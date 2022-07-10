@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo mkdir /mnt/windows
+sudo mount /dev/nvme0n1p1 /mnt/windows
+sudo cp -r /mnt/windows/EFI/Microsoft /boot/efi/EFI
+
+sudo bash -c "cat >> /boot/efi/loader/loader.conf" << EOF
+timeout 5
+console-mode max
+EOF
