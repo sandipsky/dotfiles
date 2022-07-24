@@ -15,9 +15,9 @@ sudo apt update
 sudo apt install --install-recommends winehq-staging -y
 
 #change to latest dxvk
-wget https://github.com/doitsujin/dxvk/releases/download/v1.10.1/dxvk-1.10.1.tar.gz
-tar -xf dxvk-1.10.1.tar.gz
-cd dxvk-1.10.1
+wget https://github.com/doitsujin/dxvk/releases/download/v1.10.2/dxvk-1.10.2.tar.gz
+tar -xf dxvk-1.10.2.tar.gz
+cd dxvk-1.10.2
 export WINEPREFIX=/home/sandipsky/.wine
 ./setup_dxvk.sh install
 cd ~

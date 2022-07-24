@@ -119,10 +119,13 @@ super + l
 	/usr/bin/xflock4
 
 super + w 
-	firefox
+	google-chrome-stable
 
 super + d 
 	dmenu_run
+	
+super + c
+	code
 
 
     

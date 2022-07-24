@@ -4,7 +4,6 @@
 nitrogen --restore &
 xfce4-panel -d &
 nm-applet &
-#xfdesktop -D &
 sxhkd &
 picom --config $HOME/.config/picom/picom.conf &
 
