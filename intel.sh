@@ -9,5 +9,3 @@ sudo cp blacklist-nvidia.conf /etc/modprobe.d/blacklist-nvidia.conf
 sudo rm /lib/udev/rules.d/50-remove-nvidia.rules
 sudo cp 50-remove-nvidia.rules /lib/udev/rules.d/50-remove-nvidia.rules
 
-sudo rm /etc/lightdm/lightdm.conf
-sudo cp lightdm.conf /etc/lightdm/lightdm.conf
