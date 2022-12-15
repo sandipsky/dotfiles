@@ -4,9 +4,9 @@ sudo pacman -S ueberzug graphicsmagick ghostscript -y
 cd .local
 cd bin
 chmod 755 lfub
-mkdir /home/sandipsky/.local
-mkdir /home/sandipsky/.local/bin
-cp lfub /home/sandipsky/.local/bin
+mkdir /home/sandip/.local
+mkdir /home/sandip/.local/bin
+cp lfub /home/sandip/.local/bin
 
 cd ..
 cd ..
@@ -37,7 +37,7 @@ makepkg -sri
 cd ~
 rm -rf yay
 
-yay -S visual-studio-code-bin spotify google-chrome lf-bin 
+yay -S visual-studio-code-bin lf-bin 
 
 
 
