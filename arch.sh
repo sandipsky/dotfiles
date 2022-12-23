@@ -37,7 +37,7 @@ makepkg -sri
 cd ~
 rm -rf yay
 
-yay -S visual-studio-code-bin lf-bin 
+yay -S visual-studio-code-bin lf-bin shell-color-scripts
 
 
 
