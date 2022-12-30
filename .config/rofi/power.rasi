@@ -1,7 +1,13 @@
+configuration {
+  drun-display-format: "{icon}  {name}";
+  font: "Fira Sans SemiBold 14";
+  show-icons: false;
+}
+
 inputbar {
   children: [entry];
 }
 
 listview {
-	lines: 3;
+	lines: 6;
 }

@@ -90,9 +90,13 @@ super + c
 super + s 
 	spotify
 
-#super + .
+super + .
+	rofi -show emoji
+super + shift + s
+	scrot --select --line mode=edge '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
 
-#super + shift + s
+@
+scrot '$HOME/Pictures/%Y-%m-%d-%T-screenshot.png'
 
 #super + l
 
