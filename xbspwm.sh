@@ -24,23 +24,50 @@ cp sxhkd/sxhkdrc /home/sandip/.config/sxhkd/sxhkdrc
 cp lf/* /home/sandip/.config/lf/
 cp rofi/* /home/sandip/.config/rofi/
 
+
 cd ..
 
-#echo "Are you using Real Hardware?"
+sudo pacman -S ueberzug graphicsmagick ghostscript -y
+cd .local
+cd bin
+chmod 755 *
+mkdir /home/sandip/.local
+mkdir /home/sandip/.local/bin
+cp * /home/sandip/.local/bin
 
-#read in
+cd ..
+cd ..
 
-#if [ $in == 'y' ]
-#then 
-#    ./arch.sh
-#else
-#    echo "moving on"
-#fi
+rm rf ~/.bashrc
+cp .bashrc ~/.bashrc
+cp .zshrc ~/
+cp .zprofile ~/
+cd fonts 
+sudo cp -r * /usr/share/fonts
 
-#echo "Do U want Programming Tools?"
 
-#read ni
+curl -sS https://starship.rs/install.sh | sh
 
+
+#sudo su -c "echo '/dev/nvme0n1p3 /media/sandipsky ntfs nls-utf8,umask-0755,uid-1000,gid-1000,rw 0 0' >> /etc/fstab"
+
+
+
+sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
+
+
+
+#AUR
+cd ~
+
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -sri
+
+cd ~
+rm -rf yay
+
+yay -S visual-studio-code-bin lf-bin shell-color-scripts
 
 sudo systemctl enable lightdm
 

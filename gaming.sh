@@ -1,6 +1,4 @@
 cd ..
-sudo rm /etc/pacman.conf
-sudo cp pacman.conf /etc/pacman.conf
 
 sudo pacman -Syy
 
@@ -10,19 +8,6 @@ sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcryp
 ncurses lib32-ncurses ocl-icd lib32-ocl-icd libxslt lib32-libxslt libva lib32-libva gtk3 \
 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader lib32-nvidia-utils lutris
 
-cd runtime
-wine 1.exe
-wine 2.exe
-wine 3.exe
-wine 4.exe
-wine 5.exe
-wine 6.exe
-wine 7.exe
-wine 8.exe
-wine 9.exe
-wine 10.exe
-wine 11.exe
-wine 12.exe
 
 cd ~
 wget https://github.com/doitsujin/dxvk/releases/download/v1.10.3/dxvk-1.10.3.tar.gz
