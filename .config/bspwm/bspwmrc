@@ -31,4 +31,8 @@ bspc config normal_border_color		      "#4c566a"
 bspc config active_border_color	              "#1e1e1e"
 bspc config focused_border_color	      "#5e81ac"
 
-
+bspc rule -a Xfce4-panel state=floating border=off
+bspc rule -a xfce4-popup-whiskermenu state=floating border=off
+bspc rule -a Whisker\ Menu state=floating border=off
+bspc rule -a Wrapper-2.0 state=floating border=off focus=on
+sleep 5 && xprop -name "Whisker Menu"

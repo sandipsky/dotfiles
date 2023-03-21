@@ -1,46 +1,68 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-sudo pacman -S ueberzug graphicsmagick ghostscript -y
-cd .local
-cd bin
-chmod 755 lfub
-mkdir /home/sandip/.local
-mkdir /home/sandip/.local/bin
-cp lfub /home/sandip/.local/bin
+timedatectl set-ntp true
 
-cd ..
-cd ..
+echo "Please enter EFI paritition: (example /dev/sda)"
+read EFI
 
-rm rf ~/.bashrc
-cp .bashrc ~/.bashrc
+echo "Please enter SWAP paritition: (example /dev/sda)"
+read SWAP
 
-cd ..
-
-curl -sS https://starship.rs/install.sh | sh
+echo "Please enter Root(/) paritition: (example /dev/sda)"
+read ROOT 
 
 
-#sudo su -c "echo '/dev/nvme0n1p3 /media/sandipsky ntfs nls-utf8,umask-0755,uid-1000,gid-1000,rw 0 0' >> /etc/fstab"
+# make filesystems
+echo -e "\nCreating Filesystems...\n"
 
+mkfs.vfat -F32 -n "EFISYSTEM" "${EFI}"
+mkswap "${SWAP}"
+swapon "${SWAP}"
+mkfs.ext4 -L "ROOT" "${ROOT}"
 
+# mount target
+mkdir /mnt
+mount -t ext4 "${ROOT}" /mnt
+mkdir /mnt/boot
+mount -t vfat "${EFI}" /mnt/boot/
 
-sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
+echo "--------------------------------------"
+echo "-- INSTALLING Arch Linux BASE on Main Drive       --"
+echo "--------------------------------------"
+pacstrap /mnt base base-devel --noconfirm --needed
 
+# kernel
+pacstrap /mnt linux linux-firmware --noconfirm --needed
 
+echo "--------------------------------------"
+echo "-- Setup Dependencies               --"
+echo "--------------------------------------"
 
-#AUR
-cd ~
+pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils blueman git --noconfirm --needed
 
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -sri
+# fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 
-cd ~
-rm -rf yay
+echo "--------------------------------------"
+echo "-- Bootloader Systemd Installation  --"
+echo "--------------------------------------"
 
-yay -S visual-studio-code-bin lf-bin shell-color-scripts
+bootctl install --path /mnt/boot
+echo "default arch.conf" >> /mnt/boot/loader/loader.conf
+cat <<EOF > /mnt/boot/loader/entries/arch.conf
+title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options root=${ROOT} rw
+EOF
 
+arch-chroot /mnt
 
+echo "Enter username and password"
+read USER
+useradd -m $USER
+passwd $USER
 
-
-
-
+echo "--------------------------------------"
+echo "--   SYSTEM READY FOR FIRST BOOT    --"
+echo "--------------------------------------"
