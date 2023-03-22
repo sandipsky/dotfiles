@@ -2,13 +2,13 @@
 
 timedatectl set-ntp true
 
-echo "Please enter EFI paritition: (example /dev/sda)"
+echo "Please enter EFI paritition: (example /dev/sda1 or /dev/nvme0n1p1)"
 read EFI
 
-echo "Please enter SWAP paritition: (example /dev/sda)"
+echo "Please enter SWAP paritition: (example /dev/sda2)"
 read SWAP
 
-echo "Please enter Root(/) paritition: (example /dev/sda)"
+echo "Please enter Root(/) paritition: (example /dev/sda3)"
 read ROOT 
 
 

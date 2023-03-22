@@ -44,6 +44,8 @@ cp .zprofile ~/
 cd fonts 
 sudo cp -r * /usr/share/fonts
 
+cd ..
+
 
 curl -sS https://starship.rs/install.sh | sh
 
@@ -51,9 +53,11 @@ curl -sS https://starship.rs/install.sh | sh
 
 sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
 
-yay -S visual-studio-code-bin lf-bin shell-color-scripts
-
 sudo systemctl enable lightdm
+
+yay -S visual-studio-code-bin lf-bin shell-color-scripts --noconfirm --needed
+
+
 
 
 
