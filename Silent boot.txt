@@ -1,1 +1,0 @@
-quiet loglevel=3 systemd.show_status=false splash rd.udev.log_level=3 fsck.mode=skip

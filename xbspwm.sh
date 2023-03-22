@@ -1,8 +1,7 @@
 #!/bin/bash
 
 
-sudo pacman -S nomacs zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril firefox ttf-liberation noto-fonts noto-fonts-emoji rofi vlc firefox ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin -y
-
+sudo pacman -S nomacs zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril firefox ttf-liberation noto-fonts noto-fonts-emoji rofi vlc firefox ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin ttf-fira-sans noto-fonts noto-fonts-emoji -y
 
 cd .config
 
@@ -48,29 +47,14 @@ sudo cp -r * /usr/share/fonts
 
 curl -sS https://starship.rs/install.sh | sh
 
-
 #sudo su -c "echo '/dev/nvme0n1p3 /media/sandipsky ntfs nls-utf8,umask-0755,uid-1000,gid-1000,rw 0 0' >> /etc/fstab"
 
-
-
 sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
-
-
-
-#AUR
-cd ~
-
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -sri
-
-cd ~
-rm -rf yay
 
 yay -S visual-studio-code-bin lf-bin shell-color-scripts
 
 sudo systemctl enable lightdm
 
-sudo systemctl start lightdm
+
 
 

@@ -75,17 +75,6 @@ curl -sS https://starship.rs/install.sh | sh
 sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
 
 
-
-#AUR
-cd ~
-
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -sri
-
-cd ~
-rm -rf yay
-
 yay -S visual-studio-code-bin lf-bin shell-color-scripts
 
 sudo systemctl enable lightdm
