@@ -55,7 +55,7 @@ sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
 
 sudo systemctl enable lightdm
 
-yay -S visual-studio-code-bin lf-bin shell-color-scripts --noconfirm --needed
+exit
 
 
 
