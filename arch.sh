@@ -57,18 +57,14 @@ options root=${ROOT} rw
 EOF
 
 cat <<REALEND > /mnt/next.sh
-echo "Enter root password"
-passwd
-echo "Enter username and password"
-read USER
-useradd -m $USER
-usermod -aG wheel,storage,power,audio $USER
-passwd $USER
+useradd -m sandip
+usermod -aG wheel,storage,power,audio sandip
+echo sandip:asd | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 sed -i 's/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
 
 git clone https://github.com/sandipsky/dotfiles/
-cd dotfiles
+mv dotfiles /home/sandip/
 
 echo "-------------------------------------------------"
 echo "Setup Language to US and set locale"
@@ -104,27 +100,9 @@ polkit.addRule(function(action, subject) {
 });
 EOF
 
-chmod +x gnome.sh kde.sh xbspwm.sh aur.sh
-
-sudo -H -u $USER bash -c 'bash /dotfiles/aur.sh'
-
 echo "-------------------------------------------------"
-echo "Choose Desktop Environment"
+echo "Minimal Install Complete, You can reboot now"
 echo "-------------------------------------------------"
-echo "1. GNOME"
-echo "2. KDE"
-echo "3. XFCE + BSPWM"
- 
-read op
-if [[ $op == '1' ]]
-then 
-    sh gnome.sh
-elif [[ $op == '2' ]]
-then
-    sh kde.sh
-else
-    sh xbspwm.sh
-fi
 
 REALEND
 
