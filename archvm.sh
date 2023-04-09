@@ -1,34 +1,33 @@
 #!/usr/bin/env bash
 
-# Disk name
-disk="/dev/sda"
+echo "Please enter EFI paritition: (example /dev/sda1 or /dev/nvme0n1p1)"
+read EFI
 
-# Create GPT partition table
-parted $disk mklabel gpt
+echo "Please enter SWAP paritition: (example /dev/sda2)"
+read SWAP
 
-# Create EFI partition
-parted $disk mkpart ESP fat32 1MiB 301MiB
-parted $disk set 1 boot on
+echo "Please enter Root(/) paritition: (example /dev/sda3)"
+read ROOT 
 
-# Create Swap partition
-parted $disk mkpart primary linux-swap 301MiB 4GiB
+echo "Please enter your username"
+read USER 
 
-# Create ext4 partition
-parted $disk mkpart primary ext4 4GiB 100%
+echo "Please enter your password"
+read PASSWORD 
 
-EFI = "/dev/sda1"
-SWAP =  "/dev/sda2"
-ROOT = "/dev/sda3"
-
+echo "Please choose Your Desktop Environment"
+echo "1. GNOME"
+echo "2. KDE"
+echo "3. XFCE"
+echo "4. NoDesktop"
+read DESKTOP
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
 mkfs.vfat -F32 -n "EFISYSTEM" "${EFI}"
-
 mkswap "${SWAP}"
 swapon "${SWAP}"
-
 mkfs.ext4 -L "ROOT" "${ROOT}"
 
 # mount target
@@ -49,33 +48,23 @@ echo "--------------------------------------"
 echo "-- Setup Dependencies               --"
 echo "--------------------------------------"
 
-pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils blueman git --noconfirm --needed
+pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils blueman git grub efibootmgr --noconfirm --needed
 
-# Generate fstab
+# fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
+echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
 
-bootctl install --path /mnt/boot
-echo "default arch.conf" >> /mnt/boot/loader/loader.conf
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /initramfs-linux.img
-options root=${ROOT} rw
-EOF
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id="Linux Boot Manager"
+grub-mkconfig -o /boot/grub/grub.cfg
 
 cat <<REALEND > /mnt/next.sh
-useradd -m sandip
-usermod -aG wheel,storage,power,audio sandip
-echo sandip:asd | chpasswd
+useradd -m $USER
+usermod -aG wheel,storage,power,audio $USER
+echo $USER:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
-sed -i 's/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
-
-git clone https://github.com/sandipsky/dotfiles/
-mv dotfiles /home/sandip/
 
 echo "-------------------------------------------------"
 echo "Setup Language to US and set locale"
@@ -98,10 +87,26 @@ echo "-------------------------------------------------"
 echo "Display and Audio Drivers"
 echo "-------------------------------------------------"
 
-pacman -S xorg-server xorg-server-xwayland xorg-xinit xf86-input-libinput xf86-video-vmware mesa pipewire pipewire-pulse--noconfirm --needed
+pacman -S xorg-server xorg-server-xwayland xorg-xinit xf86-input-synaptics xf86-input-libinput xf86-video-vmware mesa nvidia nvidia-utils pulseaudio --noconfirm --needed
 
-systemctl enable NetworkManager bluetooth 
-systemctl --user enable pipewire-pulse pipewire
+systemctl enable NetworkManager bluetooth
+
+#DESKTOP ENVIRONMENT
+if [[ $DESKTOP == '1' ]]
+then 
+    pacman -S gnome gdm --noconfirm --needed
+    systemctl enable gdm
+elif [[ $DESKTOP == '2' ]]
+then
+    pacman -S plasma kde-applications --noconfirm --needed
+    systemctl enable sddm
+elif [[ $DESKTOP == '3' ]]
+then
+    pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm --needed
+    systemctl enable lightdm
+else
+    echo "You have choosen to Install Desktop Yourself"
+fi
 
 echo "-------------------------------------------------"
 echo "Minimal Install Complete, You can reboot now"
