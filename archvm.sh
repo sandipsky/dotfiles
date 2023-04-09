@@ -16,15 +16,15 @@ parted $disk mkpart primary linux-swap 301MiB 4GiB
 # Create ext4 partition
 parted $disk mkpart primary ext4 4GiB 100%
 
-EFI = "${disk}1"
-SWAP =  "${disk}2"
-ROOT = "${disk}3"
+EFI = "/dev/sda1"
+SWAP =  "/dev/sda2"
+ROOT = "/dev/sda3"
 
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
-mkfs.vfat -F32 -n "EFISYSTEM" "${disk}1"
+mkfs.vfat -F32 -n "EFISYSTEM" "${EFI}"
 
 mkswap "${SWAP}"
 swapon "${SWAP}"
