@@ -31,7 +31,6 @@ swapon "${SWAP}"
 mkfs.ext4 -L "ROOT" "${ROOT}"
 
 # mount target
-mkdir /mnt
 mount -t ext4 "${ROOT}" /mnt
 mkdir /mnt/boot
 mount -t vfat "${EFI}" /mnt/boot/
@@ -48,7 +47,7 @@ echo "--------------------------------------"
 echo "-- Setup Dependencies               --"
 echo "--------------------------------------"
 
-pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils blueman git grub efibootmgr --noconfirm --needed
+pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils blueman git --noconfirm --needed
 
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -56,9 +55,15 @@ genfstab -U /mnt >> /mnt/etc/fstab
 echo "--------------------------------------"
 echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
+bootctl install --path /mnt/boot
+echo "default arch.conf" >> /mnt/boot/loader/loader.conf
+cat <<EOF > /mnt/boot/loader/entries/arch.conf
+title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options root=${ROOT} rw
+EOF
 
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id="Linux Boot Manager"
-grub-mkconfig -o /boot/grub/grub.cfg
 
 cat <<REALEND > /mnt/next.sh
 useradd -m $USER
@@ -109,7 +114,7 @@ else
 fi
 
 echo "-------------------------------------------------"
-echo "Minimal Install Complete, You can reboot now"
+echo "Install Complete, You can reboot now"
 echo "-------------------------------------------------"
 
 REALEND
