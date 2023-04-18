@@ -92,7 +92,7 @@ echo "-------------------------------------------------"
 echo "Display and Audio Drivers"
 echo "-------------------------------------------------"
 
-pacman -S xorg-server xorg-server-xwayland xorg-xinit xf86-input-synaptics xf86-input-libinput xf86-video-vmware mesa nvidia nvidia-utils pulseaudio --noconfirm --needed
+pacman -S xorg-server xorg-server-xwayland xorg-xinit xf86-video-vmware mesa nvidia nvidia-utils pulseaudio --noconfirm --needed
 
 systemctl enable NetworkManager bluetooth
 
