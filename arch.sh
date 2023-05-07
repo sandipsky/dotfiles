@@ -44,7 +44,7 @@ pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-uc
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
+echo "-- Bootloader Systemd Installation ---"
 echo "--------------------------------------"
 
 bootctl install --path /mnt/boot
