@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+##start
+
 timedatectl set-ntp true
 
 echo "Please enter EFI paritition: (example /dev/sda1 or /dev/nvme0n1p1)"
