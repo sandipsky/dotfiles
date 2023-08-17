@@ -7,8 +7,6 @@ alias pip='pip3'
 alias python='python3'
 alias xampp='sudo /opt/lampp/lampp'
 alias venv="source /home/sandip/env/bin/activate"
-alias d="cd /media/sandipsky"
-alias php='php7'
 alias lf='lfub'
 
 

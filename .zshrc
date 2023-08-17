@@ -3,23 +3,16 @@ setopt share_history
 
 eval "$(starship init zsh)"
 
-export PATH="/home/sandip/.nvm/versions/node/v18.12.1/bin/:$PATH"
 export PATH="/home/sandip/.local/bin:$PATH"
 
 #custom aliases
 alias python='python3'
 alias xampp='sudo /opt/lampp/lampp'
 alias venv="source /home/sandip/env/bin/activate"
-alias d="cd /media/sandipsky"
-alias php='php7'
 alias lf='lfub'
-alias clear='clear && colorscript random'
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-
-colorscript random
 
 # lf icons
 export LF_ICONS="\

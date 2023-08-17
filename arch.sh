@@ -4,11 +4,10 @@
 
 timedatectl set-ntp true
 
+lsblk
+
 echo "Please enter EFI paritition: (example /dev/sda1 or /dev/nvme0n1p1)"
 read EFI
-
-echo "Please enter SWAP paritition: (example /dev/sda2)"
-read SWAP
 
 echo "Please enter Root(/) paritition: (example /dev/sda3)"
 read ROOT 
@@ -18,8 +17,6 @@ read ROOT
 echo -e "\nCreating Filesystems...\n"
 
 mkfs.vfat -F32 -n "EFISYSTEM" "${EFI}"
-mkswap "${SWAP}"
-swapon "${SWAP}"
 mkfs.ext4 -L "ROOT" "${ROOT}"
 
 # mount target
@@ -40,7 +37,7 @@ echo "--------------------------------------"
 echo "-- Setup Dependencies               --"
 echo "--------------------------------------"
 
-pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils blueman git --noconfirm --needed
+pacstrap /mnt networkmanager wireless_tools vim intel-ucode bluez bluez-utils git --noconfirm --needed
 
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -55,7 +52,7 @@ cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options root=${ROOT} rw
+options root=${ROOT} rw quiet splash loglevel=3
 EOF
 
 cat <<REALEND > /mnt/next.sh
@@ -89,8 +86,8 @@ echo "-------------------------------------------------"
 echo "Display and Audio Drivers"
 echo "-------------------------------------------------"
 
-pacman -S xorg-server xorg-server-xwayland xorg-xinit xf86-input-synaptics xf86-input-libinput xf86-video-vmware mesa nvidia nvidia-utils pulseaudio --noconfirm --needed
-
+pacman -S xorg-server xorg-server-xwayland xorg-xinit xf86-input-synaptics xf86-input-libinput mesa nvidia nvidia-utils nvidia-settings pipewire pipewire-pulse pipewire-alsa --noconfirm --needed
+systemctl --user enable pipewire.service
 systemctl enable NetworkManager bluetooth
 
 touch /etc/polkit-1/rules.d/49-nopasswd_global.rules

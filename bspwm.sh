@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S nomacs zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril ttf-liberation noto-fonts noto-fonts-emoji rofi vlc firefox ntfs-3g tumbler ueberzug graphicsmagick ghostscript ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin ttf-fira-sans noto-fonts noto-fonts-emoji papirus-icon-theme --noconfirm --needed
+sudo pacman -S nomacs blueman network-manager-applet zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril ttf-liberation noto-fonts noto-fonts-emoji rofi vlc firefox ntfs-3g tumbler ueberzug graphicsmagick ghostscript ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin ttf-fira-sans noto-fonts noto-fonts-emoji --noconfirm --needed
 
 cd config
 
@@ -49,11 +49,13 @@ cd ..
 
 sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
 
-yay -S visual-studio-code-bin lf-bin shell-color-scripts plata-theme-bin brave-bin --needed --noconfirm
+sh aur.sh
+
+yay -S lf-bin --needed --noconfirm
 
 sudo systemctl enable lightdm
 
-exitcd 
+
 
 
 
