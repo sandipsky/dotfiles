@@ -8,7 +8,7 @@ alias python='python3'
 alias xampp='sudo /opt/lampp/lampp'
 alias venv="source /home/sandip/env/bin/activate"
 alias lf='lfub'
-
+alias update-grub="grub-mkconfig -o /boot/grub/grub.cfg"
 
 # lf icons
 export LF_ICONS="\

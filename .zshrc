@@ -10,6 +10,7 @@ alias python='python3'
 alias xampp='sudo /opt/lampp/lampp'
 alias venv="source /home/sandip/env/bin/activate"
 alias lf='lfub'
+alias update-grub="grub-mkconfig -o /boot/grub/grub.cfg"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
