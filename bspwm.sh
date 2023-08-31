@@ -1,6 +1,8 @@
 #!/bin/bash
 
-sudo pacman -S nomacs blueman network-manager-applet zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril ttf-liberation noto-fonts noto-fonts-emoji rofi vlc firefox ntfs-3g tumbler ueberzug graphicsmagick ghostscript ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin ttf-fira-sans noto-fonts noto-fonts-emoji --noconfirm --needed
+sudo pacman -S xorg-server xorg-server-xwayland xorg-xinit xf86-input-libinput mesa pipewire pipewire-pulse pipewire-alsa --noconfirm --needed
+
+sudo pacman -S nomacs blueman tlp network-manager-applet zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi vlc firefox ntfs-3g tumbler ueberzug graphicsmagick ghostscript ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji libreoffice-fresh --noconfirm --needed
 
 cd config
 
@@ -50,10 +52,16 @@ cd ..
 sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
 
 sh aur.sh
+sh ntfs.sh
+sh battery.sh
 
-yay -S lf-bin --needed --noconfirm
+yay -S lf-bin visual-studio-code-bin --needed --noconfirm
 
-sudo systemctl enable lightdm
+sudo systemctl --user enable pipewire
+sudo systemctl enable lightdm tlp
+sudo chsh -s /bin/zsh
+
+
 
 
 
