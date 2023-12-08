@@ -1,8 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S xorg-server xorg-server-xwayland xorg-xinit xf86-input-libinput mesa pipewire pipewire-pulse pipewire-alsa --noconfirm --needed
-
-sudo pacman -S nomacs blueman tlp network-manager-applet zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi vlc firefox ntfs-3g tumbler ueberzug graphicsmagick ghostscript ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji libreoffice-fresh --noconfirm --needed
+sudo pacman -S nomacs blueman tlp network-manager-applet zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi vlc firefox ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-dejavu ttf-dejavu-nerd libreoffice-fresh --noconfirm --needed
 
 cd config
 
@@ -14,10 +12,7 @@ mkdir /home/sandip/.config/picom
 mkdir /home/sandip/.config/bspwm
 mkdir /home/sandip/.config/sxhkd
 mkdir /home/sandip/.config/alacritty
-mkdir /home/sandip/.config/lf
 mkdir /home/sandip/.config/rofi
-mkdir /home/sandip/.local
-mkdir /home/sandip/.local/bin
 mkdir /home/sandip/.fonts
 mkdir /home/sandip/.icons
 mkdir /home/sandip/.themes
@@ -26,21 +21,11 @@ cp picom/picom.conf /home/sandip/.config/picom/picom.conf
 cp alacritty/alacritty.yml /home/sandip/.config/alacritty/alacritty.yml
 cp bspwm/bspwmrc /home/sandip/.config/bspwm/bspwmrc
 cp sxhkd/sxhkdrc /home/sandip/.config/sxhkd/sxhkdrc
-cp lf/* /home/sandip/.config/lf/
 cp rofi/* /home/sandip/.config/rofi/
 
 cd ..
 
-cd local
-cd bin
-chmod 755 *
-cp * /home/sandip/.local/bin
-
-cd ..
-cd ..
-
 rm rf /home/sandip/.bashrc
-cp .bashrc /home/sandip/.bashrc
 cp .zshrc /home/sandip
 cp .zprofile /home/sandip
 
@@ -49,17 +34,12 @@ sudo cp -r * /home/sandip/.fonts
 
 cd ..
 
-sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
-
 sh aur.sh
 sh ntfs.sh
 sh battery.sh
 
-yay -S lf-bin visual-studio-code-bin --needed --noconfirm
-
-sudo systemctl --user enable pipewire
 sudo systemctl enable lightdm tlp
-sudo chsh -s /bin/zsh
+chsh -s /bin/zsh sandip
 
 
 
