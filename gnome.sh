@@ -14,22 +14,15 @@ bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/m
 
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
-gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 5600
 
 ##New file context menu
 touch ~/Templates/NewDocument.txt
 
-sudo -s /dev/null /etc/udev/rules.d/61-gdm.rules
+sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 
 sh aur.sh
 sh ntfs.sh
-sh battery.sh
-
-rm rf /home/sandip/.bashrc
-cp .zshrc /home/sandip
-cp .zprofile /home/sandip
 
 sudo systemctl enable gdm switcheroo-control
-sudo chsh -s /bin/zsh
 
 
