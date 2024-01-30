@@ -6,3 +6,5 @@ gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startu
 
 ##New file context menu
 touch ~/Templates/NewDocument.txt
+
+curl -sS https://starship.rs/install.sh | sh
