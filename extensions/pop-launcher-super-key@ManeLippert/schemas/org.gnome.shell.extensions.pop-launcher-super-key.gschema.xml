@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+    <enum id='org.gnome.shell.extensions.pop-launcher-super-key.launcher'>  
+        <value value='2' nick='LAUNCHER'/>
+    </enum>
+    <schema id="org.gnome.shell.extensions.pop-launcher-super-key" path="/org/gnome/shell/extensions/pop-launcher-super-key/">
+        <key name="overlay-key-action" enum="org.gnome.shell.extensions.pop-launcher-super-key.launcher">
+          <default>'LAUNCHER'</default>
+          <summary>Overlay key action</summary>
+          <description>Controls the action of the overlay key, typically Super</description>
+        </key>
+    </schema>
+</schemalist>
