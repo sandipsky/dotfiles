@@ -1,8 +1,0 @@
-{
-  "name": "night-light-icon-hider",
-  "description": "A simple extension to hide nightlight icon from topbar",
-  "uuid": "nightlighthider@sandipshakya.com",
-  "shell-version": [
-    "42"
-  ]
-}
