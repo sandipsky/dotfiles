@@ -25,8 +25,8 @@ wine 11.exe
 wine 12.exe
 
 cd ~
-wget https://github.com/doitsujin/dxvk/releases/download/v1.10.3/dxvk-1.10.3.tar.gz
-tar -xf dxvk-1.10.3.tar.gz
-cd dxvk-1.10.3
+wget https://github.com/doitsujin/dxvk/releases/download/v2.3.1/dxvk-2.3.1.tar.gz
+tar -xf dxvk-2.3.1.tar.gz
+cd dxvk-2.3.1
 export WINEPREFIX=/home/sandipsky/.wine
 ./setup_dxvk.sh install
