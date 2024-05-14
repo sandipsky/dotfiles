@@ -3,7 +3,7 @@ sudo pacman -S zsh zsh-syntax-highlighting zsh-autosuggestions starship wget gno
 
 sudo systemctl enable gdm switcheroo-control tlp
 
-sudo pacman -S dotnet-sdk nodejs-lts-iron npm
+sudo pacman -S dotnet-sdk nodejs-lts-iron npm --noconfirm --needed
 
 sh aur.sh
 sh ntfs.sh
