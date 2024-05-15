@@ -18,13 +18,6 @@ read NAME
 echo "Please enter your Password"
 read PASSWORD 
 
-echo "Please choose Your Desktop Environment"
-echo "1. GNOME"
-echo "2. KDE"
-echo "3. XFCE"
-echo "4. NoDesktop"
-read DESKTOP
-
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
@@ -88,23 +81,6 @@ pacman -S pipewire pipewire-alsa pipewire-pulse --noconfirm --needed
 
 systemctl enable NetworkManager bluetooth
 systemctl --user enable pipewire pipewire-pulse
-
-#DESKTOP ENVIRONMENT
-if [[ $DESKTOP == '1' ]]
-then 
-    pacman -S gnome gdm --noconfirm --needed
-    systemctl enable gdm
-elif [[ $DESKTOP == '2' ]]
-then
-    pacman -S plasma sddm kde-applications --noconfirm --needed
-    systemctl enable sddm
-elif [[ $DESKTOP == '3' ]]
-then
-    pacman -S xfce4 xfce4-goodies lightdm lightdm-gtk-greeter --noconfirm --needed
-    systemctl enable lightdm
-else
-    echo "You have choosen to Install Desktop Yourself"
-fi
 
 echo "-------------------------------------------------"
 echo "Install Complete, You can reboot now"
