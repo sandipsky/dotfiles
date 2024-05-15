@@ -7,6 +7,7 @@ sudo systemctl enable gdm switcheroo-control tlp
 sh aur.sh
 sh ntfs.sh
 sh zsh.sh
+sh programs.sh
 
 sudo usermod -c "Sandip Shakya" sandip
 

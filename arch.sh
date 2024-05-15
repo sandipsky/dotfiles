@@ -41,7 +41,7 @@ mkdir /mnt/boot/efi
 mount "${EFI}" /mnt/boot/efi
 
 echo "--------------------------------------"
-echo "-- INSTALLING Base Arch Linux on Main Drive --"
+echo "-- INSTALLING Base Arch Linux --"
 echo "--------------------------------------"
 pacstrap /mnt base base-devel linux linux-firmware linux-headers networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils git--noconfirm --needed
 
@@ -81,12 +81,13 @@ cat <<EOF > /etc/hosts
 EOF
 
 echo "-------------------------------------------------"
-echo "Display and Audio Drivers"
+echo "Audio Drivers"
 echo "-------------------------------------------------"
 
-pacman -S xorg pulseaudio --noconfirm --needed
+pacman -S pipewire pipewire-alsa pipewire-pulse --noconfirm --needed
 
 systemctl enable NetworkManager bluetooth
+systemctl --user enable pipewire pipewire-pulse
 
 #DESKTOP ENVIRONMENT
 if [[ $DESKTOP == '1' ]]
