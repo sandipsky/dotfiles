@@ -22,7 +22,6 @@ sudo rm /usr/share/applications/qvidcap.desktop
 sudo rm /usr/share/applications/bvnc.desktop   
 sudo rm /usr/share/applications/bssh.desktop 
 
-sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 touch ~/Templates/NewDocument.txt
 
 sh aur.sh
