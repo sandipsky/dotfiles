@@ -30,8 +30,7 @@ mkfs.ext4 "${ROOT}"
 
 # mount target
 mount "${ROOT}" /mnt
-mkdir /mnt/boot/efi
-mount "${EFI}" /mnt/boot/efi
+mount --mkdir "${EFI}" /mnt/boot/efi
 
 echo "--------------------------------------"
 echo "-- INSTALLING Base Arch Linux --"
@@ -80,6 +79,9 @@ echo "--------------------------------------"
 pacman -S grub efibootmgr --noconfirm --needed
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch Linux"
 grub-mkconfig -o /boot/grub/grub.cfg
+
+cd /home/sandip
+git clone https://github.com/sandipsky/dotfiles
 
 echo "-------------------------------------------------"
 echo "Install Complete, You can reboot now"
