@@ -3,6 +3,9 @@
 echo "Please enter EFI paritition: (example /dev/sda1 or /dev/nvme0n1p1)"
 read EFI
 
+echo "Do you want to FORMAT EFI PARTITION? Yy/Nn (Choose yes for newly created Partition)"
+read ISFORMAT
+
 echo "Please enter Root(/) paritition: (example /dev/sda3)"
 read ROOT 
 
@@ -24,9 +27,6 @@ read DESKTOP
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
-
-echo "Do you want to FORMAT EFI PARTITION? Yy/Nn (Choose yes for newly created Partition)"
-read ISFORMAT
 
 if [[ $ISFORMAT == 'y' || $ISFORMAT == 'Y' ]]
 then 
