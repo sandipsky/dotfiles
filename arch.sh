@@ -3,16 +3,16 @@
 echo "Please enter EFI paritition: (example /dev/sda1 or /dev/nvme0n1p1)"
 read EFI
 
-echo "Please enter SWAP paritition: (example /dev/sda2)"
-read SWAP
-
 echo "Please enter Root(/) paritition: (example /dev/sda3)"
 read ROOT 
 
-echo "Please enter your username"
+echo "Please enter your Username"
 read USER 
 
-echo "Please enter your password"
+echo "Please enter your Full Name"
+read NAME 
+
+echo "Please enter your Password"
 read PASSWORD 
 
 echo "Please choose Your Desktop Environment"
@@ -25,29 +25,25 @@ read DESKTOP
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
-mkfs.vfat -F32 -n "EFISYSTEM" "${EFI}"
-mkswap "${SWAP}"
-swapon "${SWAP}"
-mkfs.ext4 -L "ROOT" "${ROOT}"
+echo "Do you want to FORMAT EFI PARTITION? Yy/Nn (Choose yes for newly created Partition)"
+read ISFORMAT
+
+if [[ $ISFORMAT == 'y' || $ISFORMAT == 'Y' ]]
+then 
+    mkfs.vfat -F32 "${EFI}"
+fi 
+
+mkfs.ext4 "${ROOT}"
 
 # mount target
-mount -t ext4 "${ROOT}" /mnt
-mkdir /mnt/boot
-mount -t vfat "${EFI}" /mnt/boot/
+mount "${ROOT}" /mnt
+mkdir /mnt/boot/efi
+mount "${EFI}" /mnt/boot/efi
 
 echo "--------------------------------------"
-echo "-- INSTALLING Arch Linux BASE on Main Drive       --"
+echo "-- INSTALLING Base Arch Linux on Main Drive --"
 echo "--------------------------------------"
-pacstrap /mnt base base-devel --noconfirm --needed
-
-# kernel
-pacstrap /mnt linux linux-firmware --noconfirm --needed
-
-echo "--------------------------------------"
-echo "-- Setup Dependencies               --"
-echo "--------------------------------------"
-
-pacstrap /mnt networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils blueman git --noconfirm --needed
+pacstrap /mnt base base-devel linux linux-firmware linux-headers networkmanager network-manager-applet wireless_tools nano intel-ucode bluez bluez-utils git--noconfirm --needed
 
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -55,18 +51,14 @@ genfstab -U /mnt >> /mnt/etc/fstab
 echo "--------------------------------------"
 echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
-bootctl install --path /mnt/boot
-echo "default arch.conf" >> /mnt/boot/loader/loader.conf
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /initramfs-linux.img
-options root=${ROOT} rw
-EOF
+pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch Linux"
+grub-mkconfig -o /boot/grub/grub.cfg
 
 
 cat <<REALEND > /mnt/next.sh
 useradd -m $USER
+usermod -c "${NAME}" $USER
 usermod -aG wheel,storage,power,audio $USER
 echo $USER:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
@@ -81,11 +73,11 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 ln -sf /usr/share/zoneinfo/Asia/Kathmandu /etc/localtime
 hwclock --systohc
 
-echo "arch" > /etc/hostname
+echo "archlinux" > /etc/hostname
 cat <<EOF > /etc/hosts
 127.0.0.1	localhost
 ::1			localhost
-127.0.1.1	arch.localdomain	arch
+127.0.1.1	archlinux.localdomain	archlinux
 EOF
 
 echo "-------------------------------------------------"
