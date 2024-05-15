@@ -41,14 +41,6 @@ pacstrap /mnt base base-devel linux linux-firmware linux-headers networkmanager 
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo "--------------------------------------"
-echo "-- Bootloader Installation  --"
-echo "--------------------------------------"
-pacman -S grub efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch Linux"
-grub-mkconfig -o /boot/grub/grub.cfg
-
-
 cat <<REALEND > /mnt/next.sh
 useradd -m $USER
 usermod -c "${NAME}" $USER
@@ -81,6 +73,13 @@ pacman -S pipewire pipewire-alsa pipewire-pulse --noconfirm --needed
 
 systemctl enable NetworkManager bluetooth
 systemctl --user enable pipewire pipewire-pulse
+
+echo "--------------------------------------"
+echo "-- Bootloader Installation  --"
+echo "--------------------------------------"
+pacman -S grub efibootmgr --noconfirm --needed
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch Linux"
+grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "-------------------------------------------------"
 echo "Install Complete, You can reboot now"
