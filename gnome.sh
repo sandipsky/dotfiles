@@ -1,17 +1,8 @@
 
 #!/bin/bash
-sudo pacman -S zsh zsh-syntax-highlighting zsh-autosuggestions starship wget gnome-shell gnome-control-center gnome-calculator colord-gtk nautilus python-nautilus gnome-tweaks gnome-software malcontent flatpak gnome-terminal gnome-themes-extra evince loupe gnome-text-editor file-roller xdg-user-dirs-gtk firefox vlc rhythmbox neofetch gdm gnome-keyring ntfs-3g gvfs-mtp ffmpegthumbnailer xdg-desktop-portal-gnome ttf-liberation ttf-fira-sans noto-fonts noto-fonts-emoji noto-fonts-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions tlp switcheroo-control --noconfirm --needed
+sudo pacman -S wget gnome-shell gnome-control-center gnome-calculator colord-gtk nautilus python-nautilus gnome-tweaks gnome-software malcontent flatpak gnome-terminal gnome-themes-extra evince loupe gnome-text-editor file-roller xdg-user-dirs-gtk firefox vlc rhythmbox neofetch gdm gnome-keyring ntfs-3g gvfs-mtp ffmpegthumbnailer xdg-desktop-portal-gnome ttf-liberation ttf-fira-sans noto-fonts noto-fonts-emoji noto-fonts-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions tlp switcheroo-control --noconfirm --needed
 
 sudo systemctl enable gdm switcheroo-control tlp
-
-sh aur.sh
-sh ntfs.sh
-sh zsh.sh
-sh programs.sh
-
-sudo usermod -c "Sandip Shakya" sandip
-
-gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
 
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Software.svg
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Nautilus.svg
@@ -33,6 +24,11 @@ sudo rm /usr/share/applications/bssh.desktop
 
 sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 touch ~/Templates/NewDocument.txt
+
+sh aur.sh
+sh ntfs.sh
+sh programs.sh
+sh zsh.sh
 
 sudo reboot
 
