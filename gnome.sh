@@ -1,8 +1,9 @@
 
 #!/bin/bash
-sudo pacman -S wget gnome-shell gnome-control-center gnome-calculator colord-gtk nautilus python-nautilus gnome-tweaks gnome-software malcontent flatpak gnome-terminal gnome-themes-extra evince loupe gnome-text-editor file-roller xdg-user-dirs-gtk firefox vlc rhythmbox neofetch gdm gnome-keyring ntfs-3g gvfs-mtp ffmpegthumbnailer xdg-desktop-portal-gnome ttf-liberation ttf-fira-sans noto-fonts noto-fonts-emoji noto-fonts-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions tlp switcheroo-control --noconfirm --needed
+sudo pacman -S wget gnome-shell gnome-control-center gnome-calculator gnome-menus colord-gtk nautilus python-nautilus gnome-tweaks gnome-software malcontent flatpak gnome-terminal gnome-themes-extra evince loupe gnome-text-editor file-roller xdg-user-dirs-gtk firefox vlc rhythmbox neofetch gdm gnome-keyring ntfs-3g gvfs-mtp ffmpegthumbnailer xdg-desktop-portal-gnome ttf-liberation ttf-fira-sans noto-fonts noto-fonts-emoji noto-fonts-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions tlp switcheroo-control --noconfirm --needed
 
 sudo systemctl enable gdm switcheroo-control tlp
+
 
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Software.svg
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Nautilus.svg
