@@ -1,7 +1,5 @@
 sudo rm -rf /etc/X11/xorg.conf.d/90-nvidia.conf /etc/modprobe.d/nvidia.conf
 
-cd gpu
-
 sudo rm /etc/modprobe.d/blacklist-nvidia.conf
 sudo cp blacklist-nvidia.conf /etc/modprobe.d/blacklist-nvidia.conf
 
