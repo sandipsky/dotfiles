@@ -25,6 +25,8 @@ sudo rm /usr/share/applications/bssh.desktop
 
 touch ~/Templates/NewDocument.txt
 
+cd ..
+cd scripts
 sh aur.sh
 sh ntfs.sh
 sh programs.sh
