@@ -73,7 +73,7 @@ ctrl + shift + {Right}
 # APPLICATIONS
 
 super + Return
-	xfce4-terminal
+	alacritty
 
 super + e
 	thunar

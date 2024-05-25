@@ -10,8 +10,8 @@ echo "Please enter Root(/) paritition: (example /dev/sda3)"
 read ROOT 
 
 echo "Please choose Bootloader"
-echo "1. Systemd-boot"
-echo "2. Grub(default)"
+echo "1. Grub(Default)"
+echo "2. Systemd-boot"
 read BOOT 
 
 echo "Please enter your Username"
@@ -88,7 +88,7 @@ echo "--------------------------------------"
 echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
 
-if [[ $BOOT == '1' ]]
+if [[ $BOOT == '2' ]]
 then 
     bootctl install --path /mnt/boot
     echo "default arch.conf" >> /mnt/boot/loader/loader.conf
