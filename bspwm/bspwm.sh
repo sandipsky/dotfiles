@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S nomacs blueman tlp network-manager-applet zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi vlc firefox ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller xfce4 xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-screensaver xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom git xdg-user-dirs xdg-user-dirs-gtk neofetch cmatrix mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-dejavu ttf-dejavu-nerd libreoffice-fresh --noconfirm --needed
+sudo pacman -S nomacs blueman tlp network-manager-applet zsh zsh-syntax-highlighting zsh-autosuggestions rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi vlc firefox ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller thunar xfce4-terminal xfce4-whiskermenu-plugin xfce4-battery-plugin xfce4-datetime-plugin xfce4-screenshooter xfce4-pulseaudio-plugin xfce4-settings xfce4-notifyd lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-liberation ttf-dejavu ttf-jetbrains-mono ttf-fira-sans ttf-dejavu-nerd --noconfirm --needed
 
 cd config
 
@@ -24,19 +24,6 @@ cp sxhkd/sxhkdrc /home/sandip/.config/sxhkd/sxhkdrc
 cp rofi/* /home/sandip/.config/rofi/
 
 cd ..
-
-rm rf /home/sandip/.bashrc
-cp .zshrc /home/sandip
-cp .zprofile /home/sandip
-
-cd fonts 
-sudo cp -r * /home/sandip/.fonts
-
-cd ..
-
-sh aur.sh
-sh ntfs.sh
-sh battery.sh
 
 sudo systemctl enable lightdm tlp
 chsh -s /bin/zsh sandip

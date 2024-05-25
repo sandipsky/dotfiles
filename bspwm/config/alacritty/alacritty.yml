@@ -11,7 +11,6 @@ scrolling:
   history: 10000
   multiplier: 3
 
-
 font:
   normal:
     family: DejaVuSansMono Nerd Font Mono 
@@ -27,7 +26,7 @@ font:
     style: Bold Oblique
   size: 12
   offset:
-      x: -1    # For letter spacing.
+      x: -1    
       y: 1 
 draw_bold_text_with_bright_colors: true
 
@@ -55,10 +54,6 @@ colors:
     magenta: "#bb9af7"
     cyan: "#0db9d7"
     white: "#acb0d0"
-
-#background_opacity: 0.8
-window:
-   opacity: 0.8
 
 selection:
   save_to_clipboard: false

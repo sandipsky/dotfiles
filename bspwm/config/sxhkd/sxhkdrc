@@ -73,15 +73,15 @@ ctrl + shift + {Right}
 # APPLICATIONS
 
 super + Return
-	alacritty
+	xfce4-terminal
 
 super + e
 	thunar
 
 super + w 
-	brave
+	firefox
 
-super + d 
+super + a 
 	rofi -disable-history -drun-match-fields name -show drun
 	
 super + c
