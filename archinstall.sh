@@ -7,12 +7,7 @@ echo "Do you want to FORMAT EFI PARTITION? Yy/Nn (Choose yes for newly created P
 read ISFORMAT
 
 echo "Please enter Root(/) paritition: (example /dev/sda3)"
-read ROOT 
-
-echo "Please choose Bootloader"
-echo "1. Grub(Default)"
-echo "2. Systemd-boot"
-read BOOT 
+read ROOT  
 
 echo "Please enter your Username"
 read USER 
@@ -35,13 +30,7 @@ mkfs.ext4 "${ROOT}"
 
 # mount target
 mount "${ROOT}" /mnt
-
-if [[ $BOOT == '1' ]]
-then 
-    mount --mkdir "${EFI}" /mnt/boot
-else
-    mount --mkdir "${EFI}" /mnt/boot/efi
-fi
+mount --mkdir "${EFI}" /mnt/boot/efi
 
 echo "--------------------------------------"
 echo "-- INSTALLING Base Arch Linux --"
@@ -88,21 +77,9 @@ echo "--------------------------------------"
 echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
 
-if [[ $BOOT == '2' ]]
-then 
-    bootctl install --path /mnt/boot
-    echo "default arch.conf" >> /mnt/boot/loader/loader.conf
-    cat <<EOF > /mnt/boot/loader/entries/arch.conf
-    title Arch Linux
-    linux /vmlinuz-linux
-    initrd /initramfs-linux.img
-    options root=${ROOT} rw
-    EOF
-else
-    pacman -S grub efibootmgr --noconfirm --needed
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch Linux"
-    grub-mkconfig -o /boot/grub/grub.cfg
-fi
+pacman -S grub efibootmgr --noconfirm --needed
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch Linux"
+grub-mkconfig -o /boot/grub/grub.cfg
 
 cd /home/sandip
 git clone https://github.com/sandipsky/dotfiles
@@ -112,7 +89,6 @@ echo "Install Complete, You can reboot now"
 echo "-------------------------------------------------"
 
 REALEND
-
 
 arch-chroot /mnt sh next.sh
 

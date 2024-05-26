@@ -59,7 +59,7 @@ selection:
   save_to_clipboard: false
 
 shell:
-  program: /usr/bin/bash
+  program: /usr/bin/zsh
 
 key_bindings:
   - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
