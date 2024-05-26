@@ -22,6 +22,13 @@ sudo rm /usr/share/applications/qvidcap.desktop
 sudo rm /usr/share/applications/bvnc.desktop   
 sudo rm /usr/share/applications/bssh.desktop 
 
+cd ..
+cd extensions
+sudo rm -rf /usr/share/gnome-shell/extensions/*
+for zip in *.zip; do unzip "$zip"; done
+rm *.zip 
+sudo cp * -r /usr/share/gnome-shell/extensions/
+
 touch ~/Templates/NewDocument.txt
 
 cd ..
