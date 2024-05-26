@@ -38,6 +38,10 @@ sh ntfs.sh
 sh programs.sh
 sh zsh.sh
 
+cd ..
+cd gpu
+sh intel.sh
+
 sudo reboot
 
 
