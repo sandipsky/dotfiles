@@ -1,6 +1,14 @@
 
 #!/bin/bash
-sudo pacman -S wget gnome-shell gnome-control-center gnome-calculator gnome-menus colord-gtk nautilus python-nautilus gnome-tweaks gnome-software malcontent flatpak gnome-terminal gnome-themes-extra evince loupe gnome-text-editor file-roller xdg-user-dirs-gtk firefox vlc rhythmbox neofetch gdm gnome-keyring ntfs-3g gvfs-mtp ffmpegthumbnailer xdg-desktop-portal-gnome ttf-liberation ttf-fira-sans noto-fonts noto-fonts-emoji noto-fonts-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions tlp --noconfirm --needed
+
+#GNOME DESKTOP AND UTITLITIES
+sudo pacman -S gnome-shell gnome-control-center gnome-calculator gnome-menus colord-gtk nautilus python-nautilus ffmpegthumbnailer gvfs-mtp file-roller xdg-desktop-portal-gnome gnome-tweaks gnome-software malcontent flatpak gnome-terminal gnome-themes-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions evince loupe gnome-text-editor xdg-user-dirs-gtk gdm gnome-keyring --noconfirm --needed
+
+#FONTS
+sudo pacman -S ttf-liberation noto-fonts-cjk ttf-fira-sans ttf-jetbrains-mono noto-fonts noto-fonts-emoji noto-fonts-extra --noconfirm --needed
+
+#BASIC PROGRAMS
+sudo pacman -S wget firefox vlc rhythmbox neofetch ntfs-3g tlp qbittorrent --noconfirm --needed
 
 sudo systemctl enable gdm tlp
 
@@ -34,6 +42,17 @@ sh zsh.sh
 cd ..
 cd gpu
 sh intel.sh
+
+cd ..
+cd gnome
+cd extensions
+sudo rm -r /usr/share/gnome-shell/extensions/* 
+sudo cp -r * /usr/share/gnome-shell/extensions 
+
+cd ..
+cd keybindings
+dconf load /org/gnome/settings-daemon/plugins/media-keys/ < custom 
+dconf dump /org/gnome/desktop/wm/keybindings/ < wm  
 
 sudo reboot
 
