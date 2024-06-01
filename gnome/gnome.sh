@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 #GNOME DESKTOP AND UTITLITIES
@@ -33,15 +32,13 @@ sudo rm /usr/share/applications/bssh.desktop
 touch ~/Templates/NewDocument.txt
 
 cd ..
+cd ..
 cd scripts
 sh aur.sh
 sh ntfs.sh
+sh battery.sh
 sh programs.sh
 sh zsh.sh
-
-cd ..
-cd gpu
-sh intel.sh
 
 cd ..
 cd gnome

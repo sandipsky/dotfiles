@@ -6,19 +6,6 @@ read EFI
 echo "Please enter Root(/) paritition: (example /dev/sda3)"
 read ROOT  
 
-while true; do
-    echo "Please choose Bootloader"
-    echo "1. GRUB"
-    echo "2. Systemd-boot"
-    read -p "Enter your choice: " BOOT
-
-    if [ "$BOOT" == "1" ] || [ "$BOOT" == "2" ]; then
-        break
-    else
-        echo "Invalid input. Please enter 1 or 2."
-    fi
-done
-
 echo "Please enter your Username"
 read USER 
 
@@ -40,12 +27,7 @@ mkfs.ext4 "${ROOT}"
 
 # mount target
 mount "${ROOT}" /mnt
-
-if [ "$BOOT" == "1" ]; then
-    mount --mkdir "${EFI}" /mnt/boot/efi
-elif [ "$BOOT" == "2" ]; then
-    mount --mkdir "${EFI}" /mnt/boot
-fi
+mount --mkdir "${EFI}" /mnt/boot/efi
 
 echo "--------------------------------------"
 echo "-- INSTALLING Base Arch Linux --"
@@ -54,23 +36,6 @@ pacstrap /mnt base base-devel linux linux-firmware linux-headers networkmanager 
 
 # fstab
 genfstab -U /mnt >> /mnt/etc/fstab
-
-if [ "$BOOT" == "2" ]; then
-echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
-echo "--------------------------------------"
-
-ROOT_UUID=$(blkid -s UUID -o value $ROOT)
-
-bootctl install --path /mnt/boot
-echo "default arch.conf" >> /mnt/boot/loader/loader.conf
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /initramfs-linux.img
-options root=UUID=$ROOT_UUID rw quiet splash fsck.mode=skip loglevel=3 systemd.show_status=false rd.udev.log_level=3
-EOF
-fi
 
 cat <<REALEND > /mnt/next.sh
 useradd -m $USER
@@ -109,11 +74,9 @@ echo "--------------------------------------"
 echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
 
-if [ "$BOOT" == "1" ]; then
-    pacman -S grub efibootmgr --noconfirm --needed
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch Linux"
-    grub-mkconfig -o /boot/grub/grub.cfg
-fi
+pacman -S grub efibootmgr --noconfirm --needed
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Arch Linux"
+grub-mkconfig -o /boot/grub/grub.cfg
 
 cd /home/sandip
 git clone https://github.com/sandipsky/dotfiles
