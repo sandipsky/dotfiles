@@ -1,0 +1,13 @@
+sudo nano /etc/mkinitcpio.conf
+
+MODULES = (nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+
+remove kms from hooks 
+
+sudo mkinitcpio -P 
+
+add nvidia_drm.modeset=1 
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules

@@ -7,9 +7,9 @@ sudo pacman -S gnome-shell gnome-control-center gnome-calculator gnome-menus col
 sudo pacman -S ttf-liberation noto-fonts-cjk ttf-fira-sans ttf-jetbrains-mono noto-fonts noto-fonts-emoji noto-fonts-extra --noconfirm --needed
 
 #BASIC PROGRAMS
-sudo pacman -S wget firefox vlc rhythmbox neofetch ntfs-3g tlp qbittorrent --noconfirm --needed
+sudo pacman -S wget firefox vlc rhythmbox neofetch ntfs-3g qbittorrent switcheroo-control  --noconfirm --needed
 
-sudo systemctl enable gdm tlp
+sudo systemctl enable gdm switcheroo-control 
 
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Software.svg
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Nautilus.svg

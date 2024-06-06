@@ -65,7 +65,7 @@ echo "-------------------------------------------------"
 echo "Audio Drivers"
 echo "-------------------------------------------------"
 
-pacman -S mesa-utils pipewire pipewire-alsa pipewire-pulse --noconfirm --needed
+pacman -S mesa-utils nvidia nvidia-utils nvidia-settings opencl-nvidia nvidia-prime pipewire pipewire-alsa pipewire-pulse --noconfirm --needed
 
 systemctl enable NetworkManager bluetooth
 systemctl --user enable pipewire pipewire-pulse
