@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "margin-top": 14,
+    "margin-top": 0,
     "margin-bottom": 0,
     "margin-left": 0,
     "margin-right": 0,    
@@ -15,17 +15,12 @@
     ],
 
     "modules-right": [
-        "custom/updates",
-        "pulseaudio",
-        "bluetooth",
+        "tray",
+	"bluetooth",       
         "battery", 
         "network",
-        "group/hardware",
-        "custom/cliphist",
-        "idle_inhibitor",
-        "tray",
-        "custom/exit",
-        "custom/ml4w-welcome",
-        "clock"
+	"pulseaudio",
+	"clock",        
+        "custom/exit"
     ]
 }

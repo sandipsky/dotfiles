@@ -8,9 +8,10 @@
      background-color: rgba(0, 0, 0, 0.8);
      border-bottom: 0px solid #ffffff;
      /* color: #FFFFFF; */
-     background: transparent;
+     background: #000;
      transition-property: background-color;
-     transition-duration: .5s;
+     transition-duration: .5s;	
+	padding: 8px;
  }
 
  /* -----------------------------------------------------
@@ -19,7 +20,6 @@
 
  #workspaces {
      background: #000;
-     margin: 2px 1px 3px 1px;
      padding: 0px 1px;
      border-radius: 15px;
      border: 0px;
@@ -32,29 +32,24 @@
 
  #workspaces button {
      padding: 0px 5px;
-     margin: 4px 3px;
      border-radius: 15px;
      border: 0px;
      color: #fff;
-     background-color: #222;
+     background-color: #000;
      transition: all 0.3s ease-in-out;
-     opacity: 0.4;
  }
 
  #workspaces button.active {
      color: #fff;
-     background: #222;
+     background: #666;
      border-radius: 15px;
-     min-width: 40px;
-     transition: all 0.3s ease-in-out;
      opacity: 1.0;
  }
 
  #workspaces button:hover {
      color: #fff;
-     background: #222;
-     border-radius: 15px;
-     opacity: 0.7;
+     background: #666;
+     border: none;
  }
 
  /* -----------------------------------------------------
@@ -64,13 +59,12 @@
  tooltip {
      border-radius: 10px;
      background-color: #000;
-     opacity: 0.8;
      padding: 20px;
-     margin: 0px;
  }
 
  tooltip label {
      color: #fff;
+     font-size: 20px;
  }
 
  /* -----------------------------------------------------
@@ -79,7 +73,6 @@
 
  #window {
      background: #000;
-     margin: 5px 15px 5px 0px;
      padding: 2px 10px 0px 10px;
      border-radius: 12px;
      color: #fff;
@@ -92,121 +85,6 @@
      background-color: transparent;
  }
 
- /* -----------------------------------------------------
- * Taskbar
- * ----------------------------------------------------- */
-
- #taskbar {
-     background: #000;
-     margin: 3px 15px 3px 0px;
-     padding: 0px;
-     border-radius: 15px;
-     font-weight: normal;
-     font-style: normal;
-     opacity: 0.8;
-     border: 3px solid #000;
- }
-
- #taskbar button {
-     margin: 0;
-     border-radius: 15px;
-     padding: 0px 5px 0px 5px;
- }
-
- /* -----------------------------------------------------
- * Modules
- * ----------------------------------------------------- */
-
- .modules-left>widget:first-child>#workspaces {
-     margin-left: 0;
- }
-
- .modules-right>widget:last-child>#workspaces {
-     margin-right: 0;
- }
-
- /* -----------------------------------------------------
- * Custom Quicklinks
- * ----------------------------------------------------- */
-
- #custom-brave,
- #custom-browser,
- #custom-keybindings,
- #custom-outlook,
- #custom-filemanager,
- #custom-teams,
- #custom-chatgpt,
- #custom-calculator,
- #custom-windowsvm,
- #custom-cliphist,
- #custom-wallpaper,
- #custom-settings,
- #custom-wallpaper,
- #custom-system,
- #custom-waybarthemes {
-     margin-right: 23px;
-     font-size: 20px;
-     font-weight: bold;
-     opacity: 0.8;
-     color: #000;
- }
-
- #custom-system {
-     margin-right: 15px;
- }
-
- #custom-wallpaper {
-     margin-right: 25px;
- }
-
- #custom-waybarthemes,
- #custom-settings {
-     margin-right: 20px;
- }
-
- #custom-chatgpt {
-     margin-right: 12px;
-     background-image: url("../assets/ai-icon.png");
-     background-repeat: no-repeat;
-     background-position: center;
-     padding-right: 24px;
- }
-
- #custom-ml4w-welcome {
-     margin-right: 12px;
-     background-image: url("../assets/ml4w-icon.png");
-     background-repeat: no-repeat;
-     background-position: center;
-     padding-right: 24px;
- }
-
- #custom-ml4w-hyprland-settings {
-     margin-right: 12px;
-     background-image: url("../assets/hyprland-icon.png");
-     background-repeat: no-repeat;
-     background-position: center;
-     padding-right: 16px;
- }
-
- /* -----------------------------------------------------
- * Idle Inhibator
- * ----------------------------------------------------- */
-
- #idle_inhibitor {
-     margin-right: 15px;
-     font-size: 22px;
-     font-weight: bold;
-     opacity: 0.8;
-     color: #000;
- }
-
- #idle_inhibitor.activated {
-     margin-right: 15px;
-     font-size: 20px;
-     font-weight: bold;
-     opacity: 0.8;
-     color: #dc2f2f;
- }
 
  /* -----------------------------------------------------
  * Custom Modules
@@ -219,7 +97,6 @@
      color: #fff;
      border-radius: 15px;
      padding: 0px 10px 0px 10px;
-     margin: 3px 15px 3px 14px;
      opacity: 0.8;
      border: 3px solid #000;
  }
@@ -229,70 +106,10 @@
  * ----------------------------------------------------- */
 
  #custom-exit {
-     margin: 0px 20px 0px 0px;
-     padding: 0px;
-     font-size: 20px;
-     color: #000;
- }
-
- /* -----------------------------------------------------
- * Custom Updates
- * ----------------------------------------------------- */
-
- #custom-updates {
-     background-color: #000;
-     font-size: 16px;
-     color: #fff;
-     border-radius: 15px;
-     padding: 2px 10px 0px 10px;
-     margin: 5px 15px 5px 0px;
-     opacity: 0.8;
- }
-
- #custom-updates.green {
-     background-color: #000;
- }
-
- #custom-updates.yellow {
-     background-color: #ff9a3c;
-     color: #FFFFFF;
- }
-
- #custom-updates.red {
-     background-color: #dc2f2f;
-     color: #FFFFFF;
- }
-
- /* -----------------------------------------------------
- * Custom Youtube
- * ----------------------------------------------------- */
-
- #custom-youtube {
-     background-color: #000;
-     font-size: 16px;
-     color: #fff;
-     border-radius: 15px;
-     padding: 2px 10px 0px 10px;
-     margin: 5px 15px 5px 0px;
-     opacity: 0.8;
- }
-
- /* -----------------------------------------------------
- * Hardware Group
- * ----------------------------------------------------- */
-
- #disk,
- #memory,
- #cpu,
- #language {
-     margin: 0px;
+     margin-right: 20px;
      padding: 0px;
      font-size: 16px;
-     color: #000;
- }
-
- #language {
-     margin-right: 10px;
+     color: #fff;
  }
 
  /* -----------------------------------------------------
@@ -305,7 +122,6 @@
      color: #fff;
      border-radius: 15px;
      padding: 1px 10px 0px 10px;
-     margin: 3px 15px 3px 0px;
      opacity: 0.8;
      border: 3px solid #000;
  }
@@ -320,7 +136,6 @@
      color: #fff;
      border-radius: 15px;
      padding: 2px 10px 0px 10px;
-     margin: 5px 15px 5px 0px;
      opacity: 0.8;
  }
 
@@ -339,7 +154,6 @@
      color: #fff;
      border-radius: 15px;
      padding: 2px 10px 0px 10px;
-     margin: 5px 15px 5px 0px;
      opacity: 0.8;
  }
 
@@ -365,14 +179,12 @@
      color: #fff;
      border-radius: 15px;
      padding: 2px 10px 0px 10px;
-     margin: 5px 15px 5px 0px;
      opacity: 0.8;
  }
 
  #bluetooth.off {
      background-color: transparent;
      padding: 0px;
-     margin: 0px;
  }
 
  /* -----------------------------------------------------
@@ -385,7 +197,6 @@
      color: #fff;
      border-radius: 15px;
      padding: 2px 15px 0px 10px;
-     margin: 5px 15px 5px 0px;
      opacity: 0.8;
  }
 

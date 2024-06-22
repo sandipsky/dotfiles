@@ -27,17 +27,10 @@
 
     "custom/appmenu": {
         "format": "Apps",
-        "on-click": "sleep 0.2;rofi -show drun -replace",
+        "on-click": "rofi -disable-history -drun-match-fields name -show drun",
         "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
         "tooltip": false
-    },
-
-    "custom/appmenuicon": {
-        "format": "",
-        "on-click": "rofi -show drun -replace",
-        "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
-        "tooltip": false
-    },    
+    },  
 
     "custom/exit": {
         "format": "",
@@ -56,10 +49,6 @@
         "format-alt": "{:%Y-%m-%d}"
     },
 
-    "custom/system": {
-        "format": "",
-        "tooltip": false
-    },
 
     "network": {
         "format": "{ifname}",
@@ -113,20 +102,4 @@
         "on-click": "blueman-manager",
         "format-no-controller": ""
     },
-
-    "user": {
-        "format": "{user}",
-        "interval": 60,
-        "icon": false
-    },
-
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "tooltip": true,
-        "format-icons":{
-            "activated": "",
-            "deactivated": ""
-        },
-        "on-click-right": "hyprlock"        
-    }
 }
