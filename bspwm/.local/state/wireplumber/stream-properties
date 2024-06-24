@@ -1,0 +1,6 @@
+[stream-properties]
+Audio/Sink:node.name:auto_null={"mute":false, "volume":1.000000, "channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"]}
+Audio/Source:media.name:RYTE\sT1\soutput={"volume":1.000000, "channelMap":["MONO"], "channelVolumes":[1.000000, 1.000000], "mute":false}
+Input/Audio/Internal:media.name:Bluetooth\sinternal\scapture\sstream\sfor\sRYTE\sT1\sinput={"volume":1.000000, "channelMap":["MONO"], "channelVolumes":[1.000000, 1.000000], "mute":false}
+Output/Audio:application.name:Google\sChrome={"mute":false, "channelVolumes":[1.000000, 1.000000], "volume":1.000000, "channelMap":["FL", "FR"]}
+Output/Audio:media.role:Movie={"volume":1.000000, "mute":false, "channelVolumes":[8.000000, 8.000000], "channelMap":["FL", "FR"]}

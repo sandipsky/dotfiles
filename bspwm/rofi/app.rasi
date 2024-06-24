@@ -1,0 +1,22 @@
+configuration {
+  drun-display-format: "{icon}  {name}";
+  font: "Fira Sans SemiBold 13";
+  show-icons: true;
+  
+}
+
+listview {
+	lines: 10;
+}
+
+mainbox {
+  children: [listview];
+}
+
+window {
+  width: 20%;
+  padding: 0;
+  location:   north west;
+  x-offset:   -18px;        
+  y-offset:   45px;
+}
