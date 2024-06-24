@@ -1,5 +1,6 @@
-yay -S auto-cpufreq nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k --noconfirm --needed
+yay -S auto-cpufreq betterlockscreen nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k --noconfirm --needed
 sudo auto-cpufreq --install
+systemctl enable betterlockscreen@sandip
 
 sudo usermod -aG video sandip
 sudo chown -R sandip /sys/class/backlight/intel_backlight/brightness
@@ -23,3 +24,4 @@ sudo rm /usr/share/applications/mate-color-select.desktop
 sudo rm /usr/share/applications/nm-connection-editor.desktop
 sudo rm /usr/share/applications/xfce4-about.desktop
 sudo rm /usr/share/applications/org.xfce.mousepad-settings.desktop
+
