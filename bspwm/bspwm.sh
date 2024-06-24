@@ -13,6 +13,9 @@ mkdir /home/sandip/.config/bspwm
 mkdir /home/sandip/.config/sxhkd
 mkdir /home/sandip/.config/alacritty
 mkdir /home/sandip/.config/rofi
+mkdir /home/sandip/.config
+
+mkdir /home/sandip/.config/bin
 
 cp picom/picom.conf /home/sandip/.config/picom/picom.conf
 cp alacritty/alacritty.yml /home/sandip/.config/alacritty/alacritty.yml
