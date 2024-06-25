@@ -1,19 +1,18 @@
 {
-    "hyprland/workspaces" : {
+    "hyprland/workspaces": {
         "on-click": "activate",
         "active-only": false,
         "all-outputs": true,
         "format": "{}",
         "format-icons": {
-			"urgent": "",
-			"active": "",
-			"default": ""
+            "urgent": "",
+            "active": "",
+            "default": ""
         },
         "persistent-workspaces": {
             "*": 4
-        }       
+        }
     },
-
     "hyprland/window": {
         "rewrite": {
             "(.*) - Brave": "$1",
@@ -24,32 +23,26 @@
         },
         "separate-outputs": true
     },
-
     "custom/appmenu": {
         "format": "Apps",
         "on-click": "rofi -disable-history -drun-match-fields name -show drun",
         "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
         "tooltip": false
-    },  
-
+    },
     "custom/exit": {
         "format": "",
         "on-click": "wlogout",
         "tooltip": false
     },
-
     "tray": {
         "icon-size": 21,
         "spacing": 10
     },
-
     "clock": {
         "format": "{:%H:%M %a}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
-
-
     "network": {
         "format": "{ifname}",
         "format-wifi": "   {signalStrength}%",
@@ -62,19 +55,23 @@
         "max-length": 50,
         "on-click": "~/.config/.settings/networkmanager.sh"
     },
-
     "battery": {
         "states": {
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}   {capacity}%",
+        "format": "<span color=\"#fff\">{icon}</span>   {capacity}%",
         "format-charging": "  {capacity}%",
         "format-plugged": "  {capacity}%",
         "format-alt": "{icon}  {time}",
-        "format-icons": [" ", " ", " ", " ", " "]
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ]
     },
-
     "pulseaudio": {
         "format": "{icon}   {volume}%",
         "format-bluetooth": "{volume}%  {icon} {format_source}",
@@ -89,11 +86,14 @@
             "phone": " ",
             "portable": " ",
             "car": " ",
-            "default": [" ", " ", " "]
+            "default": [
+                " ",
+                " ",
+                " "
+            ]
         },
         "on-click": "pavucontrol"
     },
-
     "bluetooth": {
         "format": " {status}",
         "format-disabled": "",
