@@ -3,24 +3,23 @@
     "margin-top": 0,
     "margin-bottom": 0,
     "margin-left": 0,
-    "margin-right": 0,    
+    "margin-right": 0,
     "spacing": 0,
-
-    "include": ["~/.config/waybar/modules.json"],
-
+    "include": [
+        "~/.config/waybar/modules.json"
+    ],
     "modules-left": [
         "custom/appmenu",
         "hyprland/workspaces",
         "hyprland/window"
     ],
-
     "modules-right": [
         "tray",
-	"bluetooth",       
-        "battery", 
+        "bluetooth",
+        "battery",
         "network",
-	"pulseaudio",
-	"clock",        
+        "pulseaudio",
+        "clock",
         "custom/exit"
     ]
 }
