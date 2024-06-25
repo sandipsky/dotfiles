@@ -1,60 +1,14 @@
  * {
-     font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+     font-family: "Fira Sans Semibold", "Font Awesome 6 Free Solid", "Material Design Icons Desktop", "MesloLGS NF", sans-serif;
      border: none;
      border-radius: 0px;
+     font-size: 16px;
  }
+
 
  window#waybar {
-     background-color: rgba(0, 0, 0, 0.8);
-     border-bottom: 0px solid #ffffff;
-     /* color: #FFFFFF; */
-     background: #000;
-     transition-property: background-color;
-     transition-duration: .5s;	
-	padding: 8px;
+     background: #1A1B26;
  }
-
- /* -----------------------------------------------------
- * Workspaces 
- * ----------------------------------------------------- */
-
- #workspaces {
-     background: #000;
-     padding: 0px 1px;
-     border-radius: 15px;
-     border: 0px;
-     font-weight: bold;
-     font-style: normal;
-     opacity: 0.8;
-     font-size: 16px;
-     color: #fff;
- }
-
- #workspaces button {
-     padding: 0px 5px;
-     border-radius: 15px;
-     border: 0px;
-     color: #fff;
-     background-color: #000;
-     transition: all 0.3s ease-in-out;
- }
-
- #workspaces button.active {
-     color: #fff;
-     background: #666;
-     border-radius: 15px;
-     opacity: 1.0;
- }
-
- #workspaces button:hover {
-     color: #fff;
-     background: #666;
-     border: none;
- }
-
- /* -----------------------------------------------------
- * Tooltips
- * ----------------------------------------------------- */
 
  tooltip {
      border-radius: 10px;
@@ -64,177 +18,67 @@
 
  tooltip label {
      color: #fff;
-     font-size: 20px;
- }
-
- /* -----------------------------------------------------
- * Window
- * ----------------------------------------------------- */
-
- #window {
-     background: #000;
-     padding: 2px 10px 0px 10px;
-     border-radius: 12px;
-     color: #fff;
      font-size: 16px;
-     font-weight: normal;
-     opacity: 0.8;
  }
 
- window#waybar.empty #window {
-     background-color: transparent;
- }
+big {
+font-size: 24px 
+}
 
+#custom-appmenu,
+#window,
+#custom-exit,
+#clock,
+#bluetooth,
+#cpu,
+#memory,
+#pulseaudio,
+#network,
+#battery,
+#backlight {
+   padding: 6px 8px;
+   color: #fff; 
+} 
 
  /* -----------------------------------------------------
- * Custom Modules
+ * Workspaces 
  * ----------------------------------------------------- */
 
- #custom-appmenu,
- #custom-appmenuwlr {
-     background-color: #000;
-     font-size: 16px;
-     color: #fff;
-     border-radius: 15px;
-     padding: 0px 10px 0px 10px;
-     opacity: 0.8;
-     border: 3px solid #000;
- }
-
- /* -----------------------------------------------------
- * Custom Exit
- * ----------------------------------------------------- */
-
- #custom-exit {
-     margin-right: 20px;
-     padding: 0px;
-     font-size: 16px;
+ #workspaces {
+     font-weight: bold;
+     font-style: normal;
+padding-right: 15px;
      color: #fff;
  }
 
- /* -----------------------------------------------------
- * Clock
- * ----------------------------------------------------- */
+ #workspaces button {
+     padding: 0px 5px;
+     color: #f5f5f5;
+     background: #1A1B26;
+ }
 
- #clock {
-     background-color: #000;
-     font-size: 16px;
+ #workspaces button.active {
+     color: #1A1B26;
+     background: #f5f5f5;
+ }
+
+#workspaces button.active:hover {
+     color: #1A1B26;
+     background: #f5f5f5;
+ }
+
+ #workspaces button:hover {
      color: #fff;
-     border-radius: 15px;
-     padding: 1px 10px 0px 10px;
-     opacity: 0.8;
-     border: 3px solid #000;
+     background: #1A1B26;
+     border: none;
+box-shadow: inherit;
+  text-shadow: inherit;
  }
 
- /* -----------------------------------------------------
- * Pulseaudio
- * ----------------------------------------------------- */
 
- #pulseaudio {
-     background-color: #000;
-     font-size: 16px;
-     color: #fff;
-     border-radius: 15px;
-     padding: 2px 10px 0px 10px;
-     opacity: 0.8;
- }
 
- #pulseaudio.muted {
-     background-color: #000;
-     color: #fff;
- }
 
- /* -----------------------------------------------------
- * Network
- * ----------------------------------------------------- */
 
- #network {
-     background-color: #000;
-     font-size: 16px;
-     color: #fff;
-     border-radius: 15px;
-     padding: 2px 10px 0px 10px;
-     opacity: 0.8;
- }
 
- #network.ethernet {
-     background-color: #000;
-     color: #fff;
- }
 
- #network.wifi {
-     background-color: #000;
-     color: #fff;
- }
 
- /* -----------------------------------------------------
- * Bluetooth
- * ----------------------------------------------------- */
-
- #bluetooth,
- #bluetooth.on,
- #bluetooth.connected {
-     background-color: #000;
-     font-size: 16px;
-     color: #fff;
-     border-radius: 15px;
-     padding: 2px 10px 0px 10px;
-     opacity: 0.8;
- }
-
- #bluetooth.off {
-     background-color: transparent;
-     padding: 0px;
- }
-
- /* -----------------------------------------------------
- * Battery
- * ----------------------------------------------------- */
-
- #battery {
-     background-color: #000;
-     font-size: 16px;
-     color: #fff;
-     border-radius: 15px;
-     padding: 2px 15px 0px 10px;
-     opacity: 0.8;
- }
-
- #battery.charging,
- #battery.plugged {
-     color: #fff;
-     background-color: #000;
- }
-
- @keyframes blink {
-     to {
-         background-color: #000;
-         color: #fff;
-     }
- }
-
- #battery.critical:not(.charging) {
-     background-color: #f53c3c;
-     color: #000;
-     animation-name: blink;
-     animation-duration: 0.5s;
-     animation-timing-function: linear;
-     animation-iteration-count: infinite;
-     animation-direction: alternate;
- }
-
- /* -----------------------------------------------------
- * Tray
- * ----------------------------------------------------- */
-
- #tray {
-     padding: 0px 15px 0px 0px;
- }
-
- #tray>.passive {
-     -gtk-icon-effect: dim;
- }
-
- #tray>.needs-attention {
-     -gtk-icon-effect: highlight;
- }
