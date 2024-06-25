@@ -40,7 +40,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat <<REALEND > /mnt/next.sh
 useradd -m $USER
 usermod -c "${NAME}" $USER
-usermod -aG wheel,storage,power,audio $USER
+usermod -aG wheel,storage,power,audio,video $USER
 echo $USER:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 

@@ -31,11 +31,11 @@ super + {h,j,k,l}
 	bspc node -f {west,south,north,east}
 
 # Swap window in given direction
-super + shift + {h,j,k,l}
+super + {Left,Down,Up,Right}
 	bspc node -s {west,south,north,east}
 
 # Switch to previous or next desktop
-super + {Left,Right}
+super + ctrl + {Left,Right}
 	bspc desktop -f {prev,next}.local
 
 # Move Window to previous or next desktop
@@ -79,26 +79,24 @@ super + e
 	thunar
 
 super + w 
-	firefox
+	google-chrome-stable
 
 super + a 
 	rofi -disable-history -drun-match-fields name -show drun
-	
-super + c
-	code
 
 super + s 
 	spotify
 
-super + .
-	rofi -show emoji
+super + l
+	betterlockscreen -l 
+
 super + shift + s
 	scrot --select --line mode=edge '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
 
 @Print
-scrot '$HOME/Pictures/%Y-%m-%d-%T-screenshot.png'
+	scrot '$HOME/Pictures/%Y-%m-%d-%T-screenshot.png'
 
-#super + l
+
 
 
     
