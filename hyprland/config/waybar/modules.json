@@ -38,7 +38,7 @@
     },
     "cpu": {
         "interval": 5,
-        "format": "<span color=\"#f7768e\"></span>  {}%",
+        "format": "<span color=\"#f7768e\"></span>  {usage}%",
         "max-length": 10
     },
     "memory": {
@@ -98,6 +98,7 @@
     "bluetooth": {
         "format": "<span color=\"#7aa2f7\"></span>  On",
         "format-disabled": "<span color=\"#fff\"></span>  Off",
+        "format-connected": "<span color=\"#7aa2f7\"></span>  {device_alias}",
         "format-off": "",
         "interval": 30,
         "on-click": "blueman-manager",
