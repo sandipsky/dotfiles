@@ -19,13 +19,12 @@
     },
     "custom/appmenu": {
         "format": "",
-        "on-click": "rofi -disable-history -drun-match-fields name -show drun",
-        "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
+        "on-click": "rofi -disable-history -drun-match-fields name -show drun -theme-str '@import \"app.rasi\"'",
         "tooltip": false
     },
     "custom/exit": {
         "format": "",
-        "on-click": "wlogout",
+        "on-click": "$HOME/.local/bin/powermenu",
         "tooltip": false
     },
     "tray": {
@@ -44,7 +43,7 @@
     },
     "memory": {
         "interval": 5,
-        "format": "<span color=\"#FBC02D\"></span>  {used} G",
+        "format": "<span color=\"#FBC02D\"></span>  {used} GiB",
         "max-length": 10
     },
     "network": {
@@ -57,7 +56,7 @@
         "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
-        "on-click": "~/.config/.settings/networkmanager.sh"
+        "on-click": "$HOME/.local/bin/rofi-wifi-menu.sh"
     },
     "battery": {
         "interval": 1,

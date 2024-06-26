@@ -21,24 +21,20 @@
      font-size: 16px;
  }
 
-big {
-font-size: 24px 
-}
-
-#custom-appmenu,
-#window,
-#custom-exit,
-#clock,
-#bluetooth,
-#cpu,
-#memory,
-#pulseaudio,
-#network,
-#battery,
-#backlight {
-   padding: 6px 8px;
-   color: #fff; 
-} 
+ #custom-appmenu,
+ #window,
+ #custom-exit,
+ #clock,
+ #bluetooth,
+ #cpu,
+ #memory,
+ #pulseaudio,
+ #network,
+ #battery,
+ #backlight {
+     padding: 6px 8px;
+     color: #fff;
+ }
 
  /* -----------------------------------------------------
  * Workspaces 
@@ -47,7 +43,7 @@ font-size: 24px
  #workspaces {
      font-weight: bold;
      font-style: normal;
-padding-right: 15px;
+     padding-right: 15px;
      color: #fff;
  }
 
@@ -62,7 +58,7 @@ padding-right: 15px;
      background: #f5f5f5;
  }
 
-#workspaces button.active:hover {
+ #workspaces button.active:hover {
      color: #1A1B26;
      background: #f5f5f5;
  }
@@ -71,14 +67,6 @@ padding-right: 15px;
      color: #fff;
      background: #1A1B26;
      border: none;
-box-shadow: inherit;
-  text-shadow: inherit;
+     box-shadow: inherit;
+     text-shadow: inherit;
  }
-
-
-
-
-
-
-
-

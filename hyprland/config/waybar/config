@@ -14,13 +14,13 @@
         "hyprland/window"
     ],
     "modules-right": [
-"cpu",        
-"memory",
+        "cpu",
+        "memory",
         "bluetooth",
         "battery",
         "network",
         "pulseaudio",
-"backlight",
+        "backlight",
         "clock",
         "custom/exit"
     ]
