@@ -32,20 +32,20 @@
         "icon-size": 21,
         "spacing": 10
     },
-    "clock": { 
+    "clock": {
         "format": "<span color=\"#6D8895\"></span>  {:%I:%M %p}",
         "tooltip-format": "<tt><big>{calendar}</big></tt>",
         "format-alt": "<span color=\"#fff\">󰃭</span>  {:%Y-%m-%d, %a}"
     },
-    "cpu": { 
-	"interval": 5,
-	"format": "<span color=\"#f7768e\"></span>  {}%",
-	"max-length": 10
+    "cpu": {
+        "interval": 5,
+        "format": "<span color=\"#f7768e\"></span>  {}%",
+        "max-length": 10
     },
     "memory": {
-	"interval": 5,
-	"format": "<span color=\"#FBC02D\"></span>  {used} G",
-	"max-length": 10
+        "interval": 5,
+        "format": "<span color=\"#FBC02D\"></span>  {used} G",
+        "max-length": 10
     },
     "network": {
         "format": "{ifname}",
@@ -60,7 +60,7 @@
         "on-click": "~/.config/.settings/networkmanager.sh"
     },
     "battery": {
-"interval": 1,
+        "interval": 1,
         "states": {
             "warning": 30,
             "critical": 15
@@ -94,7 +94,7 @@
                 " "
             ]
         },
-        "on-click": "pactl set-sink-mute 0 toggle",
+        "on-click": "pactl set-sink-mute 0 toggle"
     },
     "bluetooth": {
         "format": "<span color=\"#7aa2f7\"></span>  On",
@@ -104,9 +104,12 @@
         "on-click": "blueman-manager",
         "format-no-controller": ""
     },
-"backlight": {
-	"device": "intel_backlight",
-	"format": "<span color=\"#e0af68\">{icon}</span> {percent}%",
-	"format-icons": ["󰃠", "󰃠"]
-}
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "<span color=\"#e0af68\">{icon}</span> {percent}%",
+        "format-icons": [
+            "󰃠",
+            "󰃠"
+        ]
+    }
 }
