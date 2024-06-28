@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi-wayland vlc firefox ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-dejavu ttf-font-awesome ttf-dejavu-nerd ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono sddm nwg-look redshift qt5-wayland --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi-wayland vlc firefox ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-dejavu ttf-font-awesome ttf-dejavu-nerd ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono nwg-look redshift lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings --noconfirm --needed
 
 cd .. 
 cd scripts
@@ -72,6 +72,6 @@ cd ..
 cd apps
 sudo cp * /usr/share/applications/
 
-sudo systemctl enable sddm 
+sudo systemctl enable lightdm 
 
 
