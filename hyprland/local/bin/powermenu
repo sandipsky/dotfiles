@@ -6,7 +6,7 @@ case "$chosen" in
 	"   Power Off") poweroff ;;
 	"   Restart") reboot ;;
 	"   Suspend") systemctl suspend ;;
-	"   Log Out") bspc quit ;;
-	"   Lock") betterlockscreen -l ;;
+	"   Log Out") hyprctl dispatch exit ;;
+	"   Lock") hyprlock ;;
 	*) exit 1 ;;
 esac
