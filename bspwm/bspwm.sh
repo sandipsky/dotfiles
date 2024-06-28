@@ -1,6 +1,8 @@
 #!/bin/bash
 
-sudo pacman -S blueman zsh zsh-syntax-highlighting zsh-autosuggestions redshift rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi vlc ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller thunar lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty picom xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-liberation ttf-dejavu ttf-jetbrains-mono ttf-fira-sans ttf-dejavu-nerd ttf-font-awesome polybar adwaita-icon-theme nwg-look brightnessctl dunst --noconfirm --needed
+sudo pacman -S blueman zsh zsh-syntax-highlighting zsh-autosuggestions redshift rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi vlc ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller thunar lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-liberation ttf-dejavu ttf-jetbrains-mono ttf-fira-sans ttf-dejavu-nerd ttf-font-awesome polybar adwaita-icon-theme nwg-look brightnessctl dunst redshift --noconfirm --needed
+
+yay -S auto-cpufreq picom-ftlabs-git betterlockscreen nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin --noconfirm --needed
 
 cd config
 
@@ -21,14 +23,16 @@ cp bspwm/bspwmrc /home/sandip/.config/bspwm/bspwmrc
 cp sxhkd/sxhkdrc /home/sandip/.config/sxhkd/sxhkdrc
 cp rofi/* /home/sandip/.config/rofi/
 
-mkdir /home/sandip/.local
-mkdir /home/sandip/.local/bin
-
 cd ..
 cd local
 cd bin 
-chmod +x *
-cp * /home/sandip/.local/bin/
+mkdir /home/sandip/.local
+mkdir /home/sandip/.local/bin
+cp -r * /home/sandip/.local/bin
+chmod +x /home/sandip/.local/bin/powermenu
+chmod +x /home/sandip/.local/bin/rofi-wifi-menu.sh
+chmod +x /home/sandip/.local/bin/bluetooth_status.sh
+chmod +x /home/sandip/.local/bin/bluetooth_toggle.sh
 
 cd ..
 cd ..
@@ -67,6 +71,9 @@ sudo rm /usr/share/applications/ngw-look.desktop
 sudo rm /usr/share/applications/org.nomacs.ImageLounge.desktop
 sudo rm /usr/share/applications/org.xfce.mousepad.desktop
 sudo rm /usr/share/applications/thunar.desktop
+sudo rm /usr/share/applications/auto-cpufreq-gtk.desktop
+sudo rm /usr/share/applications/cmake-gui.desktop
+sudo rm /usr/share/applications/lstopo.desktop
 
 cd ..
 cd apps
@@ -82,7 +89,6 @@ sh battery.sh
 sh ntfs.sh
 sh zsh.sh
 
-yay -S auto-cpufreq betterlockscreen nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin --noconfirm --needed
 sudo auto-cpufreq --install
 sudo systemctl enable betterlockscreen@sandip
 sudo systemctl enable lightdm 

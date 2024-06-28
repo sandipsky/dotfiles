@@ -38,7 +38,7 @@
     font = "Fira Sans Semibold" 13
     line_height = 1
     markup = full
-    format = "<b>%a</b>\n<b>%s</b>\n%b"
+    format = "%a\n<b>%s</b>\n%b"
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -50,7 +50,7 @@
 
     enable_recursive_icon_lookup = true
     icon_theme = "Adwaita"
-    icon_position = left
+    icon_position = off
     min_icon_size = 32
     max_icon_size = 128
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
@@ -79,7 +79,7 @@
 [urgency_low]
     background = "#1A1B26"
     foreground = "#888888"
-    timeout = 6
+    timeout = 3
     frame_color = "#1A1B26"
     # Icon for notifications with low urgency, uncomment to enable
     #default_icon = /path/to/icon
@@ -87,7 +87,7 @@
 [urgency_normal]
     background = "#1A1B26"
     foreground = "#ffffff"
-    timeout = 6
+    timeout = 4
     frame_color = "#282A36"
     # Icon for notifications with normal urgency, uncomment to enable
     #default_icon = /path/to/icon
