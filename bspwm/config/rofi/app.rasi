@@ -10,7 +10,7 @@ listview {
 }
 
 mainbox {
-  children: [listview];
+  children: [inputbar, listview];
 }
 
 window {

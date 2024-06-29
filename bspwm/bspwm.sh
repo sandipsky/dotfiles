@@ -74,6 +74,7 @@ sudo rm /usr/share/applications/thunar.desktop
 sudo rm /usr/share/applications/auto-cpufreq-gtk.desktop
 sudo rm /usr/share/applications/cmake-gui.desktop
 sudo rm /usr/share/applications/lstopo.desktop
+sudo rm /usr/share/applications/lightdm-gtk-greeter-settings.desktop
 
 cd ..
 cd apps

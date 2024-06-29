@@ -23,6 +23,9 @@ super + t
 super + s
 	bspc node -t floating
 
+super + l
+	betterlockscreen -l
+
 
 # FOCUS/SWAP
 
@@ -40,7 +43,7 @@ super + ctrl + {Left,Right}
 
 # Move Window to previous or next desktop
 super + shift + {Left,Right}
-	bspc node -d {prev,next}.local
+	bspc node -d {prev,next}.local --follow
 
 # Switch to the last desktop
 super + Tab
@@ -52,7 +55,7 @@ super + {1-9,0}
 
 # Move Window to given desktop
 super + shift + {1-9,0}
-	bspc node -d focused:'^{1-9,10}'
+	bspc node -d focused:'^{1-9,10}' --follow
 
 
 # MOVE/RESIZE
@@ -82,13 +85,7 @@ super + w
 	google-chrome-stable
 
 super + a 
-	rofi -disable-history -drun-match-fields name -show drun
-
-super + s 
-	spotify
-
-super + l
-	betterlockscreen -l 
+	rofi -disable-history -drun-match-fields name -show drun -theme-str '@import "app.rasi"'
 
 super + shift + s
 	scrot --select --line mode=edge '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
