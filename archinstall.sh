@@ -102,7 +102,7 @@ if [[ $BOOT == 1 ]]; then
     title Arch Linux
     linux /vmlinuz-linux
     initrd /initramfs-linux.img
-    options root=UUID=${ROOT_UUID} rw quiet splash loglevel=3 systemd.show_status=false rd.udev.log_level=3
+    options root=UUID=${ROOT_UUID} rw
     EOF
 else
     pacman -S grub efibootmgr --noconfirm --needed
