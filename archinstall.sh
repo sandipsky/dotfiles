@@ -42,11 +42,9 @@ mkfs.ext4 "${ROOT}"
 # mount target
 mount "${ROOT}" /mnt
 if [[ $BOOT == 1 ]]; then
-    mkdir -p /mnt/boot
-    mount "$EFI" /mnt/boot
+    mount --mkdir "$EFI" /mnt/boot
 else
-    mkdir -p /mnt/boot/efi
-    mount "$EFI" /mnt/boot/efi
+    mount --mkdir "$EFI" /mnt/boot/efi
 fi
 
 echo "--------------------------------------"
@@ -96,9 +94,9 @@ echo "--------------------------------------"
 
 if [[ $BOOT == 1 ]]; then
     ROOT_UUID=$(sudo blkid -s UUID -o value "$ROOT")
-    bootctl install --path /mnt/boot
-    echo "default arch.conf" >> /mnt/boot/loader/loader.conf
-    cat <<EOF > /mnt/boot/loader/entries/arch.conf
+    bootctl install --path=/boot
+    echo "default arch.conf" >> /boot/loader/loader.conf
+    cat <<EOF > /boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
