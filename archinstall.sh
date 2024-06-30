@@ -92,8 +92,9 @@ echo "--------------------------------------"
 echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
 
+ROOT_UUID=$(blkid -s UUID -o value "$ROOT")
+
 if [[ $BOOT == 1 ]]; then
-    ROOT_UUID=$(sudo blkid -s UUID -o value "$ROOT")
     bootctl install --path=/boot
     echo "default arch.conf" >> /boot/loader/loader.conf
     cat <<EOF > /boot/loader/entries/arch.conf
