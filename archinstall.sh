@@ -99,11 +99,11 @@ if [[ $BOOT == 1 ]]; then
     bootctl install --path /mnt/boot
     echo "default arch.conf" >> /mnt/boot/loader/loader.conf
     cat <<EOF > /mnt/boot/loader/entries/arch.conf
-    title Arch Linux
-    linux /vmlinuz-linux
-    initrd /initramfs-linux.img
-    options root=UUID=${ROOT_UUID} rw
-    EOF
+title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options root=UUID=${ROOT_UUID} rw
+EOF
 else
     pacman -S grub efibootmgr --noconfirm --needed
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Linux Boot Manager"
