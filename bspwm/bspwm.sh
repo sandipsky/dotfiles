@@ -1,27 +1,26 @@
 #!/bin/bash
 
-sudo pacman -S blueman zsh zsh-syntax-highlighting zsh-autosuggestions redshift rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi vlc ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller thunar lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-liberation ttf-dejavu ttf-jetbrains-mono ttf-fira-sans ttf-dejavu-nerd ttf-font-awesome polybar adwaita-icon-theme nwg-look brightnessctl dunst redshift --noconfirm --needed
+sudo pacman -S blueman redshift rhythmbox atril rofi vlc ntfs-3g tumbler ffmpegthumbnailer nitrogen bspwm sxhkd file-roller thunar lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-jetbrains-mono ttf-fira-sans ttf-font-awesome polybar adwaita-icon-theme nwg-look brightnessctl dunst --noconfirm --needed
+
+cd .. 
+cd scripts
+sh aur.sh
+sh battery.sh
+sh ntfs.sh
+sh zsh.sh
 
 yay -S auto-cpufreq picom-ftlabs-git betterlockscreen nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin --noconfirm --needed
 
+cd bspwm
 cd config
 
 chmod 755 bspwm/bspwmrc
 chmod 644 sxhkd/sxhkdrc
 
 mkdir /home/sandip/.config
-mkdir /home/sandip/.config/picom
-mkdir /home/sandip/.config/bspwm
-mkdir /home/sandip/.config/sxhkd
-mkdir /home/sandip/.config/alacritty
-mkdir /home/sandip/.config/rofi
-mkdir /home/sandip/.config/dunst
-
-cp picom/picom.conf /home/sandip/.config/picom/picom.conf
-cp alacritty/alacritty.yml /home/sandip/.config/alacritty/alacritty.yml
-cp bspwm/bspwmrc /home/sandip/.config/bspwm/bspwmrc
-cp sxhkd/sxhkdrc /home/sandip/.config/sxhkd/sxhkdrc
-cp rofi/* /home/sandip/.config/rofi/
+rm -rf /home/sandip/.config/*
+cp -r * /home/sandip/.config/
+chmod +x /home/sandip/.config/polybar/launch.sh
 
 cd ..
 cd local
@@ -82,13 +81,7 @@ sudo cp * /usr/share/applications/
 
 cd ..
 sudo cp 90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
-
-cd .. 
-cd scripts
-sh aur.sh
-sh battery.sh
-sh ntfs.sh
-sh zsh.sh
+sudo cp backlight.rules /etc/udev/rules.d/backlight.rules
 
 sudo auto-cpufreq --install
 sudo systemctl enable betterlockscreen@sandip

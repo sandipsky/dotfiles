@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril noto-fonts noto-fonts-emoji noto-fonts-extra rofi-wayland vlc firefox ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar thunar-archive-plugin noto-fonts noto-fonts-emoji ttf-dejavu ttf-font-awesome ttf-dejavu-nerd ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono nwg-look sddm --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc firefox ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp galculator wget thunar thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono nwg-look sddm --noconfirm --needed
 
 cd .. 
 cd scripts
@@ -18,6 +18,7 @@ cd config
 
 rm -rf /home/sandip/.config/*
 cp -r * /home/sandip/.config/
+chmod +x /home/sandip/.config/waybar/launch.sh
 
 cd ..
 cd local
@@ -51,8 +52,8 @@ sudo rm /usr/share/applications/redshift-gtk.desktop
 sudo rm /usr/share/applications/picom.desktop
 sudo rm /usr/share/applications/qv4l2.desktop
 sudo rm /usr/share/applications/qvidcap.desktop
-sudo rm /usr/share/applications/mate-color-select.desktop
 sudo rm /usr/share/applications/nm-connection-editor.desktop
+sudo rm /usr/share/applications/mate-color-select.desktop
 sudo rm /usr/share/applications/xfce4-about.desktop
 sudo rm /usr/share/applications/org.xfce.mousepad-settings.desktop
 
@@ -72,6 +73,6 @@ cd ..
 cd apps
 sudo cp * /usr/share/applications/
 
-sudo systemctl enable lightdm 
+sudo systemctl enable sddm 
 
 
