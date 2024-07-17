@@ -1,0 +1,72 @@
+ * {
+     font-family: "Fira Sans Semibold", "Font Awesome 6 Free Solid", "Material Design Icons Desktop", "MesloLGS NF", sans-serif;
+     border: none;
+     border-radius: 0px;
+     font-size: 16px;
+ }
+
+
+ window#waybar {
+     background: #1A1B26;
+ }
+
+ tooltip {
+     border-radius: 10px;
+     background-color: #000;
+     padding: 20px;
+ }
+
+ tooltip label {
+     color: #fff;
+     font-size: 16px;
+ }
+
+ #custom-appmenu,
+ #window,
+ #custom-exit,
+ #clock,
+ #bluetooth,
+ #cpu,
+ #memory,
+ #pulseaudio,
+ #network,
+ #battery,
+ #backlight {
+     padding: 6px 8px;
+     color: #fff;
+ }
+
+ /* -----------------------------------------------------
+ * Workspaces 
+ * ----------------------------------------------------- */
+
+ #workspaces {
+     font-weight: bold;
+     font-style: normal;
+     padding: 0 8px;
+     color: #fff;
+ }
+
+ #workspaces button {
+     padding: 0px 5px;
+     color: #f5f5f5;
+     background: #1A1B26;
+ }
+
+ #workspaces button.active {
+     color: #1A1B26;
+     background: #f5f5f5;
+ }
+
+ #workspaces button.active:hover {
+     color: #1A1B26;
+     background: #f5f5f5;
+ }
+
+ #workspaces button:hover {
+     color: #fff;
+     background: #1A1B26;
+     border: none;
+     box-shadow: inherit;
+     text-shadow: inherit;
+ }

@@ -1,0 +1,1 @@
+UUID=4CC27C52C27C41EE  /mnt/HOME ntfs-3g uid=sandip,gid=sandip,umask=0022 0 2

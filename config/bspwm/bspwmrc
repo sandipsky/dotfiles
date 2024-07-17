@@ -1,0 +1,40 @@
+#! /bin/sh
+
+#Autostart
+nitrogen --restore &
+nm-applet &
+sxhkd &
+picom --config $HOME/.config/picom/picom.conf &
+dunst &
+redshift -P -O 5500 &
+
+bspc monitor -d 1 2 3 4 
+
+$HOME/.config/polybar/launch.sh &
+
+bspc config border_width         	      2
+bspc config window_gap           	      8
+bspc config top_padding                   30
+bspc config bottom_padding                0
+bspc config left_padding                  0
+bspc config right_padding                 0
+bspc config single_monocle                false
+bspc config click_to_focus                true
+bspc config split_ratio                   0.50
+bspc config borderless_monocle            false
+bspc config gapless_monocle               false
+bspc config focus_follows_pointer         true
+bspc config pointer_modifier              mod4
+
+#### BSPWM coloring ####
+bspc config normal_border_color		      "#4c566a"
+bspc config active_border_color	          "#1e1e1e"
+bspc config focused_border_color	      "#5e81ac"
+
+
+
+
+
+
+
+

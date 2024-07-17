@@ -1,0 +1,10 @@
+#Autostart
+xfce4-panel -d &
+nm-applet &
+
+#WindowRules
+bspc rule -a Xfce4-panel state=floating border=off
+bspc rule -a xfce4-popup-whiskermenu state=floating border=off
+bspc rule -a Whisker\ Menu state=floating border=off
+bspc rule -a Wrapper-2.0 state=floating border=off focus=on
+sleep 5 && xprop -name "Whisker Menu"

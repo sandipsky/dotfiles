@@ -1,0 +1,9 @@
+quiet splash fsck.mode=skip loglevel=3 systemd.show_status=false rd.udev.log_level=3
+
+#FOR GRUB
+sudo nano /boot/grub/grub.cfg
+
+REMOVE
+
+echo    'Loading Linux linux ...'
+echo    'Loading initial ramdisk ...'

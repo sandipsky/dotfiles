@@ -1,0 +1,101 @@
+
+# Reload sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# Restart bspwm
+super + shift + r
+	bspc wm -r
+
+# Close Window
+super + q
+	bspc node -c
+
+# Toggle fullscreen
+super + f
+	bspc desktop -l next
+
+# Switch to tiling mode
+super + t
+	bspc node -t tiled
+
+# Switch to floating mode
+super + s
+	bspc node -t floating
+
+super + l
+	betterlockscreen -l
+
+
+# FOCUS/SWAP
+
+# Focus the node in the given direction
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+# Swap window in given direction
+super + {Left,Down,Up,Right}
+	bspc node -s {west,south,north,east}
+
+# Switch to previous or next desktop
+super + ctrl + {Left,Right}
+	bspc desktop -f {prev,next}.local
+
+# Move Window to previous or next desktop
+super + shift + {Left,Right}
+	bspc node -d {prev,next}.local --follow
+
+# Switch to the last desktop
+super + Tab
+	bspc desktop -f last
+
+# Switch to given desktop
+super + {1-9,0}
+	bspc desktop -f focused:'^{1-9,10}'
+
+# Move Window to given desktop
+super + shift + {1-9,0}
+	bspc node -d focused:'^{1-9,10}' --follow
+
+
+# MOVE/RESIZE
+
+# move a floating window
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# expand a window by moving one of its side outward
+ctrl + shift + {Left}
+	bspc node -z {left -20 0}
+
+# contract a window by moving one of its side inward
+ctrl + shift + {Right}
+	bspc node -z {right 20 0}
+
+
+# APPLICATIONS
+
+super + Return
+	alacritty
+
+super + e
+	thunar
+
+super + w 
+	google-chrome-stable
+
+super + a 
+	rofi -disable-history -drun-match-fields name -show drun -theme-str '@import "app.rasi"'
+
+super + shift + s
+	scrot --select --line mode=edge '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f && rm $f'
+
+@Print
+	scrot '$HOME/Pictures/%Y-%m-%d-%T-screenshot.png'
+
+
+
+
+    
+    
+

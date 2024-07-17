@@ -1,0 +1,139 @@
+{
+    "hyprland/workspaces": {
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "on-scroll-up": "hyprctl dispatch workspace r+1",
+        "on-scroll-down": "hyprctl dispatch workspace r-1",
+        "format": "{}",
+        "format-icons": {
+            "urgent": "",
+            "active": "",
+            "default": ""
+        },
+        "persistent-workspaces": {
+            "*": 6
+        }
+    },
+    "hyprland/window": {
+        "format": "{class}",
+        "separate-outputs": true
+    },
+    "custom/appmenu": {
+        "format": "",
+        "on-click": "rofi -disable-history -drun-match-fields name -show drun -theme-str '@import \"app.rasi\"'",
+        "tooltip": false
+    },
+    "custom/exit": {
+        "format": "",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
+    "custom/sep": {
+        "format": "|"
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "<span color=\"#6D8895\"></span>  {:%I:%M %p}",
+        "tooltip-format": "<tt><big>{calendar}</big></tt>",
+        "format-alt": "<span color=\"#fff\">󰃭</span>  {:%Y-%m-%d, %a}",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 4,
+            "weeks-pos": "none",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "cpu": {
+        "interval": 5,
+        "format": "<span color=\"#f7768e\"></span>  {usage}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 5,
+        "format": "<span color=\"#FBC02D\"></span>  {used} GiB",
+        "max-length": 10
+    },
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": "<span color=\"#4DD0E1\"></span>  {essid}",
+        "format-ethernet": "  {ifname}",
+        "format-disconnected": "Disconnected",
+        "tooltip-format": " {ifname} via {gwaddri}",
+        "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50,
+        "on-click": "alacritty -e nmtui"
+    },
+    "battery": {
+        "interval": 1,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "<span color=\"#9ece6a\">{icon}</span>{capacity}%",
+        "format-charging": "<span color=\"#9ece6a\"></span>  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-alt": "{icon}  {time}",
+        "format-icons": [
+            "󰁺 ",
+            "󰁼 ",
+            "󰁿 ",
+            "󰂁 ",
+            "󰁹 "
+        ]
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " Muted",
+        "format-muted": " Muted",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "default": [
+                " ",
+                " ",
+                " "
+            ]
+        },
+        "on-click": "pactl set-sink-mute 0 toggle"
+    },
+    "bluetooth": {
+        "format": "<span color=\"#7aa2f7\"></span>  On",
+        "format-disabled": "<span color=\"#fff\"></span>  Off",
+        "format-connected": "<span color=\"#7aa2f7\"></span>  {device_alias}",
+        "format-off": "",
+        "interval": 30,
+        "on-click": "blueman-manager",
+        "format-no-controller": ""
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "<span color=\"#e0af68\">{icon}</span> {percent}%",
+        "format-icons": [
+            "󰃠",
+            "󰃠"
+        ]
+    }
+}
