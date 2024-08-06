@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #GNOME DESKTOP AND UTITLITIES
-sudo pacman -S gnome-shell gnome-control-center gnome-calculator gnome-menus colord-gtk nautilus python-nautilus ffmpegthumbnailer gvfs-mtp file-roller xdg-desktop-portal-gnome gnome-tweaks gnome-software malcontent flatpak gnome-terminal gnome-themes-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions evince loupe gnome-text-editor xdg-user-dirs-gtk gdm gnome-keyring --noconfirm --needed
+sudo pacman -S gnome-shell gnome-control-center gnome-calculator gnome-menus colord-gtk nautilus python-nautilus ffmpegthumbnailer gvfs-mtp file-roller xdg-desktop-portal-gnome gnome-tweaks gnome-terminal gnome-themes-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions evince loupe gnome-text-editor xdg-user-dirs-gtk gdm gnome-keyring power-profiles-daemon --noconfirm --needed
 
 #FONTS
 sudo pacman -S ttf-liberation noto-fonts-cjk ttf-jetbrains-mono noto-fonts noto-fonts-emoji noto-fonts-extra --noconfirm --needed
@@ -21,8 +21,7 @@ sh ntfs.sh
 sh battery.sh
 sh zsh.sh
 
-yay -S auto-cpufreq google-chrome visual-studio-code-bin --noconfirm --needed
-sudo auto-cpufreq --install
+yay -S google-chrome visual-studio-code-bin --noconfirm --needed
 
 cd ..
 cd keybindings
