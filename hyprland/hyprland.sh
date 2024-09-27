@@ -10,7 +10,7 @@ sh ntfs.sh
 sh zsh.sh
 sh git.sh
 
-yay -S auto-cpufreq nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout --noconfirm --needed
+yay -S auto-cpufreq nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome microsoft-edge-stable-bin visual-studio-code-bin wlogout --noconfirm --needed
 sudo auto-cpufreq --install
 
 sudo mkdir /etc/systemd/system/getty@tty1.service.d
@@ -22,7 +22,16 @@ cd ..
 
 cd config
 rm -rf /home/sandip/.config/*
-cp -r * /home/sandip/.config/
+
+cp -r alacritty /home/sandip/.config/
+cp -r gtk-3.0 /home/sandip/.config/
+cp -r hypr /home/sandip/.config/
+cp -r rofi /home/sandip/.config/
+cp -r Thunar /home/sandip/.config/
+cp -r waybar /home/sandip/.config/
+cp -r dunst /home/sandip/.config/
+cp -r .gtkrc-2.0 /home/sandip/.gtkrc-2.0
+
 chmod +x /home/sandip/.config/waybar/launch.sh
 cd ..
 
@@ -60,6 +69,9 @@ cd apps
 sudo cp Alacritty.desktop /usr/share/applications/Alacritty.desktop
 sudo cp atril.desktop /usr/share/applications/atril.desktop
 sudo cp org.nomacs.ImageLounge.desktop /usr/share/applications/org.nomacs.ImageLounge.desktop
+sudo cp thunar.desktop /usr/share/applications/thunar.desktop
+sudo cp org.gnome.FileRoller.desktop /usr/share/applications/org.gnome.FileRoller.desktop
+sudo cp org.xfce.mousepad.desktop /usr/share/applications/org.xfce.mousepad.desktop
 
 
 

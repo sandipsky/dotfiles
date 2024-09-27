@@ -15,19 +15,19 @@ read NAME
 echo "Please enter your Password"
 read PASSWORD 
 
-while true; do
-    echo "Choose Bootloader"
-    echo "1. Systemdboot"
-    echo "2. GRUB"
-    read BOOT
+# while true; do
+#     echo "Choose Bootloader"
+#     echo "1. Systemdboot"
+#     echo "2. GRUB"
+#     read BOOT
+#     if [[ $BOOT == 1 || $BOOT == 2 ]]; then
+#         break
+#     else
+#         echo "Invalid input. Please enter either 1 or 2."
+#     fi
+# done
 
-    # Check if input is either 1 or 2
-    if [[ $BOOT == 1 || $BOOT == 2 ]]; then
-        break
-    else
-        echo "Invalid input. Please enter either 1 or 2."
-    fi
-done
+BOOT=2
 
 # make filesystems
 echo -e "\nCreating Filesystems...\n"

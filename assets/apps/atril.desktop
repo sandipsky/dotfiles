@@ -231,6 +231,7 @@ X-MATE-Bugzilla-Product=atril
 X-MATE-Bugzilla-Component=BugBuddyBugs
 X-MATE-Bugzilla-Version=1.28.0
 Categories=GTK;Office;Viewer;
+NoDisplay=true
 # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 Keywords[ca]=MATE;document;visualitzador;pdf;dvi;ps;xps;tiff;pixbuf;djvu;còmics;
 Keywords[cs]=MATE;dokument;dokumentů;dokumenty;prohlížeč;pdf;dvi;ps;xps;tiff;pixbuf;djvu;komiks;
