@@ -6,17 +6,18 @@ configuration {
 }
 
 listview {
-	lines: 12;
+	lines: 11;
+	columns: 2;
 }
 
 mainbox {
-  children: [inputbar, listview];
+  children: [listview, inputbar];
 }
 
 window {
-  width: 20%;
+  width: 40%;
   padding: 0;
-  location:   north west;
-  x-offset:   0px;        
-  y-offset:   5px;
+  location:   south west;
+  x-offset:   4px;        
+  y-offset:   -4px;
 }

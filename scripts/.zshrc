@@ -16,3 +16,4 @@ alias update-initramfs="mkinitcpio -P"
 alias apt='pacman '
 alias install='-S '
 alias remove='-Rnsc '
+alias ngs='ng s --host 0.0.0.0 --disable-host-check true'

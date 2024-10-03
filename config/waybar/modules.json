@@ -22,6 +22,7 @@
     "custom/appmenu": {
         "format": "",
         "on-click": "rofi -disable-history -drun-match-fields name -show drun -theme-str '@import \"app.rasi\"'",
+	"on-click-right": "killall rofi",
         "tooltip": false
     },
     "custom/exit": {

@@ -78,6 +78,12 @@ cat <<EOF > /etc/hosts
 127.0.0.1	localhost
 ::1			localhost
 127.0.1.1	archlinux.localdomain	archlinux
+127.0.0.1   front1.rms.local
+192.168.0.124 front1.rms
+127.0.0.1   front1.ims.local
+192.168.0.153 front1.ims
+127.0.0.1   front1.dpms.local
+192.168.0.164 front1.dpms
 EOF
 
 echo "-------------------------------------------------"
