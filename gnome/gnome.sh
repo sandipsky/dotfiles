@@ -51,7 +51,7 @@ cd icons
 sudo cp org.gnome.Software.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Software.svg
 sudo cp org.gnome.Nautilus.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Nautilus.svg
 sudo cp org.gnome.Terminal.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg
-sudo rm -r /usr/share/gnome/extensions/*
+sudo rm -r /usr/share/gnome-shell/extensions/*
 sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 
 sudo reboot
