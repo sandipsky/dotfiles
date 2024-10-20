@@ -9,6 +9,8 @@ sh battery.sh
 sh ntfs.sh
 sh zsh.sh
 sh git.sh
+sh programs.sh
+sh gaming.sh
 
 yay -S auto-cpufreq nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome microsoft-edge-stable-bin visual-studio-code-bin wlogout --noconfirm --needed
 sudo auto-cpufreq --install
@@ -30,6 +32,8 @@ cp -r rofi /home/sandip/.config/
 cp -r Thunar /home/sandip/.config/
 cp -r waybar /home/sandip/.config/
 cp -r dunst /home/sandip/.config/
+cp -r nomacs /home/sandip/.config/
+cp -r visualboyadvance-m /home/sandip/.config/
 cp -r .gtkrc-2.0 /home/sandip/.gtkrc-2.0
 
 chmod +x /home/sandip/.config/waybar/launch.sh

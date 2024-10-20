@@ -15,20 +15,6 @@ read NAME
 echo "Please enter your Password"
 read PASSWORD 
 
-# while true; do
-#     echo "Choose Bootloader"
-#     echo "1. Systemdboot"
-#     echo "2. GRUB"
-#     read BOOT
-#     if [[ $BOOT == 1 || $BOOT == 2 ]]; then
-#         break
-#     else
-#         echo "Invalid input. Please enter either 1 or 2."
-#     fi
-# done
-
-BOOT=2
-
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
@@ -42,11 +28,8 @@ mkfs.ext4 "${ROOT}"
 # mount target
 mount "${ROOT}" /mnt
 ROOT_UUID=$(blkid -s UUID -o value "$ROOT")
-if [[ $BOOT == 1 ]]; then
-    mount --mkdir "$EFI" /mnt/boot
-else
-    mount --mkdir "$EFI" /mnt/boot/efi
-fi
+mount --mkdir "$EFI" /mnt/boot/efi
+
 
 echo "--------------------------------------"
 echo "-- INSTALLING Base Arch Linux --"
@@ -93,20 +76,9 @@ echo "--------------------------------------"
 echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
 
-if [[ $BOOT == 1 ]]; then
-    bootctl install --path=/boot
-    echo "default arch.conf" >> /boot/loader/loader.conf
-    cat <<EOF > /boot/loader/entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /initramfs-linux.img
-options root=UUID=$ROOT_UUID rw quiet
-EOF
-else
-    pacman -S grub efibootmgr --noconfirm --needed
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Linux Boot Manager"
-    grub-mkconfig -o /boot/grub/grub.cfg
-fi
+pacman -S grub efibootmgr --noconfirm --needed
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Ubuntu"
+grub-mkconfig -o /boot/grub/grub.cfg
 
 cd /home/sandip
 git clone https://github.com/sandipsky/dotfiles

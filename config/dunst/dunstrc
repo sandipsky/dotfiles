@@ -10,10 +10,10 @@
 [global]
     monitor = 0
     follow = none
-    width = 300
-    height = (0,300)
-    origin = top-right
-    offset = 10x10
+    width = 350
+    height = (0,400)
+    origin = bottom-right
+    offset = 12x12
     scale = 0
     notification_limit = 20
     progress_bar = true

@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #GNOME DESKTOP AND UTITLITIES
-sudo pacman -S gnome-shell gnome-control-center gnome-calculator gnome-menus colord-gtk nautilus python-nautilus ffmpegthumbnailer gvfs-mtp file-roller xdg-desktop-portal-gnome gnome-tweaks gnome-terminal gnome-themes-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions evince loupe gnome-text-editor xdg-user-dirs-gtk gdm gnome-keyring power-profiles-daemon --noconfirm --needed
+sudo pacman -S gnome-shell gnome-control-center gnome-calculator gnome-menus colord-gtk nautilus python-nautilus ffmpegthumbnailer gvfs-mtp file-roller xdg-desktop-portal-gnome gnome-tweaks gnome-terminal gnome-themes-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions evince eog gnome-text-editor xdg-user-dirs-gtk gdm gnome-keyring --noconfirm --needed
 
 #FONTS
-sudo pacman -S ttf-liberation noto-fonts-cjk ttf-jetbrains-mono noto-fonts noto-fonts-emoji noto-fonts-extra --noconfirm --needed
+sudo pacman -S ttf-liberation noto-fonts-cjk ttf-jetbrains-mono ttf-dejavu noto-fonts noto-fonts-emoji noto-fonts-extra --noconfirm --needed
 
 #BASIC PROGRAMS
 sudo pacman -S wget vlc rhythmbox neofetch ntfs-3g qbittorrent switcheroo-control --noconfirm --needed
@@ -13,20 +13,24 @@ sudo systemctl enable gdm switcheroo-control
 
 touch ~/Templates/NewDocument.txt
 
+cd keybindings
+dconf load /org/gnome/settings-daemon/plugins/media-keys/ < custom 
+dconf load /org/gnome/desktop/wm/keybindings/ < wm 
+
 cd ..
 cd ..
 cd scripts
 sh aur.sh
+sh git.sh
 sh ntfs.sh
 sh battery.sh
+sleep 4
 sh zsh.sh
+sh programs.sh
+sh gaming.sh
 
-yay -S google-chrome visual-studio-code-bin --noconfirm --needed
-
-cd ..
-cd keybindings
-dconf load /org/gnome/settings-daemon/plugins/media-keys/ < custom 
-dconf load /org/gnome/desktop/wm/keybindings/ < wm  
+yay -S auto-cpufreq google-chrome visual-studio-code-bin extension-manager gdm-settings --noconfirm --needed
+sudo auto-cpufreq --install
 
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Software.svg
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Nautilus.svg
@@ -47,10 +51,8 @@ cd icons
 sudo cp org.gnome.Software.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Software.svg
 sudo cp org.gnome.Nautilus.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Nautilus.svg
 sudo cp org.gnome.Terminal.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg
-sudo cp ms-excel.svg /usr/share/icons/hicolor/scalable/apps/ms-excel.svg
-sudo cp ms-word.svg /usr/share/icons/hicolor/scalable/apps/ms-word.svg
-sudo cp ms-powerpoint.svg /usr/share/icons/hicolor/scalable/apps/ms-powerpoint.svg
-
+sudo rm -r /usr/share/gnome/extensions/*
+sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 
 sudo reboot
 

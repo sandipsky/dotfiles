@@ -15,4 +15,5 @@ alias update-grub="grub-mkconfig -o /boot/grub/grub.cfg"
 alias update-initramfs="mkinitcpio -P"
 alias apt='pacman '
 alias install='-S '
+alias update='-Syy '
 alias remove='-Rnsc '
