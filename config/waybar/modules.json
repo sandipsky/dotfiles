@@ -3,8 +3,8 @@
         "on-click": "activate",
         "active-only": false,
         "all-outputs": true,
-        "on-scroll-up": "hyprctl dispatch workspace r-1",
-        "on-scroll-down": "hyprctl dispatch workspace r+1",
+        "on-scroll-up": "hyprctl dispatch workspace r+1",
+        "on-scroll-down": "hyprctl dispatch workspace r-1",
         "format": "{}",
         "format-icons": {
             "urgent": "",
@@ -21,8 +21,8 @@
     },
     "custom/appmenu": {
         "format": "",
-        "on-click": "rofi -disable-history -drun-match-fields name -show drun -no-fixed -theme-str '@import \"app.rasi\"'",
-	"on-click-right": "killall rofi", 
+        "on-click": "rofi -disable-history -drun-match-fields name -show drun -theme-str '@import \"app.rasi\"'",
+	"on-click-right": "killall rofi",
         "tooltip": false
     },
     "custom/exit": {

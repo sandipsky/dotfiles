@@ -1,6 +1,13 @@
 #!/bin/bash
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono nwg-look gnome-themes-extra wlsunset grim slurp --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra nwg-look wlsunset grim slurp --noconfirm --needed
+
+sudo mkdir /etc/systemd/system/getty@tty1.service.d
+sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
+cp .zprofile /home/sandip/.zprofile
+sudo systemctl enable getty@tty1.service
+
+sleep 5
 
 cd .. 
 cd scripts
@@ -9,32 +16,23 @@ sh battery.sh
 sh ntfs.sh
 sh zsh.sh
 sh git.sh
-sh programs.sh
 sh gaming.sh
+sh programs.sh
 
-yay -S auto-cpufreq nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome microsoft-edge-stable-bin visual-studio-code-bin wlogout --noconfirm --needed
+yay -S auto-cpufreq nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout --noconfirm --needed
 sudo auto-cpufreq --install
 
-sudo mkdir /etc/systemd/system/getty@tty1.service.d
-sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
-sudo systemctl enable getty@tty1.service
-
-cp .zprofile /home/sandip/.zprofile
 cd ..
 
 cd config
 rm -rf /home/sandip/.config/*
 
 cp -r alacritty /home/sandip/.config/
-cp -r gtk-3.0 /home/sandip/.config/
 cp -r hypr /home/sandip/.config/
 cp -r rofi /home/sandip/.config/
 cp -r Thunar /home/sandip/.config/
 cp -r waybar /home/sandip/.config/
 cp -r dunst /home/sandip/.config/
-cp -r nomacs /home/sandip/.config/
-cp -r visualboyadvance-m /home/sandip/.config/
-cp -r .gtkrc-2.0 /home/sandip/.gtkrc-2.0
 
 chmod +x /home/sandip/.config/waybar/launch.sh
 cd ..
@@ -56,13 +54,11 @@ sudo rm /usr/share/applications/thunar-settings.desktop
 sudo rm /usr/share/applications/picom.desktop
 sudo rm /usr/share/applications/qv4l2.desktop
 sudo rm /usr/share/applications/qvidcap.desktop
-sudo rm /usr/share/applications/nm-connection-editor.desktop
 sudo rm /usr/share/applications/mate-color-select.desktop
 sudo rm /usr/share/applications/xfce4-about.desktop
 sudo rm /usr/share/applications/org.xfce.mousepad-settings.desktop
 sudo rm /usr/share/applications/Alacritty.desktop
 sudo rm /usr/share/applications/atril.desktop
-sudo rm /usr/share/applications/ngw-look.desktop
 sudo rm /usr/share/applications/org.nomacs.ImageLounge.desktop
 sudo rm /usr/share/applications/org.xfce.mousepad.desktop
 sudo rm /usr/share/applications/thunar.desktop

@@ -2,15 +2,12 @@ configuration {
   drun-display-format: "{icon}  {name}";
   font: "Fira Sans SemiBold 13";
   show-icons: true;
-  me-select-entry: "MousePrimary";
-  me-accept-entry: "!MousePrimary";
-  close-on-unfocus: true;
+  
 }
 
 listview {
-  columns: 2;
-  lines: 11;
-  column-width: 25%;
+	lines: 11;
+	columns: 2;
 }
 
 mainbox {
@@ -18,7 +15,7 @@ mainbox {
 }
 
 window {
-  width: 50%;
+  width: 40%;
   padding: 0;
   location:   south west;
   x-offset:   4px;        
