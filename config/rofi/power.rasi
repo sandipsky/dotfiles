@@ -1,0 +1,35 @@
+configuration {
+  drun-display-format: "{icon}  {name}";
+  font: "Fira Sans SemiBold 13";
+  show-icons: false;
+  
+}
+
+
+
+listview {
+	
+	lines: 5;
+}
+
+mainbox {
+  children: [listview];
+}
+
+window {
+  width: 10%;
+  padding: 0;
+  location:   north east;
+  x-offset:   -8px;        
+  y-offset:   50px;
+}
+
+element {
+  padding: 10;
+  text-color: @fg-alt;
+margin-left: 4;
+}
+
+prompt {
+  height: 120px;
+}

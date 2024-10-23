@@ -1,1 +1,3 @@
 UUID=4CC27C52C27C41EE  /mnt/HOME ntfs-3g uid=sandip,gid=sandip,umask=0022 0 2
+
+/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0

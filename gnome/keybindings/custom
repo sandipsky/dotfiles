@@ -13,7 +13,7 @@ name='Nautilus'
 
 [custom-keybindings/custom2]
 binding='<Shift><Super>e'
-command='nautilus admin:///usr/'
+command='nautilus admin://'
 name='Super Nautilus'
 
 [custom-keybindings/custom3]
@@ -25,3 +25,13 @@ name='Screenshot'
 binding='<Shift><Super>s'
 command='gnome-screenshot -a'
 name='SS'
+
+[custom-keybindings/custom5]
+binding='<Super>w'
+command='google-chrome-stable'
+name='GC'
+
+[custom-keybindings/custom6]
+binding='<Super>g'
+command='lutris'
+name='Lutris'

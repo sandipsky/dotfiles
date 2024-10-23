@@ -15,20 +15,6 @@ read NAME
 echo "Please enter your Password"
 read PASSWORD 
 
-# while true; do
-#     echo "Choose Bootloader"
-#     echo "1. Systemdboot"
-#     echo "2. GRUB"
-#     read BOOT
-#     if [[ $BOOT == 1 || $BOOT == 2 ]]; then
-#         break
-#     else
-#         echo "Invalid input. Please enter either 1 or 2."
-#     fi
-# done
-
-BOOT=2
-
 # make filesystems
 echo -e "\nCreating Filesystems...\n"
 
@@ -42,11 +28,8 @@ mkfs.ext4 "${ROOT}"
 # mount target
 mount "${ROOT}" /mnt
 ROOT_UUID=$(blkid -s UUID -o value "$ROOT")
-if [[ $BOOT == 1 ]]; then
-    mount --mkdir "$EFI" /mnt/boot
-else
-    mount --mkdir "$EFI" /mnt/boot/efi
-fi
+mount --mkdir "$EFI" /mnt/boot/efi
+
 
 echo "--------------------------------------"
 echo "-- INSTALLING Base Arch Linux --"
@@ -62,6 +45,7 @@ usermod -c "${NAME}" $USER
 usermod -aG wheel,storage,power,audio,video $USER
 echo $USER:$PASSWORD | chpasswd
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
+sed -i 's/^%wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
 
 echo "-------------------------------------------------"
 echo "Setup Language to US and set locale"
@@ -73,11 +57,11 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 ln -sf /usr/share/zoneinfo/Asia/Kathmandu /etc/localtime
 hwclock --systohc
 
-echo "archlinux" > /etc/hostname
+echo "asus-f15" > /etc/hostname
 cat <<EOF > /etc/hosts
 127.0.0.1	localhost
 ::1			localhost
-127.0.1.1	archlinux.localdomain	archlinux
+127.0.1.1	asus-f15.localdomain	asus-f15
 127.0.0.1   front1.rms.local
 192.168.0.124 front1.rms
 127.0.0.1   front1.ims.local
@@ -99,20 +83,9 @@ echo "--------------------------------------"
 echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
 
-if [[ $BOOT == 1 ]]; then
-    bootctl install --path=/boot
-    echo "default arch.conf" >> /boot/loader/loader.conf
-    cat <<EOF > /boot/loader/entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /initramfs-linux.img
-options root=UUID=$ROOT_UUID rw quiet
-EOF
-else
-    pacman -S grub efibootmgr --noconfirm --needed
-    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Linux Boot Manager"
-    grub-mkconfig -o /boot/grub/grub.cfg
-fi
+pacman -S grub efibootmgr --noconfirm --needed
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=Ubuntu --modules="normal test efi_gop efi_uga search echo linux all_video gfxmenu gfxterm_background gfxterm_menu gfxterm loadenv configfile tpm" --disable-shim-lock
+grub-mkconfig -o /boot/grub/grub.cfg
 
 cd /home/sandip
 git clone https://github.com/sandipsky/dotfiles
