@@ -16,4 +16,5 @@ alias update-initramfs="mkinitcpio -P"
 alias apt='pacman '
 alias install='-S '
 alias update='-Syy '
+alias upgrade='-Syu '
 alias remove='-Rnsc '
