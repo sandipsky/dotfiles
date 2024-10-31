@@ -83,7 +83,7 @@ echo "-- Bootloader Installation  --"
 echo "--------------------------------------"
 
 pacman -S grub efibootmgr --noconfirm --needed
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Ubuntu"
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Linux"
 grub-mkconfig -o /boot/grub/grub.cfg
 
 cd /home/sandip

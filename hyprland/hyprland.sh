@@ -7,12 +7,13 @@ sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
 cp .zprofile /home/sandip/.zprofile
 sudo systemctl enable getty@tty1.service
 
-sleep 5
+sleep 3
 
 cd .. 
 cd scripts
 sh aur.sh
 sh battery.sh
+sleep 3
 sh ntfs.sh
 sh zsh.sh
 sh git.sh
