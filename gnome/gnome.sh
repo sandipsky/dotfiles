@@ -17,7 +17,7 @@ cd keybindings
 dconf load /org/gnome/settings-daemon/plugins/media-keys/ < custom 
 dconf load /org/gnome/desktop/wm/keybindings/ < wm 
 
-cd .. #gnomes
+cd .. #gnome
 cd .. #dotfiles
 cd scripts
 sh aur.sh
