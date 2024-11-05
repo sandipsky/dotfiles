@@ -1,10 +1,12 @@
 #!/bin/bash
 
+USERNAME="sandip"
+
 sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra nwg-look wlsunset grim slurp --noconfirm --needed
 
 sudo mkdir /etc/systemd/system/getty@tty1.service.d
 sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
-cp .zprofile /home/sandip/.zprofile
+cp .zprofile /home/$USERNAME/.zprofile
 sudo systemctl enable getty@tty1.service
 
 sleep 3
@@ -26,16 +28,16 @@ sudo auto-cpufreq --install
 cd ..
 
 cd config
-rm -rf /home/sandip/.config/*
+rm -rf /home/$USERNAME/.config/*
 
-cp -r alacritty /home/sandip/.config/
-cp -r hypr /home/sandip/.config/
-cp -r rofi /home/sandip/.config/
-cp -r Thunar /home/sandip/.config/
-cp -r waybar /home/sandip/.config/
-cp -r dunst /home/sandip/.config/
+cp -r alacritty /home/$USERNAME/.config/
+cp -r hypr /home/$USERNAME/.config/
+cp -r rofi /home/$USERNAME/.config/
+cp -r Thunar /home/$USERNAME/.config/
+cp -r waybar /home/$USERNAME/.config/
+cp -r dunst /home/$USERNAME/.config/
 
-chmod +x /home/sandip/.config/waybar/launch.sh
+chmod +x /home/$USERNAME/.config/waybar/launch.sh
 cd ..
 
 cd assets
@@ -73,6 +75,3 @@ sudo cp org.nomacs.ImageLounge.desktop /usr/share/applications/org.nomacs.ImageL
 sudo cp thunar.desktop /usr/share/applications/thunar.desktop
 sudo cp org.gnome.FileRoller.desktop /usr/share/applications/org.gnome.FileRoller.desktop
 sudo cp org.xfce.mousepad.desktop /usr/share/applications/org.xfce.mousepad.desktop
-
-
-
