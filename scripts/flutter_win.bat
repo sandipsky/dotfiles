@@ -1,6 +1,8 @@
 @echo off
 
 set ANDROID_VERSION=34
+setx JAVA_HOME "C:\Program Files\Java\jdk-23"
+setx PATH "%PATH%;%JAVA_HOME%\bin"
 setx ANDROID_SDK_ROOT "%USERPROFILE%\AndroidSDK"
 setx PATH "%PATH%;%USERPROFILE%\AndroidSDK\cmdline-tools\latest\bin;%USERPROFILE%\AndroidSDK\emulator"
 curl -o "%USERPROFILE%\Downloads\commandlinetools.zip" https://dl.google.com/android/repository/commandlinetools-win-11076708_latest.zip
