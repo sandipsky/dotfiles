@@ -20,7 +20,7 @@ mkdir -p ~/AndroidSDK/cmdline-tools/latest
 unzip "~/Downloads/commandlinetools.zip" -d "~/AndroidSDK/cmdline-tools/latest"
 
 # Accept licenses
-yes | ~/AndroidSDK/cmdline-tools/latest/bin/sdkmanager --licenses
+~/AndroidSDK/cmdline-tools/latest/bin/sdkmanager --licenses
 
 # Install necessary packages
 ~/AndroidSDK/cmdline-tools/latest/bin/sdkmanager "system-images;android-${ANDROID_VERSION};google_apis_playstore;x86"
