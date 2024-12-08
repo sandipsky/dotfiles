@@ -7,7 +7,7 @@
 
 
  window#waybar {
-     background: #1A1B26;
+     background: #141414;
  }
 
  tooltip {
@@ -32,7 +32,7 @@
  #network,
  #battery,
  #backlight {
-     padding: 6px 8px;
+     padding: 6px 6px;
      color: #fff;
  }
 
@@ -50,22 +50,22 @@
  #workspaces button {
      padding: 0px 5px;
      color: #f5f5f5;
-     background: #1A1B26;
+     background: #141414;
  }
 
  #workspaces button.active {
-     color: #1A1B26;
+     color: #141414;
      background: #f5f5f5;
  }
 
  #workspaces button.active:hover {
-     color: #1A1B26;
+     color: #141414;
      background: #f5f5f5;
  }
 
  #workspaces button:hover {
      color: #fff;
-     background: #1A1B26;
+     background: #141414;
      border: none;
      box-shadow: inherit;
      text-shadow: inherit;

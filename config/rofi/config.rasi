@@ -2,16 +2,22 @@ configuration {
   display-drun: "";
   display-window: "Windows:";
   drun-display-format: "{icon}  {name}";
-  font: "Fira Sans Semibold 16";
+  font: "Fira Sans Semibold 13";
   modi: "drun";
   show-icons: true;
-  hover-select: true;
   me-select-entry: "MousePrimary";
   me-accept-entry: "!MousePrimary";
-  close-on-unfocus: true;
 }
 
 @theme "/dev/null"
+
+#scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-color: @fg;
+    handle-width: 8px ;
+    padding:      0;
+}
 
 * {
   bg: #1A1B26;
@@ -23,16 +29,19 @@ configuration {
   background-color: @bg;
   
   border: 1;
-  border-radius: 12;
+  border-radius: 6;
   margin: 0;
   padding: 0;
-  spacing: 0;
-
-  
+  spacing: 0; 
 }
 
 window {
-  width: 50%;
+  width: 25%;
+  padding: 0;
+  location:   south west;
+  x-offset:   4px;        
+  y-offset:   -4px;
+  scrollbar: true;
 }
 
 element {
@@ -77,11 +86,12 @@ listview {
   background-color: @bg;
   columns: 1;
   lines: 12;
+  scrollbar: true;
 }
 
 mainbox {
   background-color: @bg;
-  children: [inputbar, listview];
+  children: [listview, inputbar];
 }
 
 prompt {
@@ -91,4 +101,5 @@ prompt {
   text-color: @fg;
 }
 
-/* vim: ft=sass
+
+

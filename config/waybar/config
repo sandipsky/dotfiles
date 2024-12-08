@@ -18,21 +18,15 @@
         ],
         "modules-right": [
                 "cpu",
-                "custom/sep",
                 "memory",
-                "custom/sep",
                 "bluetooth",
-                "custom/sep",
-                "battery",
-                "custom/sep",
+		"backlight",
                 "network",
-                "custom/sep",
+ 		"battery",
                 "pulseaudio",
-                "custom/sep",
-                "backlight",
-                "custom/sep",
+		"custom/sep",
                 "clock",
-                "custom/sep",
-                "custom/exit"
+		"custom/sep",                
+		"custom/exit"
         ]
 }

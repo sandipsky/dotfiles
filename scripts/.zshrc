@@ -8,13 +8,11 @@ SAVEHIST=50000
 setopt inc_append_history
 
 eval "$(starship init zsh)"
+export ANDROID_SDK_ROOT="/home/sandip/AndroidSDK"
 export PATH="/home/sandip/.local/bin:$PATH"
+export PATH="$PATH:/home/sandip/AndroidSDK/cmdline-tools/latest/bin:/home/sandip/AndroidSDK/emulator:/home/sandip/flutter/bin"
 
-alias sudo='sudo '
-alias update-grub="grub-mkconfig -o /boot/grub/grub.cfg"
 alias update-initramfs="mkinitcpio -P"
-alias apt='pacman '
-alias install='-S '
-alias update='-Syy '
-alias upgrade='-Syu '
-alias remove='-Rnsc '
+alias resolve="prime-run /opt/resolve/bin/resolve"
+
+export QT_QPA_PLATFORM=xcb

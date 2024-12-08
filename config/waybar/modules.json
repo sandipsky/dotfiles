@@ -21,7 +21,7 @@
     },
     "custom/appmenu": {
         "format": "",
-        "on-click": "rofi -disable-history -drun-match-fields name -show drun -theme-str '@import \"app.rasi\"'",
+        "on-click": "rofi -disable-history -drun-match-fields name -show drun",
 	"on-click-right": "killall rofi",
         "tooltip": false
     },
@@ -73,11 +73,11 @@
     },
     "network": {
         "format": "{ifname}",
-        "format-wifi": "<span color=\"#4DD0E1\"></span>  {essid}",
+        "format-wifi": "<span color=\"#4DD0E1\">󰤨</span> {essid}",
         "format-ethernet": "  {ifname}",
         "format-disconnected": "Disconnected",
         "tooltip-format": " {ifname} via {gwaddri}",
-        "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-wifi": "󰤨 {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
         "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
@@ -90,8 +90,8 @@
             "critical": 15
         },
         "format": "<span color=\"#9ece6a\">{icon}</span>{capacity}%",
-        "format-charging": "<span color=\"#9ece6a\"></span>  {capacity}%",
-        "format-plugged": "  {capacity}%",
+        "format-charging": "<span color=\"#9ece6a\"></span>  {capacity}%",
+        "format-plugged": " {capacity}%",
         "format-alt": "{icon}  {time}",
         "format-icons": [
             "󰁺 ",
@@ -113,17 +113,15 @@
             "hands-free": " ",
             "headset": " ",
             "default": [
-                " ",
-                " ",
                 " "
             ]
         },
         "on-click": "pactl set-sink-mute 0 toggle"
     },
     "bluetooth": {
-        "format": "<span color=\"#7aa2f7\"></span>  On",
-        "format-disabled": "<span color=\"#fff\"></span>  Off",
-        "format-connected": "<span color=\"#7aa2f7\"></span>  {device_alias}",
+        "format": "<span color=\"#7aa2f7\">󰂯</span> On",
+        "format-disabled": "<span color=\"#fff\">󰂯</span> Off",
+        "format-connected": "<span color=\"#7aa2f7\">󰂯</span> {device_alias}",
         "format-off": "",
         "interval": 30,
         "on-click": "blueman-manager",
