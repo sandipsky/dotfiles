@@ -22,7 +22,7 @@
     "custom/appmenu": {
         "format": "",
         "on-click": "rofi -disable-history -drun-match-fields name -show drun",
-	"on-click-right": "killall rofi",
+	    "on-click-right": "killall rofi",
         "tooltip": false
     },
     "custom/exit": {

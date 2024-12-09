@@ -54,7 +54,6 @@ sudo rm /usr/share/applications/rofi.desktop
 sudo rm /usr/share/applications/rofi-theme-selector.desktop
 sudo rm /usr/share/applications/thunar-bulk-rename.desktop
 sudo rm /usr/share/applications/thunar-settings.desktop
-sudo rm /usr/share/applications/picom.desktop
 sudo rm /usr/share/applications/qv4l2.desktop
 sudo rm /usr/share/applications/qvidcap.desktop
 sudo rm /usr/share/applications/mate-color-select.desktop
@@ -68,6 +67,7 @@ sudo rm /usr/share/applications/thunar.desktop
 sudo rm /usr/share/applications/auto-cpufreq-gtk.desktop
 sudo rm /usr/share/applications/cmake-gui.desktop
 sudo rm /usr/share/applications/lstopo.desktop
+sudo rm /usr/share/applications/com.obsproject.Studio.desktop
 cd apps
 sudo cp Alacritty.desktop /usr/share/applications/Alacritty.desktop
 sudo cp atril.desktop /usr/share/applications/atril.desktop
@@ -75,3 +75,4 @@ sudo cp org.nomacs.ImageLounge.desktop /usr/share/applications/org.nomacs.ImageL
 sudo cp thunar.desktop /usr/share/applications/thunar.desktop
 sudo cp org.gnome.FileRoller.desktop /usr/share/applications/org.gnome.FileRoller.desktop
 sudo cp org.xfce.mousepad.desktop /usr/share/applications/org.xfce.mousepad.desktop
+sudo cp com.obsproject.Studio.desktop /usr/share/applications/com.obsproject.Studio.desktop
