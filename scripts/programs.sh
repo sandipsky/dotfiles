@@ -2,7 +2,7 @@
 
 USERNAME="sandip"
 
-sudo pacman -S dotnet-sdk nodejs-lts-iron npm jdk-openjdk --noconfirm --needed
+sudo pacman -S dotnet-sdk nodejs-lts-iron npm --noconfirm --needed
 # sudo pacman -S dotnet-sdk nodejs-lts-iron npm mysql --noconfirm --needed
 
 npm i -g @angular/cli json-server --prefix=/home/$USERNAME/.local
