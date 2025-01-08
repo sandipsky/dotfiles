@@ -10,9 +10,6 @@ setopt inc_append_history
 eval "$(starship init zsh)"
 export ANDROID_SDK_ROOT="/home/sandip/AndroidSDK"
 export PATH="/home/sandip/.local/bin:$PATH"
-export PATH="$PATH:/home/sandip/AndroidSDK/cmdline-tools/latest/bin:/home/sandip/AndroidSDK/emulator:/home/sandip/flutter/bin"
+export PATH="$PATH:/home/sandip/AndroidSDK/cmdline-tools/latest/bin:/home/sandip/AndroidSDK/emulator"
 
 alias update-initramfs="mkinitcpio -P"
-alias resolve="prime-run /opt/resolve/bin/resolve"
-
-export QT_QPA_PLATFORM=xcb
