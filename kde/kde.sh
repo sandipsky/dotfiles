@@ -10,7 +10,6 @@ sh ntfs.sh
 sh automount.sh
 sh battery.sh
 sleep 4
-sh zsh.sh
 sh programs.sh
 sh gaming.sh
 

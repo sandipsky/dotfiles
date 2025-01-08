@@ -8,7 +8,6 @@ SAVEHIST=50000
 setopt inc_append_history
 
 eval "$(starship init zsh)"
-export ANDROID_SDK_ROOT="/home/sandip/AndroidSDK"
 export PATH="/home/sandip/.local/bin:$PATH"
 export PATH="$PATH:/home/sandip/AndroidSDK/cmdline-tools/latest/bin:/home/sandip/AndroidSDK/emulator"
 
