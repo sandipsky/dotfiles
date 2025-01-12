@@ -2,7 +2,7 @@
 
 USERNAME="sandip"
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra nwg-look wlsunset grim slurp --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra wlsunset grim slurp --noconfirm --needed
 
 sudo mkdir /etc/systemd/system/getty@tty1.service.d
 sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
@@ -67,6 +67,11 @@ sudo rm /usr/share/applications/thunar.desktop
 sudo rm /usr/share/applications/auto-cpufreq-gtk.desktop
 sudo rm /usr/share/applications/cmake-gui.desktop
 sudo rm /usr/share/applications/lstopo.desktop
+sudo rm /usr/share/applications/java-java21-openjdk.desktop
+sudo rm /usr/share/applications/jconsole-java21-openjdk.desktop
+sudo rm /usr/share/applications/jshell-java21-openjdk.desktop
+sudo rm /usr/share/applications/code.desktop
+sudo rm /usr/share/applications/google-chrome.desktop
 cd apps
 sudo cp Alacritty.desktop /usr/share/applications/Alacritty.desktop
 sudo cp atril.desktop /usr/share/applications/atril.desktop
@@ -74,3 +79,8 @@ sudo cp org.nomacs.ImageLounge.desktop /usr/share/applications/org.nomacs.ImageL
 sudo cp thunar.desktop /usr/share/applications/thunar.desktop
 sudo cp org.gnome.FileRoller.desktop /usr/share/applications/org.gnome.FileRoller.desktop
 sudo cp org.xfce.mousepad.desktop /usr/share/applications/org.xfce.mousepad.desktop
+sudo cp code.desktop /usr/share/applications/code.desktop
+sudo cp google-chrome.desktop /usr/share/applications/google-chrome.desktop
+
+gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'

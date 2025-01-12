@@ -13,8 +13,7 @@
                 "custom/appmenu",
                 "custom/sep",
                 "hyprland/workspaces",
-                "custom/sep",
-                "hyprland/window"
+                "custom/sep"
         ],
         "modules-right": [
                 "cpu",
@@ -24,9 +23,7 @@
                 "network",
  		"battery",
                 "pulseaudio",
-		"custom/sep",
-                "clock",
-		"custom/sep",                
+                "clock",              
 		"custom/exit"
         ]
 }

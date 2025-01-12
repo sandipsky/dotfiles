@@ -12,7 +12,7 @@
             "default": ""
         },
         "persistent-workspaces": {
-            "*": 6
+            "*": 4
         }
     },
     "hyprland/window": {
@@ -40,7 +40,7 @@
     "clock": {
         "format": "<span color=\"#6D8895\"></span>  {:%I:%M %p}",
         "tooltip-format": "<tt><big>{calendar}</big></tt>",
-        "format-alt": "<span color=\"#fff\">󰃭</span>  {:%Y-%m-%d, %a}",
+        "format-alt": "<span color=\"#fff\"> </span>  {:%Y-%m-%d, %a}",
         "calendar": {
             "mode": "month",
             "mode-mon-col": 4,
@@ -112,9 +112,9 @@
             "headphone": " ",
             "hands-free": " ",
             "headset": " ",
-            "default": [
-                " "
-            ]
+           "default": [
+			"", ""
+		],
         },
         "on-click": "pactl set-sink-mute 0 toggle"
     },
@@ -133,6 +133,7 @@
         "format-icons": [
             "󰃠",
             "󰃠"
-        ]
+        ],
+	"tooltip": false
     }
 }

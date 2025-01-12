@@ -32,7 +32,7 @@
  #network,
  #battery,
  #backlight {
-     padding: 6px 6px;
+     padding: 10px 5px;
      color: #fff;
  }
 
@@ -43,7 +43,7 @@
  #workspaces {
      font-weight: bold;
      font-style: normal;
-     padding: 0 8px;
+     padding: 0 4px;
      color: #fff;
  }
 
