@@ -1,10 +1,9 @@
  * {
-     font-family: "Fira Sans Semibold", "Font Awesome 6 Free Solid", "Material Design Icons Desktop", "MesloLGS NF", sans-serif;
+     font-family: "Fira Sans", "Font Awesome 6 Free Solid", "Material Design Icons Desktop", "MesloLGS NF", sans-serif;
      border: none;
      border-radius: 0px;
-     font-size: 16px;
+     font-size: 18px;
  }
-
 
  window#waybar {
      background: #141414;
@@ -18,7 +17,7 @@
 
  tooltip label {
      color: #fff;
-     font-size: 16px;
+     font-size: 18px;
  }
 
  #custom-appmenu,
@@ -32,7 +31,7 @@
  #network,
  #battery,
  #backlight {
-     padding: 10px 5px;
+     padding: 7px 5px;
      color: #fff;
  }
 
@@ -41,8 +40,6 @@
  * ----------------------------------------------------- */
 
  #workspaces {
-     font-weight: bold;
-     font-style: normal;
      padding: 0 4px;
      color: #fff;
  }

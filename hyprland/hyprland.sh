@@ -42,6 +42,7 @@ cd ..
 
 cd assets
 cd icons
+sudo cp -r Bibata-Modern-Ice /usr/share/icons
 sudo cp * /usr/share/icons/hicolor/scalable/apps/
 cd ..
 
@@ -72,6 +73,10 @@ sudo rm /usr/share/applications/jconsole-java21-openjdk.desktop
 sudo rm /usr/share/applications/jshell-java21-openjdk.desktop
 sudo rm /usr/share/applications/code.desktop
 sudo rm /usr/share/applications/google-chrome.desktop
+sudo rm /usr/share/applications/assistant.desktop
+sudo rm /usr/share/applications/designer.desktop
+sudo rm /usr/share/applications/linguist.desktop
+sudo rm /usr/share/applications/qdbusviewer.desktop
 cd apps
 sudo cp Alacritty.desktop /usr/share/applications/Alacritty.desktop
 sudo cp atril.desktop /usr/share/applications/atril.desktop
@@ -84,3 +89,11 @@ sudo cp google-chrome.desktop /usr/share/applications/google-chrome.desktop
 
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
+gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'
+
+sudo mkdir /mnt/HOME
+echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
+sudo mount -a
+cd /home/sandip
+sudo rm -r dotfiles
+sudo rm -r yay

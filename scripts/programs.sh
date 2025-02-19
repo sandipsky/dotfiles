@@ -2,7 +2,7 @@
 
 USERNAME="sandip"
 
-sudo pacman -S nodejs-lts-iron npm jdk21-openjdk mysql --noconfirm --needed
+sudo pacman -S nodejs-lts-iron npm jdk21-openjdk dotnet-sdk-8.0 mysql --noconfirm --needed
 
 npm i -g @angular/cli json-server --prefix=/home/$USERNAME/.local
 

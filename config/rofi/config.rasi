@@ -1,22 +1,31 @@
 configuration {
   display-drun: "";
+  drun-match-fields: "name";
+  disable-history: true;
   display-window: "Windows:";
   drun-display-format: "{icon}  {name}";
-  font: "Fira Sans Semibold 13";
+  font: "Fira Sans Semilight 12";
   modi: "drun";
   show-icons: true;
+  hover-select: true;
   me-select-entry: "MousePrimary";
   me-accept-entry: "!MousePrimary";
 }
 
 @theme "/dev/null"
 
-#scrollbar {
-    width:        4px ;
-    border:       0;
-    handle-color: @fg;
-    handle-width: 8px ;
-    padding:      0;
+entry {
+  background-color: @bg;
+  padding: 0 12;
+  text-color: @fg;
+  placeholder: "Search Applications";
+  placholder-color: grey;
+}
+
+prompt {
+  background-color: @bg;
+  enabled: true;
+  text-color: @fg;
 }
 
 * {
@@ -31,12 +40,12 @@ configuration {
 }
 
 window {
-  width: 18%;
+  width: 45%;
+  height: 42%;
   padding: 0;
-  location:   south west;
+  location:   north west;
   x-offset:   4px;        
-  y-offset:   -4px;
-  scrollbar: true;
+  y-offset:   4px;
   border: 1;
   border-radius: 12;
 }
@@ -44,59 +53,55 @@ window {
 element {
   padding: 8 4;
   text-color: @fg-alt;
-  margin-left: 4;
+  orientation: vertical; 
 }
 
 element selected {
   text-color: @fg;
   padding-left: 4;
   background-color: @bg-alt;
-  border-radius: 0;
+  border-radius: 12px;
+}
+
+element-icon selected {
+  background-color: @bg-alt;
 }
 
 element-text {
   background-color: inherit;
   text-color: @fg-alt;
-  vertical-align: 0.5;
-  margin-left: 4;
+  horizontal-align:               0.5;
+  vertical-align:                 0.5;
+  margin: 1% 0% 0.5% 0%;
 }
 
 element-icon {
-  size: 30;
-  margin-right: 4;
-}
-
-entry {
+  size: 48px;
   background-color: @bg;
-  padding: 12;
-  text-color: @fg;
-  placeholder: "Search";
-  placholder-color: grey;
 }
 
 inputbar {
   children: [prompt, entry];
+  position: center;
 }
 
 listview {
   padding: 8 12;
   background-color: @bg;
-  columns: 1;
-  lines: 10;
-  scrollbar: true;
+  columns: 10;
+  spacing: 1%;
+  cycle: false;
+  dynamic: true;
 }
 
 mainbox {
   background-color: @bg;
-  children: [listview, inputbar];
+  children: [inputbar, listview];
+  spacing: 2%;
+  padding: 2% 1.5%;
 }
 
-prompt {
-  background-color: @bg;
-  enabled: true;
-  padding: 12 0 0 12;
-  text-color: @fg;
-}
+
 
 
 

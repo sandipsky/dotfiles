@@ -17,7 +17,7 @@
 	<name>Open in Code</name>
 	<submenu></submenu>
 	<unique-id>1720270723679354-1</unique-id>
-	<command>code .</command>
+	<command>code . --enable-features=UseOzonePlatform --ozone-platform=wayland</command>
 	<description></description>
 	<range>*</range>
 	<patterns>*</patterns>

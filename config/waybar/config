@@ -1,6 +1,6 @@
 {
         "layer": "top",
-	"position": "bottom",
+	"position": "top",
         "margin-top": 0,
         "margin-bottom": 0,
         "margin-left": 0,
@@ -15,15 +15,17 @@
                 "hyprland/workspaces",
                 "custom/sep"
         ],
+	"modules-center": [
+		"clock"
+	],
         "modules-right": [
+ 		"bluetooth",
                 "cpu",
                 "memory",
-                "bluetooth",
 		"backlight",
                 "network",
  		"battery",
-                "pulseaudio",
-                "clock",              
+                "pulseaudio",              
 		"custom/exit"
         ]
 }
