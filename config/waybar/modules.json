@@ -35,6 +35,8 @@
     "custom/appmenu": {
         "format": "",
         "on-click": "pgrep rofi && killall rofi || rofi -show drun",
+        "on-scroll-up": "hyprctl dispatch movetoworkspace r-1",
+        "on-scroll-down": "hyprctl dispatch movetoworkspace r+1",
         "tooltip": false
     },
     "custom/exit": {
