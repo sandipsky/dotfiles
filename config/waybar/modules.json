@@ -16,8 +16,21 @@
         }
     },
     "hyprland/window": {
-        "format": "{class}",
-        "separate-outputs": true
+        "format": "{initialTitle}",
+        "separate-outputs": true,
+	"icon": true,
+	"on-click": "hyprctl dispatch fullscreen 1",
+	"on-click-right": "hyprctl dispatch killactive",
+ 	"on-scroll-up": "hyprctl dispatch cyclenext",
+    "on-scroll-down": "hyprctl dispatch cyclenext",
+	"rewrite": {
+		"(.*) - mousepad": "Text Editor",
+		"(.*) - Google Chrome": "Google Chrome",
+		"(.*) - Thunar": "File Manager",
+		"(.*)Alacritty": "Terminal",
+		"(.*) - Visual Studio Code": "Visual Studio Code",
+		"(.*)Image Lounge": "Image Viewer"
+	}
     },
     "custom/appmenu": {
         "format": "",
@@ -105,10 +118,9 @@
             "headphone": " ",
             "hands-free": "",
             "headset": "",
-            "headset": " ",
            "default": [
-			"", "",
-		],
+			"", ""
+		]
         },
         "on-click": "pactl set-sink-mute 0 toggle"
     },

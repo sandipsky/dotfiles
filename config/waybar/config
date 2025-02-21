@@ -13,7 +13,8 @@
                 "custom/appmenu",
                 "custom/sep",
                 "hyprland/workspaces",
-                "custom/sep"
+                "custom/sep",
+		"hyprland/window"
         ],
 	"modules-center": [
 		"clock"
