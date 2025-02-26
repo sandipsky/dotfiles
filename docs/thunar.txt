@@ -1,5 +1,0 @@
-create link
-ln -s %f Link\ to\ %n
-
-open as root
-pkexec thunar %f

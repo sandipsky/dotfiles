@@ -1,3 +1,0 @@
-sudo pacman -S switcheroo-control 
-
-sudo systemctl enable switcheroo-control 

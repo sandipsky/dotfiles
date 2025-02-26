@@ -4,6 +4,8 @@ USERNAME="sandip"
 
 sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra wlsunset grim slurp --noconfirm --needed
 
+cd scripts
+
 sudo mkdir /etc/systemd/system/getty@tty1.service.d
 sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
 cp .zprofile /home/$USERNAME/.zprofile
@@ -11,8 +13,6 @@ sudo systemctl enable getty@tty1.service
 
 sleep 3
 
-cd .. 
-cd scripts
 sh aur.sh
 sh battery.sh
 sleep 3
@@ -22,12 +22,12 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S auto-cpufreq nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout --noconfirm --needed
-sudo auto-cpufreq --install
+yay -S nomacs ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout --noconfirm --needed
 
 cd ..
 
 cd config
+
 rm -rf /home/$USERNAME/.config/*
 
 cp -r alacritty /home/$USERNAME/.config/
@@ -38,14 +38,15 @@ cp -r waybar /home/$USERNAME/.config/
 cp -r dunst /home/$USERNAME/.config/
 
 chmod +x /home/$USERNAME/.config/waybar/launch.sh
+
 cd ..
 
 cd assets
 cd icons
-sudo cp -r Bibata-Modern-Ice /usr/share/icons
 sudo cp * /usr/share/icons/hicolor/scalable/apps/
-cd ..
 
+cd ..
+cd apps
 sudo rm /usr/share/applications/avahi-discover.desktop
 sudo rm /usr/share/applications/blueman-adapters.desktop
 sudo rm /usr/share/applications/blueman-manager.desktop
@@ -77,7 +78,7 @@ sudo rm /usr/share/applications/assistant.desktop
 sudo rm /usr/share/applications/designer.desktop
 sudo rm /usr/share/applications/linguist.desktop
 sudo rm /usr/share/applications/qdbusviewer.desktop
-cd apps
+
 sudo cp Alacritty.desktop /usr/share/applications/Alacritty.desktop
 sudo cp atril.desktop /usr/share/applications/atril.desktop
 sudo cp org.nomacs.ImageLounge.desktop /usr/share/applications/org.nomacs.ImageLounge.desktop
@@ -89,7 +90,6 @@ sudo cp google-chrome.desktop /usr/share/applications/google-chrome.desktop
 
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
-gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'
 
 sudo mkdir /mnt/HOME
 echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
