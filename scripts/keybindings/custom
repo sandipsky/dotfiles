@@ -1,0 +1,37 @@
+[/]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']
+
+[custom-keybindings/custom0]
+binding='<Super>Return'
+command='gnome-terminal'
+name='Terminal'
+
+[custom-keybindings/custom1]
+binding='<Super>e'
+command='nautilus'
+name='Nautilus'
+
+[custom-keybindings/custom2]
+binding='<Shift><Super>e'
+command='nautilus admin://'
+name='Super Nautilus'
+
+[custom-keybindings/custom3]
+binding='<Super>Print'
+command='gnome-screenshot'
+name='Screenshot'
+
+[custom-keybindings/custom4]
+binding='<Shift><Super>s'
+command='gnome-screenshot -a'
+name='SS'
+
+[custom-keybindings/custom5]
+binding='<Super>w'
+command='google-chrome-stable'
+name='GC'
+
+[custom-keybindings/custom6]
+binding='<Super>g'
+command='lutris'
+name='Lutris'
