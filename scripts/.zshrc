@@ -9,6 +9,6 @@ setopt inc_append_history
 
 eval "$(starship init zsh)"
 export PATH="/home/sandip/.local/bin:$PATH"
-export PATH="$PATH:/home/sandip/AndroidSDK/cmdline-tools/latest/bin:/home/sandip/AndroidSDK/emulator"
 
 alias update-initramfs="mkinitcpio -P"
+alias update-grub="grub-mkconfig -o /boot/grub/grub.cfg"

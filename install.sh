@@ -2,16 +2,9 @@
 
 USERNAME="sandip"
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra wlsunset grim slurp --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra wlsunset grim slurp sddm --noconfirm --needed
 
 cd scripts
-
-sudo mkdir /etc/systemd/system/getty@tty1.service.d
-sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
-cp .zprofile /home/$USERNAME/.zprofile
-sudo systemctl enable getty@tty1.service
-
-sleep 3
 
 sh aur.sh
 sh battery.sh
@@ -66,7 +59,6 @@ sudo rm /usr/share/applications/atril.desktop
 sudo rm /usr/share/applications/org.nomacs.ImageLounge.desktop
 sudo rm /usr/share/applications/org.xfce.mousepad.desktop
 sudo rm /usr/share/applications/thunar.desktop
-sudo rm /usr/share/applications/auto-cpufreq-gtk.desktop
 sudo rm /usr/share/applications/cmake-gui.desktop
 sudo rm /usr/share/applications/lstopo.desktop
 sudo rm /usr/share/applications/java-java21-openjdk.desktop
