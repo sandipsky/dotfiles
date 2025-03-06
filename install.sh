@@ -89,3 +89,5 @@ sudo mount -a
 cd /home/sandip
 sudo rm -r dotfiles
 sudo rm -r yay
+
+sudo systemctl enable sddm
