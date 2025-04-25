@@ -2,7 +2,7 @@
 
 USERNAME="sandip"
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra wlsunset grim slurp sddm --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rhythmbox atril rofi-wayland vlc ntfs-3g tumbler ffmpegthumbnailer file-roller alacritty xdg-user-dirs-gtk neofetch mousepad gvfs-mtp wget thunar obs-studio qbittorrent thunar-archive-plugin noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono gnome-themes-extra wlsunset grim slurp gdm --noconfirm --needed
 
 cd scripts
 
@@ -61,9 +61,9 @@ sudo rm /usr/share/applications/org.xfce.mousepad.desktop
 sudo rm /usr/share/applications/thunar.desktop
 sudo rm /usr/share/applications/cmake-gui.desktop
 sudo rm /usr/share/applications/lstopo.desktop
-sudo rm /usr/share/applications/java-java21-openjdk.desktop
-sudo rm /usr/share/applications/jconsole-java21-openjdk.desktop
-sudo rm /usr/share/applications/jshell-java21-openjdk.desktop
+sudo rm /usr/share/applications/java-java17-openjdk.desktop
+sudo rm /usr/share/applications/jconsole-java17-openjdk.desktop
+sudo rm /usr/share/applications/jshell-java17-openjdk.desktop
 sudo rm /usr/share/applications/code.desktop
 sudo rm /usr/share/applications/google-chrome.desktop
 sudo rm /usr/share/applications/assistant.desktop
@@ -90,4 +90,4 @@ cd /home/sandip
 sudo rm -r dotfiles
 sudo rm -r yay
 
-sudo systemctl enable sddm
+sudo systemctl enable gdm
