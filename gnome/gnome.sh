@@ -7,7 +7,7 @@ sudo pacman -S gnome-shell gnome-control-center gnome-calculator gnome-menus col
 sudo pacman -S ttf-liberation noto-fonts-cjk otf-fira-sans ttf-jetbrains-mono ttf-dejavu noto-fonts noto-fonts-emoji noto-fonts-extra --noconfirm --needed
 
 #BASIC PROGRAMS
-sudo pacman -S wget vlc rhythmbox neofetch ntfs-3g qbittorrent switcheroo-control --noconfirm --needed
+sudo pacman -S wget vlc decibels gnome-music neofetch ntfs-3g qbittorrent switcheroo-control --noconfirm --needed
 
 sudo systemctl enable gdm switcheroo-control 
 sleep 3
