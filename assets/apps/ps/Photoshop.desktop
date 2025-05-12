@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Adobe Photoshop
+GenericName=Adobe Photoshop
+Comment=Photo Editing Tool
+Path=/opt/photoshop/
+Exec=wine /opt/photoshop/Photoshop.exe
+Terminal=false
+MimeType=application/x-resolveproj;
+Icon=/opt/photoshop/ps.png
+StartupNotify=true
+Name[en_US]=Adobe Photoshop
+StartupWMClass=photoshop
