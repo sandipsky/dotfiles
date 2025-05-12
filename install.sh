@@ -2,12 +2,13 @@
 
 USERNAME="sandip"
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk neofetch wget obs-studio qbittorrent noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans starship dunst adwaita-icon-theme brightnessctl ttf-jetbrains-mono wlsunset grim slurp --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk neofetch wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
 
 #GNOME APPS
-sudo pacman -S gnome-music evince loupe gnome-calendar gnome-calculator file-roller gnome-text-editor gvfs-mtp gnome-themes-extra gdm --noconfirm --needed
+sudo pacman -S gnome-music evince loupe gnome-calendar gnome-calculator file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme gnome-system-monitor gdm --noconfirm --needed
 
 #FONTS
+sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
 
 cd scripts
 
@@ -20,7 +21,7 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome gdm-settings visual-studio-code-bin wlogout --noconfirm --needed
+yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome gdm-settings visual-studio-code-bin wlogout --noconfirm --needed
 
 cd ..
 
@@ -74,7 +75,8 @@ sudo cp google-chrome.desktop /usr/share/applications/google-chrome.desktop
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-gsettings set org.gnome.desktop.interface cursor-theme 'YourCursorThemeName'
+gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
+gsettings set org.gnome.desktop.privacy remember-recent-files false
 
 sudo mkdir /mnt/HOME
 echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab

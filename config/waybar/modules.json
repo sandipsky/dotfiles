@@ -29,7 +29,8 @@
 		"(.*) - Thunar": "File Manager",
 		"(.*)Alacritty": "Terminal",
 		"(.*) - Visual Studio Code": "Visual Studio Code",
-		"(.*)Image Lounge": "Image Viewer"
+		"(.*)Image Lounge": "Image Viewer",
+		"(.*)Loading...": "Files"
 	}
     },
     "custom/appmenu": {
