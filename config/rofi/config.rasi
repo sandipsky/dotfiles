@@ -40,8 +40,8 @@ prompt {
 }
 
 window {
-  width: 45%;
-  height: 42%;
+  width: 47%;
+  height: 52%;
   padding: 0;
   location:   north west;
   x-offset:   4px;        
@@ -88,7 +88,9 @@ inputbar {
 listview {
   padding: 8 12;
   background-color: @bg;
-  columns: 10;
+  flow: horizontal;
+  columns: 6;
+  fixed-columns: true;
   spacing: 1%;
   cycle: false;
   dynamic: true;
