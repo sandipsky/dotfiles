@@ -2,7 +2,7 @@
 
 USERNAME="sandip"
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk neofetch wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk neofetch wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp virtualbox-guest-utils --noconfirm --needed
 
 #GNOME APPS
 sudo pacman -S nautilus gnome-music evince loupe gnome-calendar gnome-calculator file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme gnome-system-monitor gdm --noconfirm --needed
@@ -79,6 +79,8 @@ sudo rm -r yay
 touch ~/Templates/NewDocument.txt
 touch ~/Templates/File
 
+sudo usermod -a -G vboxsf sandip
+
 bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh)"
 
-sudo systemctl enable gdm
+sudo systemctl enable gdm vboxservice
