@@ -13,9 +13,6 @@ sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-
 cd scripts
 
 sh aur.sh
-sh battery.sh
-sleep 3
-sh ntfs.sh
 sh zsh.sh
 sh git.sh
 sh gaming.sh
@@ -75,9 +72,6 @@ gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
 
-sudo mkdir /mnt/HOME
-echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
-sudo mount -a
 cd /home/sandip
 sudo rm -r dotfiles
 sudo rm -r yay
