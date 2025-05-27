@@ -66,7 +66,6 @@ gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
 gsettings set org.gnome.desktop.interface enable-hot-corners false
 gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,close' 
 gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
