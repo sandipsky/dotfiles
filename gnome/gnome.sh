@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #GNOME DESKTOP AND UTITLITIES
-sudo pacman -S gnome-shell gnome-control-center gnome-calendar gnome-calculator gnome-menus colord-gtk nautilus python-nautilus ffmpegthumbnailer gvfs-mtp file-roller xdg-desktop-portal-gnome gnome-tweaks gnome-terminal gnome-themes-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions evince loupe gnome-text-editor power-profiles-daemon xdg-user-dirs-gtk gdm gnome-keyring --noconfirm --needed
+sudo pacman -S gnome-shell gnome-control-center gnome-software flatpak gnome-calendar gnome-calculator gnome-menus colord-gtk nautilus python-nautilus ffmpegthumbnailer gvfs-mtp file-roller xdg-desktop-portal-gnome gnome-tweaks gnome-terminal gnome-themes-extra gnome-color-manager gnome-backgrounds gnome-disk-utility gnome-screenshot gnome-shell-extensions evince loupe gnome-text-editor power-profiles-daemon xdg-user-dirs-gtk gdm gnome-keyring --noconfirm --needed
 
 #FONTS
 sudo pacman -S ttf-liberation noto-fonts-cjk ttf-fira-sans ttf-jetbrains-mono ttf-dejavu noto-fonts noto-fonts-emoji noto-fonts-extra --noconfirm --needed
@@ -41,6 +41,7 @@ yay -S breezex-cursor-theme google-chrome visual-studio-code-bin extension-manag
 
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Nautilus.svg
 sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg
+sudo rm /usr/share/icons/hicolor/scalable/apps/org.gnome.Software.svg
 
 sudo rm /usr/share/applications/avahi-discover.desktop 
 sudo rm /usr/share/applications/qv4l2.desktop 
@@ -58,6 +59,7 @@ cd assets
 cd icons
 sudo cp org.gnome.Nautilus.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Nautilus.svg
 sudo cp org.gnome.Terminal.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Terminal.svg
+sudo cp org.gnome.Software.svg /usr/share/icons/hicolor/scalable/apps/org.gnome.Software.svg
 
 sudo sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
