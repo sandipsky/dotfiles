@@ -2,10 +2,10 @@
 
 USERNAME="sandip"
 
-sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk neofetch wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
+sudo pacman -S hyprland hyprpaper xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
 
 #GNOME APPS
-sudo pacman -S nautilus gnome-music evince loupe gnome-calendar gnome-calculator file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme gnome-system-monitor gdm --noconfirm --needed
+sudo pacman -S nautilus decibels gnome-software flatpak gnome-control-center gnome-music evince loupe gnome-calendar gnome-calculator file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme gnome-system-monitor gdm --noconfirm --needed
 
 #FONTS
 sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
@@ -21,7 +21,7 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome gdm-settings visual-studio-code-bin wlogout --noconfirm --needed
+yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome microsoft-edge-stable-bin gdm-settings visual-studio-code-bin wlogout --noconfirm --needed
 
 cd ..
 
@@ -64,9 +64,11 @@ sudo rm /usr/share/applications/assistant.desktop
 sudo rm /usr/share/applications/designer.desktop
 sudo rm /usr/share/applications/linguist.desktop
 sudo rm /usr/share/applications/qdbusviewer.desktop
+sudo rm /usr/share/applications/org.gnome.Settings.desktop
 
 sudo cp Alacritty.desktop /usr/share/applications/Alacritty.desktop
 sudo cp org.gnome.FileRoller.desktop /usr/share/applications/org.gnome.FileRoller.desktop
+sudo cp org.gnome.Settings.desktop /usr/share/applications/org.gnome.Settings.desktop
 
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
