@@ -71,6 +71,7 @@ sudo rm /usr/share/applications/assistant.desktop
 sudo rm /usr/share/applications/designer.desktop
 sudo rm /usr/share/applications/linguist.desktop
 sudo rm /usr/share/applications/qdbusviewer.desktop
+sudo rm /usr/share/applications/auto-cpufreq-gtk.desktop
 
 sudo cp Alacritty.desktop /usr/share/applications/Alacritty.desktop
 sudo cp org.gnome.FileRoller.desktop /usr/share/applications/org.gnome.FileRoller.desktop
