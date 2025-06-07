@@ -18,26 +18,21 @@
     "hyprland/window": {
         "format": "{initialTitle}",
         "separate-outputs": true,
-	"icon": true,
-	"on-click": "hyprctl dispatch fullscreen 1",
-	"on-click-right": "hyprctl dispatch killactive",
- 	"on-scroll-up": "hyprctl dispatch cyclenext",
-    "on-scroll-down": "hyprctl dispatch cyclenext",
-	"rewrite": {
-		"(.*) - mousepad": "Text Editor",
-		"(.*) - Google Chrome": "Google Chrome",
-		"(.*) - Thunar": "File Manager",
-		"(.*)Alacritty": "Terminal",
-		"(.*) - Visual Studio Code": "Visual Studio Code",
-		"(.*)Image Lounge": "Image Viewer",
-		"(.*)Loading...": "Files"
-	}
+        "icon": true,
+        "on-click": "hyprctl dispatch fullscreen 1",
+        "on-click-right": "hyprctl dispatch killactive",
+        "rewrite": {
+            "(.*) - mousepad": "Text Editor",
+            "(.*) - Google Chrome": "Google Chrome",
+            "(.*)Alacritty": "Terminal",
+            "(.*) - Visual Studio Code": "Visual Studio Code",
+            "(.*)Image Lounge": "Image Viewer",
+            "(.*)Loading...": "Files"
+        }
     },
     "custom/appmenu": {
         "format": "",
-        "on-click": "pgrep rofi && killall rofi || rofi -show drun",
-        "on-scroll-up": "hyprctl dispatch movetoworkspace r-1",
-        "on-scroll-down": "hyprctl dispatch movetoworkspace r+1",
+        "on-click": "rofi -show drun",
         "tooltip": false
     },
     "custom/exit": {
@@ -54,27 +49,7 @@
     },
     "clock": {
         "format": "<span color=\"#6D8895\"></span>  {:%I:%M %p}",
-        "tooltip-format": "<tt><big>{calendar}</big></tt>",
-        "format-alt": "<span color=\"#fff\"> </span>  {:%Y-%m-%d, %a}",
-        "calendar": {
-            "mode": "month",
-            "mode-mon-col": 4,
-            "weeks-pos": "none",
-            "on-scroll": 1,
-            "format": {
-                "months": "<span color='#ffead3'><b>{}</b></span>",
-                "days": "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-            }
-        },
-        "actions": {
-            "on-click-forward": "tz_up",
-            "on-click-backward": "tz_down",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        }
+        "format-alt": "<span color=\"#fff\"> </span>  {:%Y-%m-%d, %a}"
     },
     "cpu": {
         "interval": 5,
@@ -96,7 +71,7 @@
         "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
-        "on-click": "alacritty -e nmtui" 
+        "on-click": "alacritty -e nmtui"
     },
     "battery": {
         "interval": 1,
@@ -108,7 +83,13 @@
         "format-charging": "<span color=\"#9ece6a\"></span>  {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{icon}  {time}",
-	"format-icons": [" ", " ", " ", " ", " "]
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ]
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
@@ -121,14 +102,15 @@
             "headphone": " ",
             "hands-free": "",
             "headset": "",
-           "default": [
-			"", ""
-		]
+            "default": [
+                "",
+                ""
+            ]
         },
         "on-click": "pactl set-sink-mute 0 toggle"
     },
     "bluetooth": {
-        "format": "<span color=\"#7aa2f7\"> </span> On", 
+        "format": "<span color=\"#7aa2f7\"> </span> On",
         "format-disabled": "<span color=\"#fff\"> </span> Off",
         "format-connected": "<span color=\"#7aa2f7\"> </span> {device_alias}",
         "format-off": "",
@@ -143,6 +125,6 @@
             "󰃠",
             "󰃠"
         ],
-	"tooltip": false
+        "tooltip": false
     }
 }

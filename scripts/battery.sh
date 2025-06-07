@@ -11,7 +11,7 @@ StartLimitBurst=0
 Type=oneshot
 Restart=on-failure
 
-ExecStart=/bin/bash -c 'echo 90 > /sys/class/power_supply/BAT1/charge_control_end_threshold'
+ExecStart=/bin/bash -c 'echo 80 > /sys/class/power_supply/BAT1/charge_control_end_threshold'
 [Install]
 WantedBy=multi-user.target
 EOF
