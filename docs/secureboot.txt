@@ -1,4 +1,4 @@
-#!/bin/bash
+#### ONLY FOR systemd-boot
 
 sudo pacman -S sbctl
 
