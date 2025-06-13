@@ -28,7 +28,7 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme auto-cpufreq nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome microsoft-edge-stable-bin visual-studio-code-bin wlogout --noconfirm --needed
+yay -S breezex-cursor-theme auto-cpufreq nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout --noconfirm --needed
 sudo auto-cpufreq --install
 cd ..
 
