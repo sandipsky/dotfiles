@@ -36,11 +36,7 @@ cd config
 
 rm -rf /home/$USERNAME/.config/*
 
-cp -r alacritty /home/$USERNAME/.config/
-cp -r hypr /home/$USERNAME/.config/
-cp -r rofi /home/$USERNAME/.config/
-cp -r waybar /home/$USERNAME/.config/
-cp -r dunst /home/$USERNAME/.config/
+cp -r * /home/$USERNAME/.config/
 
 chmod +x /home/$USERNAME/.config/waybar/launch.sh
 

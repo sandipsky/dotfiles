@@ -18,7 +18,8 @@
     "hyprland/window": {
         "format": "{initialTitle}",
         "separate-outputs": true,
-        "icon": true,
+        "icon": false,
+        "tooltip": false,
         "on-click": "hyprctl dispatch fullscreen 1",
         "on-click-right": "hyprctl dispatch killactive",
         "rewrite": {
@@ -27,12 +28,14 @@
             "(.*)Alacritty": "Terminal",
             "(.*) - Visual Studio Code": "Visual Studio Code",
             "(.*)Image Lounge": "Image Viewer",
-            "(.*)Loading...": "Files"
+            "(.*)Loading...": "Files",
+            "(.*)Text Editor": "Text Editor"
         }
     },
     "custom/appmenu": {
         "format": "",
         "on-click": "rofi -show drun",
+        "on-click-right": "wlogout",
         "tooltip": false
     },
     "custom/exit": {
@@ -49,7 +52,8 @@
     },
     "clock": {
         "format": "<span color=\"#6D8895\"></span>  {:%I:%M %p}",
-        "format-alt": "<span color=\"#fff\"> </span>  {:%Y-%m-%d, %a}"
+        "format-alt": "<span color=\"#fff\"> </span>  {:%Y-%m-%d, %a}",
+        "tooltip": false
     },
     "cpu": {
         "interval": 5,
@@ -126,5 +130,25 @@
             "󰃠"
         ],
         "tooltip": false
-    }
+    },
+     "custom/chrome": {
+        "format": " ",
+        "on-click": "google-chrome-stable",
+        "tooltip": false
+    },
+     "custom/files": {
+        "format": " ",
+        "on-click": "nautilus",
+        "tooltip": false
+    },
+    "custom/terminal": {
+        "format": " ",
+        "on-click": "alacritty",
+        "tooltip": false
+    },
+    "custom/lutris": {
+        "format": " ",
+        "on-click": "lutris",
+        "tooltip": false
+    },
 }

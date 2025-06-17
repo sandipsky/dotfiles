@@ -6,7 +6,7 @@
  }
 
  window#waybar {
-     background: #000;
+     background: rgba(0,0,0,0.85);
  }
 
  tooltip {
@@ -34,6 +34,42 @@
      padding: 5px 5px;
      color: #fff;
  }
+ 
+ #custom-chrome {
+    background: url("/home/sandip/.config/hypr/icons/chrome.svg");
+    padding: 5px 10px;
+    margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+  background-repeat: no-repeat;
+  }
+ 
+  #custom-files {
+    background: url("/home/sandip/.config/hypr/icons/files.svg");
+    padding: 5px 10px;
+    margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+  background-repeat: no-repeat;
+  }
+  
+   #custom-terminal {
+    background: url("/home/sandip/.config/hypr/icons/terminal.svg");
+    padding: 5px 10px;
+    margin: 0 4px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+   #custom-lutris {
+    background: url("/home/sandip/.config/hypr/icons/lutris.svg");
+    padding: 5px 10px;
+    margin: 0 4px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
  /* -----------------------------------------------------
  * Workspaces 
@@ -47,7 +83,7 @@
  #workspaces button {
      padding: 5px 5px;
      color: #f5f5f5;
-     background: #141414;
+     background: transparent;
  }
 
  #workspaces button.active {

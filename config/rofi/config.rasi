@@ -18,7 +18,7 @@ entry {
   background-color: @bg;
   padding: 0 12;
   text-color: @fg;
-  placeholder: "Search Applications";
+  placeholder: "Search...";
   placholder-color: grey;
 }
 
@@ -29,7 +29,7 @@ prompt {
 }
 
 * {
-  bg: #1A1B26;
+  bg: #000;
   bg-alt: #282A36;
   fg: #FFFFFF;
   fg-alt: #f5f5f5;
@@ -40,13 +40,13 @@ prompt {
 }
 
 window {
-  width: 47%;
+  width: 40%;
   height: 52%;
   padding: 0;
-  location:   north west;
+  location:   south west;
   x-offset:   4px;        
-  y-offset:   4px;
-  border: 1;
+  y-offset:   -4px;
+  border: 0;
   border-radius: 12;
 }
 
@@ -98,7 +98,7 @@ listview {
 
 mainbox {
   background-color: @bg;
-  children: [inputbar, listview];
+  children: [listview, inputbar];
   spacing: 2%;
   padding: 2% 1.5%;
 }
