@@ -39,6 +39,7 @@ rm -rf /home/$USERNAME/.config/*
 cp -r * /home/$USERNAME/.config/
 
 chmod +x /home/$USERNAME/.config/waybar/launch.sh
+chmod +x /home/$USERNAME/.config/hypr/scripts/startvm.sh
 
 cd ..
 
