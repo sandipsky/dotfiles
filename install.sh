@@ -17,6 +17,10 @@ sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
 cp .zprofile /home/$USERNAME/.zprofile
 sudo systemctl enable getty@tty1.service
 
+sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
+sudo cp usb-remove.service /etc/systemd/system/usb-remove.service
+sudo cp 90-local.rules /etc/udev/rules.d/90-local.rules
+
 sleep 3
 
 sh aur.sh
@@ -44,6 +48,11 @@ chmod +x /home/$USERNAME/.config/hypr/scripts/startvm.sh
 cd ..
 
 cd assets
+cd sounds
+sudo mkdir -p /usr/share/sounds/
+sudo cp * /usr/share/sounds/
+
+cd ..
 cd icons
 sudo cp * /usr/share/icons/hicolor/scalable/apps/
 

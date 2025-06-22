@@ -22,3 +22,5 @@ sudo systemctl restart libvirtd
   <ipi state="on"/>
   <evmcs state="on"/>
 </hyperv>
+sudo virsh net-autostart default
+
