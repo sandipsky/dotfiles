@@ -5,7 +5,7 @@ USERNAME="sandip"
 sudo pacman -S hyprland hyprpaper hyprpicker wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
 
 #GNOME APPS
-sudo pacman -S nautilus rhythmbox evince loupe gnome-calendar gnome-shell gnome-calculator file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme --noconfirm --needed
+sudo pacman -S power-profiles-daemon nautilus rhythmbox evince loupe gnome-calendar gnome-shell gnome-calculator file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme --noconfirm --needed
 
 #FONTS
 sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
@@ -19,7 +19,10 @@ sudo systemctl enable getty@tty1.service
 
 sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
 sudo cp usb-remove.service /etc/systemd/system/usb-remove.service
-sudo cp 90-local.rules /etc/udev/rules.d/90-local.rules
+sudo cp acpoweron.service /etc/systemd/system/acpoweron.service
+sudo cp acpoweroff.service /etc/systemd/system/acpoweroff.service
+sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
+sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
 
 sleep 3
 
@@ -32,8 +35,7 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme auto-cpufreq nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout --noconfirm --needed
-sudo auto-cpufreq --install
+yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout --noconfirm --needed
 cd ..
 
 cd config

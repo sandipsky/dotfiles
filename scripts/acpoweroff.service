@@ -1,0 +1,12 @@
+[Unit]
+Description=Set Performance Mode
+After=graphical.target
+
+[Service]
+User=sandip
+Type=oneshot
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+ExecStart=/bin/bash -c 'powerprofilesctl set power-saver'
+
+[Install]
+WantedBy=default.target
