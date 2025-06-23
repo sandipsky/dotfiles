@@ -10,12 +10,11 @@ sudo pacman -S power-profiles-daemon nautilus rhythmbox evince loupe gnome-calen
 #FONTS
 sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
 
-cd scripts
+#sddm
+sudo pacman -S sddm qt5-graphicaleffects qt5-base qt5-declarative --noconfirm --needed
+sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
 
-sudo mkdir /etc/systemd/system/getty@tty1.service.d
-sudo cp override.conf /etc/systemd/system/getty@tty1.service.d/override.conf
-cp .zprofile /home/$USERNAME/.zprofile
-sudo systemctl enable getty@tty1.service
+cd scripts
 
 sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
 sudo cp usb-remove.service /etc/systemd/system/usb-remove.service
@@ -50,6 +49,8 @@ chmod +x /home/$USERNAME/.config/hypr/scripts/startvm.sh
 cd ..
 
 cd assets
+sudo cp -r Elegant /usr/share/sddm/themes/
+
 cd sounds
 sudo mkdir -p /usr/share/sounds/
 sudo cp * /usr/share/sounds/
@@ -102,3 +103,10 @@ touch ~/Templates/NewDocument.txt
 touch ~/Templates/File
 
 bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh)"
+
+sudo rm /usr/share/xsessions/*
+sudo rm /usr/share/wayland-sessions/gnome.desktop
+sudo rm /usr/share/wayland-sessions/gnome-wayland.desktop
+sudo rm /usr/share/wayland-sessions/hyprland-uwsm.desktop
+
+sudo systemctl enable sddm
