@@ -6,7 +6,7 @@ Item {
     id: frame
     property int sessionIndex: sessionModel.lastIndex
     property string userName: userModel.lastUser
-    property string fullName: userModel.fullName
+    property string fullName: userModel.name
     property bool isProcessing: glowAnimation.running
     property alias input: passwdInput
     property alias button: loginButton
@@ -76,7 +76,7 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
 
-            text: "Sandip Shakya"
+            text: "Live User"
             color: textColor
             font.pointSize: 28
             font.bold: true
