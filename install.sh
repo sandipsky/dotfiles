@@ -61,6 +61,14 @@ cd icons
 sudo cp * /usr/share/icons/hicolor/scalable/apps/
 
 cd ..
+cd mimetypes
+sudo cp * /usr/share/icons/Adwaita/scalable/mimetypes/
+
+cd ..
+cd places
+sudo cp * /usr/share/icons/Adwaita/scalable/places/
+
+cd ..
 cd apps
 sudo rm /usr/share/applications/avahi-discover.desktop
 sudo rm /usr/share/applications/blueman-adapters.desktop

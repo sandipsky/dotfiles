@@ -6,7 +6,6 @@ Item {
     id: frame
     property int sessionIndex: sessionModel.lastIndex
     property string userName: userModel.lastUser
-    property string fullName: userModel.name
     property bool isProcessing: glowAnimation.running
     property alias input: passwdInput
     property alias button: loginButton
@@ -47,8 +46,6 @@ Item {
                 userFrame.focus = true
             }
         }
-        
-        
 
         Glow {
             id: avatarGlow
@@ -69,17 +66,16 @@ Item {
         }
 
         Text {
-            id: fullNameText
+            id: userNameText
             anchors {
                 top: userIconRec.bottom
-                topMargin: 20
+                topMargin: 10
                 horizontalCenter: parent.horizontalCenter
             }
 
-            text: "Live User"
+            text: "Sandip Shakya"
             color: textColor
-            font.pointSize: 28
-            font.bold: true
+            font.pointSize: 24
             font.family: "Fira Sans"
         }
 
@@ -87,13 +83,13 @@ Item {
             id: passwdInputRec
             visible: ! isProcessing
             anchors {
-                top: fullNameText.bottom
-                topMargin: 45
+                top: userNameText.bottom
+                topMargin: 30
                 horizontalCenter: parent.horizontalCenter
             }
             width: 260
             height: 35
-            radius: 6
+            radius: 3
             color: "#55000000"
             
 
