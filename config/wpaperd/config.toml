@@ -1,0 +1,7 @@
+[default]
+path = "/home/sandip/.config/wpaperd"
+duration = "30m"
+sorting = "ascending"
+
+[default.transition.hexagonalize]
+

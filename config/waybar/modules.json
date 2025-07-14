@@ -33,7 +33,7 @@
         }
     },
     "custom/appmenu": {
-        "format": "",
+        "format": " ",
         "on-click": "rofi -show drun",
         "on-click-right": "wlogout",
         "tooltip": false

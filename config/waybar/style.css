@@ -3,6 +3,7 @@
      border: none;
      border-radius: 0px;
      font-size: 16px;
+     font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
  }
 
  window#waybar {
@@ -34,6 +35,15 @@
      padding: 5px 5px;
      color: #fff;
  }
+
+ #custom-appmenu {
+    background: url("/home/sandip/.config/hypr/icons/bazzite.svg");
+    padding: 5px 10px;
+    margin: 0 4px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
  #custom-chrome {
      background: url("/home/sandip/.config/hypr/icons/chrome.svg");

@@ -2,7 +2,7 @@
 
 USERNAME="sandip"
 
-sudo pacman -S hyprland hyprpaper hyprpicker wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
+sudo pacman -S hyprland wpaperd hyprpicker wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
 
 #GNOME APPS
 sudo pacman -S power-profiles-daemon nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme --noconfirm --needed
@@ -35,7 +35,7 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout --noconfirm --needed
+yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git google-chrome visual-studio-code-bin wlogout heidisql --noconfirm --needed
 cd ..
 
 cd config
