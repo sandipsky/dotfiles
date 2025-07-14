@@ -75,7 +75,8 @@
         "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
-        "on-click": "alacritty -e nmtui"
+        "on-click": "alacritty -e nmtui",
+        "tooltip": false
     },
     "battery": {
         "interval": 1,
@@ -93,7 +94,8 @@
             " ",
             " ",
             " "
-        ]
+        ],
+        "tooltip": false
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
@@ -111,6 +113,7 @@
                 ""
             ]
         },
+        "tooltip": false,
         "on-click": "pactl set-sink-mute 0 toggle"
     },
     "bluetooth": {
@@ -120,7 +123,8 @@
         "format-off": "",
         "interval": 30,
         "on-click": "blueman-manager",
-        "format-no-controller": ""
+        "format-no-controller": "",
+        "tooltip": false
     },
     "backlight": {
         "device": "intel_backlight",
@@ -131,12 +135,12 @@
         ],
         "tooltip": false
     },
-     "custom/chrome": {
+    "custom/chrome": {
         "format": " ",
         "on-click": "google-chrome-stable",
         "tooltip": false
     },
-     "custom/files": {
+    "custom/files": {
         "format": " ",
         "on-click": "nautilus",
         "tooltip": false
@@ -151,4 +155,34 @@
         "on-click": "lutris",
         "tooltip": false
     },
+    "custom/steam": {
+        "format": " ",
+        "on-click": "steam",
+        "tooltip": false
+    },
+    "custom/spotify": {
+        "format": " ",
+        "on-click": "spotify",
+        "tooltip": false
+    },
+    "custom/obs": {
+        "format": " ",
+        "on-click": "obs-studio",
+        "tooltip": false
+    },
+    "custom/resolve": {
+        "format": " ",
+        "on-click": "resolve",
+        "tooltip": false
+    },
+    "custom/vbox": {
+        "format": " ",
+        "on-click": "steam",
+        "tooltip": false
+    },
+    "custom/photoshop": {
+        "format": " ",
+        "on-click": "steam",
+        "tooltip": false
+    }
 }

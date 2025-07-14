@@ -12,3 +12,4 @@ export PATH="/home/sandip/.local/bin:$PATH"
 
 alias update-initramfs="mkinitcpio -P"
 alias update-grub="grub-mkconfig -o /boot/grub/grub.cfg"
+alias sudo="sudo "

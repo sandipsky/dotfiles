@@ -6,7 +6,7 @@
  }
 
  window#waybar {
-     background: rgba(0,0,0,0.85);
+     background: rgba(0, 0, 0, 0.85);
  }
 
  tooltip {
@@ -34,42 +34,96 @@
      padding: 5px 5px;
      color: #fff;
  }
- 
+
  #custom-chrome {
-    background: url("/home/sandip/.config/hypr/icons/chrome.svg");
-    padding: 5px 10px;
-    margin: 0 4px;
+     background: url("/home/sandip/.config/hypr/icons/chrome.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
      background-size: contain;
      background-position: center;
-  background-repeat: no-repeat;
-  }
- 
-  #custom-files {
-    background: url("/home/sandip/.config/hypr/icons/files.svg");
-    padding: 5px 10px;
-    margin: 0 4px;
+     background-repeat: no-repeat;
+ }
+
+ #custom-files {
+     background: url("/home/sandip/.config/hypr/icons/files.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
      background-size: contain;
      background-position: center;
-  background-repeat: no-repeat;
-  }
-  
-   #custom-terminal {
-    background: url("/home/sandip/.config/hypr/icons/terminal.svg");
-    padding: 5px 10px;
-    margin: 0 4px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-   #custom-lutris {
-    background: url("/home/sandip/.config/hypr/icons/lutris.svg");
-    padding: 5px 10px;
-    margin: 0 4px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+     background-repeat: no-repeat;
+ }
+
+ #custom-terminal {
+     background: url("/home/sandip/.config/hypr/icons/terminal.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-lutris {
+     background: url("/home/sandip/.config/hypr/icons/lutris.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-steam {
+     background: url("/home/sandip/.config/hypr/icons/steam.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-spotify {
+     background: url("/home/sandip/.config/hypr/icons/spotify.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-obs {
+     background: url("/home/sandip/.config/hypr/icons/obs.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-resolve {
+     background: url("/home/sandip/.config/hypr/icons/resolve.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-vbox {
+     background: url("/home/sandip/.config/hypr/icons/vbox.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-photoshop {
+     background: url("/home/sandip/.config/hypr/icons/photoshop.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
 
  /* -----------------------------------------------------
  * Workspaces 
