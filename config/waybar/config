@@ -18,6 +18,10 @@
                 "custom/files",
                 "custom/terminal",
                 "custom/lutris",
+                "custom/photoshop",
+                "custom/spotify",
+                "custom/obs",
+                "custom/resolve",
                 "custom/sep",
                 "hyprland/window"
         ],
