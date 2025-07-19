@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Word
+Exec=onlyoffice-desktopeditors --new:word
+Icon=word
+Type=Application
+StartupNotify=true
+MimeType=application/vnd.openxmlformats-officedocument.wordprocessingml.document;
+Categories=Office;WordProcessor;

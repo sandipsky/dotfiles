@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Excel
+Exec=onlyoffice-desktopeditors --new:cell
+Icon=excel
+Type=Application
+StartupNotify=true
+MimeType=application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;
+Categories=Office;Spreadsheet;
+
