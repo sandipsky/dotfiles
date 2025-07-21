@@ -162,17 +162,17 @@
     },
     "custom/spotify": {
         "format": " ",
-        "on-click": "spotify",
+        "on-click": "env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U",
         "tooltip": false
     },
     "custom/obs": {
         "format": " ",
-        "on-click": "obs-studio",
+        "on-click": "obs",
         "tooltip": false
     },
     "custom/resolve": {
         "format": " ",
-        "on-click": "resolve",
+        "on-click": "/opt/resolve/bin/resolve %u",
         "tooltip": false
     },
     "custom/vbox": {
@@ -182,7 +182,7 @@
     },
     "custom/photoshop": {
         "format": " ",
-        "on-click": "steam",
+        "on-click": "wine /opt/Ps/photoshop.exe",
         "tooltip": false
     }
 }

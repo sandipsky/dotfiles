@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Powerpoint
+Exec=onlyoffice-desktopeditors --new:slide 
+Icon=powerpoint
+Type=Application
+StartupNotify=true
+MimeType=application/vnd.openxmlformats-officedocument.presentationml.presentation;
+Categories=Office;Presentation;
+

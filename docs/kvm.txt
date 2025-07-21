@@ -1,8 +1,7 @@
-sudo pacman -S qemu qemu-full virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables-nft libguestfs
-sudo pacman -S swtpm
+sudo pacman -S qemu qemu-full virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables-nft libguestfs swtpm
+sudo usermod -aG libvirt sandip
 sudo systemctl enable --now libvirtd
-sudo usermod -aG libvirt {user_name}
-sudo systemctl restart libvirtd
+sudo virsh net-autostart default
 
 <hyperv mode="custom">
   <relaxed state="on"/>
@@ -22,5 +21,5 @@ sudo systemctl restart libvirtd
   <ipi state="on"/>
   <evmcs state="on"/>
 </hyperv>
-sudo virsh net-autostart default
+
 
