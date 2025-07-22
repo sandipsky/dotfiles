@@ -14,6 +14,10 @@ sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-
 sudo pacman -S sddm qt5-graphicaleffects qt5-base qt5-declarative --noconfirm --needed
 sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
 sudo sed -i "s/^CursorTheme=.*/CursorTheme=BreezeX-Light/g" /usr/lib/sddm/sddm.conf.d/default.conf
+cd assets
+sudo cp .face.icon /usr/share/sddm/faces/
+cd ..
+sudo cp -r Elegant /usr/share/sddm/themes/
 
 cd scripts
 

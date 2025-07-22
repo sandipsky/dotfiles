@@ -35,7 +35,7 @@ Item {
             id: userIconRec
             anchors {
                 top: parent.top
-                topMargin: parent.height / 3
+                topMargin: parent.height / 2
                 horizontalCenter: parent.horizontalCenter
             }
             width: 130
@@ -73,10 +73,11 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
 
-            text: "Sandip Shakya"
+            text: "SANDIP SHAKYA"
             color: textColor
-            font.pointSize: 24
+            font.pointSize: 20
             font.family: "Fira Sans"
+            font.bold: true
         }
 
         Rectangle {
@@ -88,15 +89,15 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
             width: 260
-            height: 35
-            radius: 3
+            height: 40
+            radius: 24
             color: "#55000000"
             
 
             TextInput {
                 id: passwdInput
                 anchors.fill: parent
-                anchors.leftMargin: 8
+                anchors.leftMargin: 18
                 anchors.rightMargin: 8 + 36
                 clip: true
                 focus: true
