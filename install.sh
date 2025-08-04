@@ -39,7 +39,7 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git google-chrome visual-studio-code-bin wlogout heidisql onlyoffice-bin microsoft-edge-stable-bin --noconfirm --needed
+yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout heidisql onlyoffice-bin microsoft-edge-stable-bin --noconfirm --needed
 cd ..
 
 cd config
@@ -94,6 +94,9 @@ sudo rm /usr/share/applications/designer.desktop
 sudo rm /usr/share/applications/linguist.desktop
 sudo rm /usr/share/applications/qdbusviewer.desktop
 sudo rm /usr/share/applications/auto-cpufreq-gtk.desktop
+sudo rm /usr/share/applications/xgpsspeed.desktop
+sudo rm /usr/share/applications/xgps.desktop
+
 
 sudo cp * /usr/share/applications/
 
