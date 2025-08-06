@@ -39,7 +39,7 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout heidisql microsoft-edge-stable-bin --noconfirm --needed
+yay -S breezex-cursor-theme nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout heidisql microsoft-edge-stable-bin --noconfirm --needed
 cd ..
 
 cd config

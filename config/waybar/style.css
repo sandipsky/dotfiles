@@ -1,5 +1,5 @@
  * {
-     font-family: "Fira Sans", "Font Awesome 6 Free Solid", "Material Design Icons Desktop", "MesloLGS NF", sans-serif;
+     font-family: "Fira Sans", "Font Awesome 6 Free Solid", sans-serif;
      border: none;
      border-radius: 0px;
      font-size: 16px;
@@ -37,13 +37,13 @@
  }
 
  #custom-appmenu {
-    background: url("/home/sandip/.config/hypr/icons/bazzite.svg");
-    padding: 5px 10px;
-    margin: 0 4px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+     background: url("/home/sandip/.config/hypr/icons/bazzite.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
 
  #custom-chrome {
      background: url("/home/sandip/.config/hypr/icons/chrome.svg");

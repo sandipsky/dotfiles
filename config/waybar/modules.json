@@ -51,8 +51,8 @@
         "spacing": 10
     },
     "clock": {
-        "format": "<span color=\"#6D8895\"></span>  {:%I:%M %p}",
-        "format-alt": "<span color=\"#fff\"> </span>  {:%Y-%m-%d, %a}",
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%Y-%m-%d, %a}",
         "tooltip": false
     },
     "cpu": {
@@ -67,11 +67,11 @@
     },
     "network": {
         "format": "{ifname}",
-        "format-wifi": "<span color=\"#4DD0E1\"></span> {essid}",
+        "format-wifi": "<span color=\"#4DD0E1\">󰤨</span> {essid}",
         "format-ethernet": "  {ifname}",
         "format-disconnected": "Disconnected",
         "tooltip-format": " {ifname} via {gwaddri}",
-        "tooltip-format-wifi": " {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-wifi": "󰤨 {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
         "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
@@ -110,7 +110,8 @@
             "headset": "",
             "default": [
                 "",
-                ""
+                "",
+                ""
             ]
         },
         "tooltip": false,
