@@ -5,7 +5,7 @@ import SddmComponents 2.0
 Item {
     id: frame
     property int sessionIndex: sessionModel.lastIndex
-    property string userName: userModel.lastUser
+    property string userName: userModel.get(0).name
     property bool isProcessing: glowAnimation.running
     property alias input: passwdInput
     property alias button: loginButton

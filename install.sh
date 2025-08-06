@@ -8,7 +8,7 @@ sudo pacman -S hyprland wpaperd hyprpicker wl-clipboard xdg-desktop-portal-hyprl
 sudo pacman -S power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme --noconfirm --needed
 
 #FONTS
-sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
+sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
 
 #sddm
 sudo pacman -S sddm qt5-graphicaleffects qt5-base qt5-declarative --noconfirm --needed
@@ -39,7 +39,7 @@ sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout heidisql onlyoffice-bin microsoft-edge-stable-bin --noconfirm --needed
+yay -S breezex-cursor-theme nautilus-open-any-terminal ttf-material-design-icons-desktop-git ttf-meslo-nerd-font-powerlevel10k google-chrome visual-studio-code-bin wlogout heidisql microsoft-edge-stable-bin --noconfirm --needed
 cd ..
 
 cd config
