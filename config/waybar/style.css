@@ -3,11 +3,11 @@
      border: none;
      border-radius: 0px;
      font-size: 16px;
-     font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
  }
 
  window#waybar {
      background: rgba(0, 0, 0, 0.75);
+     background: #0D1117;
  }
 
  tooltip {
@@ -37,7 +37,7 @@
  }
 
  #custom-appmenu {
-     background: url("/home/sandip/.config/hypr/icons/bazzite.svg");
+     background: url("/usr/share/icons/hicolor/scalable/apps/bazzite.svg");
      padding: 5px 10px;
      margin: 0 4px;
      background-size: contain;
@@ -46,7 +46,7 @@
  }
 
  #custom-chrome {
-     background: url("/home/sandip/.config/hypr/icons/chrome.svg");
+     background: url("/usr/share/icons/hicolor/scalable/apps/chrome.svg");
      padding: 5px 10px;
      margin: 0 4px;
      background-size: contain;
@@ -55,7 +55,7 @@
  }
 
  #custom-files {
-     background: url("/home/sandip/.config/hypr/icons/files.svg");
+     background: url("/usr/share/icons/hicolor/scalable/apps/files.svg");
      padding: 5px 10px;
      margin: 0 4px;
      background-size: contain;
@@ -64,7 +64,7 @@
  }
 
  #custom-terminal {
-     background: url("/home/sandip/.config/hypr/icons/terminal.svg");
+     background: url("/usr/share/icons/hicolor/scalable/apps/terminal.svg");
      padding: 5px 10px;
      margin: 0 4px;
      background-size: contain;
@@ -73,7 +73,7 @@
  }
 
  #custom-lutris {
-     background: url("/home/sandip/.config/hypr/icons/lutris.svg");
+     background: url("/usr/share/icons/hicolor/scalable/apps/lutris.svg");
      padding: 5px 10px;
      margin: 0 4px;
      background-size: contain;

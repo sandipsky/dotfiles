@@ -1,8 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=Adobe Photoshop
-Path=/opt/resolve/
-Exec=wine /opt/Ps/photoshop.exe
-Terminal=false
-Icon=photoshop
