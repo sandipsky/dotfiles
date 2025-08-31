@@ -1,5 +1,5 @@
 [default]
-path = "/home/sandip/Pictures/Wallpapers"
+path = "~/Pictures/Wallpapers"
 duration = "30m"
 sorting = "ascending"
 

@@ -10,7 +10,7 @@ sudo pacman -S hyprland wpaperd hyprpicker wl-clipboard xdg-desktop-portal-hyprl
 sudo pacman -S power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme --noconfirm --needed
 
 #FONTS
-sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-font-awesome otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
+sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
 
 #sddm
 sudo pacman -S sddm qt5-graphicaleffects qt5-base qt5-declarative --noconfirm --needed
@@ -31,7 +31,7 @@ sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
 sudo cp usb-remove.service /etc/systemd/system/usb-remove.service
 sudo cp acpoweron.service /etc/systemd/system/acpoweron.service
 sudo cp acpoweroff.service /etc/systemd/system/acpoweroff.service
-sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
+#sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
 sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
 
 sleep 3
@@ -41,11 +41,10 @@ sh battery.sh
 sleep 3
 sh ntfs.sh
 sh zsh.sh
-sh git.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout heidisql microsoft-edge-stable-bin --noconfirm --needed
+yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout heidisql microsoft-edge-stable-bin --noconfirm --needed
 cd ..
 
 cd config
@@ -61,7 +60,7 @@ cd ..
 
 cd assets
 mkdir -p /home/$USERNAME/Pictures
-sudo cp -r /home/$USERNAME/Pictures/
+sudo cp images/* -r /home/$USERNAME/Pictures/
 
 cd sounds
 sudo mkdir -p /usr/share/sounds/
@@ -136,4 +135,4 @@ LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
 
 sudo systemctl enable sddm
-sudo systemctl enable --now power-profiles-daemon
+sudo systemctl enable power-profiles-daemon
