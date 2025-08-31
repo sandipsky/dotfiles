@@ -1,6 +1,8 @@
 #!/bin/bash
 
-USERNAME="sandip"
+USERNAME=$(logname)
+FULLNAME=$(getent passwd "$USERNAME" | cut -d ':' -f 5 | cut -d ',' -f 1)
+FULLNAME=${FULLNAME:-$USERNAME}
 
 sudo pacman -S hyprland wpaperd hyprpicker wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
 
@@ -15,10 +17,14 @@ sudo pacman -S sddm qt5-graphicaleffects qt5-base qt5-declarative --noconfirm --
 sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
 sudo sed -i "s/^CursorTheme=.*/CursorTheme=BreezeX-Light/g" /usr/lib/sddm/sddm.conf.d/default.conf
 cd assets
-sudo cp .face.icon /usr/share/sddm/faces/
-cd ..
-sudo cp -r Elegant /usr/share/sddm/themes/
+sudo cp sddm/.face.icon /usr/share/sddm/faces/
+sudo cp -r sddm/themes/* /usr/share/sddm/themes/
 
+QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
+sudo sed -i "s/^    property string userName:.*/    property string userName: \"$USERNAME\"/" "$QML_FILE"
+sudo sed -i "s/^    property string fullName:.*/    property string fullName: \"$FULLNAME\"/" "$QML_FILE"
+
+cd ..
 cd scripts
 
 sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
@@ -54,7 +60,8 @@ chmod +x /home/$USERNAME/.config/hypr/scripts/startvm.sh
 cd ..
 
 cd assets
-sudo cp -r Elegant /usr/share/sddm/themes/
+mkdir -p /home/$USERNAME/Pictures
+sudo cp -r /home/$USERNAME/Pictures/
 
 cd sounds
 sudo mkdir -p /usr/share/sounds/
@@ -110,13 +117,13 @@ gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacri
 sudo mkdir /mnt/HOME
 echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
 sudo mount -a
-cd /home/sandip
+cd /home/$USERNAME
 sudo rm -r dotfiles
 sudo rm -r yay
 
-mkdir -p /home/sandip/Templates
-touch /home/sandip/Templates/NewDocument.txt
-touch /home/sandip/Templates/File
+mkdir -p /home/$USERNAME/Templates
+touch /home/$USERNAME/Templates/NewDocument.txt
+touch /home/$USERNAME/Templates/File
 
 bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh)"
 
@@ -125,4 +132,8 @@ sudo rm /usr/share/wayland-sessions/gnome.desktop
 sudo rm /usr/share/wayland-sessions/gnome-wayland.desktop
 sudo rm /usr/share/wayland-sessions/hyprland-uwsm.desktop
 
+LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
+sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
+
 sudo systemctl enable sddm
+sudo systemctl enable --now power-profiles-daemon

@@ -2,5 +2,5 @@ sudo pacman -S virtualbox-guest-utils
 
 sudo systemctl enable --now vboxservice
 
-sudo usermod -a -G vboxsf sandip
-sudo chown -R sandip:users /media
+sudo usermod -a -G vboxsf $USER
+sudo chown -R $USER:users /media

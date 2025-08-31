@@ -8,7 +8,7 @@ SAVEHIST=50000
 setopt inc_append_history
 
 eval "$(starship init zsh)"
-export PATH="/home/sandip/.local/bin:$PATH"
+export PATH="~/.local/bin:$PATH"
 
 alias update-initramfs="mkinitcpio -P"
 alias update-grub="grub-mkconfig -o /boot/grub/grub.cfg"

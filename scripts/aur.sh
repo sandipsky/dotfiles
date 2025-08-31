@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USERNAME="sandip"
+USERNAME=$(logname)
 
 cd /home/$USERNAME
 sudo git clone https://aur.archlinux.org/yay.git

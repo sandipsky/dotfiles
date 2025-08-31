@@ -1,0 +1,183 @@
+{
+        "layer": "top",
+        "position": "bottom",
+        "margin-top": 0,
+        "margin-bottom": 0,
+        "margin-left": 0,
+        "margin-right": 0,
+        "spacing": 0,
+        "reload_style_on_change": true,
+        "modules-left": [
+                "custom/appmenu",
+                "custom/sep",
+                "hyprland/workspaces",
+                "custom/sep",
+                "custom/chrome",
+                "custom/files",
+                "custom/terminal",
+                "custom/lutris"
+        ],
+        "modules-center": [],
+        "modules-right": [
+                "cpu",
+                "memory",
+                "bluetooth",
+                "backlight",
+                "battery",
+                "network",
+                "pulseaudio",
+                "clock"
+        ],
+        "hyprland/workspaces": {
+                "on-click": "activate",
+                "active-only": false,
+                "all-outputs": true,
+                "on-scroll-up": "hyprctl dispatch workspace r-1",
+                "on-scroll-down": "hyprctl dispatch workspace r+1",
+                "format": "{}",
+                "format-icons": {
+                        "urgent": "",
+                        "active": "",
+                        "default": ""
+                },
+                "persistent-workspaces": {
+                        "*": 4
+                }
+        },
+        "hyprland/window": {
+                "format": "{initialTitle}",
+                "separate-outputs": true,
+                "icon": false,
+                "tooltip": false,
+                "on-click": "hyprctl dispatch fullscreen 1",
+                "on-click-right": "hyprctl dispatch killactive",
+                "rewrite": {
+                        "(.*) - mousepad": "Text Editor",
+                        "(.*) - Google Chrome": "Google Chrome",
+                        "(.*)Alacritty": "Terminal",
+                        "(.*) - Visual Studio Code": "Visual Studio Code",
+                        "(.*)Image Lounge": "Image Viewer",
+                        "(.*)Loading...": "Files",
+                        "(.*)Text Editor": "Text Editor"
+                }
+        },
+        "custom/appmenu": {
+                "format": " ",
+                "on-click": "rofi -show drun",
+                "on-click-right": "wlogout",
+                "tooltip": false
+        },
+        "custom/sep": {
+                "format": "|"
+        },
+        "tray": {
+                "icon-size": 21,
+                "spacing": 10
+        },
+        "clock": {
+                "format": "{:%I:%M %p}",
+                "format-alt": "{:%Y-%m-%d, %a}",
+                "tooltip": false
+        },
+        "cpu": {
+                "interval": 5,
+                "format": "<span color=\"#f7768e\"></span> {usage}%",
+                "max-length": 10
+        },
+        "memory": {
+                "interval": 5,
+                "format": "<span color=\"#FBC02D\"></span>  {used} GiB",
+                "max-length": 10
+        },
+        "network": {
+                "format": "{ifname}",
+                "format-wifi": "<span color=\"#4DD0E1\">󰤨</span> {essid}",
+                "format-ethernet": "  {ifname}",
+                "format-disconnected": "Disconnected",
+                "tooltip-format": " {ifname} via {gwaddri}",
+                "tooltip-format-wifi": "󰤨 {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+                "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+                "tooltip-format-disconnected": "Disconnected",
+                "max-length": 50,
+                "on-click": "alacritty -e nmtui",
+                "tooltip": false
+        },
+        "battery": {
+                "interval": 1,
+                "states": {
+                        "warning": 30,
+                        "critical": 15
+                },
+                "format": "<span color=\"#9ece6a\">{icon}</span>{capacity}%",
+                "format-charging": "<span color=\"#9ece6a\"></span>  {capacity}%",
+                "format-plugged": " {capacity}%",
+                "format-alt": "{icon}  {time}",
+                "format-icons": [
+                        " ",
+                        " ",
+                        " ",
+                        " ",
+                        " "
+                ],
+                "tooltip": false
+        },
+        "pulseaudio": {
+                "format": "{icon} {volume}%",
+                "format-bluetooth": "{icon} {volume}% {format_source}",
+                "format-bluetooth-muted": " Muted",
+                "format-muted": " Muted",
+                "format-source": "",
+                "format-source-muted": "",
+                "format-icons": {
+                        "headphone": " ",
+                        "hands-free": "",
+                        "headset": "",
+                        "default": [
+                                "",
+                                "",
+                                ""
+                        ]
+                },
+                "tooltip": false,
+                "on-click": "pactl set-sink-mute 0 toggle"
+        },
+        "bluetooth": {
+                "format": "<span color=\"#7aa2f7\"> </span> On",
+                "format-disabled": "<span color=\"#fff\"> </span> Off",
+                "format-connected": "<span color=\"#7aa2f7\"> </span> {device_alias}",
+                "format-off": "",
+                "interval": 30,
+                "on-click": "blueman-manager",
+                "format-no-controller": "",
+                "tooltip": false
+        },
+        "backlight": {
+                "device": "intel_backlight",
+                "format": "<span color=\"#e0af68\">{icon}</span> {percent}%",
+                "format-icons": [
+                        "󰃠",
+                        "󰃠"
+                ],
+                "tooltip": false
+        },
+        "custom/chrome": {
+                "format": " ",
+                "on-click": "google-chrome-stable",
+                "tooltip": false
+        },
+        "custom/files": {
+                "format": " ",
+                "on-click": "nautilus",
+                "tooltip": false
+        },
+        "custom/terminal": {
+                "format": " ",
+                "on-click": "alacritty",
+                "tooltip": false
+        },
+        "custom/lutris": {
+                "format": " ",
+                "on-click": "lutris",
+                "tooltip": false
+        }
+}

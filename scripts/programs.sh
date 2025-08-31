@@ -1,6 +1,8 @@
 #!/bin/bash
 
-USERNAME="sandip"
+USERNAME=$(logname)
+git config --global user.email "sandipshakya75@gmail.com"
+git config --global user.name "sandipsky"
 
 sudo pacman -S nodejs-lts-iron npm jdk17-openjdk tomcat10 nginx mysql --noconfirm --needed
 
