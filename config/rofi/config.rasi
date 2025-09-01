@@ -18,7 +18,7 @@ entry {
   background-color: @bg;
   padding: 0 12;
   text-color: @fg;
-  placeholder: "Search...";
+  placeholder: "Search";
   placholder-color: grey;
 }
 
@@ -29,7 +29,7 @@ prompt {
 }
 
 * {
-  bg: #000;
+  bg: #1c1c1c;
   bg-alt: #282A36;
   fg: #FFFFFF;
   fg-alt: #f5f5f5;
