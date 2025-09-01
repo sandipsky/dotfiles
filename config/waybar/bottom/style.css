@@ -1,0 +1,115 @@
+ * {
+     font-family: "Fira Sans", "Font Awesome 6 Free Solid", sans-serif;
+     border: none;
+     border-radius: 0px;
+     font-size: 16px;
+ }
+
+ window#waybar {
+     background: rgba(0, 0, 0, 0.75);
+     background: #0D1117;
+ }
+
+ tooltip {
+     border-radius: 10px;
+     background-color: #000;
+     padding: 20px;
+ }
+
+ tooltip label {
+     color: #fff;
+     font-size: 18px;
+ }
+
+ #custom-appmenu,
+ #window,
+ #custom-exit,
+ #clock,
+ #bluetooth,
+ #cpu,
+ #memory,
+ #pulseaudio,
+ #network,
+ #battery,
+ #backlight {
+     padding: 5px 5px;
+     color: #fff;
+ }
+
+ #custom-appmenu {
+     background: url("/usr/share/icons/hicolor/scalable/apps/bazzite.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-chrome {
+     background: url("/usr/share/icons/hicolor/scalable/apps/chrome.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-files {
+     background: url("/usr/share/icons/hicolor/scalable/apps/files.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-terminal {
+     background: url("/usr/share/icons/hicolor/scalable/apps/terminal.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ #custom-lutris {
+     background: url("/usr/share/icons/hicolor/scalable/apps/lutris.svg");
+     padding: 5px 10px;
+     margin: 0 4px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
+ }
+
+ /* -----------------------------------------------------
+ * Workspaces 
+ * ----------------------------------------------------- */
+
+ #workspaces {
+     padding: 0 4px;
+     color: #fff;
+ }
+
+ #workspaces button {
+     padding: 5px 5px;
+     color: #f5f5f5;
+     background: transparent;
+ }
+
+ #workspaces button.active {
+     color: #141414;
+     background: #f5f5f5;
+ }
+
+ #workspaces button.active:hover {
+     color: #141414;
+     background: #f5f5f5;
+ }
+
+ #workspaces button:hover {
+     color: #fff;
+     background: #141414;
+     border: none;
+     box-shadow: inherit;
+     text-shadow: inherit;
+ }
