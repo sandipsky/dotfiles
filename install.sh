@@ -7,7 +7,7 @@ FULLNAME=${FULLNAME:-$USERNAME}
 sudo pacman -S hyprland wpaperd hyprpicker wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman rofi-wayland vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent starship dunst brightnessctl wlsunset grim slurp --noconfirm --needed
 
 #GNOME APPS
-sudo pacman -S power-profiles-daemon gnome-boxes gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme --noconfirm --needed
+sudo pacman -S power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme --noconfirm --needed
 
 #FONTS
 sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed
@@ -20,9 +20,9 @@ cd assets
 sudo cp sddm/.face.icon /usr/share/sddm/faces/
 sudo cp -r sddm/themes/* /usr/share/sddm/themes/
 
-QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
-sudo sed -i "s/^    property string userName:.*/    property string userName: \"$USERNAME\"/" "$QML_FILE"
-sudo sed -i "s/^    property string fullName:.*/    property string fullName: \"$FULLNAME\"/" "$QML_FILE"
+# QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
+# sudo sed -i "s/^    property string userName:.*/    property string userName: \"$USERNAME\"/" "$QML_FILE"
+# sudo sed -i "s/^    property string fullName:.*/    property string fullName: \"$FULLNAME\"/" "$QML_FILE"
 
 cd ..
 cd scripts
