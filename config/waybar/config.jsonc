@@ -65,7 +65,7 @@
   },
   "custom/appmenu": {
     "format": " ",
-    "on-click": "rofi -show drun",
+    "on-click": "walker",
     "on-click-right": "wlogout",
     "tooltip": false
   },

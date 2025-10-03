@@ -1,0 +1,149 @@
+force_keyboard_focus = false    # forces keyboard forcus to stay in Walker
+close_when_open = true          # close walker when invoking while already opened
+click_to_close = true           # closes walker if clicking outside of the main content area
+selection_wrap = false          # wrap list if at bottom or top
+global_argument_delimiter = "#" # query: firefox#https://benz.dev => part after delimiter will be ignored when querying. this should be the same as in the elephant config
+keep_open_modifier = "shift"    # won't close on activation, but rather select the next item in the list
+exact_search_prefix = "'"       # disable fuzzy searching
+theme = "s"               # theme to use
+disable_mouse = false           # disable mouse (on input and list only)
+
+[shell]
+anchor_top = true
+anchor_bottom = false
+anchor_left = true
+anchor_right = true
+
+[placeholders]
+"default" = { input = "Search", list = "No Results" } # placeholders for input and empty list, key is the providers name, so f.e. "desktopapplications" or "menus:other"
+
+[keybinds]
+close = "Escape"
+next = "Down"
+previous = "Up"
+toggle_exact = "ctrl e"
+resume_last_query = "ctrl r"
+quick_activate = ["F1", "F2", "F3", "F4"]
+
+[providers]
+default = [
+  "desktopapplications",
+  "calc",
+  "runner",
+  "menus",
+  "websearch",
+] # providers to be queried by default
+empty = ["desktopapplications"] # providers to be queried when query is empty
+
+[[providers.prefixes]]
+prefix = ";"
+provider = "providerlist"
+
+[[providers.prefixes]]
+prefix = "/"
+provider = "files"
+
+[[providers.prefixes]]
+prefix = "."
+provider = "symbols"
+
+[[providers.prefixes]]
+prefix = "!"
+provider = "todo"
+
+[[providers.prefixes]]
+prefix = "="
+provider = "calc"
+
+[[providers.prefixes]]
+prefix = "@"
+provider = "websearch"
+
+[[providers.prefixes]]
+prefix = ":"
+provider = "clipboard"
+
+[providers.archlinuxpkgs]
+default = "install"
+install = "Return"
+remove = "ctrl d"
+
+[providers.calc]
+default = "copy"
+copy = "Return"
+save = "ctrl s"
+delete = "ctrl d"
+
+[providers.websearch]
+default = "search"
+search = "Return"
+remove_history = "ctrl BackSpace"
+
+[providers.providerlist]
+default = "activate"
+activate = "Return"
+
+[providers.clipboard]
+time_format = "%d.%m. - %H:%M" # format for the clipboard item date
+default = "copy"
+copy = "Return"
+delete = "ctrl d"
+delete_all = "ctrl shift d"
+edit = "ctrl o"
+toggle_images_only = "ctrl i"
+
+[providers.bluetooth]
+connect = "ctrl shift d"
+disconnect = "ctrl d"
+trust = "ctrl t"
+untrust = "ctrl shift t"
+find = "ctrl f"
+remove = "ctrl shift p"
+pair = "ctrl p"
+
+[providers.desktopapplications]
+default = "start"
+start = "Return"
+start_keep_open = "shift Return"
+remove_history = "ctrl h"
+toggle_pin = "ctrl p"
+
+[providers.files]
+default = "open"
+open = "Return"
+open_dir = "ctrl Return"
+copy_path = "ctrl shift c"
+copy_file = "ctrl c"
+
+[providers.todo]
+default = "save"
+save = "Return"
+delete = "ctrl d"
+mark_active = "ctrl a"
+mark_done = "ctrl f"
+clear = "ctrl x"
+
+[providers.runner]
+default = "start"
+start = "Return"
+start_terminal = "shift Return"
+remove_history = "ctrl h"
+
+[providers.dmenu]
+default = "select"
+select = "Return"
+
+[providers.symbols]
+default = "copy"
+copy = "Return"
+remove_history = "ctrl h"
+
+[providers.unicode]
+default = "copy"
+copy = "Return"
+remove_history = "ctrl h"
+
+[providers.menus]
+default = "activate"
+activate = "Return"
+remove_history = "ctrl h"
