@@ -10,8 +10,8 @@ sudo cp sddm/.face.icon /usr/share/sddm/faces/
 sudo sed -i "s/^CursorTheme=.*/CursorTheme=BreezeX-Light/g" /usr/lib/sddm/sddm.conf.d/default.conf
 
 #Elegant theme sddm
-#sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
-# sudo cp -r sddm/themes/* /usr/share/sddm/themes/
+sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
+sudo cp -r sddm/themes/* /usr/share/sddm/themes/
 # QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
 # sudo sed -i "s/^    property string userName:.*/    property string userName: \"$USERNAME\"/" "$QML_FILE"
 # sudo sed -i "s/^    property string fullName:.*/    property string fullName: \"$FULLNAME\"/" "$QML_FILE"
@@ -34,7 +34,7 @@ sh zsh.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout heidisql --noconfirm --needed
+yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout walker-bin elephant-desktopapplications elephant-calc --noconfirm --needed
 cd ..
 
 cd config
