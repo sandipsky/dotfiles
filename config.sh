@@ -21,8 +21,8 @@ cd scripts
 
 # sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
 # sudo cp usb-remove.service /etc/systemd/system/usb-remove.service
-# sudo cp acpoweron.service /etc/systemd/system/acpoweron.service
-# sudo cp acpoweroff.service /etc/systemd/system/acpoweroff.service
+sudo cp acpoweron.service /etc/systemd/system/acpoweron.service
+sudo cp acpoweroff.service /etc/systemd/system/acpoweroff.service
 # sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
 # sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
 
@@ -119,7 +119,6 @@ bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/m
 sudo rm /usr/share/xsessions/*
 sudo rm /usr/share/wayland-sessions/gnome.desktop
 sudo rm /usr/share/wayland-sessions/gnome-wayland.desktop
-sudo rm /usr/share/wayland-sessions/hyprland-uwsm.desktop
 
 LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
