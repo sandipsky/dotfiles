@@ -1,0 +1,10 @@
+[list-view]
+use-tree-view=true
+
+[preferences]
+default-folder-viewer='icon-view'
+migrated-gtk-settings=true
+show-create-link=true
+show-delete-permanently=true
+sort-folders-before-files=true
+
