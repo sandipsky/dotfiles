@@ -36,7 +36,7 @@ scrollbar slider {
     0 19px 38px rgba(0, 0, 0, 0.3),
     0 15px 12px rgba(0, 0, 0, 0.22);
   background: @window_bg_color;
-  padding: 20px;
+  padding: 14px;
   border-radius: 20px;
   border: 1px solid darker(@accent_bg_color);
 }
@@ -96,6 +96,7 @@ child {
   background: alpha(@accent_bg_color, 0.25);
   border-radius: 5px;
   padding: 10px;
+  opacity: 0;
 }
 
 child:hover .item-box,
@@ -110,18 +111,12 @@ child:selected .item-box {
 }
 
 .item-subtext {
-  font-size: 12px;
-  opacity: 0.5;
+  font-size: 0px;
+  opacity: 0;
 }
 
 .item-image {
   margin-right: 10px;
-}
-
-.keybind-hints {
-  font-size: 12px;
-  opacity: 0;
-  color: @theme_fg_color;
 }
 
 .preview {
@@ -156,4 +151,26 @@ child:selected .item-box {
 
 .preview .large-icons {
   -gtk-icon-size: 64px;
+}
+
+.keybinds-wrapper {
+  border-top: 1px solid lighter(@window_bg_color);
+  font-size: 0px;
+  opacity: 0;
+  color: @theme_fg_color;
+}
+
+.keybinds {
+}
+
+.keybind {
+}
+
+.keybind-bind {
+  /* color: lighter(@window_bg_color); */
+  font-weight: bold;
+  text-transform: lowercase;
+}
+
+.keybind-label {
 }

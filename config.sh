@@ -12,9 +12,6 @@ sudo sed -i "s/^CursorTheme=.*/CursorTheme=BreezeX-Light/g" /usr/lib/sddm/sddm.c
 #Elegant theme sddm
 sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
 sudo cp -r sddm/themes/* /usr/share/sddm/themes/
-# QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
-# sudo sed -i "s/^    property string userName:.*/    property string userName: \"$USERNAME\"/" "$QML_FILE"
-# sudo sed -i "s/^    property string fullName:.*/    property string fullName: \"$FULLNAME\"/" "$QML_FILE"
 
 cd ..
 cd scripts
@@ -127,6 +124,10 @@ else
     echo "Adding NVIDIA modules to MODULES array..."
     sudo sed -i 's/^MODULES=(\(.*\))/MODULES=(\1 nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$CONF_FILE"
 fi
+
+echo "Modifying HOOKS array..."
+sudo sed -i -E 's/\budev\b/systemd/' "$CONF_FILE"
+sudo sed -i -E 's/\s*fsck\b//g' "$CONF_FILE"
 
 # Rebuild initramfs
 echo "Rebuilding initramfs with mkinitcpio..."
