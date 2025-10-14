@@ -19,12 +19,8 @@ sudo cp -r sddm/themes/* /usr/share/sddm/themes/
 cd ..
 cd scripts
 
-# sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
-# sudo cp usb-remove.service /etc/systemd/system/usb-remove.service
 sudo cp acpoweron.service /etc/systemd/system/acpoweron.service
 sudo cp acpoweroff.service /etc/systemd/system/acpoweroff.service
-# sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
-# sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
 
 sh aur.sh
 sh battery.sh
@@ -122,5 +118,18 @@ sudo rm /usr/share/wayland-sessions/gnome-wayland.desktop
 
 LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
+
+CONF_FILE="/etc/mkinitcpio.conf"
+# Check if modules already exist
+if grep -q "nvidia_drm" "$CONF_FILE"; then
+    echo "NVIDIA modules already present in MODULES array. Skipping modification."
+else
+    echo "Adding NVIDIA modules to MODULES array..."
+    sudo sed -i 's/^MODULES=(\(.*\))/MODULES=(\1 nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$CONF_FILE"
+fi
+
+# Rebuild initramfs
+echo "Rebuilding initramfs with mkinitcpio..."
+sudo mkinitcpio -P
 
 sudo systemctl enable sddm power-profiles-daemon
