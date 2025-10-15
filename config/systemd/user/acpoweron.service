@@ -1,0 +1,7 @@
+[Unit]
+Description=Set performance mode on AC power
+After=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/powerprofilesctl set performance

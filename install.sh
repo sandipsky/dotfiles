@@ -26,12 +26,9 @@ cd ..
 cd scripts
 
 sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
-sudo cp acpoweron.service /etc/systemd/system/acpoweron.service
-sudo cp acpoweroff.service /etc/systemd/system/acpoweroff.service
-
-# sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
-# sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
-# sudo cp usb-remove.service /etc/systemd/system/usb-remove.service
+sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
+sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/90-usb.rules
+sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
 
 sh aur.sh
 sh battery.sh
