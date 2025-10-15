@@ -1,0 +1,8 @@
+[Unit]
+Description=Play USB sound
+
+[Service]
+User=sandip
+Type=oneshot
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+ExecStart=/usr/bin/paplay /usr/share/sounds/usb-connect.wav

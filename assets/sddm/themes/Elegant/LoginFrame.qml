@@ -72,7 +72,7 @@ Item {
                 horizontalCenter: parent.horizontalCenter
             }
 
-            text: "Sandip Shakya"
+            text: "FULLNAME"
             color: textColor
             font.pointSize: 20
             font.family: "Fira Sans"
@@ -115,7 +115,7 @@ Item {
                 }
                 onAccepted: {
                     glowAnimation.running = true
-                    sddm.login("sandip", passwdInput.text, sessionIndex)
+                    sddm.login("USERNAME", passwdInput.text, sessionIndex)
                 }
                 KeyNavigation.backtab: {
                     if (sessionButton.visible) {
@@ -149,7 +149,7 @@ Item {
                 pressImg: "icons/login_press.png"
                 onClicked: {
                     glowAnimation.running = true
-                    sddm.login("sandip", passwdInput.text, sessionIndex)
+                    sddm.login("USERNAME", passwdInput.text, sessionIndex)
                 }
                 KeyNavigation.tab: shutdownButton
                 KeyNavigation.backtab: passwdInput

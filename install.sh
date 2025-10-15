@@ -18,12 +18,20 @@ sudo sed -i "s/^CursorTheme=.*/CursorTheme=BreezeX-Light/g" /usr/lib/sddm/sddm.c
 #Elegant theme sddm
 sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
 sudo cp -r sddm/themes/* /usr/share/sddm/themes/
+QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
+sudo sed -i -E "s/FULLNAME/${FULLNAME//\//\\/}/g" "$QML_FILE"
+sudo sed -i -E "s/\"USERNAME\"/\"$USERNAME\"/g" "$QML_FILE"
 
 cd ..
 cd scripts
 
+sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
 sudo cp acpoweron.service /etc/systemd/system/acpoweron.service
 sudo cp acpoweroff.service /etc/systemd/system/acpoweroff.service
+
+# sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
+# sudo cp usb-insert.service /etc/systemd/system/usb-insert.service
+# sudo cp usb-remove.service /etc/systemd/system/usb-remove.service
 
 sh aur.sh
 sh battery.sh
@@ -43,7 +51,7 @@ rm -rf /home/$USERNAME/.config/*
 cp -r * /home/$USERNAME/.config/
 
 chmod +x /home/$USERNAME/.config/waybar/launch.sh
-chmod +x /home/$USERNAME/.config/hypr/scripts/startvm.sh
+# chmod +x /home/$USERNAME/.config/hypr/scripts/startvm.sh
 
 cd ..
 
@@ -119,6 +127,14 @@ sudo rm /usr/share/wayland-sessions/gnome-wayland.desktop
 
 mkdir -p /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public,Templates}
 chown -R $USERNAME:$USERNAME /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public,Templates}
+mkdir -p /home/$USERNAME/.config/gtk-3.0
+cat > /home/$USERNAME/.config/gtk-3.0/bookmarks <<EOF
+file:///home/$USERNAME/Documents Documents
+file:///home/$USERNAME/Downloads Downloads
+file:///home/$USERNAME/Music Music
+file:///home/$USERNAME/Pictures Pictures
+file:///home/$USERNAME/Videos Videos
+EOF
 
 LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
