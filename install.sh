@@ -142,7 +142,9 @@ if grep -q "nvidia_drm" "$CONF_FILE"; then
     echo "NVIDIA modules already present in MODULES array. Skipping modification."
 else
     echo "Adding NVIDIA modules to MODULES array..."
-    sudo sed -i 's/^MODULES=(\(.*\))/MODULES=(\1 nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$CONF_FILE"
+    sudo sed -i 's/^MODULES=(\(.*\))/MODULES=(\1nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$CONF_FILE"
+    sudo sed -i 's/\<kms\>//g' "$CONF_FILE"
+    sudo sed -i 's/  */ /g' "$CONF_FILE" 
 fi
 
 echo "Modifying HOOKS array..."
