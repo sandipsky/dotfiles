@@ -112,18 +112,14 @@ sudo mount -a
 cd /home/$USERNAME
 sudo rm -rf dotfiles yay go
 
-mkdir -p /home/$USERNAME/Templates
-touch /home/$USERNAME/Templates/NewDocument.txt
-touch /home/$USERNAME/Templates/File
-
 bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh)"
 
 sudo rm /usr/share/xsessions/*
 sudo rm /usr/share/wayland-sessions/gnome.desktop
 sudo rm /usr/share/wayland-sessions/gnome-wayland.desktop
 
-mkdir -p /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public,Templates}
-chown -R $USERNAME:$USERNAME /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public,Templates}
+mkdir -p /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public}
+chown -R $USERNAME:$USERNAME /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public}
 mkdir -p /home/$USERNAME/.config/gtk-3.0
 cat > /home/$USERNAME/.config/gtk-3.0/bookmarks <<EOF
 file:///home/$USERNAME/Documents Documents
