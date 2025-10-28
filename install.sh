@@ -152,5 +152,6 @@ echo "Rebuilding initramfs with mkinitcpio..."
 sudo mkinitcpio -P
 
 sudo systemctl enable sddm power-profiles-daemon
+systemctl --user enable pipewire pipewire-pulse wireplumber 
 
 
