@@ -71,15 +71,6 @@
      background-repeat: no-repeat;
  }
 
- #custom-lutris {
-     background: url("/usr/share/icons/hicolor/scalable/apps/lutris.svg");
-     padding: 5px 10px;
-     margin: 0 4px;
-     background-size: contain;
-     background-position: center;
-     background-repeat: no-repeat;
- }
-
  /* -----------------------------------------------------
  * Workspaces 
  * ----------------------------------------------------- */

@@ -25,17 +25,17 @@ sudo sed -i -E "s/\"USERNAME\"/\"$USERNAME\"/g" "$QML_FILE"
 cd ..
 cd scripts
 
-sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
-sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
-sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/90-usb.rules
-sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
+# sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
+# sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
+# sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/90-usb.rules
+# sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
 
 sh aur.sh
 sh battery.sh
 sleep 2
 sh ntfs.sh
 sh zsh.sh
-sh gaming.sh
+# sh gaming.sh
 sh programs.sh
 
 yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout walker-bin elephant-desktopapplications elephant-calc --noconfirm --needed
@@ -48,7 +48,6 @@ rm -rf /home/$USERNAME/.config/*
 cp -r * /home/$USERNAME/.config/
 
 chmod +x /home/$USERNAME/.config/waybar/launch.sh
-# chmod +x /home/$USERNAME/.config/hypr/scripts/startvm.sh
 
 cd ..
 
@@ -106,9 +105,10 @@ gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
 
-sudo mkdir /mnt/HOME
-echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
-sudo mount -a
+# sudo mkdir /mnt/HOME
+# echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
+# sudo mount -a
+
 cd /home/$USERNAME
 sudo rm -rf dotfiles yay go
 
@@ -118,8 +118,8 @@ sudo rm /usr/share/xsessions/*
 sudo rm /usr/share/wayland-sessions/gnome.desktop
 sudo rm /usr/share/wayland-sessions/gnome-wayland.desktop
 
-mkdir -p /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public}
-chown -R $USERNAME:$USERNAME /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public}
+# mkdir -p /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public}
+# chown -R $USERNAME:$USERNAME /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public}
 mkdir -p /home/$USERNAME/.config/gtk-3.0
 cat > /home/$USERNAME/.config/gtk-3.0/bookmarks <<EOF
 file:///home/$USERNAME/Documents Documents
