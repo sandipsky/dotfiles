@@ -20,9 +20,9 @@ cd assets
 sudo cp sddm/.face.icon /usr/share/sddm/faces/
 sudo cp -r sddm/themes/* /usr/share/sddm/themes/
 
-# QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
-# sudo sed -i "s/^    property string userName:.*/    property string userName: \"$USERNAME\"/" "$QML_FILE"
-# sudo sed -i "s/^    property string fullName:.*/    property string fullName: \"$FULLNAME\"/" "$QML_FILE"
+QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
+sudo sed -i "s/^    property string userName:.*/    property string userName: \"$USERNAME\"/" "$QML_FILE"
+sudo sed -i "s/^    property string fullName:.*/    property string fullName: \"$FULLNAME\"/" "$QML_FILE"
 
 cd ..
 cd scripts
