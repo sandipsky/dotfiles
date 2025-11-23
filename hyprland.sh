@@ -5,7 +5,7 @@ FULLNAME=$(getent passwd "$USERNAME" | cut -d ':' -f 5 | cut -d ',' -f 1)
 FULLNAME=${FULLNAME:-$USERNAME}
 
 echo "Installing core packages..."
-if ! sudo pacman -S hyprland wpaperd hyprsunset wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent starship dunst brightnessctl grim slurp sddm qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
+if ! sudo pacman -S hyprland wpaperd hyprsunset wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent dunst brightnessctl grim slurp sddm qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
     echo "Pacman package installation failed. Aborting."
     exit 1
 fi
@@ -48,7 +48,6 @@ rm -rf /home/$USERNAME/.config/*
 cp -r * /home/$USERNAME/.config/
 
 chmod +x /home/$USERNAME/.config/waybar/launch.sh
-# chmod +x /home/$USERNAME/.config/hypr/scripts/startvm.sh
 
 cd ..
 
@@ -87,9 +86,9 @@ sudo rm /usr/share/applications/qv4l2.desktop
 sudo rm /usr/share/applications/qvidcap.desktop
 sudo rm /usr/share/applications/cmake-gui.desktop
 sudo rm /usr/share/applications/lstopo.desktop
-sudo rm /usr/share/applications/java-java17-openjdk.desktop
-sudo rm /usr/share/applications/jconsole-java17-openjdk.desktop
-sudo rm /usr/share/applications/jshell-java17-openjdk.desktop
+sudo rm /usr/share/applications/java-java21-openjdk.desktop
+sudo rm /usr/share/applications/jconsole-java21-openjdk.desktop
+sudo rm /usr/share/applications/jshell-java21-openjdk.desktop
 sudo rm /usr/share/applications/assistant.desktop
 sudo rm /usr/share/applications/designer.desktop
 sudo rm /usr/share/applications/linguist.desktop
@@ -153,5 +152,5 @@ sudo mkinitcpio -P
 
 sudo systemctl enable sddm power-profiles-daemon
 systemctl --user enable pipewire pipewire-pulse wireplumber 
-
+sudo sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
