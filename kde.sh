@@ -10,18 +10,6 @@ if ! sudo pacman -S ark dolphin kate konsole plasma-meta gwenview vlc vlc-plugin
     exit 1
 fi
 
-#sddm
-cd assets
-sudo cp sddm/.face.icon /usr/share/sddm/faces/
-
-#Elegant theme sddm
-sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
-sudo cp -r sddm/themes/* /usr/share/sddm/themes/
-QML_FILE="/usr/share/sddm/themes/Elegant/LoginFrame.qml"
-sudo sed -i -E "s/FULLNAME/${FULLNAME//\//\\/}/g" "$QML_FILE"
-sudo sed -i -E "s/\"USERNAME\"/\"$USERNAME\"/g" "$QML_FILE"
-
-cd ..
 cd scripts
 
 sh aur.sh

@@ -11,7 +11,7 @@ npm i -g @angular/cli --prefix=/home/$USERNAME/.local
 sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 
 sudo systemctl enable --now mysqld
-sleep 5
+sleep 2
 
 sudo mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('Admin@123');"
 sudo mysql -e "CREATE USER '$USERNAME'@'localhost' IDENTIFIED BY 'asd';"
