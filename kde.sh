@@ -5,7 +5,7 @@ FULLNAME=$(getent passwd "$USERNAME" | cut -d ':' -f 5 | cut -d ',' -f 1)
 FULLNAME=${FULLNAME:-$USERNAME}
 
 echo "Installing core packages..."
-if ! sudo pacman -S ark dolphin kate konsole plasma-meta gwenview vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer wget obs-studio qbittorrent qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gvfs-mtp noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
+if ! sudo pacman -S ark dolphin kio-admin kate konsole plasma-meta gwenview vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer wget obs-studio qbittorrent qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gvfs-mtp noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
     echo "Pacman package installation failed. Aborting."
     exit 1
 fi
