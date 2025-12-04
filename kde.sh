@@ -5,7 +5,7 @@ FULLNAME=$(getent passwd "$USERNAME" | cut -d ':' -f 5 | cut -d ',' -f 1)
 FULLNAME=${FULLNAME:-$USERNAME}
 
 echo "Installing core packages..."
-if ! sudo pacman -S ark dolphin kio-admin kate konsole plasma-meta gwenview vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer wget obs-studio qbittorrent qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gvfs-mtp noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
+if ! sudo pacman -S ark dolphin kio-admin kate konsole plasma-meta vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer wget obs-studio qbittorrent qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gvfs-mtp noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
     echo "Pacman package installation failed. Aborting."
     exit 1
 fi
@@ -20,8 +20,12 @@ sh zsh.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S google-chrome visual-studio-code-bin --noconfirm --needed
+yay -S google-chrome visual-studio-code-bin nomacs --noconfirm --needed
 cd ..
+
+cd assets
+cd kde
+sudo cp * /usr/share/applications/
 
 sudo mkdir /mnt/HOME
 echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
