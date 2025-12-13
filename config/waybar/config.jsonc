@@ -9,9 +9,7 @@
   "reload_style_on_change": true,
   "modules-left": [
     "custom/appmenu",
-    "custom/sep",
     "hyprland/workspaces",
-    "custom/sep",
     "hyprland/window"
   ],
   "modules-center": [
