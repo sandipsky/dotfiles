@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
   "margin-top": 0,
   "margin-bottom": 0,
   "margin-left": 0,
@@ -12,14 +12,11 @@
     "custom/sep",
     "hyprland/workspaces",
     "custom/sep",
-    "custom/chrome",
-    "custom/files",
-    "custom/terminal",
-    "custom/lutris",
-    "custom/sep",
     "hyprland/window"
   ],
-  "modules-center": [],
+  "modules-center": [
+      "clock"
+      ],
   "modules-right": [
     "cpu",
     "memory",
@@ -28,7 +25,7 @@
     "battery",
     "network",
     "pulseaudio",
-    "clock"
+    "custom/exit",
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -69,6 +66,11 @@
     "on-click-right": "wlogout",
     "tooltip": false
   },
+  "custom/exit": {
+        "format": "",
+        "on-click": "wlogout",
+        "tooltip": false
+    },
   "custom/sep": {
     "format": "|"
   },
@@ -77,19 +79,23 @@
     "spacing": 10
   },
   "clock": {
-    "format": "{:%I:%M %p}",
+    "format": "{:%B %d, %I:%M %p}",
     "format-alt": "{:%Y-%m-%d, %a}",
     "tooltip": false
   },
   "cpu": {
     "interval": 5,
-    "format": "<span color=\"#f7768e\"></span> {usage}%",
-    "max-length": 10
+    "format": "<span color=\"#f7768e\"></span>",
+    "max-length": 10,
+    "tooltip": true,
+    "tooltip-format": "{usage}%",
   },
   "memory": {
     "interval": 5,
-    "format": "<span color=\"#FBC02D\"></span>  {used} GiB",
-    "max-length": 10
+    "format": "<span color=\"#FBC02D\"></span>",
+    "max-length": 10,
+    "tooltip": true,
+    "tooltip-format": "{used} GB",
   },
   "network": {
     "format-icons": [
@@ -100,12 +106,12 @@
       "󰤨"
     ],
     "format": "{ifname}",
-    "format-wifi": "{icon} {essid}",
-    "format-ethernet": "  {ifname}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "",
     "format-disconnected": "󰖪",
     "tooltip-format": "{ifname} via {gwaddri}",
     "tooltip-format-wifi": "{essid} @ {ifname}\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-    "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
     "on-click": "alacritty -e nmtui",
@@ -119,23 +125,19 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "<span color=\"#9ece6a\">{icon} </span>{capacity}%",
-    "format-charging": "<span color=\"#9ece6a\"></span>  {capacity}%",
-    "format-plugged": " {capacity}%",
+    "format": "{icon}",
+    "format-charging": "<span color=\"#9ece6a\"></span>",
+    "format-plugged": "",
     "format-alt": "{icon}  {time}",
     "format-icons": [
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
-    "tooltip": false
+    "tooltip": true,
+    "tooltip-format": "{capacity}%",
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
@@ -150,6 +152,8 @@
       "headset": "",
       "default": [
         "",
+        "",
+        "",
         "",
         ""
       ]
@@ -169,31 +173,12 @@
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "<span color=\"#e0af68\">{icon}</span> {percent}%",
+    "format": "<span color=\"#e0af68\">{icon}</span>",
     "format-icons": [
       "󰃠",
       "󰃠"
     ],
-    "tooltip": false
+    "tooltip": true,
+    "tooltip-format": "{percent}%"
   },
-  "custom/chrome": {
-    "format": " ",
-    "on-click": "google-chrome-stable",
-    "tooltip": false
-  },
-  "custom/files": {
-    "format": " ",
-    "on-click": "nautilus",
-    "tooltip": false
-  },
-  "custom/terminal": {
-    "format": " ",
-    "on-click": "alacritty",
-    "tooltip": false
-  },
-  "custom/lutris": {
-    "format": " ",
-    "on-click": "lutris",
-    "tooltip": false
-  }
 }

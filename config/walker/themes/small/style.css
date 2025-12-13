@@ -157,20 +157,36 @@ child:selected .item-box {
   border-top: 1px solid lighter(@window_bg_color);
   font-size: 0px;
   opacity: 0;
+  max-height: 0 !important;
+  display: none !important;
   color: @theme_fg_color;
 }
 
 .keybinds {
+ max-height: 0 !important;
+  display: none !important;
 }
 
 .keybind {
+ max-height: 0 !important;
+  display: none !important;
 }
 
 .keybind-bind {
   /* color: lighter(@window_bg_color); */
   font-weight: bold;
   text-transform: lowercase;
+  opacity: 0;
+  height: 0;
+  width: 0;
+   max-height: 0 !important;
+  display: none !important;
 }
 
 .keybind-label {
+  opacity: 0;
+  height: 0;
+  width: 0;
+   max-height: 0 !important;
+  display: none !important;
 }

@@ -7,6 +7,10 @@ exact_search_prefix = "'"       # disable fuzzy searching
 theme = "small"               # theme to use
 disable_mouse = false           # disable mouse (on input and list only)
 debug = false                   # enables debug printing for some stuff, f.e. keybinds
+hide_quick_activation = true   # globally hide the quick activation buttons
+hide_action_hints = true       # globally hide the action hints
+hide_action_hints_dmenu = true  # hide the actions hints for dmenu
+hide_return_action = true  
 
 [shell]
 anchor_top = true

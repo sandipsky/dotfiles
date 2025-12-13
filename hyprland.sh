@@ -117,8 +117,6 @@ sudo rm /usr/share/xsessions/*
 sudo rm /usr/share/wayland-sessions/gnome.desktop
 sudo rm /usr/share/wayland-sessions/gnome-wayland.desktop
 
-mkdir -p /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public}
-chown -R $USERNAME:$USERNAME /home/$USERNAME/{Desktop,Documents,Downloads,Music,Pictures,Videos,Public}
 mkdir -p /home/$USERNAME/.config/gtk-3.0
 cat > /home/$USERNAME/.config/gtk-3.0/bookmarks <<EOF
 file:///home/$USERNAME/Documents Documents
@@ -129,7 +127,9 @@ file:///home/$USERNAME/Videos Videos
 EOF
 
 LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
+WALL_FILE="/home/$USERNAME/.config/hypr/hyprpaper.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
+sed -i "s/^\s*text = USERNAME/    text = $USERNAME/" "$WALL_FILE"
 
 CONF_FILE="/etc/mkinitcpio.conf"
 # Check if modules already exist
