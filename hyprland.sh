@@ -5,7 +5,7 @@ FULLNAME=$(getent passwd "$USERNAME" | cut -d ':' -f 5 | cut -d ',' -f 1)
 FULLNAME=${FULLNAME:-$USERNAME}
 
 echo "Installing core packages..."
-if ! sudo pacman -S hyprland wpaperd hyprsunset wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent dunst brightnessctl grim slurp sddm qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
+if ! sudo pacman -S hyprland hyprpaper hyprsunset wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent dunst brightnessctl grim slurp sddm qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
     echo "Pacman package installation failed. Aborting."
     exit 1
 fi
@@ -28,7 +28,7 @@ cd scripts
 sudo cp 99-power.rules /etc/udev/rules.d/99-power.rules
 sudo cp 90-usb.rules /etc/udev/rules.d/90-usb.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/90-usb.rules
-sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
+sed -i "s/USERNAME/$USERNAME/g" "$WALL_FILE"
 
 sh aur.sh
 sh battery.sh
