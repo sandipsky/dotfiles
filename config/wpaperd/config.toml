@@ -1,0 +1,6 @@
+[default]
+path = "~/.config/hypr/assets/wallpapers"
+duration = "10m"
+sorting = "ascending"
+
+

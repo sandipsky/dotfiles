@@ -75,7 +75,8 @@ multiplier = 3
 save_to_clipboard = false
 
 [terminal.shell]
-program = "/usr/bin/zsh"
+program = "/usr/bin/zsh" 
+args = ["-i", "-l"]
 
 [window]
 opacity = 0.9
@@ -85,7 +86,7 @@ general = "Alacritty"
 instance = "Alacritty"
 
 [window.padding]
-x = 16
-y = 16
+x = 24
+y = 10
 
 [terminal]

@@ -5,7 +5,7 @@ FULLNAME=$(getent passwd "$USERNAME" | cut -d ':' -f 5 | cut -d ',' -f 1)
 FULLNAME=${FULLNAME:-$USERNAME}
 
 echo "Installing core packages..."
-if ! sudo pacman -S hyprland hyprpaper hyprsunset wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent dunst brightnessctl grim slurp sddm qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
+if ! sudo pacman -S hyprland wpaperd hyprsunset wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent dunst brightnessctl grim slurp sddm qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
     echo "Pacman package installation failed. Aborting."
     exit 1
 fi
@@ -52,9 +52,6 @@ chmod +x /home/$USERNAME/.config/waybar/launch.sh
 cd ..
 
 cd assets
-mkdir -p /home/$USERNAME/Pictures
-sudo cp images/* -r /home/$USERNAME/Pictures/
-
 cd sounds
 sudo mkdir -p /usr/share/sounds/
 sudo cp * /usr/share/sounds/
@@ -77,6 +74,9 @@ dconf load /org/gnome/nautilus/ < nautilus
 
 cd ..
 cd apps
+
+sudo cp * /usr/share/applications/
+
 sudo rm /usr/share/applications/avahi-discover.desktop
 sudo rm /usr/share/applications/blueman-adapters.desktop
 sudo rm /usr/share/applications/blueman-manager.desktop
@@ -95,8 +95,6 @@ sudo rm /usr/share/applications/linguist.desktop
 sudo rm /usr/share/applications/qdbusviewer.desktop
 sudo rm /usr/share/applications/xgpsspeed.desktop
 sudo rm /usr/share/applications/xgps.desktop
-
-sudo cp * /usr/share/applications/
 
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
@@ -127,9 +125,7 @@ file:///home/$USERNAME/Videos Videos
 EOF
 
 LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
-WALL_FILE="/home/$USERNAME/.config/hypr/hyprpaper.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
-sed -i "s/^\s*text = USERNAME/    text = $USERNAME/" "$WALL_FILE"
 
 CONF_FILE="/etc/mkinitcpio.conf"
 # Check if modules already exist
