@@ -38,7 +38,7 @@ sh zsh.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout walker-bin elephant-desktopapplications elephant-calc --noconfirm --needed
+yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout walker-bin elephant-desktopapplications elephant-calc neofetch --noconfirm --needed
 cd ..
 
 cd config
@@ -103,6 +103,14 @@ gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
 
+xdg-mime default org.gnome.Loupe.desktop image/jpeg
+xdg-mime default org.gnome.Loupe.desktop image/png
+xdg-mime default org.gnome.Loupe.desktop image/webp
+
+xdg-mime default org.gnome.TextEditor.desktop text/plain
+xdg-mime default org.gnome.TextEditor.desktop application/x-shellscript
+
+
 sudo mkdir /mnt/HOME
 echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
 sudo mount -a
@@ -149,4 +157,4 @@ sudo mkinitcpio -P
 sudo systemctl enable sddm power-profiles-daemon
 systemctl --user enable pipewire pipewire-pulse wireplumber 
 sudo sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
-
+xdg-user-dirs-update
