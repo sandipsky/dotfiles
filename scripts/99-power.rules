@@ -1,4 +1,8 @@
 # /etc/udev/rules.d/99-power.rules
 
-SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/usr/bin/runuser -l USERNAME -c 'systemctl --user start acpoweron.service'"
-SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/bin/runuser -l USERNAME -c 'systemctl --user start acpoweroff.service'"
+# AC connected
+SUBSYSTEM=="power_supply", KERNEL=="ACAD", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/usr/bin/runuser -l USERNAME -c 'systemctl --user start acpoweron.service'"
+
+# AC disconnected
+SUBSYSTEM=="power_supply", KERNEL=="ACAD", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/bin/runuser -l USERNAME -c 'systemctl --user start acpoweroff.service'"
+

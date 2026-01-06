@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+MODE="$1"
+
+# Get focused monitor name
+MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true).name')
+
+if [[ -z "$MONITOR" ]]; then
+    notify-send "Power Mode" "No focused monitor found"
+    exit 1
+fi
+
+case "$MODE" in
+    powersave|power-saver)
+        powerprofilesctl set power-saver
+        hyprctl keyword monitor "$MONITOR,1920x1080@60,auto,1"
+        notify-send "Power Saver Mode" "Refresh rate set to 60Hz"
+        ;;
+    balanced)
+        powerprofilesctl set balanced
+        hyprctl keyword monitor "$MONITOR,1920x1080@144,auto,1"
+        notify-send "Balanced Mode" "Refresh rate set to 144Hz"
+        ;;
+    performance|perf)
+        powerprofilesctl set performance
+        hyprctl keyword monitor "$MONITOR,1920x1080@144,auto,1"
+        notify-send "Performance Mode" "Refresh rate set to 144Hz"
+        ;;
+    *)
+        notify-send "Power Mode" "Usage: power-mode {powersave|performance}"
+        echo "Usage: power-mode {powersave|performance}"
+        exit 1
+        ;;
+esac
+

@@ -1,5 +1,5 @@
-sudo pacman -S qemu-full virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables-nft libguestfs swtpm
-sudo usermod -aG libvirt $USER
+sudo pacman -S --needed --noconfirm --ask=4 qemu-full virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables-nft libguestfs swtpm
+sudo usermod -aG libvirt sandip
 sudo systemctl enable --now libvirtd
 sudo virsh net-autostart default
 
