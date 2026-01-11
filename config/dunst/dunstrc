@@ -6,90 +6,77 @@
 #                             
 #  
 # ----------------------------------------------------- 
+# For defaults and description of each option, see the link bellow
+# https://github.com/dunst-project/dunst/blob/master/dunstrc
 
 [global]
-    monitor = 0
-    follow = none
-    width = 350
-    height = (0,400)
-    origin = bottom-right
-    offset = 12x12
-    scale = 0
-    notification_limit = 20
-    progress_bar = true
-    progress_bar_height = 10
-    progress_bar_frame_width = 1
-    progress_bar_min_width = 150
-    progress_bar_max_width = 300
-    progress_bar_corner_radius = 10
-    icon_corner_radius = 0
-    indicate_hidden = yes
-    transparency = 0
-    separator_height = 2
-    padding = 12
-    horizontal_padding = 12
-    text_icon_padding = 0
-    frame_width = 2
-    frame_color = "#ffffff"
-    gap_size = 0
-    separator_color = frame
-    sort = yes
+# Display
+follow = mouse
+width = 350
+height = (0, 300)
+origin = top-center
+offset = (20, 20)
+indicate_hidden = yes
+notification_limit = 5
+gap_size = 12
+padding = 12
+horizontal_padding = 20
+frame_width = 2
+sort = no
 
-    font = "Fira Sans Book" 12
-    line_height = 1.5
-    markup = full
-    format = "<b>%a</b>\n<b>%s</b>\n%b"
-    alignment = left
-    vertical_alignment = center
-    show_age_threshold = 60
-    ellipsize = middle
-    ignore_newline = no
-    stack_duplicates = true
-    hide_duplicate_count = false
-    show_indicators = yes
+# Progress bar
+progress_bar_frame_width = 0
+progress_bar_corner_radius = 3
 
-    enable_recursive_icon_lookup = true
-    icon_theme = "Adwaita"
-    icon_position = off
-    min_icon_size = 32
-    max_icon_size = 128
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+# Colors
+foreground = "#cdd1dc"
+frame_color = "#2d303c"
+highlight = "#2274d5, #82aad9"
 
-    sticky_history = yes
-    history_length = 20
-    dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/xdg-open
+# Text
+font = Fira Sans Semilight 15
+markup = full
+format = "<small>%a</small>\n<b>%s</b>\n%b"
+alignment = left
+vertical_alignment = center
+show_age_threshold = -1
+hide_duplicate_count = false
 
-    always_run_script = true
-    title = Dunst
-    class = Dunst
-    corner_radius = 12
-    ignore_dbusclose = false
-    force_xwayland = false
-    force_xinerama = false
+# Icon
+icon_position = left
+min_icon_size = 54
+max_icon_size = 80
+icon_path = /usr/share/icons/Arc/status/96:/usr/share/icons/Arc/status/symbolic
+icon_corner_radius = 4
 
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
+# Misc/Advanced
+dmenu = wofi --show drun --prompt 'Open with'
+corner_radius = 10
 
-[experimental]
-    per_monitor_dpi = false
+# Mouse
+mouse_left_click = close_current
+mouse_middle_click = do_action, close_current
+mouse_right_click = close_all
 
 [urgency_low]
-    background = "#1c1c1c"
-    foreground = "#ffffff"
-    frame_color = "#21212f"
-    timeout = 3
+background = "#282828"
+frame_color = "#3d3d3d"
+timeout = 3
 
 [urgency_normal]
-    background = "#1c1c1c"
-    foreground = "#ffffff"
-    frame_color = "#21212f"
-    timeout = 4
+background = "#282828"
+frame_color = "#3d3d3d"
+timeout = 8
 
 [urgency_critical]
-    background = "#1c1c1c"
-    foreground = "#ffffff"
-    frame_color = "#21212f"
-    timeout = 6
+background = "#282828"
+frame_color = "#3d3d3d"
+timeout = 0
 
+# Rules
+[fullscreen_delay_everything]
+fullscreen = delay
+
+[fullscreen_show_critical]
+msg_urgency = critical
+fullscreen = show

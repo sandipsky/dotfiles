@@ -14,7 +14,7 @@
   ],
   "modules-center": [
       "clock"
-      ],
+  ],
   "modules-right": [
     "cpu",
     "memory",
@@ -23,7 +23,7 @@
     "battery",
     "network",
     "pulseaudio",
-    "custom/exit",
+    "custom/exit"
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -68,7 +68,7 @@
         "format": "",
         "on-click": "wlogout",
         "tooltip": false
-    },
+  },
   "custom/sep": {
     "format": "|"
   },
@@ -86,14 +86,14 @@
     "format": "<span color=\"#f7768e\"></span>",
     "max-length": 10,
     "tooltip": true,
-    "tooltip-format": "{usage}%",
+    "tooltip-format": "{usage}%"
   },
   "memory": {
     "interval": 5,
     "format": "<span color=\"#FBC02D\"></span>",
     "max-length": 10,
     "tooltip": true,
-    "tooltip-format": "{used} GB",
+    "tooltip-format": "{used} GB"
   },
   "network": {
     "format-icons": [
@@ -136,6 +136,7 @@
     ],
     "tooltip": true,
     "tooltip-format": "{capacity}%",
+    "on-warning": "notify-send -u critical -a 'System' 'Battery Low' 'Battery below 20%'"
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
@@ -178,5 +179,5 @@
     ],
     "tooltip": true,
     "tooltip-format": "{percent}%"
-  },
+  }
 }

@@ -5,7 +5,7 @@ FULLNAME=$(getent passwd "$USERNAME" | cut -d ':' -f 5 | cut -d ',' -f 1)
 FULLNAME=${FULLNAME:-$USERNAME}
 
 echo "Installing core packages..."
-if ! sudo pacman -S hyprland wpaperd hyprsunset wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman jq vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent dunst brightnessctl grim slurp sddm qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono --noconfirm --needed; then
+if ! sudo pacman -S hyprland wpaperd hyprpicker hyprsunset wl-clipboard xdg-desktop-portal-hyprland waybar hyprlock hypridle blueman jq vlc vlc-plugins-all ntfs-3g ffmpegthumbnailer alacritty xdg-user-dirs-gtk wget obs-studio qbittorrent dunst brightnessctl grim slurp sddm qt5-graphicaleffects qt5-base qt5-declarative power-profiles-daemon gnome-calculator nautilus rhythmbox evince loupe gnome-shell file-roller gnome-text-editor gvfs-mtp gnome-themes-extra adwaita-icon-theme noto-fonts noto-fonts-emoji noto-fonts-extra ttf-liberation noto-fonts-cjk ttf-dejavu otf-font-awesome ttf-fira-sans ttf-jetbrains-mono libreoffice-fresh --noconfirm --needed; then
     echo "Pacman package installation failed. Aborting."
     exit 1
 fi
@@ -39,7 +39,7 @@ sh zsh.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout walker-bin elephant-desktopapplications elephant-calc neofetch --noconfirm --needed
+yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout walker-bin elephant-desktopapplications elephant-calc neofetch microsoft-edge-stable-bin --noconfirm --needed
 cd ..
 cd config
 

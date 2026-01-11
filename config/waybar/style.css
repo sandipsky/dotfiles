@@ -70,3 +70,13 @@
     color: #141414;
 }
 
+#battery.warning, #battery.critical {
+   color: #ea4b4b;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.4;
+  }
+}
