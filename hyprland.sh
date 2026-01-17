@@ -13,7 +13,7 @@ fi
 #sddm
 cd assets
 sudo cp sddm/.face.icon /usr/share/sddm/faces/
-sudo sed -i "s/^CursorTheme=.*/CursorTheme=BreezeX-Light/g" /usr/lib/sddm/sddm.conf.d/default.conf
+# sudo sed -i "s/^CursorTheme=.*/CursorTheme=BreezeX-Light/g" /usr/lib/sddm/sddm.conf.d/default.conf
 
 #Elegant theme sddm
 sudo sed -i "s/^Current=.*/Current=Elegant/g" /usr/lib/sddm/sddm.conf.d/default.conf
@@ -39,7 +39,7 @@ sh zsh.sh
 sh gaming.sh
 sh programs.sh
 
-yay -S breezex-cursor-theme ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout walker-bin elephant-desktopapplications elephant-calc neofetch microsoft-edge-stable-bin --noconfirm --needed
+yay -S ttf-material-design-icons-desktop-git nautilus-open-any-terminal google-chrome visual-studio-code-bin wlogout walker-bin elephant-desktopapplications elephant-calc neofetch --noconfirm --needed
 cd ..
 cd config
 
@@ -104,7 +104,7 @@ sudo rm /usr/share/applications/xgps.desktop
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
+# gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
 
@@ -114,7 +114,6 @@ xdg-mime default org.gnome.Loupe.desktop image/webp
 
 xdg-mime default org.gnome.TextEditor.desktop text/plain
 xdg-mime default org.gnome.TextEditor.desktop application/x-shellscript
-
 
 sudo mkdir /mnt/HOME
 echo '/dev/disk/by-uuid/4CC27C52C27C41EE /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0' | sudo tee -a /etc/fstab
@@ -140,26 +139,7 @@ EOF
 LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
 
-CONF_FILE="/etc/mkinitcpio.conf"
-# Check if modules already exist
-if grep -q "nvidia_drm" "$CONF_FILE"; then
-    echo "NVIDIA modules already present in MODULES array. Skipping modification."
-else
-    echo "Adding NVIDIA modules to MODULES array..."
-    sudo sed -i 's/^MODULES=(\(.*\))/MODULES=(\1nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "$CONF_FILE"
-    sudo sed -i 's/\<kms\>//g' "$CONF_FILE"
-    sudo sed -i 's/  */ /g' "$CONF_FILE" 
-fi
-
-echo "Modifying HOOKS array..."
-sudo sed -i -E 's/\budev\b/systemd/' "$CONF_FILE"
-sudo sed -i -E 's/\s*fsck\b//g' "$CONF_FILE"
-
-# Rebuild initramfs
-echo "Rebuilding initramfs with mkinitcpio..."
-sudo mkinitcpio -P
-
-sudo systemctl enable sddm power-profiles-daemon
-systemctl --user enable pipewire pipewire-pulse wireplumber 
+sudo systemctl enable sddm 
 sudo sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 xdg-user-dirs-update
+reboot
