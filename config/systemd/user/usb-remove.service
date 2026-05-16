@@ -1,0 +1,6 @@
+[Unit]
+Description=Play USB sound
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/paplay /usr/share/sounds/usb-disconnect.wav

@@ -1,0 +1,7 @@
+[Unit]
+Description=Set power-saver mode on battery
+After=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/powerprofilesctl set power-saver
