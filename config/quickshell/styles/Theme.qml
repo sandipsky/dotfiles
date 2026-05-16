@@ -17,5 +17,9 @@ QtObject {
     readonly property color dropdownBg: "#2b2b2b"
     readonly property color dropdownBorder: "#3a3a3a"
 
+    readonly property color launcherBg: "#202020"
+    readonly property color launcherBorder: "#383838"
+
     readonly property real menuRadius: 10
+    readonly property real launcherRadius: 12
 }
