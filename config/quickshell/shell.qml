@@ -2,11 +2,13 @@ import QtQuick
 import Quickshell
 import "modules/startmenu"
 import "modules/launcher"
+import "modules/calendar"
 
 ShellRoot {
-    // Only one of these should be `open` at a time (both grab keyboard
-    // exclusively). For now StartMenu is hidden so the launcher is the
-    // one shown on shell startup.
+    // Only one of these should be `open` at a time (the keyboard-focus
+    // ones grab exclusively). Calendar doesn't grab keyboard so it can
+    // coexist visually, but for testing keep one open at a time.
     StartMenu { open: false }
-    Launcher  {}
+    Launcher  { open: false }
+    Calendar  { open: true  }
 }
