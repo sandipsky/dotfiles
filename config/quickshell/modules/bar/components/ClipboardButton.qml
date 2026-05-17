@@ -19,8 +19,8 @@ Rectangle {
 
     Image {
         anchors.centerIn: parent
-        width: 16
-        height: 16
+        width: 24
+        height: 24
         sourceSize.width: 32
         sourceSize.height: 32
         source: Qt.resolvedUrl("../../../icons/clipboard.svg")

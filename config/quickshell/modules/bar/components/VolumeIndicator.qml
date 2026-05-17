@@ -52,10 +52,10 @@ Rectangle {
 
     Image {
         anchors.centerIn: parent
-        width: 20
-        height: 20
-        sourceSize.width: 40
-        sourceSize.height: 40
+        width: 24
+        height: 24
+        sourceSize.width: 32
+        sourceSize.height: 32
         source: Qt.resolvedUrl("../../../icons/" + root.iconFile())
         fillMode: Image.PreserveAspectFit
         smooth: true

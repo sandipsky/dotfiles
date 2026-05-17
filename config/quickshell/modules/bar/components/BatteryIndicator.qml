@@ -31,10 +31,10 @@ Rectangle {
 
     Image {
         anchors.centerIn: parent
-        width: 26
-        height: 26
-        sourceSize.width: 52
-        sourceSize.height: 52
+        width: 24
+        height: 24
+        sourceSize.width: 32
+        sourceSize.height: 32
         source: Qt.resolvedUrl("../../../icons/" + root.iconFile())
         fillMode: Image.PreserveAspectFit
         smooth: true
