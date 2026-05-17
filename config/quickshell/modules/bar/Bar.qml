@@ -29,12 +29,14 @@ PanelWindow {
 
     signal toggleStartMenu()
     signal toggleLauncher()
+    signal toggleClipboard()
     signal toggleCalendar()
 
     // Active states — driven by the owning ShellRoot so the corresponding
     // button highlights while its panel is open.
     property bool startMenuOpen: false
     property bool launcherOpen: false
+    property bool clipboardOpen: false
     property bool calendarOpen: false
 
     Rectangle {
@@ -102,6 +104,11 @@ PanelWindow {
             anchors.verticalCenter: parent.verticalCenter
             anchors.rightMargin: 6
             spacing: 4
+
+            ClipboardButton {
+                active: root.clipboardOpen
+                onClicked: root.toggleClipboard()
+            }
 
             VolumeIndicator { }
 
