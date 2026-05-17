@@ -17,6 +17,7 @@ Rectangle {
     property real volume: 0     // 0.0 .. 1.0
     property bool muted: false
     property var tooltip
+    signal clicked()
 
     function tooltipText() {
         if (muted) return "Muted";
@@ -49,6 +50,11 @@ Rectangle {
     onVolumeChanged: if (hover.hovered && tooltip) tooltip.text = root.tooltipText()
     onMutedChanged:  if (hover.hovered && tooltip) tooltip.text = root.tooltipText()
 
+    TapHandler {
+        acceptedButtons: Qt.LeftButton
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+        onTapped: root.clicked()
+    }
     TapHandler {
         acceptedButtons: Qt.RightButton
         gesturePolicy: TapHandler.ReleaseWithinBounds

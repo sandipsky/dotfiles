@@ -19,8 +19,15 @@ Rectangle {
     property int  brightness: -1        // -1 = no backlight detected
 
     property var tooltip
+    signal clicked()
 
     visible: present
+
+    TapHandler {
+        acceptedButtons: Qt.LeftButton
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+        onTapped: root.clicked()
+    }
 
     function iconFile() {
         if (charging) return "bat-charge.svg";

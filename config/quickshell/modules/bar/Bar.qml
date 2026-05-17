@@ -31,6 +31,9 @@ PanelWindow {
     signal toggleLauncher()
     signal toggleClipboard()
     signal toggleCalendar()
+    signal toggleBatteryQS()
+    signal toggleAudioQS()
+    signal toggleNetworkQS()
 
     // Active states — driven by the owning ShellRoot so the corresponding
     // button highlights while its panel is open.
@@ -38,6 +41,9 @@ PanelWindow {
     property bool launcherOpen: false
     property bool clipboardOpen: false
     property bool calendarOpen: false
+    property bool batteryQSOpen: false
+    property bool audioQSOpen: false
+    property bool networkQSOpen: false
 
     // Shared tooltip overlay (instantiated in shell.qml). Indicators on
     // the right side push text + screen-x into it on hover.
@@ -114,11 +120,20 @@ PanelWindow {
                 onClicked: root.toggleClipboard()
             }
 
-            NetworkIndicator { tooltip: root.tooltip }
+            NetworkIndicator {
+                tooltip: root.tooltip
+                onClicked: root.toggleNetworkQS()
+            }
 
-            BatteryIndicator { tooltip: root.tooltip }
+            BatteryIndicator {
+                tooltip: root.tooltip
+                onClicked: root.toggleBatteryQS()
+            }
 
-            VolumeIndicator  { tooltip: root.tooltip }
+            VolumeIndicator {
+                tooltip: root.tooltip
+                onClicked: root.toggleAudioQS()
+            }
 
             Clock {
                 active: root.calendarOpen

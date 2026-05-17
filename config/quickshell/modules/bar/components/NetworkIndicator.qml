@@ -22,6 +22,13 @@ Rectangle {
     property string speed: ""     // pre-formatted "130 Mbit/s" / "1000 Mbit/s"
 
     property var tooltip
+    signal clicked()
+
+    TapHandler {
+        acceptedButtons: Qt.LeftButton
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+        onTapped: root.clicked()
+    }
 
     function iconFile() {
         if (conn === "ethernet") return "ethernet.svg";
