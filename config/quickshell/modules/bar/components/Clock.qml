@@ -7,6 +7,7 @@ Rectangle {
     signal leftClicked()
 
     property bool active: false
+    property var tooltip
     property var now: new Date()
     // false → "h:mm AM/PM", true → "Mon, Dec 19"
     property bool altFormat: false
@@ -15,7 +16,15 @@ Rectangle {
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ]
+    readonly property var monthLong: [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
     readonly property var dayShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    readonly property var dayLong: [
+        "Sunday", "Monday", "Tuesday", "Wednesday",
+        "Thursday", "Friday", "Saturday"
+    ]
 
     function pad2(n) { return n < 10 ? "0" + n : "" + n; }
 
@@ -30,13 +39,30 @@ Rectangle {
             + monthShort[now.getMonth()] + " "
             + now.getDate();
     }
+    function tooltipText() {
+        return dayLong[now.getDay()] + ", "
+            + monthLong[now.getMonth()] + " "
+            + now.getDate() + ", " + now.getFullYear()
+            + "\n" + timeText();
+    }
 
     width: label.implicitWidth + 20
     height: 32
     radius: 6
     color: (hover.hovered || root.active) ? Theme.hoverBg : "transparent"
 
-    HoverHandler { id: hover }
+    HoverHandler {
+        id: hover
+        onHoveredChanged: {
+            if (!tooltip) return;
+            if (hovered) {
+                var p = mapToItem(null, width / 2, 0);
+                tooltip.show(root.tooltipText(), p.x);
+            } else {
+                tooltip.hide();
+            }
+        }
+    }
 
     // Left click opens calendar
     TapHandler {
@@ -66,5 +92,13 @@ Rectangle {
         running: true
         repeat: true
         onTriggered: root.now = new Date()
+    }
+
+    // Refresh the tooltip text live while the cursor lingers, so the
+    // minute rolls over without dismissing/re-entering the indicator.
+    onNowChanged: {
+        if (hover.hovered && tooltip) {
+            tooltip.text = root.tooltipText();
+        }
     }
 }

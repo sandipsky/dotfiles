@@ -11,12 +11,14 @@ ShellRoot {
     Launcher  { id: launcher;  open: false }
     Calendar  { id: calendar;  open: false }
     Clipboard { id: clipboard; open: false }
+    Tooltip   { id: tooltip }
 
     Bar {
         startMenuOpen: startmenu.open
         launcherOpen:  launcher.open
         clipboardOpen: clipboard.open
         calendarOpen:  calendar.open
+        tooltip:       tooltip
 
         onToggleStartMenu: startmenu.open = !startmenu.open
         onToggleLauncher:  launcher.open  = !launcher.open

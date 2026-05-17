@@ -16,6 +16,12 @@ Rectangle {
     // these commands for `pactl` equivalents.
     property real volume: 0     // 0.0 .. 1.0
     property bool muted: false
+    property var tooltip
+
+    function tooltipText() {
+        if (muted) return "Muted";
+        return "Volume: " + Math.round(volume * 100) + "%";
+    }
 
     function iconFile() {
         if (muted) return "vol-mute.svg";
@@ -26,7 +32,22 @@ Rectangle {
         return "vol3.svg";
     }
 
-    HoverHandler { id: hover }
+    HoverHandler {
+        id: hover
+        onHoveredChanged: {
+            if (!tooltip) return;
+            if (hovered) {
+                var p = mapToItem(null, width / 2, 0);
+                tooltip.show(root.tooltipText(), p.x);
+            } else {
+                tooltip.hide();
+            }
+        }
+    }
+
+    // Refresh tooltip live while the cursor lingers and the volume changes.
+    onVolumeChanged: if (hover.hovered && tooltip) tooltip.text = root.tooltipText()
+    onMutedChanged:  if (hover.hovered && tooltip) tooltip.text = root.tooltipText()
 
     TapHandler {
         acceptedButtons: Qt.RightButton

@@ -39,6 +39,10 @@ PanelWindow {
     property bool clipboardOpen: false
     property bool calendarOpen: false
 
+    // Shared tooltip overlay (instantiated in shell.qml). Indicators on
+    // the right side push text + screen-x into it on hover.
+    property var tooltip
+
     Rectangle {
         id: bar
         anchors.fill: parent
@@ -110,12 +114,15 @@ PanelWindow {
                 onClicked: root.toggleClipboard()
             }
 
-            BatteryIndicator { }
+            NetworkIndicator { tooltip: root.tooltip }
 
-            VolumeIndicator { }
+            BatteryIndicator { tooltip: root.tooltip }
+
+            VolumeIndicator  { tooltip: root.tooltip }
 
             Clock {
                 active: root.calendarOpen
+                tooltip: root.tooltip
                 onLeftClicked: root.toggleCalendar()
             }
         }
