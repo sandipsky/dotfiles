@@ -11,8 +11,9 @@ sudo pacman -S --noconfirm --needed \
     hyprpicker \
     hyprsunset \
     wl-clipboard \
+    cliphist \
     xdg-desktop-portal-hyprland \
-    waybar \
+    quickshell \
     hyprlock \
     hypridle \
     blueman \
@@ -39,11 +40,7 @@ sudo pacman -S --noconfirm --needed \
 yay -S --noconfirm --needed \
     breezex-cursor-theme \
     ttf-material-design-icons-desktop-git \
-    nautilus-open-any-terminal \
-    wlogout \
-    walker-bin \
-    elephant-desktopapplications \
-    elephant-calc
+    nautilus-open-any-terminal 
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules
 sudo cp assets/90-usb.rules /etc/udev/rules.d/90-usb.rules
@@ -101,7 +98,6 @@ sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/
 
 rm -rf /home/$USERNAME/.config/*
 cp -r config/* /home/$USERNAME/.config/
-chmod +x /home/$USERNAME/.config/waybar/launch.sh
 
 mkdir -p /home/$USERNAME/.local
 cp -r local/* /home/$USERNAME/.local/

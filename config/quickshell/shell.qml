@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import "modules/startmenu"
 import "modules/launcher"
 import "modules/calendar"
@@ -16,6 +17,19 @@ ShellRoot {
     AudioQuickSettings    { id: audioQS;       open: false }
     NetworkQuickSettings  { id: networkQS;     open: false }
     Tooltip               { id: tooltip }
+
+    IpcHandler {
+        target: "launcher"
+        function toggle(): void { launcher.open = !launcher.open; }
+    }
+    IpcHandler {
+        target: "startmenu"
+        function toggle(): void { startmenu.open = !startmenu.open; }
+    }
+    IpcHandler {
+        target: "clipboard"
+        function toggle(): void { clipboard.open = !clipboard.open; }
+    }
 
     // Only one Quick Settings flyout should be visible at a time.
     function closeOtherQS(keep) {
