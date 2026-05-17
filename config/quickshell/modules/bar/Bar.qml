@@ -110,6 +110,8 @@ PanelWindow {
                 onClicked: root.toggleClipboard()
             }
 
+            BatteryIndicator { }
+
             VolumeIndicator { }
 
             Clock {
