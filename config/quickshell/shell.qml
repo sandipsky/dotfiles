@@ -3,12 +3,20 @@ import Quickshell
 import "modules/startmenu"
 import "modules/launcher"
 import "modules/calendar"
+import "modules/bar"
 
 ShellRoot {
-    // Only one of these should be `open` at a time (the keyboard-focus
-    // ones grab exclusively). Calendar doesn't grab keyboard so it can
-    // coexist visually, but for testing keep one open at a time.
-    StartMenu { open: false }
-    Launcher  { open: false }
-    Calendar  { open: true  }
+    StartMenu { id: startmenu; open: false }
+    Launcher  { id: launcher;  open: false }
+    Calendar  { id: calendar;  open: false }
+
+    Bar {
+        startMenuOpen: startmenu.open
+        launcherOpen:  launcher.open
+        calendarOpen:  calendar.open
+
+        onToggleStartMenu: startmenu.open = !startmenu.open
+        onToggleLauncher:  launcher.open  = !launcher.open
+        onToggleCalendar:  calendar.open  = !calendar.open
+    }
 }

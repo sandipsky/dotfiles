@@ -27,7 +27,13 @@ QtObject {
     readonly property color calendarTodayText: "#ffffff"
     readonly property color calendarDimText: "#6a6a6a"
 
+    readonly property color barBg: "#1c1c1c"
+    readonly property color barBorder: "#404040"
+    readonly property color barActiveBg: "#3a3a3a"
+    readonly property color barAccent: "#0078d4"
+
     readonly property real menuRadius: 10
     readonly property real launcherRadius: 12
     readonly property real calendarRadius: 10
+    readonly property int  barHeight: 40
 }
