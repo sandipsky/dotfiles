@@ -52,6 +52,24 @@ PanelWindow {
             color: Theme.barBorder
         }
 
+        // Fitt's Law hot corner: extends the start-button hit area to the
+        // bottom-left screen corner so slamming the cursor there toggles
+        // the menu, Windows-style. Sits beneath the RowLayout so the
+        // visible button still owns its own hover/click.
+        Item {
+            id: startHotCorner
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            // Cover the button itself plus the 6 px left margin.
+            width: 6 + 32
+
+            TapHandler {
+                gesturePolicy: TapHandler.ReleaseWithinBounds
+                onTapped: root.toggleStartMenu()
+            }
+        }
+
         // ---- Left side: start button + workspaces ----
         RowLayout {
             anchors.left: parent.left
