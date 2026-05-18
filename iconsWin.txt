@@ -1,0 +1,68 @@
+Battery Saver
+ UE863
+ UE864
+ UE865
+ UE866
+ UE867
+ UE868
+ UE869
+ UE86A
+ UE86B
+ UEA94
+ UEA95
+
+Battery Charge
+ UE85A
+ UE85B
+ UE85C
+ UE85D
+ UE85E
+ UE85F
+ UE860
+ UE861
+ UE862
+ UE83E
+ UEA93
+
+Battery
+ UE850
+ UE851
+ UE852
+ UE853
+ UE854
+ UE855
+ UE856
+ UE857
+ UE858
+ UE859
+ UE83F
+
+Wifi
+UE871 (no signal)
+UE872 (1 bar)
+UE873 (2 bars)
+UE874 (3 bars)
+UE701 (4 bars / generic Wifi)
+ UE701
+
+UE839 (Ethernet / wired connection)
+
+UF384 (NetworkOffline – globe with slash)
+
+Microphone
+UE720 (Microphone)
+UF12E (MicOff)
+
+Volume / Audio levels
+UE74F (Mute)
+UE767 (Volume – generic speaker)
+UE992 (Volume0)
+UE993 (Volume1)
+UE994 (Volume2)
+UE995 (Volume3 – full)
+UE198 (VolumeBars)
+
+Headphone / Headset
+UE7F6 (Headphone)
+UEA32 (Headset)
+
