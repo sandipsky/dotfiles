@@ -24,13 +24,13 @@ Rectangle {
         return "Volume: " + Math.round(volume * 100) + "%";
     }
 
-    function iconFile() {
-        if (muted) return "vol-mute.svg";
+    function iconChar() {
+        if (muted) return "\uE74F";
         var pct = volume * 100;
-        if (pct < 1)  return "vol-mute.svg";
-        if (pct < 34) return "vol1.svg";
-        if (pct < 67) return "vol2.svg";
-        return "vol3.svg";
+        if (pct < 1)  return "\uE74F";
+        if (pct < 34) return "\uE993";
+        if (pct < 67) return "\uE994";
+        return "\uE995";
     }
 
     HoverHandler {
@@ -77,15 +77,27 @@ Rectangle {
         }
     }
 
-    Image {
+    // Dim full-volume glyph sits underneath so the inactive arcs stay
+    // visible as a faint outline behind the active level. Hidden while
+    // muted — the mute icon shouldn't carry phantom arcs.
+    Text {
         anchors.centerIn: parent
-        width: 24
-        height: 24
-        sourceSize.width: 32
-        sourceSize.height: 32
-        source: Qt.resolvedUrl("../../../icons/" + root.iconFile())
-        fillMode: Image.PreserveAspectFit
-        smooth: true
+        visible: !root.muted
+        text: "\uE995"
+        color: Theme.textSecondary
+        opacity: 0.35
+        font.family: "Segoe Fluent Icons"
+        font.pixelSize: 18
+        renderType: Text.NativeRendering
+    }
+
+    Text {
+        anchors.centerIn: parent
+        text: root.iconChar()
+        color: Theme.textPrimary
+        font.family: "Segoe Fluent Icons"
+        font.pixelSize: 18
+        renderType: Text.NativeRendering
     }
 
     // Poll for state. wpctl prints e.g. "Volume: 0.50" or

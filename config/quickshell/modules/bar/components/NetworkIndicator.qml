@@ -30,15 +30,16 @@ Rectangle {
         onTapped: root.clicked()
     }
 
-    function iconFile() {
-        if (conn === "ethernet") return "ethernet.svg";
+    function iconChar() {
+        if (conn === "ethernet") return "\uE839";
         if (conn === "wifi") {
-            if (wifiSignal >= 75) return "wifi4.svg";
-            if (wifiSignal >= 50) return "wifi3.svg";
-            if (wifiSignal >= 25) return "wifi2.svg";
-            return "wifi1.svg";
+            if (wifiSignal >= 75) return "\uE701";
+            if (wifiSignal >= 50) return "\uE874";
+            if (wifiSignal >= 25) return "\uE873";
+            if (wifiSignal > 0)   return "\uE872";
+            return "\uE871";
         }
-        return "nointernet.svg";
+        return "\uF384";
     }
 
     function tooltipText() {
@@ -79,15 +80,13 @@ Rectangle {
     onIpChanged:         refreshTooltip()
     onSpeedChanged:      refreshTooltip()
 
-    Image {
+    Text {
         anchors.centerIn: parent
-        width: 22
-        height: 22
-        sourceSize.width: 44
-        sourceSize.height: 44
-        source: Qt.resolvedUrl("../../../icons/" + root.iconFile())
-        fillMode: Image.PreserveAspectFit
-        smooth: true
+        text: root.iconChar()
+        color: Theme.textPrimary
+        font.family: "Segoe Fluent Icons"
+        font.pixelSize: 17
+        renderType: Text.NativeRendering
     }
 
     // NetworkManager is the de-facto network daemon on both Plasma and

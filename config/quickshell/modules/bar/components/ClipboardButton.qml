@@ -19,10 +19,8 @@ Rectangle {
 
     Image {
         anchors.centerIn: parent
-        width: 24
-        height: 24
-        sourceSize.width: 32
-        sourceSize.height: 32
+        width: 20
+        height: 20
         source: Qt.resolvedUrl("../../../icons/clipboard.svg")
         fillMode: Image.PreserveAspectFit
         smooth: true

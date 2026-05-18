@@ -82,7 +82,7 @@ Rectangle {
         anchors.centerIn: parent
         text: root.altFormat ? root.dateText() : root.timeText()
         color: Theme.textPrimary
-        font.pixelSize: 13
+        font.pixelSize: 14
     }
 
     // Tick every second so the minute rolls over promptly without

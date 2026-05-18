@@ -113,7 +113,7 @@ PanelWindow {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             anchors.rightMargin: 6
-            spacing: 4
+            spacing: 0
 
             ClipboardButton {
                 active: root.clipboardOpen

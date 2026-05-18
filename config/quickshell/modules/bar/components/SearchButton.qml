@@ -19,10 +19,8 @@ Rectangle {
 
     Image {
         anchors.centerIn: parent
-        width: 16
-        height: 16
-        sourceSize.width: 32
-        sourceSize.height: 32
+        width: 18
+        height: 18
         source: Qt.resolvedUrl("../../../icons/search.svg")
         fillMode: Image.PreserveAspectFit
         smooth: true

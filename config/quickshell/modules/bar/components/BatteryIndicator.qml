@@ -29,13 +29,21 @@ Rectangle {
         onTapped: root.clicked()
     }
 
-    function iconFile() {
-        if (charging) return "bat-charge.svg";
-        if (percentage <= 10) return "bat0.svg";
-        if (percentage <= 30) return "bat1.svg";
-        if (percentage <= 55) return "bat2.svg";
-        if (percentage <= 80) return "bat3.svg";
-        return "bat4.svg";
+    // Segoe Fluent Icons glyphs. Discharging: Battery0..Battery10 (E850..E859,E83F).
+    // Charging: BatteryCharging0..10 (E85A..E862,E83E).
+    function iconChar() {
+        if (charging) {
+            if (percentage <= 10) return "\uE85A";
+            if (percentage <= 30) return "\uE85C";
+            if (percentage <= 55) return "\uE85F";
+            if (percentage <= 80) return "\uE861";
+            return "\uE83E";
+        }
+        if (percentage <= 10) return "\uE850";
+        if (percentage <= 30) return "\uE852";
+        if (percentage <= 55) return "\uE855";
+        if (percentage <= 80) return "\uE857";
+        return "\uE83F";
     }
 
     function tooltipText() {
@@ -70,15 +78,13 @@ Rectangle {
     onTimeRemainingChanged: refreshTooltip()
     onBrightnessChanged:    refreshTooltip()
 
-    Image {
+    Text {
         anchors.centerIn: parent
-        width: 24
-        height: 24
-        sourceSize.width: 32
-        sourceSize.height: 32
-        source: Qt.resolvedUrl("../../../icons/" + root.iconFile())
-        fillMode: Image.PreserveAspectFit
-        smooth: true
+        text: root.iconChar()
+        color: Theme.textPrimary
+        font.family: "Segoe Fluent Icons"
+        font.pixelSize: 26
+        renderType: Text.NativeRendering
     }
 
     // sysfs is the cheapest, most portable source — works the same on

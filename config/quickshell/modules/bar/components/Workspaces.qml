@@ -107,7 +107,7 @@ Row {
                 anchors.centerIn: parent
                 text: cell.wsId
                 color: cell.isActive ? Theme.textPrimary : Theme.textSecondary
-                font.pixelSize: 12
+                font.pixelSize: 14
                 font.weight: cell.isActive ? Font.DemiBold : Font.Normal
             }
         }
