@@ -54,7 +54,21 @@ PanelWindow {
 
     property int batteryPct: 0
     property bool batteryPresent: false
+    property bool batteryCharging: false
     property string timeRemaining: ""
+
+    // Segoe Fluent Icons glyphs (deciles), kept in sync with the bar's
+    // BatteryIndicator so the footer flips to BatterySaver while
+    // power-saver is active and the laptop isn't plugged in.
+    readonly property var __batGlyphs:    ["\uE851","\uE852","\uE853","\uE854","\uE855","\uE856","\uE857","\uE858","\uE859","\uE83F"]
+    readonly property var __chargeGlyphs: ["\uE85B","\uE85C","\uE85D","\uE85E","\uE85F","\uE860","\uE861","\uE862","\uEA93","\uE83E"]
+    readonly property var __saverGlyphs:  ["\uE864","\uE865","\uE866","\uE867","\uE868","\uE869","\uE86A","\uE86B","\uEA94","\uEA95"]
+    function batteryGlyph() {
+        var idx = Math.max(0, Math.min(9, Math.ceil(batteryPct / 10) - 1));
+        if (batteryCharging)            return __chargeGlyphs[idx];
+        if (profile === "power-saver")  return __saverGlyphs[idx];
+        return __batGlyphs[idx];
+    }
 
     // ----- outside-click dismiss -----
     MouseArea {
@@ -133,25 +147,15 @@ PanelWindow {
                 color: "transparent"
                 visible: root.batteryPresent
 
-                Image {
+                Text {
                     id: footerBat
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    width: 26
-                    height: 26
-                    sourceSize.width: 52
-                    sourceSize.height: 52
-                    source: Qt.resolvedUrl(
-                        "../../icons/" + (
-                            root.batteryPct <= 10 ? "bat0.svg" :
-                            root.batteryPct <= 30 ? "bat1.svg" :
-                            root.batteryPct <= 55 ? "bat2.svg" :
-                            root.batteryPct <= 80 ? "bat3.svg" :
-                                                     "bat4.svg"
-                        )
-                    )
-                    fillMode: Image.PreserveAspectFit
-                    smooth: true
+                    text: root.batteryGlyph()
+                    color: Theme.textPrimary
+                    font.family: "Segoe Fluent Icons"
+                    font.pixelSize: 20
+                    renderType: Text.NativeRendering
                 }
                 Text {
                     anchors.left: footerBat.right
@@ -197,29 +201,37 @@ PanelWindow {
         }
     }
 
-    // Pulls capacity + a pre-formatted time-remaining string in one shell hop.
+    // Pulls capacity + charging state + a pre-formatted time-remaining string in one shell hop.
     Process {
         id: batteryQuery
         command: ["sh", "-c",
             "cap=$(cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n1);"
             + "[ -z \"$cap\" ] && exit 0;"
             + "echo \"pct=$cap\";"
+            + "st=$(cat /sys/class/power_supply/BAT*/status 2>/dev/null | head -n1);"
+            + "[ -n \"$st\" ] && echo \"status=$st\";"
             + "t=$(upower -i $(upower -e 2>/dev/null | grep -m1 BAT) 2>/dev/null"
             + "    | awk '/time to empty|time to full/ {sub(/^ +/, \"\"); print; exit}');"
             + "[ -n \"$t\" ] && echo \"time=$t\""]
         stdout: StdioCollector {
             onStreamFinished: {
                 var lines = text.split("\n");
-                var pct = -1, time = "";
+                var pct = -1, time = "", status = "";
                 for (var i = 0; i < lines.length; ++i) {
                     var line = lines[i];
                     if (line.indexOf("pct=") === 0) {
                         var n = parseInt(line.substring(4));
                         if (!isNaN(n)) pct = n;
+                    } else if (line.indexOf("status=") === 0) {
+                        status = line.substring(7);
                     } else if (line.indexOf("time=") === 0) {
                         time = line.substring(5);
                     }
                 }
+                // Match the bar indicator: anything but Discharging/Unknown counts as charging.
+                root.batteryCharging = (status === "Charging"
+                                     || status === "Full"
+                                     || status === "Not charging");
                 if (pct >= 0) {
                     root.batteryPct = pct;
                     root.batteryPresent = true;

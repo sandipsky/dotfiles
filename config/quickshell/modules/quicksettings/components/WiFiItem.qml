@@ -22,11 +22,13 @@ Item {
     height: expanded ? 140 : 56
     Behavior on height { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
 
-    function iconFile() {
-        if (signalStrength >= 75) return "wifi4.svg";
-        if (signalStrength >= 50) return "wifi3.svg";
-        if (signalStrength >= 25) return "wifi2.svg";
-        return "wifi1.svg";
+    // Segoe Fluent Icons signal-strength glyphs: Wifi4 E701, Wifi3 E874,
+    // Wifi2 E873, Wifi1 E872.
+    function iconChar() {
+        if (signalStrength >= 75) return "\uE701";
+        if (signalStrength >= 50) return "\uE874";
+        if (signalStrength >= 25) return "\uE873";
+        return "\uE872";
     }
 
     // ---- Row backdrop (hover + faint divider) ----
@@ -59,15 +61,13 @@ Item {
         width: 32
         height: 56
 
-        Image {
+        Text {
             anchors.centerIn: parent
-            width: 22
-            height: 22
-            sourceSize.width: 44
-            sourceSize.height: 44
-            source: Qt.resolvedUrl("../../../icons/" + root.iconFile())
-            fillMode: Image.PreserveAspectFit
-            smooth: true
+            text: root.iconChar()
+            color: Theme.textPrimary
+            font.family: "Segoe Fluent Icons"
+            font.pixelSize: 18
+            renderType: Text.NativeRendering
         }
 
         // Small lock badge for secured networks

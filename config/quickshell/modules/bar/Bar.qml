@@ -49,6 +49,14 @@ PanelWindow {
     // the right side push text + screen-x into it on hover.
     property var tooltip
 
+    // Optimistic power-profile override pushed in from shell.qml whenever
+    // the BatteryQuickSettings tile cycles the profile. Lets the battery
+    // glyph flip to the BatterySaver family without waiting for the
+    // indicator's own 10-second poll.
+    function setPowerProfile(p) {
+        if (p && p.length > 0) battery.profile = p;
+    }
+
     Rectangle {
         id: bar
         anchors.fill: parent
@@ -126,6 +134,7 @@ PanelWindow {
             }
 
             BatteryIndicator {
+                id: battery
                 tooltip: root.tooltip
                 onClicked: root.toggleBatteryQS()
             }

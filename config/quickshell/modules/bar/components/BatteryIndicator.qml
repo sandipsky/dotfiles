@@ -17,6 +17,7 @@ Rectangle {
     property bool charging: false
     property string timeRemaining: ""   // e.g. "1hr 24min remaining" or ""
     property int  brightness: -1        // -1 = no backlight detected
+    property string profile: ""         // powerprofilesctl: power-saver | balanced | performance
 
     property var tooltip
     signal clicked()
@@ -29,21 +30,19 @@ Rectangle {
         onTapped: root.clicked()
     }
 
-    // Segoe Fluent Icons glyphs. Discharging: Battery0..Battery10 (E850..E859,E83F).
-    // Charging: BatteryCharging0..10 (E85A..E862,E83E).
+    // Segoe Fluent Icons glyphs, indexed 0..9 \u2192 battery levels 1..10 (deciles).
+    // Discharging: Battery1..Battery10  (E851..E859, E83F)
+    // Charging:    BatteryCharging1..10 (E85B..E862, EA93, E83E)
+    // Power-saver: BatterySaver1..10    (E864..E86B, EA94, EA95)
+    readonly property var __batGlyphs:    ["\uE851","\uE852","\uE853","\uE854","\uE855","\uE856","\uE857","\uE858","\uE859","\uE83F"]
+    readonly property var __chargeGlyphs: ["\uE85B","\uE85C","\uE85D","\uE85E","\uE85F","\uE860","\uE861","\uE862","\uEA93","\uE83E"]
+    readonly property var __saverGlyphs:  ["\uE864","\uE865","\uE866","\uE867","\uE868","\uE869","\uE86A","\uE86B","\uEA94","\uEA95"]
+
     function iconChar() {
-        if (charging) {
-            if (percentage <= 10) return "\uE85A";
-            if (percentage <= 30) return "\uE85C";
-            if (percentage <= 55) return "\uE85F";
-            if (percentage <= 80) return "\uE861";
-            return "\uE83E";
-        }
-        if (percentage <= 10) return "\uE850";
-        if (percentage <= 30) return "\uE852";
-        if (percentage <= 55) return "\uE855";
-        if (percentage <= 80) return "\uE857";
-        return "\uE83F";
+        var idx = Math.max(0, Math.min(9, Math.ceil(percentage / 10) - 1));
+        if (charging)                       return __chargeGlyphs[idx];
+        if (profile === "power-saver")      return __saverGlyphs[idx];
+        return __batGlyphs[idx];
     }
 
     function tooltipText() {
@@ -101,6 +100,7 @@ Rectangle {
             statusQuery.running = true;
             timeQuery.running = true;
             brightnessQuery.running = true;
+            profileQuery.running = true;
         }
     }
 
@@ -171,6 +171,19 @@ Rectangle {
                 var pretty = (h > 0 ? h + "hr " : "") + (mn > 0 || h === 0 ? mn + "min" : "").trim();
                 pretty = pretty.trim();
                 root.timeRemaining = pretty + (direction === "full" ? " to full" : " remaining");
+            }
+        }
+    }
+
+    // Active power profile — used to swap the bar glyph to the BatterySaver
+    // family when the user has toggled power-saver and isn't currently plugged in.
+    Process {
+        id: profileQuery
+        command: ["sh", "-c", "powerprofilesctl get 2>/dev/null"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                var p = text.trim();
+                if (p.length > 0) root.profile = p;
             }
         }
     }

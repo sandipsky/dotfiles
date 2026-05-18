@@ -5,6 +5,8 @@ Item {
     id: root
 
     property string iconSource: ""
+    // When set, renders a Segoe Fluent Icons glyph in place of iconSource.
+    property string iconChar: ""
     property real value: 0      // 0..1
     property real minValue: 0
     property real maxValue: 1
@@ -25,13 +27,26 @@ Item {
         source: root.iconSource
         fillMode: Image.PreserveAspectFit
         smooth: true
-        visible: source.toString().length > 0
+        visible: root.iconChar.length === 0 && source.toString().length > 0
+    }
+
+    Text {
+        id: leftGlyph
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        text: root.iconChar
+        color: Theme.textPrimary
+        font.family: "Segoe Fluent Icons"
+        font.pixelSize: 16
+        renderType: Text.NativeRendering
+        visible: root.iconChar.length > 0
     }
 
     Item {
         id: trackArea
-        anchors.left: leftIcon.visible ? leftIcon.right : parent.left
-        anchors.leftMargin: leftIcon.visible ? 14 : 0
+        anchors.left: leftGlyph.visible ? leftGlyph.right
+                       : (leftIcon.visible ? leftIcon.right : parent.left)
+        anchors.leftMargin: (leftGlyph.visible || leftIcon.visible) ? 14 : 0
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         height: parent.height

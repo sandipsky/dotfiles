@@ -38,7 +38,16 @@ ShellRoot {
         if (keep !== networkQS) networkQS.open = false;
     }
 
+    // Forward power-profile changes from the quick-settings tile to the bar
+    // so the battery glyph (BatterySaver family) updates instantly instead
+    // of waiting for the bar indicator's own 10 s poll.
+    Connections {
+        target: batteryQS
+        function onProfileChanged() { bar.setPowerProfile(batteryQS.profile); }
+    }
+
     Bar {
+        id: bar
         startMenuOpen:  startmenu.open
         launcherOpen:   launcher.open
         clipboardOpen:  clipboard.open

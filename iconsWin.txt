@@ -1,5 +1,4 @@
 Battery Saver
- UE863
  UE864
  UE865
  UE866
@@ -12,7 +11,6 @@ Battery Saver
  UEA95
 
 Battery Charge
- UE85A
  UE85B
  UE85C
  UE85D
@@ -25,7 +23,6 @@ Battery Charge
  UEA93
 
 Battery
- UE850
  UE851
  UE852
  UE853

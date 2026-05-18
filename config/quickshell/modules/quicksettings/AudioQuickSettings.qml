@@ -70,15 +70,12 @@ PanelWindow {
 
             SettingSlider {
                 Layout.fillWidth: true
-                iconSource: Qt.resolvedUrl(
-                    "../../icons/" + (
-                        root.muted ? "vol-mute.svg" :
-                        root.volume * 100 < 1  ? "vol-mute.svg" :
-                        root.volume * 100 < 34 ? "vol1.svg" :
-                        root.volume * 100 < 67 ? "vol2.svg" :
-                                                  "vol3.svg"
-                    )
-                )
+                // Segoe Fluent Icons: Mute E74F / Volume1..3 E993..E995.
+                iconChar: root.muted                  ? "\uE74F" :
+                          root.volume * 100 < 1       ? "\uE74F" :
+                          root.volume * 100 < 34      ? "\uE993"  :
+                          root.volume * 100 < 67      ? "\uE994"  :
+                                                        "\uE995"
                 minValue: 0
                 maxValue: 1
                 value: root.volume
