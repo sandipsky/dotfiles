@@ -33,8 +33,8 @@ Rectangle {
     function iconChar() {
         if (conn === "ethernet") return "\uE839";
         if (conn === "wifi") {
-            if (wifiSignal >= 75) return "\uE701";
-            if (wifiSignal >= 50) return "\uE874";
+            if (wifiSignal >= 60) return "\uE701";
+            if (wifiSignal >= 40) return "\uE874";
             if (wifiSignal >= 25) return "\uE873";
             if (wifiSignal > 0)   return "\uE872";
             return "\uE871";

@@ -107,8 +107,10 @@ Row {
                 anchors.centerIn: parent
                 text: cell.wsId
                 color: cell.isActive ? Theme.textPrimary : Theme.textSecondary
-                font.pixelSize: 14
-                font.weight: cell.isActive ? Font.DemiBold : Font.Normal
+                font.family: Theme.fontFamily
+                font.styleName: Theme.fontStyle
+                font.pixelSize: 15
+                font.weight: cell.isActive ? Font.Bold : Font.Normal
             }
         }
     }

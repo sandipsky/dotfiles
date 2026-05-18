@@ -167,6 +167,8 @@ PanelWindow {
                               ? ": " + root.timeRemaining
                               : "")
                     color: Theme.textPrimary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
                     font.pixelSize: 13
                     font.weight: Font.DemiBold
                     elide: Text.ElideRight

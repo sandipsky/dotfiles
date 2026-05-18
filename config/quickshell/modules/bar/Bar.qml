@@ -96,7 +96,7 @@ PanelWindow {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.leftMargin: 6
-            spacing: 6
+            spacing: 2
 
             StartButton {
                 Layout.alignment: Qt.AlignVCenter

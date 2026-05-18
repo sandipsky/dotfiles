@@ -65,7 +65,9 @@ Rectangle {
                         anchors.verticalCenter: parent.verticalCenter
                         text: modelData.label
                         color: Theme.textPrimary
-                        font.pixelSize: 13
+                        font.family: Theme.fontFamily
+                        font.styleName: Theme.fontStyle
+                        font.pixelSize: 15
                     }
                 }
             }

@@ -16,7 +16,7 @@ Rectangle {
 
     color: Theme.startmenuSearchInputBg
     radius: height / 2
-    border.color: input.activeFocus ? Theme.textPrimary : Theme.startmenuSearchBorder
+    border.color:  Theme.startmenuSearchBorder
     border.width: 1
 
     Image {
@@ -46,7 +46,9 @@ Rectangle {
         color: Theme.textPrimary
         placeholderText: "Search for apps"
         placeholderTextColor: Theme.startmenuSearchPlaceholder
-        font.pixelSize: 13
+        font.family: Theme.fontFamily
+        font.styleName: Theme.fontStyle
+        font.pixelSize: 16
         selectByMouse: true
         verticalAlignment: TextInput.AlignVCenter
         focus: true

@@ -126,6 +126,8 @@ PanelWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Clipboard"
                     color: Theme.textPrimary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
                     font.pixelSize: 15
                     font.weight: Font.DemiBold
                 }
@@ -154,6 +156,8 @@ PanelWindow {
                         anchors.centerIn: parent
                         text: "Clear All"
                         color: Theme.textPrimary
+                        font.family: Theme.fontFamily
+                        font.styleName: Theme.fontStyle
                         font.pixelSize: 13
                     }
                 }
@@ -206,6 +210,8 @@ PanelWindow {
                     visible: root.entries.length === 0
                     text: "Clipboard history is empty"
                     color: Theme.textSecondary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
                     font.pixelSize: 13
                 }
             }

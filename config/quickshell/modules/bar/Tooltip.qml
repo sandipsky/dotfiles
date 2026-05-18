@@ -57,6 +57,8 @@ PanelWindow {
             anchors.centerIn: parent
             text: root.text
             color: Theme.textPrimary
+            font.family: Theme.fontFamily
+            font.styleName: Theme.fontStyle
             font.pixelSize: 12
             horizontalAlignment: Text.AlignHCenter
             lineHeight: 1.2

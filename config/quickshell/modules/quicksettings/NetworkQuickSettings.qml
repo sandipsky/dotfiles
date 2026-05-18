@@ -111,6 +111,8 @@ PanelWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     text: "Wi-Fi"
                     color: Theme.textPrimary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
                     font.pixelSize: 14
                     font.weight: Font.DemiBold
                 }
@@ -150,6 +152,8 @@ PanelWindow {
             Text {
                 text: "Wi-Fi is off"
                 color: Theme.textPrimary
+                font.family: Theme.fontFamily
+                font.styleName: Theme.fontStyle
                 font.pixelSize: 18
                 font.weight: Font.DemiBold
             }
@@ -158,6 +162,8 @@ PanelWindow {
                 wrapMode: Text.WordWrap
                 text: "Turn on Wi-Fi to connect to an available Wi-Fi network."
                 color: Theme.textSecondary
+                font.family: Theme.fontFamily
+                font.styleName: Theme.fontStyle
                 font.pixelSize: 13
                 lineHeight: 1.2
             }

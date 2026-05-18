@@ -41,7 +41,9 @@ Rectangle {
         color: Theme.textPrimary
         placeholderText: "Search..."
         placeholderTextColor: Theme.startmenuSearchPlaceholder
-        font.pixelSize: 18
+        font.family: Theme.fontFamily
+        font.styleName: Theme.fontStyle
+        font.pixelSize: 20
         selectByMouse: true
         verticalAlignment: TextInput.AlignVCenter
         focus: true

@@ -46,7 +46,7 @@ Rectangle {
             + "\n" + timeText();
     }
 
-    width: label.implicitWidth + 20
+    width: label.implicitWidth + 10
     height: 32
     radius: 6
     color: (hover.hovered || root.active) ? Theme.hoverBg : "transparent"
@@ -82,7 +82,9 @@ Rectangle {
         anchors.centerIn: parent
         text: root.altFormat ? root.dateText() : root.timeText()
         color: Theme.textPrimary
-        font.pixelSize: 14
+        font.family: Theme.fontFamily
+        font.styleName: "Bold"
+        font.pixelSize: 15
     }
 
     // Tick every second so the minute rolls over promptly without

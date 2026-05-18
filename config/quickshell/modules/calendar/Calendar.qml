@@ -141,6 +141,8 @@ PanelWindow {
                         + ", " + root.monthNames[root.today.getMonth()]
                         + " "  + root.today.getDate()
                     color: Theme.textPrimary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
                     font.pixelSize: 15
                     font.weight: Font.DemiBold
                 }
@@ -157,6 +159,8 @@ PanelWindow {
                     anchors.verticalCenter: parent.verticalCenter
                     text: root.monthNames[root.viewMonth] + " " + root.viewYear
                     color: Theme.textPrimary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
                     font.pixelSize: 14
                     font.weight: Font.DemiBold
                 }
@@ -179,6 +183,8 @@ PanelWindow {
                             anchors.centerIn: parent
                             text: "▲"
                             color: Theme.textSecondary
+                            font.family: Theme.fontFamily
+                            font.styleName: Theme.fontStyle
                             font.pixelSize: 9
                         }
                     }
@@ -194,6 +200,8 @@ PanelWindow {
                             anchors.centerIn: parent
                             text: "▼"
                             color: Theme.textPrimary
+                            font.family: Theme.fontFamily
+                            font.styleName: Theme.fontStyle
                             font.pixelSize: 9
                         }
                     }
@@ -221,6 +229,8 @@ PanelWindow {
                                 anchors.centerIn: parent
                                 text: modelData
                                 color: Theme.textPrimary
+                                font.family: Theme.fontFamily
+                                font.styleName: Theme.fontStyle
                                 font.pixelSize: 13
                             }
                         }
@@ -274,6 +284,8 @@ PanelWindow {
                                     color: isToday
                                         ? Theme.calendarTodayText
                                         : (isCurrent ? Theme.textPrimary : Theme.calendarDimText)
+                                    font.family: Theme.fontFamily
+                                    font.styleName: Theme.fontStyle
                                     font.pixelSize: 13
                                 }
                             }

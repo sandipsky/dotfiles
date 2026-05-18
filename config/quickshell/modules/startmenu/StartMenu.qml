@@ -26,6 +26,13 @@ PanelWindow {
     property bool open: true
     visible: open
 
+    onOpenChanged: {
+        if (open) {
+            searchBar.clear();
+            searchBar.focusInput();
+        }
+    }
+
     function close() {
         menu.closeDropdowns();
         open = false;
@@ -43,8 +50,8 @@ PanelWindow {
 
     Rectangle {
         id: menu
-        width: 560
-        height: 760
+        width: 420
+        height: 680
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 60
         anchors.left: parent.left
@@ -70,9 +77,9 @@ PanelWindow {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.topMargin: 28
-            anchors.leftMargin: 28
-            anchors.rightMargin: 28
+            anchors.topMargin: 24
+            anchors.leftMargin: 16
+            anchors.rightMargin: 16
             anchors.bottomMargin: 0
             spacing: 24
 

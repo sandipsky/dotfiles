@@ -28,6 +28,8 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         text: root.preview
         color: Theme.textPrimary
+        font.family: Theme.fontFamily
+        font.styleName: Theme.fontStyle
         font.pixelSize: 13
         elide: Text.ElideRight
         maximumLineCount: 1

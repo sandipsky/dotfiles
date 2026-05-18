@@ -97,6 +97,8 @@ Item {
         verticalAlignment: Text.AlignVCenter
         text: root.ssid
         color: Theme.textPrimary
+        font.family: Theme.fontFamily
+        font.styleName: Theme.fontStyle
         font.pixelSize: 13
         font.weight: root.inUse ? Font.DemiBold : Font.Normal
         elide: Text.ElideRight
@@ -140,6 +142,8 @@ Item {
                     anchors.centerIn: parent
                     text: "Connect"
                     color: Theme.textPrimary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
                     font.pixelSize: 12
                 }
             }
@@ -166,6 +170,8 @@ Item {
                     anchors.centerIn: parent
                     text: "Cancel"
                     color: Theme.textSecondary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
                     font.pixelSize: 12
                 }
             }
@@ -176,6 +182,8 @@ Item {
             Text {
                 text: "Connected"
                 color: Theme.textSecondary
+                font.family: Theme.fontFamily
+                font.styleName: Theme.fontStyle
                 font.pixelSize: 12
             }
         }
@@ -200,6 +208,8 @@ Item {
             anchors.topMargin: 2
             text: "Enter the password"
             color: Theme.textSecondary
+            font.family: Theme.fontFamily
+            font.styleName: Theme.fontStyle
             font.pixelSize: 12
         }
 
@@ -220,6 +230,8 @@ Item {
                 anchors.leftMargin: 10
                 anchors.rightMargin: 10
                 verticalAlignment: TextInput.AlignVCenter
+                font.family: Theme.fontFamily
+                font.styleName: Theme.fontStyle
                 font.pixelSize: 13
                 color: Theme.textPrimary
                 clip: true
@@ -261,6 +273,8 @@ Item {
                 anchors.centerIn: parent
                 text: "Connect"
                 color: "#ffffff"
+                font.family: Theme.fontFamily
+                font.styleName: Theme.fontStyle
                 font.pixelSize: 12
                 font.weight: Font.DemiBold
             }

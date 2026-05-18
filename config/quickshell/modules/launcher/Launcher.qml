@@ -26,6 +26,13 @@ PanelWindow {
     property bool open: true
     visible: open
 
+    onOpenChanged: {
+        if (open) {
+            input.text = "";
+            results.selectedIndex = 0;
+        }
+    }
+
     function close() { open = false; }
 
     Keys.onEscapePressed: root.close()
@@ -59,7 +66,7 @@ PanelWindow {
     Rectangle {
         id: launcher
 
-        width: 640
+        width: 720
         x: (parent.width - width) / 2
         y: parent.height * 0.20
 
@@ -84,7 +91,7 @@ PanelWindow {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            height: 60
+            height: 54
 
             onAccepted: launcher.activateSelected()
             onEscapePressed: root.close()

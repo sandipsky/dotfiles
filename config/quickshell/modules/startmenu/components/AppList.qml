@@ -108,7 +108,9 @@ Item {
                     anchors.centerIn: parent
                     text: root.filter.length > 0 ? "No results" : "No applications found"
                     color: Theme.textSecondary
-                    font.pixelSize: 13
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
+                    font.pixelSize: 16
                 }
             }
 
@@ -143,6 +145,8 @@ Item {
                             anchors.verticalCenter: parent.verticalCenter
                             text: firstChar
                             color: Theme.textPrimary
+                            font.family: Theme.fontFamily
+                            font.styleName: Theme.fontStyle
                             font.pixelSize: 14
                             font.weight: Font.DemiBold
                         }
@@ -185,13 +189,17 @@ Item {
                                 Text {
                                     text: modelData.name || modelData.id || ""
                                     color: Theme.textPrimary
-                                    font.pixelSize: 13
+                                    font.family: Theme.fontFamily
+                                    font.styleName: Theme.fontStyle
+                                    font.pixelSize: 16
                                 }
                                 Text {
                                     text: modelData.genericName || ""
                                     visible: text.length > 0 && text !== (modelData.name || "")
                                     color: Theme.textSecondary
-                                    font.pixelSize: 11
+                                    font.family: Theme.fontFamily
+                                    font.styleName: Theme.fontStyle
+                                    font.pixelSize: 13
                                 }
                             }
                         }

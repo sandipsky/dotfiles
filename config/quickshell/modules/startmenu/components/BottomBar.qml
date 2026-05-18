@@ -23,7 +23,7 @@ Rectangle {
         anchors.leftMargin: 12
         anchors.verticalCenter: parent.verticalCenter
         height: 48
-        width: userRow.implicitWidth + 24
+        width: userRow.implicitWidth
         radius: 6
         color: userHover.hovered ? Theme.hoverBg : "transparent"
 
@@ -62,7 +62,9 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 text: "Sandip Shakya"
                 color: Theme.textPrimary
-                font.pixelSize: 13
+                font.family: Theme.fontFamily
+                font.styleName: "Bold"
+                font.pixelSize: 16
             }
         }
     }

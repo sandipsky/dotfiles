@@ -33,7 +33,10 @@ QtObject {
     readonly property color barAccent: "#0078d4"
 
     readonly property real menuRadius: 10
-    readonly property real launcherRadius: 12
+    readonly property real launcherRadius: 28
     readonly property real calendarRadius: 10
     readonly property int  barHeight: 40
+
+    readonly property string fontFamily: "Fira Sans"
+    readonly property string fontStyle: "Book"
 }

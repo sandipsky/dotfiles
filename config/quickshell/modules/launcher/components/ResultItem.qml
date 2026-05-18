@@ -77,7 +77,9 @@ Rectangle {
             Text {
                 text: item ? item.title : ""
                 color: Theme.textPrimary
-                font.pixelSize: 14
+                font.family: Theme.fontFamily
+                font.styleName: Theme.fontStyle
+                font.pixelSize: 17
                 elide: Text.ElideRight
                 width: root.width - 70
             }
@@ -85,7 +87,9 @@ Rectangle {
                 text: item ? (item.subtitle || "") : ""
                 visible: text.length > 0
                 color: Theme.textSecondary
-                font.pixelSize: 11
+                font.family: Theme.fontFamily
+                font.styleName: Theme.fontStyle
+                font.pixelSize: 15
                 elide: Text.ElideRight
                 width: root.width - 70
             }

@@ -52,6 +52,8 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         text: root.label
         color: Theme.textPrimary
+        font.family: Theme.fontFamily
+        font.styleName: Theme.fontStyle
         font.pixelSize: 13
         font.weight: Font.DemiBold
         elide: Text.ElideRight
@@ -64,6 +66,8 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         text: "›"
         color: Theme.textPrimary
+        font.family: Theme.fontFamily
+        font.styleName: Theme.fontStyle
         font.pixelSize: 20
         font.weight: Font.Light
         visible: root.showChevron
