@@ -1,0 +1,14 @@
+Headphone / Headset
+uE7F6 (Headphone)
+uEA32 (Headset)
+
+Notification
+uF2A3 ( bell )
+uF285 ( do not disturb)
+
+Power
+uE7E8 (power/shutdown)
+uE72E (lock)
+uE7E8 (restart)
+uE708 (sleep)
+uF3B1 (signout)

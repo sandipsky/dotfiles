@@ -71,11 +71,11 @@ PanelWindow {
             SettingSlider {
                 Layout.fillWidth: true
                 // Segoe Fluent Icons: Mute E74F / Volume1..3 E993..E995.
-                iconChar: root.muted                  ? "\uE74F" :
-                          root.volume * 100 < 1       ? "\uE74F" :
-                          root.volume * 100 < 34      ? "\uE993"  :
-                          root.volume * 100 < 67      ? "\uE994"  :
-                                                        "\uE995"
+                iconChar: root.muted                  ? "" :
+                          root.volume * 100 < 1       ? "" :
+                          root.volume * 100 < 34      ? ""  :
+                          root.volume * 100 < 67      ? ""  :
+                                                        ""
                 minValue: 0
                 maxValue: 1
                 value: root.volume

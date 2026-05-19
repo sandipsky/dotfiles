@@ -16,6 +16,8 @@ Rectangle {
     // these commands for `pactl` equivalents.
     property real volume: 0     // 0.0 .. 1.0
     property bool muted: false
+    // "speakers" | "headphone" | "headset", driven by deviceQuery.
+    property string device: "speakers"
     property var tooltip
     signal clicked()
 
@@ -26,6 +28,8 @@ Rectangle {
 
     function iconChar() {
         if (muted) return "\uE74F";
+        if (device === "headset")   return "\uE95B";  // Headset (MDL2 fallback; EA32 missing in font)
+        if (device === "headphone") return "\uE7F6";  // Headphone
         var pct = volume * 100;
         if (pct < 1)  return "\uE74F";
         if (pct < 34) return "\uE993";
@@ -82,7 +86,7 @@ Rectangle {
     // muted — the mute icon shouldn't carry phantom arcs.
     Text {
         anchors.centerIn: parent
-        visible: !root.muted
+        visible: !root.muted && root.device === "speakers"
         text: "\uE995"
         color: Theme.textSecondary
         opacity: 0.35
@@ -118,6 +122,41 @@ Rectangle {
                 root.muted = t.indexOf("[MUTED]") !== -1;
                 var m = t.match(/Volume:\s*([0-9.]+)/);
                 if (m) root.volume = parseFloat(m[1]);
+            }
+        }
+    }
+
+    // Detects whether the active sink is a headset / headphone / speakers
+    // by checking both the sink name (catches bluetooth profiles) and the
+    // active port (catches wired headphone jacks on the same card).
+    Timer {
+        running: true
+        interval: 2000
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: deviceQuery.running = true
+    }
+    Process {
+        id: deviceQuery
+        command: ["sh", "-c",
+            "sink=$(pactl get-default-sink 2>/dev/null);"
+            + "[ -z \"$sink\" ] && exit 0;"
+            + "port=$(pactl list sinks 2>/dev/null | awk -v s=\"$sink\" '"
+            + "  $1==\"Name:\" && $2==s {found=1; next}"
+            + "  /^Sink #/ {found=0}"
+            + "  found && /Active Port:/ {sub(/.*: /, \"\"); print; exit}"
+            + "');"
+            + "echo \"$sink $port\" | tr '[:upper:]' '[:lower:]'"
+        ]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                var t = text.trim();
+                if (t.indexOf("headset") !== -1) root.device = "headset";
+                else if (t.indexOf("headphone") !== -1
+                      || t.indexOf("a2dp") !== -1
+                      || t.indexOf("hsp") !== -1
+                      || t.indexOf("hfp") !== -1) root.device = "headphone";
+                else root.device = "speakers";
             }
         }
     }

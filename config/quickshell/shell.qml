@@ -13,10 +13,11 @@ ShellRoot {
     Launcher              { id: launcher;      open: false }
     Calendar              { id: calendar;      open: false }
     Clipboard             { id: clipboard;     open: false }
-    BatteryQuickSettings  { id: batteryQS;     open: false }
-    AudioQuickSettings    { id: audioQS;       open: false }
-    NetworkQuickSettings  { id: networkQS;     open: false }
-    Tooltip               { id: tooltip }
+    BatteryQuickSettings    { id: batteryQS;     open: false }
+    AudioQuickSettings      { id: audioQS;       open: false }
+    NetworkQuickSettings    { id: networkQS;     open: false }
+    BluetoothQuickSettings  { id: bluetoothQS;   open: false }
+    Tooltip                 { id: tooltip }
 
     IpcHandler {
         target: "launcher"
@@ -30,12 +31,20 @@ ShellRoot {
         target: "clipboard"
         function toggle(): void { clipboard.open = !clipboard.open; }
     }
+    IpcHandler {
+        target: "bluetoothqs"
+        function toggle(): void {
+            closeOtherQS(bluetoothQS);
+            bluetoothQS.open = !bluetoothQS.open;
+        }
+    }
 
     // Only one Quick Settings flyout should be visible at a time.
     function closeOtherQS(keep) {
-        if (keep !== batteryQS) batteryQS.open = false;
-        if (keep !== audioQS)   audioQS.open   = false;
-        if (keep !== networkQS) networkQS.open = false;
+        if (keep !== batteryQS)   batteryQS.open   = false;
+        if (keep !== audioQS)     audioQS.open     = false;
+        if (keep !== networkQS)   networkQS.open   = false;
+        if (keep !== bluetoothQS) bluetoothQS.open = false;
     }
 
     // Forward power-profile changes from the quick-settings tile to the bar
@@ -48,14 +57,15 @@ ShellRoot {
 
     Bar {
         id: bar
-        startMenuOpen:  startmenu.open
-        launcherOpen:   launcher.open
-        clipboardOpen:  clipboard.open
-        calendarOpen:   calendar.open
-        batteryQSOpen:  batteryQS.open
-        audioQSOpen:    audioQS.open
-        networkQSOpen:  networkQS.open
-        tooltip:        tooltip
+        startMenuOpen:   startmenu.open
+        launcherOpen:    launcher.open
+        clipboardOpen:   clipboard.open
+        calendarOpen:    calendar.open
+        batteryQSOpen:   batteryQS.open
+        audioQSOpen:     audioQS.open
+        networkQSOpen:   networkQS.open
+        bluetoothQSOpen: bluetoothQS.open
+        tooltip:         tooltip
 
         onToggleStartMenu: startmenu.open = !startmenu.open
         onToggleLauncher:  launcher.open  = !launcher.open
@@ -72,6 +82,10 @@ ShellRoot {
         onToggleNetworkQS: {
             closeOtherQS(networkQS);
             networkQS.open = !networkQS.open;
+        }
+        onToggleBluetoothQS: {
+            closeOtherQS(bluetoothQS);
+            bluetoothQS.open = !bluetoothQS.open;
         }
     }
 }

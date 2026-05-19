@@ -34,6 +34,7 @@ PanelWindow {
     signal toggleBatteryQS()
     signal toggleAudioQS()
     signal toggleNetworkQS()
+    signal toggleBluetoothQS()
 
     // Active states — driven by the owning ShellRoot so the corresponding
     // button highlights while its panel is open.
@@ -44,6 +45,7 @@ PanelWindow {
     property bool batteryQSOpen: false
     property bool audioQSOpen: false
     property bool networkQSOpen: false
+    property bool bluetoothQSOpen: false
 
     // Shared tooltip overlay (instantiated in shell.qml). Indicators on
     // the right side push text + screen-x into it on hover.
