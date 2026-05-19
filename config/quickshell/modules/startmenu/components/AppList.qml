@@ -6,6 +6,7 @@ Item {
     id: root
 
     property string filter: ""
+    property int selectedIndex: 0
     signal appLaunched()
 
     readonly property var entries: {
@@ -34,6 +35,7 @@ Item {
         flick.targetY = 0;
         scrollAnim.enabled = false;
         flick.contentY = 0;
+        selectedIndex = 0;
     }
 
     function launch(entry) {
@@ -41,6 +43,37 @@ Item {
             entry.execute();
             root.appLaunched();
         }
+    }
+
+    function moveSelection(delta) {
+        var n = entries.length;
+        if (n === 0) return;
+        selectedIndex = (selectedIndex + delta + n) % n;
+        ensureSelectedVisible();
+    }
+
+    function launchSelected() {
+        if (entries.length === 0) return;
+        var i = Math.max(0, Math.min(entries.length - 1, selectedIndex));
+        launch(entries[i]);
+    }
+
+    function ensureSelectedVisible() {
+        var item = repeater.itemAt(selectedIndex);
+        if (!item) return;
+        var top = item.y;
+        var bottom = top + item.height;
+        var newY = flick.contentY;
+        if (top < flick.contentY) {
+            newY = top;
+        } else if (bottom > flick.contentY + flick.height) {
+            newY = bottom - flick.height;
+        } else {
+            return;
+        }
+        scrollAnim.enabled = true;
+        flick.contentY = newY;
+        flick.targetY = newY;
     }
 
     Flickable {
@@ -51,9 +84,7 @@ Item {
         clip: true
         // Must stay true for touchpad 2-finger gesture scrolling to work
         // (Wayland routes touchpad scroll through the Flickable's input
-        // path, not just WheelHandler). Mouse drag-from-content is
-        // suppressed separately by each row's TapHandler grabbing presses
-        // with gesturePolicy: ReleaseWithinBounds.
+        // path as touch/drag events, not wheel events).
         interactive: true
         boundsBehavior: Flickable.StopAtBounds
         flickDeceleration: 6000
@@ -64,7 +95,26 @@ Item {
         Behavior on contentY {
             id: scrollAnim
             enabled: false
-            NumberAnimation { duration: 220; easing.type: Easing.OutCubic }
+            NumberAnimation { duration: 480; easing.type: Easing.OutQuart }
+        }
+
+        // Touchpad sensitivity boost: Flickable tracks drag input 1:1, so to
+        // make 2-finger touchpad gestures scroll further per finger movement
+        // we add an extra delta on every contentY change that came from a
+        // user drag. inAmplify guards against re-entry.
+        readonly property real touchpadBoost: 2.4
+        property bool inAmplify: false
+        property real lastDragY: 0
+        onDraggingChanged: if (dragging) lastDragY = contentY
+        onContentYChanged: {
+            if (inAmplify || !dragging) return;
+            var delta = contentY - lastDragY;
+            if (delta === 0) return;
+            inAmplify = true;
+            var maxY = Math.max(0, contentHeight - height);
+            contentY = Math.max(0, Math.min(maxY, contentY + delta * touchpadBoost));
+            lastDragY = contentY;
+            inAmplify = false;
         }
 
         WheelHandler {
@@ -72,13 +122,18 @@ Item {
             onWheel: (event) => {
                 var dy = 0;
                 // Touchpad 2-finger / hi-res wheel: pixel-precise deltas.
-                // Track them 1:1 (no easing fight, follows the fingers).
+                // Track them 1:1 (no easing fight, follows the fingers),
+                // with a small multiplier for snappier feel.
                 if (event.pixelDelta && event.pixelDelta.y !== 0) {
-                    dy = -event.pixelDelta.y;
+                    // Match the touchpad drag amplification (1 + touchpadBoost).
+                    dy = -event.pixelDelta.y * (1 + flick.touchpadBoost);
                     scrollAnim.enabled = false;
                 } else if (event.angleDelta.y !== 0) {
                     // Discrete mouse wheel notches → stepped + animated.
-                    var step = 80;
+                    // Natural ~140 px line × (1 + touchpadBoost) so each notch
+                    // covers a bit more than an amplified touchpad gesture,
+                    // since the wheel only ticks discretely.
+                    var step = 140 * (1 + flick.touchpadBoost);
                     dy = -event.angleDelta.y / 120 * step;
                     scrollAnim.enabled = true;
                 } else {
@@ -115,6 +170,7 @@ Item {
             }
 
             Repeater {
+                id: repeater
                 model: root.entries
                 delegate: Column {
                     width: list.width
@@ -132,7 +188,7 @@ Item {
                         if (!/[A-Z]/.test(p)) p = "#";
                         return p !== firstChar;
                     }
-                    readonly property bool isHighlighted: root.filter.length > 0 && index === 0
+                    readonly property bool isHighlighted: index === root.selectedIndex
 
                     Item {
                         width: list.width

@@ -81,8 +81,8 @@ PanelWindow {
         width: 320
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.rightMargin: 12
-        anchors.bottomMargin: 60
+        anchors.rightMargin: 8
+        anchors.bottomMargin: 46
 
         height: column.implicitHeight + 28
 
@@ -154,7 +154,7 @@ PanelWindow {
                     text: root.batteryGlyph()
                     color: Theme.textPrimary
                     font.family: "Segoe Fluent Icons"
-                    font.pixelSize: 20
+                    font.pixelSize: 28
                     renderType: Text.NativeRendering
                 }
                 Text {
@@ -169,7 +169,7 @@ PanelWindow {
                     color: Theme.textPrimary
                     font.family: Theme.fontFamily
                     font.styleName: Theme.fontStyle
-                    font.pixelSize: 13
+                    font.pixelSize: 16
                     font.weight: Font.DemiBold
                     elide: Text.ElideRight
                 }

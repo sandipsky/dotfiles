@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
+import Quickshell.Widgets
 import "../../styles"
 import "components"
 
@@ -48,14 +49,14 @@ PanelWindow {
         onPressed: root.close()
     }
 
-    Rectangle {
+    ClippingRectangle {
         id: menu
         width: 420
         height: 680
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 60
+        anchors.bottomMargin: 46
         anchors.left: parent.left
-        anchors.leftMargin: 12
+        anchors.leftMargin: 8
 
         color: Theme.startmenuBg
         radius: Theme.menuRadius
@@ -65,6 +66,8 @@ PanelWindow {
         function closeDropdowns() {
             userDropdown.visible = false;
             powerDropdown.visible = false;
+            bottomBar.userActive = false;
+            bottomBar.powerActive = false;
         }
         readonly property bool anyDropdownOpen: userDropdown.visible || powerDropdown.visible
 
@@ -90,14 +93,13 @@ PanelWindow {
 
                 onAccepted: {
                     if (appList.entries.length > 0) {
-                        var first = appList.entries[0];
-                        if (first && first.execute) {
-                            first.execute();
-                            root.close();
-                        }
+                        appList.launchSelected();
+                        root.close();
                     }
                 }
                 onEscapePressed: root.close()
+                onUpPressed: appList.moveSelection(-1)
+                onDownPressed: appList.moveSelection(1)
             }
 
             AppList {
@@ -112,18 +114,20 @@ PanelWindow {
                 id: bottomBar
                 Layout.fillWidth: true
                 Layout.preferredHeight: 72
-                Layout.leftMargin: -28
-                Layout.rightMargin: -28
+                Layout.leftMargin: -16
+                Layout.rightMargin: -16
 
                 onToggleUserMenu: {
                     var openTo = !userDropdown.visible;
                     menu.closeDropdowns();
                     userDropdown.visible = openTo;
+                    bottomBar.userActive = openTo;
                 }
                 onTogglePowerMenu: {
                     var openTo = !powerDropdown.visible;
                     menu.closeDropdowns();
                     powerDropdown.visible = openTo;
+                    bottomBar.powerActive = openTo;
                 }
             }
         }

@@ -30,7 +30,7 @@ Rectangle {
         color: Theme.textPrimary
         font.family: Theme.fontFamily
         font.styleName: Theme.fontStyle
-        font.pixelSize: 13
+        font.pixelSize: 16
         elide: Text.ElideRight
         maximumLineCount: 1
     }
@@ -57,8 +57,8 @@ Rectangle {
 
         Image {
             anchors.centerIn: parent
-            width: 14
-            height: 14
+            width: 18
+            height: 18
             sourceSize.width: 28
             sourceSize.height: 28
             source: Qt.resolvedUrl("../../../icons/delete.svg")

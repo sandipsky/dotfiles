@@ -65,22 +65,34 @@ Row {
         }
     }
     function nextWs() {
-        if (onHyprland) Hyprland.dispatch("workspace e+1");
-        else Quickshell.execDetached([kdeQdbus, "org.kde.KWin", "/KWin", "nextDesktop"]);
+        // Clamp to [1..count] so the scroll wheel doesn't wrap at the end.
+        if (root.current >= root.count) return;
+        root.switchTo(root.current + 1);
     }
     function prevWs() {
-        if (onHyprland) Hyprland.dispatch("workspace e-1");
-        else Quickshell.execDetached([kdeQdbus, "org.kde.KWin", "/KWin", "previousDesktop"]);
+        if (root.current <= 1) return;
+        root.switchTo(root.current - 1);
     }
 
     // Scroll handler covers the whole row. Wheel down → next, up → prev.
+    // Tracks an optimistic `pending` workspace so rapid touchpad events
+    // don't blow past the clamp before `current` catches up.
     WheelHandler {
+        id: wheel
         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+        property int pending: -1
+
         onWheel: (event) => {
-            if (event.angleDelta.y < 0) root.nextWs();
-            else if (event.angleDelta.y > 0) root.prevWs();
+            event.accepted = true;
+            if (event.angleDelta.y === 0) return;
+            var base = wheel.pending > 0 ? wheel.pending : root.current;
+            var target = base + (event.angleDelta.y < 0 ? 1 : -1);
+            if (target < 1 || target > root.count) return;
+            wheel.pending = target;
+            root.switchTo(target);
         }
     }
+    onCurrentChanged: if (wheel.pending === root.current) wheel.pending = -1
 
     Repeater {
         model: root.count
@@ -109,7 +121,7 @@ Row {
                 color: cell.isActive ? Theme.textPrimary : Theme.textSecondary
                 font.family: Theme.fontFamily
                 font.styleName: Theme.fontStyle
-                font.pixelSize: 15
+                font.pixelSize: 16
                 font.weight: cell.isActive ? Font.Bold : Font.Normal
             }
         }

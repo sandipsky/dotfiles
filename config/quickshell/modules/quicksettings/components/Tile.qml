@@ -34,8 +34,8 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: 14
         anchors.verticalCenter: parent.verticalCenter
-        width: 18
-        height: 18
+        width: 24
+        height: 24
         sourceSize.width: 36
         sourceSize.height: 36
         source: root.iconSource
@@ -54,22 +54,9 @@ Rectangle {
         color: Theme.textPrimary
         font.family: Theme.fontFamily
         font.styleName: Theme.fontStyle
-        font.pixelSize: 13
+        font.pixelSize: 16
         font.weight: Font.DemiBold
         elide: Text.ElideRight
     }
 
-    Text {
-        id: chevron
-        anchors.right: parent.right
-        anchors.rightMargin: 14
-        anchors.verticalCenter: parent.verticalCenter
-        text: "›"
-        color: Theme.textPrimary
-        font.family: Theme.fontFamily
-        font.styleName: Theme.fontStyle
-        font.pixelSize: 20
-        font.weight: Font.Light
-        visible: root.showChevron
-    }
 }

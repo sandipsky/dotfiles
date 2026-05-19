@@ -14,6 +14,7 @@ Item {
     signal connectClicked()
     signal submitClicked(string password)
     signal cancelClicked()
+    signal disconnectClicked()
 
     readonly property bool secured: security.length > 0 && security !== "--"
 
@@ -66,7 +67,7 @@ Item {
             text: root.iconChar()
             color: Theme.textPrimary
             font.family: "Segoe Fluent Icons"
-            font.pixelSize: 18
+            font.pixelSize: 24
             renderType: Text.NativeRendering
         }
 
@@ -76,8 +77,8 @@ Item {
             anchors.bottom: parent.bottom
             anchors.rightMargin: 0
             anchors.bottomMargin: 12
-            width: 11
-            height: 11
+            width: 13
+            height: 13
             sourceSize.width: 22
             sourceSize.height: 22
             source: Qt.resolvedUrl("../../../icons/lock.svg")
@@ -99,7 +100,7 @@ Item {
         color: Theme.textPrimary
         font.family: Theme.fontFamily
         font.styleName: Theme.fontStyle
-        font.pixelSize: 13
+        font.pixelSize: 16
         font.weight: root.inUse ? Font.DemiBold : Font.Normal
         elide: Text.ElideRight
     }
@@ -117,7 +118,7 @@ Item {
             id: rightContent
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
-            sourceComponent: root.inUse ? connectedLabel
+            sourceComponent: root.inUse ? disconnectButton
                               : (root.expanded ? cancelButton : connectButton)
         }
 
@@ -144,7 +145,7 @@ Item {
                     color: Theme.textPrimary
                     font.family: Theme.fontFamily
                     font.styleName: Theme.fontStyle
-                    font.pixelSize: 12
+                    font.pixelSize: 14
                 }
             }
         }
@@ -172,19 +173,36 @@ Item {
                     color: Theme.textSecondary
                     font.family: Theme.fontFamily
                     font.styleName: Theme.fontStyle
-                    font.pixelSize: 12
+                    font.pixelSize: 14
                 }
             }
         }
 
         Component {
-            id: connectedLabel
-            Text {
-                text: "Connected"
-                color: Theme.textSecondary
-                font.family: Theme.fontFamily
-                font.styleName: Theme.fontStyle
-                font.pixelSize: 12
+            id: disconnectButton
+            Rectangle {
+                width: discText.implicitWidth + 22
+                height: 28
+                radius: 14
+                color: discHover.hovered ? Theme.hoverBg : "transparent"
+                border.color: Theme.calendarBorder
+                border.width: 1
+
+                HoverHandler { id: discHover }
+                TapHandler {
+                    gesturePolicy: TapHandler.ReleaseWithinBounds
+                    onTapped: root.disconnectClicked()
+                }
+
+                Text {
+                    id: discText
+                    anchors.centerIn: parent
+                    text: "Disconnect"
+                    color: Theme.textPrimary
+                    font.family: Theme.fontFamily
+                    font.styleName: Theme.fontStyle
+                    font.pixelSize: 14
+                }
             }
         }
     }
@@ -195,7 +213,7 @@ Item {
         anchors.right: parent.right
         anchors.top: rowBg.bottom
         anchors.bottom: parent.bottom
-        anchors.leftMargin: 56          // align under SSID label
+        anchors.leftMargin: 12         // align under SSID label
         anchors.rightMargin: 12
         visible: root.expanded
         opacity: root.expanded ? 1 : 0
@@ -210,7 +228,7 @@ Item {
             color: Theme.textSecondary
             font.family: Theme.fontFamily
             font.styleName: Theme.fontStyle
-            font.pixelSize: 12
+            font.pixelSize: 14
         }
 
         Rectangle {
@@ -232,7 +250,7 @@ Item {
                 verticalAlignment: TextInput.AlignVCenter
                 font.family: Theme.fontFamily
                 font.styleName: Theme.fontStyle
-                font.pixelSize: 13
+                font.pixelSize: 14
                 color: Theme.textPrimary
                 clip: true
                 selectByMouse: true
@@ -275,7 +293,7 @@ Item {
                 color: "#ffffff"
                 font.family: Theme.fontFamily
                 font.styleName: Theme.fontStyle
-                font.pixelSize: 12
+                font.pixelSize: 14
                 font.weight: Font.DemiBold
             }
         }

@@ -89,8 +89,8 @@ PanelWindow {
         // for the taskbar/dock area.
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.rightMargin: 12
-        anchors.bottomMargin: 60
+        anchors.rightMargin: 8
+        anchors.bottomMargin: 46
 
         color: Theme.calendarBg
         radius: Theme.calendarRadius
@@ -143,7 +143,7 @@ PanelWindow {
                     color: Theme.textPrimary
                     font.family: Theme.fontFamily
                     font.styleName: Theme.fontStyle
-                    font.pixelSize: 15
+                    font.pixelSize: 18
                     font.weight: Font.DemiBold
                 }
             }
@@ -161,7 +161,7 @@ PanelWindow {
                     color: Theme.textPrimary
                     font.family: Theme.fontFamily
                     font.styleName: Theme.fontStyle
-                    font.pixelSize: 14
+                    font.pixelSize: 16
                     font.weight: Font.DemiBold
                 }
 
@@ -185,7 +185,7 @@ PanelWindow {
                             color: Theme.textSecondary
                             font.family: Theme.fontFamily
                             font.styleName: Theme.fontStyle
-                            font.pixelSize: 9
+                            font.pixelSize: 12
                         }
                     }
                     Rectangle {
@@ -202,7 +202,7 @@ PanelWindow {
                             color: Theme.textPrimary
                             font.family: Theme.fontFamily
                             font.styleName: Theme.fontStyle
-                            font.pixelSize: 9
+                            font.pixelSize: 12
                         }
                     }
                 }
@@ -231,7 +231,7 @@ PanelWindow {
                                 color: Theme.textPrimary
                                 font.family: Theme.fontFamily
                                 font.styleName: Theme.fontStyle
-                                font.pixelSize: 13
+                                font.pixelSize: 16
                             }
                         }
                     }
@@ -286,7 +286,7 @@ PanelWindow {
                                         : (isCurrent ? Theme.textPrimary : Theme.calendarDimText)
                                     font.family: Theme.fontFamily
                                     font.styleName: Theme.fontStyle
-                                    font.pixelSize: 13
+                                    font.pixelSize: 16
                                 }
                             }
                         }

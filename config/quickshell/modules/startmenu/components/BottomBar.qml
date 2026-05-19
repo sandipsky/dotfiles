@@ -5,16 +5,15 @@ import "../../../styles"
 Rectangle {
     id: root
     color: Theme.startmenuUserBg
-
-    // Match the container's bottom-corner radius so the menu's
-    // outline curves cleanly along the user bar. Qt 6.7+ per-corner radii.
-    topLeftRadius: 0
-    topRightRadius: 0
-    bottomLeftRadius: Theme.menuRadius
-    bottomRightRadius: Theme.menuRadius
+    // Shape is handled by the parent ClippingRectangle (menu).
 
     signal toggleUserMenu()
     signal togglePowerMenu()
+
+    // Driven by StartMenu so the button keeps the hover-bg highlight
+    // while its dropdown is open.
+    property bool userActive: false
+    property bool powerActive: false
 
     // ---- User button (left) ----
     Rectangle {
@@ -23,9 +22,10 @@ Rectangle {
         anchors.leftMargin: 12
         anchors.verticalCenter: parent.verticalCenter
         height: 48
-        width: userRow.implicitWidth
+        // Auto-fit the hover area to the avatar + name + side padding.
+        width: userRow.implicitWidth + 20
         radius: 6
-        color: userHover.hovered ? Theme.hoverBg : "transparent"
+        color: (userHover.hovered || root.userActive) ? Theme.hoverBg : "transparent"
 
         HoverHandler { id: userHover }
         TapHandler {
@@ -35,9 +35,9 @@ Rectangle {
 
         Row {
             id: userRow
-            anchors.fill: parent
+            anchors.left: parent.left
             anchors.leftMargin: 8
-            anchors.rightMargin: 12
+            anchors.verticalCenter: parent.verticalCenter
             spacing: 12
 
             Rectangle {
@@ -48,13 +48,29 @@ Rectangle {
                 color: "#444"
                 clip: true
 
+                // ~/.face is the conventional GNOME/KDE per-user avatar.
+                // If it doesn't exist, the Image fails to load and we fall
+                // back to a Segoe Fluent person glyph.
                 Image {
+                    id: avatarImg
                     anchors.fill: parent
-                    source: Quickshell.iconPath("avatar-default", "user-info")
                     sourceSize.width: 64
                     sourceSize.height: 64
-                    smooth: true
+                    source: "file://" + Quickshell.env("HOME") + "/.face"
                     fillMode: Image.PreserveAspectCrop
+                    smooth: true
+                    visible: status === Image.Ready
+                    asynchronous: true
+                }
+
+                Text {
+                    anchors.centerIn: parent
+                    visible: avatarImg.status !== Image.Ready
+                    text: ""   // Segoe Fluent Icons: Contact
+                    color: Theme.textPrimary
+                    font.family: "Segoe Fluent Icons"
+                    font.pixelSize: 18
+                    renderType: Text.NativeRendering
                 }
             }
 
@@ -78,7 +94,7 @@ Rectangle {
         width: 40
         height: 40
         radius: 6
-        color: powerHover.hovered ? Theme.hoverBg : "transparent"
+        color: (powerHover.hovered || root.powerActive) ? Theme.hoverBg : "transparent"
 
         HoverHandler { id: powerHover }
         TapHandler {

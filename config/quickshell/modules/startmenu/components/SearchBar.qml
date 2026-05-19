@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import Quickshell
 import "../../../styles"
 
@@ -10,6 +9,8 @@ Rectangle {
 
     signal accepted()
     signal escapePressed()
+    signal upPressed()
+    signal downPressed()
 
     function focusInput() { input.forceActiveFocus(); }
     function clear()       { input.text = ""; }
@@ -33,7 +34,7 @@ Rectangle {
         smooth: true
     }
 
-    TextField {
+    TextInput {
         id: input
         anchors.left: searchIcon.right
         anchors.leftMargin: 12
@@ -42,19 +43,31 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         height: parent.height - 4
 
-        background: Item {}
         color: Theme.textPrimary
-        placeholderText: "Search for apps"
-        placeholderTextColor: Theme.startmenuSearchPlaceholder
         font.family: Theme.fontFamily
         font.styleName: Theme.fontStyle
         font.pixelSize: 16
         selectByMouse: true
         verticalAlignment: TextInput.AlignVCenter
         focus: true
+        clip: true
 
-        onAccepted: root.accepted()
+        // Intercept Up/Down BEFORE TextInput's cursor-movement consumes them.
+        Keys.priority: Keys.BeforeItem
+        Keys.onUpPressed: (event) => { root.upPressed(); event.accepted = true; }
+        Keys.onDownPressed: (event) => { root.downPressed(); event.accepted = true; }
         Keys.onEscapePressed: root.escapePressed()
+        Keys.onReturnPressed: root.accepted()
+        Keys.onEnterPressed: root.accepted()
+
+        Text {
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            text: "Search for apps"
+            color: Theme.startmenuSearchPlaceholder
+            font: input.font
+            visible: input.text.length === 0
+        }
     }
 
     Component.onCompleted: input.forceActiveFocus()

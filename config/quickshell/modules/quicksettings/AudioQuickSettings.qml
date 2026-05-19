@@ -42,8 +42,8 @@ PanelWindow {
         width: 320
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.rightMargin: 12
-        anchors.bottomMargin: 60
+        anchors.rightMargin: 8
+        anchors.bottomMargin: 46
 
         height: column.implicitHeight + 28
 

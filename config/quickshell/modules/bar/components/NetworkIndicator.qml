@@ -33,7 +33,7 @@ Rectangle {
     function iconChar() {
         if (conn === "ethernet") return "\uE839";
         if (conn === "wifi") {
-            if (wifiSignal >= 60) return "\uE701";
+            if (wifiSignal >= 50) return "\uE701";
             if (wifiSignal >= 40) return "\uE874";
             if (wifiSignal >= 25) return "\uE873";
             if (wifiSignal > 0)   return "\uE872";
@@ -85,7 +85,7 @@ Rectangle {
         text: root.iconChar()
         color: Theme.textPrimary
         font.family: "Segoe Fluent Icons"
-        font.pixelSize: 17
+        font.pixelSize: root.conn === "ethernet" ? 17 : 18
         renderType: Text.NativeRendering
     }
 
@@ -95,7 +95,7 @@ Rectangle {
     // typical "wired is the active route" heuristic.
     Timer {
         running: true
-        interval: 5000
+        interval: 2000
         repeat: true
         triggeredOnStart: true
         onTriggered: deviceQuery.running = true

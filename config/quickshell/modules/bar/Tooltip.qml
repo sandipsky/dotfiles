@@ -59,7 +59,7 @@ PanelWindow {
             color: Theme.textPrimary
             font.family: Theme.fontFamily
             font.styleName: Theme.fontStyle
-            font.pixelSize: 12
+            font.pixelSize: 16
             horizontalAlignment: Text.AlignHCenter
             lineHeight: 1.2
         }

@@ -83,8 +83,7 @@ Rectangle {
         text: root.altFormat ? root.dateText() : root.timeText()
         color: Theme.textPrimary
         font.family: Theme.fontFamily
-        font.styleName: "Bold"
-        font.pixelSize: 15
+        font.pixelSize: 16
     }
 
     // Tick every second so the minute rolls over promptly without

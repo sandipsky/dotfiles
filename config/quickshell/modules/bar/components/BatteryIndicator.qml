@@ -92,7 +92,7 @@ Rectangle {
     // exposes more than one battery.
     Timer {
         running: true
-        interval: 10000
+        interval: 4000
         repeat: true
         triggeredOnStart: true
         onTriggered: {

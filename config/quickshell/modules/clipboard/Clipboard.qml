@@ -76,8 +76,8 @@ PanelWindow {
         height: 460
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.rightMargin: 12
-        anchors.bottomMargin: 60
+        anchors.rightMargin: 8
+        anchors.bottomMargin: 46
 
         color: Theme.calendarBg
         radius: Theme.calendarRadius
@@ -128,8 +128,8 @@ PanelWindow {
                     color: Theme.textPrimary
                     font.family: Theme.fontFamily
                     font.styleName: Theme.fontStyle
-                    font.pixelSize: 15
-                    font.weight: Font.DemiBold
+                    font.pixelSize: 16
+                    font.weight: Font.Bold
                 }
 
                 Rectangle {
@@ -158,7 +158,7 @@ PanelWindow {
                         color: Theme.textPrimary
                         font.family: Theme.fontFamily
                         font.styleName: Theme.fontStyle
-                        font.pixelSize: 13
+                        font.pixelSize: 15
                     }
                 }
             }
@@ -212,7 +212,7 @@ PanelWindow {
                     color: Theme.textSecondary
                     font.family: Theme.fontFamily
                     font.styleName: Theme.fontStyle
-                    font.pixelSize: 13
+                    font.pixelSize: 16
                 }
             }
         }
