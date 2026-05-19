@@ -142,5 +142,9 @@ bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/m
 
 xdg-user-dirs-update
 
+sudo iptables -F || true
+sudo iptables -X || true
 sudo sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
+
+
 reboot
