@@ -1,7 +1,0 @@
-<svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g transform="translate(-1.0, 1.8) scale(1.22, 0.85)">
-    <path d="M13 19.75H7C2.59 19.75 1.25 18.41 1.25 14V10C1.25 5.59 2.59 4.25 7 4.25H13C17.41 4.25 18.75 5.59 18.75 10V14C18.75 18.41 17.41 19.75 13 19.75ZM7 5.75C3.43 5.75 2.75 6.43 2.75 10V14C2.75 17.57 3.43 18.25 7 18.25H13C16.57 18.25 17.25 17.57 17.25 14V10C17.25 6.43 16.57 5.75 13 5.75H7Z" fill="#ffffff"/>
-    <rect x="19" y="10" width="1" height="4" rx="0.3" fill="#ffffff"/>
-    <rect x="4" y="7" width="9.75" height="10" rx="1.5" fill="#ffffff"/>
-  </g>
-</svg>
