@@ -72,7 +72,11 @@ history = 10000
 multiplier = 3
 
 [selection]
-save_to_clipboard = false
+save_to_clipboard = true
+
+[[mouse.bindings]]
+action = "Paste"
+mouse = "Right"
 
 [terminal.shell]
 program = "/usr/bin/zsh" 

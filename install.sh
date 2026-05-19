@@ -22,7 +22,6 @@ sudo pacman -S --noconfirm --needed \
     xdg-user-dirs-gtk \
     obs-studio \
     qbittorrent \
-    dunst \
     brightnessctl \
     grim \
     slurp \
@@ -39,7 +38,6 @@ sudo pacman -S --noconfirm --needed \
 
 yay -S --noconfirm --needed \
     breezex-cursor-theme \
-    ttf-material-design-icons-desktop-git \
     nautilus-open-any-terminal 
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules
@@ -95,6 +93,10 @@ done
 update-desktop-database ~/.local/share/applications
 
 sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/
+
+sudo mkdir -p /usr/share/fonts
+sudo cp assets/fonts/* /usr/share/fonts/
+sudo fc-cache -f
 
 rm -rf /home/$USERNAME/.config/*
 cp -r config/* /home/$USERNAME/.config/

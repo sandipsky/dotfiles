@@ -7,10 +7,13 @@ import "modules/calendar"
 import "modules/clipboard"
 import "modules/quicksettings"
 import "modules/bar"
+import "modules/notifications"
 import "services"
 
 ShellRoot {
     PinnedApps              { id: pinnedApps }
+    Notifications           { id: notifs }
+    NotificationPopup       { service: notifs }
     StartMenu             { id: startmenu;     open: false; pinned: pinnedApps }
     Launcher              { id: launcher;      open: false }
     Calendar              { id: calendar;      open: false }

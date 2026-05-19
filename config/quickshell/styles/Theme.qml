@@ -32,6 +32,11 @@ QtObject {
     readonly property color barActiveBg: "#3a3a3a"
     readonly property color barAccent: "#0078d4"
 
+    readonly property color notificationBg: "#282828"
+    readonly property color notificationBorder: "#3d3d3d"
+    readonly property color notificationText: "#cdd1dc"
+    readonly property color notificationCriticalBorder: "#a04040"
+
     readonly property real menuRadius: 10
     readonly property real launcherRadius: 28
     readonly property real calendarRadius: 10
