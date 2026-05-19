@@ -51,6 +51,14 @@ PanelWindow {
     // the right side push text + screen-x into it on hover.
     property var tooltip
 
+    // PinnedApps service (instantiated in shell.qml). Drives the centered
+    // taskbar row.
+    property var pinned
+
+    // Forwarded from PinnedBar so shell.qml can spawn the unpin overlay
+    // above the bar.
+    signal pinnedContextRequested(string id, int screenX)
+
     // Optimistic power-profile override pushed in from shell.qml whenever
     // the BatteryQuickSettings tile cycles the profile. Lets the battery
     // glyph flip to the BatterySaver family without waiting for the
@@ -116,6 +124,14 @@ PanelWindow {
                 Layout.alignment: Qt.AlignVCenter
                 count: 6
             }
+        }
+
+        // ---- Center: pinned-app taskbar ----
+        PinnedBar {
+            anchors.centerIn: parent
+            pinned: root.pinned
+            tooltip: root.tooltip
+            onContextRequested: (id, screenX) => root.pinnedContextRequested(id, screenX)
         }
 
         // ---- Right side: volume + clock ----
