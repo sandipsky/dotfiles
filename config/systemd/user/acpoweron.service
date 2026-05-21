@@ -5,3 +5,5 @@ After=graphical.target
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/powerprofilesctl set performance
+ExecStart=/usr/bin/brightnessctl -q s +8%
+ExecStart=/usr/bin/hyprctl keyword monitor eDP-1,1920x1080@144,0x0,1
