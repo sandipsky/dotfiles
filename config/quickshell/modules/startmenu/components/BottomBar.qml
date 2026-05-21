@@ -48,9 +48,6 @@ Rectangle {
                 color: "#444"
                 clip: true
 
-                // ~/.face is the conventional GNOME/KDE per-user avatar.
-                // If it doesn't exist, the Image fails to load and we fall
-                // back to a Segoe Fluent person glyph.
                 Image {
                     id: avatarImg
                     anchors.fill: parent
@@ -63,14 +60,16 @@ Rectangle {
                     asynchronous: true
                 }
 
-                Text {
+                Image {
                     anchors.centerIn: parent
+                    width: 20
+                    height: 20
+                    sourceSize.width: 40
+                    sourceSize.height: 40
+                    source: Qt.resolvedUrl("../../../icons/user.svg")
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
                     visible: avatarImg.status !== Image.Ready
-                    text: ""   // Segoe Fluent Icons: Contact
-                    color: Theme.textPrimary
-                    font.family: "Segoe Fluent Icons"
-                    font.pixelSize: 18
-                    renderType: Text.NativeRendering
                 }
             }
 
