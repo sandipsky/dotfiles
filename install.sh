@@ -45,13 +45,13 @@ sudo cp assets/90-usb.rules /etc/udev/rules.d/90-usb.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/90-usb.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
 
-dconf load /org/gnome/nautilus/ < assets/nautilus
+sudo -u "$USERNAME" -H dbus-run-session -- dconf load /org/gnome/nautilus/ < assets/nautilus
 
 sudo mkdir -p /usr/share/sounds/
 sudo cp assets/sounds/* /usr/share/sounds/
 
-mkdir -p ~/.local/share/applications
-cp assets/apps/* ~/.local/share/applications/
+sudo -u "$USERNAME" mkdir -p "/home/$USERNAME/.local/share/applications"
+sudo -u "$USERNAME" cp assets/apps/* "/home/$USERNAME/.local/share/applications/"
 
 files=(
     avahi-discover.desktop
@@ -78,19 +78,20 @@ files=(
     remote-viewer.desktop
 )
 
-mkdir -p "$HOME/.local/share/applications"
+APPS_DIR="/home/$USERNAME/.local/share/applications"
+sudo -u "$USERNAME" mkdir -p "$APPS_DIR"
 
 for file in "${files[@]}"; do
     src="/usr/share/applications/$file"
-    dest="$HOME/.local/share/applications/$file"
+    dest="$APPS_DIR/$file"
 
     if [[ -f "$src" ]]; then
-        cp "$src" "$dest"
-        echo "NoDisplay=true" >> "$dest"
+        sudo -u "$USERNAME" cp "$src" "$dest"
+        sudo -u "$USERNAME" bash -c "echo 'NoDisplay=true' >> '$dest'"
     fi
 done
 
-update-desktop-database ~/.local/share/applications
+sudo -u "$USERNAME" update-desktop-database "$APPS_DIR"
 
 sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/
 
@@ -98,12 +99,7 @@ sudo mkdir -p /usr/share/fonts
 sudo cp assets/fonts/* /usr/share/fonts/
 sudo fc-cache -f
 
-rm -rf /home/$USERNAME/.config/*
-cp -r config/* /home/$USERNAME/.config/
-
-mkdir -p /home/$USERNAME/.local
-cp -r local/* /home/$USERNAME/.local/
-chmod +x /home/$USERNAME/.local/bin/*
+sudo -u "$USERNAME" cp -r config/* "/home/$USERNAME/.config/"
 
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
 sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf >/dev/null <<EOF
@@ -124,23 +120,25 @@ EOF
 LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
 
+sudo -u "$USERNAME" -H dbus-run-session -- bash <<'EOF'
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
+EOF
 
-xdg-mime default org.gnome.Loupe.desktop image/jpeg
-xdg-mime default org.gnome.Loupe.desktop image/png
-xdg-mime default org.gnome.Loupe.desktop image/webp
+sudo -u "$USERNAME" -H xdg-mime default org.gnome.Loupe.desktop image/jpeg
+sudo -u "$USERNAME" -H xdg-mime default org.gnome.Loupe.desktop image/png
+sudo -u "$USERNAME" -H xdg-mime default org.gnome.Loupe.desktop image/webp
 
-xdg-mime default org.gnome.TextEditor.desktop text/plain
-xdg-mime default org.gnome.TextEditor.desktop application/x-shellscript
+sudo -u "$USERNAME" -H xdg-mime default org.gnome.TextEditor.desktop text/plain
+sudo -u "$USERNAME" -H xdg-mime default org.gnome.TextEditor.desktop application/x-shellscript
 
-bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh)"
+sudo -u "$USERNAME" -H bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh)"
 
-xdg-user-dirs-update
+sudo -u "$USERNAME" -H xdg-user-dirs-update
 
 sudo iptables -F || true
 sudo iptables -X || true

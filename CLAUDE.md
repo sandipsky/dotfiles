@@ -8,7 +8,7 @@ Personal Arch Linux dotfiles for a Hyprland + Quickshell desktop. There is no bu
 
 ## Installing / re-applying
 
-[install.sh](install.sh) is the only entry point. It is **destructive** — line 101 runs `rm -rf /home/$USERNAME/.config/*` before copying — so never run it on a machine you haven't already backed up.
+[install.sh](install.sh) is the only entry point. It's still destructive in places (overlays files into `~/.config/`, edits `/etc/sudoers` and `/etc/systemd/system/`, flushes iptables, ends with `reboot`) — never run it on a machine you haven't already backed up.
 
 It expects Arch with `pacman` and `yay`, and assumes it's run via `sudo` (it uses `logname` to discover the real user). Typical usage:
 
@@ -16,7 +16,18 @@ It expects Arch with `pacman` and `yay`, and assumes it's run via `sudo` (it use
 ./install.sh
 ```
 
-What it does, in order: installs Hyprland/Quickshell/etc. packages, installs two AUR packages via `yay`, copies the udev rules from [assets/](assets/) into `/etc/udev/rules.d/` (substituting `$USERNAME`), copies sound + font assets into `/usr/share/`, installs `.desktop` overrides, **wipes and replaces** `~/.config/*` from [config/](config/), copies [local/](local/) into `~/.local/`, sets up tty1 autologin + a `.zprofile` that `exec uwsm start hyprland.desktop`, patches the user's name into [config/hypr/hyprlock.conf](config/hypr/hyprlock.conf), sets gsettings + xdg-mime defaults, then reboots.
+What it does, in order: installs Hyprland/Quickshell/etc. packages, installs two AUR packages via `yay`, copies the udev rules from [assets/](assets/) into `/etc/udev/rules.d/` (substituting `$USERNAME`), copies sound + font assets into `/usr/share/`, installs `.desktop` overrides into the user's `~/.local/share/applications/`, copies [config/](config/) into the user's `~/.config/`, sets up tty1 autologin + a `.zprofile` that `exec uwsm start hyprland.desktop`, patches the user's name into [config/hypr/hyprlock.conf](config/hypr/hyprlock.conf), sets gsettings + xdg-mime defaults, runs `xdg-user-dirs-update`, then reboots.
+
+### Root vs. user pattern
+
+The script is invoked under `sudo`, so by default every command runs as root. Anything that writes to system paths (`/etc`, `/usr/share`, `pacman`) is fine as-is. Anything that touches the user's home or per-user config must drop privileges with `sudo -u "$USERNAME"` — otherwise the writes go to `/root` (or root's dconf) and the user can't read/modify them. The pattern in the script:
+
+- `sudo -u "$USERNAME" cp …` for files under `/home/$USERNAME/.config/` and `/home/$USERNAME/.local/`
+- `sudo -u "$USERNAME" -H dbus-run-session -- …` for `dconf load` and `gsettings set` (needs a session bus)
+- `sudo -u "$USERNAME" -H xdg-mime …` / `xdg-user-dirs-update` (need `$HOME`)
+- `yay` is also non-root by design — leave it without a `sudo` prefix
+
+When adding to `install.sh`, decide which side of this split your command belongs on. Never use `~` or `$HOME` — they expand to `/root` here; use `/home/$USERNAME/…` explicitly.
 
 Reload Hyprland config in a running session with `Super+Shift+N` (bound to `hyprctl reload`). The Quickshell config can be reloaded by killing/relaunching `qs`.
 
@@ -24,7 +35,6 @@ Reload Hyprland config in a running session with `Super+Shift+N` (bound to `hypr
 
 - [assets/](assets/) — files that get copied to **system** locations during install. Udev rules, fonts, sounds, app icons, `.desktop` overrides, and a `nautilus` dconf dump.
 - [config/](config/) — copied verbatim to `~/.config/`. The bulk of the repo.
-- [local/](local/) — copied verbatim to `~/.local/`. Currently just [bin/power-mode](local/bin/power-mode).
 - [docs/](docs/) — loose notes (e.g. [secureboot.txt](docs/secureboot.txt) for `sbctl` enrollment).
 
 ## Hyprland config
@@ -65,8 +75,6 @@ Indicators don't own their flyouts — they emit signals (`toggleBatteryQS`, etc
 
 ## Power profiles
 
-[local/bin/power-mode](local/bin/power-mode) bundles `powerprofilesctl` + a monitor refresh-rate change + a notification. It's the single source of truth for "power saver = 60 Hz, balanced/performance = 144 Hz" — change refresh rates here, not in `hyprland.conf`.
-
-Automatic switching on AC plug/unplug is driven by udev (`assets/99-power.rules`) firing the `acpoweron.service` / `acpoweroff.service` systemd user units in [config/systemd/user/](config/systemd/user/). USB insert/remove notifications work the same way (`assets/90-usb.rules` → `usb-insert.service` / `usb-remove.service`).
+Automatic switching on AC plug/unplug is driven by udev (`assets/99-power.rules`) firing the `acpoweron.service` / `acpoweroff.service` systemd user units in [config/systemd/user/](config/systemd/user/), which call `powerprofilesctl set performance` / `set power-saver` directly. USB insert/remove notifications work the same way (`assets/90-usb.rules` → `usb-insert.service` / `usb-remove.service`).
 
 Note that the udev rules contain a literal `USERNAME` token that [install.sh](install.sh) `sed`s into the real user during install — when editing those rules in the repo, leave the token as `USERNAME`.
