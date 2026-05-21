@@ -83,7 +83,7 @@ program = "/usr/bin/zsh"
 args = ["-i", "-l"]
 
 [window]
-opacity = 0.9
+opacity = 0.8
 
 [window.class]
 general = "Alacritty"
