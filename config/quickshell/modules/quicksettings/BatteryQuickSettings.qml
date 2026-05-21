@@ -48,6 +48,16 @@ PanelWindow {
         var next = profileList[(idx + 1) % profileList.length];
         Quickshell.execDetached(["powerprofilesctl", "set", next]);
         profile = next;
+        setRefreshRate(next === "power-saver" ? 60 : 144);
+    }
+
+    // Power-saver drops eDP-1 to 60 Hz to extend battery; any other profile
+    // restores 144 Hz. Hyprland-only; harmless no-op elsewhere.
+    function setRefreshRate(hz) {
+        Quickshell.execDetached([
+            "hyprctl", "keyword", "monitor",
+            "eDP-1,1920x1080@" + hz + ",auto,1"
+        ]);
     }
 
     property int brightness: 50

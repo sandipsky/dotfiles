@@ -7,9 +7,6 @@ Item {
 
     property string filter: ""
     property int selectedIndex: 0
-    // PinnedApps service from shell.qml; null-safe so AppList still
-    // renders in isolation (e.g. previews).
-    property var pinned: null
     signal appLaunched()
 
     readonly property var entries: {
@@ -224,14 +221,6 @@ Item {
                             gesturePolicy: TapHandler.ReleaseWithinBounds
                             onTapped: root.launch(modelData)
                         }
-                        TapHandler {
-                            acceptedButtons: Qt.RightButton
-                            gesturePolicy: TapHandler.ReleaseWithinBounds
-                            onTapped: (ep) => {
-                                var p = mapToItem(root, ep.position.x, ep.position.y);
-                                contextMenu.showAt(p.x, p.y, modelData.id);
-                            }
-                        }
 
                         Row {
                             anchors.fill: parent
@@ -275,69 +264,6 @@ Item {
             }
 
             Item { width: 1; height: 8 }
-        }
-    }
-
-    // Click-anywhere-else inside AppList closes the context menu.
-    MouseArea {
-        anchors.fill: parent
-        visible: contextMenu.visible
-        z: 999
-        onPressed: (m) => { contextMenu.visible = false; m.accepted = true; }
-    }
-
-    // Right-click "Pin to taskbar / Unpin from taskbar" popup. Positioned
-    // at the click point in AppList-local coordinates by showAt().
-    Rectangle {
-        id: contextMenu
-        visible: false
-        z: 1000
-
-        property string targetId: ""
-        property bool targetPinned: false
-
-        width: 180
-        height: 40
-        color: Theme.dropdownBg
-        border.color: Theme.dropdownBorder
-        border.width: 1
-        radius: 8
-
-        function showAt(localX, localY, id) {
-            targetId = id;
-            targetPinned = root.pinned ? root.pinned.isPinned(id) : false;
-            x = Math.max(0, Math.min(localX, root.width - width));
-            y = Math.max(0, Math.min(localY, root.height - height));
-            visible = true;
-        }
-
-        Rectangle {
-            anchors.fill: parent
-            anchors.margins: 4
-            radius: 4
-            color: itemHover.hovered ? Theme.hoverBg : "transparent"
-            HoverHandler { id: itemHover }
-            TapHandler {
-                gesturePolicy: TapHandler.ReleaseWithinBounds
-                onTapped: {
-                    if (root.pinned) {
-                        if (contextMenu.targetPinned) root.pinned.unpin(contextMenu.targetId);
-                        else root.pinned.pin(contextMenu.targetId);
-                    }
-                    contextMenu.visible = false;
-                }
-            }
-            Text {
-                anchors.fill: parent
-                anchors.leftMargin: 12
-                anchors.rightMargin: 12
-                verticalAlignment: Text.AlignVCenter
-                text: contextMenu.targetPinned ? "Unpin from taskbar" : "Pin to taskbar"
-                color: Theme.textPrimary
-                font.family: Theme.fontFamily
-                font.styleName: Theme.fontStyle
-                font.pixelSize: 14
-            }
         }
     }
 

@@ -41,9 +41,9 @@ Rectangle {
             if (!tooltip) return;
             if (hovered) {
                 var p = mapToItem(null, width / 2, 0);
-                tooltip.show(root.tooltipText(), p.x);
+                tooltip.show(root.tooltipText(), p.x, root);
             } else {
-                tooltip.hide();
+                tooltip.hide(root);
             }
         }
     }

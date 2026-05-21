@@ -28,14 +28,24 @@ PanelWindow {
     property real anchorX: 0
     property bool open: false
 
+    // The indicator that currently "owns" the tooltip. Used to resolve the
+    // ambiguous event order when the cursor crosses from one indicator to
+    // another: the entering indicator's show() may fire before OR after
+    // the leaving one's hide(). Tracking ownership makes hide() ignored
+    // when a different source already took over.
+    property var owner: null
+
     visible: open && text.length > 0
 
-    function show(t, x) {
+    function show(t, x, src) {
+        owner = src || null;
         text = t;
         anchorX = x;
         open = true;
     }
-    function hide() {
+    function hide(src) {
+        if (src !== undefined && src !== owner) return;
+        owner = null;
         open = false;
     }
 

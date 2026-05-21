@@ -11,10 +11,9 @@ import "modules/notifications"
 import "services"
 
 ShellRoot {
-    PinnedApps              { id: pinnedApps }
     Notifications           { id: notifs }
     NotificationPopup       { service: notifs }
-    StartMenu             { id: startmenu;     open: false; pinned: pinnedApps }
+    StartMenu             { id: startmenu;     open: false }
     Launcher              { id: launcher;      open: false }
     Calendar              { id: calendar;      open: false }
     Clipboard             { id: clipboard;     open: false }
@@ -23,7 +22,6 @@ ShellRoot {
     NetworkQuickSettings    { id: networkQS;     open: false }
     BluetoothQuickSettings  { id: bluetoothQS;   open: false }
     Tooltip                 { id: tooltip }
-    PinnedContextMenu       { id: pinnedMenu; pinned: pinnedApps }
 
     IpcHandler {
         target: "launcher"
@@ -72,9 +70,6 @@ ShellRoot {
         networkQSOpen:   networkQS.open
         bluetoothQSOpen: bluetoothQS.open
         tooltip:         tooltip
-        pinned:          pinnedApps
-
-        onPinnedContextRequested: (id, screenX) => pinnedMenu.show(id, screenX)
 
         onToggleStartMenu: startmenu.open = !startmenu.open
         onToggleLauncher:  launcher.open  = !launcher.open

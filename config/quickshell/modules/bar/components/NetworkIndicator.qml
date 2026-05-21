@@ -53,7 +53,6 @@ Rectangle {
             if (device.length > 0) lines.push(device);
         }
         if (ip.length > 0)    lines.push(ip);
-        if (speed.length > 0) lines.push(speed);
         return lines.length > 0 ? lines.join("\n") : "Connected";
     }
 
@@ -63,9 +62,9 @@ Rectangle {
             if (!tooltip) return;
             if (hovered) {
                 var p = mapToItem(null, width / 2, 0);
-                tooltip.show(root.tooltipText(), p.x);
+                tooltip.show(root.tooltipText(), p.x, root);
             } else {
-                tooltip.hide();
+                tooltip.hide(root);
             }
         }
     }

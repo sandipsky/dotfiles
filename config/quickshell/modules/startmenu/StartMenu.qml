@@ -27,10 +27,6 @@ PanelWindow {
     property bool open: true
     visible: open
 
-    // PinnedApps service (instantiated in shell.qml). Used for the
-    // right-click "Pin/Unpin to taskbar" action on AppList rows.
-    property var pinned: null
-
     onOpenChanged: {
         if (open) {
             searchBar.clear();
@@ -111,7 +107,6 @@ PanelWindow {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 filter: searchBar.text
-                pinned: root.pinned
                 onAppLaunched: root.close()
             }
 
