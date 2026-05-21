@@ -164,55 +164,130 @@ PanelWindow {
             }
 
             // ---------- History list ----------
-            ListView {
-                id: list
+            Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                clip: true
-                model: root.entries
-                spacing: 2
-                topMargin: 8
-                bottomMargin: 8
-                leftMargin: 8
-                rightMargin: 8
-                boundsBehavior: Flickable.StopAtBounds
 
-                delegate: ClipboardItem {
-                    width: list.width - list.leftMargin - list.rightMargin
-                    entryId: modelData.id
-                    preview: modelData.preview
+                ListView {
+                    id: list
+                    anchors.fill: parent
+                    clip: true
+                    model: root.entries
+                    spacing: 2
+                    topMargin: 8
+                    bottomMargin: 8
+                    leftMargin: 8
+                    rightMargin: 8
+                    boundsBehavior: Flickable.StopAtBounds
 
-                    onCopy: {
-                        // cliphist decode reads its argument as a list entry,
-                        // so prefix the bare id with a fake tab/preview to
-                        // satisfy its parser.
-                        Quickshell.execDetached([
-                            "sh", "-c",
-                            "cliphist decode " + entryId + " | wl-copy"
-                        ]);
-                        root.close();
+                    delegate: ClipboardItem {
+                        width: list.width - list.leftMargin - list.rightMargin
+                        entryId: modelData.id
+                        preview: modelData.preview
+
+                        onCopy: {
+                            // cliphist decode reads its argument as a list entry,
+                            // so prefix the bare id with a fake tab/preview to
+                            // satisfy its parser.
+                            Quickshell.execDetached([
+                                "sh", "-c",
+                                "cliphist decode " + entryId + " | wl-copy"
+                            ]);
+                            root.close();
+                        }
+                        onRemoveEntry: {
+                            // Optimistic update: drop the row from the view
+                            // right away so the click feels instant. The
+                            // background `cliphist delete` catches up — we
+                            // skip the refresh() because `cliphist list`
+                            // would race ahead of the delete and re-add the
+                            // row until the next refresh.
+                            var id = entryId;
+                            root.entries = root.entries.filter(function (e) {
+                                return e.id !== id;
+                            });
+                            Quickshell.execDetached([
+                                "sh", "-c",
+                                "printf '" + id + "\\tx\\n' | cliphist delete"
+                            ]);
+                        }
                     }
-                    onRemoveEntry: {
-                        // cliphist delete reads list entries from stdin and
-                        // only consumes the id before the tab — sending any
-                        // line that starts with "<id>\t" is enough.
-                        Quickshell.execDetached([
-                            "sh", "-c",
-                            "printf '" + entryId + "\\tx\\n' | cliphist delete"
-                        ]);
-                        root.refresh();
+
+                    // Empty-state placeholder
+                    Text {
+                        anchors.centerIn: parent
+                        visible: root.entries.length === 0
+                        text: "Clipboard history is empty"
+                        color: Theme.textSecondary
+                        font.family: Theme.fontFamily
+                        font.styleName: Theme.fontStyle
+                        font.pixelSize: 16
                     }
                 }
 
-                // Empty-state placeholder
-                Text {
-                    anchors.centerIn: parent
-                    visible: root.entries.length === 0
-                    text: "Clipboard history is empty"
-                    color: Theme.textSecondary
-                    font.family: Theme.fontFamily
-                    font.styleName: Theme.fontStyle
-                    font.pixelSize: 16
+                // Interactive scrollbar: drag the thumb or click anywhere on
+                // the track to jump. Width expands on hover for an easier
+                // grab target. Mirrors the startmenu AppList scrollbar.
+                Item {
+                    id: scrollbar
+                    anchors.right: parent.right
+                    anchors.rightMargin: 4
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    width: scrollHover.hovered || scrollArea.pressed ? 12 : 6
+                    visible: list.contentHeight > list.height
+
+                    Behavior on width { NumberAnimation { duration: 120 } }
+
+                    HoverHandler { id: scrollHover }
+
+                    Item {
+                        id: track
+                        anchors.fill: parent
+                    }
+
+                    MouseArea {
+                        id: scrollArea
+                        anchors.fill: parent
+                        acceptedButtons: Qt.LeftButton
+                        preventStealing: true
+
+                        property real grabOffset: 0
+
+                        function moveTo(localY) {
+                            var maxThumbY = Math.max(0, track.height - thumb.height);
+                            var maxContentY = Math.max(0, list.contentHeight - list.height);
+                            if (maxThumbY <= 0 || maxContentY <= 0) return;
+                            var newThumbY = Math.max(0, Math.min(maxThumbY, localY - grabOffset));
+                            list.contentY = (newThumbY / maxThumbY) * maxContentY;
+                        }
+
+                        onPressed: (mouse) => {
+                            if (mouse.y >= thumb.y && mouse.y <= thumb.y + thumb.height) {
+                                grabOffset = mouse.y - thumb.y;
+                            } else {
+                                grabOffset = thumb.height / 2;
+                                moveTo(mouse.y);
+                            }
+                        }
+                        onPositionChanged: (mouse) => {
+                            if (pressed) moveTo(mouse.y);
+                        }
+                    }
+
+                    Rectangle {
+                        id: thumb
+                        x: 2
+                        width: Math.max(0, scrollbar.width - 4)
+                        radius: width / 2
+                        color: scrollHover.hovered || scrollArea.pressed
+                            ? "#6a6a6a"
+                            : Theme.startmenuSearchBorder
+
+                        readonly property real maxContentY: Math.max(1, list.contentHeight - list.height)
+                        y: (list.contentY / maxContentY) * (track.height - height)
+                        height: Math.max(30, track.height * Math.min(1, list.height / list.contentHeight))
+                    }
                 }
             }
         }

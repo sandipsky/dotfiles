@@ -63,9 +63,9 @@ files=(
     qvidcap.desktop
     cmake-gui.desktop
     lstopo.desktop
-    java-java21-openjdk.desktop
-    jconsole-java21-openjdk.desktop
-    jshell-java21-openjdk.desktop
+    java-java25-openjdk.desktop
+    jconsole-java25-openjdk.desktop
+    jshell-java25-openjdk.desktop
     assistant.desktop
     designer.desktop
     linguist.desktop
@@ -76,6 +76,11 @@ files=(
     org.freedesktop.IBus.Setup.desktop
     org.gnome.FileRoller.desktop
     remote-viewer.desktop
+    assistant.desktop
+    qdbusviewer.desktop
+    linguist.desktop
+    designer.desktop
+    uuctl.desktop
 )
 
 APPS_DIR="/home/$USERNAME/.local/share/applications"
