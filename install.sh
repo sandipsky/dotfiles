@@ -122,23 +122,6 @@ if [[ -z "$WAYLAND_DISPLAY" && "$(tty)" == "/dev/tty1" ]]; then
 fi
 EOF
 
-sudo -u "$USERNAME" tee "/home/$USERNAME/.zshrc" >/dev/null <<'EOF'
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-HISTFILE=~/.history
-HISTSIZE=10000
-SAVEHIST=50000
-
-setopt inc_append_history
-
-PROMPT_EOL_MARK=''
-
-eval "$(starship init zsh)"
-
-export PATH="$PATH:$HOME/.local/bin"
-EOF
-
 LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
 sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
 
