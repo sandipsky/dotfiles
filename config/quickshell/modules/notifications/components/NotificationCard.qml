@@ -106,7 +106,7 @@ Rectangle {
             color: Theme.notificationText
             opacity: closeHover.hovered ? 1.0 : 0.7
             font.family: Theme.fontFamily
-            font.pixelSize: 12
+            font.pixelSize: 15
         }
     }
 
@@ -123,21 +123,68 @@ Rectangle {
 
         // Icon: prefer the inline image hint, then the desktop entry icon,
         // then fall back to the appIcon string (also a freedesktop name).
-        Image {
+        // If none of those yields a usable image — or the image is the
+        // tiny magenta/black "missing texture" placeholder some apps emit
+        // (notably blueman's battery notifications) — we render a generic
+        // bell glyph instead.
+        Item {
             Layout.alignment: Qt.AlignTop
             Layout.preferredWidth: 54
             Layout.preferredHeight: 54
-            sourceSize.width: 108
-            sourceSize.height: 108
-            fillMode: Image.PreserveAspectFit
-            smooth: true
-            visible: status === Image.Ready
-            source: {
-                if (!root.notification) return "";
-                if (root.notification.image && root.notification.image.length > 0)
-                    return root.notification.image;
-                var name = root.notification.appIcon || root.notification.desktopEntry || "";
-                return name.length > 0 ? Quickshell.iconPath(name, "dialog-information") : "";
+
+            // Temporary: log what the daemon hands us so we can pinpoint
+            // which field is producing the magenta/black checkerboard.
+            Component.onCompleted: {
+                if (!root.notification) return;
+                var n = root.notification;
+                console.log("[notif-icon] app=" + n.appName
+                    + " appIcon=" + JSON.stringify(n.appIcon)
+                    + " desktopEntry=" + JSON.stringify(n.desktopEntry)
+                    + " image=" + JSON.stringify(n.image)
+                    + " resolved=" + JSON.stringify(notifIcon.source.toString())
+                    + " size=" + notifIcon.sourceSize.width + "x" + notifIcon.sourceSize.height
+                    + " status=" + notifIcon.status);
+            }
+
+            Image {
+                id: notifIcon
+                anchors.fill: parent
+                sourceSize.width: 108
+                sourceSize.height: 108
+                fillMode: Image.PreserveAspectFit
+                smooth: true
+                cache: false
+                // We deliberately ignore `notification.image` (the inline
+                // pixmap hint). Some apps — notably blueman's battery
+                // notifications — pack a magenta/black "missing texture"
+                // checkerboard into that hint, and there's no reliable way
+                // to tell it apart from a legitimate inline icon. The
+                // theme-resolved appIcon / desktopEntry name is much more
+                // dependable; if neither resolves we fall through to the
+                // bell glyph below.
+                source: {
+                    if (!root.notification) return "";
+                    var name = root.notification.appIcon || root.notification.desktopEntry || "";
+                    if (name.length === 0) return "";
+                    return Quickshell.iconPath(name, "");
+                }
+                readonly property bool looksValid: status === Image.Ready
+                    && sourceSize.width >= 24 && sourceSize.height >= 24
+                visible: looksValid
+            }
+
+            Text {
+                anchors.centerIn: parent
+                visible: !notifIcon.looksValid
+                // Font Awesome 7 Free Solid: fa-bell (U+F0F3) — generic
+                // fallback for notifications that don't supply a usable icon.
+                text: ""
+                color: Theme.notificationText
+                opacity: 0.7
+                font.family: "Font Awesome 7 Free"
+                font.styleName: "Solid"
+                font.pixelSize: 34
+                renderType: Text.NativeRendering
             }
         }
 
@@ -155,7 +202,7 @@ Rectangle {
                 elide: Text.ElideRight
                 font.family: Theme.fontFamily
                 font.styleName: Theme.fontStyle
-                font.pixelSize: 12
+                font.pixelSize: 15
             }
             Text {
                 visible: text.length > 0
@@ -168,7 +215,7 @@ Rectangle {
                 textFormat: Text.PlainText
                 font.family: Theme.fontFamily
                 font.styleName: "DemiBold"
-                font.pixelSize: 15
+                font.pixelSize: 18
             }
             Text {
                 visible: text.length > 0
@@ -181,7 +228,7 @@ Rectangle {
                 textFormat: Text.RichText
                 font.family: Theme.fontFamily
                 font.styleName: Theme.fontStyle
-                font.pixelSize: 14
+                font.pixelSize: 16
                 onLinkActivated: (url) => Quickshell.execDetached(["xdg-open", url])
             }
 
@@ -222,7 +269,7 @@ Rectangle {
                             color: Theme.notificationText
                             font.family: Theme.fontFamily
                             font.styleName: Theme.fontStyle
-                            font.pixelSize: 13
+                            font.pixelSize: 16
                         }
                     }
                 }

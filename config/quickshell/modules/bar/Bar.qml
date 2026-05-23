@@ -142,6 +142,11 @@ PanelWindow {
                 tooltip: root.tooltip
             }
 
+            BluetoothIndicator {
+                tooltip: root.tooltip
+                onClicked: root.toggleBluetoothQS()
+            }
+
             NetworkIndicator {
                 tooltip: root.tooltip
                 onClicked: root.toggleNetworkQS()

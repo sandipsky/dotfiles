@@ -1,6 +1,3 @@
 [default]
-path = "~/.config/hypr/assets/wallpapers"
-duration = "10m"
-sorting = "ascending"
-
-
+path = "/home/sandip/Pictures/Wallpapers/desktop-1920x1080 (1).jpg"
+transition-time = 0

@@ -8,6 +8,7 @@ import "modules/clipboard"
 import "modules/quicksettings"
 import "modules/bar"
 import "modules/notifications"
+import "modules/wallpaper"
 import "services"
 
 ShellRoot {
@@ -17,6 +18,7 @@ ShellRoot {
     Launcher              { id: launcher;      open: false }
     Calendar              { id: calendar;      open: false }
     Clipboard             { id: clipboard;     open: false }
+    WallpaperSelector     { id: wallpaper;     open: false }
     BatteryQuickSettings    { id: batteryQS;     open: false }
     AudioQuickSettings      { id: audioQS;       open: false }
     NetworkQuickSettings    { id: networkQS;     open: false }
@@ -34,6 +36,10 @@ ShellRoot {
     IpcHandler {
         target: "clipboard"
         function toggle(): void { clipboard.open = !clipboard.open; }
+    }
+    IpcHandler {
+        target: "wallpaper"
+        function toggle(): void { wallpaper.open = !wallpaper.open; }
     }
     IpcHandler {
         target: "bluetoothqs"

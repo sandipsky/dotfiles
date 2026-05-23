@@ -24,15 +24,16 @@ Rectangle {
     }
 
     function iconChar() {
-        // E702 = Bluetooth. There's no distinct "off" glyph in the font that
-        // renders well at this size, so we fade the icon when powered off.
-        return "";
+        // Font Awesome 7 Brands: fa-bluetooth (U+F293). Brands ships in a
+        // single style only, so the on/off distinction comes from opacity
+        // (full when powered, dimmed when off) — same trick as before.
+        return "";
     }
 
     function tooltipText() {
-        if (!powered) return "Bluetooth off";
-        if (connected.length === 0) return "Bluetooth on";
-        return "Connected: " + connected.join(", ");
+        if (!powered) return "Bluetooth Off";
+        if (connected.length === 0) return "Bluetooth On";
+        return "Bluetooth On - " + connected.join(", ");
     }
 
     HoverHandler {
@@ -59,7 +60,7 @@ Rectangle {
         text: root.iconChar()
         color: Theme.textPrimary
         opacity: root.powered ? 1.0 : 0.4
-        font.family: "Segoe Fluent Icons"
+        font.family: "Font Awesome 7 Brands"
         font.pixelSize: 18
         renderType: Text.NativeRendering
     }

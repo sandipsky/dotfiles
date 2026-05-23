@@ -23,7 +23,12 @@ PanelWindow {
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
     property bool open: false
-    visible: open
+    // Keep the window rendered while the slide-out animation finishes.
+    property bool _renderVisible: open
+    visible: _renderVisible
+
+    // Distance the panel must travel to be fully tucked behind the bar.
+    readonly property real _hiddenOffset: panel.height + panel.anchors.bottomMargin
 
     function close() { open = false; }
     function refresh() {
@@ -31,12 +36,19 @@ PanelWindow {
         if (powered) listQuery.running = true;
     }
     onOpenChanged: {
-        if (open) refresh();
-        else {
+        if (open) {
+            _renderVisible = true;
+            refresh();
+            slideOutAnim.stop();
+            slideTransform.y = _hiddenOffset;
+            slideInAnim.restart();
+        } else {
             scanPoller.stop();
             scanning = false;
             // Stop any background scan we may have started.
             Quickshell.execDetached(["bluetoothctl", "scan", "off"]);
+            slideInAnim.stop();
+            slideOutAnim.restart();
         }
     }
 
@@ -46,15 +58,29 @@ PanelWindow {
     property bool powered: false
     property var devices: []          // [{ mac, name, icon, paired, connected }]
     property bool scanning: false
-    property var busyMacs: ({})       // mac → true while a connect/disconnect is in flight
+    // Each entry: mac → { action: "connect"|"disconnect"|"pair"|"unpair" }.
+    // Used both as the busy flag for BluetoothItem and as a hint so the
+    // next listQuery can decide whether the device reached its target state.
+    property var busyMacs: ({})
 
-    function setBusy(mac, on) {
+    function setBusy(mac, action) {
         var copy = {};
         for (var k in busyMacs) copy[k] = busyMacs[k];
-        if (on) copy[mac] = true; else delete copy[mac];
+        if (action) copy[mac] = { action: action };
+        else        delete copy[mac];
         busyMacs = copy;
+        if (action) busyTimeout.restart();
     }
     function isBusy(mac) { return !!busyMacs[mac]; }
+
+    // Hard safety net: if a bluetoothctl action never produces a state
+    // change (out-of-range device, agent never replied, etc.) the device
+    // would otherwise be stuck on "Working…" until the next scan timeout.
+    Timer {
+        id: busyTimeout
+        interval: 8000
+        onTriggered: root.busyMacs = ({})
+    }
 
     function startScan() {
         var showLoading = devices.length === 0;
@@ -68,13 +94,29 @@ PanelWindow {
     }
 
     function connectDevice(mac) {
-        setBusy(mac, true);
+        setBusy(mac, "connect");
         Quickshell.execDetached(["bluetoothctl", "connect", mac]);
         actionRecheck.restart();
     }
     function disconnectDevice(mac) {
-        setBusy(mac, true);
+        setBusy(mac, "disconnect");
         Quickshell.execDetached(["bluetoothctl", "disconnect", mac]);
+        actionRecheck.restart();
+    }
+    // Pair → trust → connect in one hop. The mac is passed as a positional
+    // arg ($1) so it's never spliced into the shell string directly.
+    function pairDevice(mac) {
+        setBusy(mac, "pair");
+        Quickshell.execDetached([
+            "sh", "-c",
+            "bluetoothctl pair \"$1\" && bluetoothctl trust \"$1\" && bluetoothctl connect \"$1\"",
+            "sh", mac
+        ]);
+        actionRecheck.restart();
+    }
+    function unpairDevice(mac) {
+        setBusy(mac, "unpair");
+        Quickshell.execDetached(["bluetoothctl", "remove", mac]);
         actionRecheck.restart();
     }
 
@@ -84,13 +126,49 @@ PanelWindow {
         onPressed: root.close()
     }
 
+    // Clipping container: its bottom edge sits at the top of the bar so
+    // anything past that line is cut off, producing the "tuck behind the
+    // bar" slide. The bar (a separate layer-shell surface) keeps painting
+    // normally over the clipped pixels.
+    Item {
+        id: slideClip
+        anchors.fill: parent
+        anchors.bottomMargin: Theme.barHeight
+        clip: true
+
+        Item {
+            id: slideContent
+            anchors.fill: parent
+            transform: Translate { id: slideTransform; y: 0 }
+        }
+
+        NumberAnimation {
+            id: slideInAnim
+            target: slideTransform
+            property: "y"
+            to: 0
+            duration: 260
+            easing.type: Easing.OutCubic
+        }
+
+        NumberAnimation {
+            id: slideOutAnim
+            target: slideTransform
+            property: "y"
+            to: root._hiddenOffset
+            duration: 220
+            easing.type: Easing.InCubic
+            onFinished: root._renderVisible = false
+        }
+
     Rectangle {
         id: panel
+        parent: slideContent
         width: 360
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.rightMargin: 8
-        anchors.bottomMargin: 46
+        anchors.bottomMargin: 6
 
         height: column.implicitHeight + 24
 
@@ -150,7 +228,7 @@ PanelWindow {
 
                     Text {
                         anchors.centerIn: parent
-                        text: ""   // Segoe Fluent Icons: Refresh
+                        text: ""   // Segoe Fluent Icons: Refresh
                         color: Theme.textPrimary
                         font.family: "Segoe Fluent Icons"
                         font.pixelSize: 14
@@ -197,6 +275,7 @@ PanelWindow {
                         : deviceList)
             }
         }
+    }
     }
 
     Component {
@@ -290,6 +369,8 @@ PanelWindow {
 
                     onConnectClicked:    root.connectDevice(mac)
                     onDisconnectClicked: root.disconnectDevice(mac)
+                    onPairClicked:       root.pairDevice(mac)
+                    onUnpairClicked:     root.unpairDevice(mac)
                 }
             }
 
@@ -411,6 +492,26 @@ PanelWindow {
                     var bn = (b.name || b.mac).toLowerCase();
                     return an < bn ? -1 : an > bn ? 1 : 0;
                 });
+
+                // Clear the busy flag for any device that has reached the
+                // state its pending action was waiting for, so the row stops
+                // showing "Working…" once bluetoothctl actually settles.
+                var newByMac = {};
+                for (var k = 0; k < out.length; k++) newByMac[out[k].mac] = out[k];
+                var stillBusy = {};
+                for (var mac in root.busyMacs) {
+                    var entry  = root.busyMacs[mac];
+                    var action = entry && entry.action;
+                    var now    = newByMac[mac];
+                    var done = false;
+                    if (action === "connect")    done = now && now.connected;
+                    else if (action === "disconnect") done = !now || !now.connected;
+                    else if (action === "pair")  done = now && now.paired;
+                    else if (action === "unpair") done = !now;
+                    if (!done) stillBusy[mac] = entry;
+                }
+                root.busyMacs = stillBusy;
+
                 root.devices = out;
                 if (out.length > 0 && root.scanning) {
                     root.scanning = false;
