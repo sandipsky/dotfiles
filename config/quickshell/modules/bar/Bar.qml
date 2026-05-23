@@ -134,6 +134,14 @@ PanelWindow {
                 onClicked: root.toggleClipboard()
             }
 
+            CpuIndicator {
+                tooltip: root.tooltip
+            }
+
+            MemoryIndicator {
+                tooltip: root.tooltip
+            }
+
             NetworkIndicator {
                 tooltip: root.tooltip
                 onClicked: root.toggleNetworkQS()

@@ -25,12 +25,27 @@ PanelWindow {
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
     property bool open: true
-    visible: open
+    // Keep the window rendered while the slide-out animation finishes.
+    property bool _renderVisible: open
+    visible: _renderVisible
+
+    // Distance the menu must travel to be fully tucked behind the bar.
+    // Menu's bottom sits `slideClip.bottomMargin` above the bar's top, so
+    // moving it down by (menu.height + that gap) puts its top at the bar's
+    // top edge — where the slideClip will clip the rest away.
+    readonly property real _hiddenOffset: menu.height + menu.anchors.bottomMargin
 
     onOpenChanged: {
         if (open) {
+            _renderVisible = true;
             searchBar.clear();
             searchBar.focusInput();
+            slideOutAnim.stop();
+            slideTransform.y = _hiddenOffset;
+            slideInAnim.restart();
+        } else {
+            slideInAnim.stop();
+            slideOutAnim.restart();
         }
     }
 
@@ -49,12 +64,22 @@ PanelWindow {
         onPressed: root.close()
     }
 
+    // Clipping container: its bottom edge sits at the top of the bar so
+    // anything past that line is cut off. Sliding the menu down through
+    // this edge produces the "tuck behind the bar" effect, while the bar
+    // (a separate layer-shell surface) continues to paint normally.
+    Item {
+        id: slideClip
+        anchors.fill: parent
+        anchors.bottomMargin: Theme.barHeight
+        clip: true
+
     ClippingRectangle {
         id: menu
         width: 420
         height: 680
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 46
+        anchors.bottomMargin: 6
         anchors.left: parent.left
         anchors.leftMargin: 8
 
@@ -62,6 +87,37 @@ PanelWindow {
         radius: Theme.menuRadius
         border.color: Theme.startmenuBorder
         border.width: 1
+
+        transform: Translate {
+            id: slideTransform
+            y: 0
+        }
+
+        NumberAnimation {
+            id: slideInAnim
+            target: slideTransform
+            property: "y"
+            to: 0
+            duration: 260
+            easing.type: Easing.OutCubic
+        }
+
+        NumberAnimation {
+            id: slideOutAnim
+            target: slideTransform
+            property: "y"
+            to: root._hiddenOffset
+            duration: 220
+            easing.type: Easing.InCubic
+            onFinished: root._renderVisible = false
+        }
+
+        Component.onCompleted: {
+            if (root.open) {
+                slideTransform.y = root._hiddenOffset;
+                slideInAnim.restart();
+            }
+        }
 
         function closeDropdowns() {
             userDropdown.visible = false;
@@ -190,5 +246,6 @@ PanelWindow {
                 }
             ]
         }
+    }
     }
 }

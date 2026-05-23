@@ -22,9 +22,26 @@ PanelWindow {
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
     property bool open: true
-    visible: open
+    // Keep the window rendered while the slide-out animation finishes.
+    property bool _renderVisible: open
+    visible: _renderVisible
+
+    // Distance the panel must travel to be fully tucked behind the bar.
+    readonly property real _hiddenOffset: panel.height + panel.anchors.bottomMargin
 
     function close() { open = false; }
+
+    onOpenChanged: {
+        if (open) {
+            _renderVisible = true;
+            slideOutAnim.stop();
+            slideTransform.y = _hiddenOffset;
+            slideInAnim.restart();
+        } else {
+            slideInAnim.stop();
+            slideOutAnim.restart();
+        }
+    }
 
     // -------- state --------
     property var today: new Date()
@@ -79,8 +96,44 @@ PanelWindow {
         onPressed: root.close()
     }
 
+    // Clipping container: its bottom edge sits at the top of the bar so
+    // anything past that line is cut off, producing the "tuck behind the
+    // bar" slide. The bar (a separate layer-shell surface) keeps painting
+    // normally over the clipped pixels.
+    Item {
+        id: slideClip
+        anchors.fill: parent
+        anchors.bottomMargin: Theme.barHeight
+        clip: true
+
+        Item {
+            id: slideContent
+            anchors.fill: parent
+            transform: Translate { id: slideTransform; y: 0 }
+        }
+
+        NumberAnimation {
+            id: slideInAnim
+            target: slideTransform
+            property: "y"
+            to: 0
+            duration: 260
+            easing.type: Easing.OutCubic
+        }
+
+        NumberAnimation {
+            id: slideOutAnim
+            target: slideTransform
+            property: "y"
+            to: root._hiddenOffset
+            duration: 220
+            easing.type: Easing.InCubic
+            onFinished: root._renderVisible = false
+        }
+
     Rectangle {
         id: panel
+        parent: slideContent
 
         width: 360
         height: 460
@@ -90,7 +143,7 @@ PanelWindow {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.rightMargin: 8
-        anchors.bottomMargin: 46
+        anchors.bottomMargin: 6
 
         color: Theme.calendarBg
         radius: Theme.calendarRadius
@@ -100,7 +153,7 @@ PanelWindow {
 
         // Light drop shadow (stacked rings; no MultiEffect for VM compat).
         Repeater {
-            parent: root
+            parent: slideContent
             model: 6
             delegate: Rectangle {
                 anchors.fill: panel
@@ -294,5 +347,6 @@ PanelWindow {
                 }
             }
         }
+    }
     }
 }
