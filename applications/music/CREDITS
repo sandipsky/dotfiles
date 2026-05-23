@@ -1,0 +1,19 @@
+Icon attribution
+================
+
+The application icons in data/ are derived from GNOME Music, copyright the
+GNOME Project, licensed under the GNU General Public License version 2 or
+later (GPL-2.0-or-later). They were copied verbatim from the GNOME Music
+package and renamed to match this project's application ID:
+
+    data/dev.sandip.Music.svg
+        <- /usr/share/icons/hicolor/scalable/apps/org.gnome.Music.svg
+    data/dev.sandip.Music-symbolic.svg
+        <- /usr/share/icons/hicolor/symbolic/apps/org.gnome.Music-symbolic.svg
+
+GNOME Music upstream:  https://gitlab.gnome.org/GNOME/gnome-music
+License text:          https://www.gnu.org/licenses/gpl-2.0.html
+
+All other UI icons referenced in code (e.g. media-playback-start-symbolic,
+view-list-symbolic, audio-x-generic-symbolic) resolve at runtime via the
+system icon theme (Adwaita) and are not bundled with this project.

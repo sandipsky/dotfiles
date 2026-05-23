@@ -145,8 +145,8 @@ sudo -u "$USERNAME" -H bash -c "$(wget -qO- https://raw.githubusercontent.com/ha
 
 sudo -u "$USERNAME" -H xdg-user-dirs-update
 
-sudo iptables -F || true
-sudo iptables -X || true
+sudo -u "$USERNAME" -H bash -c "cd '$PWD/applications/music' && echo Y | ./install.sh"
+
 sudo -u "$USERNAME" rm -f /home/$USERNAME/.gnupg/public-keys.d/pubring.db.lock
 sudo sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
