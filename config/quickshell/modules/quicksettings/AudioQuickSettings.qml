@@ -79,12 +79,26 @@ PanelWindow {
                 minValue: 0
                 maxValue: 1
                 value: root.volume
+                showPercent: true
                 onValueDragged: (v) => {
                     root.volume = v;
+                    if (root.muted) {
+                        root.muted = false;
+                        Quickshell.execDetached([
+                            "wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "0"
+                        ]);
+                    }
                     Quickshell.execDetached([
                         "wpctl", "set-volume", "-l", "1.0",
                         "@DEFAULT_AUDIO_SINK@",
                         Math.round(v * 100) + "%"
+                    ]);
+                }
+                onIconClicked: {
+                    root.muted = !root.muted;
+                    Quickshell.execDetached([
+                        "wpctl", "set-mute",
+                        "@DEFAULT_AUDIO_SINK@", "toggle"
                     ]);
                 }
             }

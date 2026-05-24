@@ -10,11 +10,29 @@ Item {
     property real value: 0      // 0..1
     property real minValue: 0
     property real maxValue: 1
+    property bool showPercent: false
 
     signal valueDragged(real value)    // while user drags
     signal valueCommitted(real value)  // on release / click
+    signal iconClicked()
 
     height: 28
+
+    Text {
+        id: percentLabel
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        text: {
+            var span = root.maxValue - root.minValue;
+            var n = span > 0 ? (root.value - root.minValue) / span : 0;
+            return Math.round(Math.max(0, Math.min(1, n)) * 100) + "%";
+        }
+        color: Theme.textPrimary
+        font.pixelSize: 15
+        horizontalAlignment: Text.AlignRight
+        width: 38
+        visible: root.showPercent
+    }
 
     Image {
         id: leftIcon
@@ -37,9 +55,26 @@ Item {
         text: root.iconChar
         color: Theme.textPrimary
         font.family: "Segoe Fluent Icons"
-        font.pixelSize: 16
+        font.pixelSize: 18
         renderType: Text.NativeRendering
         visible: root.iconChar.length > 0
+    }
+
+    MouseArea {
+        id: iconHit
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        width: Math.max(
+            (leftGlyph.visible ? leftGlyph.width : 0),
+            (leftIcon.visible  ? leftIcon.width  : 0),
+            20
+        ) + 12
+        height: Math.max(parent.height, 24)
+        z: 2
+        enabled: leftGlyph.visible || leftIcon.visible
+        visible: enabled
+        cursorShape: Qt.PointingHandCursor
+        onClicked: root.iconClicked()
     }
 
     Item {
@@ -47,7 +82,8 @@ Item {
         anchors.left: leftGlyph.visible ? leftGlyph.right
                        : (leftIcon.visible ? leftIcon.right : parent.left)
         anchors.leftMargin: (leftGlyph.visible || leftIcon.visible) ? 14 : 0
-        anchors.right: parent.right
+        anchors.right: percentLabel.visible ? percentLabel.left : parent.right
+        anchors.rightMargin: percentLabel.visible ? 8 : 0
         anchors.verticalCenter: parent.verticalCenter
         height: parent.height
 

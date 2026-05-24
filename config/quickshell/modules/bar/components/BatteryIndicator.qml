@@ -18,6 +18,7 @@ Rectangle {
     property string timeRemaining: ""   // e.g. "1hr 24min remaining" or ""
     property int  brightness: -1        // -1 = no backlight detected
     property string profile: ""         // powerprofilesctl: power-saver | balanced | performance
+    property int refreshRate: -1        // current monitor refresh rate (Hz), -1 if unknown
 
     property var tooltip
     signal clicked()
@@ -45,11 +46,20 @@ Rectangle {
         return __batGlyphs[idx];
     }
 
+    function profileLabel() {
+        if (profile === "power-saver")  return "Power Saver";
+        if (profile === "balanced")     return "Balanced";
+        if (profile === "performance")  return "Performance";
+        return profile;
+    }
+
     function tooltipText() {
         var line1 = percentage + "%";
         if (timeRemaining.length > 0) line1 += ": " + timeRemaining;
         var lines = [line1];
         if (brightness >= 0) lines.push("Brightness: " + brightness + "%");
+        if (profile.length > 0) lines.push("Profile: " + profileLabel());
+        if (refreshRate > 0) lines.push("Refresh: " + refreshRate + " Hz");
         return lines.join("\n");
     }
 
@@ -76,14 +86,49 @@ Rectangle {
     onChargingChanged:      refreshTooltip()
     onTimeRemainingChanged: refreshTooltip()
     onBrightnessChanged:    refreshTooltip()
+    onProfileChanged:       refreshTooltip()
+    onRefreshRateChanged:   refreshTooltip()
+
+    // Two layers, so only the level fill bars get tinted:
+    //   bottom = plain Battery1..10 glyph (outline + level bars, no bolt/leaf)
+    //            drawn in the accent color
+    //   top    = matching "empty" variant of the active family
+    //            (Battery0 / BatteryCharging0 / BatterySaver0), drawn in the
+    //            regular text color — covers the outline plus the bolt/leaf
+    //            while leaving the interior transparent so the colored bars
+    //            below show through.
+    readonly property color __fillColor: {
+        if (charging)                   return "#9fd89f";
+        if (profile === "power-saver")  return "#eaa300";
+        return Theme.textPrimary;
+    }
+    readonly property bool __tinted: charging || profile === "power-saver"
+
+    function __levelGlyph() {
+        var idx = Math.max(0, Math.min(9, Math.ceil(percentage / 10) - 1));
+        return __batGlyphs[idx];
+    }
+
+    Text {
+        id: batteryFill
+        anchors.centerIn: parent
+        text: root.__levelGlyph()
+        color: root.__fillColor
+        font.family: "Segoe Fluent Icons"
+        font.pixelSize: 26
+        renderType: Text.NativeRendering
+    }
 
     Text {
         anchors.centerIn: parent
-        text: root.iconChar()
+        text: root.charging ? "\uE85A"
+              : root.profile === "power-saver" ? "\uE863"
+              : "\uE850"
         color: Theme.textPrimary
         font.family: "Segoe Fluent Icons"
         font.pixelSize: 26
         renderType: Text.NativeRendering
+        visible: root.__tinted
     }
 
     // sysfs is the cheapest, most portable source — works the same on
@@ -101,6 +146,7 @@ Rectangle {
             timeQuery.running = true;
             brightnessQuery.running = true;
             profileQuery.running = true;
+            refreshRateQuery.running = true;
         }
     }
 
@@ -184,6 +230,28 @@ Rectangle {
             onStreamFinished: {
                 var p = text.trim();
                 if (p.length > 0) root.profile = p;
+            }
+        }
+    }
+
+    // Current monitor refresh rate via hyprctl. Picks the focused monitor
+    // when available, otherwise falls back to the first monitor reported.
+    Process {
+        id: refreshRateQuery
+        command: ["sh", "-c",
+            "hyprctl monitors 2>/dev/null"
+            + " | awk '/^Monitor /{m=$0; next}"
+            + " /^[[:space:]]+[0-9]+x[0-9]+@/{"
+            + "  split($1,a,\"@\");"
+            + "  if (focused==\"\" || m ~ /focused/) { focused=a[2] }"
+            + "  if (first==\"\") first=a[2]"
+            + " } END { print (focused!=\"\" ? focused : first) }'"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                var s = text.trim();
+                if (s.length === 0) { root.refreshRate = -1; return; }
+                var n = parseFloat(s);
+                root.refreshRate = isNaN(n) ? -1 : Math.round(n);
             }
         }
     }
