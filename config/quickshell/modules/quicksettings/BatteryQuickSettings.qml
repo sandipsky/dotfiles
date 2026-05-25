@@ -26,6 +26,7 @@ PanelWindow {
     // Keep the window rendered while the slide-out animation finishes.
     property bool _renderVisible: open
     visible: _renderVisible
+    property bool profileExpanded: false
 
     // Distance the panel must travel to be fully tucked behind the bar.
     readonly property real _hiddenOffset: panel.height + panel.anchors.bottomMargin
@@ -44,6 +45,7 @@ PanelWindow {
             slideTransform.y = _hiddenOffset;
             slideInAnim.restart();
         } else {
+            profileExpanded = false;
             slideInAnim.stop();
             slideOutAnim.restart();
         }
@@ -58,13 +60,11 @@ PanelWindow {
         if (p === "performance") return "Performance";
         return p || "Balanced";
     }
-    function cycleProfile() {
-        var idx = profileList.indexOf(profile);
-        if (idx < 0) idx = 1;
-        var next = profileList[(idx + 1) % profileList.length];
-        Quickshell.execDetached(["powerprofilesctl", "set", next]);
-        profile = next;
-        setRefreshRate(next === "power-saver" ? 60 : 144);
+    function setProfile(p) {
+        if (p === profile) return;
+        Quickshell.execDetached(["powerprofilesctl", "set", p]);
+        profile = p;
+        setRefreshRate(p === "power-saver" ? 60 : 144);
     }
 
     // Power-saver drops eDP-1 to 60 Hz to extend battery; any other profile
@@ -169,12 +169,145 @@ PanelWindow {
             anchors.topMargin: 14
             spacing: 10
 
-            Tile {
+            Item {
+                id: profileTile
                 Layout.fillWidth: true
-                iconSource: Qt.resolvedUrl("../../icons/profile.svg")
-                label: root.profileLabel(root.profile)
-                active: false
-                onClicked: root.cycleProfile()
+                implicitHeight: 44
+
+                Rectangle {
+                    id: profileTileBg
+                    anchors.fill: parent
+                    radius: height / 2
+                    color: root.profileExpanded ? Theme.barAccent : Theme.dropdownBg
+
+                    HoverHandler { id: profileTileHover }
+                    TapHandler {
+                        gesturePolicy: TapHandler.ReleaseWithinBounds
+                        onTapped: root.profileExpanded = !root.profileExpanded
+                    }
+
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: parent.radius
+                        color: profileTileHover.hovered ? "#ffffff" : "transparent"
+                        opacity: 0.06
+                    }
+
+                    Image {
+                        id: profileIcon
+                        anchors.left: parent.left
+                        anchors.leftMargin: 14
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: 24
+                        height: 24
+                        sourceSize.width: 36
+                        sourceSize.height: 36
+                        source: Qt.resolvedUrl("../../icons/profile.svg")
+                        fillMode: Image.PreserveAspectFit
+                        smooth: true
+                    }
+
+                    Text {
+                        anchors.left: profileIcon.right
+                        anchors.leftMargin: 12
+                        anchors.right: profileChevron.left
+                        anchors.rightMargin: 8
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: root.profileLabel(root.profile)
+                        color: Theme.textPrimary
+                        font.family: Theme.fontFamily
+                        font.styleName: Theme.fontStyle
+                        font.pixelSize: 16
+                        font.weight: Font.DemiBold
+                        elide: Text.ElideRight
+                    }
+
+                    Text {
+                        id: profileChevron
+                        anchors.right: parent.right
+                        anchors.rightMargin: 14
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: ""   // Segoe Fluent Icons: ChevronDown
+                        color: Theme.textPrimary
+                        font.family: "Segoe Fluent Icons"
+                        font.pixelSize: 12
+                        renderType: Text.NativeRendering
+                        rotation: root.profileExpanded ? 180 : 0
+                        Behavior on rotation { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
+                    }
+                }
+            }
+
+            // Power-profile dropdown — slides open below the tile.
+            Item {
+                id: profileDropdown
+                Layout.fillWidth: true
+                Layout.preferredHeight: root.profileExpanded ? profileOptions.implicitHeight + 4 : 0
+                clip: true
+                visible: Layout.preferredHeight > 0
+
+                Behavior on Layout.preferredHeight {
+                    NumberAnimation { duration: 160; easing.type: Easing.OutCubic }
+                }
+
+                Column {
+                    id: profileOptions
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.topMargin: 4
+                    spacing: 0
+
+                    Repeater {
+                        model: root.profileList
+
+                        delegate: Rectangle {
+                            width: profileOptions.width
+                            height: 34
+                            radius: 6
+                            color: optHover.hovered
+                                ? Theme.hoverBg
+                                : (modelData === root.profile ? Theme.dropdownBg : "transparent")
+
+                            HoverHandler { id: optHover }
+                            TapHandler {
+                                gesturePolicy: TapHandler.ReleaseWithinBounds
+                                onTapped: {
+                                    root.setProfile(modelData);
+                                    root.profileExpanded = false;
+                                }
+                            }
+
+                            Text {
+                                anchors.left: parent.left
+                                anchors.leftMargin: 14
+                                anchors.right: optCheck.left
+                                anchors.rightMargin: 8
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: root.profileLabel(modelData)
+                                color: Theme.textPrimary
+                                font.family: Theme.fontFamily
+                                font.styleName: Theme.fontStyle
+                                font.pixelSize: 14
+                                font.weight: modelData === root.profile ? Font.DemiBold : Font.Normal
+                                elide: Text.ElideRight
+                            }
+
+                            Text {
+                                id: optCheck
+                                anchors.right: parent.right
+                                anchors.rightMargin: 14
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: ""   // Segoe Fluent Icons: CheckMark
+                                color: Theme.barAccent
+                                font.family: "Segoe Fluent Icons"
+                                font.pixelSize: 12
+                                renderType: Text.NativeRendering
+                                visible: modelData === root.profile
+                            }
+                        }
+                    }
+                }
             }
 
             SettingSlider {

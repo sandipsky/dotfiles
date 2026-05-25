@@ -31,6 +31,16 @@ Rectangle {
         onTapped: root.clicked()
     }
 
+    WheelHandler {
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+        enabled: root.brightness >= 0
+        onWheel: (event) => {
+            var step = event.angleDelta.y > 0 ? "5%+" : "5%-";
+            Quickshell.execDetached(["brightnessctl", "-q", "set", step]);
+            brightnessQuery.running = true;
+        }
+    }
+
     // Segoe Fluent Icons glyphs, indexed 0..9 \u2192 battery levels 1..10 (deciles).
     // Discharging: Battery1..Battery10  (E851..E859, E83F)
     // Charging:    BatteryCharging1..10 (E85B..E862, EA93, E83E)
