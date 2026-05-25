@@ -34,6 +34,7 @@ sudo pacman -S --noconfirm --needed \
     gvfs-mtp \
     gnome-themes-extra \
     adwaita-icon-theme \
+    libreoffice-fresh \
     uwsm
 
 yay -S --noconfirm --needed \
@@ -93,6 +94,17 @@ for file in "${files[@]}"; do
     if [[ -f "$src" ]]; then
         sudo -u "$USERNAME" cp "$src" "$dest"
         sudo -u "$USERNAME" bash -c "echo 'NoDisplay=true' >> '$dest'"
+    fi
+done
+
+libreoffice_files=(base draw math startcenter)
+for name in "${libreoffice_files[@]}"; do
+    src="/usr/lib/libreoffice/share/xdg/$name.desktop"
+    dest="$APPS_DIR/libreoffice-$name.desktop"
+
+    if [[ -f "$src" ]]; then
+        sudo -u "$USERNAME" sed '/^Actions=/a NoDisplay=true' "$src" \
+            | sudo -u "$USERNAME" tee "$dest" >/dev/null
     fi
 done
 
