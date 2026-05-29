@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/dev/sandip/Launcher">
+    <file>style.css</file>
+    <file compressed="true">icons/search.svg</file>
+    <file compressed="true">icons/calculator.svg</file>
+    <file compressed="true">icons/web.svg</file>
+  </gresource>
+</gresources>
