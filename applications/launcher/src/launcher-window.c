@@ -29,6 +29,33 @@ selected_index (LauncherWindow *self)
   return row != NULL ? gtk_list_box_row_get_index (row) : -1;
 }
 
+/* Scroll the capped results area so the given row is fully visible. We adjust
+ * the scroller's vadjustment by hand because the row never grabs real focus
+ * (that stays on the entry so typing keeps working), so the ScrolledWindow's
+ * automatic focus-follows scrolling never kicks in. */
+static void
+scroll_row_into_view (LauncherWindow *self, GtkWidget *row)
+{
+  GtkAdjustment *vadj =
+    gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (self->scroller));
+  if (vadj == NULL)
+    return;
+
+  graphene_rect_t bounds;
+  if (!gtk_widget_compute_bounds (row, self->list, &bounds))
+    return; /* not allocated yet — nothing to scroll to */
+
+  double top    = bounds.origin.y;
+  double bottom = top + bounds.size.height;
+  double value  = gtk_adjustment_get_value (vadj);
+  double page   = gtk_adjustment_get_page_size (vadj);
+
+  if (top < value)
+    gtk_adjustment_set_value (vadj, top);
+  else if (bottom > value + page)
+    gtk_adjustment_set_value (vadj, bottom - page);
+}
+
 static void
 select_index (LauncherWindow *self, int index)
 {
@@ -39,6 +66,7 @@ select_index (LauncherWindow *self, int index)
       /* Keep the highlighted row scrolled into view without stealing focus
        * from the entry (so typing keeps working). */
       gtk_widget_set_focus_child (self->list, GTK_WIDGET (row));
+      scroll_row_into_view (self, GTK_WIDGET (row));
     }
 }
 
@@ -184,6 +212,16 @@ on_key_pressed (GtkEventControllerKey *controller, guint keyval, guint keycode,
 }
 
 static void
+on_backdrop_pressed (GtkGestureClick *gesture, int n_press, double x, double y,
+                     gpointer user_data)
+{
+  (void) gesture; (void) n_press; (void) x; (void) y;
+  /* Click landed on the empty area around the card -> dismiss. Clicks on the
+   * card itself are consumed by the card's own widgets and never reach here. */
+  launcher_window_hide (LAUNCHER_WINDOW (user_data));
+}
+
+static void
 on_active_changed (GObject *object, GParamSpec *pspec, gpointer user_data)
 {
   (void) pspec; (void) user_data;
@@ -217,14 +255,20 @@ launcher_window_init (LauncherWindow *self)
 
   gtk_window_set_decorated (window, FALSE);
   gtk_window_set_resizable (window, FALSE);
-  gtk_window_set_default_size (window, 720, -1);
   gtk_widget_add_css_class (GTK_WIDGET (self), "launcher");
 
   /* The rounded, bordered surface. The toplevel itself is transparent (see
-   * style.css) so these corners aren't clipped to a square. */
+   * style.css) so these corners aren't clipped to a square.
+   *
+   * Width is fixed on the card; height is left to its content, so the card is
+   * a slim Spotlight-style bar at rest and grows downward as results appear.
+   * It's parented into a full-screen overlay below (not set as the window's
+   * content directly) so it can float at 20% from the top, centered. */
   GtkWidget *card = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_widget_add_css_class (card, "card");
-  adw_application_window_set_content (ADW_APPLICATION_WINDOW (self), card);
+  gtk_widget_set_size_request (card, 720, -1);
+  gtk_widget_set_halign (card, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (card, GTK_ALIGN_START);
 
   /* Search row: magnifier glyph + frameless entry. */
   GtkWidget *row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 14);
@@ -267,6 +311,38 @@ launcher_window_init (LauncherWindow *self)
   gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (self->scroller), self->list);
   gtk_widget_set_visible (self->scroller, FALSE);
   gtk_box_append (GTK_BOX (card), self->scroller);
+
+  /* Full-screen transparent overlay. GNOME/mutter won't let a normal toplevel
+   * position itself and doesn't speak layer-shell, so to place the card at 20%
+   * from the top (like the QML launcher) we cover the whole monitor with a
+   * transparent window and float the card inside it. The empty area around the
+   * card is a backdrop that dismisses the launcher when clicked — the
+   * click-outside-to-close behaviour of the QML overlay. */
+  GtkWidget *overlay = gtk_overlay_new ();
+
+  GtkWidget *backdrop = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_overlay_set_child (GTK_OVERLAY (overlay), backdrop);
+
+  GtkGesture *backdrop_click = gtk_gesture_click_new ();
+  g_signal_connect (backdrop_click, "pressed",
+                    G_CALLBACK (on_backdrop_pressed), self);
+  gtk_widget_add_controller (backdrop, GTK_EVENT_CONTROLLER (backdrop_click));
+
+  gtk_overlay_add_overlay (GTK_OVERLAY (overlay), card);
+  adw_application_window_set_content (ADW_APPLICATION_WINDOW (self), overlay);
+
+  /* Cover the primary monitor and offset the card to 20% of its height. */
+  GdkDisplay *display = gdk_display_get_default ();
+  GdkMonitor *monitor =
+    g_list_model_get_item (gdk_display_get_monitors (display), 0);
+  if (monitor != NULL)
+    {
+      GdkRectangle geo;
+      gdk_monitor_get_geometry (monitor, &geo);
+      gtk_widget_set_margin_top (card, (int) (geo.height * 0.20));
+      gtk_window_fullscreen_on_monitor (window, monitor);
+      g_object_unref (monitor);
+    }
 
   /* Wiring. */
   g_signal_connect (self->entry, "changed", G_CALLBACK (on_entry_changed), self);
