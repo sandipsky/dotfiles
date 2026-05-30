@@ -7,7 +7,7 @@ launcher_sources = files(
   'launcher-search.c',
 )
 
-launcher_deps = [gtk_dep, adw_dep, gio_unix_dep, m_dep]
+launcher_deps = [gtk_dep, adw_dep, gio_unix_dep, m_dep, layer_shell_dep]
 
 executable('launcher',
   launcher_sources,

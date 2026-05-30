@@ -4,6 +4,10 @@
 #include "launcher-result-row.h"
 #include "launcher-search.h"
 
+#ifdef HAVE_LAYER_SHELL
+#include <gtk4-layer-shell.h>
+#endif
+
 struct _LauncherWindow
 {
   AdwApplicationWindow parent_instance;
@@ -330,16 +334,10 @@ launcher_window_init (LauncherWindow *self)
   gtk_widget_set_visible (self->scroller, FALSE);
   gtk_box_append (GTK_BOX (card), self->scroller);
 
-  /* Screen-covering transparent overlay. GNOME/mutter won't let a normal
-   * toplevel position itself and doesn't speak layer-shell, so to place the
-   * card at 20% from the top (like the QML launcher) we cover the monitor and
-   * float the card inside. We MAXIMIZE rather than fullscreen: a fullscreen
-   * surface gets unredirected (direct scan-out) by mutter, which drops the
-   * window's alpha and paints the transparent area solid black — very visible
-   * on software-rendered VMs. Maximized windows stay composited, so the
-   * desktop shows through around the card. The empty area is a backdrop that
-   * dismisses the launcher when clicked — the click-outside-to-close of the
-   * QML overlay. */
+  /* Screen-covering transparent overlay: the card floats inside at 20% from
+   * the top (like the QML launcher), and the empty area around it is a
+   * backdrop that dismisses the launcher when clicked — click-outside-to-close.
+   * Two ways to cover the screen, chosen at runtime below. */
   GtkWidget *overlay = gtk_overlay_new ();
 
   GtkWidget *backdrop = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -354,7 +352,32 @@ launcher_window_init (LauncherWindow *self)
   adw_application_window_set_content (ADW_APPLICATION_WINDOW (self), overlay);
 
   self->card = card;
-  gtk_window_maximize (window); /* card offset to 20% in position_card_idle() */
+
+  /* On a wlroots compositor (Hyprland, sway, ...) become a real layer-shell
+   * overlay anchored to all four edges — full-output, above everything, with
+   * exclusive keyboard focus, exactly like the QML PanelWindow. Elsewhere
+   * (GNOME, which has no layer-shell) fall back to maximizing: a fullscreen
+   * surface gets unredirected by mutter, dropping the window's alpha and
+   * painting the transparent area solid black on software-rendered VMs, while
+   * a maximized window stays composited so the desktop shows through. Either
+   * way the card is offset to 20% of the window height in position_card_idle. */
+  gboolean layered = FALSE;
+#ifdef HAVE_LAYER_SHELL
+  if (gtk_layer_is_supported ())
+    {
+      gtk_layer_init_for_window (window);
+      gtk_layer_set_namespace (window, "launcher");
+      gtk_layer_set_layer (window, GTK_LAYER_SHELL_LAYER_OVERLAY);
+      gtk_layer_set_keyboard_mode (window, GTK_LAYER_SHELL_KEYBOARD_MODE_EXCLUSIVE);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_TOP,    TRUE);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_LEFT,   TRUE);
+      gtk_layer_set_anchor (window, GTK_LAYER_SHELL_EDGE_RIGHT,  TRUE);
+      layered = TRUE;
+    }
+#endif
+  if (!layered)
+    gtk_window_maximize (window);
 
   /* Wiring. */
   g_signal_connect (self->entry, "changed", G_CALLBACK (on_entry_changed), self);

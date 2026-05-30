@@ -4,14 +4,29 @@ A minimal GTK4 + libadwaita application launcher — the GTK port of the
 Quickshell launcher in
 [`config/quickshell/modules/launcher/`](../../config/quickshell/modules/launcher/).
 GNOME doesn't run Quickshell, so on a GNOME session this standalone binary
-provides the same thing: a centered, dark search box that filters installed
-apps, doubles as a calculator, and offers a Google-search fallback.
+provides the same thing: a dark search box at ~20% from the top that filters
+installed apps, doubles as a calculator, and offers a Google-search fallback.
 
 It runs as a **resident background service** (started on login) and pops its
 window up **instantly on Alt+Space** — the process is already warm, so there's
-no cold-start. A frameless, centered window appears focused on a search field
-and dismisses itself on **Escape**, on **Alt+Space** again, or when it loses
-focus (click elsewhere), mirroring the overlay's outside-click behavior.
+no cold-start. A frameless overlay appears focused on a search field and
+dismisses itself on **Escape**, on **Alt+Space** again, by clicking outside the
+card, or when it loses focus.
+
+### How it covers the screen
+
+The launcher is a screen-covering overlay with the search card floated at 20%
+from the top. How that overlay is realized is chosen at runtime:
+
+- **wlroots compositors (Hyprland, sway, …)** — if `gtk4-layer-shell` is
+  available and the compositor supports the protocol, it becomes a real
+  layer-shell overlay anchored to all four screen edges, on the overlay layer,
+  with exclusive keyboard focus — exactly like the Quickshell `PanelWindow`. So
+  the *same binary* works as a first-class launcher on Hyprland too.
+- **GNOME (mutter)** — has no layer-shell, so it falls back to a maximized
+  transparent window. (Fullscreen would get unredirected by mutter, dropping
+  the alpha and painting the backdrop solid black on software-rendered VMs;
+  maximized windows stay composited.)
 
 There is no `.desktop` entry — it's keybind-driven, not launched from the app
 grid.
@@ -47,12 +62,17 @@ Already on this Arch system after a GTK app build: `gtk4`, `libadwaita`,
 Still needed (install once):
 
 ```
-sudo pacman -S meson ninja wl-clipboard
+sudo pacman -S meson ninja wl-clipboard gtk4-layer-shell
 ```
 
 `wl-clipboard` is only used to copy calculator results; without it the app
 falls back to the GTK clipboard (which doesn't survive the process exiting on
 Wayland).
+
+`gtk4-layer-shell` is **optional** — it's what makes the launcher a proper
+layer-shell overlay on Hyprland/sway. The build auto-detects it
+(`dependency('gtk4-layer-shell-0', required: false)` + `-DHAVE_LAYER_SHELL`); if
+it's absent the binary still builds and runs, just GNOME-style (maximized).
 
 ## Build & install
 
@@ -93,6 +113,18 @@ Re-run with a different shortcut, or edit it in **Settings → Keyboard →
 View and Customize Shortcuts → Custom Shortcuts → Launcher**. The command is the
 absolute path `~/.local/bin/launcher --toggle` so it works regardless of the
 session `PATH`.
+
+`install.sh` only sets up the **GNOME** keybinding (via gsettings). On Hyprland
+the keybind lives in your Hyprland config instead — add to
+[`config/hypr/conf/keybinds.conf`](../../config/hypr/conf/keybinds.conf):
+
+```
+bind = ALT, SPACE, exec, ~/.local/bin/launcher --toggle
+```
+
+and start the service the same way (`systemctl --user start launcher.service`,
+or an `exec-once` in autostart). Note that on Hyprland the Quickshell launcher
+already covers this — running both is redundant.
 
 ## Layout map
 

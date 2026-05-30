@@ -18,6 +18,11 @@ adw_dep      = dependency('libadwaita-1', version: '>= 1.4')
 gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.66')
 m_dep        = cc.find_library('m', required: false)
 
+# Optional: turns the launcher into a proper layer-shell overlay on wlroots
+# compositors (Hyprland, sway, ...). Absent on GNOME, where we fall back to a
+# maximized window — so this is not required to build.
+layer_shell_dep = dependency('gtk4-layer-shell-0', required: false)
+
 gnome = import('gnome')
 
 common_c_args = [
@@ -25,6 +30,10 @@ common_c_args = [
   '-DAPP_ID="' + app_id + '"',
   '-DAPP_VERSION="' + meson.project_version() + '"',
 ]
+
+if layer_shell_dep.found()
+  common_c_args += '-DHAVE_LAYER_SHELL'
+endif
 
 # Silence a few warnings that fire on GTK/GObject macro use
 foreach a : ['-Wno-unused-parameter', '-Wno-cast-function-type']

@@ -42,7 +42,8 @@ REQUIRED_PKGS=(
     glib2          # provides glib-compile-resources
     gtk4
     libadwaita
-    wl-clipboard   # calculator results are copied via wl-copy
+    gtk4-layer-shell  # proper overlay on wlroots compositors (Hyprland); unused on GNOME
+    wl-clipboard      # calculator results are copied via wl-copy
     hicolor-icon-theme
 )
 
