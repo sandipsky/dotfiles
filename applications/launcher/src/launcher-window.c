@@ -8,6 +8,7 @@ struct _LauncherWindow
 {
   AdwApplicationWindow parent_instance;
 
+  GtkWidget  *card;       /* floats inside the full-screen overlay at 20% top */
   GtkWidget  *entry;
   GtkWidget  *separator;
   GtkWidget  *scroller;
@@ -98,6 +99,20 @@ activate_index (LauncherWindow *self, int index)
 
 /* ---------- show / hide / toggle ---------- */
 
+/* The window is maximized, so its final height is only known once the
+ * compositor has allocated it. Offset the card to 20% of that height as soon
+ * as the allocation lands (retry on the next idle until it does). */
+static gboolean
+position_card_idle (gpointer data)
+{
+  LauncherWindow *self = LAUNCHER_WINDOW (data);
+  int h = gtk_widget_get_height (GTK_WIDGET (self));
+  if (h <= 1)
+    return G_SOURCE_CONTINUE; /* not allocated yet */
+  gtk_widget_set_margin_top (self->card, (int) (h * 0.20));
+  return G_SOURCE_REMOVE;
+}
+
 static void
 window_show (LauncherWindow *self)
 {
@@ -108,6 +123,7 @@ window_show (LauncherWindow *self)
   gtk_widget_set_visible (GTK_WIDGET (self), TRUE);
   gtk_window_present (GTK_WINDOW (self));
   gtk_widget_grab_focus (self->entry);
+  g_idle_add (position_card_idle, self);
 }
 
 void
@@ -254,7 +270,9 @@ launcher_window_init (LauncherWindow *self)
   GtkWindow *window = GTK_WINDOW (self);
 
   gtk_window_set_decorated (window, FALSE);
-  gtk_window_set_resizable (window, FALSE);
+  /* Resizable so it can be maximized to cover the monitor (see below); the
+   * card inside still hugs its content. */
+  gtk_window_set_resizable (window, TRUE);
   gtk_widget_add_css_class (GTK_WIDGET (self), "launcher");
 
   /* The rounded, bordered surface. The toplevel itself is transparent (see
@@ -312,12 +330,16 @@ launcher_window_init (LauncherWindow *self)
   gtk_widget_set_visible (self->scroller, FALSE);
   gtk_box_append (GTK_BOX (card), self->scroller);
 
-  /* Full-screen transparent overlay. GNOME/mutter won't let a normal toplevel
-   * position itself and doesn't speak layer-shell, so to place the card at 20%
-   * from the top (like the QML launcher) we cover the whole monitor with a
-   * transparent window and float the card inside it. The empty area around the
-   * card is a backdrop that dismisses the launcher when clicked — the
-   * click-outside-to-close behaviour of the QML overlay. */
+  /* Screen-covering transparent overlay. GNOME/mutter won't let a normal
+   * toplevel position itself and doesn't speak layer-shell, so to place the
+   * card at 20% from the top (like the QML launcher) we cover the monitor and
+   * float the card inside. We MAXIMIZE rather than fullscreen: a fullscreen
+   * surface gets unredirected (direct scan-out) by mutter, which drops the
+   * window's alpha and paints the transparent area solid black — very visible
+   * on software-rendered VMs. Maximized windows stay composited, so the
+   * desktop shows through around the card. The empty area is a backdrop that
+   * dismisses the launcher when clicked — the click-outside-to-close of the
+   * QML overlay. */
   GtkWidget *overlay = gtk_overlay_new ();
 
   GtkWidget *backdrop = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -331,18 +353,8 @@ launcher_window_init (LauncherWindow *self)
   gtk_overlay_add_overlay (GTK_OVERLAY (overlay), card);
   adw_application_window_set_content (ADW_APPLICATION_WINDOW (self), overlay);
 
-  /* Cover the primary monitor and offset the card to 20% of its height. */
-  GdkDisplay *display = gdk_display_get_default ();
-  GdkMonitor *monitor =
-    g_list_model_get_item (gdk_display_get_monitors (display), 0);
-  if (monitor != NULL)
-    {
-      GdkRectangle geo;
-      gdk_monitor_get_geometry (monitor, &geo);
-      gtk_widget_set_margin_top (card, (int) (geo.height * 0.20));
-      gtk_window_fullscreen_on_monitor (window, monitor);
-      g_object_unref (monitor);
-    }
+  self->card = card;
+  gtk_window_maximize (window); /* card offset to 20% in position_card_idle() */
 
   /* Wiring. */
   g_signal_connect (self->entry, "changed", G_CALLBACK (on_entry_changed), self);
