@@ -38,8 +38,8 @@ PanelWindow {
     onOpenChanged: {
         if (open) {
             _renderVisible = true;
-            searchBar.clear();
-            searchBar.focusInput();
+            bottomBar.clearSearch();
+            bottomBar.focusSearch();
             slideOutAnim.stop();
             slideTransform.y = _hiddenOffset;
             slideInAnim.restart();
@@ -120,12 +120,10 @@ PanelWindow {
         }
 
         function closeDropdowns() {
-            userDropdown.visible = false;
-            powerDropdown.visible = false;
-            bottomBar.userActive = false;
+            powerDropdown.open = false;
             bottomBar.powerActive = false;
         }
-        readonly property bool anyDropdownOpen: userDropdown.visible || powerDropdown.visible
+        readonly property bool anyDropdownOpen: powerDropdown.open
 
         // Swallows any click inside the menu that wasn't handled by a
         // child handler so the outer outsideArea never sees it.
@@ -139,71 +137,63 @@ PanelWindow {
             anchors.topMargin: 24
             anchors.leftMargin: 16
             anchors.rightMargin: 16
-            anchors.bottomMargin: 0
+            anchors.bottomMargin: 12
             spacing: 24
-
-            SearchBar {
-                id: searchBar
-                Layout.fillWidth: true
-                Layout.preferredHeight: 44
-
-                onAccepted: {
-                    if (appList.entries.length > 0) {
-                        appList.launchSelected();
-                        root.close();
-                    }
-                }
-                onEscapePressed: root.close()
-                onUpPressed: appList.moveSelection(-1)
-                onDownPressed: appList.moveSelection(1)
-            }
 
             AppList {
                 id: appList
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                filter: searchBar.text
+                filter: bottomBar.searchText
+                // While the power dropdown is open, ignore clicks so a tap on
+                // a dropdown item doesn't also launch the app beneath it.
+                enabled: !powerDropdown.open
                 onAppLaunched: root.close()
             }
 
             BottomBar {
                 id: bottomBar
                 Layout.fillWidth: true
-                Layout.preferredHeight: 72
-                Layout.leftMargin: -16
-                Layout.rightMargin: -16
 
-                onToggleUserMenu: {
-                    var openTo = !userDropdown.visible;
-                    menu.closeDropdowns();
-                    userDropdown.visible = openTo;
-                    bottomBar.userActive = openTo;
+                onSearchAccepted: {
+                    if (appList.entries.length > 0) {
+                        appList.launchSelected();
+                        root.close();
+                    }
                 }
+                onSearchEscape: root.close()
+                onSearchUp: appList.moveSelection(-1)
+                onSearchDown: appList.moveSelection(1)
+
                 onTogglePowerMenu: {
-                    var openTo = !powerDropdown.visible;
-                    menu.closeDropdowns();
-                    powerDropdown.visible = openTo;
+                    var openTo = !powerDropdown.open;
+                    powerDropdown.open = openTo;
                     bottomBar.powerActive = openTo;
                 }
             }
         }
 
-        // Click-elsewhere-in-the-menu closes any open dropdown.
+        // Any click outside the open dropdown (app list, search, the power
+        // button) closes it. We grab the press but only close on release
+        // (onClicked): keeping the grab for the whole gesture stops the
+        // release from falling through to the power button — which would
+        // otherwise re-toggle the dropdown back open.
         MouseArea {
             anchors.fill: parent
             z: 500
             visible: menu.anyDropdownOpen
-            onPressed: (m) => { menu.closeDropdowns(); m.accepted = true; }
+            onPressed: (m) => { m.accepted = true; }
+            onClicked: menu.closeDropdowns()
         }
 
         Dropdown {
-            id: userDropdown
+            id: powerDropdown
             z: 1000
-            anchors.left: parent.left
-            anchors.leftMargin: 16
+            anchors.right: parent.right
+            anchors.rightMargin: 16
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 80
-            width: 220
+            anchors.bottomMargin: 64
+            width: 200
 
             actions: [
                 {
@@ -215,20 +205,8 @@ PanelWindow {
                     label: "Sign out",
                     icon: Qt.resolvedUrl("../../icons/logout.svg"),
                     onTrigger: () => Quickshell.execDetached(["loginctl", "terminate-user", Quickshell.env("USER") || ""])
-                }
-            ]
-        }
-
-        Dropdown {
-            id: powerDropdown
-            z: 1000
-            anchors.right: parent.right
-            anchors.rightMargin: 16
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 80
-            width: 200
-
-            actions: [
+                },
+                { separator: true },
                 {
                     label: "Sleep",
                     icon: Qt.resolvedUrl("../../icons/sleep.svg"),

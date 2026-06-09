@@ -1,97 +1,46 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import "../../../styles"
 
-Rectangle {
+// Footer row: search field, power icon — transparent background.
+RowLayout {
     id: root
-    color: Theme.startmenuUserBg
-    // Shape is handled by the parent ClippingRectangle (menu).
 
-    signal toggleUserMenu()
     signal togglePowerMenu()
+
+    // Search signals/state, forwarded from the embedded SearchBar.
+    signal searchAccepted()
+    signal searchEscape()
+    signal searchUp()
+    signal searchDown()
+    property alias searchText: searchBar.text
+    function clearSearch() { searchBar.clear(); }
+    function focusSearch() { searchBar.focusInput(); }
 
     // Driven by StartMenu so the button keeps the hover-bg highlight
     // while its dropdown is open.
-    property bool userActive: false
     property bool powerActive: false
 
-    // ---- User button (left) ----
-    Rectangle {
-        id: userBtn
-        anchors.left: parent.left
-        anchors.leftMargin: 12
-        anchors.verticalCenter: parent.verticalCenter
-        height: 48
-        // Auto-fit the hover area to the avatar + name + side padding.
-        width: userRow.implicitWidth + 20
-        radius: 6
-        color: (userHover.hovered || root.userActive) ? Theme.hoverBg : "transparent"
+    spacing: 12
 
-        HoverHandler { id: userHover }
-        TapHandler {
-            gesturePolicy: TapHandler.ReleaseWithinBounds
-            onTapped: root.toggleUserMenu()
-        }
+    // ---- Search (left) ----
+    SearchBar {
+        id: searchBar
+        Layout.fillWidth: true
+        Layout.preferredHeight: 44
 
-        Row {
-            id: userRow
-            anchors.left: parent.left
-            anchors.leftMargin: 8
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: 12
-
-            Rectangle {
-                anchors.verticalCenter: parent.verticalCenter
-                width: 32
-                height: 32
-                radius: 16
-                color: "#444"
-                clip: true
-
-                Image {
-                    id: avatarImg
-                    anchors.fill: parent
-                    sourceSize.width: 64
-                    sourceSize.height: 64
-                    source: "file://" + Quickshell.env("HOME") + "/.face"
-                    fillMode: Image.PreserveAspectCrop
-                    smooth: true
-                    visible: status === Image.Ready
-                    asynchronous: true
-                }
-
-                Image {
-                    anchors.centerIn: parent
-                    width: 20
-                    height: 20
-                    sourceSize.width: 40
-                    sourceSize.height: 40
-                    source: Qt.resolvedUrl("../../../icons/user.svg")
-                    fillMode: Image.PreserveAspectFit
-                    smooth: true
-                    visible: avatarImg.status !== Image.Ready
-                }
-            }
-
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Sandip Shakya"
-                color: Theme.textPrimary
-                font.family: Theme.fontFamily
-                font.styleName: "Bold"
-                font.pixelSize: 16
-            }
-        }
+        onAccepted: root.searchAccepted()
+        onEscapePressed: root.searchEscape()
+        onUpPressed: root.searchUp()
+        onDownPressed: root.searchDown()
     }
 
     // ---- Power button (right) ----
     Rectangle {
         id: powerBtn
-        anchors.right: parent.right
-        anchors.rightMargin: 16
-        anchors.verticalCenter: parent.verticalCenter
-        width: 40
-        height: 40
+        Layout.preferredWidth: 40
+        Layout.preferredHeight: 40
         radius: 6
         color: (powerHover.hovered || root.powerActive) ? Theme.hoverBg : "transparent"
 
@@ -103,8 +52,8 @@ Rectangle {
 
         Image {
             anchors.centerIn: parent
-            width: 18
-            height: 18
+            width: 22
+            height: 22
             sourceSize.width: 36
             sourceSize.height: 36
             source: Qt.resolvedUrl("../../../icons/power.svg")
