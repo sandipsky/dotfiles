@@ -6,9 +6,9 @@ import "../../styles"
 import "components"
 
 // Full-screen overlay that draws the current notification stack at the
-// top-center of the screen. Input is masked to the cards themselves so
-// the surrounding area stays click-through (background apps still react
-// to clicks where there's no notification).
+// top-right of the screen, just below the bar. Input is masked to the
+// cards themselves so the surrounding area stays click-through
+// (background apps still react to clicks where there's no notification).
 PanelWindow {
     id: root
 
@@ -35,11 +35,11 @@ PanelWindow {
 
     Column {
         id: stack
-        // Bottom-right corner, sitting above the bar's exclusive zone.
+        // Top-right corner, sitting just below the bar's exclusive zone.
         anchors.right: parent.right
         anchors.rightMargin: 20
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: Theme.barHeight + 20
+        anchors.top: parent.top
+        anchors.topMargin: Theme.barHeight + 20
         spacing: 12
 
         Repeater {

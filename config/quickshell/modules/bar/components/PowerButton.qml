@@ -18,12 +18,12 @@ Rectangle {
     }
 
     Image {
-        anchors.horizontalCenter: parent.horizontalCenter
-        width: 22
-        height: 24
+        anchors.centerIn: parent
+        width: 18
+        height: 18
         sourceSize.width: 36
         sourceSize.height: 36
-        source: Qt.resolvedUrl("../../../icons/startmenu.svg")
+        source: Qt.resolvedUrl("../../../icons/power.svg")
         fillMode: Image.PreserveAspectFit
         smooth: true
     }

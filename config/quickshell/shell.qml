@@ -6,6 +6,7 @@ import "modules/launcher"
 import "modules/calendar"
 import "modules/clipboard"
 import "modules/quicksettings"
+import "modules/power"
 import "modules/bar"
 import "modules/notifications"
 import "modules/wallpaper"
@@ -23,6 +24,7 @@ ShellRoot {
     AudioQuickSettings      { id: audioQS;       open: false }
     NetworkQuickSettings    { id: networkQS;     open: false }
     BluetoothQuickSettings  { id: bluetoothQS;   open: false }
+    PowerMenu               { id: powerMenu;     open: false }
     Tooltip                 { id: tooltip }
 
     IpcHandler {
@@ -75,6 +77,7 @@ ShellRoot {
         audioQSOpen:     audioQS.open
         networkQSOpen:   networkQS.open
         bluetoothQSOpen: bluetoothQS.open
+        powerMenuOpen:   powerMenu.open
         tooltip:         tooltip
 
         onToggleStartMenu: startmenu.open = !startmenu.open
@@ -97,5 +100,6 @@ ShellRoot {
             closeOtherQS(bluetoothQS);
             bluetoothQS.open = !bluetoothQS.open;
         }
+        onTogglePowerMenu: powerMenu.open = !powerMenu.open
     }
 }

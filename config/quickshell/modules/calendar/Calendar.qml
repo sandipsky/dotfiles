@@ -26,8 +26,8 @@ PanelWindow {
     property bool _renderVisible: open
     visible: _renderVisible
 
-    // Distance the panel must travel to be fully tucked behind the bar.
-    readonly property real _hiddenOffset: panel.height + panel.anchors.bottomMargin
+    // Negative: the panel tucks up behind the top bar when hidden.
+    readonly property real _hiddenOffset: -(panel.height + panel.anchors.topMargin)
 
     function close() { open = false; }
 
@@ -47,6 +47,9 @@ PanelWindow {
     property var today: new Date()
     property int viewYear: today.getFullYear()
     property int viewMonth: today.getMonth()    // 0-based
+    // Direction of the last month change: +1 = next, -1 = prev. Drives the
+    // day-grid slide-in animation.
+    property int slideDir: 1
 
     // Re-resolve "today" each time the calendar is opened so the
     // highlight stays correct after the day rolls over.
@@ -56,21 +59,30 @@ PanelWindow {
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ]
-    readonly property var weekdayLong: [
-        "Sunday", "Monday", "Tuesday", "Wednesday",
-        "Thursday", "Friday", "Saturday"
-    ]
     readonly property var dayShort: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
     function gotoPrev() {
         var m = viewMonth - 1, y = viewYear;
         if (m < 0) { m = 11; y -= 1; }
+        slideDir = -1;
         viewMonth = m; viewYear = y;
+        animateMonthChange();
     }
     function gotoNext() {
         var m = viewMonth + 1, y = viewYear;
         if (m > 11) { m = 0; y += 1; }
+        slideDir = 1;
         viewMonth = m; viewYear = y;
+        animateMonthChange();
+    }
+
+    // Kick off the directional slide + fade for the day grid. The cells have
+    // already been rebuilt synchronously by the time this runs, so it reads
+    // as an "enter": start offset + transparent, settle to centred + opaque.
+    function animateMonthChange() {
+        gridSlide.x = slideDir * 26;
+        dayGrid.opacity = 0;
+        monthAnim.restart();
     }
 
     // 6-row × 7-col grid filled with leading prev-month + month + trailing next.
@@ -96,14 +108,14 @@ PanelWindow {
         onPressed: root.close()
     }
 
-    // Clipping container: its bottom edge sits at the top of the bar so
-    // anything past that line is cut off, producing the "tuck behind the
+    // Clipping container: its top edge sits at the bottom of the bar so
+    // anything above that line is cut off, producing the "tuck behind the
     // bar" slide. The bar (a separate layer-shell surface) keeps painting
     // normally over the clipped pixels.
     Item {
         id: slideClip
         anchors.fill: parent
-        anchors.bottomMargin: Theme.barHeight
+        anchors.topMargin: Theme.barHeight
         clip: true
 
         Item {
@@ -136,14 +148,12 @@ PanelWindow {
         parent: slideContent
 
         width: 360
-        height: 460
+        height: 412
 
-        // Bottom-right (system-tray corner), with breathing room
-        // for the taskbar/dock area.
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.rightMargin: 8
-        anchors.bottomMargin: 6
+        // Centred under the clock, just below the top bar.
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 6
 
         color: Theme.calendarBg
         radius: Theme.calendarRadius
@@ -179,32 +189,17 @@ PanelWindow {
             anchors.fill: parent
             spacing: 0
 
-            // ---------- Today header ----------
+            // ---------- Month navigator (top bar) ----------
             Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 56
                 color: Theme.calendarHeaderBg
-                radius: Theme.calendarRadius
-
-                Text {
-                    anchors.left: parent.left
-                    anchors.leftMargin: 20
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: root.weekdayLong[root.today.getDay()]
-                        + ", " + root.monthNames[root.today.getMonth()]
-                        + " "  + root.today.getDate()
-                    color: Theme.textPrimary
-                    font.family: Theme.fontFamily
-                    font.styleName: Theme.fontStyle
-                    font.pixelSize: 18
-                    font.weight: Font.DemiBold
-                }
-            }
-
-            // ---------- Month navigator ----------
-            Item {
-                Layout.fillWidth: true
-                Layout.preferredHeight: 48
+                // Round only the top corners so it matches the panel's
+                // rounded top while sitting flush against the grid below.
+                topLeftRadius: Theme.calendarRadius
+                topRightRadius: Theme.calendarRadius
+                bottomLeftRadius: 0
+                bottomRightRadius: 0
 
                 Text {
                     anchors.left: parent.left
@@ -220,38 +215,40 @@ PanelWindow {
 
                 Row {
                     anchors.right: parent.right
-                    anchors.rightMargin: 12
+                    anchors.rightMargin: 16
                     anchors.verticalCenter: parent.verticalCenter
-                    spacing: 2
+                    spacing: 4
 
+                    // Previous month (left)
                     Rectangle {
                         width: 28; height: 28; radius: 4
-                        color: upHover.hovered ? Theme.hoverBg : "transparent"
-                        HoverHandler { id: upHover }
+                        color: prevHover.hovered ? Theme.hoverBg : "transparent"
+                        HoverHandler { id: prevHover }
                         TapHandler {
                             gesturePolicy: TapHandler.ReleaseWithinBounds
                             onTapped: root.gotoPrev()
                         }
                         Text {
                             anchors.centerIn: parent
-                            text: "▲"
-                            color: Theme.textSecondary
+                            text: "◀"
+                            color: Theme.textPrimary
                             font.family: Theme.fontFamily
                             font.styleName: Theme.fontStyle
                             font.pixelSize: 12
                         }
                     }
+                    // Next month (right)
                     Rectangle {
                         width: 28; height: 28; radius: 4
-                        color: dnHover.hovered ? Theme.hoverBg : "transparent"
-                        HoverHandler { id: dnHover }
+                        color: nextHover.hovered ? Theme.hoverBg : "transparent"
+                        HoverHandler { id: nextHover }
                         TapHandler {
                             gesturePolicy: TapHandler.ReleaseWithinBounds
                             onTapped: root.gotoNext()
                         }
                         Text {
                             anchors.centerIn: parent
-                            text: "▼"
+                            text: "▶"
                             color: Theme.textPrimary
                             font.family: Theme.fontFamily
                             font.styleName: Theme.fontStyle
@@ -297,16 +294,32 @@ PanelWindow {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.bottomMargin: 12
+                clip: true
                 readonly property real cellW: (width - 24) / 7
                 readonly property real cellH: height / 6
 
+                // Directional slide + fade played whenever the month changes.
+                ParallelAnimation {
+                    id: monthAnim
+                    NumberAnimation {
+                        target: gridSlide; property: "x"
+                        to: 0; duration: 220; easing.type: Easing.OutCubic
+                    }
+                    NumberAnimation {
+                        target: dayGrid; property: "opacity"
+                        to: 1; duration: 220; easing.type: Easing.OutCubic
+                    }
+                }
+
                 Grid {
+                    id: dayGrid
                     anchors.fill: parent
                     anchors.leftMargin: 12
                     anchors.rightMargin: 12
                     columns: 7
                     rowSpacing: 0
                     columnSpacing: 0
+                    transform: Translate { id: gridSlide }
 
                     Repeater {
                         model: root.cells

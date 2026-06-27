@@ -52,7 +52,7 @@ PanelWindow {
     Rectangle {
         id: bubble
         x: Math.max(8, Math.min(parent.width - width - 8, root.anchorX - width / 2))
-        y: parent.height - height - Theme.barHeight - 8
+        y: Theme.barHeight + 8
 
         width: label.implicitWidth + 20
         height: label.implicitHeight + 14

@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(git pull *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Read(//sys/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0A:00/power_supply/BAT1/**)",
+      "Read(//sys/class/power_supply/BAT1/**)",
+      "Bash(systemctl list-unit-files *)",
+      "Bash(systemctl --user list-unit-files)",
+      "Bash(systemctl status *)",
+      "Bash(systemctl cat *)",
+      "Bash(find /home/sandip -maxdepth 3 -type d \\\\\\( -iname \"archlinux\" -o -iname \"arch\" \\\\\\) 2>/dev/null | grep -v \"/\\\\.git/\")",
+      "Read(//home/sandip/**)",
+      "Read(//home/sandip/Projects/archlinux/**)",
+      "Bash(grep -n \"charge_control_end_threshold\\\\|battery-charge-threshold\\\\|threshold\" /home/sandip/Projects/archlinux/install.sh)"
     ]
   }
 }

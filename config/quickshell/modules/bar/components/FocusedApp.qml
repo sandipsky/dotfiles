@@ -78,7 +78,8 @@ Rectangle {
 
     Image {
         id: icon
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 2
         anchors.left: parent.left
         anchors.leftMargin: 5
         width: source.toString().length > 0 ? 18 : 0
@@ -93,23 +94,24 @@ Rectangle {
 
     Text {
         id: label
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 2
         anchors.left: icon.right
         anchors.leftMargin: icon.visible ? 6 : 1
         width: Math.min(implicitWidth, root.maxLabelWidth)
         text: root.displayName
         color: Theme.textPrimary
         font.family: Theme.fontFamily
-        font.styleName: Theme.fontStyle
-        font.pixelSize: 15
+        font.pixelSize: 16
         elide: Text.ElideRight
     }
 
     Rectangle {
         id: stackDot
-        anchors.verticalCenter: parent.verticalCenter
         anchors.left: label.right
         anchors.leftMargin: 6
+        anchors.top: parent.top
+        anchors.topMargin: 9
         width: 6
         height: 6
         radius: 3

@@ -34,7 +34,6 @@ sudo pacman -S --noconfirm --needed \
     gvfs-mtp \
     gnome-themes-extra \
     adwaita-icon-theme \
-    libreoffice-fresh \
     uwsm
 
 yay -S --noconfirm --needed \
@@ -42,14 +41,9 @@ yay -S --noconfirm --needed \
     nautilus-open-any-terminal 
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules
-sudo cp assets/90-usb.rules /etc/udev/rules.d/90-usb.rules
-sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/90-usb.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
 
 sudo -u "$USERNAME" -H dbus-run-session -- dconf load /org/gnome/nautilus/ < assets/nautilus
-
-sudo mkdir -p /usr/share/sounds/
-sudo cp assets/sounds/* /usr/share/sounds/
 
 sudo -u "$USERNAME" mkdir -p "/home/$USERNAME/.local/share/applications"
 sudo -u "$USERNAME" cp assets/apps/* "/home/$USERNAME/.local/share/applications/"
@@ -94,17 +88,6 @@ for file in "${files[@]}"; do
     if [[ -f "$src" ]]; then
         sudo -u "$USERNAME" cp "$src" "$dest"
         sudo -u "$USERNAME" bash -c "echo 'NoDisplay=true' >> '$dest'"
-    fi
-done
-
-libreoffice_files=(base draw math startcenter)
-for name in "${libreoffice_files[@]}"; do
-    src="/usr/lib/libreoffice/share/xdg/$name.desktop"
-    dest="$APPS_DIR/libreoffice-$name.desktop"
-
-    if [[ -f "$src" ]]; then
-        sudo -u "$USERNAME" sed '/^Actions=/a NoDisplay=true' "$src" \
-            | sudo -u "$USERNAME" tee "$dest" >/dev/null
     fi
 done
 

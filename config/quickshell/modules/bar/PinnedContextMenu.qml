@@ -47,7 +47,7 @@ PanelWindow {
         width: 180
         height: 40
         x: Math.max(8, Math.min(root.anchorX - width / 2, parent.width - width - 8))
-        y: parent.height - Theme.barHeight - height - 6
+        y: Theme.barHeight + 6
 
         color: Theme.dropdownBg
         border.color: Theme.dropdownBorder

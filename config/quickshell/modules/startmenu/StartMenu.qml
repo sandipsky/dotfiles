@@ -29,11 +29,10 @@ PanelWindow {
     property bool _renderVisible: open
     visible: _renderVisible
 
-    // Distance the menu must travel to be fully tucked behind the bar.
-    // Menu's bottom sits `slideClip.bottomMargin` above the bar's top, so
-    // moving it down by (menu.height + that gap) puts its top at the bar's
-    // top edge — where the slideClip will clip the rest away.
-    readonly property real _hiddenOffset: menu.height + menu.anchors.bottomMargin
+    // Negative: the menu tucks up behind the top bar when hidden. Moving it
+    // up by (menu.height + the top gap) lifts its bottom edge to the bar's
+    // bottom edge — where the slideClip clips the rest away.
+    readonly property real _hiddenOffset: -(menu.height + menu.anchors.topMargin)
 
     onOpenChanged: {
         if (open) {
@@ -50,7 +49,6 @@ PanelWindow {
     }
 
     function close() {
-        menu.closeDropdowns();
         open = false;
     }
 
@@ -64,22 +62,22 @@ PanelWindow {
         onPressed: root.close()
     }
 
-    // Clipping container: its bottom edge sits at the top of the bar so
-    // anything past that line is cut off. Sliding the menu down through
+    // Clipping container: its top edge sits at the bottom of the bar so
+    // anything above that line is cut off. Sliding the menu up through
     // this edge produces the "tuck behind the bar" effect, while the bar
     // (a separate layer-shell surface) continues to paint normally.
     Item {
         id: slideClip
         anchors.fill: parent
-        anchors.bottomMargin: Theme.barHeight
+        anchors.topMargin: Theme.barHeight
         clip: true
 
     ClippingRectangle {
         id: menu
         width: 420
         height: 680
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 6
+        anchors.top: parent.top
+        anchors.topMargin: 6
         anchors.left: parent.left
         anchors.leftMargin: 8
 
@@ -119,12 +117,6 @@ PanelWindow {
             }
         }
 
-        function closeDropdowns() {
-            powerDropdown.open = false;
-            bottomBar.powerActive = false;
-        }
-        readonly property bool anyDropdownOpen: powerDropdown.open
-
         // Swallows any click inside the menu that wasn't handled by a
         // child handler so the outer outsideArea never sees it.
         MouseArea {
@@ -145,9 +137,6 @@ PanelWindow {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 filter: bottomBar.searchText
-                // While the power dropdown is open, ignore clicks so a tap on
-                // a dropdown item doesn't also launch the app beneath it.
-                enabled: !powerDropdown.open
                 onAppLaunched: root.close()
             }
 
@@ -164,66 +153,9 @@ PanelWindow {
                 onSearchEscape: root.close()
                 onSearchUp: appList.moveSelection(-1)
                 onSearchDown: appList.moveSelection(1)
-
-                onTogglePowerMenu: {
-                    var openTo = !powerDropdown.open;
-                    powerDropdown.open = openTo;
-                    bottomBar.powerActive = openTo;
-                }
             }
         }
 
-        // Any click outside the open dropdown (app list, search, the power
-        // button) closes it. We grab the press but only close on release
-        // (onClicked): keeping the grab for the whole gesture stops the
-        // release from falling through to the power button — which would
-        // otherwise re-toggle the dropdown back open.
-        MouseArea {
-            anchors.fill: parent
-            z: 500
-            visible: menu.anyDropdownOpen
-            onPressed: (m) => { m.accepted = true; }
-            onClicked: menu.closeDropdowns()
-        }
-
-        Dropdown {
-            id: powerDropdown
-            z: 1000
-            anchors.right: parent.right
-            anchors.rightMargin: 16
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 64
-            width: 200
-
-            actions: [
-                {
-                    label: "Lock",
-                    icon: Qt.resolvedUrl("../../icons/lock.svg"),
-                    onTrigger: () => Quickshell.execDetached(["loginctl", "lock-session"])
-                },
-                {
-                    label: "Sign out",
-                    icon: Qt.resolvedUrl("../../icons/logout.svg"),
-                    onTrigger: () => Quickshell.execDetached(["loginctl", "terminate-user", Quickshell.env("USER") || ""])
-                },
-                { separator: true },
-                {
-                    label: "Sleep",
-                    icon: Qt.resolvedUrl("../../icons/sleep.svg"),
-                    onTrigger: () => Quickshell.execDetached(["systemctl", "suspend"])
-                },
-                {
-                    label: "Shut down",
-                    icon: Qt.resolvedUrl("../../icons/power.svg"),
-                    onTrigger: () => Quickshell.execDetached(["systemctl", "poweroff"])
-                },
-                {
-                    label: "Restart",
-                    icon: Qt.resolvedUrl("../../icons/restart.svg"),
-                    onTrigger: () => Quickshell.execDetached(["systemctl", "reboot"])
-                }
-            ]
-        }
     }
     }
 }

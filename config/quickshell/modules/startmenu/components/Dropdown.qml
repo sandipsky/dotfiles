@@ -11,12 +11,13 @@ Rectangle {
     property real separatorHeight: 13
     property real menuPadding: 6
 
-    // Slide up/down open-close, mirroring the bar's calendar panel.
+    // Slide down/up open-close, mirroring the bar's calendar panel.
     property bool open: false
     // Keep rendered while the slide-out animation finishes.
     property bool _renderVisible: open
-    // How far it slides while opening/closing.
-    property real slideDistance: 24
+    // How far it slides while opening/closing. Negative so it descends from
+    // above into place, matching the top bar.
+    property real slideDistance: -24
 
     visible: _renderVisible
     opacity: open ? 1 : 0

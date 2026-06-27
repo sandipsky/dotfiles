@@ -27,10 +27,15 @@ QtObject {
     readonly property color calendarTodayText: "#ffffff"
     readonly property color calendarDimText: "#6a6a6a"
 
-    readonly property color barBg: "#1c1c1c"
+    readonly property color barBg: "#141414"
     readonly property color barBorder: "#404040"
     readonly property color barActiveBg: "#3a3a3a"
     readonly property color barAccent: "#0078d4"
+    // Active workspace pill: full-height white block with black text.
+    readonly property color barActiveWsBg: "#ffffff"
+    readonly property color barActiveWsText: "#000000"
+    // Inactive workspace number — lighter than the usual secondary grey.
+    readonly property color barInactiveWsText: "#d0d0d0"
 
     readonly property color notificationBg: "#282828"
     readonly property color notificationBorder: "#3d3d3d"
@@ -40,7 +45,7 @@ QtObject {
     readonly property real menuRadius: 10
     readonly property real launcherRadius: 28
     readonly property real calendarRadius: 10
-    readonly property int  barHeight: 40
+    readonly property int  barHeight: 28
 
     readonly property string fontFamily: "Fira Sans"
     readonly property string fontStyle: "Book"

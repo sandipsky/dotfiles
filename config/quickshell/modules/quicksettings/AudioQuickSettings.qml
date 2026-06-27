@@ -27,8 +27,8 @@ PanelWindow {
     property bool _renderVisible: open
     visible: _renderVisible
 
-    // Distance the panel must travel to be fully tucked behind the bar.
-    readonly property real _hiddenOffset: panel.height + panel.anchors.bottomMargin
+    // Negative: the panel tucks up behind the top bar when hidden.
+    readonly property real _hiddenOffset: -(panel.height + panel.anchors.topMargin)
 
     function close() { open = false; }
     function refresh() { volumeQuery.running = true; }
@@ -53,14 +53,14 @@ PanelWindow {
         onPressed: root.close()
     }
 
-    // Clipping container: its bottom edge sits at the top of the bar so
-    // anything past that line is cut off, producing the "tuck behind the
+    // Clipping container: its top edge sits at the bottom of the bar so
+    // anything above that line is cut off, producing the "tuck behind the
     // bar" slide. The bar (a separate layer-shell surface) keeps painting
     // normally over the clipped pixels.
     Item {
         id: slideClip
         anchors.fill: parent
-        anchors.bottomMargin: Theme.barHeight
+        anchors.topMargin: Theme.barHeight
         clip: true
 
         Item {
@@ -93,9 +93,9 @@ PanelWindow {
         parent: slideContent
         width: 320
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        anchors.top: parent.top
         anchors.rightMargin: 8
-        anchors.bottomMargin: 6
+        anchors.topMargin: 6
 
         height: column.implicitHeight + 28
 

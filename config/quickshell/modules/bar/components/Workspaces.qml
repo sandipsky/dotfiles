@@ -9,7 +9,9 @@ Row {
 
     property int count: 6
     property int current: 1
-    spacing: 4
+    spacing: 2
+    // Match the bar so the active cell can run full height, edge to edge.
+    height: Theme.barHeight
 
     // Compositor detection. The Hyprland import above is harmless when not
     // running under Hyprland — the IPC simply stays disconnected.
@@ -102,11 +104,12 @@ Row {
             readonly property int wsId: index + 1
             readonly property bool isActive: root.current === wsId
 
-            width: 28
-            height: 28
-            radius: 6
+            // Full bar height; the active cell reads as a squared white block.
+            width: 22
+            height: root.height
+            radius: 0
             color: isActive
-                ? Theme.barActiveBg
+                ? Theme.barActiveWsBg
                 : (hover.hovered ? Theme.hoverBg : "transparent")
 
             HoverHandler { id: hover }
@@ -116,9 +119,11 @@ Row {
             }
 
             Text {
-                anchors.centerIn: parent
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: parent.top
+                anchors.topMargin: 4
                 text: cell.wsId
-                color: cell.isActive ? Theme.textPrimary : Theme.textSecondary
+                color: cell.isActive ? Theme.barActiveWsText : Theme.barInactiveWsText
                 font.family: Theme.fontFamily
                 font.styleName: Theme.fontStyle
                 font.pixelSize: 16

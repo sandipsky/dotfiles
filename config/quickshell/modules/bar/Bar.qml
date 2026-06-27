@@ -8,12 +8,12 @@ import "components"
 PanelWindow {
     id: root
 
-    // Anchor across the bottom edge, full width, fixed height.
-    // Leaving `top` unset keeps the bar at the bottom and prevents it
-    // from stretching vertically.
+    // Anchor across the top edge, full width, fixed height.
+    // Leaving `bottom` unset keeps the bar pinned to the top and prevents
+    // it from stretching vertically.
     screen: Quickshell.screens[0]
     anchors {
-        bottom: true
+        top: true
         left: true
         right: true
     }
@@ -35,6 +35,7 @@ PanelWindow {
     signal toggleAudioQS()
     signal toggleNetworkQS()
     signal toggleBluetoothQS()
+    signal togglePowerMenu()
 
     // Active states — driven by the owning ShellRoot so the corresponding
     // button highlights while its panel is open.
@@ -46,6 +47,7 @@ PanelWindow {
     property bool audioQSOpen: false
     property bool networkQSOpen: false
     property bool bluetoothQSOpen: false
+    property bool powerMenuOpen: false
 
     // Shared tooltip overlay (instantiated in shell.qml). Indicators on
     // the right side push text + screen-x into it on hover.
@@ -64,18 +66,8 @@ PanelWindow {
         anchors.fill: parent
         color: Theme.barBg
 
-        // Top hairline border — the bar is flush with the bottom edge,
-        // so only the top side ever shows a visible separator.
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            height: 1
-            color: Theme.barBorder
-        }
-
         // Fitt's Law hot corner: extends the start-button hit area to the
-        // bottom-left screen corner so slamming the cursor there toggles
+        // top-left screen corner so slamming the cursor there toggles
         // the menu, Windows-style. Sits beneath the RowLayout so the
         // visible button still owns its own hover/click.
         Item {
@@ -106,14 +98,8 @@ PanelWindow {
                 onClicked: root.toggleStartMenu()
             }
 
-            SearchButton {
-                Layout.alignment: Qt.AlignVCenter
-                active: root.launcherOpen
-                onClicked: root.toggleLauncher()
-            }
-
             Workspaces {
-                Layout.alignment: Qt.AlignVCenter
+                Layout.fillHeight: true
                 count: 6
             }
 
@@ -122,7 +108,14 @@ PanelWindow {
             }
         }
 
-        // ---- Right side: volume + clock ----
+        // ---- Center: clock ----
+        Clock {
+            anchors.centerIn: parent
+            active: root.calendarOpen
+            onLeftClicked: root.toggleCalendar()
+        }
+
+        // ---- Right side: tray indicators + power ----
         Row {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
@@ -163,10 +156,9 @@ PanelWindow {
                 onClicked: root.toggleAudioQS()
             }
 
-            Clock {
-                active: root.calendarOpen
-                tooltip: root.tooltip
-                onLeftClicked: root.toggleCalendar()
+            PowerButton {
+                active: root.powerMenuOpen
+                onClicked: root.togglePowerMenu()
             }
         }
     }
