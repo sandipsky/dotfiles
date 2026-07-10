@@ -1,0 +1,27 @@
+{
+    "general": {
+        "avatarImage": "/home/USERNAME/.face"
+    },
+    "idle": {
+        "enabled": true,
+        "lockTimeout": 600,
+        "screenOffTimeout": 660,
+        "suspendTimeout": 3600
+    },
+    "nightLight": {
+        "enabled": true,
+        "autoSchedule": true,
+        "nightTemp": "5800",
+        "dayTemp": "6500"
+    },
+    "wallpaper": {
+        "directory": "/home/USERNAME/Pictures/Wallpapers"
+    },
+    "colorSchemes": {
+        "useWallpaperColors": true,
+        "darkMode": true
+    },
+    "appLauncher": {
+        "enableClipboardHistory": true
+    }
+}

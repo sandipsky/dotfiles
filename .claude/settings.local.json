@@ -12,7 +12,31 @@
       "Bash(find /home/sandip -maxdepth 3 -type d \\\\\\( -iname \"archlinux\" -o -iname \"arch\" \\\\\\) 2>/dev/null | grep -v \"/\\\\.git/\")",
       "Read(//home/sandip/**)",
       "Read(//home/sandip/Projects/archlinux/**)",
-      "Bash(grep -n \"charge_control_end_threshold\\\\|battery-charge-threshold\\\\|threshold\" /home/sandip/Projects/archlinux/install.sh)"
+      "Bash(grep -n \"charge_control_end_threshold\\\\|battery-charge-threshold\\\\|threshold\" /home/sandip/Projects/archlinux/install.sh)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:aur.archlinux.org)",
+      "WebFetch(domain:docs.noctalia.dev)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:taoofmac.com)",
+      "Bash(curl -s --max-time 30 \"https://aur.archlinux.org/rpc/v5/info?arg\\\\[\\\\]=noctalia-shell&arg\\\\[\\\\]=noctalia-shell-git&arg\\\\[\\\\]=noctalia&arg\\\\[\\\\]=noctalia-git&arg\\\\[\\\\]=noctalia-bin\")",
+      "Bash(curl -s --max-time 30 \"https://api.github.com/repos/noctalia-dev/noctalia/releases?per_page=8\")",
+      "Bash(curl -s --max-time 30 \"https://aur.archlinux.org/rpc/v5/info?arg\\\\[\\\\]=noctalia-qs\")",
+      "Bash(curl -s --max-time 30 \"https://api.github.com/repos/noctalia-dev/noctalia/releases?per_page=3\")",
+      "Bash(curl -s --max-time 30 \"https://api.github.com/repos/noctalia-dev/noctalia-docs/git/trees/main?recursive=1\")",
+      "Bash(curl -s --max-time 30 \"https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=noctalia-shell\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" --max-time 15 \"https://docs.noctalia.dev/v4/\")",
+      "Bash(curl -s --max-time 20 \"https://docs.noctalia.dev/v4/getting-started/keybinds/\")",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:wiki.pika-os.com)",
+      "Bash(curl -s --max-time 25 \"https://data.jsdelivr.com/v1/packages/gh/noctalia-dev/noctalia@v4.7.7\")",
+      "WebFetch(domain:data.jsdelivr.com)",
+      "Bash(mv '/c/Users/Sandip Shakya/Projects/dotfiles/config/hypr/assets/profile.png' '/c/Users/Sandip Shakya/Projects/dotfiles/assets/profile.png')",
+      "Bash(rm -rf '/c/Users/Sandip Shakya/Projects/dotfiles/config/quickshell' '/c/Users/Sandip Shakya/Projects/dotfiles/config/wpaperd' '/c/Users/Sandip Shakya/Projects/dotfiles/config/hypr/assets')",
+      "Bash(rm -f '/c/Users/Sandip Shakya/Projects/dotfiles/config/hypr/hyprlock.conf' '/c/Users/Sandip Shakya/Projects/dotfiles/config/hypr/hypridle.conf' '/c/Users/Sandip Shakya/Projects/dotfiles/config/hypr/hyprsunset.conf')",
+      "Bash(git -C '/c/Users/Sandip Shakya/Projects/dotfiles' status --short)",
+      "Bash(git -C \"/c/Users/Sandip Shakya/Projects/dotfiles\" status --short)",
+      "Bash(git -C \"/c/Users/Sandip Shakya/Projects/dotfiles\" diff --stat)"
     ]
   }
 }

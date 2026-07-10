@@ -2,20 +2,16 @@
 set -e
 
 USERNAME=$(logname)
-FULLNAME=$(getent passwd "$USERNAME" | cut -d ':' -f 5 | cut -d ',' -f 1)
-FULLNAME=${FULLNAME:-$USERNAME}
 
 sudo pacman -S --noconfirm --needed \
     hyprland \
-    wpaperd \
     hyprpicker \
-    hyprsunset \
     wl-clipboard \
     cliphist \
+    wtype \
     xdg-desktop-portal-hyprland \
-    quickshell \
-    hyprlock \
-    hypridle \
+    wlsunset \
+    power-profiles-daemon \
     blueman \
     jq \
     alacritty \
@@ -38,7 +34,8 @@ sudo pacman -S --noconfirm --needed \
 
 yay -S --noconfirm --needed \
     breezex-cursor-theme \
-    nautilus-open-any-terminal 
+    nautilus-open-any-terminal \
+    noctalia-shell
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
@@ -117,8 +114,8 @@ if [[ -z "$WAYLAND_DISPLAY" && "$(tty)" == "/dev/tty1" ]]; then
 fi
 EOF
 
-LOCK_FILE="/home/$USERNAME/.config/hypr/hyprlock.conf"
-sed -i "s/^\s*text = FULLNAME/    text = $FULLNAME/" "$LOCK_FILE"
+sudo -u "$USERNAME" sed -i "s|USERNAME|$USERNAME|g" "/home/$USERNAME/.config/noctalia/settings.json"
+sudo -u "$USERNAME" cp assets/profile.png "/home/$USERNAME/.face"
 
 sudo -u "$USERNAME" -H dbus-run-session -- bash <<'EOF'
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
