@@ -67,12 +67,7 @@ Item {
   function onOpened() {
     // Just update available categories in case pinned apps changed
     updateAvailableCategories();
-    // Default to Pinned if there are pinned apps, otherwise all
-    if (availableCategories.includes("Pinned")) {
-      selectedCategory = "Pinned";
-    } else {
-      selectedCategory = "all";
-    }
+    selectedCategory = "all";
     // Set category mode initially (will be updated when getResults is called)
     showsCategories = true;
   }
@@ -195,11 +190,11 @@ Item {
     return appId.toLowerCase().trim();
   }
 
-  // Helper function to check if an app is pinned
+  // Helper function to check if an app is pinned (to the taskbar/dock)
   function isAppPinned(app) {
     if (!app)
       return false;
-    const pinnedApps = Settings.data.appLauncher.pinnedApps || [];
+    const pinnedApps = Settings.data.dock.pinnedApps || [];
     const appId = getAppKey(app);
     const normalizedId = normalizeAppId(appId);
     return pinnedApps.some(pinnedId => normalizeAppId(pinnedId) === normalizedId);
@@ -254,7 +249,7 @@ Item {
     let hasPinned = false;
 
     // Check if there are any pinned apps
-    const pinnedApps = Settings.data.appLauncher.pinnedApps || [];
+    const pinnedApps = Settings.data.dock.pinnedApps || [];
     if (pinnedApps.length > 0) {
       // Verify that at least one pinned app exists in entries
       for (let app of entries) {
@@ -432,31 +427,8 @@ Item {
     }
 
     if (!query || query.trim() === "") {
-      // Return filtered apps, optionally sorted by usage
-      let sorted;
-      if (Settings.data.appLauncher.sortByMostUsed) {
-        sorted = filteredEntries.slice().sort((a, b) => {
-                                                // Pinned first
-                                                const aPinned = isAppPinned(a);
-                                                const bPinned = isAppPinned(b);
-                                                if (aPinned !== bPinned)
-                                                return aPinned ? -1 : 1;
-
-                                                const ua = getUsageCount(a);
-                                                const ub = getUsageCount(b);
-                                                if (ub !== ua)
-                                                return ub - ua;
-                                                return (a.name || "").toLowerCase().localeCompare((b.name || "").toLowerCase());
-                                              });
-      } else {
-        sorted = filteredEntries.slice().sort((a, b) => {
-                                                const aPinned = isAppPinned(a);
-                                                const bPinned = isAppPinned(b);
-                                                if (aPinned !== bPinned)
-                                                return aPinned ? -1 : 1;
-                                                return (a.name || "").toLowerCase().localeCompare((b.name || "").toLowerCase());
-                                              });
-      }
+      // Always sort alphabetically by name
+      const sorted = filteredEntries.slice().sort((a, b) => (a.name || "").toLowerCase().localeCompare((b.name || "").toLowerCase()));
       return sorted.map(app => createResultEntry(app));
     }
 
@@ -467,17 +439,7 @@ Item {
                                           "limit": 20
                                         });
 
-      // Sort pinned first within fuzzy results while preserving fuzzysort order otherwise
-      const pinned = [];
-      const nonPinned = [];
-      for (const r of fuzzyResults) {
-        const app = r.obj;
-        if (isAppPinned(app))
-          pinned.push(r);
-        else
-          nonPinned.push(r);
-      }
-      return pinned.concat(nonPinned).map(result => createResultEntry(result.obj, result.score));
+      return fuzzyResults.map(result => createResultEntry(result.obj, result.score));
     } else {
       // Fallback to simple search
       const searchTerm = query.toLowerCase();
@@ -614,13 +576,13 @@ Item {
     if (!appId)
       return;
     const normalizedId = normalizeAppId(appId);
-    let arr = (Settings.data.appLauncher.pinnedApps || []).slice();
+    let arr = (Settings.data.dock.pinnedApps || []).slice();
     const idx = arr.findIndex(pinnedId => normalizeAppId(pinnedId) === normalizedId);
     if (idx >= 0)
       arr.splice(idx, 1);
     else
       arr.push(appId);
-    Settings.data.appLauncher.pinnedApps = arr;
+    Settings.data.dock.pinnedApps = arr;
   }
 
   // -------------------------

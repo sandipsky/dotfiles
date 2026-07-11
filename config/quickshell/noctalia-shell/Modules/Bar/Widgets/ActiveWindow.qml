@@ -41,6 +41,8 @@ Item {
   // Widget settings - matching MediaMini pattern
   readonly property bool showIcon: (widgetSettings.showIcon !== undefined) ? widgetSettings.showIcon : (widgetMetadata.showIcon || false)
   readonly property bool showText: (widgetSettings.showText !== undefined) ? widgetSettings.showText : (widgetMetadata.showText || false)
+  readonly property string titleMode: (widgetSettings.titleMode !== undefined) ? widgetSettings.titleMode : (widgetMetadata.titleMode || "title")
+  readonly property string noWindowText: (widgetSettings.noWindowText !== undefined) ? widgetSettings.noWindowText : (widgetMetadata.noWindowText || "default")
   readonly property string hideMode: (widgetSettings.hideMode !== undefined) ? widgetSettings.hideMode : (widgetMetadata.hideMode || "hidden")
   readonly property string scrollingMode: (widgetSettings.scrollingMode !== undefined) ? widgetSettings.scrollingMode : (widgetMetadata.scrollingMode || "hover")
 
@@ -56,15 +58,59 @@ Item {
   readonly property real capsuleHeight: Style.getCapsuleHeightForScreen(screenName)
   readonly property real barFontSize: Style.getBarFontSizeForScreen(screenName)
   readonly property bool hasFocusedWindow: CompositorService.getFocusedWindow() !== null
-  readonly property string windowTitle: CompositorService.getFocusedWindowTitle() || "No active window"
+  readonly property string windowTitle: {
+    if (!hasFocusedWindow) {
+      if (noWindowText === "desktop")
+        return "Desktop";
+      if (noWindowText === "none")
+        return "";
+      return "No active window";
+    }
+    if (titleMode === "appname")
+      return getFocusedAppName();
+    return CompositorService.getFocusedWindowTitle() || "";
+  }
+
+  function getFocusedAppName() {
+    const win = CompositorService.getFocusedWindow();
+    if (!win || !win.appId)
+      return CompositorService.getFocusedWindowTitle() || "";
+    const entry = ThemeIcons.findAppEntry(String(win.appId));
+    if (entry && entry.name)
+      return entry.name;
+    return String(win.appId);
+  }
   readonly property string fallbackIcon: "user-desktop"
 
   readonly property int iconSize: Style.toOdd(capsuleHeight * 0.75)
   readonly property int verticalSize: Style.toOdd(capsuleHeight * 0.85)
 
+  // Length of the widget along a vertical bar (sideways title support)
+  readonly property real verticalContentLength: {
+    if (!showText)
+      return verticalSize;
+    if (useFixedWidth)
+      return Math.max(verticalSize, maxWidth);
+    var len = Style.margin2M;
+    if (showIcon && hasFocusedWindow)
+      len += iconSize + Style.marginS;
+    len += verticalTitleMeasure.implicitWidth + Style.marginS;
+    return Math.max(verticalSize, Math.ceil(Math.min(len, maxWidth)));
+  }
+
+  // Invisible text used to measure the title length for the vertical bar
+  NText {
+    id: verticalTitleMeasure
+    visible: false
+    text: windowTitle
+    pointSize: barFontSize
+    applyUiScale: false
+    font.weight: Style.fontWeightMedium
+  }
+
   // For horizontal bars, height is always barHeight (no animation needed)
   // For vertical bars, collapse to 0 when hidden
-  implicitHeight: isVerticalBar ? (((!hasFocusedWindow) && hideMode === "hidden") ? 0 : verticalSize) : barHeight
+  implicitHeight: isVerticalBar ? (((!hasFocusedWindow) && hideMode === "hidden") ? 0 : verticalContentLength) : barHeight
   implicitWidth: isVerticalBar ? (((!hasFocusedWindow) && hideMode === "hidden") ? 0 : verticalSize) : (((!hasFocusedWindow) && hideMode === "hidden") ? 0 : dynamicWidth)
 
   // "visible": Always Visible, "hidden": Hide When Empty, "transparent": Transparent When Empty
@@ -201,7 +247,14 @@ Item {
     x: isVerticalBar ? Style.pixelAlignCenter(parent.width, width) : 0
     y: isVerticalBar ? 0 : Style.pixelAlignCenter(parent.height, height)
     width: isVerticalBar ? ((!hasFocusedWindow) && hideMode === "hidden" ? 0 : verticalSize) : ((!hasFocusedWindow) && (hideMode === "hidden") ? 0 : dynamicWidth)
-    height: isVerticalBar ? ((!hasFocusedWindow) && hideMode === "hidden" ? 0 : verticalSize) : capsuleHeight
+    height: isVerticalBar ? ((!hasFocusedWindow) && hideMode === "hidden" ? 0 : verticalContentLength) : capsuleHeight
+
+    Behavior on height {
+      NumberAnimation {
+        duration: Style.animationNormal
+        easing.type: Easing.InOutCubic
+      }
+    }
     radius: Style.radiusM
     color: Style.capsuleColor
     border.color: Style.capsuleBorderColor
@@ -234,7 +287,7 @@ Item {
           Layout.preferredWidth: iconSize
           Layout.preferredHeight: iconSize
           Layout.alignment: Qt.AlignVCenter
-          visible: showIcon
+          visible: showIcon && hasFocusedWindow
 
           IconImage {
             id: windowIcon
@@ -291,7 +344,7 @@ Item {
         }
       }
 
-      // Vertical layout for left/right bars - icon only
+      // Vertical layout for left/right bars - icon + sideways title
       Item {
         id: verticalLayout
         width: parent.width - Style.margin2M
@@ -307,8 +360,8 @@ Item {
           width: root.iconSize
           height: width
           x: Style.pixelAlignCenter(parent.width, width)
-          y: Style.pixelAlignCenter(parent.height, height)
-          visible: windowTitle !== ""
+          y: showText ? 0 : Style.pixelAlignCenter(parent.height, height)
+          visible: showIcon && hasFocusedWindow
 
           IconImage {
             id: windowIconVertical
@@ -326,6 +379,29 @@ Item {
 
               fragmentShader: Qt.resolvedUrl(Quickshell.shellDir + "/Shaders/qsb/appicon_colorize.frag.qsb")
             }
+          }
+        }
+
+        // Sideways title
+        Item {
+          id: verticalTitleContainer
+          visible: showText
+          width: parent.width
+          anchors.top: verticalIconContainer.visible ? verticalIconContainer.bottom : parent.top
+          anchors.topMargin: verticalIconContainer.visible ? Style.marginS : 0
+          anchors.bottom: parent.bottom
+
+          NText {
+            anchors.centerIn: parent
+            rotation: 90
+            width: parent.height
+            text: windowTitle
+            elide: Text.ElideRight
+            horizontalAlignment: Text.AlignHCenter
+            pointSize: barFontSize
+            applyUiScale: false
+            font.weight: Style.fontWeightMedium
+            color: root.textColor
           }
         }
       }

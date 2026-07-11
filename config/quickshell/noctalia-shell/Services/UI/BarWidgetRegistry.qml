@@ -81,6 +81,8 @@ Singleton {
                                   "ActiveWindow": {
                                     "showText": true,
                                     "showIcon": true,
+                                    "titleMode": "title",
+                                    "noWindowText": "default",
                                     "hideMode": "hidden",
                                     "scrollingMode": "hover",
                                     "maxWidth": 145,
@@ -262,7 +264,8 @@ Singleton {
                                     "showPinnedApps": true,
                                     "smartWidth": true,
                                     "maxTaskbarWidth": 40,
-                                    "iconScale": 0.8
+                                    "iconScale": 0.8,
+                                    "itemGap": 2
                                   },
                                   "Tray": {
                                     "blacklist": [],
@@ -293,6 +296,8 @@ Singleton {
                                   },
                                   "Workspace": {
                                     "labelMode": "index",
+                                    "workspaceMode": "dynamic",
+                                    "fixedWorkspaces": 5,
                                     "followFocusedScreen": false,
                                     "hideUnoccupied": false,
                                     "characterCount": 2,

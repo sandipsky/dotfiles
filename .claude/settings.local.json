@@ -55,7 +55,36 @@
       "Bash(qs -c noctalia-shell ipc show)",
       "Bash(chmod +x /home/sandip/dotfiles/reset.sh)",
       "Bash(bash -n /home/sandip/dotfiles/reset.sh)",
-      "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/test-reset-tail.sh)"
+      "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/test-reset-tail.sh)",
+      "Bash(pacman -Qq noctalia-shell)",
+      "Bash(echo \"rc=$?\")",
+      "Bash(grim -g \"0,0 60x600\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/bar-circle.png)",
+      "Read(//home/sandip/.config/noctalia/**)",
+      "Bash(cp ~/.config/noctalia/settings.json /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/settings-backup.json)",
+      "Bash(mv /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/settings-new.json ~/.config/noctalia/settings.json)",
+      "Bash(grim -g \"0,0 60x300\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/bar-labels.png)",
+      "Bash(grep -n 'source:\\\\|iconForAppId\\\\|IconImage\\\\|spacing' Modules/Bar/Widgets/Taskbar.qml | head -30; ls ~/.local/share/applications/ | grep -i alacritty; grep -iE 'icon|^name|noDisplay' ~/.local/share/applications/*lacritty* 2>/dev/null; ls /home/sandip/dotfiles/assets/apps/)",
+      "Read(//home/sandip/.local/share/applications/**)",
+      "Bash(grim -g \"0,0 60x600\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/bar-taskbar.png)",
+      "Bash(grim -g \"0,0 60x600\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/bar-gap12.png)",
+      "Bash(grim -g '0,0 60x600' /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/tb-before.png)",
+      "Bash(hyprctl dispatch *)",
+      "Bash(grim -g '0,0 60x600' /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/tb-after.png)",
+      "Bash(grim /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/launcher.png)",
+      "Bash(qs -c noctalia-shell ipc call launcher toggle)",
+      "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/shot-launcher.sh)",
+      "Bash(jq -c '.bar.widgets' ~/.config/noctalia/settings.json; cd /home/sandip/dotfiles/config/quickshell/noctalia-shell && grep -n 'isVertical\\\\|visible\\\\|showText' Modules/Bar/Widgets/ActiveWindow.qml | head -20; grep -c '' Modules/Bar/Widgets/ActiveWindow.qml)",
+      "Bash(grim -g \"0,0 60x1080\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/bar-title.png)",
+      "Bash(grim -g \"0,140 60x400\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/bar-title2.png)",
+      "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/test-activewindow.sh)",
+      "Bash(hyprctl getoption *)",
+      "Bash(cp /home/sandip/dotfiles/config/hypr/conf/layout.conf ~/.config/hypr/conf/layout.conf)",
+      "Bash(hyprctl reload *)",
+      "Bash(grim -g \"0,300 200x400\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/gap-check.png)",
+      "Bash(sed 's|/home/sandip|/home/USERNAME|g' ~/.config/noctalia/settings.json > /home/sandip/dotfiles/config/noctalia/settings.json && jq -e . /home/sandip/dotfiles/config/noctalia/settings.json >/dev/null && echo VALID-JSON && grep -c USERNAME /home/sandip/dotfiles/config/noctalia/settings.json && grep -c sandip /home/sandip/dotfiles/config/noctalia/settings.json; true)"
+    ],
+    "additionalDirectories": [
+      "/home/sandip/.config/noctalia"
     ]
   }
 }

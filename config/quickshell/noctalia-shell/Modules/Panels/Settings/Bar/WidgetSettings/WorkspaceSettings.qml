@@ -16,6 +16,8 @@ ColumnLayout {
   signal settingsChanged(var settings)
 
   property string valueLabelMode: widgetData.labelMode !== undefined ? widgetData.labelMode : widgetMetadata.labelMode
+  property string valueWorkspaceMode: widgetData.workspaceMode !== undefined ? widgetData.workspaceMode : widgetMetadata.workspaceMode
+  property int valueFixedWorkspaces: widgetData.fixedWorkspaces !== undefined ? widgetData.fixedWorkspaces : widgetMetadata.fixedWorkspaces
   property bool valueHideUnoccupied: widgetData.hideUnoccupied !== undefined ? widgetData.hideUnoccupied : widgetMetadata.hideUnoccupied
   property bool valueFollowFocusedScreen: widgetData.followFocusedScreen !== undefined ? widgetData.followFocusedScreen : widgetMetadata.followFocusedScreen
   property int valueCharacterCount: widgetData.characterCount !== undefined ? widgetData.characterCount : widgetMetadata.characterCount
@@ -39,6 +41,8 @@ ColumnLayout {
   function saveSettings() {
     var settings = Object.assign({}, widgetData || {});
     settings.labelMode = valueLabelMode;
+    settings.workspaceMode = valueWorkspaceMode;
+    settings.fixedWorkspaces = valueFixedWorkspaces;
     settings.hideUnoccupied = valueHideUnoccupied;
     settings.characterCount = valueCharacterCount;
     settings.followFocusedScreen = valueFollowFocusedScreen;
@@ -57,6 +61,41 @@ ColumnLayout {
     settings.pillSize = valuePillSize;
     settings.fontWeight = valueFontWeight;
     settingsChanged(settings);
+  }
+
+  NComboBox {
+    id: workspaceModeCombo
+    label: "Workspace count"
+    description: "Dynamic shows the compositor's current workspaces; fixed always displays a set number."
+    model: [
+      {
+        "key": "dynamic",
+        "name": "Dynamic"
+      },
+      {
+        "key": "fixed",
+        "name": "Fixed"
+      }
+    ]
+    currentKey: widgetData.workspaceMode || widgetMetadata.workspaceMode
+    onSelected: key => {
+                  valueWorkspaceMode = key;
+                  saveSettings();
+                }
+    minimumWidth: 200
+  }
+
+  NSpinBox {
+    label: "Number of workspaces"
+    description: "How many workspaces to always display in fixed mode."
+    from: 1
+    to: 20
+    value: valueFixedWorkspaces
+    onValueChanged: {
+      valueFixedWorkspaces = value;
+      saveSettings();
+    }
+    visible: valueWorkspaceMode === "fixed"
   }
 
   NComboBox {
@@ -157,6 +196,7 @@ ColumnLayout {
                  valueHideUnoccupied = checked;
                  saveSettings();
                }
+    visible: valueWorkspaceMode === "dynamic"
   }
 
   NToggle {

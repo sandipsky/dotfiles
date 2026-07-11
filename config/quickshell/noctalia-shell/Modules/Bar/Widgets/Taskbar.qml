@@ -49,6 +49,7 @@ Item {
   readonly property int maxTaskbarWidthPercent: (widgetSettings.maxTaskbarWidth !== undefined) ? widgetSettings.maxTaskbarWidth : widgetMetadata.maxTaskbarWidth
   readonly property real iconScale: (widgetSettings.iconScale !== undefined) ? widgetSettings.iconScale : widgetMetadata.iconScale
   readonly property int itemSize: Style.toOdd(capsuleHeight * Math.max(0.1, iconScale))
+  readonly property int itemGap: (widgetSettings.itemGap !== undefined) ? widgetSettings.itemGap : widgetMetadata.itemGap
 
   // Maximum width for the taskbar widget to prevent overlapping with other widgets
   readonly property real maxTaskbarWidth: {
@@ -97,6 +98,19 @@ Item {
   }
   property int modelUpdateTrigger: 0  // Dummy property to force model re-evaluation
 
+  // Revision counter to force icon re-evaluation once desktop entries are loaded
+  property int iconRevision: 0
+
+  // Desktop entries load asynchronously; stale lookups otherwise stick until a click
+  Connections {
+    target: DesktopEntries.applications
+    function onValuesChanged() {
+      root._desktopEntryIdCache = {};
+      root.iconRevision++;
+      Qt.callLater(root.updateCombinedModel);
+    }
+  }
+
   // Hover state
   property var hoveredWindowId: ""
   // Combined model of running windows and pinned apps
@@ -124,27 +138,51 @@ Item {
   }
 
   function sortApps(apps) {
-    if (!sessionAppOrder || sessionAppOrder.length === 0) {
-      return apps;
-    }
+    // Pinned apps always keep the slot given by the pinned order, running or not,
+    // so launching a pinned app never moves it. Unpinned running apps follow,
+    // kept in transient session order.
+    const pinnedApps = Settings.data.dock.pinnedApps || [];
 
+    const pinnedItems = [];
+    const runningItems = [];
+    apps.forEach(app => {
+                   if (app.type === "pinned" || app.type === "pinned-running") {
+                     pinnedItems.push(app);
+                   } else {
+                     runningItems.push(app);
+                   }
+                 });
+
+    const orderedPinned = [];
+    const remainingPinned = [...pinnedItems];
+    pinnedApps.forEach(pinnedId => {
+                         const normPinned = normalizeAppId(pinnedId);
+                         for (var i = 0; i < remainingPinned.length; ) {
+                           const app = remainingPinned[i];
+                           if (normalizeAppId(app.appId) === normPinned || normalizeAppId(resolveToDesktopEntryId(app.appId)) === normPinned) {
+                             orderedPinned.push(app);
+                             remainingPinned.splice(i, 1);
+                           } else {
+                             i++;
+                           }
+                         }
+                       });
+    remainingPinned.forEach(app => orderedPinned.push(app));
+
+    const order = sessionAppOrder || [];
     const sorted = [];
-    const remaining = [...apps];
-
-    // 1. Pick apps that are in the session order
-    for (let i = 0; i < sessionAppOrder.length; i++) {
-      const key = sessionAppOrder[i];
+    const remaining = [...runningItems];
+    for (let i = 0; i < order.length; i++) {
+      const key = order[i];
       const idx = remaining.findIndex(app => getAppKey(app) === key);
       if (idx !== -1) {
         sorted.push(remaining[idx]);
         remaining.splice(idx, 1);
       }
     }
-
-    // 2. Append any new/remaining apps
     remaining.forEach(app => sorted.push(app));
 
-    return sorted;
+    return orderedPinned.concat(sorted);
   }
 
   function reorderApps(fromIndex, toIndex) {
@@ -669,8 +707,8 @@ Item {
       rows: isVerticalBar ? -1 : 1 // -1 means unlimited
       columns: isVerticalBar ? 1 : -1 // -1 means unlimited
 
-      rowSpacing: isVerticalBar ? Style.marginXXS : 0
-      columnSpacing: isVerticalBar ? 0 : Style.marginXXS
+      rowSpacing: isVerticalBar ? root.itemGap : 0
+      columnSpacing: isVerticalBar ? 0 : root.itemGap
 
       Repeater {
         model: root.combinedModel
@@ -853,7 +891,10 @@ Item {
                     id: appIcon
                     anchors.fill: parent
 
-                    source: ThemeIcons.iconForAppId(taskbarItem.modelData.appId)
+                    source: {
+                      root.iconRevision; // Force re-evaluation when revision changes
+                      return ThemeIcons.iconForAppId(taskbarItem.modelData.appId);
+                    }
                     smooth: true
                     asynchronous: true
 

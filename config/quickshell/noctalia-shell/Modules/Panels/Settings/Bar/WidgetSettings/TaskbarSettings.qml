@@ -28,6 +28,7 @@ ColumnLayout {
   property int valueTitleWidth: widgetData.titleWidth !== undefined ? widgetData.titleWidth : widgetMetadata.titleWidth
   property bool valueShowPinnedApps: widgetData.showPinnedApps !== undefined ? widgetData.showPinnedApps : widgetMetadata.showPinnedApps
   property real valueIconScale: widgetData.iconScale !== undefined ? widgetData.iconScale : widgetMetadata.iconScale
+  property int valueItemGap: widgetData.itemGap !== undefined ? widgetData.itemGap : widgetMetadata.itemGap
 
   Component.onCompleted: {
     if (widgetData && widgetData.hideMode !== undefined) {
@@ -49,6 +50,7 @@ ColumnLayout {
     settings.titleWidth = parseInt(titleWidthInput.text) || widgetMetadata.titleWidth;
     settings.showPinnedApps = valueShowPinnedApps;
     settings.iconScale = valueIconScale;
+    settings.itemGap = valueItemGap;
     settingsChanged(settings);
   }
 
@@ -141,6 +143,19 @@ ColumnLayout {
                saveSettings();
              }
     text: Math.round(root.valueIconScale * 100) + "%"
+  }
+
+  NSpinBox {
+    Layout.fillWidth: true
+    label: "Item spacing"
+    description: "Space in pixels between taskbar items."
+    from: 0
+    to: 24
+    value: root.valueItemGap
+    onValueChanged: {
+      root.valueItemGap = value;
+      saveSettings();
+    }
   }
 
   NToggle {

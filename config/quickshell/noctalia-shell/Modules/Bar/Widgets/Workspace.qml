@@ -58,6 +58,8 @@ Item {
     return Style.fontWeightBold;
   }
   readonly property bool hideUnoccupied: (widgetSettings.hideUnoccupied !== undefined) ? widgetSettings.hideUnoccupied : widgetMetadata.hideUnoccupied
+  readonly property string workspaceMode: (widgetSettings.workspaceMode !== undefined) ? widgetSettings.workspaceMode : widgetMetadata.workspaceMode
+  readonly property int fixedWorkspaces: (widgetSettings.fixedWorkspaces !== undefined) ? widgetSettings.fixedWorkspaces : widgetMetadata.fixedWorkspaces
   readonly property bool followFocusedScreen: (widgetSettings.followFocusedScreen !== undefined) ? widgetSettings.followFocusedScreen : widgetMetadata.followFocusedScreen
   readonly property int characterCount: {
     const count = (widgetSettings.characterCount !== undefined) ? widgetSettings.characterCount : widgetMetadata.characterCount;
@@ -162,12 +164,10 @@ Item {
 
   function getWorkspaceWidth(ws, activeOverride) {
     const d = Math.round(capsuleHeight * root.baseDimensionRatio);
-    const isActive = activeOverride !== undefined ? activeOverride : ws.isActive;
-    const factor = isActive ? 2.2 : 1;
 
     // Don't calculate text width if labels are off
     if (labelMode === "none") {
-      return Style.toOdd(d * factor);
+      return Style.toOdd(d);
     }
 
     var displayText = ws.idx.toString();
@@ -182,14 +182,12 @@ Item {
 
     const textWidth = displayText.length * (d * 0.4); // Approximate width per character
     const padding = d * 0.6;
-    return Style.toOdd(Math.max(d * factor, textWidth + padding));
+    return Style.toOdd(Math.max(d, textWidth + padding));
   }
 
   function getWorkspaceHeight(ws, activeOverride) {
     const d = Math.round(capsuleHeight * root.baseDimensionRatio);
-    const isActive = activeOverride !== undefined ? activeOverride : ws.isActive;
-    const factor = isActive ? 2.2 : 1;
-    return Style.toOdd(d * factor);
+    return Style.toOdd(d);
   }
 
   function computeWidth() {
@@ -291,6 +289,8 @@ Item {
   onScreenChanged: scheduleRefresh()
   onScreenNameChanged: scheduleRefresh()
   onHideUnoccupiedChanged: scheduleRefresh()
+  onWorkspaceModeChanged: scheduleRefresh()
+  onFixedWorkspacesChanged: scheduleRefresh()
   onAppVisibleChanged: {
     if (appVisible) {
       scheduleRefresh();
@@ -344,7 +344,7 @@ Item {
 
         if (!matchesScreen)
           continue;
-        if (hideUnoccupied && !ws.isOccupied && !ws.isFocused)
+        if (workspaceMode !== "fixed" && hideUnoccupied && !ws.isOccupied && !ws.isFocused)
           continue;
 
         // Create a plain JS object for the workspace data
@@ -367,6 +367,29 @@ Item {
         // to avoid Qt 6.9 ListModel nested array serialization issues
 
         targetList.push(workspaceData);
+      }
+
+      if (workspaceMode === "fixed") {
+        var mergedList = [];
+        for (var n = 1; n <= fixedWorkspaces; n++) {
+          var match = targetList.find(ws => ws.idx === n);
+          mergedList.push(match || {
+                            id: n,
+                            idx: n,
+                            name: "",
+                            output: screen.name,
+                            isFocused: false,
+                            isActive: false,
+                            isUrgent: false,
+                            isOccupied: false
+                          });
+        }
+        // Keep real workspaces beyond the fixed range so the focused one never disappears
+        for (var j = 0; j < targetList.length; j++) {
+          if (targetList[j].idx > fixedWorkspaces)
+            mergedList.push(targetList[j]);
+        }
+        targetList = mergedList;
       }
     }
 

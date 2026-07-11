@@ -23,6 +23,8 @@ ColumnLayout {
   property int valueMaxWidth: widgetData.maxWidth !== undefined ? widgetData.maxWidth : widgetMetadata.maxWidth
   property bool valueUseFixedWidth: widgetData.useFixedWidth !== undefined ? widgetData.useFixedWidth : widgetMetadata.useFixedWidth
   property bool valueColorizeIcons: widgetData.colorizeIcons !== undefined ? widgetData.colorizeIcons : widgetMetadata.colorizeIcons
+  property string valueTitleMode: widgetData.titleMode !== undefined ? widgetData.titleMode : widgetMetadata.titleMode
+  property string valueNoWindowText: widgetData.noWindowText !== undefined ? widgetData.noWindowText : widgetMetadata.noWindowText
   property string valueTextColor: widgetData.textColor !== undefined ? widgetData.textColor : widgetMetadata.textColor
 
   Component.onCompleted: {
@@ -41,6 +43,8 @@ ColumnLayout {
     settings.useFixedWidth = valueUseFixedWidth;
     settings.colorizeIcons = valueColorizeIcons;
     settings.textColor = valueTextColor;
+    settings.titleMode = valueTitleMode;
+    settings.noWindowText = valueNoWindowText;
     settingsChanged(settings);
   }
 
@@ -90,6 +94,56 @@ ColumnLayout {
                  saveSettings();
                }
     defaultValue: widgetMetadata.showText
+  }
+
+  NComboBox {
+    Layout.fillWidth: true
+    label: "Text to display"
+    description: "Show the focused window's title or its application name."
+    model: [
+      {
+        "key": "title",
+        "name": "Window title"
+      },
+      {
+        "key": "appname",
+        "name": "Application name"
+      }
+    ]
+    currentKey: root.valueTitleMode
+    onSelected: key => {
+                  root.valueTitleMode = key;
+                  saveSettings();
+                }
+    defaultValue: widgetMetadata.titleMode
+    visible: root.valueShowText
+  }
+
+  NComboBox {
+    Layout.fillWidth: true
+    label: "When no window is active"
+    description: "What the text should show when nothing is focused."
+    model: [
+      {
+        "key": "default",
+        "name": "\"No active window\""
+      },
+      {
+        "key": "desktop",
+        "name": "\"Desktop\""
+      },
+      {
+        "key": "none",
+        "name": "Nothing"
+      }
+    ]
+    currentKey: root.valueNoWindowText
+    onSelected: key => {
+                  root.valueNoWindowText = key;
+                  saveSettings();
+                }
+    defaultValue: widgetMetadata.noWindowText
+    visible: root.valueShowText
   }
 
   NToggle {
