@@ -36,7 +36,26 @@
       "Bash(rm -f '/c/Users/Sandip Shakya/Projects/dotfiles/config/hypr/hyprlock.conf' '/c/Users/Sandip Shakya/Projects/dotfiles/config/hypr/hypridle.conf' '/c/Users/Sandip Shakya/Projects/dotfiles/config/hypr/hyprsunset.conf')",
       "Bash(git -C '/c/Users/Sandip Shakya/Projects/dotfiles' status --short)",
       "Bash(git -C \"/c/Users/Sandip Shakya/Projects/dotfiles\" status --short)",
-      "Bash(git -C \"/c/Users/Sandip Shakya/Projects/dotfiles\" diff --stat)"
+      "Bash(git -C \"/c/Users/Sandip Shakya/Projects/dotfiles\" diff --stat)",
+      "Bash(pacman -Q noctalia-shell noctalia-qs)",
+      "Bash(pacman -Qi noctalia-shell)",
+      "Bash(pacman -Qi noctalia-qs)",
+      "Read(//etc/xdg/quickshell/**)",
+      "Bash(curl -fsSL 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=noctalia-shell')",
+      "Bash(sudo -n true)",
+      "Bash(echo \"sudo-rc=$?\")",
+      "Bash(qs --help)",
+      "Bash(cd /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/noctalia && du -sh --exclude=.git */ .github/ | sort -rh | head -12 && echo --- && du -sh /etc/xdg/quickshell/noctalia-shell && echo --- && diff -rq --exclude=.git --exclude=.github --exclude=.gitignore . /etc/xdg/quickshell/noctalia-shell/ && echo \"IDENTICAL to installed copy\")",
+      "Read(//etc/xdg/quickshell/noctalia-shell/**)",
+      "Bash(cp -r /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/noctalia/* /home/sandip/dotfiles/config/quickshell/noctalia-shell/)",
+      "Bash(echo \"gitignore-rc=$?\")",
+      "Bash(mkdir -p ~/.config/quickshell)",
+      "Read(//home/sandip/.config/quickshell/**)",
+      "Bash(qs list *)",
+      "Bash(qs -c noctalia-shell ipc show)",
+      "Bash(chmod +x /home/sandip/dotfiles/reset.sh)",
+      "Bash(bash -n /home/sandip/dotfiles/reset.sh)",
+      "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/test-reset-tail.sh)"
     ]
   }
 }

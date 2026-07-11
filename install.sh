@@ -19,6 +19,11 @@ sudo pacman -S --noconfirm --needed \
     obs-studio \
     qbittorrent \
     brightnessctl \
+    imagemagick \
+    ffmpeg \
+    qt6-multimedia \
+    python \
+    wlr-randr \
     grim \
     slurp \
     gnome-calculator \
@@ -35,7 +40,7 @@ sudo pacman -S --noconfirm --needed \
 yay -S --noconfirm --needed \
     breezex-cursor-theme \
     nautilus-open-any-terminal \
-    noctalia-shell
+    noctalia-qs
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
