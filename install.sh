@@ -39,8 +39,15 @@ sudo pacman -S --noconfirm --needed \
 
 yay -S --noconfirm --needed \
     breezex-cursor-theme \
-    nautilus-open-any-terminal \
-    noctalia-qs
+    nautilus-open-any-terminal
+
+if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
+    BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
+    sudo -u "$USERNAME" cp -r assets/noctalia-qs/. "$BUILD_DIR/"
+    (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
+    pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
+    rm -rf "$BUILD_DIR"
+fi
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules

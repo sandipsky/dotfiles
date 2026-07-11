@@ -102,7 +102,20 @@
       "Bash(cd /home/sandip/dotfiles/config/quickshell/noctalia-shell && find Modules/Panels/ControlCenter -name '*.qml' | head -20; jq -c '.controlCenter' ~/.config/noctalia/settings.json; grep -rn 'media-sysmon\\\\|mediaSysMon\\\\|Media and System' --include='*.qml' Modules/ Commons/ Assets/translations/en.json 2>/dev/null | head)",
       "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/shot-cc.sh)",
       "Bash(sed 's|/home/sandip|/home/USERNAME|g' ~/.config/noctalia/settings.json > /home/sandip/dotfiles/config/noctalia/settings.json && jq -e '[.controlCenter.cards[].id] | index\\(\"sysmon-card\"\\) != null' /home/sandip/dotfiles/config/noctalia/settings.json >/dev/null && echo SNAPSHOT-OK)",
-      "Bash(/usr/lib/qt6/bin/qmlformat config/quickshell/noctalia-shell/Modules/LockScreen/LockScreenPanel.qml)"
+      "Bash(/usr/lib/qt6/bin/qmlformat config/quickshell/noctalia-shell/Modules/LockScreen/LockScreenPanel.qml)",
+      "Bash(curl -fsSL 'https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=noctalia-qs')",
+      "Read(//home/sandip/.cache/yay/noctalia-qs/**)",
+      "Bash(pacman -Q noctalia-qs)",
+      "Bash(curl -fsSL 'https://aur.archlinux.org/cgit/aur.git/snapshot/noctalia-qs.tar.gz' -o nqs-aur.tar.gz)",
+      "Bash(tar xf *)",
+      "Bash(curl -fsSL 'https://github.com/noctalia-dev/noctalia-qs/archive/v0.0.12.tar.gz' -o noctalia-qs/noctalia-qs-0.0.12.tar.gz)",
+      "Bash(bash -n /home/sandip/dotfiles/install.sh)",
+      "Bash(git -C /home/sandip/dotfiles status --short)",
+      "Bash(pacman -T cli11 cmake ninja qt6-shadertools spirv-tools wayland-protocols git vulkan-headers)",
+      "Bash(echo \"missing-rc=$?\")",
+      "Bash(rm -rf /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/build-test)",
+      "Bash(cp -r /home/sandip/dotfiles/assets/noctalia-qs /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/build-test)",
+      "Bash(makepkg -f)"
     ],
     "additionalDirectories": [
       "/home/sandip/.config/noctalia"
