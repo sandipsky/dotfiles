@@ -58,7 +58,19 @@ Item {
   readonly property real capsuleHeight: Style.getCapsuleHeightForScreen(screenName)
   readonly property real barFontSize: Style.getBarFontSizeForScreen(screenName)
   readonly property bool hasFocusedWindow: CompositorService.getFocusedWindow() !== null
+  // Revision counter: desktop entries load asynchronously, bump to re-resolve
+  // names/icons through user .desktop overrides once they arrive
+  property int iconRevision: 0
+
+  Connections {
+    target: DesktopEntries.applications
+    function onValuesChanged() {
+      root.iconRevision++;
+    }
+  }
+
   readonly property string windowTitle: {
+    iconRevision; // Force re-evaluation when desktop entries load
     if (!hasFocusedWindow) {
       if (noWindowText === "desktop")
         return "Desktop";
@@ -179,13 +191,15 @@ Item {
 
   function getAppIcon() {
     try {
+      root.iconRevision; // Force re-evaluation when desktop entries load
+
       // Try CompositorService first
       const focusedWindow = CompositorService.getFocusedWindow();
       if (focusedWindow && focusedWindow.appId) {
         try {
           const idValue = focusedWindow.appId;
           const normalizedId = (typeof idValue === 'string') ? idValue : String(idValue);
-          const iconResult = ThemeIcons.iconForAppId(normalizedId.toLowerCase());
+          const iconResult = ThemeIcons.iconForAppId(normalizedId);
           if (iconResult && iconResult !== "") {
             return iconResult;
           }
@@ -202,7 +216,7 @@ Item {
             if (activeToplevel.appId) {
               const idValue2 = activeToplevel.appId;
               const normalizedId2 = (typeof idValue2 === 'string') ? idValue2 : String(idValue2);
-              const iconResult2 = ThemeIcons.iconForAppId(normalizedId2.toLowerCase());
+              const iconResult2 = ThemeIcons.iconForAppId(normalizedId2);
               if (iconResult2 && iconResult2 !== "") {
                 return iconResult2;
               }

@@ -314,6 +314,8 @@ Singleton {
       property bool animationDisabled: false
       property bool compactLockScreen: false
       property bool lockScreenAnimations: false
+      property string lockScreenFont: ""
+      property string lockScreenWallpaper: ""
       property bool lockOnSuspend: true
       property bool showSessionButtonsOnLockScreen: true
       property bool showHibernateOnLockScreen: false

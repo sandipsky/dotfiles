@@ -415,6 +415,7 @@ Singleton {
         CompositorService.lock();
       }
     }
+
   }
 
   IpcHandler {

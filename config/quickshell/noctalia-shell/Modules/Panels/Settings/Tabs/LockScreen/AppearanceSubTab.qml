@@ -3,61 +3,51 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import qs.Commons
+import qs.Services.System
+import qs.Services.UI
 import qs.Widgets
 
 ColumnLayout {
   id: root
   spacing: Style.marginL
-  function insertToken(token) {
-    if (formatInput.inputItem) {
-      var input = formatInput.inputItem;
-      var cursorPos = input.cursorPosition;
-      var currentText = input.text;
-      var newText = currentText.substring(0, cursorPos) + token + currentText.substring(cursorPos);
-      input.text = newText + " ";
-      input.cursorPosition = cursorPos + token.length + 1;
-      input.forceActiveFocus();
+
+  NTextInputButton {
+    label: "Lock screen background"
+    description: "Custom image for the lock screen. Leave empty to use the current wallpaper."
+    text: Settings.data.general.lockScreenWallpaper
+    placeholderText: "Current wallpaper"
+    buttonIcon: "photo"
+    buttonTooltip: "Select an image"
+    onInputTextChanged: text => Settings.data.general.lockScreenWallpaper = text
+    onButtonClicked: {
+      lockWallpaperPicker.openFilePicker();
     }
   }
 
-  NComboBox {
-    label: I18n.tr("panels.lock-screen.clock-style-label")
-    description: I18n.tr("panels.lock-screen.clock-style-description")
-    model: [
-      {
-        "key": "analog",
-        "name": I18n.tr("panels.lock-screen.clock-style-analog")
-      },
-      {
-        "key": "digital",
-        "name": I18n.tr("panels.lock-screen.clock-style-digital")
-      },
-      {
-        "key": "custom",
-        "name": I18n.tr("panels.lock-screen.clock-style-custom")
-      }
-    ]
-    currentKey: Settings.data.general.clockStyle
-    onSelected: key => Settings.data.general.clockStyle = key
-    defaultValue: Settings.getDefaultValue("general.clockStyle")
-    z: 10
+  NFilePicker {
+    id: lockWallpaperPicker
+    title: "Select lock screen background"
+    selectionMode: "files"
+    initialPath: Settings.preprocessPath(Settings.data.general.lockScreenWallpaper).substr(0, Settings.preprocessPath(Settings.data.general.lockScreenWallpaper).lastIndexOf("/")) || Quickshell.env("HOME")
+    nameFilters: ImageCacheService.basicImageFilters
+    onAccepted: paths => {
+                  if (paths.length > 0) {
+                    Settings.data.general.lockScreenWallpaper = paths[0];
+                  }
+                }
   }
 
-  NTextInput {
-    id: formatInput
-    label: I18n.tr("panels.lock-screen.clock-format-label")
-    description: I18n.tr("panels.lock-screen.clock-format-description")
-    text: Settings.data.general.clockFormat
-    onTextChanged: Settings.data.general.clockFormat = text
-    visible: Settings.data.general.clockStyle === "custom"
-    defaultValue: Settings.getDefaultValue("general.clockFormat")
-  }
-
-  NDateTimeTokens {
-    Layout.fillWidth: true
-    Layout.preferredHeight: 300
-    visible: Settings.data.general.clockStyle === "custom"
-    onTokenClicked: token => root.insertToken(token)
+  NSearchableComboBox {
+    label: "Lock screen font"
+    description: "Font used for the clock and date on the lock screen."
+    model: FontService.availableFonts
+    currentKey: Settings.data.general.lockScreenFont || Settings.data.ui.fontFixed
+    placeholder: "Select a font"
+    searchPlaceholder: "Search fonts"
+    popupHeight: 420
+    defaultValue: Settings.getDefaultValue("general.lockScreenFont")
+    settingsPath: "general.lockScreenFont"
+    onSelected: key => Settings.data.general.lockScreenFont = key
   }
 
   NToggle {
@@ -66,23 +56,6 @@ ColumnLayout {
     checked: Settings.data.general.passwordChars
     onToggled: checked => Settings.data.general.passwordChars = checked
     defaultValue: Settings.getDefaultValue("general.passwordChars")
-  }
-
-  NToggle {
-    label: I18n.tr("panels.lock-screen.compact-lockscreen-label")
-    description: I18n.tr("panels.lock-screen.compact-lockscreen-description")
-    checked: Settings.data.general.compactLockScreen
-    onToggled: checked => Settings.data.general.compactLockScreen = checked
-    defaultValue: Settings.getDefaultValue("general.compactLockScreen")
-  }
-
-  NToggle {
-    label: I18n.tr("panels.lock-screen.enable-lockscreen-media-controls-label")
-    description: I18n.tr("panels.lock-screen.enable-lockscreen-media-controls-description")
-    checked: Settings.data.general.enableLockScreenMediaControls
-    onToggled: checked => Settings.data.general.enableLockScreenMediaControls = checked
-    visible: !Settings.data.general.compactLockScreen
-    defaultValue: Settings.getDefaultValue("general.enableLockScreenMediaControls")
   }
 
   NToggle {

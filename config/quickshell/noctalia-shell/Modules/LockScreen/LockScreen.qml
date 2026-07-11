@@ -142,18 +142,13 @@ Loader {
                   }
                 }
 
-                // Header with avatar, welcome, time, date
-                LockScreenHeader {
-                  id: headerComponent
-                }
-
                 // Info notification
                 Rectangle {
                   width: infoRowLayout.implicitWidth + Style.marginXL * 1.5
                   height: 50
                   anchors.horizontalCenter: parent.horizontalCenter
                   anchors.bottom: parent.bottom
-                  anchors.bottomMargin: (Settings.data.general.compactLockScreen ? 280 : 360) * Style.uiScaleRatio
+                  anchors.bottomMargin: 200 * Style.uiScaleRatio
                   radius: Style.radiusL
                   color: Color.mTertiary
                   visible: lockContext.showInfo && lockContext.infoMessage && !panelComponent.timerActive
@@ -192,7 +187,7 @@ Loader {
                   height: 50
                   anchors.horizontalCenter: parent.horizontalCenter
                   anchors.bottom: parent.bottom
-                  anchors.bottomMargin: (Settings.data.general.compactLockScreen ? 280 : 360) * Style.uiScaleRatio
+                  anchors.bottomMargin: 200 * Style.uiScaleRatio
                   radius: Style.radiusL
                   color: Color.mError
                   visible: lockContext.showFailure && lockContext.errorMessage && !panelComponent.timerActive
@@ -231,7 +226,7 @@ Loader {
                   height: 50
                   anchors.horizontalCenter: parent.horizontalCenter
                   anchors.bottom: parent.bottom
-                  anchors.bottomMargin: (Settings.data.general.compactLockScreen ? 280 : 360) * Style.uiScaleRatio
+                  anchors.bottomMargin: 200 * Style.uiScaleRatio
                   radius: Style.radiusL
                   color: Color.mSurface
                   visible: panelComponent.timerActive
@@ -307,12 +302,26 @@ Loader {
                   }
 
                   Keys.onPressed: function (event) {
+                    // Any key on the cover stage reveals the login stage;
+                    // printable characters still flow into the password field.
+                    if (panelComponent.stage === "cover") {
+                      panelComponent.stage = "login";
+                      if (Keybinds.checkKey(event, 'enter', Settings) || Keybinds.checkKey(event, 'escape', Settings)) {
+                        event.accepted = true;
+                        return;
+                      }
+                    }
                     if (Keybinds.checkKey(event, 'enter', Settings)) {
                       lockContext.tryUnlock();
                       event.accepted = true;
                     }
-                    if (Keybinds.checkKey(event, 'escape', Settings) && panelComponent.timerActive) {
-                      panelComponent.cancelTimer();
+                    if (Keybinds.checkKey(event, 'escape', Settings)) {
+                      if (panelComponent.timerActive) {
+                        panelComponent.cancelTimer();
+                      } else {
+                        lockContext.currentText = "";
+                        panelComponent.stage = "cover";
+                      }
                       event.accepted = true;
                     }
                   }

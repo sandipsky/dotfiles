@@ -12,6 +12,10 @@ Item {
 
   // Cached wallpaper path - exposed for parent components
   property string resolvedWallpaperPath: ""
+
+  // Custom lock screen wallpaper override (Settings > Lock Screen)
+  readonly property string customLockWallpaper: (Settings.data.general.lockScreenWallpaper || "") !== "" ? Settings.preprocessPath(Settings.data.general.lockScreenWallpaper) : ""
+  onCustomLockWallpaperChanged: Qt.callLater(requestCachedWallpaper)
   property color tintColor: Settings.data.colorSchemes.darkMode ? Color.mSurface : Color.mOnSurface
 
   required property var screen
@@ -60,22 +64,25 @@ Item {
       return;
     }
 
-    // Check for solid color mode first
-    if (Settings.data.wallpaper.useSolidColor) {
-      resolvedWallpaperPath = "";
-      return;
-    }
-
-    const originalPath = WallpaperService.getWallpaper(screen.name) || "";
+    var originalPath = customLockWallpaper;
     if (originalPath === "") {
-      resolvedWallpaperPath = "";
-      return;
-    }
+      // Check for solid color mode first
+      if (Settings.data.wallpaper.useSolidColor) {
+        resolvedWallpaperPath = "";
+        return;
+      }
 
-    // Handle solid color paths
-    if (WallpaperService.isSolidColorPath(originalPath)) {
-      resolvedWallpaperPath = "";
-      return;
+      originalPath = WallpaperService.getWallpaper(screen.name) || "";
+      if (originalPath === "") {
+        resolvedWallpaperPath = "";
+        return;
+      }
+
+      // Handle solid color paths
+      if (WallpaperService.isSolidColorPath(originalPath)) {
+        resolvedWallpaperPath = "";
+        return;
+      }
     }
 
     if (!ImageCacheService || !ImageCacheService.initialized) {
@@ -111,7 +118,7 @@ Item {
 
   Image {
     id: lockBgImage
-    visible: source !== "" && Settings.data.wallpaper.enabled && !Settings.data.wallpaper.useSolidColor && (!PowerProfileService.noctaliaPerformanceMode || !Settings.data.noctaliaPerformance.disableWallpaper)
+    visible: source !== "" && (root.customLockWallpaper !== "" || (Settings.data.wallpaper.enabled && !Settings.data.wallpaper.useSolidColor)) && (!PowerProfileService.noctaliaPerformanceMode || !Settings.data.noctaliaPerformance.disableWallpaper)
     anchors.fill: parent
     fillMode: Image.PreserveAspectCrop
     source: resolvedWallpaperPath

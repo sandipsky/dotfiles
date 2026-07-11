@@ -81,7 +81,19 @@
       "Bash(cp /home/sandip/dotfiles/config/hypr/conf/layout.conf ~/.config/hypr/conf/layout.conf)",
       "Bash(hyprctl reload *)",
       "Bash(grim -g \"0,300 200x400\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/gap-check.png)",
-      "Bash(sed 's|/home/sandip|/home/USERNAME|g' ~/.config/noctalia/settings.json > /home/sandip/dotfiles/config/noctalia/settings.json && jq -e . /home/sandip/dotfiles/config/noctalia/settings.json >/dev/null && echo VALID-JSON && grep -c USERNAME /home/sandip/dotfiles/config/noctalia/settings.json && grep -c sandip /home/sandip/dotfiles/config/noctalia/settings.json; true)"
+      "Bash(sed 's|/home/sandip|/home/USERNAME|g' ~/.config/noctalia/settings.json > /home/sandip/dotfiles/config/noctalia/settings.json && jq -e . /home/sandip/dotfiles/config/noctalia/settings.json >/dev/null && echo VALID-JSON && grep -c USERNAME /home/sandip/dotfiles/config/noctalia/settings.json && grep -c sandip /home/sandip/dotfiles/config/noctalia/settings.json; true)",
+      "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/test-lockscreen.sh)",
+      "Bash(grim /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/state-now.png)",
+      "Bash(echo \"pkg-rc=$?\")",
+      "Bash(./reset.sh)",
+      "Bash(/usr/lib/qt6/bin/qmlformat Modules/LockScreen/LockScreenPanel.qml)",
+      "Bash(/usr/lib/qt6/bin/qmlformat /home/sandip/dotfiles/config/quickshell/noctalia-shell/Modules/LockScreen/LockScreenPanel.qml)",
+      "Bash(/usr/lib/qt6/bin/qmlformat config/quickshell/noctalia-shell/Modules/Bar/Widgets/ActiveWindow.qml)",
+      "Bash(grim -g \"0,300 60x500\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/aw-alacritty.png)",
+      "Bash(hyprctl activewindow *)",
+      "Bash(grim -g \"0,300 60x500\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/aw-alacritty2.png)",
+      "Bash(grim -g \"0,300 60x500\" /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/aw-alacritty3.png)",
+      "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/test-aw.sh)"
     ],
     "additionalDirectories": [
       "/home/sandip/.config/noctalia"
