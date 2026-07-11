@@ -375,5 +375,14 @@ ColumnLayout {
       defaultValue: Settings.getDefaultValue("bar.showOnWorkspaceSwitch")
       onToggled: checked => Settings.data.bar.showOnWorkspaceSwitch = checked
     }
+
+    NToggle {
+      Layout.fillWidth: true
+      label: "Show when workspace is empty"
+      description: "Keep the bar visible while the active workspace has no windows."
+      checked: Settings.data.bar.showWhenWorkspaceEmpty
+      defaultValue: Settings.getDefaultValue("bar.showWhenWorkspaceEmpty")
+      onToggled: checked => Settings.data.bar.showWhenWorkspaceEmpty = checked
+    }
   }
 }

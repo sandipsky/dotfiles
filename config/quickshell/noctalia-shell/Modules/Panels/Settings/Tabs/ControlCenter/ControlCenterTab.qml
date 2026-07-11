@@ -45,8 +45,14 @@ ColumnLayout {
       "required": false
     },
     {
-      "id": "media-sysmon-card",
-      "text": "Media and System Monitor",
+      "id": "media-card",
+      "text": "Media",
+      "enabled": true,
+      "required": false
+    },
+    {
+      "id": "sysmon-card",
+      "text": "System Monitor",
       "enabled": true,
       "required": false
     }

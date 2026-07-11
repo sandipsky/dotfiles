@@ -21,12 +21,12 @@ NBox {
     anchors.fill: parent
     anchors.margins: Style.marginS
 
-    Column {
+    Row {
       anchors.fill: parent
 
       Item {
-        width: parent.width
-        height: parent.height / 4
+        width: parent.width / 4
+        height: parent.height
 
         NCircleStat {
           id: cpuUsageGauge
@@ -49,8 +49,8 @@ NBox {
       }
 
       Item {
-        width: parent.width
-        height: parent.height / 4
+        width: parent.width / 4
+        height: parent.height
 
         NCircleStat {
           id: cpuTempGauge
@@ -74,8 +74,8 @@ NBox {
       }
 
       Item {
-        width: parent.width
-        height: parent.height / 4
+        width: parent.width / 4
+        height: parent.height
 
         NCircleStat {
           id: memPercentGauge
@@ -98,8 +98,8 @@ NBox {
       }
 
       Item {
-        width: parent.width
-        height: parent.height / 4
+        width: parent.width / 4
+        height: parent.height
 
         NCircleStat {
           id: diskPercentsGauge

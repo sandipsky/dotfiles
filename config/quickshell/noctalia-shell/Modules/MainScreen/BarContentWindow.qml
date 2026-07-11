@@ -63,7 +63,7 @@ PanelWindow {
     id: hideTimer
     interval: barWindow.hideDelay
     onTriggered: {
-      if (barWindow.autoHide && !barWindow.barHovered && !barWindow.panelOpen && !BarService.popupOpen) {
+      if (barWindow.autoHide && !barWindow.barHovered && !barWindow.panelOpen && !BarService.popupOpen && !BarService.shouldStayVisible(barWindow.screen?.name)) {
         BarService.setScreenHidden(barWindow.screen?.name, true);
       }
     }

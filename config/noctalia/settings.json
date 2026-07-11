@@ -19,7 +19,7 @@
         "overviewLayer": false,
         "pinnedApps": [
         ],
-        "position": "follow_bar",
+        "position": "top_left",
         "screenshotAnnotationTool": "",
         "showCategories": false,
         "showIconBackground": false,
@@ -40,7 +40,7 @@
         "volumeStep": 5
     },
     "bar": {
-        "autoHideDelay": 500,
+        "autoHideDelay": 200,
         "autoShowDelay": 150,
         "backgroundOpacity": 0.93,
         "barType": "simple",
@@ -48,7 +48,7 @@
         "capsuleOpacity": 1,
         "contentPadding": 2,
         "density": "default",
-        "displayMode": "always_visible",
+        "displayMode": "auto_hide",
         "enableExclusionZoneInset": true,
         "fontScale": 1.25,
         "frameRadius": 12,
@@ -61,19 +61,20 @@
         "middleClickFollowMouse": false,
         "monitors": [
         ],
-        "mouseWheelAction": "none",
-        "mouseWheelWrap": true,
+        "mouseWheelAction": "workspace",
+        "mouseWheelWrap": false,
         "outerCorners": false,
         "position": "left",
         "reverseScroll": false,
-        "rightClickAction": "controlCenter",
+        "rightClickAction": "none",
         "rightClickCommand": "",
         "rightClickFollowMouse": true,
         "screenOverrides": [
         ],
         "showCapsule": true,
-        "showOnWorkspaceSwitch": true,
+        "showOnWorkspaceSwitch": false,
         "showOutline": false,
+        "showWhenWorkspaceEmpty": true,
         "useSeparateOpacity": false,
         "widgetSpacing": 6,
         "widgets": {
@@ -82,7 +83,7 @@
                     "colorizeIcons": false,
                     "hideMode": "visible",
                     "id": "ActiveWindow",
-                    "maxWidth": 145,
+                    "maxWidth": 200,
                     "noWindowText": "desktop",
                     "scrollingMode": "hover",
                     "showIcon": true,
@@ -102,22 +103,6 @@
                     "iconColor": "none",
                     "id": "Launcher",
                     "useDistroLogo": false
-                },
-                {
-                    "compactMode": false,
-                    "hideMode": "hidden",
-                    "hideWhenIdle": false,
-                    "id": "MediaMini",
-                    "maxWidth": 145,
-                    "panelShowAlbumArt": true,
-                    "scrollingMode": "hover",
-                    "showAlbumArt": true,
-                    "showArtistFirst": true,
-                    "showProgressRing": true,
-                    "showVisualizer": false,
-                    "textColor": "none",
-                    "useFixedWidth": false,
-                    "visualizerType": "linear"
                 },
                 {
                     "characterCount": 2,
@@ -158,6 +143,12 @@
                 }
             ],
             "right": [
+                {
+                    "displayMode": "onhover",
+                    "iconColor": "none",
+                    "id": "Bluetooth",
+                    "textColor": "none"
+                },
                 {
                     "displayMode": "onhover",
                     "iconColor": "none",
@@ -278,8 +269,12 @@
                 "id": "weather-card"
             },
             {
+                "enabled": false,
+                "id": "media-card"
+            },
+            {
                 "enabled": true,
-                "id": "media-sysmon-card"
+                "id": "sysmon-card"
             }
         ],
         "diskPath": "/",
@@ -348,8 +343,8 @@
         ],
         "onlySameOutput": true,
         "pinnedApps": [
-            "org.gnome.Nautilus",
             "google-chrome",
+            "org.gnome.Nautilus",
             "Alacritty"
         ],
         "pinnedStatic": false,
@@ -369,7 +364,7 @@
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
         "clockStyle": "custom",
-        "compactLockScreen": true,
+        "compactLockScreen": false,
         "dimmerOpacity": 0.2,
         "enableBlurBehind": true,
         "enableLockScreenCountdown": true,
@@ -404,12 +399,14 @@
         "language": "",
         "lockOnSuspend": true,
         "lockScreenAnimations": true,
-        "lockScreenBlur": 0,
+        "lockScreenBlur": 0.35000000000000003,
         "lockScreenCountdownDuration": 10000,
+        "lockScreenFont": "Fira Sans SemiBold",
         "lockScreenMonitors": [
         ],
         "lockScreenTint": 0,
-        "passwordChars": false,
+        "lockScreenWallpaper": "",
+        "passwordChars": true,
         "radiusRatio": 1,
         "reverseScroll": false,
         "scaleRatio": 1,
@@ -456,7 +453,7 @@
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "",
+        "name": "kathmandu",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
@@ -541,8 +538,8 @@
     },
     "sessionMenu": {
         "countdownDuration": 10000,
-        "enableCountdown": true,
-        "largeButtonsLayout": "grid",
+        "enableCountdown": false,
+        "largeButtonsLayout": "single-row",
         "largeButtonsStyle": true,
         "position": "center",
         "powerOptions": [
@@ -564,41 +561,41 @@
                 "action": "hibernate",
                 "command": "",
                 "countdownEnabled": true,
-                "enabled": true,
-                "keybind": "3"
+                "enabled": false,
+                "keybind": ""
             },
             {
                 "action": "reboot",
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
-                "keybind": "4"
+                "keybind": "3"
             },
             {
                 "action": "logout",
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
-                "keybind": "5"
+                "keybind": "4"
             },
             {
                 "action": "shutdown",
                 "command": "",
-                "countdownEnabled": true,
+                "countdownEnabled": false,
                 "enabled": true,
-                "keybind": "6"
+                "keybind": "5"
             },
             {
                 "action": "rebootToUefi",
                 "command": "",
-                "countdownEnabled": true,
-                "enabled": true,
-                "keybind": "7"
+                "countdownEnabled": false,
+                "enabled": false,
+                "keybind": ""
             },
             {
                 "action": "userspaceReboot",
                 "command": "",
-                "countdownEnabled": true,
+                "countdownEnabled": false,
                 "enabled": false,
                 "keybind": ""
             }

@@ -150,6 +150,47 @@ Singleton {
     }
   }
 
+  // Whether the bar must stay visible because the active workspace is empty
+  function shouldStayVisible(screenName) {
+    if (!Settings.data.bar.showWhenWorkspaceEmpty)
+      return false;
+    if (Settings.getBarDisplayModeForScreen(screenName) !== "auto_hide")
+      return false;
+    return isActiveWorkspaceEmpty(screenName);
+  }
+
+  function isActiveWorkspaceEmpty(screenName) {
+    if (!screenName)
+      return false;
+    var name = String(screenName).toLowerCase();
+    for (var i = 0; i < CompositorService.workspaces.count; i++) {
+      var ws = CompositorService.workspaces.get(i);
+      if (!ws || !ws.isActive)
+        continue;
+      var output = (ws.output || "").toLowerCase();
+      if (CompositorService.globalWorkspaces || output === name) {
+        return !ws.isOccupied;
+      }
+    }
+    return false;
+  }
+
+  // Show/hide bars as the active workspace occupancy changes
+  function updateEmptyWorkspaceVisibility() {
+    if (!Settings.data.bar.showWhenWorkspaceEmpty)
+      return;
+    for (var screenName in screenAutoHideState) {
+      if (Settings.getBarDisplayModeForScreen(screenName) !== "auto_hide")
+        continue;
+      if (isActiveWorkspaceEmpty(screenName)) {
+        setScreenHidden(screenName, false);
+      } else if (!screenAutoHideState[screenName].hidden && !isBarHovered(screenName)) {
+        // Workspace became occupied - restart the auto-hide cycle
+        barHoverStateChanged(screenName, false);
+      }
+    }
+  }
+
   // Temporarily show the bar, then auto-hide after the configured delay.
   // Uses the same pattern as workspace switch: show, then emit unhover
   // to start the hide timer.
@@ -243,6 +284,12 @@ Singleton {
   // Workspace switch handler - directly show bar on the focused workspace screen
   Connections {
     target: CompositorService
+    function onWorkspacesChanged() {
+      Qt.callLater(root.updateEmptyWorkspaceVisibility);
+    }
+    function onWindowListChanged() {
+      Qt.callLater(root.updateEmptyWorkspaceVisibility);
+    }
     function onWorkspaceChanged() {
       if (!Settings.data.bar.showOnWorkspaceSwitch)
         return;

@@ -238,6 +238,7 @@ Singleton {
       property int autoHideDelay: 500 // ms before hiding after mouse leaves
       property int autoShowDelay: 150 // ms before showing when mouse enters
       property bool showOnWorkspaceSwitch: true // show bar briefly on workspace switch
+      property bool showWhenWorkspaceEmpty: false // keep bar visible while the active workspace has no windows
 
       // Widget configuration for modular bar system
       property JsonObject widgets
@@ -539,7 +540,11 @@ Singleton {
           "enabled": true
         },
         {
-          "id": "media-sysmon-card",
+          "id": "media-card",
+          "enabled": true
+        },
+        {
+          "id": "sysmon-card",
           "enabled": true
         }
       ]

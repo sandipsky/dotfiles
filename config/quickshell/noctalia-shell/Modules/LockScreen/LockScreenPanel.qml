@@ -549,7 +549,7 @@ Item {
     // Power button
     NIconButton {
       icon: "shutdown"
-      baseSize: 36
+      baseSize: 30
       visible: Settings.data.general.showSessionButtonsOnLockScreen
       colorBg: Qt.alpha(Color.mSurface, 0.65)
       colorFg: Color.mOnSurface
@@ -567,7 +567,7 @@ Item {
     anchors.right: parent.right
     anchors.rightMargin: 28
     anchors.bottom: parent.bottom
-    anchors.bottomMargin: 28 + 36 + Style.marginM
+    anchors.bottomMargin: 28 + 30 + Style.marginM
     width: 210
     height: sessionMenuColumn.implicitHeight + Style.marginM * 2
     radius: Style.radiusM

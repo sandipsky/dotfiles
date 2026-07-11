@@ -59,8 +59,11 @@ SmartPanel {
       case "weather-card":
         height += weatherHeight;
         break;
-      case "media-sysmon-card":
-        height += mediaSysMonHeight;
+      case "media-card":
+        height += mediaHeight;
+        break;
+      case "sysmon-card":
+        height += sysmonHeight;
         break;
       default:
         break;
@@ -73,7 +76,8 @@ SmartPanel {
   readonly property int shortcutsHeight: Math.round(52 * Style.uiScaleRatio)
   readonly property int audioHeight: Math.round(60 * Style.uiScaleRatio)
   readonly property int brightnessHeight: Math.round(60 * Style.uiScaleRatio)
-  readonly property int mediaSysMonHeight: Math.round(260 * Style.uiScaleRatio)
+  readonly property int mediaHeight: Math.round(220 * Style.uiScaleRatio)
+  readonly property int sysmonHeight: Math.round(84 * Style.uiScaleRatio)
 
   // We keep a dynamic weather height due to a more complex layout and font scaling
   property int weatherHeight: Math.round(210 * Style.uiScaleRatio)
@@ -114,8 +118,10 @@ SmartPanel {
               return brightnessHeight;
             case "weather-card":
               return weatherHeight;
-            case "media-sysmon-card":
-              return mediaSysMonHeight;
+            case "media-card":
+              return mediaHeight;
+            case "sysmon-card":
+              return sysmonHeight;
             default:
               return 0;
             }
@@ -132,8 +138,10 @@ SmartPanel {
               return brightnessCard;
             case "weather-card":
               return weatherCard;
-            case "media-sysmon-card":
-              return mediaSysMonCard;
+            case "media-card":
+              return mediaCard;
+            case "sysmon-card":
+              return sysmonCard;
             }
           }
         }
@@ -170,22 +178,13 @@ SmartPanel {
     }
 
     Component {
-      id: mediaSysMonCard
-      RowLayout {
-        spacing: Style.marginL
+      id: mediaCard
+      MediaCard {}
+    }
 
-        // Media card
-        MediaCard {
-          Layout.fillWidth: true
-          Layout.fillHeight: true
-        }
-
-        // System monitors combined in one card
-        SystemMonitorCard {
-          Layout.preferredWidth: Math.round(Style.baseWidgetSize * 2.625)
-          Layout.fillHeight: true
-        }
-      }
+    Component {
+      id: sysmonCard
+      SystemMonitorCard {}
     }
   }
 }
