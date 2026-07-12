@@ -1,4 +1,6 @@
 #!/bin/bash
+# Mirror of install.sh that installs the ORIGINAL upstream Noctalia (AUR
+# noctalia-shell into /etc/xdg/quickshell) instead of the vendored fork.
 set -e
 
 USERNAME=$(logname)
@@ -39,19 +41,10 @@ sudo pacman -S --noconfirm --needed \
 
 yay -S --noconfirm --needed \
     breezex-cursor-theme \
-    nautilus-open-any-terminal
+    nautilus-open-any-terminal \
+    noctalia-shell
 
 sudo -u "$USERNAME" -H bash -c "curl -fsSL https://claude.ai/install.sh | bash"
-
-if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
-    if ! yay -S --noconfirm --needed noctalia-qs; then
-        BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
-        sudo -u "$USERNAME" cp -r assets/noctalia-qs/. "$BUILD_DIR/"
-        (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
-        pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
-        rm -rf "$BUILD_DIR"
-    fi
-fi
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
@@ -121,6 +114,9 @@ sudo cp assets/fonts/* /usr/share/fonts/
 sudo fc-cache -f
 
 sudo -u "$USERNAME" cp -r config/* "/home/$USERNAME/.config/"
+
+# Remove the forked shell so the original from /etc/xdg/quickshell is used
+sudo -u "$USERNAME" rm -rf "/home/$USERNAME/.config/quickshell/noctalia-shell"
 
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
 sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf >/dev/null <<EOF

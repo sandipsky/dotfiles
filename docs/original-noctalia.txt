@@ -1,0 +1,44 @@
+#### Installing ORIGINAL Noctalia instead of the forked one
+
+This repo ships a forked/patched Noctalia vendored at config/quickshell/noctalia-shell/
+(installed to ~/.config/quickshell/noctalia-shell). The original upstream Noctalia
+lives in the AUR as "noctalia-shell" and installs to /etc/xdg/quickshell/noctalia-shell.
+Quickshell prefers ~/.config over /etc/xdg, so whichever exists in ~/.config wins.
+
+## Option 1 - fresh machine, original Noctalia from the start
+
+Run noctalia.sh instead of install.sh:
+
+sudo ./noctalia.sh
+
+It is a mirror of install.sh with exactly three differences:
+- installs the AUR "noctalia-shell" package (pulls the noctalia-qs runtime itself)
+- skips the vendored noctalia-qs build fallback (original needs upstream alive anyway)
+- deletes ~/.config/quickshell/noctalia-shell after the config copy, so the
+  stock version in /etc/xdg is used
+
+## Option 2 - existing machine, switch from fork to original
+
+yay -S noctalia-shell
+rm -rf ~/.config/quickshell/noctalia-shell
+pkill -f 'qs -c noctalia-shell'
+qs -c noctalia-shell -d
+
+## Switching back to the fork
+
+cd ~/dotfiles
+./reset.sh
+
+(reset.sh removes the AUR noctalia-shell package, syncs the fork back to
+~/.config/quickshell/noctalia-shell and restarts the shell)
+
+## Notes
+
+- Runtime settings (~/.config/noctalia/settings.json) are kept in both directions.
+  Fork-only settings keys are ignored by original Noctalia (deep-merge), but the
+  split Media / System Monitor control-center cards revert to upstream's combined
+  card, and fork-only features (fixed workspaces, sideways window title, Windows 11
+  style lock screen, taskbar spacing/pinned-order fixes, bar show-when-empty) do
+  not exist upstream.
+- Do NOT install the official "quickshell" package alongside; noctalia-qs
+  conflicts with it and provides the same qs binary.
