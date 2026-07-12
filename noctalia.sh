@@ -5,6 +5,23 @@ set -e
 
 USERNAME=$(logname)
 
+# The GLX router's first DHCP DNS server (110.44.112.200) is dead and glibc
+# stalls 5 s per lookup on it; pin working DNS and cache via systemd-resolved.
+if nmcli -t -f NAME connection show | grep -Fxq GLX; then
+    sudo nmcli connection modify GLX \
+        ipv4.ignore-auto-dns yes ipv4.dns "1.1.1.1 110.44.113.245" \
+        ipv6.ignore-auto-dns yes ipv6.dns "2606:4700:4700::1111 2606:4700:4700::1001"
+fi
+sudo systemctl enable --now systemd-resolved.service
+sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+sudo systemctl restart NetworkManager
+for _ in $(seq 1 30); do
+    if nmcli -t -f STATE general 2>/dev/null | grep -q '^connected'; then
+        break
+    fi
+    sleep 1
+done
+
 sudo pacman -S --noconfirm --needed \
     hyprland \
     hyprpicker \
