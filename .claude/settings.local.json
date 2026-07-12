@@ -169,7 +169,9 @@
       "Read(//tmp/**)",
       "Bash(echo \"add rc=$?\")",
       "Bash(echo \"delete rc=$?\")",
-      "Bash(nmcli -t -f NAME connection show)"
+      "Bash(nmcli -t -f NAME connection show)",
+      "Bash(ping -4 -c 2 -W 3 1.1.1.1)",
+      "Bash(whois 147.135.15.16)"
     ],
     "additionalDirectories": [
       "/home/sandip/.config/noctalia"
