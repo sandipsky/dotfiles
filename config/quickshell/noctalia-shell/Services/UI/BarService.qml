@@ -175,16 +175,22 @@ Singleton {
     return false;
   }
 
-  // Show/hide bars as the active workspace occupancy changes
+  // Show/hide bars as the active workspace occupancy changes.
+  // Iterates real screens (not screenAutoHideState): the state map stays empty
+  // until a bar's content loads, which never happens while it starts hidden.
   function updateEmptyWorkspaceVisibility() {
     if (!Settings.data.bar.showWhenWorkspaceEmpty)
       return;
-    for (var screenName in screenAutoHideState) {
+    var screens = Quickshell.screens || [];
+    for (var i = 0; i < screens.length; i++) {
+      var screenName = screens[i]?.name || "";
+      if (!screenName)
+        continue;
       if (Settings.getBarDisplayModeForScreen(screenName) !== "auto_hide")
         continue;
       if (isActiveWorkspaceEmpty(screenName)) {
         setScreenHidden(screenName, false);
-      } else if (!screenAutoHideState[screenName].hidden && !isBarHovered(screenName)) {
+      } else if (screenAutoHideState[screenName] && !screenAutoHideState[screenName].hidden && !isBarHovered(screenName)) {
         // Workspace became occupied - restart the auto-hide cycle
         barHoverStateChanged(screenName, false);
       }
@@ -219,9 +225,22 @@ Singleton {
     }
   }
 
+  // Startup re-check: settings and workspaces load asynchronously, so early
+  // evaluations can run before either is ready. Re-evaluate shortly after start.
+  Timer {
+    id: emptyWorkspaceStartupTimer
+    interval: 2000
+    repeat: false
+    running: true
+    onTriggered: root.updateEmptyWorkspaceVisibility()
+  }
+
   // update bar's hidden state when mode changes
   Connections {
     target: Settings.data.bar
+    function onShowWhenWorkspaceEmptyChanged() {
+      Qt.callLater(root.updateEmptyWorkspaceVisibility);
+    }
     function onDisplayModeChanged() {
       Logger.d("BarService", "Display mode changed to:", Settings.data.bar.displayMode);
 
@@ -324,6 +343,11 @@ Singleton {
       readyBars[screenName] = true;
       Logger.d("BarService", "Bar is ready on screen:", screenName);
       barReadyChanged(screenName);
+      // Seed the auto-hide state so startup evaluations (e.g. empty-workspace
+      // visibility before any hover/switch event) can reach this screen
+      getOrCreateAutoHideState(screenName);
+      Qt.callLater(updateEmptyWorkspaceVisibility);
+      emptyWorkspaceStartupTimer.restart();
     }
   }
 

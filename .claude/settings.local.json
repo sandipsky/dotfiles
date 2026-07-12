@@ -115,7 +115,12 @@
       "Bash(echo \"missing-rc=$?\")",
       "Bash(rm -rf /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/build-test)",
       "Bash(cp -r /home/sandip/dotfiles/assets/noctalia-qs /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/build-test)",
-      "Bash(makepkg -f)"
+      "Bash(makepkg -f)",
+      "Bash(bash /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/test-boot-empty.sh)",
+      "Bash(/usr/lib/qt6/bin/qmlformat config/quickshell/noctalia-shell/Services/UI/BarService.qml)",
+      "Bash(sed -i 's/sleep 2.5/sleep 4/' /tmp/claude-1000/-home-sandip-dotfiles/9ccf9a18-c31a-4052-a573-0b631882fae3/scratchpad/test-boot-empty.sh)",
+      "Bash(echo \"qmlformat-rc=$?\")",
+      "Bash(jq -c '{dm: .bar.displayMode, empty: .bar.showWhenWorkspaceEmpty, sws: .bar.showOnWorkspaceSwitch}' ~/.config/noctalia/settings.json; grep -rn 'registerBar' Modules/ | grep -v BarService)"
     ],
     "additionalDirectories": [
       "/home/sandip/.config/noctalia"
