@@ -2261,5 +2261,24 @@
       "poor": "Poor",
       "weak": "Weak"
     }
+  },
+  "vpn": {
+    "panel": {
+      "title": "VPN",
+      "connected": "Connected",
+      "disconnected": "Not connected",
+      "connecting": "Connecting…",
+      "disconnecting": "Disconnecting…",
+      "removing": "Removing…",
+      "no-profiles": "No VPN profiles",
+      "no-profiles-hint": "Import a WireGuard or OpenVPN profile and it will appear here.",
+      "refresh": "Refresh",
+      "import": "Import profile",
+      "import-title": "Select a WireGuard (.conf) or OpenVPN (.ovpn) file",
+      "import-success": "VPN profile imported",
+      "delete": "Delete",
+      "delete-confirm": "Delete this VPN profile?",
+      "remove-success": "VPN profile removed"
+    }
   }
 }

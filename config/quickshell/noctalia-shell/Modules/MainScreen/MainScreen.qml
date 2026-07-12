@@ -28,6 +28,7 @@ import qs.Modules.Panels.Settings
 import qs.Modules.Panels.SetupWizard
 import qs.Modules.Panels.SystemStats
 import qs.Modules.Panels.Tray
+import qs.Modules.Panels.VPN
 import qs.Modules.Panels.Wallpaper
 import qs.Services.Compositor
 import qs.Services.Power
@@ -391,6 +392,12 @@ PanelWindow {
     NetworkPanel {
       id: networkPanel
       objectName: "networkPanel-" + (root.screen?.name || "unknown")
+      screen: root.screen
+    }
+
+    VPNPanel {
+      id: vpnPanel
+      objectName: "vpnPanel-" + (root.screen?.name || "unknown")
       screen: root.screen
     }
 

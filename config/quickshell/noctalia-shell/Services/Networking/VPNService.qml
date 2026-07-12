@@ -13,8 +13,11 @@ Singleton {
   property bool refreshing: false
   property bool connecting: false
   property bool disconnecting: false
+  property bool removing: false
+  property bool importing: false
   property string connectingUuid: ""
   property string disconnectingUuid: ""
+  property string removingUuid: ""
   property string lastError: ""
   property bool refreshPending: false
 
@@ -116,6 +119,41 @@ Singleton {
     } else {
       connect(uuid);
     }
+  }
+
+  // Delete a VPN profile from NetworkManager entirely
+  function remove(uuid) {
+    if (removing || !uuid) {
+      return;
+    }
+    const conn = connections[uuid];
+    if (!conn) {
+      return;
+    }
+    removing = true;
+    removingUuid = uuid;
+    lastError = "";
+    removeProcess.uuid = uuid;
+    removeProcess.name = conn.name;
+    removeProcess.running = true;
+  }
+
+  // Import a new VPN profile from a config file (WireGuard .conf / OpenVPN .ovpn)
+  function importConfig(path) {
+    if (importing || !path) {
+      return;
+    }
+    // NetworkManager needs the VPN type up-front; infer it from the extension
+    const lower = path.toLowerCase();
+    var type = "wireguard";
+    if (lower.endsWith(".ovpn")) {
+      type = "openvpn";
+    }
+    importing = true;
+    lastError = "";
+    importProcess.path = path;
+    importProcess.vpnType = type;
+    importProcess.running = true;
   }
 
   function setConnection(uuid, data) {
@@ -281,6 +319,79 @@ Singleton {
         }
         disconnecting = false;
         disconnectingUuid = "";
+      }
+    }
+  }
+
+  Process {
+    id: removeProcess
+    property string uuid: ""
+    property string name: ""
+    running: false
+    command: ["nmcli", "connection", "delete", "uuid", uuid]
+
+    stdout: StdioCollector {
+      onStreamFinished: {
+        const output = text.trim();
+        if (!output || !output.includes("successfully deleted")) {
+          return;
+        }
+        const map = Object.assign({}, connections);
+        delete map[removeProcess.uuid];
+        connections = map;
+        removing = false;
+        removingUuid = "";
+        lastError = "";
+        Logger.i("VPN", "Removed " + removeProcess.name);
+        ToastService.showNotice(removeProcess.name, I18n.tr("vpn.panel.remove-success"), "trash");
+        scheduleRefresh(500);
+      }
+    }
+
+    stderr: StdioCollector {
+      onStreamFinished: {
+        const trimmed = text.trim();
+        if (trimmed) {
+          lastError = trimmed.split("\n")[0].trim();
+          Logger.w("VPN", "Remove error: " + trimmed);
+          ToastService.showWarning(removeProcess.name, lastError);
+        }
+        removing = false;
+        removingUuid = "";
+      }
+    }
+  }
+
+  Process {
+    id: importProcess
+    property string path: ""
+    property string vpnType: "wireguard"
+    running: false
+    command: ["nmcli", "connection", "import", "type", vpnType, "file", path]
+
+    stdout: StdioCollector {
+      onStreamFinished: {
+        const output = text.trim();
+        if (!output || !output.includes("successfully added")) {
+          return;
+        }
+        importing = false;
+        lastError = "";
+        Logger.i("VPN", "Imported " + importProcess.path);
+        ToastService.showNotice(I18n.tr("vpn.panel.title"), I18n.tr("vpn.panel.import-success"), "shield-plus");
+        scheduleRefresh(500);
+      }
+    }
+
+    stderr: StdioCollector {
+      onStreamFinished: {
+        const trimmed = text.trim();
+        if (trimmed) {
+          lastError = trimmed.split("\n")[0].trim();
+          Logger.w("VPN", "Import error: " + trimmed);
+          ToastService.showWarning(I18n.tr("vpn.panel.title"), lastError);
+        }
+        importing = false;
       }
     }
   }

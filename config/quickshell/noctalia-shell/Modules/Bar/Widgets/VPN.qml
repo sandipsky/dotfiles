@@ -126,10 +126,18 @@ Item {
     autoHide: false
     forceOpen: !isBarVertical && root.displayMode === "alwaysShow"
     forceClose: isBarVertical || root.displayMode === "alwaysHide" || !pill.text
+    onClicked: {
+      var p = PanelService.getPanel("vpnPanel", screen);
+      if (p)
+        p.toggle(this);
+    }
     onRightClicked: {
       PanelService.showContextMenu(contextMenu, pill, screen);
     }
     tooltipText: {
+      if (PanelService.getPanel("vpnPanel", screen)?.isPanelOpen) {
+        return "";
+      }
       if (pill.text !== "") {
         return pill.text;
       }
