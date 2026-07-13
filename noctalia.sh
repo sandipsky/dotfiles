@@ -5,13 +5,16 @@ set -e
 
 USERNAME=$(logname)
 
-# The GLX router's first DHCP DNS server (110.44.112.200) is dead and glibc
-# stalls 5 s per lookup on it; pin working DNS and cache via systemd-resolved.
-if nmcli -t -f NAME connection show | grep -Fxq GLX; then
-    sudo nmcli connection modify GLX \
-        ipv4.ignore-auto-dns yes ipv4.dns "1.1.1.1 110.44.113.245" \
-        ipv6.ignore-auto-dns yes ipv6.dns "2606:4700:4700::1111 2606:4700:4700::1001"
-fi
+# Some routers hand out dead DNS servers via DHCP (the GLX router's first one,
+# 110.44.112.200, never answers and glibc stalls 5 s per lookup on it). Prefer
+# known-good resolvers globally — Domains=~. outranks any network's DHCP DNS —
+# and cache via systemd-resolved, which also auto-skips unresponsive servers.
+sudo mkdir -p /etc/systemd/resolved.conf.d
+sudo tee /etc/systemd/resolved.conf.d/10-global-dns.conf > /dev/null <<'EOF'
+[Resolve]
+DNS=1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
+Domains=~.
+EOF
 sudo systemctl enable --now systemd-resolved.service
 sudo ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl restart NetworkManager
