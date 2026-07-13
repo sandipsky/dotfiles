@@ -335,7 +335,9 @@
       "show-labels-only-when-occupied-description": "Only show workspace labels when they contain windows.",
       "show-labels-only-when-occupied-label": "Show labels only when occupied",
       "unfocused-icons-opacity-description": "Set the opacity level for unfocused app icons.",
-      "unfocused-icons-opacity-label": "Unfocused icons opacity"
+      "unfocused-icons-opacity-label": "Unfocused icons opacity",
+      "wrap-workspaces-description": "Cycle back to the other end when scrolling past the first or last workspace.",
+      "wrap-workspaces-label": "Wrap around"
     }
   },
   "battery": {

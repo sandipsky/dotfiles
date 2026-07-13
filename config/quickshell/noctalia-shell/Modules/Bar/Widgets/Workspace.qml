@@ -80,6 +80,7 @@ Item {
   readonly property real unfocusedIconsOpacity: (widgetSettings.unfocusedIconsOpacity !== undefined) ? widgetSettings.unfocusedIconsOpacity : widgetMetadata.unfocusedIconsOpacity
   readonly property real groupedBorderOpacity: (widgetSettings.groupedBorderOpacity !== undefined) ? widgetSettings.groupedBorderOpacity : widgetMetadata.groupedBorderOpacity
   readonly property bool enableScrollWheel: (widgetSettings.enableScrollWheel !== undefined) ? widgetSettings.enableScrollWheel : widgetMetadata.enableScrollWheel
+  readonly property bool wrapWorkspaces: (widgetSettings.wrapWorkspaces !== undefined) ? widgetSettings.wrapWorkspaces : widgetMetadata.wrapWorkspaces
   readonly property bool reverseScroll: Settings.data.general.reverseScroll
   readonly property real iconScale: (widgetSettings.iconScale !== undefined) ? widgetSettings.iconScale : widgetMetadata.iconScale
   readonly property string focusedColor: (widgetSettings.focusedColor !== undefined) ? widgetSettings.focusedColor : widgetMetadata.focusedColor
@@ -226,9 +227,17 @@ Item {
     var current = getFocusedLocalIndex();
     if (current < 0)
       current = 0;
-    var next = (current + offset) % localWorkspaces.count;
-    if (next < 0)
-      next = localWorkspaces.count - 1;
+    var next;
+    if (root.wrapWorkspaces) {
+      next = (current + offset) % localWorkspaces.count;
+      if (next < 0)
+        next += localWorkspaces.count;
+    } else {
+      // No wrap: stop at the first/last workspace instead of cycling.
+      next = current + offset;
+      if (next < 0 || next >= localWorkspaces.count)
+        return;
+    }
     if (next === current)
       return;
     const ws = localWorkspaces.get(next);

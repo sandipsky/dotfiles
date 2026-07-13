@@ -30,6 +30,7 @@ ColumnLayout {
   property real valueUnfocusedIconsOpacity: widgetData.unfocusedIconsOpacity !== undefined ? widgetData.unfocusedIconsOpacity : widgetMetadata.unfocusedIconsOpacity
   property real valueGroupedBorderOpacity: widgetData.groupedBorderOpacity !== undefined ? widgetData.groupedBorderOpacity : widgetMetadata.groupedBorderOpacity
   property bool valueEnableScrollWheel: widgetData.enableScrollWheel !== undefined ? widgetData.enableScrollWheel : widgetMetadata.enableScrollWheel
+  property bool valueWrapWorkspaces: widgetData.wrapWorkspaces !== undefined ? widgetData.wrapWorkspaces : widgetMetadata.wrapWorkspaces
   property real valueIconScale: widgetData.iconScale !== undefined ? widgetData.iconScale : widgetMetadata.iconScale
   property string valueFocusedColor: widgetData.focusedColor !== undefined ? widgetData.focusedColor : widgetMetadata.focusedColor
   property string valueOccupiedColor: widgetData.occupiedColor !== undefined ? widgetData.occupiedColor : widgetMetadata.occupiedColor
@@ -53,6 +54,7 @@ ColumnLayout {
     settings.unfocusedIconsOpacity = valueUnfocusedIconsOpacity;
     settings.groupedBorderOpacity = valueGroupedBorderOpacity;
     settings.enableScrollWheel = valueEnableScrollWheel;
+    settings.wrapWorkspaces = valueWrapWorkspaces;
     settings.iconScale = valueIconScale;
     settings.focusedColor = valueFocusedColor;
     settings.occupiedColor = valueOccupiedColor;
@@ -227,6 +229,17 @@ ColumnLayout {
                  valueEnableScrollWheel = checked;
                  saveSettings();
                }
+  }
+
+  NToggle {
+    label: I18n.tr("bar.workspace.wrap-workspaces-label")
+    description: I18n.tr("bar.workspace.wrap-workspaces-description")
+    checked: valueWrapWorkspaces
+    onToggled: checked => {
+                 valueWrapWorkspaces = checked;
+                 saveSettings();
+               }
+    visible: valueEnableScrollWheel
   }
 
   NDivider {
