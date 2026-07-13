@@ -249,8 +249,8 @@ Item {
     // Avatar
     Item {
       Layout.alignment: Qt.AlignHCenter
-      Layout.preferredWidth: 110
-      Layout.preferredHeight: 110
+      Layout.preferredWidth: 130
+      Layout.preferredHeight: 130
 
       Rectangle {
         anchors.fill: parent
@@ -262,8 +262,8 @@ Item {
 
       NImageRounded {
         anchors.centerIn: parent
-        width: 104
-        height: 104
+        width: 124
+        height: 124
         radius: width / 2
         imagePath: Settings.preprocessPath(Settings.data.general.avatarImage)
         fallbackIcon: "person"
@@ -274,8 +274,9 @@ Item {
     NText {
       Layout.alignment: Qt.AlignHCenter
       text: HostService.displayName
-      pointSize: Style.fontSizeXXL
-      font.weight: Style.fontWeightBold
+      family: "Fira Sans SemiBold"
+      pointSize: Style.fontSizeXXXL
+      font.weight: Style.fontWeightSemiBold
       color: Color.mOnSurface
       horizontalAlignment: Text.AlignHCenter
     }
@@ -285,8 +286,8 @@ Item {
       id: passwordInputContainer
       Layout.alignment: Qt.AlignHCenter
       Layout.topMargin: Style.marginXL
-      Layout.preferredWidth: 230
-      Layout.preferredHeight: 34
+      Layout.preferredWidth: 200
+      Layout.preferredHeight: 30
       radius: Style.iRadiusL
       color: Color.mSurface
       border.color: passwordInput.activeFocus ? Color.mPrimary : Qt.alpha(Color.mOutline, 0.3)
