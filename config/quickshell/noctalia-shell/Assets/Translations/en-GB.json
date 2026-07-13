@@ -63,10 +63,14 @@
       "hide-if-not-detected-description": "Hide the widget when no battery is detected on the system.",
       "hide-if-not-detected-label": "Hide when not detected",
       "low-battery-threshold-label": "Low battery warning threshold",
+      "show-brightness-slider-description": "Display a brightness slider inside the battery panel.",
+      "show-brightness-slider-label": "Show brightness slider",
       "show-noctalia-performance-description": "Display the Noctalia performance mode toggle inside the battery panel.<br>Disables shadows and animations in Noctalia to reduce resource usage.",
       "show-noctalia-performance-label": "Show Noctalia Performance toggle",
       "show-power-profile-description": "Display the power profile selection inside the battery panel.",
-      "show-power-profile-label": "Show power profile controls"
+      "show-power-profile-label": "Show power profile controls",
+      "show-refresh-rate-description": "Display a refresh rate switcher inside the battery panel (supported displays only).",
+      "show-refresh-rate-label": "Show refresh rate switcher"
     },
     "brightness": {
       "apply-all-description": "Change brightness for every monitor when using the scroll wheel.",
@@ -511,6 +515,7 @@
     "reboot-to-uefi": "Reboot to UEFI",
     "record": "Start recording",
     "refresh": "Refresh",
+    "refresh-rate": "Refresh rate",
     "required": "(required)",
     "reset": "Reset",
     "reset-to-default": "Reset to Default",
@@ -1979,6 +1984,10 @@
     "power-profile": {
       "changed": "Power profile changed",
       "profile-name": "{profile}"
+    },
+    "refresh-rate": {
+      "changed": "Refresh rate set to {rate} Hz",
+      "failed": "Failed to change refresh rate"
     },
     "theming-processor-failed": {
       "desc-generic": "Encountered an error while processing templates",

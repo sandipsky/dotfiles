@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Services.UPower
 import qs.Commons
 import qs.Modules.MainScreen
+import qs.Services.Compositor
 import qs.Services.Hardware
 import qs.Services.Networking
 import qs.Services.Power
@@ -16,6 +17,13 @@ SmartPanel {
 
   preferredWidth: Math.round(440 * Style.uiScaleRatio)
   preferredHeight: Math.round(460 * Style.uiScaleRatio)
+
+  onOpened: {
+    if (panelContent.brightnessMonitor)
+      panelContent.localBrightness = panelContent.brightnessMonitor.brightness || 0;
+    if (panelContent.showRefreshRateSwitcher)
+      RefreshRateService.refresh();
+  }
 
   panelContent: Item {
     id: panelContent
@@ -31,9 +39,47 @@ SmartPanel {
     property int profileIndex: profileToIndex(PowerProfileService.profile)
     readonly property bool showPowerProfiles: panelID ? panelID.showPowerProfiles : resolveWidgetSetting("showPowerProfiles", false)
     readonly property bool showNoctaliaPerformance: panelID ? panelID.showNoctaliaPerformance : resolveWidgetSetting("showNoctaliaPerformance", false)
+    readonly property bool showBrightnessSlider: panelID ? panelID.showBrightnessSlider : resolveWidgetSetting("showBrightnessSlider", false)
+    readonly property bool showRefreshRateSwitcher: panelID ? panelID.showRefreshRateSwitcher : resolveWidgetSetting("showRefreshRateSwitcher", false)
     readonly property bool isLowBattery: BatteryService.isLowBattery
     readonly property bool isCriticalBattery: BatteryService.isCriticalBattery
     readonly property var primaryDevice: BatteryService.primaryDevice
+
+    // Brightness control for the monitor this panel is shown on
+    readonly property var brightnessMonitor: screen ? BrightnessService.getMonitorForScreen(screen) : null
+    property real localBrightness: 0
+    property bool localBrightnessChanging: false
+
+    // Refresh-rate switcher state (Hyprland only; revision drives re-evaluation)
+    readonly property string screenName: screen ? screen.name : ""
+    readonly property var refreshRates: (RefreshRateService.revision, RefreshRateService.getRates(screenName))
+    readonly property int currentRefreshRate: (RefreshRateService.revision, RefreshRateService.getCurrentRate(screenName))
+    readonly property bool refreshRateSupported: (RefreshRateService.revision, RefreshRateService.isSupported(screenName))
+
+    Component.onCompleted: {
+      if (brightnessMonitor)
+        localBrightness = brightnessMonitor.brightness || 0;
+      if (showRefreshRateSwitcher)
+        RefreshRateService.refresh();
+    }
+
+    Connections {
+      target: BrightnessService
+      function onMonitorBrightnessChanged(monitor, newBrightness) {
+        if (monitor === panelContent.brightnessMonitor && !panelContent.localBrightnessChanging)
+          panelContent.localBrightness = newBrightness;
+      }
+    }
+
+    Timer {
+      id: brightnessDebounce
+      interval: 100
+      repeat: false
+      onTriggered: {
+        if (panelContent.brightnessMonitor && Math.abs(panelContent.localBrightness - panelContent.brightnessMonitor.brightness) > 0.009)
+          panelContent.brightnessMonitor.setBrightness(panelContent.localBrightness);
+      }
+    }
 
     function profileToIndex(p) {
       return powerProfiles.indexOf(p) ?? 1;
@@ -392,6 +438,132 @@ SmartPanel {
             NToggle {
               checked: PowerProfileService.noctaliaPerformanceMode
               onToggled: checked => PowerProfileService.noctaliaPerformanceMode = checked
+            }
+          }
+        }
+      }
+
+      // Brightness slider
+      NBox {
+        Layout.fillWidth: true
+        implicitHeight: brightnessLayout.implicitHeight + Style.margin2L
+        visible: showBrightnessSlider && brightnessMonitor && brightnessMonitor.brightnessControlAvailable
+
+        ColumnLayout {
+          id: brightnessLayout
+          anchors.fill: parent
+          anchors.margins: Style.marginL
+          spacing: Style.marginS
+
+          RowLayout {
+            Layout.fillWidth: true
+            spacing: Style.marginS
+
+            NIcon {
+              icon: localBrightness <= 0.001 ? "sun-off" : (localBrightness <= 0.5 ? "brightness-low" : "brightness-high")
+              pointSize: Style.fontSizeL
+              color: Color.mOnSurface
+            }
+
+            NText {
+              text: I18n.tr("common.brightness")
+              font.weight: Style.fontWeightBold
+              color: Color.mOnSurface
+              Layout.fillWidth: true
+            }
+
+            NText {
+              text: Math.round(localBrightness * 100) + "%"
+              color: Color.mOnSurfaceVariant
+            }
+          }
+
+          NSlider {
+            id: brightnessSlider
+            Layout.fillWidth: true
+            from: 0
+            to: 1
+            value: localBrightness
+            stepSize: 0.01
+            heightRatio: 0.5
+            onMoved: {
+              localBrightness = value;
+              brightnessDebounce.restart();
+            }
+            onPressedChanged: localBrightnessChanging = pressed
+            tooltipText: `${Math.round(localBrightness * 100)}%`
+
+            MouseArea {
+              anchors.fill: parent
+              hoverEnabled: true
+              acceptedButtons: Qt.NoButton
+              propagateComposedEvents: true
+              onWheel: wheel => {
+                         const delta = wheel.angleDelta.y || wheel.angleDelta.x;
+                         const step = Settings.data.brightness.brightnessStep / 100.0;
+                         const increment = delta > 0 ? step : -step;
+                         localBrightness = Math.max(0, Math.min(1, localBrightness + increment));
+                         brightnessDebounce.restart();
+                       }
+            }
+          }
+        }
+      }
+
+      // Refresh rate switcher (Hyprland, multi-rate displays only)
+      NBox {
+        Layout.fillWidth: true
+        implicitHeight: refreshRateLayout.implicitHeight + Style.margin2L
+        visible: showRefreshRateSwitcher && refreshRateSupported
+
+        ColumnLayout {
+          id: refreshRateLayout
+          anchors.fill: parent
+          anchors.margins: Style.marginL
+          spacing: Style.marginS
+
+          RowLayout {
+            Layout.fillWidth: true
+            spacing: Style.marginS
+
+            NIcon {
+              icon: "refresh"
+              pointSize: Style.fontSizeL
+              color: Color.mOnSurface
+            }
+
+            NText {
+              text: I18n.tr("common.refresh-rate")
+              font.weight: Style.fontWeightBold
+              color: Color.mOnSurface
+              Layout.fillWidth: true
+            }
+
+            NText {
+              text: `${currentRefreshRate} Hz`
+              color: Color.mOnSurfaceVariant
+            }
+          }
+
+          RowLayout {
+            Layout.fillWidth: true
+            spacing: Style.marginS
+
+            Repeater {
+              model: refreshRates
+              delegate: NButton {
+                readonly property bool active: modelData === currentRefreshRate
+                Layout.fillWidth: true
+                text: `${modelData} Hz`
+                fontSize: Style.fontSizeS
+                outlined: !active
+                backgroundColor: active ? Color.mPrimary : Color.mOnSurfaceVariant
+                textColor: Color.mOnPrimary
+                onClicked: {
+                  if (!active)
+                    RefreshRateService.setRefreshRate(screenName, modelData);
+                }
+              }
             }
           }
         }

@@ -23,6 +23,8 @@ ColumnLayout {
   property bool valueShowNoctaliaPerformance: widgetData.showNoctaliaPerformance !== undefined ? widgetData.showNoctaliaPerformance : widgetMetadata.showNoctaliaPerformance
   property bool valueHideIfNotDetected: widgetData.hideIfNotDetected !== undefined ? widgetData.hideIfNotDetected : widgetMetadata.hideIfNotDetected
   property bool valueHideIfIdle: widgetData.hideIfIdle !== undefined ? widgetData.hideIfIdle : widgetMetadata.hideIfIdle
+  property bool valueShowBrightnessSlider: widgetData.showBrightnessSlider !== undefined ? widgetData.showBrightnessSlider : widgetMetadata.showBrightnessSlider
+  property bool valueShowRefreshRateSwitcher: widgetData.showRefreshRateSwitcher !== undefined ? widgetData.showRefreshRateSwitcher : widgetMetadata.showRefreshRateSwitcher
 
   function saveSettings() {
     var settings = Object.assign({}, widgetData || {});
@@ -34,6 +36,8 @@ ColumnLayout {
     settings.showNoctaliaPerformance = valueShowNoctaliaPerformance;
     settings.hideIfNotDetected = valueHideIfNotDetected;
     settings.hideIfIdle = valueHideIfIdle;
+    settings.showBrightnessSlider = valueShowBrightnessSlider;
+    settings.showRefreshRateSwitcher = valueShowRefreshRateSwitcher;
     settings.deviceNativePath = valueDeviceNativePath;
     settingsChanged(settings);
   }
@@ -134,5 +138,27 @@ ColumnLayout {
                  saveSettings();
                }
     defaultValue: widgetMetadata.showNoctaliaPerformance
+  }
+
+  NToggle {
+    label: I18n.tr("bar.battery.show-brightness-slider-label")
+    description: I18n.tr("bar.battery.show-brightness-slider-description")
+    checked: valueShowBrightnessSlider
+    onToggled: checked => {
+                 valueShowBrightnessSlider = checked;
+                 saveSettings();
+               }
+    defaultValue: widgetMetadata.showBrightnessSlider
+  }
+
+  NToggle {
+    label: I18n.tr("bar.battery.show-refresh-rate-label")
+    description: I18n.tr("bar.battery.show-refresh-rate-description")
+    checked: valueShowRefreshRateSwitcher
+    onToggled: checked => {
+                 valueShowRefreshRateSwitcher = checked;
+                 saveSettings();
+               }
+    defaultValue: widgetMetadata.showRefreshRateSwitcher
   }
 }

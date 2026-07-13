@@ -251,7 +251,9 @@ Item {
     if (panel) {
       panel.panelID = {
         showPowerProfiles: widgetSettings.showPowerProfiles !== undefined ? widgetSettings.showPowerProfiles : widgetMetadata.showPowerProfiles,
-        showNoctaliaPerformance: widgetSettings.showNoctaliaPerformance !== undefined ? widgetSettings.showNoctaliaPerformance : widgetMetadata.showNoctaliaPerformance
+        showNoctaliaPerformance: widgetSettings.showNoctaliaPerformance !== undefined ? widgetSettings.showNoctaliaPerformance : widgetMetadata.showNoctaliaPerformance,
+        showBrightnessSlider: widgetSettings.showBrightnessSlider !== undefined ? widgetSettings.showBrightnessSlider : widgetMetadata.showBrightnessSlider,
+        showRefreshRateSwitcher: widgetSettings.showRefreshRateSwitcher !== undefined ? widgetSettings.showRefreshRateSwitcher : widgetMetadata.showRefreshRateSwitcher
       };
     }
     return panel;

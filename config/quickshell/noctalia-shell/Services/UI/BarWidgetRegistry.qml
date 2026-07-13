@@ -100,6 +100,8 @@ Singleton {
                                     "deviceNativePath": "__default__",
                                     "showPowerProfiles": false,
                                     "showNoctaliaPerformance": false,
+                                    "showBrightnessSlider": false,
+                                    "showRefreshRateSwitcher": false,
                                     "hideIfNotDetected": true,
                                     "hideIfIdle": false
                                   },
