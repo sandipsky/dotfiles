@@ -39,7 +39,7 @@ Reload Hyprland config in a running session with `Super+Shift+N` (bound to `hypr
 
 - [assets/](assets/) — files that get copied to **system** locations during install (udev rules, fonts, app icons, `.desktop` overrides, a `nautilus` dconf dump), plus `profile.png`, which becomes the user's `~/.face` avatar. Also `noctalia-qs/` — a vendored copy of the AUR PKGBUILD and source tarball for the Quickshell runtime; install.sh tries AUR first and falls back to building this local copy if the download fails (so the setup reproduces without AUR/GitHub); refresh both files together when bumping the runtime version.
 - [config/](config/) — copied verbatim to `~/.config/` (`alacritty`, `gtk-3.0`, `hypr`, `noctalia`, `quickshell`, `systemd/user`). The bulk of the repo; `quickshell/noctalia-shell/` is the vendored Noctalia source tree.
-- [docs/](docs/) — loose notes (e.g. [secureboot.txt](docs/secureboot.txt) for `sbctl` enrollment).
+- [docs/](docs/) — loose notes (e.g. [secureboot.txt](docs/secureboot.txt) for `sbctl` enrollment). [noctalia-patches.md](docs/noctalia-patches.md) documents every local patch carried on the vendored Noctalia fork, feature by feature — keep it updated when patching the fork, so the customizations can be re-applied on a future upstream rewrite.
 
 ## Hyprland config
 
