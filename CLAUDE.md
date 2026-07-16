@@ -16,7 +16,7 @@ It expects Arch with `pacman` and `yay`, and assumes it's run via `sudo` (it use
 ./install.sh
 ```
 
-[noctalia.sh](noctalia.sh) is a mirror of install.sh that installs the **original** upstream Noctalia instead of the fork: it adds the AUR `noctalia-shell` package (which lands in `/etc/xdg/quickshell/` and pulls `noctalia-qs` itself, so the local-build fallback is omitted) and deletes `~/.config/quickshell/noctalia-shell` after the config copy so Quickshell falls through to the stock version. Everything else is identical — when editing install.sh, mirror the change here.
+This repo installs only the vendored Noctalia **fork** — there are no alternate-variant install scripts anymore (the old `noctalia.sh` for original upstream and the v4↔v5 switchers were removed). Manual steps for running original upstream Noctalia instead of the fork are kept for reference in [docs/original-noctalia.txt](docs/original-noctalia.txt) (note: it references the removed `noctalia.sh`; only its manual `~/.config`-level steps still apply).
 
 [reset.sh](reset.sh) is the day-to-day helper for the vendored Noctalia fork: run it **as your user** (unlike install.sh) with `./reset.sh`. It removes the AUR `noctalia-shell` package if still present (the only step that sudo-prompts, keeping the `noctalia-qs` runtime installed), syncs [config/quickshell/noctalia-shell/](config/quickshell/) to `~/.config/quickshell/noctalia-shell/` (full replace, so deleted files don't linger), and cleanly restarts the shell. It never touches `~/.config/noctalia/settings.json`, so runtime settings survive.
 

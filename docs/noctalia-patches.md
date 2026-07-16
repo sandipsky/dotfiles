@@ -24,6 +24,7 @@ Summary of features (each detailed below):
 5. Bar auto-hide: "show when workspace is empty" option
 6. VPN panel: full profile manager (connect/disconnect/import/delete via nmcli)
 7. Battery panel extras: brightness slider + Hyprland refresh-rate switcher
+8. Bar auto-hide: v5-style slide animation (replaces the opacity fade)
 
 ---
 
@@ -247,6 +248,39 @@ false — enabled per-widget in bar settings; note this machine's live settings.
   Hyprland's monitors.conf line reapplies on config reload.
 
 ---
+
+## 8. Bar auto-hide: v5-style slide animation
+
+Files: `Modules/MainScreen/BarContentWindow.qml`,
+`Modules/MainScreen/Backgrounds/BarBackground.qml`.
+
+Upstream v4 hides/reveals the auto-hide bar with a plain 150 ms opacity fade. The C++
+v5 rewrite instead **slides** the bar fully off its screen edge with no fade at all
+(`src/shell/bar/bar.cpp`: `hideOpacity` drives `slideRoot` position only, opacity stays
+1.0; 200 ms, `EaseOutCubic` on reveal, `EaseInQuad` on hide, 4 px overshoot). This patch
+replicates that in the QML tree:
+
+- Both files share a `hideProgress` property (0 = shown, 1 = hidden) with a
+  `Behavior`/`NumberAnimation` of duration `Style.animationNormal * 2/3` (= 200 ms at
+  animation speed 1, scales with the setting, 0 when animations are disabled) and easing
+  bound to direction: `isHidden ? Easing.InQuad : Easing.OutCubic`.
+- **BarContentWindow** translates the bar content (`transform: Translate`) toward the
+  bar's edge by `barHeight + edge margin + overshoot`; the content clips at the window
+  edge, which coincides with the screen edge for `simple` bars. `windowHideTimer` (which
+  drops window visibility/input after hiding) now waits for the slide duration instead of
+  `Style.animationFast`.
+- **BarBackground** (the ShapePath in MainScreen's unified shadow Shape) folds
+  `slideDx/slideDy * hideProgress` into `barMappedPos`, so the background and its drop
+  shadow travel with the content. Slide deltas are derived from bar x/y/size so content
+  and background move at identical speeds.
+- **Overshoot must clear the drop shadow**: the background lives in a full-screen window,
+  so a shape parked only 4 px off-screen still bleeds its shadow (up to
+  `Style.shadowBlurMax` = 22 px + offset) back onto the edge. Both files use
+  `slideOvershoot = 4 + Style.shadowBlurMax + 8`.
+- **Framed bars can't slide** (the background is a full-screen frame) and **floating
+  bars clip** at their window edge before clearing the screen — both keep an opacity
+  fade (`opacityFactor`/content `opacity` = `1 - hideProgress`); `simple` bars get the
+  pure slide.
 
 ## Re-applying on a new codebase
 

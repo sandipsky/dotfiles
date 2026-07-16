@@ -52,6 +52,16 @@ PanelWindow {
   readonly property int showDelay: Settings.data.bar.autoShowDelay || 100
   property bool isHidden: autoHide
 
+  // Auto-hide slide animation (matches upstream v5): the bar slides fully off
+  // its screen edge over ~200ms — EaseOutCubic on reveal, EaseInQuad on hide —
+  // instead of a plain opacity fade. The overshoot must also clear the drop
+  // shadow blur or a shadow strip stays visible at the edge while hidden.
+  readonly property int hideAnimDuration: Math.round(Style.animationNormal * 2 / 3)
+  readonly property real slideOvershoot: 4 + Style.shadowBlurMax + 8
+  readonly property real slideDistance: barHeight + (barIsVertical ? barMarginH : barMarginV) + slideOvershoot
+  readonly property real slideDx: isFramed ? 0 : (barPosition === "left" ? -slideDistance : barPosition === "right" ? slideDistance : 0)
+  readonly property real slideDy: isFramed ? 0 : (barPosition === "top" ? -slideDistance : barPosition === "bottom" ? slideDistance : 0)
+
   // Hover tracking
   property bool barHovered: false
 
@@ -156,10 +166,10 @@ PanelWindow {
   // The bar is hidden via opacity + window visibility instead.
   property bool contentLoaded: false
 
-  // Delay window hide to allow fade-out animation to complete
+  // Delay window hide to allow slide-out animation to complete
   Timer {
     id: windowHideTimer
-    interval: Style.animationFast
+    interval: barWindow.hideAnimDuration
     onTriggered: {
       if (barWindow.isHidden)
         barWindow.windowVisible = false;
@@ -208,16 +218,25 @@ PanelWindow {
     sourceComponent: Item {
       anchors.fill: parent
 
-      // Fade animation
-      opacity: barWindow.isHidden ? 0 : 1
+      // Slide animation progress: 0 = shown, 1 = hidden
+      property real hideProgress: barWindow.isHidden ? 1 : 0
 
-      Behavior on opacity {
+      Behavior on hideProgress {
         enabled: barWindow.autoHide
         NumberAnimation {
-          duration: Style.animationFast
-          easing.type: Easing.OutQuad
+          duration: barWindow.hideAnimDuration
+          easing.type: barWindow.isHidden ? Easing.InQuad : Easing.OutCubic
         }
       }
+
+      transform: Translate {
+        x: barWindow.slideDx * hideProgress
+        y: barWindow.slideDy * hideProgress
+      }
+
+      // Framed bars can't slide (they'd clip inside the frame) and floating
+      // bars clip at the window edge before clearing the screen — fade those.
+      opacity: (barWindow.isFramed || barWindow.barFloating) ? 1 - hideProgress : 1
 
       Bar {
         id: barContent

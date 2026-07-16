@@ -54,8 +54,10 @@ ShapePath {
   readonly property real frameRadius: Settings.data.bar.frameRadius ?? 20
 
   // Bar position - since bar's parent fills the screen and Shape also fills the screen,
-  // we can use bar.x and bar.y directly (they're already in screen coordinates)
-  readonly property point barMappedPos: bar ? Qt.point(bar.x, bar.y) : Qt.point(0, 0)
+  // we can use bar.x and bar.y directly (they're already in screen coordinates).
+  // The auto-hide slide offset is folded in so the background (and its shadow)
+  // travels with the bar content.
+  readonly property point barMappedPos: bar ? Qt.point(bar.x + slideDx * hideProgress, bar.y + slideDy * hideProgress) : Qt.point(0, 0)
 
   // Effective dimensions - 0 when bar shouldn't show (similar to panel behavior)
   readonly property real barWidth: (bar && shouldShow) ? bar.width : 0
@@ -121,16 +123,46 @@ ShapePath {
   readonly property real leftEdgeOvs: (!isFramed && shouldShow && bar && bar.topLeftCornerState === -1 && bar.bottomLeftCornerState === -1 && barMappedPos.x <= 0) ? -screenEdgeOvershoot : 0
   readonly property real rightEdgeOvs: (!isFramed && shouldShow && bar && bar.topRightCornerState === -1 && bar.bottomRightCornerState === -1 && (barMappedPos.x + barWidth) >= screenWidth) ? screenEdgeOvershoot : 0
 
-  // Auto-hide opacity factor for background fade
-  property real opacityFactor: (bar && bar.isHidden) ? 0 : 1
+  // Auto-hide slide animation (matches upstream v5): the background slides off
+  // the screen edge with the bar content — EaseOutCubic reveal, EaseInQuad hide.
+  // Framed bars can't slide (full-screen frame), so they keep the fade; floating
+  // bars fade as well to stay in sync with the clipped content window.
+  readonly property bool isFloating: Settings.data.bar.barType === "floating"
+  property real hideProgress: (bar && bar.isHidden) ? 1 : 0
 
-  Behavior on opacityFactor {
+  Behavior on hideProgress {
     enabled: bar && bar.autoHide
     NumberAnimation {
-      duration: Style.animationFast
-      easing.type: Easing.OutQuad
+      duration: Math.round(Style.animationNormal * 2 / 3)
+      easing.type: (root.bar && root.bar.isHidden) ? Easing.InQuad : Easing.OutCubic
     }
   }
+
+  // Slide delta that fully clears the screen edge. The overshoot also clears
+  // the drop shadow blur (same formula as BarContentWindow.slideOvershoot so
+  // content and background travel at identical speeds).
+  readonly property real slideOvershoot: 4 + Style.shadowBlurMax + 8
+  readonly property real slideDx: {
+    if (isFramed || !bar)
+      return 0;
+    if (barPosition === "left")
+      return -(bar.x + bar.width + slideOvershoot);
+    if (barPosition === "right")
+      return (screenWidth - bar.x) + slideOvershoot;
+    return 0;
+  }
+  readonly property real slideDy: {
+    if (isFramed || !bar)
+      return 0;
+    if (barPosition === "top")
+      return -(bar.y + bar.height + slideOvershoot);
+    if (barPosition === "bottom")
+      return (screenHeight - bar.y) + slideOvershoot;
+    return 0;
+  }
+
+  // Auto-hide opacity factor — only fades where the slide can't hide everything
+  readonly property real opacityFactor: (isFramed || isFloating) ? 1 - hideProgress : 1
 
   // ShapePath configuration
   strokeWidth: -1 // No stroke, fill only
