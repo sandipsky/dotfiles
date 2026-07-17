@@ -85,12 +85,16 @@ Singleton {
     onTriggered: root.geolocateAndApply()
   }
 
-  // Update timer runs when weather is enabled or location-based scheduling is active
+  // Update timer runs when weather is enabled or location-based scheduling is active.
+  // This tick only *checks* whether a fetch is due (fetches are throttled by
+  // weatherUpdateFrequency), so a slower tick saves wakeups without staleness;
+  // triggeredOnStart keeps the first fetch immediate.
   Timer {
     id: updateTimer
-    interval: 20 * 1000
+    interval: 60 * 1000
     running: Settings.data.location.weatherEnabled || Settings.data.colorSchemes.schedulingMode == "location"
     repeat: true
+    triggeredOnStart: true
     onTriggered: {
       update();
     }

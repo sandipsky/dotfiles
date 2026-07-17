@@ -305,6 +305,54 @@ unchanged): `showViewToggle` gates the list/grid toggle button next to the searc
 Both are exposed as `NToggle`s in Settings → Launcher → General, above "Show
 categories", with strings added to `en.json` only (other locales fall back).
 
+## 10. Power: fewer polls and process spawns
+
+Files: `Services/Networking/NetworkService.qml`, `Services/Networking/VPNService.qml`,
+`Services/Media/AudioService.qml`, `Services/Location/LocationService.qml`.
+
+Idle battery work, measured then trimmed (an idle shell averaged ~4% CPU over a 2 h
+session before this):
+
+- **VPNService** polled `nmcli connection show` every **5 s** (~720 spawns/hour, the
+  single biggest idle cost). NetworkService already runs a persistent `nmcli -t monitor`;
+  it now re-emits every monitor line as a `monitorLine(string)` signal, and VPNService
+  refreshes off those events (debounced 1 s, filtered to connection/profile/VPN-ish
+  lines) with the poll stretched to a 60 s safety net. Verified: 30 s of watching
+  process spawns showed zero `nmcli connection show` (previously 6).
+- **AudioService** `wpctlPollTimer` 20 s → 60 s (comment already declared it a safety
+  net; real updates are event-driven).
+- **LocationService** weather tick 20 s → 60 s with `triggeredOnStart: true` — the tick
+  only checks whether a fetch is due (actual fetches are throttled by
+  `weatherUpdateFrequency`), so nothing gets staler; startup fetch stays immediate.
+
+Audited and deliberately left alone: SystemStatService (registration-gated, stops when
+nothing displays stats), MediaService position tick (only while playing),
+NGraph/NCircleStat repaint timers (self-stopping), SmartPanel content (lazy-loaded,
+freed on close), wallpapers (pre-scaled to screen size via ImageCacheService before
+decode), NScrollText marquee (gated on overflow + scroll mode). The GitHub
+version/contributors fetch in `Services/Noctalia/` is one-shot at startup — harmless,
+though it 301-errors on the vendored fork.
+
+## 11. Memory: clipboard cache pruning
+
+File: `Services/Keyboard/ClipboardService.qml`.
+
+`contentCache` (full text of clipboard entries) and `firstSeenById` (copy timestamps)
+were only cleaned when an entry was explicitly deleted — entries that simply fell off
+cliphist's history stayed cached for the whole session, growing without bound. The list
+refresh handler now prunes both maps down to the ids cliphist actually reports.
+(`imageDataById` already had LRU eviction and needed nothing.)
+
+Leak audit notes (2026-07, so it doesn't need redoing): every dynamic
+`createObject`/`createQmlObject` site destroys on completion (Bar custom commands,
+ImageCacheService/PluginRegistry/Wallhaven processes, Icons font loader, TrayMenu
+submenus, tooltips); NotificationService prunes its id maps, destroys watchers, and
+caps history at 100; stat/graph histories are fixed-length; VPN connections map is
+rebuilt wholesale per refresh; ToastService/Logger keep no buffers. Idle RSS was flat
+during measurement. Note that Quickshell hot reloads retain the previous component
+tree, so RSS climbs with every reset.sh-less iteration session — restart via reset.sh
+to reclaim.
+
 ## Re-applying on a new codebase
 
 Priority if porting incrementally: the lock screen (1) and the taskbar/workspace behavior

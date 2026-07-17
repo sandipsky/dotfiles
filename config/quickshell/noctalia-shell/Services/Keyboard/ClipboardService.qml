@@ -193,6 +193,21 @@ Singleton {
       items = filtered;
       loading = false;
 
+      // Prune per-id caches for entries that fell off cliphist's history —
+      // without this, contentCache/firstSeenById grow for the whole session
+      const liveIds = {};
+      for (const it of filtered) {
+        liveIds[it.id] = true;
+      }
+      for (const cid in root.contentCache) {
+        if (!liveIds[cid])
+          delete root.contentCache[cid];
+      }
+      for (const fid in root.firstSeenById) {
+        if (!liveIds[fid])
+          delete root.firstSeenById[fid];
+      }
+
       // Try to capture current clipboard and associate with newest item
       if (filtered.length > 0 && !filtered[0].isImage && !root.contentCache[filtered[0].id]) {
         root.captureCurrentClipboard();

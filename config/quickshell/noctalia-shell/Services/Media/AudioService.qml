@@ -796,7 +796,7 @@ Singleton {
   Timer {
     id: wpctlPollTimer
     // Safety net only; regular updates are event-driven from sink audio signals.
-    interval: 20000
+    interval: 60000
     running: root.wpctlAvailable
     repeat: true
     onTriggered: {

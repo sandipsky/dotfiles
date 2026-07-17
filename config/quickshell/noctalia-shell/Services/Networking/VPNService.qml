@@ -47,9 +47,12 @@ Singleton {
 
   readonly property bool hasActiveConnection: activeConnections.length > 0
 
+  // Slow fallback poll only — real-time updates come from nmcli monitor events
+  // below, so this just catches anything the event stream might miss. The old
+  // 5 s poll spawned ~720 nmcli processes per hour for no benefit.
   Timer {
     id: refreshTimer
-    interval: 5000
+    interval: 60000
     running: true
     repeat: true
     onTriggered: refresh()
@@ -60,6 +63,18 @@ Singleton {
     interval: 1000
     repeat: false
     onTriggered: refresh()
+  }
+
+  // Refresh on NetworkManager events (VPN/WireGuard activation shows up as
+  // device or connection-profile lines). Debounced through delayedRefreshTimer
+  // so event bursts trigger a single nmcli call.
+  Connections {
+    target: NetworkService
+    function onMonitorLine(line) {
+      if (/connect|profile|vpn|wireguard|tun[0-9]|removed|added/i.test(line)) {
+        delayedRefreshTimer.restart();
+      }
+    }
   }
 
   Component.onCompleted: {

@@ -1123,6 +1123,10 @@ Singleton {
     }
   }
 
+  // Raw nmcli monitor lines, for other services (e.g. VPNService) to react to
+  // NetworkManager events without running their own poll loops.
+  signal monitorLine(string line)
+
   // Listen to NetworkManager events in real-time (roaming, auto-connect)  -- ~9mb Memory usage.
   Process {
     id: networkMonitorProcess
@@ -1133,6 +1137,7 @@ Singleton {
                   })
     stdout: SplitParser {
       onRead: data => {
+        root.monitorLine(data);
         if (data.endsWith(": connected") || data.endsWith(": disconnected")) {
           Logger.d("Network", "State changed: " + data);
           deviceStatusProcess.running = true;
