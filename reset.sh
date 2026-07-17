@@ -13,8 +13,14 @@ if pacman -Qq noctalia-shell >/dev/null 2>&1; then
     sudo pacman -R --noconfirm noctalia-shell
 fi
 
+# Build the vendored recipe only — the AUR noctalia-qs is unmaintained
+# (upstream discontinued the fork when v5 dropped Quickshell).
 if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
-    yay -S --noconfirm --needed noctalia-qs
+    BUILD_DIR=$(mktemp -d)
+    cp -r "$SCRIPT_DIR/assets/noctalia-qs/." "$BUILD_DIR/"
+    (cd "$BUILD_DIR" && makepkg -s --noconfirm)
+    sudo pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
+    rm -rf "$BUILD_DIR"
 fi
 
 mkdir -p "$HOME/.config/quickshell"

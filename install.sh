@@ -63,14 +63,15 @@ yay -S --noconfirm --needed \
 
 sudo -u "$USERNAME" -H bash -c "curl -fsSL https://claude.ai/install.sh | bash"
 
+# noctalia-qs is built only from the vendored recipe in assets/ — upstream
+# discontinued the fork (v5 dropped Quickshell), so the AUR package is
+# unmaintained and must not be trusted for unattended --noconfirm builds.
 if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
-    if ! yay -S --noconfirm --needed noctalia-qs; then
-        BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
-        sudo -u "$USERNAME" cp -r assets/noctalia-qs/. "$BUILD_DIR/"
-        (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
-        pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
-        rm -rf "$BUILD_DIR"
-    fi
+    BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
+    sudo -u "$USERNAME" cp -r assets/noctalia-qs/. "$BUILD_DIR/"
+    (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
+    pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
+    rm -rf "$BUILD_DIR"
 fi
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules

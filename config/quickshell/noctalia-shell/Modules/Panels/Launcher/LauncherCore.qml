@@ -94,7 +94,7 @@ Rectangle {
     return "both";
   }
 
-  readonly property bool showLayoutToggle: !providerHasDisplayString && providerSupportedLayouts === "both"
+  readonly property bool showLayoutToggle: Settings.data.appLauncher.showViewToggle && !providerHasDisplayString && providerSupportedLayouts === "both"
 
   readonly property string layoutMode: {
     if (searchText === ">")
@@ -875,6 +875,7 @@ Rectangle {
     }
 
     ColumnLayout {
+      visible: Settings.data.appLauncher.showResultsCount
       Layout.leftMargin: Style.marginL
       Layout.rightMargin: Style.marginL
 

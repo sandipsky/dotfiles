@@ -266,9 +266,19 @@ replicates that in the QML tree:
   bound to direction: `isHidden ? Easing.InQuad : Easing.OutCubic`.
 - **BarContentWindow** translates the bar content (`transform: Translate`) toward the
   bar's edge by `barHeight + edge margin + overshoot`; the content clips at the window
-  edge, which coincides with the screen edge for `simple` bars. `windowHideTimer` (which
-  drops window visibility/input after hiding) now waits for the slide duration instead of
-  `Style.animationFast`.
+  edge, which coincides with the screen edge for `simple` bars.
+- **The window stays mapped while hidden.** Upstream v4 set `visible: false` after the
+  hide animation (via a `windowHideTimer`), so every reveal paid a layer-shell
+  unmap→remap round-trip through the compositor — the first frames of the slide-in were
+  delayed/dropped and the reveal felt laggy next to v5 (whose surface stays alive). The
+  window now stays `visible` in auto-hide mode and toggles an input `mask` instead:
+  empty `Region` while hidden (click-through, same trick as `BarExclusionZone`),
+  full-window `Region` while shown. `windowHideTimer` is gone.
+- **Show/hide delays honor 0.** `hideDelay`/`showDelay` read settings with `??` instead
+  of `||`, so a configured `0` no longer silently falls back to 500/100 ms. The
+  installed default `bar.autoShowDelay` in `config/noctalia/settings.json` is `0`
+  (instant reveal on edge-touch, like v5); `autoHideDelay` stays 200 ms so the bar
+  doesn't flicker when the mouse grazes away.
 - **BarBackground** (the ShapePath in MainScreen's unified shadow Shape) folds
   `slideDx/slideDy * hideProgress` into `barMappedPos`, so the background and its drop
   shadow travel with the content. Slide deltas are derived from bar x/y/size so content
@@ -281,6 +291,19 @@ replicates that in the QML tree:
   bars clip** at their window edge before clearing the screen — both keep an opacity
   fade (`opacityFactor`/content `opacity` = `1 - hideProgress`); `simple` bars get the
   pure slide.
+
+## 9. Launcher: hide view toggle / results count
+
+Files: `Commons/Settings.qml`, `Modules/Panels/Launcher/LauncherCore.qml`,
+`Modules/Panels/Settings/Tabs/Launcher/GeneralSubTab.qml`,
+`Assets/Translations/en.json`.
+
+Two new booleans under `appLauncher` (both default `true`, so stock behavior is
+unchanged): `showViewToggle` gates the list/grid toggle button next to the search field
+(ANDed into `LauncherCore.showLayoutToggle`), and `showResultsCount` gates the footer
+(divider + "N results" line — hiding it also hides the "No results" empty-state text).
+Both are exposed as `NToggle`s in Settings → Launcher → General, above "Show
+categories", with strings added to `en.json` only (other locales fall back).
 
 ## Re-applying on a new codebase
 
@@ -295,7 +318,8 @@ Settings keys to preserve (so existing `settings.json` keeps working):
 `general.lockScreenWallpaper`, `general.lockScreenFont`, `bar.showWhenWorkspaceEmpty`,
 widget settings `titleMode`, `noWindowText` (ActiveWindow), `itemGap` (Taskbar),
 `workspaceMode`, `fixedWorkspaces`, `wrapWorkspaces` (Workspace), `showBrightnessSlider`,
-`showRefreshRateSwitcher` (Battery), and the `media-card` / `sysmon-card` control-center
+`showRefreshRateSwitcher` (Battery), `appLauncher.showViewToggle`,
+`appLauncher.showResultsCount`, and the `media-card` / `sysmon-card` control-center
 card ids. The dock/launcher share `dock.pinnedApps`.
 
 To regenerate the authoritative diff at any time:

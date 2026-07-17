@@ -41,7 +41,7 @@
     },
     "bar": {
         "autoHideDelay": 200,
-        "autoShowDelay": 150,
+        "autoShowDelay": 0,
         "backgroundOpacity": 0.93,
         "barType": "simple",
         "capsuleColorKey": "none",

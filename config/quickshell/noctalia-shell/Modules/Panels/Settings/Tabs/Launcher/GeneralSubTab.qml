@@ -110,6 +110,22 @@ ColumnLayout {
   }
 
   NToggle {
+    label: I18n.tr("panels.launcher.settings-show-view-toggle-label")
+    description: I18n.tr("panels.launcher.settings-show-view-toggle-description")
+    checked: Settings.data.appLauncher.showViewToggle
+    onToggled: checked => Settings.data.appLauncher.showViewToggle = checked
+    defaultValue: Settings.getDefaultValue("appLauncher.showViewToggle")
+  }
+
+  NToggle {
+    label: I18n.tr("panels.launcher.settings-show-results-count-label")
+    description: I18n.tr("panels.launcher.settings-show-results-count-description")
+    checked: Settings.data.appLauncher.showResultsCount
+    onToggled: checked => Settings.data.appLauncher.showResultsCount = checked
+    defaultValue: Settings.getDefaultValue("appLauncher.showResultsCount")
+  }
+
+  NToggle {
     label: I18n.tr("panels.launcher.settings-show-categories-label")
     description: I18n.tr("panels.launcher.settings-show-categories-description")
     checked: Settings.data.appLauncher.showCategories

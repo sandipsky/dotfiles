@@ -469,6 +469,8 @@ Singleton {
       property string customLaunchPrefix: ""
       // View mode: "list" or "grid"
       property string viewMode: "list"
+      property bool showViewToggle: true
+      property bool showResultsCount: true
       property bool showCategories: true
       // Icon mode: "tabler" or "native"
       property string iconMode: "tabler"

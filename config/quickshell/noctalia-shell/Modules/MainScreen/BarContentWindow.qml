@@ -20,10 +20,14 @@ PanelWindow {
   // Note: screen property is inherited from PanelWindow and should be set by parent
   color: "transparent" // Transparent - background is in MainScreen below
 
-  // Window invisible when auto-hidden (blocks input) or toggled off via IPC.
-  // windowVisible stays true briefly after isHidden to allow fade-out animation.
-  property bool windowVisible: !isHidden
-  visible: contentLoaded && windowVisible && BarService.effectivelyVisible
+  // Window stays mapped while auto-hidden so the reveal doesn't wait on a
+  // compositor unmap/remap round-trip (which delayed/dropped the first frames
+  // of the slide-in). An empty input mask keeps the hidden bar click-through.
+  visible: contentLoaded && BarService.effectivelyVisible
+  mask: Region {
+    width: barWindow.isHidden ? 0 : barWindow.width
+    height: barWindow.isHidden ? 0 : barWindow.height
+  }
 
   Component.onCompleted: {
     Logger.d("BarContentWindow", "Bar content window created for screen:", barWindow.screen?.name);
@@ -48,8 +52,9 @@ PanelWindow {
 
   // Auto-hide properties
   readonly property bool autoHide: Settings.getBarDisplayModeForScreen(barWindow.screen?.name) === "auto_hide"
-  readonly property int hideDelay: Settings.data.bar.autoHideDelay || 500
-  readonly property int showDelay: Settings.data.bar.autoShowDelay || 100
+  // ?? not ||: a configured 0 must mean "no delay", not fall back to defaults
+  readonly property int hideDelay: Settings.data.bar.autoHideDelay ?? 500
+  readonly property int showDelay: Settings.data.bar.autoShowDelay ?? 100
   property bool isHidden: autoHide
 
   // Auto-hide slide animation (matches upstream v5): the bar slides fully off
@@ -166,26 +171,9 @@ PanelWindow {
   // The bar is hidden via opacity + window visibility instead.
   property bool contentLoaded: false
 
-  // Delay window hide to allow slide-out animation to complete
-  Timer {
-    id: windowHideTimer
-    interval: barWindow.hideAnimDuration
-    onTriggered: {
-      if (barWindow.isHidden)
-        barWindow.windowVisible = false;
-    }
-  }
-
   onIsHiddenChanged: {
-    if (isHidden) {
-      // Delay window hide so fade-out is visible
-      windowHideTimer.restart();
-    } else {
-      windowHideTimer.stop();
-      windowVisible = true;
-      if (!contentLoaded)
-        contentLoaded = true;
-    }
+    if (!isHidden && !contentLoaded)
+      contentLoaded = true;
   }
 
   Connections {
