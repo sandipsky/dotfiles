@@ -137,6 +137,11 @@ sudo -u "$USERNAME" update-desktop-database "$APPS_DIR"
 
 sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/
 
+# extract-audio: pulls audio out of videos as MP3 (Resolve on Linux can't
+# decode AAC, so H.264 clips import silent without it). ffmpeg is in the
+# pacman list above. /usr/local/bin so it works from any shell/directory.
+sudo install -Dm755 assets/bin/extract-audio /usr/local/bin/extract-audio
+
 sudo mkdir -p /usr/share/fonts
 sudo cp assets/fonts/* /usr/share/fonts/
 sudo fc-cache -f

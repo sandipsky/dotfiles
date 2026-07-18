@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+#
+# extract-audio — Pull the audio out of video files, fast.
+#
+# Made for the DaVinci Resolve Studio (Linux) workflow: Studio reads H.264/
+# H.265 video natively, but no Linux Resolve reads AAC audio — so extract the
+# audio (MP3 by default — Resolve on Linux reads MP3, just not AAC) and drop
+# it on the timeline alongside the video.
+#
+# Only the audio stream is touched (video is never decoded), so even long
+# clips finish in a couple of seconds.
+#
+# Usage:
+#   extract-audio [options] [INPUT...]
+#     INPUT   video file(s) and/or directories (all videos inside, non-recursive)
+#             default: all video files in the current directory
+#
+# Options:
+#   -o, --output DIR   output directory              (default: current directory)
+#       --wav          uncompressed PCM WAV instead of MP3 (best quality,
+#                      ~11.5 MB/min; MP3 320k is ~2.4 MB/min)
+#   -a, --audio BITS   WAV bit depth, 16 or 24       (default: 16; implies --wav)
+#       --copy         bit-perfect stream copy, original codec kept (instant;
+#                      e.g. .m4a — NOT readable by Resolve on Linux if AAC)
+#       --keep-going   continue if one file fails
+#   -h, --help         show this help
+#
+# Examples:
+#   extract-audio                        # every video here -> clip.mp3 here
+#   extract-audio clip.mp4               # -> ./clip.mp3
+#   extract-audio -o ~/edit ~/Footage    # all videos in ~/Footage -> ~/edit/*.mp3
+#   extract-audio --wav clip.mp4         # -> ./clip.wav (uncompressed PCM)
+
+set -euo pipefail
+
+if [[ -t 1 ]]; then B=$'\e[1m'; G=$'\e[32m'; Y=$'\e[33m'; R=$'\e[31m'; C=$'\e[36m'; N=$'\e[0m'; else B= G= Y= R= C= N=; fi
+info(){ printf '%s\n' "${C}==>${N} $*"; }
+ok(){   printf '%s\n' "${G}OK ${N} $*"; }
+warn(){ printf '%s\n' "${Y}!! ${N} $*" >&2; }
+err(){  printf '%s\n' "${R}ERR${N} $*" >&2; }
+die(){  err "$*"; exit 1; }
+
+OUTDIR="$PWD"
+ABITS=16
+MODE=mp3
+KEEP_GOING=0
+INPUTS=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -o|--output)  OUTDIR="${2:?}"; shift 2;;
+    -a|--audio)   ABITS="${2:?}"; MODE=wav; shift 2;;
+    --wav)        MODE=wav; shift;;
+    --copy)       MODE=copy; shift;;
+    --keep-going) KEEP_GOING=1; shift;;
+    -h|--help)    sed -n '2,32p' "$0" | sed 's/^# \{0,1\}//'; exit 0;;
+    --) shift; while [[ $# -gt 0 ]]; do INPUTS+=("$1"); shift; done;;
+    -*) die "unknown option: $1 (try --help)";;
+    *)  INPUTS+=("$1"); shift;;
+  esac
+done
+
+command -v ffmpeg  >/dev/null || die "ffmpeg not found (install: sudo pacman -S ffmpeg)"
+command -v ffprobe >/dev/null || die "ffprobe not found (install: sudo pacman -S ffmpeg)"
+[[ "$ABITS" == 16 || "$ABITS" == 24 ]] || die "--audio must be 16 or 24"
+[[ ${#INPUTS[@]} -gt 0 ]] || INPUTS=("$PWD")
+
+# extension for --copy mode, by source codec (mka = safe catch-all container)
+copy_ext(){ case "$1" in aac) echo m4a;; mp3) echo mp3;; opus|vorbis) echo ogg;;
+  flac) echo flac;; ac3) echo ac3;; eac3) echo eac3;; pcm_*) echo wav;; *) echo mka;; esac; }
+
+# ---------- gather input files ----------
+FILES=()
+for p in "${INPUTS[@]}"; do
+  if [[ -d "$p" ]]; then
+    while IFS= read -r -d '' f; do FILES+=("$f"); done \
+      < <(find "$p" -maxdepth 1 -type f \( -iname '*.mp4' -o -iname '*.mov' -o -iname '*.mkv' -o -iname '*.avi' -o -iname '*.m4v' -o -iname '*.mts' -o -iname '*.m2ts' -o -iname '*.ts' -o -iname '*.webm' -o -iname '*.flv' -o -iname '*.wmv' -o -iname '*.3gp' -o -iname '*.mpg' -o -iname '*.mpeg' \) -print0 | sort -z)
+  elif [[ -f "$p" ]]; then
+    FILES+=("$p")
+  else
+    warn "skipping (not found): $p"
+  fi
+done
+[[ ${#FILES[@]} -gt 0 ]] || die "no video files found"
+
+mkdir -p "$OUTDIR"
+case "$MODE" in
+  mp3)  MODE_DESC="MP3 320k";;
+  wav)  MODE_DESC="WAV pcm_s${ABITS}le";;
+  copy) MODE_DESC="stream copy (original codec)";;
+esac
+info "mode: $MODE_DESC  |  output: ${B}$OUTDIR${N}  |  files: ${#FILES[@]}"
+
+extract_one(){
+  local input="$1" base ntracks acodec out t suffix
+  base="$(basename "${input%.*}")"
+  ntracks="$(ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 "$input" | grep -c . || true)"
+  if [[ "$ntracks" -eq 0 ]]; then warn "no audio stream: $(basename "$input")"; return 0; fi
+
+  for (( t=0; t<ntracks; t++ )); do
+    suffix=""; [[ "$ntracks" -gt 1 ]] && suffix="_a$((t+1))"
+    case "$MODE" in
+      mp3)
+        out="$OUTDIR/${base}${suffix}.mp3"
+        ffmpeg -hide_banner -loglevel error -y -i "$input" -map "0:a:$t" -vn -c:a libmp3lame -b:a 320k "$out";;
+      wav)
+        out="$OUTDIR/${base}${suffix}.wav"
+        ffmpeg -hide_banner -loglevel error -y -i "$input" -map "0:a:$t" -vn -c:a "pcm_s${ABITS}le" "$out";;
+      copy)
+        acodec="$(ffprobe -v error -select_streams a:$t -show_entries stream=codec_name -of csv=p=0 "$input")"
+        out="$OUTDIR/${base}${suffix}.$(copy_ext "$acodec")"
+        ffmpeg -hide_banner -loglevel error -y -i "$input" -map "0:a:$t" -vn -c:a copy "$out";;
+    esac
+    ok "$(basename "$out")  ($(du -h "$out" | cut -f1))"
+  done
+}
+
+fail=0
+for f in "${FILES[@]}"; do
+  if ! extract_one "$f"; then
+    fail=$((fail+1))
+    [[ $KEEP_GOING -eq 1 ]] || die "extraction failed for: $f (use --keep-going to skip failures)"
+  fi
+done
+
+[[ $fail -eq 0 ]] || { warn "done with $fail failure(s) out of ${#FILES[@]}"; exit 1; }

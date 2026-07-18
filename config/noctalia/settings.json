@@ -16,13 +16,15 @@
         "enableWindowsSearch": true,
         "iconMode": "tabler",
         "ignoreMouseInput": false,
-        "overviewLayer": false,
+        "overviewLayer": true,
         "pinnedApps": [
         ],
-        "position": "top_left",
+        "position": "center",
         "screenshotAnnotationTool": "",
         "showCategories": false,
         "showIconBackground": false,
+        "showResultsCount": false,
+        "showViewToggle": false,
         "sortByMostUsed": true,
         "terminalCommand": "alacritty -e",
         "viewMode": "list"
@@ -125,7 +127,8 @@
                     "showBadge": true,
                     "showLabelsOnlyWhenOccupied": false,
                     "unfocusedIconsOpacity": 1,
-                    "workspaceMode": "fixed"
+                    "workspaceMode": "fixed",
+                    "wrapWorkspaces": false
                 },
                 {
                     "colorizeIcons": false,
@@ -161,8 +164,10 @@
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
-                    "showNoctaliaPerformance": true,
-                    "showPowerProfiles": true
+                    "showBrightnessSlider": true,
+                    "showNoctaliaPerformance": false,
+                    "showPowerProfiles": true,
+                    "showRefreshRateSwitcher": true
                 },
                 {
                     "displayMode": "alwaysHide",
@@ -172,10 +177,9 @@
                     "textColor": "none"
                 },
                 {
-                    "applyToAllMonitors": false,
-                    "displayMode": "alwaysHide",
+                    "displayMode": "alwaysShow",
                     "iconColor": "none",
-                    "id": "Brightness",
+                    "id": "VPN",
                     "textColor": "none"
                 },
                 {
@@ -230,7 +234,7 @@
                 "id": "calendar-month-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "weather-card"
             }
         ]
@@ -241,9 +245,9 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Noctalia (default)",
+        "predefinedScheme": "Rose Pine",
         "schedulingMode": "off",
-        "syncGsettings": true,
+        "syncGsettings": false,
         "useWallpaperColors": true
     },
     "controlCenter": {
@@ -345,7 +349,8 @@
         "pinnedApps": [
             "google-chrome",
             "org.gnome.Nautilus",
-            "Alacritty"
+            "Alacritty",
+            "net.lutris.Lutris"
         ],
         "pinnedStatic": false,
         "position": "bottom",
@@ -405,11 +410,11 @@
         "lockScreenMonitors": [
         ],
         "lockScreenTint": 0,
-        "lockScreenWallpaper": "",
+        "lockScreenWallpaper": "/home/USERNAME/Pictures/0018.jpg",
         "passwordChars": true,
         "radiusRatio": 1,
         "reverseScroll": false,
-        "scaleRatio": 1,
+        "scaleRatio": 1.05,
         "screenRadiusRatio": 1,
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
@@ -443,7 +448,7 @@
         "resumeScreenOffCommand": "",
         "resumeSuspendCommand": "",
         "screenOffCommand": "",
-        "screenOffTimeout": 660,
+        "screenOffTimeout": 2400,
         "suspendCommand": "",
         "suspendTimeout": 3600
     },
@@ -459,7 +464,7 @@
         "showWeekNumberInCalendar": false,
         "use12hourFormat": false,
         "useFahrenheit": false,
-        "weatherEnabled": true,
+        "weatherEnabled": false,
         "weatherShowEffects": true,
         "weatherTaliaMascotAlways": false
     },
@@ -496,7 +501,7 @@
         "enableMarkdown": false,
         "enableMediaToast": false,
         "enabled": true,
-        "location": "top_right",
+        "location": "bottom",
         "lowUrgencyDuration": 3,
         "monitors": [
         ],
@@ -525,9 +530,10 @@
         "enabledTypes": [
             0,
             1,
-            2
+            2,
+            3
         ],
-        "location": "top_right",
+        "location": "bottom",
         "monitors": [
         ],
         "overlayLayer": true
@@ -665,10 +671,10 @@
         "panelPosition": "follow_bar",
         "randomIntervalSec": 300,
         "setWallpaperOnAllMonitors": true,
-        "showHiddenFiles": false,
+        "showHiddenFiles": true,
         "skipStartupTransition": false,
         "solidColor": "#1a1a2e",
-        "sortOrder": "name",
+        "sortOrder": "date_asc",
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": [
@@ -682,7 +688,7 @@
         "useOriginalImages": false,
         "useSolidColor": false,
         "useWallhaven": false,
-        "viewMode": "browse",
+        "viewMode": "single",
         "wallhavenApiKey": "",
         "wallhavenCategories": "111",
         "wallhavenOrder": "desc",
