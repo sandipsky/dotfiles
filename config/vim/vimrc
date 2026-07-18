@@ -1,0 +1,46 @@
+" ---------- UI ----------
+syntax enable
+set termguicolors          " 24-bit color (alacritty supports it)
+set background=dark        " force the Mocha (dark) flavor
+colorscheme catppuccin
+" don't paint vim's own background — let alacritty's (translucent black)
+" show through so the window padding blends in instead of framing vim
+hi Normal guibg=NONE
+hi NonText guibg=NONE
+hi EndOfBuffer guibg=NONE
+hi LineNr guibg=NONE
+hi SignColumn guibg=NONE
+hi FoldColumn guibg=NONE
+set number                 " line numbers
+set cursorline             " highlight the current line
+set laststatus=2           " always show statusline
+set ruler                  " line:col in statusline
+set showcmd                " show pending keys bottom-right
+set wildmenu               " tab-completion menu for : commands
+set display=lastline       " show as much of a wrapped last line as fits
+set scrolloff=5            " keep context above/below cursor
+set mouse=a                " mouse: click to move, drag to select, wheel scroll
+
+" ---------- Search ----------
+set incsearch              " jump while typing
+set hlsearch               " highlight all matches
+set ignorecase smartcase   " case-insensitive unless query has uppercase
+
+" ---------- Editing ----------
+set tabstop=4 shiftwidth=4 expandtab   " 4-space indent, like VS Code default
+set autoindent
+set backspace=indent,eol,start
+
+" ---------- Cursor shape per mode (DECSCUSR escape codes) ----------
+" 1=blinking block, 2=steady block, 3=blinking underline,
+" 4=steady underline, 5=blinking bar, 6=steady bar
+let &t_EI = "\e[1 q"   " normal mode: blinking block
+let &t_SI = "\e[5 q"   " insert mode: blinking bar
+let &t_SR = "\e[3 q"   " replace mode: blinking underline
+
+" vim only sends t_EI when leaving insert mode, not at startup —
+" emit it on enter/resume so normal mode starts as a block
+autocmd VimEnter,VimResume * call echoraw(&t_EI)
+
+" restore Alacritty's default (beam) when leaving vim
+autocmd VimLeave,VimSuspend * call echoraw("\e[5 q")
