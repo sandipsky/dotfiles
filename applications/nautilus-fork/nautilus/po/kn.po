@@ -1,0 +1,5682 @@
+# translation of nautilus.master.kn.po to Kannada
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Shankar Prasad <svenkate@redhat.com>, 2007, 2008.
+# Pramod <rpramod@postmaster.co.uk>, 2002.
+# Vikram Vincent <vincentvikram@swatantra.org>, 2008.
+# Shankar Prasad <svenkate@redhat.com>, 2008, 2009, 2010, 2011, 2012, 2013, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus.master.kn\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=nautilus&keywords=I18N+L10N&component=Internationalization (i18n)\n"
+"POT-Creation-Date: 2014-09-02 10:07+0000\n"
+"PO-Revision-Date: 2014-09-22 12:11+0530\n"
+"Last-Translator: Shankar Prasad <svenkate AT redhat Dot com>\n"
+"Language-Team: Kannada <kde-i18n-doc@kde.org>\n"
+"Language: kn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../data/org.gnome.Nautilus.appdata.xml.in.h:1
+msgid ""
+"Nautilus, also known as Files, is the default file manager of the GNOME "
+"desktop. It provides a simple and integrated way of managing your files and "
+"browsing your file system."
+msgstr ""
+"ಫೈಲ್ಸ್‌ ಎಂದೂ ಸಹ ಕರೆಯಲಾಗುವ Nautilus ಎನ್ನುವುದು GNOME ಗಣಕತೆರೆಯ ಪೂರ್ವನಿಯೋಜಿತ ಕಡತ "
+"ವ್ಯವಸ್ಥಾಪಕವಾಗಿದೆ. ಇದು ನಿಮ್ಮ ಕಡತಗಳನ್ನು ವ್ಯವಸ್ಥಾಪಿಸಲು ಮತ್ತು ನಿಮ್ಮ ಕಡತ "
+"ವ್ಯವಸ್ಥೆಯನ್ನು ವೀಕ್ಷಿಸಲು ಸರಳವಾದ ಮತ್ತು ಸಂಘಟಿತವಾದ ವಿಧಾನವನ್ನು ಒದಗಿಸುತ್ತದೆ."
+
+#: ../data/org.gnome.Nautilus.appdata.xml.in.h:2
+msgid ""
+"Nautilus supports all the basic functions of a file manager and more. It can "
+"search and manage your files and folders, both locally and on a network, "
+"read and write data to and from removable media, run scripts, and launch "
+"applications. It has three views: Icon Grid, Icon List, and Tree List. Its "
+"functions can be extended with plugins and scripts."
+msgstr ""
+"Nautilus ಒಂದು ಕಡತ ವ್ಯವಸ್ಥಾಪಕದ ಎಲ್ಲಾ ಮೂಲಭೂತ ಕಾರ್ಯಭಾರಗಳನ್ನು ಮತ್ತು ಇನ್ನೂ "
+"ಹೆಚ್ಚಿನವುಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ. ಇದು ನಿಮ್ಮ ಕಡತಗಳನ್ನು ಮತ್ತು ಕಡತಕೋಶಗಳನ್ನು "
+"ಸ್ಥಳೀಯವಾಗಿ ಮತ್ತು ಒಂದು ಜಾಲಬಂಧದಲ್ಲಿ ಹುಡುಕಲು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಿಸಲು, ತೆಗೆಯಬಹುದಾದ "
+"ಮಾಧ್ಯಮಕ್ಕೆ ಮತ್ತು ಮಾಧ್ಯಮದಿಂದ ಮಾಹಿತಿಯನ್ನು ಓದಲು ಮತ್ತು ಬರೆಯಲು, ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು "
+"ಚಲಾಯಿಸಲು, ಮತ್ತು ಅನ್ವಯಗಳನ್ನು ಆರಂಭಿಸಲು ಶಕ್ತವಾಗಿರುತ್ತದೆ. ಇದು ಮೂರು ಬಗೆಯ ನೋಟಗಳನ್ನು "
+"ಹೊಂದಿರುತ್ತದೆ: ಚಿಹ್ನೆ ಚೌಕಜಾಲ, ಚಿಹ್ನೆ ಪಟ್ಟಿ, ಮತ್ತು ವೃಕ್ಷ ಪಟ್ಟಿ. ಪ್ಲಗ್‌ಇನ್‌ಗಳು "
+"ಮತ್ತು "
+"ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಬಳಸಿಕೊಂಡು ಇದರ ಕ್ರಿಯೆಗಳನ್ನು ವಿಸ್ತರಿಸಬಹುದು."
+
+#: ../data/nautilus-autorun-software.desktop.in.in.h:1
+msgid "Run Software"
+msgstr "ತಂತ್ರಾಂಶವನ್ನು ಚಲಾಯಿಸು"
+
+#. set dialog properties
+#: ../data/nautilus-connect-server.desktop.in.in.h:1
+#: ../src/nautilus-connect-server-dialog.c:547
+msgid "Connect to Server"
+msgstr "ಪೂರೈಕೆಗಣಕಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸು"
+
+#. Set initial window title
+#: ../data/org.gnome.Nautilus.desktop.in.in.h:1
+#: ../src/nautilus-file-management-properties.ui.h:29
+#: ../src/nautilus-properties-window.c:4449 ../src/nautilus-window.c:2164
+#: ../src/nautilus-window.c:2333
+msgid "Files"
+msgstr "ಕಡತಗಳು"
+
+#: ../data/org.gnome.Nautilus.desktop.in.in.h:2
+msgid "Access and organize files"
+msgstr "ಕಡತಗಳನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಿ ಹಾಗು ವ್ಯವಸ್ಥಿತವಾಗಿ ಜೋಡಿಸಿ"
+
+#: ../data/org.gnome.Nautilus.desktop.in.in.h:3
+msgid "folder;manager;explore;disk;filesystem;"
+msgstr "ಕಡತಕೋಶ;ವ್ಯವಸ್ಥಾಪಕ;ಹುಡುಕು;ಡಿಸ್ಕ್‍;ಕಡತವ್ಯವಸ್ಥೆ;"
+
+#: ../data/nautilus.xml.in.h:1
+msgid "Saved search"
+msgstr "ಉಳಿಸಲಾದ ಹುಡುಕಾಟ"
+
+#: ../eel/eel-canvas.c:1254 ../eel/eel-canvas.c:1255
+msgid "X"
+msgstr "X"
+
+#: ../eel/eel-canvas.c:1261 ../eel/eel-canvas.c:1262
+msgid "Y"
+msgstr "Y"
+
+#: ../eel/eel-editable-label.c:312 ../libnautilus-private/nautilus-file.c:6180
+#: ../libnautilus-private/nautilus-file.c:6181
+msgid "Text"
+msgstr "ಪಠ್ಯ"
+
+#: ../eel/eel-editable-label.c:313
+msgid "The text of the label."
+msgstr "ಶೀರ್ಷಿಕೆಯ ಪಠ್ಯ."
+
+#: ../eel/eel-editable-label.c:319
+msgid "Justification"
+msgstr "ಜಸ್ಟಿಫಿಕೇಶನ್"
+
+#: ../eel/eel-editable-label.c:320
+msgid ""
+"The alignment of the lines in the text of the label relative to each other. "
+"This does NOT affect the alignment of the label within its allocation. See "
+"GtkMisc::xalign for that."
+msgstr ""
+"ಲೇಬಲ್ಲಿನಲ್ಲಿನ ಪಠ್ಯದ ಸಾಲುಗಳ ವಾಲಿಕೆಯು ಪರಸ್ಪರ ಒಂದಕ್ಕೊಂದು ಸಂಬಂಧಿತವಾಗಿರುತ್ತದೆ. "
+"ಇದರಿಂದ "
+"ಲೇಬಲ್‌ ಅನ್ನು ನಿಯೋಜಿಸಲಾದ ಸ್ಥಳದಲ್ಲಿ ಅದರ ವಾಲಿಕೆಯ ಮೇಲೆ ಯಾವುದೆ ಪರಿಣಾಮ ಬೀರುವುದಿಲ್ಲ. "
+"ಇದಕ್ಕಾಗಿ GtkMisc::xalign ಅನ್ನು ನೋಡಿ."
+
+#: ../eel/eel-editable-label.c:328
+msgid "Line wrap"
+msgstr "ಸಾಲು ಆವರಿಕೆ(ವ್ರಾಪ್)"
+
+#: ../eel/eel-editable-label.c:329
+msgid "If set, wrap lines if the text becomes too wide."
+msgstr ""
+"ಹೊಂದಿಸಿದಲ್ಲಿ, ಪಠ್ಯವು ಅಂತ್ಯಂತ ಅಗಲವಾಗಿದ್ದಲ್ಲಿ ಸಾಲುಗಳನ್ನು ವ್ರಾಪ್ ಮಾಡುತ್ತದೆ."
+
+#: ../eel/eel-editable-label.c:336
+msgid "Cursor Position"
+msgstr "ತೆರೆ ಸೂಚಕದ ಸ್ಥಾನ"
+
+#: ../eel/eel-editable-label.c:337
+msgid "The current position of the insertion cursor in chars."
+msgstr "ಸೇರಿಸುವ ಕರ್ಸರಿನ ಈಗಿನ ಸ್ಥಳ, ಅಕ್ಷರಗಳಲ್ಲಿ."
+
+#: ../eel/eel-editable-label.c:346
+msgid "Selection Bound"
+msgstr "ಆಯ್ಕೆಯ ಮಿತಿ"
+
+#: ../eel/eel-editable-label.c:347
+msgid ""
+"The position of the opposite end of the selection from the cursor in chars."
+msgstr "ತೆರೆಸೂಚಕದಿಂದ ಆಯ್ಕೆಯ ವಿರುದ್ಧ ತುದಿಯಲ್ಲಿನ ಸ್ಥಾನ, ಅಕ್ಷರಗಳಲ್ಲಿ."
+
+#. name, stock id
+#. label, accelerator
+#: ../eel/eel-editable-label.c:3084
+#: ../libnautilus-private/nautilus-clipboard.c:356 ../src/nautilus-view.c:7159
+#: ../src/nautilus-view.c:7312
+msgid "Cu_t"
+msgstr "ಕತ್ತರಿಸು (_t)"
+
+#. name, stock id
+#. label, accelerator
+#: ../eel/eel-editable-label.c:3086
+#: ../libnautilus-private/nautilus-clipboard.c:360 ../src/nautilus-view.c:7163
+#: ../src/nautilus-view.c:7316
+#| msgid "_Copy Here"
+msgid "_Copy"
+msgstr "ಪ್ರತಿ ಮಾಡು (_C)"
+
+#. name, stock id
+#. label, accelerator
+#: ../eel/eel-editable-label.c:3088
+#: ../libnautilus-private/nautilus-clipboard.c:364 ../src/nautilus-view.c:7167
+msgid "_Paste"
+msgstr "ಅಂಟಿಸು (_P)"
+
+#: ../eel/eel-editable-label.c:3091
+msgid "Select All"
+msgstr "ಎಲ್ಲವನ್ನೂ ಅಯ್ಕೆಮಾಡು"
+
+#: ../eel/eel-gtk-extensions.c:326
+msgid "Show more _details"
+msgstr "ಇನ್ನಷ್ಟು ವಿವರಗಳನ್ನು ತೋರಿಸು (_d)"
+
+#. Put up the timed wait window.
+#: ../eel/eel-stock-dialogs.c:195
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:542
+#: ../libnautilus-private/nautilus-file-operations.c:183
+#: ../src/nautilus-connect-server-dialog.c:653
+#: ../src/nautilus-location-entry.c:274 ../src/nautilus-mime-actions.c:647
+#: ../src/nautilus-mime-actions.c:651 ../src/nautilus-mime-actions.c:722
+#: ../src/nautilus-mime-actions.c:1065 ../src/nautilus-mime-actions.c:1571
+#: ../src/nautilus-mime-actions.c:1795
+#: ../src/nautilus-properties-window.c:4440
+#: ../src/nautilus-properties-window.c:5416 ../src/nautilus-query-editor.c:519
+#: ../src/nautilus-view.c:964 ../src/nautilus-view.c:1478
+#: ../src/nautilus-view.c:1598 ../src/nautilus-view.c:5948
+#| msgid "Cancel"
+msgid "_Cancel"
+msgstr "ರದ್ದುಗೊಳಿಸು (_C)"
+
+#: ../eel/eel-stock-dialogs.c:204
+msgid "You can stop this operation by clicking cancel."
+msgstr "ಈ ಕಾರ್ಯಾಚರಣೆವನ್ನು ನಿಲ್ಲಿಸಲು ರದ್ದು ಮಾಡು ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ."
+
+#: ../eel/eel-vfs-extensions.c:98
+msgid " (invalid Unicode)"
+msgstr "(ಅಮಾನ್ಯ ಯುನಿಕೋಡ್)"
+
+#: ../libnautilus-private/nautilus-bookmark.c:107
+#: ../libnautilus-private/nautilus-desktop-link.c:129
+#: ../libnautilus-private/nautilus-file-utilities.c:265
+#: ../src/nautilus-list-view.c:1826 ../src/nautilus-pathbar.c:295
+#: ../src/nautilus-query-editor.c:1094
+#: ../src/nautilus-shell-search-provider.c:285
+msgid "Home"
+msgstr "ನೆಲೆ"
+
+#: ../libnautilus-private/nautilus-canvas-container.c:2453
+msgid "The selection rectangle"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಆಯತ"
+
+#. tooltip
+#: ../libnautilus-private/nautilus-clipboard.c:357
+msgid "Cut the selected text to the clipboard"
+msgstr "ಆಯ್ಕೆ ಮಾಡಲಾದ ಪಠ್ಯವನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡಿಗೆ ಕತ್ತರಿಸು ಮಾಡು"
+
+#. tooltip
+#: ../libnautilus-private/nautilus-clipboard.c:361
+msgid "Copy the selected text to the clipboard"
+msgstr "ಆಯ್ಕೆ ಮಾಡಲಾದ ಪಠ್ಯವನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡಿಗೆ ಕಾಪಿ ಮಾಡು"
+
+#. tooltip
+#: ../libnautilus-private/nautilus-clipboard.c:365
+msgid "Paste the text stored on the clipboard"
+msgstr "ಕ್ಲಿಪ್‌ಬೋರ್ಡಿನಲ್ಲಿರುವ ಪಠ್ಯವನ್ನು ಅಂಟಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../libnautilus-private/nautilus-clipboard.c:368 ../src/nautilus-view.c:7183
+msgid "Select _All"
+msgstr "ಎಲ್ಲವನ್ನೂ ಆರಿಸು (_A)"
+
+#. tooltip
+#: ../libnautilus-private/nautilus-clipboard.c:369
+msgid "Select all the text in a text field"
+msgstr "ಪಠ್ಯ ಕ್ಷೇತ್ರದಲ್ಲಿನ ಎಲ್ಲಾ ಪಠ್ಯವನ್ನು ಆರಿಸು"
+
+#: ../libnautilus-private/nautilus-column-chooser.c:374
+msgid "Move _Up"
+msgstr "ಮೇಲೆ ಜರುಗಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-column-chooser.c:383
+msgid "Move Dow_n"
+msgstr "ಕೆಳಗೆ ಜರುಗಿಸು (_n)"
+
+#: ../libnautilus-private/nautilus-column-chooser.c:396
+msgid "Use De_fault"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತವನ್ನು ಆರಿಸು (_f)"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:56
+#: ../src/nautilus-list-view.c:2039
+msgid "Name"
+msgstr "ಹೆಸರು"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:57
+msgid "The name and icon of the file."
+msgstr "ಕಡತದ ಹೆಸರು ಹಾಗು ಚಿಹ್ನೆ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:63
+msgid "Size"
+msgstr "ಗಾತ್ರ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:64
+msgid "The size of the file."
+msgstr "ಕಡತದ ಗಾತ್ರ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:71
+msgid "Type"
+msgstr "ಪ್ರಕಾರ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:72
+msgid "The type of the file."
+msgstr "ಕಡತದ ಪ್ರಕಾರ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:78
+msgid "Modified"
+msgstr "ಮಾರ್ಪಡಿಸಲಾದ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:79
+msgid "The date the file was modified."
+msgstr "ಕಡತವನ್ನು ಮಾರ್ಪಡಿಸಿದ ದಿನಾಂಕ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:86
+#| msgid "Accessed:"
+msgid "Accessed"
+msgstr "ತೆರೆದದ್ದು"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:87
+#| msgid "The date the file was modified."
+msgid "The date the file was accessed."
+msgstr "ಕಡತವನ್ನು ತೆರೆದ ದಿನಾಂಕ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:95
+msgid "Owner"
+msgstr "ಮಾಲಿಕ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:96
+msgid "The owner of the file."
+msgstr "ಕಡತದ ಮಾಲಿಕ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:103
+msgid "Group"
+msgstr "ಸಮೂಹ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:104
+msgid "The group of the file."
+msgstr "ಕಡತದ ಸಮೂಹ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:111
+#: ../src/nautilus-properties-window.c:4511
+msgid "Permissions"
+msgstr "ಅನುಮತಿಗಳು"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:112
+msgid "The permissions of the file."
+msgstr "ಕಡತದ ಅನುಮತಿಗಳು."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:119
+msgid "MIME Type"
+msgstr "MIME ಬಗೆ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:120
+msgid "The mime type of the file."
+msgstr "ಕಡತದ mime ಬಗೆ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:127
+#: ../src/nautilus-image-properties-page.c:413
+msgid "Location"
+msgstr "ಸ್ಥಳ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:128
+msgid "The location of the file."
+msgstr "ಕಡತವು ಇರುವ ಸ್ಥಳ."
+
+#: ../libnautilus-private/nautilus-column-utilities.c:169
+msgid "Trashed On"
+msgstr "ಕಸಬುಟ್ಟಿಗೆ ಹಾಕಿದ್ದು"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:170
+msgid "Date when file was moved to the Trash"
+msgstr "ಕಡತವನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸಿದ ದಿನಾಂಕ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:176
+msgid "Original Location"
+msgstr "ಮೂಲ ಸ್ಥಳ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:177
+msgid "Original location of file before moved to the Trash"
+msgstr "ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸುವ ಮೊದಲು ಕಡತವು ಇದ್ದ ಮೂಲ ಸ್ಥಳ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:194
+msgid "Relevance"
+msgstr "ಪ್ರಸ್ತುತತೆ"
+
+#: ../libnautilus-private/nautilus-column-utilities.c:195
+msgid "Relevance rank for search"
+msgstr "ಹುಡುಕಾಟಕ್ಕಾಗಿ ಪ್ರಸ್ತುತತೆಯ ದರ್ಜೆ"
+
+#: ../libnautilus-private/nautilus-desktop-directory-file.c:433
+#: ../libnautilus-private/nautilus-desktop-icon-file.c:149
+msgid "on the desktop"
+msgstr "ಗಣಕತೆರೆಯ ಮೇಲೆ"
+
+#: ../libnautilus-private/nautilus-desktop-link-monitor.c:83
+#, c-format
+msgid "You cannot move the volume “%s” to the trash."
+msgstr "“%s“ ಪರಿಮಾಣವನ್ನು ನೀವು ಕಸದಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸುವಂತಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-desktop-link-monitor.c:93
+msgid ""
+"If you want to eject the volume, please use Eject in the popup menu of the "
+"volume."
+msgstr ""
+"ನೀವು ಪರಿಮಾಣವನ್ನು ಹೊರ ತಳ್ಳಲು ಬಯಸಿದಲ್ಲಿ, ದಯವಿಟ್ಟು ಪುಟಿಕೆ(ಪಾಪ್ಅಪ್) "
+"ಮೆನುವಿನಲ್ಲಿರುವ ಹೊರ "
+"ತಳ್ಳು ಅನ್ನು ಬಳಸಿ."
+
+#: ../libnautilus-private/nautilus-desktop-link-monitor.c:95
+#: ../libnautilus-private/nautilus-desktop-link-monitor.c:104
+#: ../src/nautilus-location-entry.c:274 ../src/nautilus-mime-actions.c:1065
+#: ../src/nautilus-mime-actions.c:1242 ../src/nautilus-mime-actions.c:1795
+#: ../src/nautilus-view.c:964
+msgid "_OK"
+msgstr "ಸರಿ (_O)"
+
+#: ../libnautilus-private/nautilus-desktop-link-monitor.c:102
+msgid ""
+"If you want to unmount the volume, please use Unmount Volume in the popup "
+"menu of the volume."
+msgstr ""
+"ನೀವು ಪರಿಮಾಣವನ್ನು ಅವರೋಹಿಸಲು ಬಯಸಿದಲ್ಲಿ, ದಯವಿಟ್ಟು ಪುಟಿಕೆ(ಪಾಪ್ಅಪ್) ಮೆನುವಿನಲ್ಲಿರುವ "
+"ಪರಿಮಾಣವನ್ನು ಆರೋಹಿಸು ಅನ್ನು ಬಳಸಿ."
+
+#. Translators: this is of the format "hostname (uri-scheme)"
+#: ../libnautilus-private/nautilus-directory.c:517
+#, c-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: ../libnautilus-private/nautilus-dnd.c:773
+msgid "_Move Here"
+msgstr "ಇಲ್ಲಿಗೆ ಸ್ಥಳಾಂತರಿಸು (_M)"
+
+#: ../libnautilus-private/nautilus-dnd.c:778
+msgid "_Copy Here"
+msgstr "ಇಲ್ಲಿಗೆ ಕಾಪಿ ಮಾಡು (_C)"
+
+#: ../libnautilus-private/nautilus-dnd.c:783
+msgid "_Link Here"
+msgstr "ಇಲ್ಲಿಗೆ ಕೊಂಡಿಹಾಕು (_L)"
+
+#: ../libnautilus-private/nautilus-dnd.c:790
+msgid "Cancel"
+msgstr "ರದ್ದು ಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file.c:1226
+#: ../libnautilus-private/nautilus-vfs-file.c:369
+msgid "This file cannot be mounted"
+msgstr "ಈ ಕಡತವನ್ನು ಆರೋಹಿಸಲಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1271
+msgid "This file cannot be unmounted"
+msgstr "ಈ ಕಡತವನ್ನು ಆರೋಹಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1305
+msgid "This file cannot be ejected"
+msgstr "ಈ ಕಡತವನ್ನು ಹೊರತಳ್ಳಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1338
+#: ../libnautilus-private/nautilus-vfs-file.c:547
+msgid "This file cannot be started"
+msgstr "ಈ ಕಡತವನ್ನು ಆರಂಭಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1390
+#: ../libnautilus-private/nautilus-file.c:1421
+msgid "This file cannot be stopped"
+msgstr "ಈ ಕಡತವನ್ನು ನಿಲ್ಲಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1840
+#, c-format
+msgid "Slashes are not allowed in filenames"
+msgstr "ಕಡತದ ಹೆಸರುಗಳಲ್ಲಿ ಅಡ್ಡಗೆರೆಗಳನ್ನು(/) ಬಳಸುವಂತಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1858
+#, c-format
+msgid "File not found"
+msgstr "ಕಡತವು ಕಂಡುಬಂದಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1886
+#, c-format
+msgid "Toplevel files cannot be renamed"
+msgstr "ಮೇಲ್ಮಟ್ಟದ ಕಡತಗಳ ಹೆಸರುಗಳನ್ನು ಬದಲಾಯಿಸಲಾಗುವುದಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1909
+#, c-format
+msgid "Unable to rename desktop icon"
+msgstr "ಗಣಕತೆರೆ ಚಿಹ್ನೆಯ ಹೆಸರನ್ನು ಬದಲಾಯಿಸಲಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:1938
+#, c-format
+msgid "Unable to rename desktop file"
+msgstr "ಗಣಕತೆರೆ ಕಡತದ ಹೆಸರನ್ನು ಬದಲಾಯಿಸಲಾಗಿಲ್ಲ"
+
+#.
+#. * Note to localizers: You can look at man strftime
+#. * for details on the format, but you should only use
+#. * the specifiers from the C standard, not extensions.
+#. * These include "%" followed by one of
+#. * "aAbBcdHIjmMpSUwWxXyYZ". There are two extensions
+#. * in the Nautilus version of strftime that can be
+#. * used (and match GNU extensions). Putting a "-"
+#. * between the "%" and any numeric directive will turn
+#. * off zero padding, and putting a "_" there will use
+#. * space padding instead of zero padding.
+#.
+#: ../libnautilus-private/nautilus-file.c:4466
+msgid "%R"
+msgstr "%R"
+
+#: ../libnautilus-private/nautilus-file.c:4467
+msgid "%-I:%M %P"
+msgstr "%-I:%M %P"
+
+#: ../libnautilus-private/nautilus-file.c:4468
+#: ../libnautilus-private/nautilus-file.c:4469
+msgid "%b %-e"
+msgstr "%b %-e"
+
+#: ../libnautilus-private/nautilus-file.c:4470
+msgid "%b %-d %Y"
+msgstr "%b %-d %Y"
+
+#: ../libnautilus-private/nautilus-file.c:4471
+msgid "%a, %b %e %Y %I:%M:%S %p"
+msgstr "%a, %b %e %Y %I:%M:%S %p"
+
+#: ../libnautilus-private/nautilus-file.c:4472
+msgid "%a, %b %e %Y %T"
+msgstr "%a, %b %e %Y %T"
+
+#: ../libnautilus-private/nautilus-file.c:4955
+#, c-format
+msgid "Not allowed to set permissions"
+msgstr "ಅನುಮತಿಗಳನ್ನು ಹೊಂದಿಸಲು ಅನುಮತಿ ಇಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:5250
+#, c-format
+msgid "Not allowed to set owner"
+msgstr "ಮಾಲಿಕರನ್ನು ನೇಮಿಸಲು ಅನುಮತಿ ಇಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:5268
+#, c-format
+msgid "Specified owner '%s' doesn't exist"
+msgstr "ಸೂಚಿಸಲಾದ ಮಾಲಿಕ \"%s\" ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:5532
+#, c-format
+msgid "Not allowed to set group"
+msgstr "ಸಮೂಹವನ್ನು ರಚಿಸಲು ಅನುಮತಿ ಇಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file.c:5550
+#, c-format
+msgid "Specified group '%s' doesn't exist"
+msgstr "ಸೂಚಿಸಲಾದ '%s' ಸಮೂಹವು ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ"
+
+#. Translators: "Me" is used to indicate the file is owned by me (the current user)
+#: ../libnautilus-private/nautilus-file.c:5685
+msgid "Me"
+msgstr "ನಾನು"
+
+#: ../libnautilus-private/nautilus-file.c:5709
+#, c-format
+msgid "%'u item"
+msgid_plural "%'u items"
+msgstr[0] "%'u ಅಂಶ"
+msgstr[1] "%'u ಅಂಶಗಳು"
+
+#: ../libnautilus-private/nautilus-file.c:5710
+#, c-format
+msgid "%'u folder"
+msgid_plural "%'u folders"
+msgstr[0] "%'u ಕಡತಕೋಶ"
+msgstr[1] "%'u ಕಡತಕೋಶಗಳು"
+
+#: ../libnautilus-private/nautilus-file.c:5711
+#, c-format
+msgid "%'u file"
+msgid_plural "%'u files"
+msgstr[0] "%'u ಕಡತ"
+msgstr[1] "%'u ಕಡತಗಳು"
+
+#. This means no contents at all were readable
+#: ../libnautilus-private/nautilus-file.c:6107
+#: ../libnautilus-private/nautilus-file.c:6123
+msgid "? items"
+msgstr "? ಅಂಶಗಳು"
+
+#. This means no contents at all were readable
+#: ../libnautilus-private/nautilus-file.c:6113
+msgid "? bytes"
+msgstr "? ಬೈಟುಗಳು"
+
+#: ../libnautilus-private/nautilus-file.c:6130
+#: ../libnautilus-private/nautilus-file.c:6210
+msgid "Unknown"
+msgstr "ಗೊತ್ತಿರದ"
+
+#. Fallback, use for both unknown attributes and attributes
+#. * for which we have no more appropriate default.
+#.
+#: ../libnautilus-private/nautilus-file.c:6144
+#: ../src/nautilus-properties-window.c:1198
+msgid "unknown"
+msgstr "ಅಜ್ಞಾತ"
+
+#: ../libnautilus-private/nautilus-file.c:6174
+#: ../libnautilus-private/nautilus-file.c:6182
+#: ../libnautilus-private/nautilus-file.c:6233
+msgid "Program"
+msgstr "ಪ್ರೋಗ್ರಾಂ"
+
+#: ../libnautilus-private/nautilus-file.c:6175
+msgid "Audio"
+msgstr "ಆಡಿಯೊ"
+
+#: ../libnautilus-private/nautilus-file.c:6176
+msgid "Font"
+msgstr "ಅಕ್ಷರಶೈಲಿ"
+
+#: ../libnautilus-private/nautilus-file.c:6177
+#: ../src/nautilus-image-properties-page.c:767
+msgid "Image"
+msgstr "ಚಿತ್ರ"
+
+#: ../libnautilus-private/nautilus-file.c:6178
+msgid "Archive"
+msgstr "ಸಂಗ್ರಹ"
+
+#: ../libnautilus-private/nautilus-file.c:6179
+msgid "Markup"
+msgstr "ಮಾರ್ಕ್ಅಪ್"
+
+#: ../libnautilus-private/nautilus-file.c:6183
+#: ../src/nautilus-query-editor.c:354
+msgid "Video"
+msgstr "ವೀಡಿಯೋ"
+
+#: ../libnautilus-private/nautilus-file.c:6184
+msgid "Contacts"
+msgstr "ಸಂಪರ್ಕವಿಳಾಸಗಳು"
+
+#: ../libnautilus-private/nautilus-file.c:6185
+msgid "Calendar"
+msgstr "ದಿನಸೂಚಿ"
+
+#: ../libnautilus-private/nautilus-file.c:6186
+msgid "Document"
+msgstr "ದಸ್ತಾವೇಜು"
+
+#: ../libnautilus-private/nautilus-file.c:6187
+#: ../src/nautilus-query-editor.c:420
+msgid "Presentation"
+msgstr "ಪ್ರಸ್ತುತಿ"
+
+#: ../libnautilus-private/nautilus-file.c:6188
+#: ../src/nautilus-query-editor.c:404
+msgid "Spreadsheet"
+msgstr "ಸ್ಪ್ರೆಡ್ ಶೀಟ್"
+
+#: ../libnautilus-private/nautilus-file.c:6235
+msgid "Binary"
+msgstr "ಬೈನರಿ"
+
+#: ../libnautilus-private/nautilus-file.c:6239
+msgid "Folder"
+msgstr "ಕಡತಕೋಶ"
+
+#: ../libnautilus-private/nautilus-file.c:6270
+msgid "Link"
+msgstr "ಕೊಂಡಿ"
+
+#. Note to localizers: convert file type string for file
+#. * (e.g. "folder", "plain text") to file type for symbolic link
+#. * to that kind of file (e.g. "link to folder").
+#.
+#. appended to new link file
+#: ../libnautilus-private/nautilus-file.c:6276
+#: ../libnautilus-private/nautilus-file-operations.c:377
+#: ../src/nautilus-view-dnd.c:122
+#, c-format
+msgid "Link to %s"
+msgstr "%s ಗೆ ಕೊಂಡಿ"
+
+#: ../libnautilus-private/nautilus-file.c:6292
+#: ../libnautilus-private/nautilus-file.c:6306
+msgid "Link (broken)"
+msgstr "ಕೊಂಡಿ (ತುಂಡಾದ)"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:141
+#, c-format
+msgid "Merge folder “%s”?"
+msgstr "\"%s\" ಕಡತಕೋಶವನ್ನು ವಿಲೀನಗೊಳಿಸಬೇಕೆ?"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:145
+msgid ""
+"Merging will ask for confirmation before replacing any files in the folder "
+"that conflict with the files being copied."
+msgstr ""
+"ವಿಲೀನಗೊಳಿಸುವಾಗ ಕಡತಕೋಶದಲ್ಲಿರುವ ಯಾವುದೆ ಕಡತಗಳನ್ನು ಬದಲಾಯಿಸುವ ಸಂದರ್ಭದಲ್ಲಿ ಕಾಪಿ "
+"ಮಾಡುತ್ತಿರುವ ಕಡತಗಳಲ್ಲಿ ಎನಾದರೂ ವಿವಾದ ಎದುರಾದರೆ ನಿಮ್ಮ ಅನುಮತಿಯನ್ನು ಕೇಳುತ್ತದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:150
+#, c-format
+msgid "An older folder with the same name already exists in “%s”."
+msgstr "“%s\" ನಲ್ಲಿ ಇದೇ ಹೆಸರಿನ ಒಂದು ಹಳೆಯ ಕಡತಕೋಶವು ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:154
+#, c-format
+msgid "A newer folder with the same name already exists in “%s”."
+msgstr "“%s\" ನಲ್ಲಿ ಇದೇ ಹೆಸರಿನ ಒಂದು ಹೊಸ ಕಡತಕೋಶವು ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:158
+#, c-format
+msgid "Another folder with the same name already exists in “%s”."
+msgstr "“%s\" ನಲ್ಲಿ ಇದೇ ಹೆಸರಿನ ಬೇರೊಂದು ಕಡತಕೋಶವು ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:163
+msgid "Replacing it will remove all files in the folder."
+msgstr "ನೀವದನ್ನು ಬದಲಿ ಮಾಡಿದರೆ ಅದರಲ್ಲಿನ ಕಡತಗಳು ತೆಗೆದು ಹಾಕಲ್ಪಡುತ್ತವೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:165
+#, c-format
+msgid "Replace folder “%s”?"
+msgstr "“%s\" ಎಂಬ ಕಡತಕೋಶವನ್ನು ಬದಲಾಯಿಸಲು ಬಯಸುತ್ತೀರೆ?"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:167
+#, c-format
+msgid "A folder with the same name already exists in “%s”."
+msgstr "“%s\" ನಲ್ಲಿ ಇದೇ ಹೆಸರಿನ ಒಂದು ಕಡತಕೋಶವು ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:172
+#, c-format
+msgid "Replace file “%s”?"
+msgstr "“%s\" ಎಂಬ ಕಡತವನ್ನು ಬದಲಾಯಿಸಬೇಕೆ?"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:174
+msgid "Replacing it will overwrite its content."
+msgstr "ನೀವದನ್ನು ಬದಲಿ ಮಾಡಿದರೆ ಅದು ತಿದ್ದಿಬರೆಯಲ್ಪಡುತ್ತದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:178
+#, c-format
+msgid "An older file with the same name already exists in “%s”."
+msgstr "“%s” ನಲ್ಲಿ ಇದೇ ಹೆಸರಿನ ಒಂದು ಹಳೆಯ ಕಡತವು ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:182
+#, c-format
+msgid "A newer file with the same name already exists in “%s”."
+msgstr "“%s” ನಲ್ಲಿ ಇದೇ ಹೆಸರಿನ ಒಂದು ಹೊಸ ಕಡತವು ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:186
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr "“%s” ನಲ್ಲಿ ಇದೇ ಹೆಸರಿನ ಬೇರೊಂದು ಕಡತವು ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:254
+msgid "Original file"
+msgstr "ಮೂಲ ಕಡತ"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:255
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:286
+#: ../src/nautilus-properties-window.c:3250
+msgid "Size:"
+msgstr "ಗಾತ್ರ:"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:258
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:289
+#: ../src/nautilus-properties-window.c:3232
+msgid "Type:"
+msgstr "ಬಗೆ:"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:261
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:292
+msgid "Last modified:"
+msgstr "ಕೊನೆಯದಾಗಿ ಬದಲಾಯಿಸಿದ್ದು:"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:285
+msgid "Replace with"
+msgstr "ಇದರಿಂದ ಬದಲಿಸು"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:314
+msgid "Merge"
+msgstr "ವಿಲೀನಗೊಳಿಸಿ"
+
+#. Setup the expander for the rename action
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:507
+msgid "_Select a new name for the destination"
+msgstr "ಗುರಿಗಾಗಿ ಒಂದು ಹೊಸ ಹೆಸರನ್ನು ಸೂಚಿಸಿ (_S):"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:521
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:316
+msgid "Reset"
+msgstr "ಪುನಃ ಹೊಂದಿಸು"
+
+#. Setup the checkbox to apply the action to all files
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:533
+msgid "Apply this action to all files"
+msgstr "ಈ ಕ್ರಿಯೆಯನ್ನು ಎಲ್ಲಾ ಕಡತಗಳಿಗೆ ಅನ್ವಯಿಸು"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:544
+#: ../libnautilus-private/nautilus-file-operations.c:184
+msgid "_Skip"
+msgstr "ಉಪೇಕ್ಷಿಸಿ (_S)"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:549
+msgid "Re_name"
+msgstr "ಹೆಸರನ್ನು ಬದಲಾಯಿಸು (_n)"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:555
+msgid "Replace"
+msgstr "ಬದಲಿ ಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file-conflict-dialog.c:629
+msgid "File conflict"
+msgstr "ಕಡತದ ಸಂದಿಗ್ಧತೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:185
+msgid "S_kip All"
+msgstr "ಎಲ್ಲವನ್ನು ಉಪೇಕ್ಷಿಸು (_k)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:186
+msgid "_Retry"
+msgstr "ಪುನಃ ಪ್ರಯತ್ನಿಸು (_R)"
+
+#. name, stock id
+#. label, accelerator
+#: ../libnautilus-private/nautilus-file-operations.c:187
+#: ../src/nautilus-view.c:7215 ../src/nautilus-view.c:7329
+#: ../src/nautilus-view.c:8649
+msgid "_Delete"
+msgstr "ಅಳಿಸು (_D)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:188
+msgid "Delete _All"
+msgstr "ಎಲ್ಲವನ್ನೂ ಅಳಿಸು (_A)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:189
+msgid "_Replace"
+msgstr "ಬದಲಿ ಮಾಡು  (_R)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:190
+msgid "Replace _All"
+msgstr "ಎಲ್ಲವನ್ನೂ ಬದಲಿಸು (_A)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:191
+msgid "_Merge"
+msgstr "ಒಗ್ಗೂಡಿಸು (_M)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:192
+msgid "Merge _All"
+msgstr "ಎಲ್ಲವನ್ನೂ ಒಗ್ಗೂಡಿಸು (_A)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:193
+msgid "Copy _Anyway"
+msgstr "ಆದರೂ ಕಾಪಿ ಮಾಡು (_A)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:278
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d ಸೆಕೆಂಡು"
+msgstr[1] "%'d ಸೆಕೆಂಡುಗಳು"
+
+#: ../libnautilus-private/nautilus-file-operations.c:283
+#: ../libnautilus-private/nautilus-file-operations.c:294
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d ನಿಮಿಷ"
+msgstr[1] "%'d ನಿಮಿಷಗಳು"
+
+#: ../libnautilus-private/nautilus-file-operations.c:293
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d ಗಂಟೆ"
+msgstr[1] "%'d ಗಂಟೆಗಳು"
+
+#: ../libnautilus-private/nautilus-file-operations.c:301
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "ಅಂದಾಜು %'d ಗಂಟೆ"
+msgstr[1] "ಅಂದಾಜು %'d ಗಂಟೆಗಳು"
+
+#. appended to new link file
+#: ../libnautilus-private/nautilus-file-operations.c:381
+#, c-format
+msgid "Another link to %s"
+msgstr "%s ಗೆ ಇನ್ನೊಂದು ಕೊಂಡಿ"
+
+#. Localizers: Feel free to leave out the "st" suffix
+#. * if there's no way to do that nicely for a
+#. * particular language.
+#.
+#: ../libnautilus-private/nautilus-file-operations.c:397
+#, c-format
+msgid "%'dst link to %s"
+msgstr "%'d ನೆಯ ಕೊಂಡಿ (%s ಗೆ)"
+
+#. appended to new link file
+#: ../libnautilus-private/nautilus-file-operations.c:401
+#, c-format
+msgid "%'dnd link to %s"
+msgstr "%'d ನೆಯ ಕೊಂಡಿ (%s ಗೆ)"
+
+#. appended to new link file
+#: ../libnautilus-private/nautilus-file-operations.c:405
+#, c-format
+msgid "%'drd link to %s"
+msgstr "%'d ನೆಯ ಕೊಂಡಿ (%s ಗೆ)"
+
+#. appended to new link file
+#: ../libnautilus-private/nautilus-file-operations.c:409
+#, c-format
+msgid "%'dth link to %s"
+msgstr "%'d ನೆಯ ಕೊಂಡಿ (%s ಗೆ)"
+
+#. Localizers:
+#. * Feel free to leave out the st, nd, rd and th suffix or
+#. * make some or all of them match.
+#.
+#. localizers: tag used to detect the first copy of a file
+#: ../libnautilus-private/nautilus-file-operations.c:448
+msgid " (copy)"
+msgstr " (ನಕಲು ಪ್ರತಿ)"
+
+#. localizers: tag used to detect the second copy of a file
+#: ../libnautilus-private/nautilus-file-operations.c:450
+msgid " (another copy)"
+msgstr " (ಇನ್ನೊಂದು ನಕಲು ಪ್ರತಿ)"
+
+#. localizers: tag used to detect the x11th copy of a file
+#. localizers: tag used to detect the x12th copy of a file
+#. localizers: tag used to detect the x13th copy of a file
+#. localizers: tag used to detect the xxth copy of a file
+#: ../libnautilus-private/nautilus-file-operations.c:453
+#: ../libnautilus-private/nautilus-file-operations.c:455
+#: ../libnautilus-private/nautilus-file-operations.c:457
+#: ../libnautilus-private/nautilus-file-operations.c:467
+msgid "th copy)"
+msgstr "ನೆಯ ಪ್ರತಿ)"
+
+#. localizers: tag used to detect the x1st copy of a file
+#: ../libnautilus-private/nautilus-file-operations.c:460
+msgid "st copy)"
+msgstr "ನೆಯ ಪ್ರತಿ)"
+
+#. localizers: tag used to detect the x2nd copy of a file
+#: ../libnautilus-private/nautilus-file-operations.c:462
+msgid "nd copy)"
+msgstr "ನೆಯ ಪ್ರತಿ)"
+
+#. localizers: tag used to detect the x3rd copy of a file
+#: ../libnautilus-private/nautilus-file-operations.c:464
+msgid "rd copy)"
+msgstr "ನೆಯ ಪ್ರತಿ)"
+
+#. localizers: appended to first file copy
+#: ../libnautilus-private/nautilus-file-operations.c:481
+#, c-format
+msgid "%s (copy)%s"
+msgstr "%s (ನಕಲು ಪ್ರತಿ)%s"
+
+#. localizers: appended to second file copy
+#: ../libnautilus-private/nautilus-file-operations.c:483
+#, c-format
+msgid "%s (another copy)%s"
+msgstr "%s (ಇನ್ನೊಂದು ಪ್ರತಿ)%s"
+
+#. localizers: appended to x11th file copy
+#. localizers: appended to x12th file copy
+#. localizers: appended to x13th file copy
+#. localizers: appended to xxth file copy
+#: ../libnautilus-private/nautilus-file-operations.c:486
+#: ../libnautilus-private/nautilus-file-operations.c:488
+#: ../libnautilus-private/nautilus-file-operations.c:490
+#: ../libnautilus-private/nautilus-file-operations.c:504
+#, c-format
+msgid "%s (%'dth copy)%s"
+msgstr "%s (%'d ನೆಯ ಪ್ರತಿ)%s"
+
+#. localizers: if in your language there's no difference between 1st, 2nd, 3rd and nth
+#. * plurals, you can leave the st, nd, rd suffixes out and just make all the translated
+#. * strings look like "%s (copy %'d)%s".
+#.
+#. localizers: appended to x1st file copy
+#: ../libnautilus-private/nautilus-file-operations.c:498
+#, c-format
+msgid "%s (%'dst copy)%s"
+msgstr "%s (%'d ನೆಯ ಪ್ರತಿ)%s"
+
+#. localizers: appended to x2nd file copy
+#: ../libnautilus-private/nautilus-file-operations.c:500
+#, c-format
+msgid "%s (%'dnd copy)%s"
+msgstr "%s (%'d ನೆಯ ಪ್ರತಿ)%s"
+
+#. localizers: appended to x3rd file copy
+#: ../libnautilus-private/nautilus-file-operations.c:502
+#, c-format
+msgid "%s (%'drd copy)%s"
+msgstr "%s (%'d ನೆಯ ಪ್ರತಿ)%s"
+
+#. localizers: opening parentheses to match the "th copy)" string
+#: ../libnautilus-private/nautilus-file-operations.c:603
+msgid " ("
+msgstr " ("
+
+#. localizers: opening parentheses of the "th copy)" string
+#: ../libnautilus-private/nautilus-file-operations.c:611
+#, c-format
+msgid " (%'d"
+msgstr " (%'d"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1354
+msgid "Are you sure you want to permanently delete “%B” from the trash?"
+msgstr "“%B” ವನ್ನು ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಬೇಕೆಂದು ನೀವು ಖಾತ್ರಿಯೆ?"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1357
+#, c-format
+msgid ""
+"Are you sure you want to permanently delete the %'d selected item from the "
+"trash?"
+msgid_plural ""
+"Are you sure you want to permanently delete the %'d selected items from the "
+"trash?"
+msgstr[0] ""
+"ಆರಿಸಲ್ಪಟ್ಟ %'d ಅಂಶವನ್ನು ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಬೇಕೆಂದು ನೀವು ಖಾತ್ರಿಯೆ?"
+msgstr[1] ""
+"ಆರಿಸಲ್ಪಟ್ಟ %'d ಅಂಶಗಳನ್ನು ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಬೇಕೆಂದು ನೀವು ಖಾತ್ರಿಯೆ?"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1367
+#: ../libnautilus-private/nautilus-file-operations.c:1433
+msgid "If you delete an item, it will be permanently lost."
+msgstr "ನೀವು ಒಂದು ಅಂಶವನ್ನು ಅಳಿಸಿದರೆ, ಅದು ಶಾಶ್ವತವಾಗಿ ನಾಶಗೊಳ್ಳುತ್ತದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1387
+msgid "Empty all items from Trash?"
+msgstr "ಕಸದ ಬುಟ್ಟಿಯಲ್ಲಿನ ಎಲ್ಲಾ ಅಂಶಗಳನ್ನು ಖಾಲಿ ಮಾಡಬೇಕೆ?"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1391
+msgid "All items in the Trash will be permanently deleted."
+msgstr "ಕಸದ ಬುಟ್ಟಿಯಲ್ಲಿನ ಎಲ್ಲಾ ಅಂಶಗಳು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಿಹೋಗುತ್ತವೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1394
+#: ../libnautilus-private/nautilus-file-operations.c:2270
+#: ../src/nautilus-window.c:813
+msgid "Empty _Trash"
+msgstr "ಕಸದಬುಟ್ಟಿಯನ್ನು ಖಾಲಿಮಾಡು (_T)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1421
+msgid "Are you sure you want to permanently delete “%B”?"
+msgstr "“%B”ಅನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಬೇಕೆಂದು ನೀವು ಖಚಿತವೆ?"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1424
+#, c-format
+msgid "Are you sure you want to permanently delete the %'d selected item?"
+msgid_plural ""
+"Are you sure you want to permanently delete the %'d selected items?"
+msgstr[0] "ಆರಿಸಲ್ಪಟ್ಟ %'d ಅಂಶವನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಬೇಕೆಂದು ನೀವು ಖಾತ್ರಿಯೆ?"
+msgstr[1] "ಆರಿಸಲ್ಪಟ್ಟ %'d ಅಂಶಗಳನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಬೇಕೆಂದು ನೀವು ಖಾತ್ರಿಯೆ?"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1467
+#, c-format
+msgid "%'d file left to delete"
+msgid_plural "%'d files left to delete"
+msgstr[0] "ಅಳಿಸಲು %'d ಕಡತವು ಬಾಕಿ ಉಳಿದಿದೆ"
+msgstr[1] "ಅಳಿಸಲು %'d ಕಡತಗಳು ಬಾಕಿ ಉಳಿದಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1473
+msgid "Deleting files"
+msgstr "ಕಡತಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತ್ತಿದೆ"
+
+#. To translators: %T will expand to a time like "2 minutes".
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
+#.
+#: ../libnautilus-private/nautilus-file-operations.c:1487
+msgid "%T left"
+msgid_plural "%T left"
+msgstr[0] "%T ಬಾಕಿ ಇದೆ"
+msgstr[1] "%T ಬಾಕಿ ಇದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1554
+#: ../libnautilus-private/nautilus-file-operations.c:1588
+#: ../libnautilus-private/nautilus-file-operations.c:1627
+#: ../libnautilus-private/nautilus-file-operations.c:1703
+#: ../libnautilus-private/nautilus-file-operations.c:2530
+msgid "Error while deleting."
+msgstr "ಅಳಿಸುವಾಗ ದೋಷ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1558
+msgid ""
+"Files in the folder “%B” cannot be deleted because you do not have "
+"permissions to see them."
+msgstr ""
+"“%B” ಕಡತಕೋಶದಲ್ಲಿನ ಕಡತಗಳನ್ನು ಅಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ ಏಕೆಂದರೆ ನಿಮ್ಮಲ್ಲಿ ಅವುಗಳನ್ನು "
+"ನೋಡಲು "
+"ಬೇಕಿರುವ ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1561
+#: ../libnautilus-private/nautilus-file-operations.c:2589
+#: ../libnautilus-private/nautilus-file-operations.c:3599
+msgid ""
+"There was an error getting information about the files in the folder “%B”."
+msgstr "“%B” ಕಡತಕೋಶದಲ್ಲಿನ ಕಡತಗಳ ಬಗ್ಗೆ ಮಾಹಿತಿಯನ್ನು ಪಡೆಯುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1570
+#: ../libnautilus-private/nautilus-file-operations.c:3608
+msgid "_Skip files"
+msgstr "ಕಡತಗಳನ್ನು ಉಪೇಕ್ಷಿಸಿ (_S)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1591
+msgid ""
+"The folder “%B” cannot be deleted because you do not have permissions to "
+"read it."
+msgstr ""
+"“%B” ಕಡತಕೋಶವನ್ನು ಅಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ ಏಕೆಂದರೆ ನಿಮ್ಮಲ್ಲಿ ಅದನ್ನು ಓದಲು ಬೇಕಿರುವ "
+"ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1594
+#: ../libnautilus-private/nautilus-file-operations.c:2628
+#: ../libnautilus-private/nautilus-file-operations.c:3644
+msgid "There was an error reading the folder “%B”."
+msgstr "“%B” ಕಡತಕೋಶವನ್ನು ಓದುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1628
+msgid "Could not remove the folder %B."
+msgstr "%B ಕಡತಕೋಶವನ್ನು ಸ್ಥಳಾಂತರಿಸಲಾಗಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1704
+msgid "There was an error deleting %B."
+msgstr "%B ಅಳಿಸುವಾಗ ಒಂದು ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:1783
+msgid "Moving files to trash"
+msgstr "ಕಡತಗಳನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1785
+#, c-format
+msgid "%'d file left to trash"
+msgid_plural "%'d files left to trash"
+msgstr[0] "%'d ಕಡತವನ್ನು ಕಸದಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸಲು ಬಾಕಿ ಇವೆ"
+msgstr[1] "%'d ಕಡತಗಳನ್ನು ಕಸದಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸಲು ಬಾಕಿ ಇವೆ"
+
+#. Translators: %B is a file name
+#: ../libnautilus-private/nautilus-file-operations.c:1837
+msgid "“%B” can't be put in the trash. Do you want to delete it immediately?"
+msgstr ""
+"“%B” ಅನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಹಾಕಲಾಗಲಿಲ್ಲ. ಅದನ್ನು ಈ ತಕ್ಷಣ ಅಳಿಸಲು ನೀವು ಬಯಸುತ್ತ್ತಿರೆ?"
+
+#: ../libnautilus-private/nautilus-file-operations.c:1843
+msgid "This remote location does not support sending items to the trash."
+msgstr ""
+"ಈ ದೂರಸ್ಥ ಸ್ಥಳವು ಅಂಶಗಳನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸುವುದನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2017
+msgid "Trashing Files"
+msgstr "ಕಡತಗಳನ್ನು ಕಸದಬುಟ್ಟಿಗೆ ಜರುಗಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2019
+msgid "Deleting Files"
+msgstr "ಕಡತಗಳನ್ನು ಅಳಿಸಲಾಗುತ್ತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2101
+msgid "Unable to eject %V"
+msgstr "%V ಅನ್ನು ಹೊರ ತಳ್ಳಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2103
+msgid "Unable to unmount %V"
+msgstr "%V ಅನ್ನು ಅವರೋಹಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2260
+msgid "Do you want to empty the trash before you unmount?"
+msgstr "ಅವರೋಹಿಸುವ ಮೊದಲು ನೀವು ಕಸದಬುಟ್ಟಿಯನ್ನು ಖಾಲಿ ಮಾಡಲು ಬಯಸುತ್ತೀರೆ?"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2262
+msgid ""
+"In order to regain the free space on this volume the trash must be emptied. "
+"All trashed items on the volume will be permanently lost."
+msgstr ""
+"ಈ ಪರಿಮಾಣದಲ್ಲಿ ಖಾಳಿ ಜಾಗವನ್ನು ಮರಳಿ ಪಡೆಯಲು ಕಸದ ಬುಟ್ಟಿಯನ್ನು ಖಾಲಿ ಮಾಡಿಬೇಕಾಗುತ್ತದೆ. "
+"ಕಸದ "
+"ಬುಟ್ಟಿಗೆ ಕಳುಹಿಸಲಾದ ಈ ಪರಿಮಾಣದಲ್ಲಿನ ಎಲ್ಲಾ ವಸ್ತುಗಳು ಶಾಶ್ವತವಾಗಿ ಇಲ್ಲವಾಗುತ್ತವೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2268
+msgid "Do _not Empty Trash"
+msgstr "ಕಸಬುಟ್ಟಿಯನ್ನು ಖಾಲಿಮಾಡಬೇಡ (_n)"
+
+#. Translators: %s is a file name formatted for display
+#: ../libnautilus-private/nautilus-file-operations.c:2401
+#: ../src/nautilus-view.c:6434
+#, c-format
+msgid "Unable to access “%s”"
+msgstr "“%s” ಅನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2477
+#, c-format
+msgid "Preparing to copy %'d file (%S)"
+msgid_plural "Preparing to copy %'d files (%S)"
+msgstr[0] "%'d ಕಡತವನ್ನು(%S) ಕಾಪಿ ಮಾಡಲು ತಯಾರಾಗುತ್ತಿದೆ"
+msgstr[1] "%'d ಕಡತಗಳನ್ನು(%S) ಕಾಪಿ ಮಾಡಲು ತಯಾರಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2483
+#, c-format
+msgid "Preparing to move %'d file (%S)"
+msgid_plural "Preparing to move %'d files (%S)"
+msgstr[0] "%'d ಕಡತವನ್ನು(%S) ಸ್ಥಳಾಂತರಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+msgstr[1] "%'d ಕಡತಗಳನ್ನು(%S) ಸ್ಥಳಾಂತರಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2489
+#, c-format
+msgid "Preparing to delete %'d file (%S)"
+msgid_plural "Preparing to delete %'d files (%S)"
+msgstr[0] "%'d ಕಡತವನ್ನು(%S) ಅಳಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+msgstr[1] "%'d ಕಡತಗಳನ್ನು(%S) ಅಳಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2495
+#, c-format
+msgid "Preparing to trash %'d file"
+msgid_plural "Preparing to trash %'d files"
+msgstr[0] "%'d ಕಡತವನ್ನು ಕಸದಬುಟ್ಟಿಗೆ ವರ್ಗಾಯಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+msgstr[1] "%'d ಕಡತಗಳನ್ನು ಕಸದಬುಟ್ಟಿಗೆ ವರ್ಗಾಯಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2526
+#: ../libnautilus-private/nautilus-file-operations.c:3459
+#: ../libnautilus-private/nautilus-file-operations.c:3591
+#: ../libnautilus-private/nautilus-file-operations.c:3636
+msgid "Error while copying."
+msgstr "ಕಾಪಿ ಮಾಡುವಾಗ ದೋಷ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2528
+#: ../libnautilus-private/nautilus-file-operations.c:3589
+#: ../libnautilus-private/nautilus-file-operations.c:3634
+msgid "Error while moving."
+msgstr "ಸ್ಥಳಾಂತರಿಸುವಾದ ದೋಷ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2532
+msgid "Error while moving files to trash."
+msgstr "ಕಡತವನ್ನು ಕಸದಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸುವಾಗ ದೋಷ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2586
+msgid ""
+"Files in the folder “%B” cannot be handled because you do not have "
+"permissions to see them."
+msgstr ""
+"“%B” ನಲ್ಲಿನ ಕಡತಗಳನ್ನು ನಿಭಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ ಏಕೆಂದರೆ ಅವುಗಳನ್ನು ನೋಡಲು ಅಗತ್ಯವಿರುವ "
+"ಅನುಮತಿಗಳನ್ನು ನೀವು ಹೊಂದಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2625
+msgid ""
+"The folder “%B” cannot be handled because you do not have permissions to "
+"read it."
+msgstr ""
+"“%B” ಕಡತಕೋಶವನ್ನು ನಿಭಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ ಏಕೆಂದರೆ ನಿಮ್ಮಲ್ಲಿ ಅದನ್ನು ಓದಲು ಬೇಕಿರುವ "
+"ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2702
+msgid ""
+"The file “%B” cannot be handled because you do not have permissions to read "
+"it."
+msgstr ""
+"“%B” ಕಡತವನ್ನು ನಿಭಾಯಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ ಏಕೆಂದರೆ ನಿಮ್ಮಲ್ಲಿ ಅದನ್ನು ಓದಲು ಬೇಕಿರುವ "
+"ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2705
+msgid "There was an error getting information about “%B”."
+msgstr "“%B” ಬಗ್ಗೆ ಮಾಹಿತಿಯನ್ನು ಪಡೆದುಕೊಳ್ಳುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2807
+#: ../libnautilus-private/nautilus-file-operations.c:2855
+#: ../libnautilus-private/nautilus-file-operations.c:2894
+#: ../libnautilus-private/nautilus-file-operations.c:2924
+msgid "Error while copying to “%B”."
+msgstr "“%B” ಗೆ ಕಾಪಿ ಮಾಡುವಾಗ ದೋಷ ಕಂಡುಬಂದಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2811
+msgid "You do not have permissions to access the destination folder."
+msgstr "ಉದ್ದೇಶಿತ ಕಡತಕೋಶವನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ನಿಮಗೆ ಅಗತ್ಯ ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2813
+msgid "There was an error getting information about the destination."
+msgstr "ಉದ್ದೇಶಿತ ಸ್ಥಳದ ಬಗ್ಗೆ ಮಾಹಿತಿಯನ್ನು ಪಡೆಯುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2856
+msgid "The destination is not a folder."
+msgstr "ಉದ್ದೇಶಿತ ಸ್ಥಳವು ಒಂದು ಕಡತಕೋಶವಾಗಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2895
+msgid ""
+"There is not enough space on the destination. Try to remove files to make "
+"space."
+msgstr ""
+"ಉದ್ದೇಶಿತ ಸ್ಥಳದಲ್ಲಿ ಸಾಕಷ್ಟು ಜಾಗವಿಲ್ಲ. ಒಂದಿಷ್ಟು ಕಡತಗಳನ್ನು ತೆಗೆದು ಹಾಕಿ ನಂತರ "
+"ಇನ್ನೊಮ್ಮೆ "
+"ಪ್ರಯತ್ನಿಸಿ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2897
+#, c-format
+msgid "%S more space is required to copy to the destination."
+msgstr "ನಿರ್ದೇಶಿತ ಸ್ಥಳಕ್ಕೆ ಪ್ರತಿ ಮಾಡಲು %S ಕ್ಕೂ ಹೆಚ್ಚಿನ ಜಾಗದ ಅಗತ್ಯವಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2925
+msgid "The destination is read-only."
+msgstr "ಉದ್ದೆಶಿತ ಕಡತಕೋಶವು ಓದಲು ಮಾತ್ರವಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:2984
+msgid "Moving “%B” to “%B”"
+msgstr "“%B” ಅನ್ನು “%B” ಗೆ ವರ್ಗಾಯಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2985
+msgid "Copying “%B” to “%B”"
+msgstr "“%B” ಅನ್ನು “%B” ಗೆ ಕಾಪಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:2992
+msgid "Duplicating “%B”"
+msgstr "“%B” ಅನ್ನು ನಕಲು ಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:3000
+msgid "Moving file %'d of %'d (in “%B”) to “%B”"
+msgstr "%'d ಕಡತವನ್ನು (%'d ರಲ್ಲಿ) (“%B” ಯಲ್ಲಿ) “%B” ಗೆ ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:3002
+msgid "Copying file %'d of %'d (in “%B”) to “%B”"
+msgstr "%'d ಕಡತವನ್ನು (%'d ರಲ್ಲಿ) (“%B” ಯಲ್ಲಿ) “%B” ಗೆ ಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:3009
+msgid "Duplicating file %'d of %'d (in “%B”)"
+msgstr "%'d ಕಡತವನ್ನು (%'d ರಲ್ಲಿ) (“%B” ಯಲ್ಲಿ) ನಕಲುಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:3018
+msgid "Moving file %'d of %'d to “%B”"
+msgstr "%'d ಕಡತವನ್ನು (%'d ರಲ್ಲಿ) “%B” ಗೆ ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:3020
+msgid "Copying file %'d of %'d to “%B”"
+msgstr "%'d ಕಡತವನ್ನು (%'d ರಲ್ಲಿ) “%B” ಗೆ ಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:3026
+#, c-format
+msgid "Duplicating file %'d of %'d"
+msgstr "%'d ಕಡತವನ್ನು (%'d ರಲ್ಲಿ) ನಕಲುಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#. To translators: %S will expand to a size like "2 bytes" or "3 MB", so something like "4 kb of 4 MB"
+#: ../libnautilus-private/nautilus-file-operations.c:3045
+#, c-format
+msgid "%S of %S"
+msgstr "%S, %S ನಲ್ಲಿ"
+
+#. To translators: %S will expand to a size like "2 bytes" or "3 MB", %T to a time duration like
+#. * "2 minutes". So the whole thing will be something like "2 kb of 4 MB -- 2 hours left (4kb/sec)"
+#. *
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %T argument).
+#.
+#: ../libnautilus-private/nautilus-file-operations.c:3056
+msgid "%S of %S — %T left (%S/sec)"
+msgid_plural "%S of %S — %T left (%S/sec)"
+msgstr[0] "%S of %S — %T ಬಾಕಿ ಇದೆ (%S/ಸೆಕೆಂಡ್)"
+msgstr[1] "%S of %S — %T ಬಾಕಿ ಇದೆ (%S/ಸೆಕೆಂಡ್)"
+
+#: ../libnautilus-private/nautilus-file-operations.c:3463
+msgid ""
+"The folder “%B” cannot be copied because you do not have permissions to "
+"create it in the destination."
+msgstr ""
+"ಕಡತಕೋಶ “%B” ಅನ್ನು ಪ್ರತಿ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ ಏಕೆಂದರೆ ನಿಮಲ್ಲಿ ಅದನ್ನು ಉದ್ದೇಶಿತ "
+"ಸ್ಥಳದಲ್ಲಿ "
+"ರಚಿಸಲು ಅಗತ್ಯವಿರುವ ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:3466
+msgid "There was an error creating the folder “%B”."
+msgstr "“%B” ಕಡತಕೋಶವನ್ನು ರಚಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:3596
+msgid ""
+"Files in the folder “%B” cannot be copied because you do not have "
+"permissions to see them."
+msgstr ""
+"“%B” ಕಡತಕೋಶದಲ್ಲಿನ ಕಡತಗಳನ್ನು ಪ್ರತಿ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ ಏಕೆಂದರೆ ನಿಮಲ್ಲಿ ಇದನ್ನು "
+"ನೋಡಲು  "
+"ಅಗತ್ಯವಿರುವ ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:3641
+msgid ""
+"The folder “%B” cannot be copied because you do not have permissions to read "
+"it."
+msgstr ""
+"ಕಡತಕೋಶ  “%B” ಅನ್ನು ಕಾಪಿ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ ಏಕೆಂದರೆ ನಿಮಲ್ಲಿ ಇದನ್ನು ಓದಲು "
+"ಅಗತ್ಯವಿರುವ "
+"ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:3686
+#: ../libnautilus-private/nautilus-file-operations.c:4376
+#: ../libnautilus-private/nautilus-file-operations.c:4990
+msgid "Error while moving “%B”."
+msgstr "“%B” ಸ್ಥಳಾಂತರಿಸುವಾಗ ದೋಷ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:3687
+msgid "Could not remove the source folder."
+msgstr "ಮೂಲ ಕಡತಕೋಶವನ್ನು ತೆಗೆದು ಹಾಕಲಾಗಲಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:3771
+#: ../libnautilus-private/nautilus-file-operations.c:3812
+#: ../libnautilus-private/nautilus-file-operations.c:4378
+#: ../libnautilus-private/nautilus-file-operations.c:4449
+msgid "Error while copying “%B”."
+msgstr "“%B” ಗೆ ಕಾಪಿ ಮಾಡುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:3772
+#, c-format
+msgid "Could not remove files from the already existing folder %F."
+msgstr "ಈಗಾಗಲೆ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ %F ಕಡತಕೋಶದಿಂದ ಕಡತಗಳನ್ನು ತೆಗೆದು ಹಾಕಲಾಗಲಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:3813
+#, c-format
+msgid "Could not remove the already existing file %F."
+msgstr "ಈಗಾಗಲೆ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ %F ಅನ್ನು ತೆಗೆದು ಹಾಕಲಾಗಲಿಲ್ಲ."
+
+#. the run_warning() frees all strings passed in automatically
+#: ../libnautilus-private/nautilus-file-operations.c:4133
+#: ../libnautilus-private/nautilus-file-operations.c:4833
+msgid "You cannot move a folder into itself."
+msgstr "ಒಂದು ಕಡತಕೋಶವನ್ನು ಅದೇ ಕಡತಕೋಶಕ್ಕೆ ನೀವು ಸ್ಥಳಾಂತರಿಸಲಾಗುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:4134
+#: ../libnautilus-private/nautilus-file-operations.c:4834
+msgid "You cannot copy a folder into itself."
+msgstr "ಒಂದು ಕಡತಕೋಶವನ್ನು ಅದೇ ಕಡತಕೋಶಕ್ಕೆ ನೀವು ಕಾಪಿ ಮಾಡಲಾಗುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:4135
+#: ../libnautilus-private/nautilus-file-operations.c:4835
+msgid "The destination folder is inside the source folder."
+msgstr "ಉದ್ದೇಶಿತ ಕಡತವು ಮೂಲ ಕಡತದ ಒಳಗೆ ಇದೆ."
+
+#. the run_warning() frees all strings passed in automatically
+#: ../libnautilus-private/nautilus-file-operations.c:4165
+msgid "You cannot move a file over itself."
+msgstr "ನೀವು ಒಂದು ಕಡತಕೋಶವನ್ನು ಸ್ವತಃ ಅದರ ಮೇಲೆಯೆ ಸ್ಥಳಾಂತರಿಸಲಾಗುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:4166
+msgid "You cannot copy a file over itself."
+msgstr "ನೀವು ಒಂದು ಕಡತಕೋಶವನ್ನು ಅದರ ಮೇಲೆ ಕಾಪಿ ಮಾಡಲಾಗುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:4167
+msgid "The source file would be overwritten by the destination."
+msgstr "ಮೂಲ ಕಡತವನ್ನು ಅದರ ಗುರಿಯಿಂದ ತಿದ್ದಿ ಬರೆಯಬಹುದಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:4380
+#, c-format
+msgid "Could not remove the already existing file with the same name in %F."
+msgstr ""
+"%F ಯಲ್ಲಿ ಇದೇ ಹೆಸರಿನೊಂದಿಗೆ ಈಗಾಗಲೆ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಕಡತವನ್ನು ತೆಗೆದು ಹಾಕಲಾಗಲಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:4450
+#, c-format
+msgid "There was an error copying the file into %F."
+msgstr "%F ಗೆ ಕಡತವನ್ನು ನಕಲಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:4681
+#: ../libnautilus-private/nautilus-file-operations.c:4715
+msgid "Copying Files"
+msgstr "ಕಡತಗಳನ್ನು ಕಾಪಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:4743
+msgid "Preparing to Move to “%B”"
+msgstr "“%B”ಗೆ ಸ್ಥಳಾಂತರಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:4747
+#, c-format
+msgid "Preparing to move %'d file"
+msgid_plural "Preparing to move %'d files"
+msgstr[0] "%'d ಕಡತವನ್ನು ಸ್ಥಳಾಂತರಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+msgstr[1] "%'d ಕಡತಗಳನ್ನು ಸ್ಥಳಾಂತರಿಸಲು ತಯಾರಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:4991
+#, c-format
+msgid "There was an error moving the file into %F."
+msgstr "%F ಗೆ ಕಡತವನ್ನು ಸ್ಥಳಾಂತರಗೊಳಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:5253
+msgid "Moving Files"
+msgstr "ಕಡತಗಳನ್ನು ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:5288
+msgid "Creating links in “%B”"
+msgstr "“%B” ಯಲ್ಲಿ ಕೊಂಡಿಗಳನ್ನು ನಿರ್ಮಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:5292
+#, c-format
+msgid "Making link to %'d file"
+msgid_plural "Making links to %'d files"
+msgstr[0] "%'d ಕಡತಕ್ಕೆ ಕೊಂಡಿಯನ್ನು ನಿರ್ಮಿಸಲಾಗುತ್ತಿದೆ"
+msgstr[1] "%'d ಕಡತಗಳಿಗೆ ಕೊಂಡಿಗಳನ್ನು ನಿರ್ಮಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:5427
+msgid "Error while creating link to %B."
+msgstr "%B ಗೆ ಕೊಂಡಿ ರಚಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:5429
+msgid "Symbolic links only supported for local files"
+msgstr "ಸಾಂಕೇತಿಕ ಕೊಂಡಿಗಳು ಸ್ಥಳೀಯ ಕಡತಗಳಲ್ಲಿ ಬೆಂಬಲಿತವಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-file-operations.c:5432
+msgid "The target doesn't support symbolic links."
+msgstr "ಉದ್ದೇಶಿತ ಸ್ಥಳವು ಸಾಂಕೇತಿಕ ಕೊಂಡಿಗಳನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:5435
+#, c-format
+msgid "There was an error creating the symlink in %F."
+msgstr "%F ನಲ್ಲಿ ಸಾಂಕೇತಿಕ ಕೊಂಡಿಯನ್ನು ರಚಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:5754
+msgid "Setting permissions"
+msgstr "ಅನುಮತಿಗಳು ಹೊಂದಿಸಲಾಗುತ್ತಿದೆ"
+
+#. localizers: the initial name of a new folder
+#: ../libnautilus-private/nautilus-file-operations.c:6019
+msgid "Untitled Folder"
+msgstr "ಶೀರ್ಷಿಕೆ ಇಲ್ಲದ ಕಡತಕೋಶ"
+
+#. localizers: the initial name of a new template document
+#: ../libnautilus-private/nautilus-file-operations.c:6025
+#, c-format
+msgid "Untitled %s"
+msgstr "ಶೀರ್ಷಿಕೆ ಇಲ್ಲದ %s"
+
+#. localizers: the initial name of a new empty document
+#: ../libnautilus-private/nautilus-file-operations.c:6031
+msgid "Untitled Document"
+msgstr "ಶೀರ್ಷಿಕೆ ಇಲ್ಲದ ದಸ್ತಾವೇಜು"
+
+#: ../libnautilus-private/nautilus-file-operations.c:6209
+msgid "Error while creating directory %B."
+msgstr "%B ಕೋಶವನ್ನು ರಚಿಸುವಾಗ ದೋಷ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:6211
+msgid "Error while creating file %B."
+msgstr "%B ಕಡತವನ್ನು ರಚಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:6213
+#, c-format
+msgid "There was an error creating the directory in %F."
+msgstr "%F ಯಲ್ಲಿ ಒಂದು ಕೋಶವನ್ನು ರಚಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-file-operations.c:6482
+msgid "Emptying Trash"
+msgstr "ಕಸಬುಟ್ಟಿಯನ್ನು ಖಾಲಿಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file-operations.c:6530
+#: ../libnautilus-private/nautilus-file-operations.c:6571
+#: ../libnautilus-private/nautilus-file-operations.c:6606
+#: ../libnautilus-private/nautilus-file-operations.c:6641
+msgid "Unable to mark launcher trusted (executable)"
+msgstr ""
+"ಆರಂಭಗಾರನನ್ನು ನಂಬಿಕಾರ್ಹ ಎಂದು ಗುರುತು ಹಾಕಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ (ಕಾರ್ಯಗತಗೊಳಿಸಬಲ್ಲ)"
+
+#. Reset to default info
+#: ../libnautilus-private/nautilus-file-undo-operations.c:133
+#: ../src/nautilus-view.c:2531
+msgid "Undo"
+msgstr "ರದ್ದುಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:136
+#: ../src/nautilus-view.c:2532
+msgid "Undo last action"
+msgstr "ಹಿಂದಿನ ಕ್ರಿಯೆಯನ್ನು ರದ್ದು ಮಾಡು"
+
+#. Reset to default info
+#: ../libnautilus-private/nautilus-file-undo-operations.c:140
+#: ../src/nautilus-view.c:2550
+msgid "Redo"
+msgstr "ಪುನಃಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:143
+#: ../src/nautilus-view.c:2551
+msgid "Redo last undone action"
+msgstr "ಹಿಂದೆ ರದ್ದು ಮಾಡಲಾದ ಕಾರ್ಯವನ್ನು ಪುನಃ ಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:365
+#, c-format
+msgid "Move %d item back to '%s'"
+msgid_plural "Move %d items back to '%s'"
+msgstr[0] "%d ಅಂಶವನ್ನು '%s' ಗೆ ಮರಳಿ ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು '%s' ಗೆ ಮರಳಿ ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:368
+#, c-format
+msgid "Move %d item to '%s'"
+msgid_plural "Move %d items to '%s'"
+msgstr[0] "%d ಅಂಶವನ್ನು '%s' ಗೆ ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು '%s' ಗೆ ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:372
+#, c-format
+msgid "_Undo Move %d item"
+msgid_plural "_Undo Move %d items"
+msgstr[0] "%d ಅಂಶವನ್ನು ಸ್ಥಳಾಂತರವನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ಸ್ಥಳಾಂತರವನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:375
+#, c-format
+msgid "_Redo Move %d item"
+msgid_plural "_Redo Move %d items"
+msgstr[0] "%d ಅಂಶವನ್ನು ಪುನಃ ಸ್ಥಳಾಂತರಿಸು (_R)"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ಪುನಃ ಸ್ಥಳಾಂತರಿಸು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:379
+#, c-format
+msgid "Move '%s' back to '%s'"
+msgstr "'%s' ಅನ್ನು '%s' ಗೆ ಮರಳಿ ಸ್ಥಳಾಂತರಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:380
+#, c-format
+msgid "Move '%s' to '%s'"
+msgstr "'%s' ಅನ್ನು '%s' ಗೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:382
+msgid "_Undo Move"
+msgstr "ಸ್ಥಳಾಂತರವನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:383
+msgid "_Redo Move"
+msgstr "ಪುನಃ ಸ್ಥಳಾಂತರಿಸು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:386
+msgid "_Undo Restore from Trash"
+msgstr "ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಹಿಂದೆ ಪಡೆಯುವುದನ್ನು ರದ್ದುಮಾಡು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:387
+msgid "_Redo Restore from Trash"
+msgstr "ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಪುನಃ ಮರಳಿ ಪಡೆ (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:390
+#, c-format
+msgid "Move %d item back to trash"
+msgid_plural "Move %d items back to trash"
+msgstr[0] "%d ಅಂಶವನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಮರಳಿ ಸ್ಥಳಾಂತರಿಸು"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಮರಳಿ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:393
+#: ../libnautilus-private/nautilus-file-undo-operations.c:979
+#, c-format
+msgid "Restore %d item from trash"
+msgid_plural "Restore %d items from trash"
+msgstr[0] "%d ಅಂಶವನ್ನು ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಮರಳಿ ಪಡೆ"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಮರಳಿ ಪಡೆ"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:397
+#, c-format
+msgid "Move '%s' back to trash"
+msgstr "'%s' ಅನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಮರಳಿ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:398
+#, c-format
+msgid "Restore '%s' from trash"
+msgstr "'%s' ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಹಿಂದೆ ಪಡೆ"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:402
+#, c-format
+msgid "Delete %d copied item"
+msgid_plural "Delete %d copied items"
+msgstr[0] "ಪ್ರತಿ ಮಾಡಲಾದ %d ಅಂಶವನ್ನು ಅಳಿಸು"
+msgstr[1] "ಪ್ರತಿ ಮಾಡಲಾದ %d ಅಂಶಗಳನ್ನು ಅಳಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:405
+#, c-format
+msgid "Copy %d item to '%s'"
+msgid_plural "Copy %d items to '%s'"
+msgstr[0] "%d ಅಂಶವನ್ನು '%s' ಗೆ ಪ್ರತಿ ಮಾಡು"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು '%s' ಗೆ ಪ್ರತಿ ಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:409
+#, c-format
+msgid "_Undo Copy %d item"
+msgid_plural "_Undo Copy %d items"
+msgstr[0] "%d ಅಂಶವನ್ನು ಪ್ರತಿಮಾಡುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ಪ್ರತಿಮಾಡುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:412
+#, c-format
+msgid "_Redo Copy %d item"
+msgid_plural "_Redo Copy %d items"
+msgstr[0] "%d ಅಂಶವನ್ನು ಮರಳಿ ಪ್ರತಿ ಮಾಡು (_R)"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ಮರಳಿ ಪ್ರತಿ ಮಾಡು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:416
+#: ../libnautilus-private/nautilus-file-undo-operations.c:438
+#: ../libnautilus-private/nautilus-file-undo-operations.c:671
+#, c-format
+msgid "Delete '%s'"
+msgstr "'%s' ಅನ್ನು ಅಳಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:417
+#, c-format
+msgid "Copy '%s' to '%s'"
+msgstr "'%s' ಅನ್ನು '%s' ಗೆ ಪ್ರತಿ ಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:419
+msgid "_Undo Copy"
+msgstr "ಪ್ರತಿಮಾಡುವುದನ್ನು ರದ್ದುಮಾಡು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:420
+msgid "_Redo Copy"
+msgstr "ಮರಳಿ ಪ್ರತಿ ಮಾಡು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:424
+#, c-format
+msgid "Delete %d duplicated item"
+msgid_plural "Delete %d duplicated items"
+msgstr[0] "ದ್ವಿಪ್ರತಿ ಮಾಡಲಾದ %d ಅಂಶವನ್ನು ಅಳಿಸು"
+msgstr[1] "ದ್ವಿಪ್ರತಿ ಮಾಡಲಾದ %d ಅಂಶಗಳನ್ನು ಅಳಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:427
+#, c-format
+msgid "Duplicate %d item in '%s'"
+msgid_plural "Duplicate %d items in '%s'"
+msgstr[0] "%d ಅಂಶವನ್ನು '%s' ನಲ್ಲಿ ದ್ವಿಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು '%s' ನಲ್ಲಿ ದ್ವಿಪ್ರತಿ ಮಾಡಲಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:431
+#, c-format
+msgid "_Undo Duplicate %d item"
+msgid_plural "_Undo Duplicate %d items"
+msgstr[0] "%d ಅಂಶವನ್ನು ದ್ವಿಪ್ರತಿ ಮಾಡುವುದನ್ನು ರದ್ದುಮಾಡು (_U)"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ದ್ವಿಪ್ರತಿ ಮಾಡುವುದನ್ನು ರದ್ದುಮಾಡು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:434
+#, c-format
+msgid "_Redo Duplicate %d item"
+msgid_plural "_Redo Duplicate %d items"
+msgstr[0] "%d ಅಂಶವನ್ನು ಪುನಃ ದ್ವಿಪ್ರತಿ ಮಾಡು (_R)"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ಪುನಃ ದ್ವಿಪ್ರತಿ ಮಾಡು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:439
+#, c-format
+msgid "Duplicate '%s' in '%s'"
+msgstr "'%s' ಅನ್ನು '%s' ನಲ್ಲಿ ದ್ವಿಪ್ರತಿ ಮಾಡು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:442
+msgid "_Undo Duplicate"
+msgstr "ದ್ವಿಪ್ರತಿ ಮಾಡುವುದನ್ನು ರದ್ದುಮಾಡು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:443
+msgid "_Redo Duplicate"
+msgstr "ಪುನಃ ದ್ವಿಪ್ರತಿ ಮಾಡು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:447
+#, c-format
+msgid "Delete links to %d item"
+msgid_plural "Delete links to %d items"
+msgstr[0] "%d ಅಂಶದ ಕೊಂಡಿಗಳನ್ನು ಅಳಿಸು"
+msgstr[1] "%d ಅಂಶಗಳ ಕೊಂಡಿಗಳನ್ನು ಅಳಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:450
+#, c-format
+msgid "Create links to %d item"
+msgid_plural "Create links to %d items"
+msgstr[0] "%d ಅಂಶಕ್ಕೆ ಕೊಂಡಿಗಳನ್ನು ರಚಿಸು"
+msgstr[1] "%d ಅಂಶಗಳಿಗೆ ಕೊಂಡಿಗಳನ್ನು ರಚಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:454
+#, c-format
+msgid "Delete link to '%s'"
+msgstr "'%s' ಗೆ ಕೊಂಡಿಯನ್ನು ಅಳಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:455
+#, c-format
+msgid "Create link to '%s'"
+msgstr "'%s' ಗೆ ಕೊಂಡಿಯನ್ನು ರಚಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:457
+msgid "_Undo Create Link"
+msgstr "ಕೊಂಡಿ ರಚಿಸುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:458
+msgid "_Redo Create Link"
+msgstr "ಕೊಂಡಿ ರಚಿಸುವುದನ್ನು ಪುನಃ ಮಾಡು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:674
+#, c-format
+msgid "Create an empty file '%s'"
+msgstr "ಒಂದು ಖಾಲಿ ಕಡತ '%s' ಅನ್ನು ರಚಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:676
+msgid "_Undo Create Empty File"
+msgstr "ಖಾಲಿ ಕಡತವನ್ನು ರಚಿಸುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (_E)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:677
+msgid "_Redo Create Empty File"
+msgstr "ಖಾಲಿ ಕಡತವನ್ನು ರಚಿಸುವುದನ್ನು ಪುನಃ ಮಾಡು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:679
+#, c-format
+msgid "Create a new folder '%s'"
+msgstr "ಹೊಸ ಕಡತಕೋಶ '%s' ಅನ್ನು ರಚಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:681
+msgid "_Undo Create Folder"
+msgstr "ಕಡತಕೋಶವನ್ನು ರಚಿಸುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:682
+msgid "_Redo Create Folder"
+msgstr "ಕಡತಕೋಶವನ್ನು ರಚಿಸುವುದನ್ನು ಪುನಃ ಮಾಡು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:684
+#, c-format
+msgid "Create new file '%s' from template "
+msgstr "'%s' ನಮೂನೆಯಿಂದ ಒಂದು ಹೊಸ ಕಡತವನ್ನು ರಚಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:686
+msgid "_Undo Create from Template"
+msgstr "ನಮೂನೆಯಿಂದ ರಚಿಸುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:687
+msgid "_Redo Create from Template"
+msgstr "ನಮೂನೆಯಿಂದ ರಚಿಸುವುದನ್ನು ಪುನಃ ಮಾಡು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:867
+#: ../libnautilus-private/nautilus-file-undo-operations.c:868
+#, c-format
+msgid "Rename '%s' as '%s'"
+msgstr "'%s' ಅನ್ನು '%s' ಎಂದು ಮರುಹೆಸರಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:870
+msgid "_Undo Rename"
+msgstr "ಮರುಹೆಸರಿಸುವುದನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:871
+msgid "_Redo Rename"
+msgstr "ಮರುಹೆಸರಿಸುವುದನ್ನು ಪುನಃ ಮಾಡು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:982
+#, c-format
+msgid "Move %d item to trash"
+msgid_plural "Move %d items to trash"
+msgstr[0] "%d ಅಂಶವನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸು"
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:994
+#, c-format
+msgid "Restore '%s' to '%s'"
+msgstr "'%s' ಅನ್ನು '%s' ಗೆ ಮರಳಿಸ್ಥಾಪಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1001
+#, c-format
+msgid "Move '%s' to trash"
+msgstr "'%s' ಅನ್ನು ಕಸಬುಟ್ಟಿಗೆ ಜರುಗಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1005
+msgid "_Undo Trash"
+msgstr "ಕಸಬುಟ್ಟಿಗೆ ಹಾಕುವುದರ ರದ್ದತಿ (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1006
+msgid "_Redo Trash"
+msgstr "ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಮರಳಿ ಪಡೆ (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1297
+#, c-format
+msgid "Restore original permissions of items enclosed in '%s'"
+msgstr "ಅಡಕಗೊಳಿಸಲಾದ ಅಂಶಗಳ ಮೂಲ ಅನುಮತಿಗಳನ್ನು '%s' ನಲ್ಲಿ ಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1298
+#, c-format
+msgid "Set permissions of items enclosed in '%s'"
+msgstr "ಅಡಕಗೊಳಿಸಲಾದ ಅಂಶಗಳ ಅನುಮತಿಗಳನ್ನು '%s' ನಲ್ಲಿ ಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1300
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1455
+msgid "_Undo Change Permissions"
+msgstr "ಅನುಮತಿಗಳ ಬದಲಾವಣೆಯನ್ನು ರದ್ದುಗೊಳಿಸು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1301
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1456
+msgid "_Redo Change Permissions"
+msgstr "ಅನುಮತಿಗಳನ್ನು ಪುನಃ ಬದಲಾಯಿಸು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1452
+#, c-format
+msgid "Restore original permissions of '%s'"
+msgstr "'%s' ನ ಮೂಲ ಅನುಮತಿಗಳನ್ನು ಮರಳಿಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1453
+#, c-format
+msgid "Set permissions of '%s'"
+msgstr "'%s' ನ ಅನುಮತಿಗಳು ಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1563
+#, c-format
+msgid "Restore group of '%s' to '%s'"
+msgstr "'%s' ನ ಗುಂಪನ್ನು '%s' ಗೆ ಮರಳಿಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1565
+#, c-format
+msgid "Set group of '%s' to '%s'"
+msgstr "'%s' ನ ಗುಂಪನ್ನು '%s' ಗೆ ಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1568
+msgid "_Undo Change Group"
+msgstr "ಗುಂಪಿನ ಬದಲಾವಣೆಯನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1569
+msgid "_Redo Change Group"
+msgstr "ಗುಂಪನ್ನು ಪುನಃ ಬದಲಾಯಿಸು (_R)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1571
+#, c-format
+msgid "Restore owner of '%s' to '%s'"
+msgstr "'%s' ನ ಮಾಲಿಕನನ್ನು '%s' ಗೆ ಮರುಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1573
+#, c-format
+msgid "Set owner of '%s' to '%s'"
+msgstr "'%s' ನ ಮಾಲಿಕನನ್ನು '%s' ಗೆ ಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1576
+msgid "_Undo Change Owner"
+msgstr "ಮಾಲಿಕನ ಬದಲಾವಣೆಯನ್ನು ರದ್ದುಗೊಳಿಸು (_U)"
+
+#: ../libnautilus-private/nautilus-file-undo-operations.c:1577
+msgid "_Redo Change Owner"
+msgstr "ಮಾಲಿಕನನ್ನು ಪುನಃ ಬದಲಾಯಿಸು (_R)"
+
+#: ../libnautilus-private/nautilus-file-utilities.c:932
+#, c-format
+msgid "Could not determine original location of “%s” "
+msgstr "“%s” ಮೊದಲು ಇದ್ದ ಸ್ಥಳವನ್ನು ಕಂಡು ಹಿಡಿಯಲಾಗಿಲ್ಲ "
+
+#: ../libnautilus-private/nautilus-file-utilities.c:936
+msgid "The item cannot be restored from trash"
+msgstr "ಅಂಶವನ್ನು ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಮರಳಿ ಪಡೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:80
+#, c-format
+msgid "Error while adding “%s”: %s"
+msgstr "“%s” ಅನ್ನು ಸೇರಿಸುವಲ್ಲಿ ದೋಷ: %s"
+
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:82
+msgid "Could not add application"
+msgstr "ಅನ್ವಯವನ್ನು ಸೇರಿಸಲಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:110
+msgid "Could not forget association"
+msgstr "ಸಂಬಂಧವನ್ನು ಮರೆಯಲಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:134
+msgid "Forget association"
+msgstr "ಸಂಬಂಧವನ್ನು ಮರೆತು ಬಿಡು"
+
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:172
+#, c-format
+msgid "Error while setting “%s” as default application: %s"
+msgstr "“%s” ಅನ್ನು ಪೂರ್ವನಿಯೋಜಿತ ಅನ್ವಯವಾಗಿ ಹೊಂದಿಸುವಾಗ ದೋಷ ಉಂಟಾಗಿದೆ: %s"
+
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:174
+msgid "Could not set as default"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ಹೊಂದಿಸಲಾಗಿಲ್ಲ"
+
+#. Translators: the %s here is a file extension
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:252
+#, c-format
+msgid "%s document"
+msgstr "%s ದಸ್ತಾವೇಜು"
+
+#. Translators; %s here is a mime-type description
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:259
+#, c-format
+msgid "Open all files of type “%s” with"
+msgstr "“%s” ಬಗೆಯ ಎಲ್ಲಾ ಕಡತಗಳನ್ನು ಇದರಿಂದ ತೆರೆ"
+
+#. Translators: first %s is filename, second %s is mime-type description
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:266
+#, c-format
+msgid "Select an application to open “%s” and other files of type “%s”"
+msgstr "“%s” ಹಾಗು “%s” ಬಗೆಯ ಕಡತಗಳನ್ನು ತೆರೆಯಲು ಒಂದು ಅನ್ವಯವನ್ನು ಆರಿಸಿ"
+
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:324
+msgid "_Add"
+msgstr "ಸೇರಿಸು (_A)"
+
+#: ../libnautilus-private/nautilus-mime-application-chooser.c:332
+msgid "Set as default"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಹೊಂದಿಸು"
+
+#: ../libnautilus-private/nautilus-program-choosing.c:312
+msgid "Sorry, but you cannot execute commands from a remote site."
+msgstr "ಕ್ಷಮಿಸಿ, ನೀವು ಒಂದು ದೂರಸ್ಥ ಸ್ಥಳದಿಂದ ಆದೇಶಗಳನ್ನು ಕಾರ್ಯಗತಗೊಳಿಸಲಾಗುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/nautilus-program-choosing.c:314
+msgid "This is disabled due to security considerations."
+msgstr "ಸುರಕ್ಷತಾ ಕಾರಣದಿಂದಾಗಿ ಇದನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-program-choosing.c:325
+#: ../libnautilus-private/nautilus-program-choosing.c:393
+msgid "There was an error launching the application."
+msgstr "ಅನ್ವಯವನ್ನು ಆರಂಭಿಸುವಾಗ ಒಂದು ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#: ../libnautilus-private/nautilus-program-choosing.c:350
+#: ../libnautilus-private/nautilus-program-choosing.c:361
+msgid "This drop target only supports local files."
+msgstr "ಸೇರಿಸಬಹುದಾದ ಈ ಸ್ಥಳವು ಕೇವಲ ಸ್ಥಳೀಯ ಕಡತಗಳನ್ನು ಮಾತ್ರ ಬೆಂಬಲಿಸುತ್ತದೆ."
+
+#: ../libnautilus-private/nautilus-program-choosing.c:351
+msgid ""
+"To open non-local files copy them to a local folder and then drop them again."
+msgstr ""
+"ಸ್ಥಳೀಯವಲ್ಲದ ಕಡತಗಳನ್ನು ತೆರೆಯಲು, ಅವನ್ನು ಒಂದು ಸ್ಥಳೀಯ ಕಡತಕೋಶಕ್ಕೆ ಕಾಪಿ ಮಾಡಿ ಹಾಗು "
+"ಪುನಃ "
+"ಅವನ್ನು ಇಲ್ಲಿಗೆ ಸೇರಿಸಿ."
+
+#: ../libnautilus-private/nautilus-program-choosing.c:362
+msgid ""
+"To open non-local files copy them to a local folder and then drop them "
+"again. The local files you dropped have already been opened."
+msgstr ""
+"ಸ್ಥಳೀಯವಲ್ಲದ ಕಡತಗಳನ್ನು ತೆರೆಯಲು, ಅವನ್ನು ಒಂದು ಸ್ಥಳೀಯ ಕಡತಕೋಶಕ್ಕೆ ಕಾಪಿ ಮಾಡಿ ಹಾಗು "
+"ಪುನಃ "
+"ಅವನ್ನು ಇಲ್ಲಿಗೆ ಸೇರಿಸಿ. ನೀವು ಸೇರಿಸಿದ ಸ್ಥಳೀಯ ಕಡತಗಳು ಈಗಾಗಲೆ ತೆರೆಯಲ್ಪಟ್ಟಿವೆ."
+
+#: ../libnautilus-private/nautilus-program-choosing.c:391
+msgid "Details: "
+msgstr "ವಿವರಗಳು: "
+
+#: ../libnautilus-private/nautilus-progress-info.c:190
+#: ../libnautilus-private/nautilus-progress-info.c:208
+msgid "Preparing"
+msgstr "ತಯಾರಾಗುತ್ತಿದೆ"
+
+#: ../libnautilus-private/nautilus-query.c:207
+#: ../libnautilus-private/nautilus-search-directory-file.c:159
+#: ../libnautilus-private/nautilus-search-directory-file.c:211
+#: ../libnautilus-private/nautilus-search-directory-file.c:256
+msgid "Search"
+msgstr "ಹುಡುಕು"
+
+#: ../libnautilus-private/nautilus-query.c:210
+#, c-format
+msgid "Search for “%s”"
+msgstr "“%s” ಗಾಗಿನ ಹುಡುಕಾಟ"
+
+#: ../libnautilus-private/nautilus-search-engine.c:189
+msgid "Unable to complete the requested search"
+msgstr "ಮನವಿ ಸಲ್ಲಿಸಲಾದ ಹುಡುಕಾಟವನ್ನು ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:1
+msgid "Where to position newly open tabs in browser windows."
+msgstr "ಹೊಸದಾಗಿ ತೆರೆಯಲಾದ ಹಾಳೆಗಳನ್ನು ವೀಕ್ಷಕ ಕಿಟಕಿಯಲ್ಲಿ ಎಲ್ಲಿ ಇರಿಸಬೇಕು."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:2
+msgid ""
+"If set to \"after-current-tab\", then new tabs are inserted after the "
+"current tab. If set to \"end\", then new tabs are appended to the end of the "
+"tab list."
+msgstr ""
+"\"after-current-tab\"(ಈಗಿನ ಹಾಳೆಯ ನಂತರ) ಕ್ಕೆ ಹೊಂದಿಸಿದಲ್ಲಿ, ಹೊಸ ಹಾಳೆಗಳು ಈಗಿನ "
+"ಹಾಳೆಗಳ ನಂತರ ಸೇರಿಸಲ್ಪಡುತ್ತದೆ. \"end\"(ಕೊನೆ) ಗೆ ಹೊಂದಿಸಿದಲ್ಲಿ, ಹೊಸ ಹಾಳೆಗಳು ಹಾಳೆ "
+"ಪಟ್ಟಿಯ ಕೊನೆಯಲ್ಲಿ ಸೇರಿಸಲ್ಪಡುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:3
+msgid "Always use the location entry, instead of the pathbar"
+msgstr "ಮಾರ್ಗಪಟ್ಟಿಯ ಬದಲು ಎಲ್ಲಾ ಸಮಯದಲ್ಲೂ ಸ್ಥಳ ನಮೂದನ್ನು ಬಳಸು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:4
+msgid ""
+"If set to true, then Nautilus browser windows will always use a textual "
+"input entry for the location toolbar, instead of the pathbar."
+msgstr ""
+"ನಿಜ ಎಂದಾದಲ್ಲಿ, Nautilus ವೀಕ್ಷಕ ಕಿಟಕಿಗಳು ಎಲ್ಲಾ ಸಮಯದಲ್ಲೂ ಪಠ್ಯಾತ್ಮಕ ಆದಾನ ನಮೂದಿಗೆ "
+"ಸ್ಥಳ "
+"ಪಟ್ಟಿಯ ಬದಲು ಮಾರ್ಗ ಪಟ್ಟಿಯನ್ನು ಬಳಸುತ್ತವೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:5
+msgid "Whether to ask for confirmation when deleting files, or emptying Trash"
+msgstr ""
+"ಕಡತಗಳನ್ನು ಅಳಿಸುವ ಮೊದಲು, ಅಥವ ಕಸದಬುಟ್ಟಿಯನ್ನು ಖಾಲಿ ಮಾಡುವ ಮೊದಲು ಖಚಿತಪಡಿಸಲು ಕೇಳಬೇಕೆ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:6
+msgid ""
+"If set to true, then Nautilus will ask for confirmation when you attempt to "
+"delete files, or empty the Trash."
+msgstr ""
+"ನಿಜ ಎಂದಾದಲ್ಲಿ, ಕಡತಗಳನ್ನು ಅಳಿಸುವಾಗ, ಅಥವ ಕಸದಬುಟ್ಟಿಯನ್ನು ಖಾಲಿ ಮಾಡುವಾಗ ನೀವು "
+"ಹೊರಟಾಗ "
+"Nautilus ಖಚಿತಪಡಿಸಲು ಕೇಳುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:7
+msgid "Whether to enable immediate deletion"
+msgstr "ತಕ್ಷಣ ಅಳಿಸುವಿಕೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಬೇಕೆ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:8
+msgid ""
+"If set to true, then Nautilus will have a feature allowing you to delete a "
+"file immediately and in-place, instead of moving it to the trash. This "
+"feature can be dangerous, so use caution."
+msgstr ""
+"ನಿಜ ಎಂದಾದಲ್ಲಿ, Nautilus ಕಡತವನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ವರ್ಗಾಯಿಸದೆ, ತಕ್ಷಣ ಹಾಗು ಆ "
+"ಜಾಗದಲ್ಲೆ "
+"ಅಳಿಸಿ ಹಾಕುವ ಸವಲತ್ತನ್ನು ಹೊಂದಿರುತ್ತದೆ. ಈ ಸವಲತ್ತು ಅಪಾಯಕಾರಿಯಾಗಬಹುದು, ಆದ್ದರಿಂದ "
+"ಎಚ್ಚರದಿಂದಿರಿ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:9
+msgid "When to show number of items in a folder"
+msgstr "ಒಂದು ಕಡತಕೋಶದಲ್ಲಿರುವ ಅಂಶಗಳ ಸಂಖ್ಯೆಗಳನ್ನು ಯಾವಾಗ ತೋರಿಸಬೇಕು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:10
+msgid ""
+"Speed tradeoff for when to show the number of items in a folder. If set to "
+"\"always\" then always show item counts, even if the folder is on a remote "
+"server. If set to \"local-only\" then only show counts for local file "
+"systems. If set to \"never\" then never bother to compute item counts."
+msgstr ""
+"ಒಂದು ಕಡತಕೋಶದಲ್ಲಿ ಯಾವ ಸಮಯದಲ್ಲಿ ಅಂಶಗಳ ಸಂಖ್ಯೆಯನ್ನು ತೋರಿಸಬೇಕು ಎನ್ನುವ ವೇಗವಾದ "
+"ಟ್ರೇಡ್‌ಆಫ್‌. "
+"\"always\"(ಯಾವಾಗಲೂ) ಎಂದು ಬದಲಾಯಿಸಿದಲ್ಲಿ, ಯಾವಾಗಲೂ ಅಂಶಗಳ ಲೆಕ್ಕವನ್ನು "
+"ತೋರಿಸಲಾಗುತ್ತದೆ, "
+"ಕಡತಕೋಶವು ಒಂದು ದೂರದ ಪೂರೈಕೆಗಣಕದಲ್ಲಿದ್ದಾಗಲೂ ಸಹ. \"local-only\"(ಸ್ಥಳೀಯ ಮಾತ್ರ) "
+"ಆಗಿದ್ದಲ್ಲಿ ಕೇವಲ ಸ್ಥಳೀಯ ಕಡತ ವ್ಯವಸ್ಥೆಯಲ್ಲಿರುವುದರ ಲೆಕ್ಕವನ್ನು ಮಾತ್ರ "
+"ತೋರಿಸಲಾಗುತ್ತದೆ. \"never"
+"\" (ಎಂದಿಗೂ ಬೇಡ) ಎಂದಾಗಿದ್ದರೆ ಎಂದಿಗೂ ಸಹ ಅಂಶಗಳ ಲೆಕ್ಕವನ್ನು ತೋರಿಸುವ ಗೋಜಿಗೆ "
+"ಹೋಗುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:11
+msgid "Type of click used to launch/open files"
+msgstr "ಕಡತಗಳನ್ನು ಆರಂಭಿಸಲು/ತೆರೆಯಲು ಬಳಸಬೇಕಿರುವ ಕ್ಲಿಕ್‌ನ ಬಗೆ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:12
+msgid ""
+"Possible values are \"single\" to launch files on a single click, or \"double"
+"\" to launch them on a double click."
+msgstr ""
+"ಸಾಧ್ಯವಿರುವ ಮೌಲ್ಯಗಳೆಂದರೆ, ಒಂದು ಕ್ಲಿಕ್ಕಿನಲ್ಲಿ ಇದನ್ನು ಆರಂಭಿಸಲು \"single\" "
+"ಆಗಿರುತ್ತದೆ, "
+"ಅಥವ ಎರಡು ಕ್ಲಿಕ್ಕಿನಲ್ಲಿ ಆರಂಭಿಸಲು \"double\" ಆಗಿರುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:13
+msgid "What to do with executable text files when activated"
+msgstr "ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದ ಸಕ್ರಿಯಗೊಳಿಸಲ್ಪಟ್ಟ ಪಠ್ಯ ಕಡತಗಳೊಂದಿಗೆ ಏನು ಮಾಡಬೇಕು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:14
+msgid ""
+"What to do with executable text files when they are activated (single or "
+"double clicked). Possible values are \"launch\" to launch them as programs, "
+"\"ask\" to ask what to do via a dialog, and \"display\" to display them as "
+"text files."
+msgstr ""
+"ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದ ಪಠ್ಯ ಕಡತಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿದಾಗ ಏನು ಮಾಡಬೇಕು (ಒಮ್ಮೆ ಅಥವ ಎರಡು "
+"ಬಾರಿ ಕ್ಲಿಕ್ಕಿಸಿದಾಗ). ಸಾಧ್ಯವಿರುವ ಮೌಲ್ಯಗಳೆಂದರೆ ಪ್ರೋಗ್ರಾಮನ್ನು ಆರಂಭಿಸಲು \"launch"
+"\" (ಆರಂಭಿಸು), ಏನು ಮಾಡಬೇಕು ಎಂದು ಸಂವಾದದ ಮೂಲಕ ಕೇಳಲು \"ask\" (ಕೇಳು), ಹಾಗು "
+"ಅವುಗಳನ್ನು ಪಠ್ಯ ಕಡತಗಳಾಗಿ ತೋರಿಸಲು \"display\" (ತೋರಿಸು) ಆಗಿರುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:15
+msgid "Show the package installer for unknown mime types"
+msgstr "ಅಜ್ಞಾತ mime ಬಗೆಗಳಿಗಾಗಿ ಪ್ಯಾಕೇಜ್‌ ಅನುಸ್ಥಾಪಕವನ್ನು ತೋರಿಸು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:16
+msgid ""
+"Whether to show the user a package installer dialog in case an unknown mime "
+"type is opened, in order to search for an application to handle it."
+msgstr ""
+"ಗೊತ್ತಿರದ mime ಬಗೆಯನ್ನು ತೆರೆದಾಗ ಅದನ್ನು ನಿಭಾಯಿಸುವ ಸಲುವಾಗಿ ಬಳಕೆದಾರರಿಗೆ ಪ್ಯಾಕೆಜ್ "
+"ಅನುಸ್ಥಾಪಕ ಸಂವಾದಕಿಟಕಿಯನ್ನು ತೋರಿಸಬೇಕೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:17
+msgid "Use extra mouse button events in Nautilus' browser window"
+msgstr "Nautilus ವೀಕ್ಷಕ ಕಿಟಕಿಗಳಲ್ಲಿ ಹೆಚ್ಚುವರಿ ಮೌಸ್‌ ಗುಂಡಿ ಘಟನೆಗಳನ್ನು ಬಳಸಿ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:18
+msgid ""
+"For users with mice that have \"Forward\" and \"Back\" buttons, this key "
+"will determine if any action is taken inside of Nautilus when either is "
+"pressed."
+msgstr ""
+"\"Forward\" ಹಾಗು \"Back\" ಗಾಗಿ ಗುಂಡಿಗಳಿರುವ ಮೌಸ್‌ಗಳನ್ನು ಹೊಂದಿರುವ "
+"ಬಳಕೆದಾರರಿಗಾಗಿ, ಈ "
+"ಕೀಲಿಯು Nautilus ನ ಒಳಗೆ ಆ ಎರಡು ಗುಂಡಿಗಳಲ್ಲಿ ಒಂದನ್ನು ಒತ್ತಿದಾಗ ಯಾವುದೆ ಕ್ರಮವನ್ನು "
+"ತೆಗೆದುಕೊಳ್ಳಲಾಗಿದೆ ಎಂದು ನಿರ್ಧರಿಸುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:19
+msgid "Mouse button to activate the \"Forward\" command in browser window"
+msgstr ""
+"\"Forward\" ಆದೇಶಯನ್ನು ವೀಕ್ಷಕಕಿಟಕಿಯಲ್ಲಿ ಸಕ್ರಿಯಗೊಳಿಸಲು ಬಳಸಬಹುದಾದ ಮೌಸ್‌ ಗುಂಡಿ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:20
+msgid ""
+"For users with mice that have buttons for \"Forward\" and \"Back\", this key "
+"will set which button activates the \"Forward\" command in a browser window. "
+"Possible values range between 6 and 14."
+msgstr ""
+"\"Forward\" ಹಾಗು \"Back\" ಗಾಗಿ ಗುಂಡಿಗಳಿರುವ ಮೌಸ್‌ಗಳನ್ನು ಹೊಂದಿರುವ "
+"ಬಳಕೆದಾರರಿಗಾಗಿ, ಈ "
+"ಕೀಲಿಯು ಒಂದು ವೀಕ್ಷಕಕಿಟಕಿಯಲ್ಲಿ ಯಾವ ಗುಂಡಿಯು \"Forward\" ಆದೇಶಯನ್ನು "
+"ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ "
+"ಎಂದು ಹೊಂದಿಸಬಹುದು. ಇದರ ಸಾಧ್ಯವಿರುವ ಮೌಲ್ಯಗಳು 6 ಹಾಗು 14 ರ ನಡುವೆ ಇರುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:21
+msgid "Mouse button to activate the \"Back\" command in browser window"
+msgstr ""
+"\"Back\" ಆದೇಶಯನ್ನು ವೀಕ್ಷಕಕಿಟಕಿಯಲ್ಲಿ ಸಕ್ರಿಯಗೊಳಿಸಲು ಬಳಸಬಹುದಾದ ಮೌಸ್‌ ಗುಂಡಿ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:22
+msgid ""
+"For users with mice that have buttons for \"Forward\" and \"Back\", this key "
+"will set which button activates the \"Back\" command in a browser window. "
+"Possible values range between 6 and 14."
+msgstr ""
+"\"Forward\" ಹಾಗು \"Back\" ಗಾಗಿ ಗುಂಡಿಗಳಿರುವ ಮೌಸ್‌ಗಳನ್ನು ಹೊಂದಿರುವ "
+"ಬಳಕೆದಾರರಿಗಾಗಿ, ಈ "
+"ಕೀಲಿಯು ಒಂದು ವೀಕ್ಷಕಕಿಟಕಿಯಲ್ಲಿ ಯಾವ ಗುಂಡಿಯು \"Back\" ಆದೇಶಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ "
+"ಎಂದು ಹೊಂದಿಸಬಹುದು. ಇದರ ಸಾಧ್ಯವಿರುವ ಮೌಲ್ಯಗಳು 6 ಹಾಗು 14 ರ ನಡುವೆ ಇರುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:23
+msgid "When to show thumbnails of files"
+msgstr "ಕಡತಗಳ ತಂಬ್‌ನೈಲ್‌ಗಳನ್ನು ಯಾವಾಗ ತೋರಿಸಬೇಕು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:24
+msgid ""
+"Speed tradeoff for when to show a file as a thumbnail. If set to \"always\" "
+"then always thumbnail, even if the folder is on a remote server. If set to "
+"\"local-only\" then only show thumbnails for local file systems. If set to "
+"\"never\" then never bother to thumbnail files, just use a generic icon. "
+"Despite what the name may suggest, this applies to any previewable file type."
+msgstr ""
+"ಒಂದು ಕಡತದ ತಂಬನೈಲ್‌ ಚಿಹ್ನೆಯನ್ನು ಯಾವ ಸಮಯದಲ್ಲಿ ತೋರಿಸಬೇಕು ಎನ್ನುವ ವೇಗವಾದ "
+"ಟ್ರೇಡ್‌ಆಫ್‌. "
+"\"always\"(ಯಾವಾಗಲೂ) ಎಂದು ಬದಲಾಯಿಸಿದಲ್ಲಿ, ಯಾವಾಗಲೂ ತಂಬ್‌ನೈಲ್ ಇರುತ್ತದೆ, ಕಡತವು "
+"ಒಂದು "
+"ದೂರದ ಪೂರೈಕೆಗಣಕದಲ್ಲಿದ್ದಾಗಲೂ ಸಹ. \"local-only\"(ಸ್ಥಳೀಯ ಮಾತ್ರ) ಆಗಿದ್ದಲ್ಲಿ ಕೇವಲ "
+"ಸ್ಥಳೀಯ "
+"ಕಡತ ವ್ಯವಸ್ಥೆಯಲ್ಲಿರುವುದರ ತಂಬನೈಲ್ ಅನ್ನು ಮಾತ್ರ ತೋರಿಸಲಾಗುತ್ತದೆ. \"never\" (ಎಂದಿಗೂ "
+"ಬೇಡ) "
+"ಎಂದಾಗಿದ್ದರೆ ಎಂದಿಗೂ ಸಹ ತಂಬ್‌ನೈಲ್ ಕಡತವನ್ನು ತೋರಿಸಲಾಗುವುದಿಲ್ಲ, ಕೇವಲ ಒಂದು "
+"ಸಾಮಾನ್ಯವಾದ "
+"ಚಿಹ್ನೆಯನ್ನು ತೋರಿಸಲಾಗುತ್ತದೆ. ನೀವು ಏನೇ ಹೆಸರನ್ನು ಸೂಚಿದರೂ ಸಹ, ಇದು ಯಾವುದೇ "
+"ಅವಲೋಕಿಸಬಹುದಾದ ಕಡತದ ಬಗೆಗೆ ಅನ್ವಯಿಸುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:25
+msgid "Maximum image size for thumbnailing"
+msgstr "ತಂಬ್‌ನೈಲಿಂಗ್‌ ಮಾಡಬಹುದಾದ ಚಿತ್ರದ ಗರಿಷ್ಟ ಗಾತ್ರ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:26
+msgid ""
+"Images over this size (in bytes) won't be thumbnailed. The purpose of this "
+"setting is to avoid thumbnailing large images that may take a long time to "
+"load or use lots of memory."
+msgstr ""
+"ಈ ಇದಕ್ಕಿಂತ ದೊಡ್ಡ ಗಾತ್ರದ(ಬೈಟ್‌ಗಳಲ್ಲಿ) ಚಿತ್ರಗಳು ತಂಬ್‌ನೈಲ್‌ ಮಾಡಲ್ಪಡುವುದಿಲ್ಲ. "
+"ಏಕೆಂದರೆ, ದೊಡ್ಡ "
+"ಗಾತ್ರದ ಚಿತ್ರಗಳನ್ನು ತಂಬ್‌ನೈಲ್‌ ಮಾಡಲು ಬಹಳ ಸಮಯ ಹಿಡಿಯಬಹುದು ಅಥವ ಬಹಳ ಮೆಮೊರಿಯು "
+"ಬೇಕಾಗಬಹುದು."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:27
+msgid "Show folders first in windows"
+msgstr "ಕಿಟಕಿಗಳಲ್ಲಿ ಕಡತಕೋಶಗಳನ್ನು ಮೊದಲು ತೋರಿಸು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:28
+msgid ""
+"If set to true, then Nautilus shows folders prior to showing files in the "
+"icon and list views."
+msgstr ""
+"ನಿಜ ಎಂದಾದಲ್ಲಿ, ಕಡತಗಳನ್ನು ಚಿಹ್ನೆ ಹಾಗು ಪಟ್ಟಿ ನೋಟದಲ್ಲ್ಲಿ ತೋರಿಸುವ ಮೊದಲು Nautilus "
+"ಕಡತ "
+"ಕೋಶಗಳನ್ನು ತೋರಿಸುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:29
+msgid "Default sort order"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ವಿಂಗಡಣಾ ಕ್ರಮ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:30
+msgid ""
+"The default sort-order for items in the icon view. Possible values are \"name"
+"\", \"size\", \"type\" and \"mtime\"."
+msgstr ""
+"ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ಅಂಶಗಳ ಪೂರ್ವನಿಯೋಜಿತ ವಿಂಗಡಣಾ-ಕ್ರಮ. ಸಾಧ್ಯವಿರುವ ಮೌಲ್ಯಗಳು \"name"
+"\"(ಹೆಸರು), \"size\"(ಗಾತ್ರ), \"type\"(ಬಗೆ), ಹಾಗು \"mtime\""
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:31
+msgid "Reverse sort order in new windows"
+msgstr "ಹೊಸ ಕಿಟಕಿಗಳಲ್ಲಿ ತಿರುವುಮರುವಾದ ವಿಂಗಡಣಾ ಕ್ರಮ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:32
+msgid ""
+"If true, files in new windows will be sorted in reverse order. ie, if sorted "
+"by name, then instead of sorting the files from \"a\" to \"z\", they will be "
+"sorted from \"z\" to \"a\"; if sorted by size, instead of being "
+"incrementally they will be sorted decrementally."
+msgstr ""
+"ನಿಜವಾದಲ್ಲಿ, ಹೊಸ ಕಿಟಕಿಗಳಲ್ಲಿನ ಕಡತಗಳು ಹಿಂದು ಮುಂದಾದ ಅನುಕ್ರಮದಲ್ಲಿ "
+"ಜೋಡಿಸಲ್ಪಡುತ್ತದೆ. "
+"ಅಂದರೆ, ಹೆಸರಿನ ಆಧಾರಲ್ಲಿ ವಿಂಗಡಿಸಿದಲ್ಲಿ, ಕಡತಗಳು \"a\" ಯಿಂದ \"z\" ಅನುಕ್ರಮದಲ್ಲಿ "
+"ವಿಂಗಡಿಸಲ್ಪಡುವ ಬದಲಿಗೆ,\"z\" ಯಿಂದ \"a\" ಅನುಕ್ರಮದಲ್ಲಿ ವಿಂಗಡಿಸಲ್ಪಡುತ್ತದೆ. "
+"ಎಲ್ಲಿಯಾದರೂ, "
+"ಗಾತ್ರದ ಆಧಾರದಲ್ಲಿ ವಿಂಗಡಿಸಿದರೆ, ಅವು ಆರೋಹಣ ಕ್ರಮದ ಬದಲಿಗೆ ಅವರೋಹಣ ಕ್ರಮದಲ್ಲಿ "
+"ವಿಂಗಡಿಸಲ್ಪಡುತ್ತವೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:33
+msgid "Default folder viewer"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ಕಡತಕೋಶ ವೀಕ್ಷಕ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:34
+msgid ""
+"When a folder is visited this viewer is used unless you have selected "
+"another view for that particular folder. Possible values are \"list-view\", "
+"and \"icon-view\"."
+msgstr ""
+"ನಿಶ್ಚಿತ ಕಡತಕೋಶಕ್ಕಾಗಿ ನೀವು ಒಂದು ವೀಕ್ಷಣೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡದೆ ಇದ್ದಲ್ಲಿ ಒಂದು "
+"ಕಡತಕೋಶಕ್ಕೆ "
+"ಭೇಟಿ ನೀಡಿದಾಗ ಈ ವೀಕ್ಷಕವನ್ನು ಬಳಸಲಾಗುವುದು. ಸಾಧ್ಯವಿರುವ ಮೌಲ್ಯಗಳು "
+"\"list-view\"(ಪಟ್ಟಿ "
+"ನೋಟ), ಮತ್ತು \"icon-view\"(ಚಿಹ್ನೆ ನೋಟ) ಆಗಿರುತ್ತವೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:35
+msgid "Whether to show hidden files"
+msgstr "ಅಡಗಿಸಲಾದ ಕಡತಗಳನ್ನು ತೋರಿಸಬೇಕೆ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:36
+msgid ""
+"This key is deprecated and ignored. The \"show-hidden\" key from \"org.gtk."
+"Settings.FileChooser\" is now used instead."
+msgstr ""
+"ಈ ಕೀಲಿಯನ್ನು ಅಪ್ರಚಲಿತಗೊಳಿಸಲಾಗಿದೆ ಮತ್ತು ಕಡೆಗಣಿಸಲಾಗುತ್ತದೆ. ಬದಲಿಗೆ \"org.gtk."
+"Settings.FileChooser\" ಇಂದ \"show-hidden\" ಅನ್ನು ಬಳಸಲಾಗುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:37
+msgid "Bulk rename utility"
+msgstr "ಒಟ್ಟಾರೆ ಮರುಹೆಸರಿಸುವ ಸೌಲಭ್ಯ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:38
+msgid ""
+"If set, Nautilus will append URIs of selected files and treat the result as "
+"a command line for bulk renaming. Bulk rename applications can register "
+"themselves in this key by setting the key to a space-separated string of "
+"their executable name and any command line options. If the executable name "
+"is not set to a full path, it will be searched for in the search path."
+msgstr ""
+"ಹೊಂದಿಸಲಾಗಿದ್ದಲ್ಲಿ, Nautilus ಆಯ್ಕೆ ಮಾಡಿದ ಕಡತಗಳ URI ಗಳನ್ನು ಸೇರಿಸುತ್ತದೆ ಮತ್ತು "
+"ದೊಡ್ಡಸಂಖ್ಯೆ ಮರುಗಾತ್ರಿಸುವಿಕೆಗಾಗಿ ಫಲಿತಾಂಶವನ್ನು ಒಂದು ಆಜ್ಞಾ ಸಾಲಿನಲ್ಲಿ "
+"ಪರಿಗಣಿಸುತ್ತದೆ. "
+"ದೊಡ್ಡಸಂಖ್ಯೆಯ ಮರುಹೆಸರಿಸುವಿಕೆಯ ಅನ್ವಯಗಳು ಅವುಗಳಿಂದ ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದ ಹೆಸರು ಮತ್ತು "
+"ಯಾವುದೆ ಆಜ್ಞಾ ಸಾಲಿನ ಆಯ್ಕೆಗಳನ್ನು ಹೊಂದಿರುವ ವಾಕ್ಯಾಂಶವನ್ನು ಒಂದು ಅಂತರದೊಂದಿಗೆ ಕೀಲಿಗೆ "
+"ಹೊಂದಿಸುವ ಮೂಲಕ ತಮ್ಮನ್ನು ತಾವು ಈ ಕೀಲಿಯಲ್ಲಿ ನೋಂದಾಯಿಸಿಕೊಳ್ಳಬಹುದು. "
+"ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದ "
+"ಹೆಸರನ್ನು ಒಂದು ಸಂಪೂರ್ಣ ಮಾರ್ಗಕ್ಕೆ ಹೊಂದಿಸಲಾಗಿರದೆ ಇದ್ದಲ್ಲಿ, ಇದನ್ನು ಹುಡುಕು "
+"ಮಾರ್ಗದಲ್ಲಿ "
+"ಹುಡುಕಲಾಗುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:39
+msgid "List of possible captions on icons"
+msgstr "ಸಾಧ್ಯವಿರುವ ಚಿಹ್ನೆಗಳ ಶೀರ್ಷಿಕೆಗಳ ಪಟ್ಟಿ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:40
+msgid ""
+"A list of captions below an icon in the icon view and the desktop. The "
+"actual number of captions shown depends on the zoom level. Some possible "
+"values are: \"size\", \"type\", \"date_modified\", \"owner\", \"group\", "
+"\"permissions\", and \"mime_type\"."
+msgstr ""
+"ಚಿಹ್ನೆ ನೋಟ ಹಾಗು ಗಣಕತೆರೆಯಲ್ಲಿ ಕಾಣಿಸುವ ಚಿಹ್ನೆಗಳ ಕೆಳಗೆ ಕಂಡು ಬರುವ ಶೀರ್ಷಿಕೆಗಳ ಒಂದು "
+"ಪಟ್ಟಿ. ಯಾವ ಮಟ್ಟಕ್ಕೆ ಹಿಗ್ಗಿಸಲಾಗಿದೆ ಎನ್ನುವುದರ ಮೇಲೆ ಶೀರ್ಷಿಕೆಗಳ ಸಂಖ್ಯೆಯು "
+"ನಿರ್ಧರಿಸಲ್ಪಡುತ್ತದೆ. ಸಾಧ್ಯವಿರುವ ಕೆಲವು ಮೌಲ್ಯಗಳೆಂದರೆ : \"size\"(ಗಾತ್ರ), "
+"\"type\"(ಬಗೆ), "
+"\"date_modified\"(ಮಾರ್ಪಡಿಸಿದ ದಿನಾಂಕ), \"owner\"(ಮಾಲಿಕರು), \"group\"(ಗುಂಪು), "
+"\"permissions\"(ಅನುಮತಿಗಳು) ಹಾಗು \"mime_type\"(ಮೈಮ್‌ ಬಗೆ)."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:41
+msgid "Default icon zoom level"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ಚಿಹ್ನೆ ಹಿಗ್ಗಿಸುವ ಮಟ್ಟ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:42
+msgid "Default zoom level used by the icon view."
+msgstr "ಚಿಹ್ನೆ ನೋಟದಲ್ಲಿ ಬಳಸಲಾದ ಪೂರ್ವನಿಯೋಜಿತ ಹಿಗ್ಗಿಸುವ ಮಟ್ಟ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:43
+msgid "Default Thumbnail Icon Size"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ಚಿಹ್ನೆಯ ತಂಬ್‍ನೈಲ್‍ನ ಗಾತ್ರ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:44
+msgid "The default size of an icon for a thumbnail in the icon view."
+msgstr "ಚಿಹ್ನೆ ನೋಟದಲ್ಲಿನ ಒಂದು ತಂಬ್‌ನೈಲ್‌ಗಾಗಿ ಚಿಹ್ನೆಯ ಪೂರ್ವನಿಯೋಜಿತ ಗಾತ್ರ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:45
+msgid "Text Ellipsis Limit"
+msgstr "ಪಠ್ಯ ಎಲಿಪ್ಸಿಸ್ ಮಿತಿ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:47
+#, no-c-format
+msgid ""
+"A string specifying how parts of overlong file names should be replaced by "
+"ellipses, depending on the zoom level. Each of the list entries is of the "
+"form \"Zoom Level:Integer\". For each specified zoom level, if the given "
+"integer is larger than 0, the file name will not exceed the given number of "
+"lines. If the integer is 0 or smaller, no limit is imposed on the specified "
+"zoom level. A default entry of the form \"Integer\" without any specified "
+"zoom level is also allowed. It defines the maximum number of lines for all "
+"other zoom levels. Examples: 0 - always display overlong file names; 3 - "
+"shorten file names if they exceed three lines; smallest:5,smaller:4,0 - "
+"shorten file names if they exceed five lines for zoom level \"smallest\". "
+"Shorten file names if they exceed four lines for zoom level \"smaller\". Do "
+"not shorten file names for other zoom levels. Available zoom levels: "
+"smallest (33%), smaller (50%), small (66%), standard (100%), large (150%), "
+"larger (200%), largest (400%)"
+msgstr ""
+"ಹಿಗ್ಗಿಸುವ ಮಟ್ಟಕ್ಕೆ ಅಧರಿತವಾಗಿ ದೊಡ್ಡದಾದ ಕಡತದ ಹೆಸರುಗಳ ಭಾಗಗಳನ್ನು ಹೇಗೆ "
+"ದೀರ್ಘವೃತ್ತದಿಂದ "
+"ಬದಲಾಯಿಸಬೇಕು ಎಂದು ಸೂಚಿಸುವ ಒಂದು ವಾಕ್ಯ. ಪ್ರತಿಯೊಂದು ನಮೂದುಗಳು \"Zoom Level:Integer"
+"\" ಬಗೆಯಲ್ಲಿ ಇರಬೇಕು. ಸೂಚಿಸಲಾದ ಪ್ರತಿಯೊಂದು ಹಿಗ್ಗಿಸುವ ಮಟ್ಟಕ್ಕಾಗಿ, ಒದಗಿಸಲಾದ "
+"ಪೂರ್ಣಾಂಕವು "
+"0 ಗಿಂತ ದೊಡ್ಡದಾಗಿದ್ದರೆ, ಒದಗಿಸಲಾದ ಸಾಲುಗಳ ಸಂಖ್ಯೆಗಿಂತ ಕಡತದ ಹೆಸರು "
+"ದೊಡ್ಡದಾಗಿರುವುದಿಲ್ಲ. "
+"ಎಲ್ಲಿಯಾದರೂ ಪೂರ್ಣಾಂಕವು 0 ಗೆ ಆಗಿದ್ದರೆ ಅಥವ 0 ಗಿಂತ ಚಿಕ್ಕದಾಗಿದ್ದರೆ, ಸೂಚಿಸಲಾಗುವ "
+"ಹಿಗ್ಗಿಸುವ ಮಟ್ಟಕ್ಕೆ ಯಾವುದೆ ಮಿತಿ ಇರುವುದಿಲ್ಲ. ಯಾವುದೆ ನಿಶ್ಚಿತ ಹಿಗ್ಗಿಸುವ ಮಟ್ಟವನ್ನು "
+"ಸೂಚಿಸದೆ ಕೇವಲ \"Integer\" (ಪೂರ್ಣಾಂಕ) ಬಗೆಯ ಒಂದು ಪೂರ್ವನಿಯೋಜಿತ ನಮೂದಿಗೂ ಸಹ ಅನುಮತಿ "
+"ಇದೆ. ಇದು ಎಲ್ಲಾ ಹಿಗ್ಗಿಸುವ ಮಟ್ಟಕ್ಕೆ ಗರಿಷ್ಟ ಸಂಖ್ಯೆಯ ಸಾಲಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ. "
+"ಉದಾಹರಣೆಗೆ: 0 "
+"- ಯಾವಾಗಲೂ ದೊಡ್ಡದಾದ ಕಡತದ ಹೆಸರುಗಳನ್ನು ಸೂಚಿಸುತ್ತದೆ; 3 - ಕಡತದ ಹೆಸರುಗಳು ಮೂರು "
+"ಸಾಲುಗಳಿಗಿಂತ ದೊಡ್ಡದಾಗಿದ್ದಲ್ಲಿ ಅವನ್ನು ಚಿಕ್ಕದಾಗಿಸುತ್ತದೆ; ಅತ್ಯಂತ ಚಿಕ್ಕದಾದ:5, ಅತಿ "
+"ಚಿಕ್ಕದಾದ:4,0 - ಹಿಗ್ಗಿಸುವ ಮಟ್ಟ \"smallest\"(ಅತ್ಯಂತ ಚಿಕ್ಕದಾದ) ಗಾಗಿನ ಐದು "
+"ಸಾಲುಗಳಿಗಿಂತ "
+"ಹೆಚ್ಚಿದ್ದಲ್ಲಿ ಕಡತದ ಹೆಸರನ್ನು ಚಿಕ್ಕದಾಗಿಸುತ್ತದೆ. ಹಿಗ್ಗಿಸುವ ಮಟ್ಟ \"smaller\"(ಅತಿ "
+"ಚಿಕ್ಕದಾದ) ಗಾಗಿನ ಐದು ಸಾಲುಗಳಿಗಿಂತ ಹೆಚ್ಚಿದ್ದಲ್ಲಿ ಕಡತದ ಹೆಸರನ್ನು ಚಿಕ್ಕದಾಗಿಸುತ್ತದೆ. "
+"ಬೇರೆ "
+"ಹಿಗ್ಗಿಸುವ ಮಟ್ಟಗಳಿಗಾಗಿ ಕಡತದ ಹೆಸರುಗಳನ್ನು ಚಿಕ್ಕದಾಗಿಸುವುದಿಲ್ಲ. ಲಭ್ಯವಿರುವ "
+"ಹಿಗ್ಗಿಸುವ "
+"ಮಟ್ಟಗಳೆಂದರೆ: smallest(ಅತ್ಯಂತ ಚಿಕ್ಕದಾದ) (33%), smaller (ಅತಿ ಚಿಕ್ಕದಾದ)(50%), "
+"small(ಚಿಕ್ಕದಾದ) (66%), standard (ಸಾಧಾರಣ)(100%), large (ದೊಡ್ಡದಾದ)(150%), "
+"larger "
+"(ಅತ್ಯಂತ ದೊಡ್ಡದಾದ) (200%), largest (ಬೃಹತ್ತ)(400%)"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:48
+msgid "Default list zoom level"
+msgstr "ಪಟ್ಟಿಯ ಪೂರ್ವನಿಯೋಜಿತ ಹಿಗ್ಗಿಸುವ ಮಟ್ಟ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:49
+msgid "Default zoom level used by the list view."
+msgstr "ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ಬಳಸಲಾದ ಪೂರ್ವನಿಯೋಜಿತ ಹಿಗ್ಗಿಸುವ ಮಟ್ಟ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:50
+msgid "Default list of columns visible in the list view"
+msgstr "ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ಕಾಣಿಸುವ ಪೂರ್ವನಿಯೋಜಿತ ಕಾಲಂಗಳ ಪಟ್ಟಿ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:51
+msgid "Default list of columns visible in the list view."
+msgstr "ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ಕಾಣಿಸುವ ಕಾಲಂಗಳ ಪೂರ್ವನಿಯೋಜಿತ ಪಟ್ಟಿ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:52
+msgid "Default column order in the list view"
+msgstr "ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ಪೂರ್ವನಿಯೋಜಿತ ಕಾಲಂ ಅನುಕ್ರಮ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:53
+msgid "Default column order in the list view."
+msgstr "ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ಪೂರ್ವನಿಯೋಜಿತ ಕಾಲಂ ಅನುಕ್ರಮ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:54
+msgid "Use tree view"
+msgstr "ವೃಕ್ಷ ನೋಟವನ್ನು ಬಳಸು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:55
+msgid ""
+"Whether a tree should be used for list view navigation instead of a flat list"
+msgstr ""
+"ಒಂದು ಪಟ್ಟಿ ನೋಟ ನ್ಯಾವಿಗೇಶನ್‌ಗಾಗಿ ಚಪ್ಪಟೆ ಪಟ್ಟಿಯ ಬದಲಿಗೆ ಒಂದು ವೃಕ್ಷ ನೋಟವನ್ನು "
+"ಬಳಸಬೇಕು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:56
+msgid "Desktop font"
+msgstr "ಗಣಕತೆರೆ ಅಕ್ಷರ ಶೈಲಿ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:57
+#| msgid "The font _description used for the icons on the desktop."
+msgid "The font description used for the icons on the desktop."
+msgstr "ಗಣಕತೆರೆಯಲ್ಲಿನ ಚಿಹ್ನೆಗಳಿಗೆ ಬಳಸಲಾಗುವ ಅಕ್ಷರಶೈಲಿ ವಿವರಣೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:58
+msgid "Home icon visible on desktop"
+msgstr "ಗಣಕತೆರೆಯಲ್ಲಿ ಕಾಣಿಸುವ ನೆಲೆಯ ಚಿಹ್ನೆ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:59
+msgid ""
+"If this is set to true, an icon linking to the home folder will be put on "
+"the desktop."
+msgstr ""
+"ಇದು ನಿಜ ಎಂದಾಗಿದ್ದಲ್ಲಿ, ನೆಲೆ ಕಡತಕೋಶಕ್ಕೆ ಕೊಂಡಿ ಜೋಡಿಸುವ ಒಂದು ಚಿಹ್ನೆಯನ್ನು "
+"ಗಣಕತೆರೆಯಲ್ಲಿ "
+"ಇರಿಸಲಾಗುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:60
+msgid "Trash icon visible on desktop"
+msgstr "ಗಣಕತೆರೆಯಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುವ ಕಸದಬುಟ್ಟಿಯ ಚಿಹ್ನೆ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:61
+msgid ""
+"If this is set to true, an icon linking to the trash will be put on the "
+"desktop."
+msgstr ""
+"ಇದು ನಿಜ ಎಂದಾಗಿದ್ದಲ್ಲಿ, ಕಸದ ಬುಟ್ಟಿಗೆ ಕೊಂಡಿ ಜೋಡಿಸುವ ಒಂದು ಚಿಹ್ನೆಯನ್ನು "
+"ಗಣಕತೆರೆಯಲ್ಲಿ "
+"ಇರಿಸಲಾಗುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:62
+msgid "Show mounted volumes on the desktop"
+msgstr "ಆರೋಹಿಸಲಾದ ಪರಿಮಾಣಗಳನ್ನು ಗಣಕದಲ್ಲಿ ತೋರಿಸು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:63
+msgid ""
+"If this is set to true, icons linking to mounted volumes will be put on the "
+"desktop."
+msgstr ""
+"ಇದು ನಿಜ ಎಂದಾಗಿದ್ದಲ್ಲಿ, ಆರೋಹಿಸಲಾದ ಪರಿಮಾಣಗಳಿಗೆ ಕೊಂಡಿ ಜೋಡಿಸುವ ಒಂದು ಚಿಹ್ನೆಯನ್ನು "
+"ಗಣಕತೆರೆಯಲ್ಲಿ ಇರಿಸಲಾಗುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:64
+msgid "Network Servers icon visible on the desktop"
+msgstr "ಗಣಕತೆರೆಯ ಮೇಲೆ ಕಾಣಿಸಿಕೊಳ್ಳುವ ಜಾಲಬಂಧ ಪೂರೈಕೆಗಣಕಗಳ ಚಿಹ್ನೆ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:65
+msgid ""
+"If this is set to true, an icon linking to the Network Servers view will be "
+"put on the desktop."
+msgstr ""
+"ನಿಜ ಎಂದಾದಲ್ಲಿ, ಜಾಲ ಬಂಧ ಪೂರೈಕೆಗಣಕಕ್ಕೆ ಕೊಂಡಿ ಜೋಡಿಸುವ ಒಂದು ಚಿಹ್ನೆಯು ಗಣಕತೆರೆಯಲ್ಲಿ "
+"ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:66
+msgid "Desktop home icon name"
+msgstr "ಗಣಕತೆರೆಯ ನೆಲೆ ಚಿಹ್ನೆಯ ಹೆಸರು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:67
+msgid ""
+"This name can be set if you want a custom name for the home icon on the "
+"desktop."
+msgstr ""
+"ಗಣಕತೆರೆಯಲ್ಲಿರುವ ನೆಲೆಯ ಚಿಹ್ನೆಯು ನಿಮ್ಮ ಇಚ್ಛೆಯ ಒಂದು ಹೆಸರನ್ನು ನೀಡಲು ನೀವು "
+"ಬಯಸಿದಲ್ಲಿ "
+"ಇದನ್ನು ಹೊಂದಿಸಬಹುದು."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:68
+msgid "Desktop trash icon name"
+msgstr "ಗಣಕತೆರೆಯ ಕಸದ ಬುಟ್ಟಿಯ ಚಿಹ್ನೆಯ ಹೆಸರು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:69
+msgid ""
+"This name can be set if you want a custom name for the trash icon on the "
+"desktop."
+msgstr ""
+"ಗಣಕತೆರೆಯಲ್ಲಿರುವ ಕಸದಬುಟ್ಟಿ ಚಿಹ್ನೆಯು ನಿಮ್ಮ ಇಚ್ಛೆಯ ಒಂದು ಹೆಸರನ್ನು ನೀಡಲು ನೀವು "
+"ಬಯಸಿದಲ್ಲಿ "
+"ಇದನ್ನು ಹೊಂದಿಸಬಹುದು."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:70
+msgid "Network servers icon name"
+msgstr "ಜಾಲಬಂಧ ಪೂರೈಕೆಗಣಕಗಳ ಚಿಹ್ನೆ ಹೆಸರು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:71
+msgid ""
+"This name can be set if you want a custom name for the network servers icon "
+"on the desktop."
+msgstr ""
+"ಗಣಕತೆರೆಯಲ್ಲಿರುವ ಜಾಲಬಂಧ ಪೂರೈಕೆಗಣಕಗಳ ಚಿಹ್ನೆಗೆ ನಿಮ್ಮ ಇಚ್ಛೆಯ ಒಂದು ಹೆಸರನ್ನು ನೀಡಲು "
+"ನೀವು "
+"ಬಯಸಿದಲ್ಲಿ ಇದನ್ನು ಹೊಂದಿಸಬಹುದು."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:72
+msgid ""
+"An integer specifying how parts of overlong file names should be replaced by "
+"ellipses on the desktop. If the number is larger than 0, the file name will "
+"not exceed the given number of lines. If the number is 0 or smaller, no "
+"limit is imposed on the number of displayed lines."
+msgstr ""
+"ದೊಡ್ಡದಾದ ಕಡತದ ಹೆಸರುಗಳ ಭಾಗಗಳನ್ನು ಹೇಗೆ ಗಣಕತೆರೆಯಲ್ಲಿನ ದೀರ್ಘವೃತ್ತಗಳಿಂದ "
+"ಬದಲಾಯಿಸಬೇಕು "
+"ಎಂದು ಸೂಚಿಸುವ ಒಂದು ಪೂರ್ಣಾಂಕ. ಸಂಖ್ಯೆಯು 0 ಗಿಂತ ದೊಡ್ಡದಾಗಿದ್ದಲ್ಲಿ, ಕಡತದ ಹೆಸರುಗಳು "
+"ಒದಗಿಸಲಾದ ಸಾಲುಗಳ ಸಂಖ್ಯೆಯನ್ನು ಮೀರುವುದಿಲ್ಲ. ಸಂಖ್ಯೆಯು 0 ಅಥವ 0 ಗಿಂತ ಸಣ್ಣದಾಗಿದ್ದರೆ, "
+"ತೋರಿಸಲಾಗುವ ಸಾಲುಗಳ ಮೇಲೆ ಯಾವುದೆ ಮಿತಿಯನ್ನು ಹೇರಲಾಗುವುದಿಲ್ಲ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:73
+msgid "Fade the background on change"
+msgstr "ಹಿನ್ನಲೆಯು ಬದಲಾದಾಗ ಅದನ್ನು ಮಬ್ಬುಗೊಳಿಸು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:74
+msgid ""
+"If set to true, then Nautilus will use a fade effect to change the desktop "
+"background."
+msgstr ""
+"ನಿಜ ಎಂದಾದಲ್ಲಿ, Nautilus ಗಣಕತೆರೆಯ ಹಿನ್ನೆಲೆಯನ್ನು ಬದಲಾಯಿಸಲು ಮಬ್ಬುಗೊಳಿಸುವ "
+"ಪರಿಣಾಮವನ್ನು "
+"ಬಳಸುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:75
+msgid "The geometry string for a navigation window."
+msgstr "ನ್ಯಾವಿಗೇಶನ್ ಕಿಟಕಿಗಾಗಿನ ಜ್ಯಾಮಿತಿಯ ವಾಕ್ಯಾಂಶ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:76
+msgid ""
+"A string containing the saved geometry and coordinates string for navigation "
+"windows."
+msgstr ""
+"ನ್ಯಾವಿಗೇಶನ್ ಕಿಟಕಿಗಳಿಗಾಗಿ ಉಳಿಸಲಾದ ಜ್ಯಾಮಿತಿ ಮತ್ತು ನಿರ್ದೇಶಾಂಕಗಳ ವಾಕ್ಯಾಂಶವನ್ನು "
+"ಹೊಂದಿರುವ "
+"ವಾಕ್ಯಾಂಶ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:77
+msgid "Whether the navigation window should be maximized."
+msgstr "ನ್ಯಾವಿಗೇಶನ್‌ಕಿಟಕಿಯನ್ನು ಗರಿಷ್ಟ ಮಟ್ಟಕ್ಕೆ ಹಿಗ್ಗಿಸಬೇಕೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:78
+msgid "Whether the navigation window should be maximized by default."
+msgstr "ನ್ಯಾವಿಗೇಶನ್‌ ಕಿಟಕಿಯನ್ನು ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಗರಿಷ್ಟ ಮಟ್ಟಕ್ಕೆ ಹಿಗ್ಗಿಸಬೇಕೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:79
+msgid "Width of the side pane"
+msgstr "ಅಂಚಿನ ಫಲಕದ ಅಗಲ"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:80
+msgid "The default width of the side pane in new windows."
+msgstr "ಹೊಸ ಕಿಟಕಿಗಳ ಅಂಚಿನ ಫಲಕದ ಪೂರ್ವನಿಯೋಜಿತ ಅಗಲ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:81
+msgid "Show location bar in new windows"
+msgstr "ಸ್ಥಳದ ಪಟ್ಟಿಯನ್ನು ಹೊಸ ಕಿಟಕಿಗಳಲ್ಲಿ ತೋರಿಸು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:82
+msgid ""
+"If set to true, newly opened windows will have the location bar visible."
+msgstr ""
+"ನಿಜ ಎಂದಾದಲ್ಲಿ, ಹೊಸದಾಗಿ ತೆರೆಯಲಾದ ಕಿಟಕಿಗಳ ಸ್ಥಳ ಪಟ್ಟಿಯು ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ."
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:83
+msgid "Show side pane in new windows"
+msgstr "ಹೊಸ ಕಿಟಕಿಗಳಲ್ಲಿ ಅಂಚಿನ ಫಲಕವನ್ನು ತೋರಿಸು"
+
+#: ../libnautilus-private/org.gnome.nautilus.gschema.xml.in.h:84
+msgid "If set to true, newly opened windows will have the side pane visible."
+msgstr "ನಿಜ ಎಂದಾದಲ್ಲಿ, ಹೊಸದಾಗಿ ತೆರೆಯಲಾದ ಕಿಟಕಿಗಳ ಅಂಚಿನ ಫಲಕವು ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ."
+
+#: ../nautilus-sendto-extension/nautilus-nste.c:96
+#: ../nautilus-sendto-extension/nautilus-nste.c:101
+msgid "Email…"
+msgstr "ವಿಅಂಚೆ…"
+
+#: ../nautilus-sendto-extension/nautilus-nste.c:97
+#| msgid "Send file by mail, instant message…"
+msgid "Send file by mail…"
+msgstr "ಕಡತವನ್ನು ಅಂಚೆಯ ಮೂಲಕ ಕಳುಹಿಸಿ…"
+
+#: ../nautilus-sendto-extension/nautilus-nste.c:102
+#| msgid "Send files by mail, instant message…"
+msgid "Send files by mail…"
+msgstr "ಕಡತಗಳನ್ನು ಅಂಚೆಯ ಮೂಲಕ ಕಳುಹಿಸಿ…"
+
+#. Some sort of failure occurred. How 'bout we tell the user?
+#: ../src/nautilus-application.c:215 ../src/nautilus-window-slot.c:1611
+msgid "Oops! Something went wrong."
+msgstr "ಓಹ್! ಎಲ್ಲೋ ಏನೋ ತಪ್ಪಾಗಿದೆ."
+
+#: ../src/nautilus-application.c:217
+#, c-format
+msgid ""
+"Unable to create a required folder. Please create the following folder, or "
+"set permissions such that it can be created:\n"
+"%s"
+msgstr ""
+"ಅಗತ್ಯವಿರುವ ಕಡತಕೋಶವನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ. ದಯವಿಟ್ಟು ಈ ಕೆಳಗಿನ ಕಡತಕೋಶವನ್ನು "
+"ರಚಿಸಿ, "
+"ಅಥವ  ಅದನ್ನು ನಿರ್ಮಿಸುವಂತೆ ಅನುಮತಿಗಳನ್ನು ಒದಗಿಸಿ:\n"
+"%s"
+
+#: ../src/nautilus-application.c:222
+#, c-format
+msgid ""
+"Unable to create required folders. Please create the following folders, or "
+"set permissions such that they can be created:\n"
+"%s"
+msgstr ""
+"ಅಗತ್ಯವಿರುವ ಕಡತಕೋಶಗಳನ್ನು ರಚಿಸಲು. ಸಾಧ್ಯವಾಗಿಲ್ಲ ದಯವಿಟ್ಟು ಈ ಕೆಳಗಿನ ಕಡತಕೋಶಗಳನ್ನು "
+"ರಚಿಸಿ, "
+"ಅಥವ  ಅವುಗಳನ್ನು ನಿರ್ಮಿಸುವಂತೆ ಅನುಮತಿಗಳನ್ನು ಒದಗಿಸಿ:\n"
+"%s"
+
+#: ../src/nautilus-application.c:354
+msgid ""
+"Nautilus 3.0 deprecated this directory and tried migrating this "
+"configuration to ~/.config/nautilus"
+msgstr ""
+"Nautilus 3.0 ಈ ಕೋಶವನ್ನು ಅಪ್ರಚಲಿತಗೊಳಿಸಿದೆ ಮತ್ತು ಈ ಸಂರಚನೆಯನ್ನು  "
+"~/.config/nautilus "
+"ಗೆ ವರ್ಗಾಯಿಸಲು ಪ್ರಯತ್ನಿಸಿದೆ."
+
+#: ../src/nautilus-application.c:702
+msgid "--check cannot be used with other options."
+msgstr "--check ಅನ್ನು ಬೇರೆ ಆಯ್ಕೆಗಳೊಂದಿಗೆ ಬಳಸುವಂತಿಲ್ಲ."
+
+#: ../src/nautilus-application.c:709
+msgid "--quit cannot be used with URIs."
+msgstr "--quit ಅನ್ನು URIಗಳೊಂದಿಗೆ ಬಳಸಲು ಸಾಧ್ಯವಿರುವುದಿಲ್ಲ."
+
+#: ../src/nautilus-application.c:717
+msgid "--select must be used with at least an URI."
+msgstr "--select ಅನ್ನು ಕನಿಷ್ಟ ಒಂದು URI ಯೊಂದಿಗೆ ಬಳಸಬೇಕು."
+
+#: ../src/nautilus-application.c:724
+msgid "--no-desktop and --force-desktop cannot be used together."
+msgstr ""
+"--no-desktop ಮತ್ತು --force-desktop ಅನ್ನು ಒಟ್ಟಿಗೆ ಬಳಸಲು ಸಾಧ್ಯವಿರುವುದಿಲ್ಲ."
+
+#: ../src/nautilus-application.c:808
+msgid "Perform a quick set of self-check tests."
+msgstr "ಒಂದು ಕ್ಷಿಪ್ರವಾದ ಸ್ವಯಂ-ಪರೀಕ್ಷೆಗಳನ್ನು ನಿರ್ವಹಿಸು."
+
+#: ../src/nautilus-application.c:815
+msgid "Create the initial window with the given geometry."
+msgstr "ಒದಗಿಸಲಾದ ಅಳತೆಯೊಂದಿಗೆ ಆರಂಭದ ಕಿಟಕಿಯನ್ನು ರಚಿಸು."
+
+#: ../src/nautilus-application.c:815
+msgid "GEOMETRY"
+msgstr "GEOMETRY"
+
+#: ../src/nautilus-application.c:817
+msgid "Show the version of the program."
+msgstr "ಪ್ರೋಗ್ರಾಮ್‌ನ ಆವೃತ್ತಿಯನ್ನು ತೋರಿಸು."
+
+#: ../src/nautilus-application.c:819
+msgid "Always open a new window for browsing specified URIs"
+msgstr "ನಿಶ್ಚಿತ URIಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಪ್ರತಿ ಬಾರಿಯೂ ಒಂದು ಕಿಟಕಿಯನ್ನು ತೆರೆ"
+
+#: ../src/nautilus-application.c:821
+msgid "Only create windows for explicitly specified URIs."
+msgstr "ಸ್ಪಷ್ಟವಾಗಿ ತಿಳಿಸಿದ ಯುಆರ್ಐಗಳಿಗಾಗಿ ಮಾತ್ರ ಕಿಟಕಿಗಳು ರಚಿಸಲ್ಪಡಬೇಕು."
+
+#: ../src/nautilus-application.c:823
+msgid "Never manage the desktop (ignore the GSettings preference)."
+msgstr "ಎಂದಿಗೂ ಗಣಕತೆರೆಯನ್ನು ವ್ಯವಸ್ಥಾಪಿಸಬೇಡ (GSettings ಆದ್ಯತೆಗಳನ್ನು ಕಡೆಗಣಿಸು)."
+
+#: ../src/nautilus-application.c:825
+msgid "Always manage the desktop (ignore the GSettings preference)."
+msgstr "ಯಾವಾಗಲೂ ಗಣಕತೆರೆಯನ್ನು ವ್ಯವಸ್ಥಾಪಿಸಬೇಡ (GSettings ಆದ್ಯತೆಗಳನ್ನು ಕಡೆಗಣಿಸು)."
+
+#: ../src/nautilus-application.c:827
+msgid "Quit Nautilus."
+msgstr "Nautilus‍ ನಿಂದ ನಿರ್ಗಮಿಸು."
+
+#: ../src/nautilus-application.c:829
+msgid "Select specified URI in parent folder."
+msgstr "ಸೂಚಿಸಲಾದ URI ಅನ್ನು ಮೂಲ ಕಡತಕೋಶದಲ್ಲಿ ತೋರಿಸು."
+
+#: ../src/nautilus-application.c:830
+msgid "[URI...]"
+msgstr "[URI...]"
+
+#. Translators: this is a fatal error quit message printed on the
+#. * command line
+#: ../src/nautilus-application.c:906
+msgid "Could not register the application"
+msgstr "ಅನ್ವಯವನ್ನು ನೋಂದಾಯಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../src/nautilus-application-actions.c:127
+#, c-format
+msgid ""
+"There was an error displaying help: \n"
+"%s"
+msgstr ""
+"ಸಹಾಯವನ್ನು ತೋರಿಸುವಾಗ ಒಂದು ದೋಷ ಉಂಟಾಗಿದೆ: \n"
+"%s"
+
+#: ../src/nautilus-app-menu.ui.h:1
+msgid "New _Window"
+msgstr "ಹೊಸ ಕಿಟಕಿ (_W)"
+
+#: ../src/nautilus-app-menu.ui.h:2
+msgid "Connect to _Server…"
+msgstr "ಪೂರೈಕೆಗಣಕಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸು (_S)…"
+
+#: ../src/nautilus-app-menu.ui.h:3
+msgid "_Bookmarks"
+msgstr "ಪುಟಗುರುತುಗಳು (_B)"
+
+#: ../src/nautilus-app-menu.ui.h:4
+msgid "Prefere_nces"
+msgstr "ಆದ್ಯತೆಗಳು (_n)"
+
+#: ../src/nautilus-app-menu.ui.h:5
+msgid "_Help"
+msgstr "ಸಹಾಯ (_H)"
+
+#: ../src/nautilus-app-menu.ui.h:6
+msgid "_About"
+msgstr "ಬಗ್ಗೆ  (_A)"
+
+#: ../src/nautilus-app-menu.ui.h:7
+msgid "_Quit"
+msgstr "ನಿರ್ಗಮಿಸು (_Q)"
+
+#: ../src/nautilus-autorun-software.c:142
+#: ../src/nautilus-autorun-software.c:145
+#, c-format
+msgid ""
+"Unable to start the program:\n"
+"%s"
+msgstr ""
+"ಪ್ರೊಗ್ರಾಮ್ ಅನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ಸಾಧ್ಯವಾಗಿಲ್ಲ:\n"
+"%s"
+
+#: ../src/nautilus-autorun-software.c:148
+#, c-format
+msgid "Unable to locate the program"
+msgstr "ಪ್ರೊಗ್ರಾಮ್ ಅನ್ನು ಪತ್ತೆಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../src/nautilus-autorun-software.c:170
+msgid "Oops! There was a problem running this software."
+msgstr "ಓಹ್! ಈ ತಂತ್ರಾಂಶವನ್ನು ಚಲಾಯಿಸುವಲ್ಲಿ ಒಂದು ತೊಂದರೆ ಉಂಟಾಗಿದೆ."
+
+#: ../src/nautilus-autorun-software.c:201
+#, c-format
+msgid ""
+"“%s” contains software intended to be automatically started. Would you like "
+"to run it?"
+msgstr ""
+"“%s” ತಾನಾಗಿಯೆ ಆರಂಭಗೊಳ್ಳಲು ಬಯಸುವ ಒಂದು ತಂತ್ರಾಂಶವನ್ನು ಹೊಂದಿರಬಹುದು. ನೀವದನ್ನು "
+"ಚಲಾಯಿಸಲು ಬಯಸುತ್ತೀರೆ?"
+
+#: ../src/nautilus-autorun-software.c:205
+msgid "If you don't trust this location or aren't sure, press Cancel."
+msgstr ""
+"ನೀವು ಈ ಸ್ಥಳವನ್ನು ನಂಬದೆ ಇದ್ದಲ್ಲಿ ಅಥವ ನೀವು ಖಚಿತವಿಲ್ಲದೆ ಇದ್ದಲ್ಲಿ, ರದ್ದುಗೊಳಿಸು "
+"ಅನ್ನು ಒತ್ತಿ."
+
+#: ../src/nautilus-autorun-software.c:240 ../src/nautilus-mime-actions.c:723
+msgid "_Run"
+msgstr "ಚಲಾಯಿಸು (_R)"
+
+#: ../src/nautilus-bookmarks-window.c:166
+msgid "No bookmarks defined"
+msgstr "ಯಾವುದೆ ಬುಕ್‍ಮಾರ್ಕುಗಳು ವಿವರಿಸಲ್ಪಟ್ಟಿಲ್ಲ"
+
+#: ../src/nautilus-bookmarks-window.c:711
+msgid "Bookmarks"
+msgstr "ಬುಕ್‌ಮಾರ್ಕುಗಳು"
+
+#: ../src/nautilus-bookmarks-window.ui.h:1
+msgid "Remove"
+msgstr "ತೆಗೆದು ಹಾಕು"
+
+#: ../src/nautilus-bookmarks-window.ui.h:2
+msgid "Move Up"
+msgstr "ಮೇಲೆ ಜರುಗಿಸು"
+
+#: ../src/nautilus-bookmarks-window.ui.h:3
+msgid "Move Down"
+msgstr "ಕೆಳಗೆ ಜರುಗಿಸು"
+
+#: ../src/nautilus-bookmarks-window.ui.h:4
+msgid "_Name"
+msgstr "ಹೆಸರು (_N)"
+
+#: ../src/nautilus-bookmarks-window.ui.h:5
+msgid "_Location"
+msgstr "ಸ್ಥಳ (_L)"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-canvas-view.c:1108
+msgid "Re_versed Order"
+msgstr "ತಿರುವುಮುರುಗಾದ ಅನುಕ್ರಮ (_v)"
+
+#. tooltip
+#: ../src/nautilus-canvas-view.c:1109
+msgid "Display icons in the opposite order"
+msgstr "ವಿರುದ್ದದ ಅನುಕ್ರಮದಲ್ಲಿ ಚಿಹ್ನೆಗಳನ್ನು ತೋರಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-canvas-view.c:1113
+msgid "_Keep Aligned"
+msgstr "ಜೋಡಿಸಿ ಇಡು (_K)"
+
+#. tooltip
+#: ../src/nautilus-canvas-view.c:1114
+msgid "Keep icons lined up on a grid"
+msgstr "ಚಿಹ್ನೆಗಳನ್ನು ಗ್ರಿಡ್‌ನಲ್ಲಿ ಸಾಲಾಗಿ ಜೋಡಿಸು"
+
+#: ../src/nautilus-canvas-view.c:1121
+msgid "_Manually"
+msgstr "ಕೈಯಾರೆ (_M)"
+
+#: ../src/nautilus-canvas-view.c:1122
+msgid "Leave icons wherever they are dropped"
+msgstr "ಚಿಹ್ನೆಗಳು ಎಲ್ಲಿ ಬೀಳಿಸಲ್ಪಡುತ್ತವೆಯೋ ಅಲ್ಲಿಯೆ ಇರಲು ಬಿಡು"
+
+#: ../src/nautilus-canvas-view.c:1125
+msgid "By _Name"
+msgstr "ಹೆಸರಿನಿಂದ (_N)"
+
+#: ../src/nautilus-canvas-view.c:1126
+msgid "Keep icons sorted by name in rows"
+msgstr "ಚಿಹ್ನೆಗಳನ್ನು ಅವುಗಳ ಹೆಸರಿನ ಮೇರೆಗೆ ಸಾಲುಗಳಲ್ಲಿ ಜೋಡಿಸಿ ಇಡು"
+
+#: ../src/nautilus-canvas-view.c:1129
+msgid "By _Size"
+msgstr "ಗಾತ್ರದಿಂದ (_S)"
+
+#: ../src/nautilus-canvas-view.c:1130
+msgid "Keep icons sorted by size in rows"
+msgstr "ಚಿಹ್ನೆಗಳನ್ನು ಅವುಗಳ ಗಾತ್ರದ ಮೇರೆಗೆ ಸಾಲುಗಳಲ್ಲಿ ಜೋಡಿಸಿ ಇಡು"
+
+#: ../src/nautilus-canvas-view.c:1133
+msgid "By _Type"
+msgstr "ಬಗೆಯಿಂದ (_T)"
+
+#: ../src/nautilus-canvas-view.c:1134
+msgid "Keep icons sorted by type in rows"
+msgstr "ಚಿಹ್ನೆಗಳನ್ನು ಅವುಗಳ ಬಗೆಯ ಮೇರೆಗೆ ಸಾಲುಗಳಲ್ಲಿ ಜೋಡಿಸಿ ಇಡು"
+
+#: ../src/nautilus-canvas-view.c:1137
+msgid "By Modification _Date"
+msgstr "ಮಾರ್ಪಡಿಸಿದ ದಿನಾಂಕದಿಂದ (_D)"
+
+#: ../src/nautilus-canvas-view.c:1138
+msgid "Keep icons sorted by modification date in rows"
+msgstr "ಚಿಹ್ನೆಗಳನ್ನು ಮಾರ್ಪಡಿಸಲಾದ ದಿನಾಂಕದ ಆಧಾರ ಮೇಲೆ ಸಾಲುಗಳಲ್ಲಿ ಜೋಡಿಸಿ ಇಡು"
+
+#: ../src/nautilus-canvas-view.c:1141
+#| msgid "By Access Date"
+msgid "By _Access Date"
+msgstr "ತೆರೆದ ದಿನಾಂಕದ ಮೇರೆಗೆ (_A)"
+
+#: ../src/nautilus-canvas-view.c:1142
+#| msgid "Keep icons sorted by trash time in rows"
+msgid "Keep icons sorted by access date in rows"
+msgstr "ಚಿಹ್ನೆಗಳನ್ನು ಅವುಗಳ ತೆರೆದ ದಿನಾಂಕವನ್ನು ಮೇರೆಗೆ ಸಾಲುಗಳಲ್ಲಿ ಜೋಡಿಸಿ ಇಡಿ"
+
+#: ../src/nautilus-canvas-view.c:1145
+msgid "By T_rash Time"
+msgstr "ಕಸದ ಬುಟ್ಟಿಗೆ ಹಾಕಿದ ಸಮಯದ ಮೇರೆಗೆ  (_N)"
+
+#: ../src/nautilus-canvas-view.c:1146
+msgid "Keep icons sorted by trash time in rows"
+msgstr ""
+"ಚಿಹ್ನೆಗಳನ್ನು ಅವುಗಳನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಹಾಕಿದ ಸಮಯದ ಮೇರೆಗೆ ಸಾಲುಗಳಲ್ಲಿ ಜೋಡಿಸಿ ಇಡಿ"
+
+#: ../src/nautilus-canvas-view.c:1149
+msgid "By Search Relevance"
+msgstr "ಹುಡುಕು ಪ್ರಸ್ತುತತೆಯ ಮೇರೆಗೆ"
+
+#: ../src/nautilus-canvas-view.c:1150
+msgid "Keep icons sorted by search relevance in rows"
+msgstr "ಚಿಹ್ನೆಗಳನ್ನು ಅವುಗಳ ಹುಡುಕು ಪ್ರಸ್ತುತತೆಯ ಮೇರೆಗೆ ಸಾಲುಗಳಲ್ಲಿ ಜೋಡಿಸಿ ಇಡು"
+
+#: ../src/nautilus-canvas-view-container.c:523
+#: ../src/nautilus-file-management-properties.ui.h:35
+msgid "Icon View"
+msgstr "ಚಿಹ್ನೆ ನೋಟ"
+
+#. if it wasn't cancelled show a dialog
+#: ../src/nautilus-connect-server.c:52 ../src/nautilus-mime-actions.c:1869
+#: ../src/nautilus-mime-actions.c:2133
+msgid "Unable to access location"
+msgstr "ಸ್ಥಳವನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../src/nautilus-connect-server.c:73
+msgid "Unable to display location"
+msgstr "ಸ್ಥಳವನ್ನು ಪತ್ತೆ ಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../src/nautilus-connect-server.c:139
+msgid "Print but do not open the URI"
+msgstr "ಮುದ್ರಿಸು ಆದರೆ URI ಅನ್ನು ತೆರೆಯಬೇಡ"
+
+#. Translators: This is the --help description for the connect to server app,
+#. the initial newlines are between the command line arg and the description
+#: ../src/nautilus-connect-server.c:151
+msgid ""
+"\n"
+"\n"
+"Add connect to server mount"
+msgstr ""
+"\n"
+"\n"
+"ಪೂರೈಕೆಗಣಕ ಆರೋಹಣಕ್ಕೆ ಸಂಪರ್ಕವನ್ನು ಸೇರಿಸಿ"
+
+#: ../src/nautilus-connect-server-dialog.c:109
+msgid "This file server type is not recognized."
+msgstr "ಕಡತ ಪೂರೈಕೆಗಣಕದ ಬಗೆಯನ್ನು ಗುರುತಿಸಲಾಗುವುದಿಲ್ಲ."
+
+#: ../src/nautilus-connect-server-dialog.c:116
+msgid "This doesn't look like an address."
+msgstr "ಇದು ಒಂದು ವಿಳಾಸ ಎಂದು ಕಾಣಿಸುತ್ತಿಲ್ಲ."
+
+#. Translators: %s is a URI of the form "smb://foo.example.com"
+#: ../src/nautilus-connect-server-dialog.c:225
+#, c-format
+msgid "For example, %s"
+msgstr "ಉದಾಹರಣೆ, %s"
+
+#: ../src/nautilus-connect-server-dialog.c:493
+msgid "_Remove"
+msgstr "ತೆಗೆದು ಹಾಕು (_R)"
+
+#: ../src/nautilus-connect-server-dialog.c:502
+msgid "_Clear All"
+msgstr "ಎಲ್ಲವನ್ನೂ ಅಳಿಸು (_C)"
+
+#: ../src/nautilus-connect-server-dialog.c:563
+msgid "_Server Address"
+msgstr "ಪೂರೈಕೆಗಣಕದ ವಿಳಾಸ (_S)"
+
+#: ../src/nautilus-connect-server-dialog.c:587
+msgid "_Recent Servers"
+msgstr "ಇತ್ತೀಚಿನ ಪೂರೈಕೆಗಣಕಗಳು (_R)"
+
+#: ../src/nautilus-connect-server-dialog.c:656
+msgid "C_onnect"
+msgstr "ಸಂಪರ್ಕ ಕಲ್ಪಿಸು (_o)"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-desktop-canvas-view.c:663 ../src/nautilus-view.c:7155
+#: ../src/nautilus-view.c:8701
+msgid "E_mpty Trash"
+msgstr "ಕಸಬುಟ್ಟಿಯನ್ನು ಖಾಲಿಮಾಡು (_m)"
+
+#. label, accelerator
+#: ../src/nautilus-desktop-canvas-view.c:687
+#: ../src/nautilus-desktop-canvas-view.c:728
+msgid "Restore Icons' Original Si_zes"
+msgstr "ಆರಿಸಲಾದ ಪ್ರತಿಯೊಂದು ಚಿಹ್ನೆಗಳನ್ನು ಅದರ ನಿಜವಾದ ಗಾತ್ರಗಳಿಗೆ ಮರಳಿಸು (_z)"
+
+#: ../src/nautilus-desktop-canvas-view.c:688
+msgid "Restore Icon's Original Si_ze"
+msgstr "ಚಿಹ್ನೆಯ ಮೂಲ ಗಾತ್ರಕ್ಕೆ ಮರಳಿಸು (_z)"
+
+#. label, accelerator
+#: ../src/nautilus-desktop-canvas-view.c:700
+msgid "Change Desktop _Background"
+msgstr "ಗಣಕತೆರೆಯ ಹಿನ್ನಲೆಯನ್ನು ಬದಲಾಯಿಸು (_B)"
+
+#. tooltip
+#: ../src/nautilus-desktop-canvas-view.c:702
+msgid ""
+"Show a window that lets you set your desktop background's pattern or color"
+msgstr ""
+"ನಿಮ್ಮ ಗಣಕತೆರೆಯ ಹಿನ್ನಲೆಯ ವಿನ್ಯಾಸವನ್ನು ಅಥವ ಬಣ್ಣವನ್ನು ಬದಲಾಯಿಸಲು ಅನುವು ಮಾಡುವ ಒಂದು "
+"ಕಿಟಕಿಯನ್ನು ತೋರಿಸಲಾಗುತ್ತದೆ"
+
+#. label, accelerator
+#: ../src/nautilus-desktop-canvas-view.c:707
+msgid "Empty Trash"
+msgstr "ಕಸಬುಟ್ಟಿಯನ್ನು ಖಾಲಿಮಾಡು"
+
+#. tooltip
+#: ../src/nautilus-desktop-canvas-view.c:709 ../src/nautilus-trash-bar.c:212
+#: ../src/nautilus-view.c:7156
+msgid "Delete all items in the Trash"
+msgstr "ಕಸದ ಬುಟ್ಟಿಯಲ್ಲಿನ ಎಲ್ಲಾ ಅಂಶಗಳನ್ನು ಅಳಿಸಿಹಾಕು"
+
+#. label, accelerator
+#: ../src/nautilus-desktop-canvas-view.c:714
+msgid "_Organize Desktop by Name"
+msgstr "ಗಣಕತೆರೆಯನ್ನು ಹೆಸರಿನ ಮೇರೆಗೆ ಜೋಡಿಸು (_O)"
+
+#. tooltip
+#: ../src/nautilus-desktop-canvas-view.c:716
+msgid "Reposition icons to better fit in the window and avoid overlapping"
+msgstr ""
+"ಕಿಟಕಿಯ ಒಳಗೆ ಸರಿಯಾಗಿ ಕೂರುವಂತೆ ಹಾಗು ಒಂದರ ಮೇಲೆ ಇನ್ನೊಂದು ಹೇರದಂತೆ ಚಿಹ್ನೆಗಳ ಸ್ಥಾನದ "
+"ಸರಿಪಡಿಸುವಿಕೆ"
+
+#. label, accelerator
+#: ../src/nautilus-desktop-canvas-view.c:721
+msgid "Resize Icon…"
+msgstr "ಚಿಹ್ನೆಯನ್ನು ಬದಲಾಯಿಸು…"
+
+#. tooltip
+#: ../src/nautilus-desktop-canvas-view.c:723
+msgid "Make the selected icons resizable"
+msgstr "ಆರಿಸಲಾದ ಚಿಹ್ನೆಗಳನ್ನು ಗಾತ್ರ ಬದಲಿಸಲು ಸಾಧ್ಯವಿರುತೆ ಮಾಡು"
+
+#. tooltip
+#: ../src/nautilus-desktop-canvas-view.c:730
+#| msgid "Restore each selected icons to its original size"
+msgid "Restore each selected icon to its original size"
+msgstr "ಆರಿಸಲಾದ ಪ್ರತಿಯೊಂದು ಚಿಹ್ನೆಗಳನ್ನೂ ಸಹ ಅದರ ಮೂಲ ಗಾತ್ರಕ್ಕೆ ಮರಳಿಸಿ"
+
+#: ../src/nautilus-desktop-item-properties.c:404
+#: ../src/nautilus-desktop-item-properties.c:414
+#: ../src/nautilus-image-properties-page.c:368
+msgid "Comment"
+msgstr "ಅಭಿಪ್ರಾಯ"
+
+#: ../src/nautilus-desktop-item-properties.c:407
+msgid "URL"
+msgstr "URL"
+
+#: ../src/nautilus-desktop-item-properties.c:410
+#: ../src/nautilus-desktop-item-properties.c:420
+#: ../src/nautilus-image-properties-page.c:359
+#: ../src/nautilus-image-properties-page.c:414
+msgid "Description"
+msgstr "ವಿವರಣೆ"
+
+#: ../src/nautilus-desktop-item-properties.c:417
+msgid "Command"
+msgstr "ಆದೇಶ"
+
+#. hardcode "Desktop"
+#: ../src/nautilus-desktop-window.c:197 ../src/nautilus-desktop-window.c:367
+msgid "Desktop"
+msgstr "ಗಣಕತೆರೆ"
+
+#: ../src/nautilus-error-reporting.c:67
+#, c-format
+msgid "You do not have the permissions necessary to view the contents of “%s”."
+msgstr "“%s” ನ ಒಳ ಅಂಶಗಳನ್ನು ವೀಕ್ಷಿಸಲು ನಿಮಗೆ ಅಗತ್ಯ ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../src/nautilus-error-reporting.c:71
+#, c-format
+msgid "“%s” could not be found. Perhaps it has recently been deleted."
+msgstr "“%s” ಕಂಡು ಬಂದಿಲ್ಲ. ಬಹುಷಃ ಅದು ಇತ್ತೀಚಿಗಷ್ಟೆ ಅಳಿಸಲ್ಪಟ್ಟಿರಬಹುದು."
+
+#: ../src/nautilus-error-reporting.c:75
+#, c-format
+msgid "Sorry, could not display all the contents of “%s”: %s"
+msgstr "ಕ್ಷಮಿಸಿ,“%s” ನಲ್ಲಿನ ಎಲ್ಲ ಒಳ ಅಂಶಗಳನ್ನು ತೋರಿಸಲಾಗಿಲ್ಲ: %s"
+
+#: ../src/nautilus-error-reporting.c:82
+msgid "This location could not be displayed."
+msgstr "ಸ್ಥಳವನ್ನು ತೋರಿಸಲಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-error-reporting.c:106
+#, c-format
+msgid "You do not have the permissions necessary to change the group of “%s”."
+msgstr "“%s” ದ ಸಮೂಹವನ್ನು ಬದಲಾಯಿಸಲು ಅಗತ್ಯವಿರುವ ಅನುಮತಿಗಳು ನಿಮ್ಮಲ್ಲಿಲ್ಲ."
+
+#. fall through
+#: ../src/nautilus-error-reporting.c:119
+#, c-format
+msgid "Sorry, could not change the group of “%s”: %s"
+msgstr "ಕ್ಷಮಿಸಿ, “%s” ನ ಸಮೂಹವನ್ನು ಬದಲಾಯಿಸಲಾಗಲಿಲ್ಲ: %s"
+
+#: ../src/nautilus-error-reporting.c:124
+msgid "The group could not be changed."
+msgstr "ಸಮೂಹವನ್ನು ಬದಲಾಯಿಸಲಾಗಲಿಲ್ಲ."
+
+#: ../src/nautilus-error-reporting.c:144
+#, c-format
+msgid "Sorry, could not change the owner of “%s”: %s"
+msgstr "ಕ್ಷಮಿಸಿ, “%s” ನ ಮಾಲಿಕನನ್ನು ಬದಲಾಯಿಸಲಾಗಲಿಲ್ಲ: %s"
+
+#: ../src/nautilus-error-reporting.c:146
+msgid "The owner could not be changed."
+msgstr "ಮಾಲಿಕನನ್ನು ಬದಲಾಯಿಸಲಾಗಲಿಲ್ಲ."
+
+#: ../src/nautilus-error-reporting.c:166
+#, c-format
+msgid "Sorry, could not change the permissions of “%s”: %s"
+msgstr "ಕ್ಷಮಿಸಿ, “%s” ನ ಅನುಮತಿಗಳನ್ನು ಬದಲಾಯಿಸಲಾಗಲಿಲ್ಲ: %s"
+
+#: ../src/nautilus-error-reporting.c:168
+msgid "The permissions could not be changed."
+msgstr "ಅನುಮತಿಗಳನ್ನು ಬದಲಾಯಿಸಲಾಗಲಿಲ್ಲ."
+
+#: ../src/nautilus-error-reporting.c:203
+#, c-format
+msgid ""
+"The name “%s” is already used in this location. Please use a different name."
+msgstr ""
+"“%s” ಎಂಬ ಹೆಸರು ಈಗಾಗಲೆ ಈ ಸ್ಥಳದಲ್ಲಿ ಬಳಸಲ್ಪಟ್ಟಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಬೇರೆ ಹೆಸರನ್ನು "
+"ಬಳಸಿ."
+
+#: ../src/nautilus-error-reporting.c:208
+#, c-format
+msgid ""
+"There is no “%s” in this location. Perhaps it was just moved or deleted?"
+msgstr ""
+"ಈ ಸ್ಥಳದಲ್ಲಿ “%s” ಇಲ್ಲ. ಬಹುಷಃ ಅದು ಸ್ಥಳಾಂತರಿತಗೊಂಡಿರಬೇಕು ಅಥವ ಅಳಿಸಲ್ಪಟ್ಟಿರಬೇಕು?"
+
+#: ../src/nautilus-error-reporting.c:213
+#, c-format
+msgid "You do not have the permissions necessary to rename “%s”."
+msgstr "“%s” ದ ಹೆಸರನ್ನು ಬದಲಾಯಿಸಲು ನಿಮಗೆ ಅಗತ್ಯ ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#: ../src/nautilus-error-reporting.c:218
+#, c-format
+msgid ""
+"The name “%s” is not valid because it contains the character “/”. Please use "
+"a different name."
+msgstr ""
+"“%s” ಎನ್ನುವ ಹೆಸರು ಅಮಾನ್ಯವಾಗಿದೆ ಏಕೆಂದರೆ ಅದು “/” ಅಕ್ಷರವನ್ನು ಹೊಂದಿದೆ. ದಯವಿಟ್ಟು "
+"ಒಂದು "
+"ಬೇರೆ ಹೆಸರನ್ನು ಬಳಸಿ."
+
+#: ../src/nautilus-error-reporting.c:222
+#, c-format
+msgid "The name “%s” is not valid. Please use a different name."
+msgstr "“%s” ಎನ್ನುವ ಹೆಸರು ಅಮಾನ್ಯವಾಗಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಬೇರೆ ಹೆಸರನ್ನು ಬಳಸಿ."
+
+#: ../src/nautilus-error-reporting.c:228
+#, c-format
+msgid "The name “%s” is too long. Please use a different name."
+msgstr "“%s” ಎನ್ನುವ ಹೆಸರು ಬಹಳ ದೊಡ್ಡದಾಗಿದೆ. ದಯವಿಟ್ಟು ಒಂದು ಬೇರೆ ಹೆಸರನ್ನು ಬಳಸಿ."
+
+#. fall through
+#: ../src/nautilus-error-reporting.c:242
+#, c-format
+msgid "Sorry, could not rename “%s” to “%s”: %s"
+msgstr "ಕ್ಷಮಿಸಿ, “%s” ನ ಹೆಸರನ್ನು “%s” ಎಂದು ಬದಲಾಯಿಸಲಾಗಿಲಿಲ್ಲ: %s"
+
+#: ../src/nautilus-error-reporting.c:250
+msgid "The item could not be renamed."
+msgstr "ಅಂಶದ ಹೆಸರನ್ನು ಬದಲಾಯಿಸಲಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-error-reporting.c:347
+#, c-format
+msgid "Renaming “%s” to “%s”."
+msgstr "“%s” ಅನ್ನು “%s” ಗೆ ಮರುಹೆಸರಿಸಲಾಗುತ್ತಿದೆ."
+
+#. Translators: this is referred to captions under icons.
+#: ../src/nautilus-file-management-properties.c:211
+#: ../src/nautilus-properties-window.c:4024
+#: ../src/nautilus-properties-window.c:4051
+msgid "None"
+msgstr "ಯಾವುದೂ ಇಲ್ಲ"
+
+#: ../src/nautilus-file-management-properties.ui.h:1
+msgid "Files Preferences"
+msgstr "ಕಡತಗಳ ಆದ್ಯತೆಗಳು"
+
+#: ../src/nautilus-file-management-properties.ui.h:2
+msgid "Default View"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ನೋಟ"
+
+#: ../src/nautilus-file-management-properties.ui.h:3
+msgid "View _new folders using:"
+msgstr "ಇವನ್ನು ಬಳಸುವ ಹೊಸ ಕಡತಗಳನ್ನು ನೋಡು (_n):"
+
+#: ../src/nautilus-file-management-properties.ui.h:4
+msgid "_Arrange items:"
+msgstr "ಅಂಶಗಳನ್ನು ಜೋಡಿಸು (_A):"
+
+#: ../src/nautilus-file-management-properties.ui.h:5
+msgid "Sort _folders before files"
+msgstr "ಕಡತಗಳಿಗೂ ಮೊದಲು ಕಡತಕೋಶಗಳನ್ನು ವಿಂಗಡಿಸು (_f)"
+
+#: ../src/nautilus-file-management-properties.ui.h:6
+msgid "Show hidden and _backup files"
+msgstr "ಅಡಗಿಸಲಾದ ಹಾಗು ಬ್ಯಾಕ್ಅಪ್ ಕಡತಗಳನ್ನು ತೋರಿಸು (_b)"
+
+#: ../src/nautilus-file-management-properties.ui.h:7
+msgid "Icon View Defaults"
+msgstr "ಚಿಹ್ನೆ ನೋಟದ ಪೂರ್ವನಿಯೋಜಿತಗಳು"
+
+#: ../src/nautilus-file-management-properties.ui.h:8
+msgid "Default _zoom level:"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ಹಿಗ್ಗಿಸುವ ಮಟ್ಟ (_z):"
+
+#: ../src/nautilus-file-management-properties.ui.h:9
+msgid "List View Defaults"
+msgstr "ಪಟ್ಟಿ ನೋಟದ ಪೂರ್ವನಿಯೋಜಿತಗಳು"
+
+#: ../src/nautilus-file-management-properties.ui.h:10
+msgid "D_efault zoom level:"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತ ಹಿಗ್ಗಿಸುವ ಮಟ್ಟ (_e):"
+
+#: ../src/nautilus-file-management-properties.ui.h:11
+msgid "Views"
+msgstr "ನೋಟಗಳು"
+
+#: ../src/nautilus-file-management-properties.ui.h:12
+msgid "Behavior"
+msgstr "ವರ್ತನೆ"
+
+#: ../src/nautilus-file-management-properties.ui.h:13
+msgid "_Single click to open items"
+msgstr "ಅಂಶಗಳನ್ನು ತೆರೆಯಲು ಒಂದು ಕ್ಲಿಕ್ (_S)"
+
+#: ../src/nautilus-file-management-properties.ui.h:14
+msgid "_Double click to open items"
+msgstr "ಅಂಶಗಳನ್ನು ತೆರೆಯಲು ಎರಡು ಬಾರಿ ಕ್ಲಿಕ್ಕಿಸಿ (_D)"
+
+#: ../src/nautilus-file-management-properties.ui.h:15
+msgid "Executable Text Files"
+msgstr "ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದ ಪಠ್ಯ ಕಡತಗಳು"
+
+#: ../src/nautilus-file-management-properties.ui.h:16
+msgid "_Run executable text files when they are opened"
+msgstr "ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದ ಪಠ್ಯ ಕಡತಗಳು ತೆರೆಯಲ್ಪಟ್ಟಾಗ ಅವನ್ನು ಚಲಾಯಿಸು (_R)"
+
+#: ../src/nautilus-file-management-properties.ui.h:17
+msgid "_View executable text files when they are opened"
+msgstr "ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದ ಪಠ್ಯ ಕಡತಗಳು ತೆರೆಯಲ್ಪಟ್ಟಾಗ ಅವನ್ನು ನೋಡು (_V)"
+
+#: ../src/nautilus-file-management-properties.ui.h:18
+msgid "_Ask each time"
+msgstr "ಪ್ರತಿ ಬಾರಿಯೂ ಕೇಳು (_A)"
+
+#. trash
+#: ../src/nautilus-file-management-properties.ui.h:19
+#: ../src/nautilus-shell-search-provider.c:290 ../src/nautilus-trash-bar.c:194
+msgid "Trash"
+msgstr "ಕಸಬುಟ್ಟಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:20
+msgid "Ask before _emptying the Trash or deleting files"
+msgstr "ಕಸಬುಟ್ಟಿಯನ್ನು ಖಾಲಿ ಮಾಡುವಾಗ ಅಥವ ಕಡತಗಳನ್ನು ಅಳಿಸುವಾಗ ಅನುಮತಿ ಪಡೆ (_e)"
+
+#: ../src/nautilus-file-management-properties.ui.h:21
+msgid "I_nclude a Delete command that bypasses Trash"
+msgstr "ಕಸದ ಬುಟ್ಟಿಯನ್ನು ತಪ್ಪಿಸುವ ಒಂದು ಅಳಿಸು ಆದೇಶಯನ್ನು ಸೇರಿಸು (_n)"
+
+#: ../src/nautilus-file-management-properties.ui.h:22
+msgid "Icon Captions"
+msgstr "ಚಿಹ್ನೆಯ ಶೀರ್ಷಿಕೆಗಳು"
+
+#: ../src/nautilus-file-management-properties.ui.h:23
+msgid ""
+"Choose the order of information to appear beneath icon names. More "
+"information will appear when zooming in closer."
+msgstr ""
+"ಚಿಹ್ನೆಯ ಹೆಸರುಗಳ ಕೆಳಗೆ ಕಾಣಿಸಬೇಕಿರುವ ಮಾಹಿತಿಯ ಅನುಕ್ರಮವನ್ನು ಆರಿಸಿ. ಹತ್ತಿರಕ್ಕೆ "
+"ಹಿಗ್ಗಿಸಿದಷ್ಟ್ಟೂ ಹೆಚ್ಚು ಮಾಹಿತಿಯು ಕಾಣಿಸುತ್ತದೆ."
+
+#: ../src/nautilus-file-management-properties.ui.h:24
+#: ../src/nautilus-list-view.c:2135
+msgid "List View"
+msgstr "ಪಟ್ಟಿ ನೋಟ"
+
+#: ../src/nautilus-file-management-properties.ui.h:25
+msgid "Navigate folders in a tree"
+msgstr "ಕಡತಕೋಶಗಳನ್ನು ಒಂದು ವೃಕ್ಷದಲ್ಲಿ ನ್ಯಾವಿಗೇಟ್‌ ಮಾಡು"
+
+#: ../src/nautilus-file-management-properties.ui.h:26
+msgid "Display"
+msgstr "ಪ್ರದರ್ಶಕ"
+
+#: ../src/nautilus-file-management-properties.ui.h:27
+msgid "Choose the order of information to appear in the list view."
+msgstr "ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ಕಾಣಿಸಬೇಕಿರುವ ಮಾಹಿತಿಯ ಅನುಕ್ರಮವನ್ನು ಆರಿಸಿ."
+
+#: ../src/nautilus-file-management-properties.ui.h:28
+msgid "List Columns"
+msgstr "ಕಾಲಂಗಳ ಪಟ್ಟಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:30
+msgid "Show _thumbnails:"
+msgstr "ಸೂಚ್ಯಚಿತ್ರಗಳನ್ನು (ತಂಬ್‌ನೈಲ್) ತೋರಿಸು (_t):"
+
+#: ../src/nautilus-file-management-properties.ui.h:31
+msgid "_Only for files smaller than:"
+msgstr "ಕೇವಲ ಇದಕ್ಕಿಂತ ಚಿಕ್ಕದಾದ ಕಡತಗಳಿಗೆ ಮಾತ್ರ (_O):"
+
+#: ../src/nautilus-file-management-properties.ui.h:32
+#: ../src/nautilus-properties-window.c:4452
+msgid "Folders"
+msgstr "ಕಡತಕೋಶಗಳು"
+
+#: ../src/nautilus-file-management-properties.ui.h:33
+msgid "Count _number of items:"
+msgstr "ಅಂಶಗಳ ಸಂಖ್ಯೆಯನ್ನು ಎಣಿಸು (_n):"
+
+#: ../src/nautilus-file-management-properties.ui.h:34
+msgid "Preview"
+msgstr "ಅವಲೋಕನ"
+
+#: ../src/nautilus-file-management-properties.ui.h:36
+msgid "Always"
+msgstr "ಯಾವಾಗಲೂ"
+
+#: ../src/nautilus-file-management-properties.ui.h:37
+msgid "Local Files Only"
+msgstr "ಸ್ಥಳೀಯ ಕಡತ ಮಾತ್ರ"
+
+#: ../src/nautilus-file-management-properties.ui.h:38
+msgid "Never"
+msgstr "ಎಂದಿಗೂ ಬೇಡ"
+
+#: ../src/nautilus-file-management-properties.ui.h:39
+msgid "By Name"
+msgstr "ಹೆಸರಿನಿಂದ"
+
+#: ../src/nautilus-file-management-properties.ui.h:40
+msgid "By Size"
+msgstr "ಗಾತ್ರದಿಂದ"
+
+#: ../src/nautilus-file-management-properties.ui.h:41
+msgid "By Type"
+msgstr "ಬಗೆಯಿಂದ"
+
+#: ../src/nautilus-file-management-properties.ui.h:42
+msgid "By Modification Date"
+msgstr "ಮಾರ್ಪಡಿಸಲಾದ ದಿನಾಂಕದೊಂದಿಗೆ"
+
+#: ../src/nautilus-file-management-properties.ui.h:43
+msgid "By Access Date"
+msgstr "ನಿಲುಕಿಸಿಕೊಳ್ಳಲಾದ ದಿನಾಂಕದ ಮೇರೆಗೆ"
+
+#: ../src/nautilus-file-management-properties.ui.h:44
+msgid "By Trashed Date"
+msgstr "ಕಸದ ಬುಟ್ಟಿಗೆ ಹಾಕಲಾದ ದಿನಾಂಕದ ಮೇರೆಗೆ"
+
+#: ../src/nautilus-file-management-properties.ui.h:46
+#, no-c-format
+msgid "33%"
+msgstr "೩೩%"
+
+#: ../src/nautilus-file-management-properties.ui.h:48
+#, no-c-format
+msgid "50%"
+msgstr "೫೦%"
+
+#: ../src/nautilus-file-management-properties.ui.h:50
+#, no-c-format
+msgid "66%"
+msgstr "೬೬%"
+
+#: ../src/nautilus-file-management-properties.ui.h:52
+#, no-c-format
+msgid "100%"
+msgstr "೧೦೦%"
+
+#: ../src/nautilus-file-management-properties.ui.h:54
+#, no-c-format
+msgid "150%"
+msgstr "೧೫೦%"
+
+#: ../src/nautilus-file-management-properties.ui.h:56
+#, no-c-format
+msgid "200%"
+msgstr "೨೦೦%"
+
+#: ../src/nautilus-file-management-properties.ui.h:58
+#, no-c-format
+msgid "400%"
+msgstr "೪೦೦%"
+
+#: ../src/nautilus-file-management-properties.ui.h:59
+msgid "100 KB"
+msgstr "೧೦೦ KB"
+
+#: ../src/nautilus-file-management-properties.ui.h:60
+msgid "500 KB"
+msgstr "೫೦೦ KB"
+
+#: ../src/nautilus-file-management-properties.ui.h:61
+msgid "1 MB"
+msgstr "೧ ಎಮ್‌ಬಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:62
+msgid "3 MB"
+msgstr "೩ ಎಮ್‌ಬಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:63
+msgid "5 MB"
+msgstr "೫ ಎಮ್‌ಬಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:64
+msgid "10 MB"
+msgstr "೧೦ ಎಮ್‌ಬಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:65
+msgid "100 MB"
+msgstr "೧೦೦ ಎಮ್‌ಬಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:66
+msgid "1 GB"
+msgstr "೧ ಜಿಬಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:67
+msgid "2 GB"
+msgstr "೨ ಜಿಬಿ"
+
+#: ../src/nautilus-file-management-properties.ui.h:68
+msgid "4 GB"
+msgstr "೪ ಜಿಬಿ"
+
+#: ../src/nautilus-image-properties-page.c:329
+msgid "Image Type"
+msgstr "ಚಿತ್ರದ ಬಗೆ"
+
+#: ../src/nautilus-image-properties-page.c:331
+#: ../src/nautilus-image-properties-page.c:337
+#, c-format
+msgid "%d pixel"
+msgid_plural "%d pixels"
+msgstr[0] "%d ಪಿಕ್ಸೆಲ್"
+msgstr[1] "%d ಪಿಕ್ಸೆಲ್‌ಗಳು"
+
+#: ../src/nautilus-image-properties-page.c:335
+msgid "Width"
+msgstr "ಅಗಲ"
+
+#: ../src/nautilus-image-properties-page.c:341
+msgid "Height"
+msgstr "ಎತ್ತರ"
+
+#: ../src/nautilus-image-properties-page.c:354
+#: ../src/nautilus-image-properties-page.c:355
+msgid "Title"
+msgstr "ಶೀರ್ಷಿಕೆ"
+
+#: ../src/nautilus-image-properties-page.c:356
+#: ../src/nautilus-image-properties-page.c:357
+msgid "Author"
+msgstr "ಕತೃ"
+
+#: ../src/nautilus-image-properties-page.c:360
+#: ../src/nautilus-image-properties-page.c:417
+msgid "Copyright"
+msgstr "ಹಕ್ಕು"
+
+#: ../src/nautilus-image-properties-page.c:361
+msgid "Created On"
+msgstr "ರಚಿಸಿದ್ದು"
+
+#: ../src/nautilus-image-properties-page.c:362
+msgid "Created By"
+msgstr "ರಚಿಸಿದವರು"
+
+#. Translators: this refers to a legal disclaimer string embedded in
+#. * the metadata of an image
+#: ../src/nautilus-image-properties-page.c:365
+msgid "Disclaimer"
+msgstr "ಡಿಸ್‌ಕ್ಲೈಮರ್"
+
+#: ../src/nautilus-image-properties-page.c:366
+msgid "Warning"
+msgstr "ಎಚ್ಚರಿಕೆ"
+
+#: ../src/nautilus-image-properties-page.c:367
+msgid "Source"
+msgstr "ಆಕರ"
+
+#: ../src/nautilus-image-properties-page.c:382
+msgid "Camera Brand"
+msgstr "ಕ್ಯಾಮೆರಾ ಬ್ರಾಂಡ್"
+
+#: ../src/nautilus-image-properties-page.c:383
+msgid "Camera Model"
+msgstr "ಕ್ಯಾಮೆರಾ ಮಾಡಲ್"
+
+#. Choose which date to show in order of relevance
+#: ../src/nautilus-image-properties-page.c:386
+msgid "Date Taken"
+msgstr "ತೆಗೆಯಲಾದ ದಿನಾಂಕ"
+
+#: ../src/nautilus-image-properties-page.c:387
+msgid "Date Digitized"
+msgstr "ಡಿಜಿಟೈಸ್ ಮಾಡಿದ ದಿನಾಂಕ"
+
+#: ../src/nautilus-image-properties-page.c:388
+msgid "Date Modified"
+msgstr "ಮಾರ್ಪಡಿಸಿದ ದಿನಾಂಕ"
+
+#: ../src/nautilus-image-properties-page.c:392
+msgid "Exposure Time"
+msgstr "ಎಕ್ಸ್‍ಪೋಶರ್ ಸಮಯ"
+
+#: ../src/nautilus-image-properties-page.c:393
+msgid "Aperture Value"
+msgstr "ಅಪರ್ಚರ್ ಮೌಲ್ಯ"
+
+#: ../src/nautilus-image-properties-page.c:394
+msgid "ISO Speed Rating"
+msgstr "ISO ಸ್ಪೀಡ್ ರೇಟಿಂಗ್"
+
+#: ../src/nautilus-image-properties-page.c:395
+msgid "Flash Fired"
+msgstr "ಫ್ಲ್ಯಾಶ್ ಫೈರ್ಡ್"
+
+#: ../src/nautilus-image-properties-page.c:396
+msgid "Metering Mode"
+msgstr "ಮೀಟರಿಂಗ್ ಮೋಡ್"
+
+#: ../src/nautilus-image-properties-page.c:397
+msgid "Exposure Program"
+msgstr "ಎಕ್ಸ್‍ಪೋಶರ್ ಪ್ರೊಗ್ರಾಂ"
+
+#: ../src/nautilus-image-properties-page.c:398
+msgid "Focal Length"
+msgstr "ಫೋಕಲ್ ಲೆಂಗ್ತ್‍"
+
+#: ../src/nautilus-image-properties-page.c:399
+msgid "Software"
+msgstr "ತಂತ್ರಾಂಶ"
+
+#: ../src/nautilus-image-properties-page.c:415
+msgid "Keywords"
+msgstr "ಮುಖ್ಯಶಬ್ಧಗಳು"
+
+#: ../src/nautilus-image-properties-page.c:416
+msgid "Creator"
+msgstr "ನಿರ್ಮಾತೃ"
+
+#: ../src/nautilus-image-properties-page.c:418
+msgid "Rating"
+msgstr "ಗುಣನಿಶ್ಚಯ"
+
+#: ../src/nautilus-image-properties-page.c:441
+msgid "Failed to load image information"
+msgstr "ಚಿತ್ರ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡುವಲ್ಲಿ ವಿಫಲತೆ"
+
+#: ../src/nautilus-image-properties-page.c:706
+#: ../src/nautilus-list-model.c:391 ../src/nautilus-window-slot.c:618
+#: ../src/nautilus-window-slot.c:2212
+msgid "Loading…"
+msgstr "ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ…"
+
+#: ../src/nautilus-list-model.c:389
+msgid "(Empty)"
+msgstr "(ಖಾಲಿ)"
+
+#: ../src/nautilus-list-view.c:1608
+#| msgid "Use De_fault"
+msgid "Use Default"
+msgstr "ಪೂರ್ವನಿಯೋಜಿತವನ್ನು ಆರಿಸು"
+
+#: ../src/nautilus-list-view.c:2941
+#, c-format
+msgid "%s Visible Columns"
+msgstr "%s ಗೋಚರಿಸುವ ಕಾಲಂಗಳು"
+
+#: ../src/nautilus-list-view.c:2960
+msgid "Choose the order of information to appear in this folder:"
+msgstr "ಈ ಕಡತಕೋಶದಲ್ಲಿ ಕಾಣಿಸಬೇಕಿರುವ ಮಾಹಿತಿಯ ಅನುಕ್ರಮವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ:"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-list-view.c:3015
+msgid "Visible _Columns…"
+msgstr "ಗೋಚರಿಸುವ ಕಾಲಂಗಳು (_C)…"
+
+#. tooltip
+#: ../src/nautilus-list-view.c:3016
+msgid "Select the columns visible in this folder"
+msgstr "ಈ ಕಡತಕೋಶದಲ್ಲಿ ಗೋಚರಿಸುವ ಕಾಲಂಗಳನು ಆರಿಸು"
+
+#: ../src/nautilus-location-entry.c:259
+#, c-format
+msgid "Do you want to view %d location?"
+msgid_plural "Do you want to view %d locations?"
+msgstr[0] "ನೀವು %d ಸ್ಥಳವನ್ನು ವೀಕ್ಷಿಸಲು ಬಯಸುತ್ತೀರೆ?"
+msgstr[1] "ನೀವು %d ಸ್ಥಳಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಬಯಸುತ್ತೀರೆ?"
+
+#: ../src/nautilus-location-entry.c:263 ../src/nautilus-mime-actions.c:1061
+#, c-format
+msgid "This will open %d separate window."
+msgid_plural "This will open %d separate windows."
+msgstr[0] "ಇದು ಪ್ರತ್ಯೇಕ %d ಕಿಟಕಿಯನ್ನು ತೆರೆಯುತ್ತದೆ."
+msgstr[1] "ಇದು ಪ್ರತ್ಯೇಕ %d ಕಿಟಕಿಗಳನ್ನು ತೆರೆಯುತ್ತದೆ."
+
+#: ../src/nautilus-mime-actions.c:631
+#, c-format
+msgid "The link “%s” is broken. Move it to Trash?"
+msgstr "“%s” ಕೊಂಡಿಯು ತುಂಡಾಗಿದೆ. ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸಬೇಕೆ?"
+
+#: ../src/nautilus-mime-actions.c:633
+#, c-format
+msgid "The link “%s” is broken."
+msgstr "“%s” ಕೊಂಡಿಯು ತುಂಡಾಗಿದೆ."
+
+#: ../src/nautilus-mime-actions.c:639
+msgid "This link cannot be used because it has no target."
+msgstr "ಈ ಕೊಂಡಿಯನ್ನು ಬಳಸಲಾಗುವುದಿಲ್ಲ, ಏಕೆಂದರೆ ಇದು ಯಾವುದೆ ಗುರಿಯನ್ನು ಹೊಂದಿಲ್ಲ."
+
+#: ../src/nautilus-mime-actions.c:641
+#, c-format
+msgid "This link cannot be used because its target “%s” doesn't exist."
+msgstr ""
+"ಈ ಕೊಂಡಿಯನ್ನು ಬಳಸಲಾಗುವುದಿಲ್ಲ ಏಕೆಂದರೆ ಇದರ ಗುರಿಯಾದಂತಹ “%s” ಅಸ್ತಿತ್ವದಲ್ಲಿಲ್ಲ."
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-mime-actions.c:651 ../src/nautilus-view.c:7211
+#: ../src/nautilus-view.c:7325 ../src/nautilus-view.c:8299
+#: ../src/nautilus-view.c:8618
+msgid "Mo_ve to Trash"
+msgstr "ಕಸದ ಬುಟ್ಟಿಗೆ ಜರುಗಿಸು (_v)"
+
+#: ../src/nautilus-mime-actions.c:711
+#, c-format
+msgid "Do you want to run “%s”, or display its contents?"
+msgstr "ನೀವು “%s” ಅನ್ನು ಚಲಾಯಿಸಬೇಕೆ, ಅಥವ ಅದರ ಒಳ ಅಂಶಗಳನ್ನು ತೋರಿಸಬೇಕೆ?"
+
+#: ../src/nautilus-mime-actions.c:713
+#, c-format
+msgid "“%s” is an executable text file."
+msgstr "“%s” ವು ಒಂದು ಕಾರ್ಯಗತಗೊಳಿಸಬಲ್ಲ ಪಠ್ಯಕಡತ."
+
+#: ../src/nautilus-mime-actions.c:719
+msgid "Run in _Terminal"
+msgstr "ಟರ್ಮಿನಲ್‍ನಲ್ಲಿ ಚಲಾಯಿಸು (_T)"
+
+#: ../src/nautilus-mime-actions.c:720
+msgid "_Display"
+msgstr "ಪ್ರದರ್ಶಿಸು (_D)"
+
+#: ../src/nautilus-mime-actions.c:1056 ../src/nautilus-mime-actions.c:1791
+#: ../src/nautilus-view.c:955
+msgid "Are you sure you want to open all files?"
+msgstr "ನೀವು ಎಲ್ಲಾ ಕಡತಗಳನ್ನು ತೆರೆಯಬೇಕೆಂದು ಖಾತ್ರಿಯೆ?"
+
+#: ../src/nautilus-mime-actions.c:1058
+#, c-format
+msgid "This will open %d separate tab."
+msgid_plural "This will open %d separate tabs."
+msgstr[0] "ಇದು ಪ್ರತ್ಯೇಕ %d ಹಾಳೆಯನ್ನು ತೆರೆಯುತ್ತದೆ."
+msgstr[1] "ಇದು ಪ್ರತ್ಯೇಕ %d ಹಾಳೆಗಳನ್ನು ತೆರೆಯುತ್ತದೆ."
+
+#: ../src/nautilus-mime-actions.c:1123
+#, c-format
+msgid "Could not display “%s”."
+msgstr "“%s” ಅನ್ನು ತೋರಿಸಲಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-mime-actions.c:1221
+msgid "The file is of an unknown type"
+msgstr "ಕಡತವು ಬಗೆಯ ಅಜ್ಞಾತವಾಗಿದೆ"
+
+#: ../src/nautilus-mime-actions.c:1225
+#, c-format
+msgid "There is no application installed for “%s” files"
+msgstr "“%s” ಕಡತಗಳಿಗಾಗಿ ಅನುಸ್ಥಾಪಿತವಾಗಿರ ಯಾವುದೆ ಅನ್ವಯವಿಲ್ಲ"
+
+#: ../src/nautilus-mime-actions.c:1240
+msgid "_Select Application"
+msgstr "ಒಂದು ಅನ್ವಯವನ್ನು ಆರಿಸು (_S)"
+
+#: ../src/nautilus-mime-actions.c:1276
+msgid "There was an internal error trying to search for applications:"
+msgstr "ಅನ್ವಯಗಳಿಗಾಗಿ ಹುಡುಕುವಾಗ ಒಂದು ದೋಷ ಉಂಟಾಗಿದೆ:"
+
+#: ../src/nautilus-mime-actions.c:1278
+msgid "Unable to search for application"
+msgstr "ಅನ್ವಯಕ್ಕಾಗಿ ಹುಡುಕಲಾಗಲಿಲ್ಲ"
+
+#: ../src/nautilus-mime-actions.c:1397
+#, c-format
+msgid ""
+"There is no application installed for “%s” files.\n"
+"Do you want to search for an application to open this file?"
+msgstr ""
+"“%s” ಕಡತಗಳಿಗಾಗಿ ಅನುಸ್ಥಾಪಿತವಾಗಿರ ಯಾವುದೆ ಅನ್ವಯವಿಲ್ಲ.\n"
+"ಈ ಕಡತವನ್ನು ತೆರೆಯಲು ಒಂದು ಅನ್ವಯಕ್ಕಾಗಿ ಹುಡುಕಲು ಬಯಸುತ್ತೀರೆ?"
+
+#: ../src/nautilus-mime-actions.c:1547
+msgid "Untrusted application launcher"
+msgstr "ನಂಬಿಕಾರ್ಹವಲ್ಲದ ಅನ್ವಯ ಆರಂಭಗಾರ"
+
+#: ../src/nautilus-mime-actions.c:1550
+#, c-format
+msgid ""
+"The application launcher “%s” has not been marked as trusted. If you do not "
+"know the source of this file, launching it may be unsafe."
+msgstr ""
+"ಅನ್ವಯದ ಆರಂಭಗಾರ “%s” ಅನ್ನು ನಂಬಿಕಾರ್ಹ ಎಂದು ಗುರುತು ಹಾಕಿಲ್ಲ. ನಿಮಗೆ ಈ ಕಡತದ ಮೂಲದ "
+"ಬಗೆಗೆ "
+"ನಿಮಗೆ ತಿಳಿಯದೆ ಇದ್ದರೆ, ಆರಂಭಿಸುವುದು ಸುರಕ್ಷಿತವಾಗಿರುವುದಿಲ್ಲ."
+
+#: ../src/nautilus-mime-actions.c:1565
+msgid "_Launch Anyway"
+msgstr "ಪರವಾಗಿಲ್ಲ ಆರಂಭಿಸು (_L)"
+
+#: ../src/nautilus-mime-actions.c:1568
+msgid "Mark as _Trusted"
+msgstr "ನಂಬಿಕಾರ್ಹ ಎಂದು ಗುರುತುಹಾಕು (_T)"
+
+#: ../src/nautilus-mime-actions.c:1792
+#, c-format
+msgid "This will open %d separate application."
+msgid_plural "This will open %d separate applications."
+msgstr[0] "ಇದು  ಪ್ರತ್ಯೇಕ %d ಅನ್ವಯವನ್ನು ತೆರೆಯುತ್ತದೆ."
+msgstr[1] "ಇದು  ಪ್ರತ್ಯೇಕ %d ಅನ್ವಯಗಳನ್ನು ತೆರೆಯುತ್ತದೆ."
+
+#: ../src/nautilus-mime-actions.c:2212
+msgid "Unable to start location"
+msgstr "ಸ್ಥಳವನ್ನು ಆರಂಭಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../src/nautilus-mime-actions.c:2296
+#, c-format
+msgid "Opening “%s”."
+msgstr "“%s” ಅನ್ನು ತೆರೆಯಲಾಗುತ್ತಿದೆ."
+
+#: ../src/nautilus-mime-actions.c:2299
+#, c-format
+msgid "Opening %d item."
+msgid_plural "Opening %d items."
+msgstr[0] "%d ಅಂಶವನ್ನು ತೆರೆಯಲಾಗುತ್ತಿದೆ."
+msgstr[1] "%d ಅಂಶಗಳನ್ನು ತೆರೆಯಲಾಗುತ್ತಿದೆ."
+
+#: ../src/nautilus-notebook.c:382
+msgid "Close tab"
+msgstr "ಹಾಳೆಯನ್ನು ಮುಚ್ಚು"
+
+#: ../src/nautilus-progress-ui-handler.c:106
+#: ../src/nautilus-progress-ui-handler.c:158
+#: ../src/nautilus-progress-ui-handler.c:216
+#: ../src/nautilus-progress-ui-handler.c:272
+msgid "File Operations"
+msgstr "ಕಡತ ಕಾರ್ಯಾಚರಣೆಗಳು"
+
+#: ../src/nautilus-progress-ui-handler.c:117
+msgid "Show Details"
+msgstr "ವಿವರಗಳನ್ನು ತೋರಿಸು"
+
+#: ../src/nautilus-progress-ui-handler.c:152
+#: ../src/nautilus-progress-ui-handler.c:174
+#, c-format
+msgid "%'d file operation active"
+msgid_plural "%'d file operations active"
+msgstr[0] "%'d ಕಡತ ಕಾರ್ಯವು ಸಕ್ರಿಯವಾಗಿದೆ"
+msgstr[1] "%'d ಕಡತ ಕಾರ್ಯಗಳು ಸಕ್ರಿಯವಾಗಿವೆ"
+
+#: ../src/nautilus-progress-ui-handler.c:273
+msgid "All file operations have been successfully completed"
+msgstr "ಎಲ್ಲಾ ಕಡತ ಕಾರ್ಯಾಚರಣೆಗಳು ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿವೆ"
+
+#: ../src/nautilus-properties-window.c:511
+msgid "You cannot assign more than one custom icon at a time!"
+msgstr ""
+"ಒಂದು ಬಾರಿಗೆ ಒಂದಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಅಗತ್ಯಾನುಗುಣ ಚಿಹ್ನೆಗಳನ್ನು ನಿಯೋಜಿಸುವಂತಿಲ್ಲ!"
+
+#: ../src/nautilus-properties-window.c:512
+msgid "Please drag just one image to set a custom icon."
+msgstr "ಅಗತ್ಯಾನುಗುಣ ಚಿಹ್ನೆಯಾಗಿಸಲು ದಯವಿಟ್ಟು ಕೇವಲ ಒಂದು ಚಿತ್ರವನ್ನು ಸೇರಿಸಿ."
+
+#: ../src/nautilus-properties-window.c:523
+msgid "The file that you dropped is not local."
+msgstr "ನೀವು ಸೇರಿಸಿದ ಕಡತವು ಸ್ಥಳೀಯವಾದುದಲ್ಲ."
+
+#: ../src/nautilus-properties-window.c:524
+#: ../src/nautilus-properties-window.c:530
+msgid "You can only use local images as custom icons."
+msgstr "ನೀವು ಅಗತ್ಯಾನುಗುಣ ಚಿಹ್ನೆಗಳಿಗೆ ಕೇವಲ ಸ್ಥಳೀಯ ಕಡತಗಳನ್ನು ಮಾತ್ರ ಬಳಸಬಹುದಾಗಿದೆ."
+
+#: ../src/nautilus-properties-window.c:529
+msgid "The file that you dropped is not an image."
+msgstr "ನೀವು ಸೇರಿಸಿದ ಕಡತವು ಒಂದು ಚಿತ್ರವಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-properties-window.c:644
+msgid "_Name:"
+msgid_plural "_Names:"
+msgstr[0] "ಹೆಸರು (_N):"
+msgstr[1] "ಹೆಸರುಗಳು (_N):"
+
+#: ../src/nautilus-properties-window.c:839
+#, c-format
+msgid "Properties"
+msgstr "ಗುಣಗಳು"
+
+#: ../src/nautilus-properties-window.c:847
+#, c-format
+msgid "%s Properties"
+msgstr "%s ಗುಣಗಳು"
+
+#: ../src/nautilus-properties-window.c:1239
+#, c-format
+msgctxt "MIME type description (MIME type)"
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: ../src/nautilus-properties-window.c:1440
+msgid "Cancel Group Change?"
+msgstr "ಸಮೂಹ ಬದಲಾವಣೆಯನ್ನು ರದ್ದುಪಡಿಸಬೇಕೆ?"
+
+#: ../src/nautilus-properties-window.c:1837
+msgid "Cancel Owner Change?"
+msgstr "ಮಾಲಿಕನ ಬದಲಾವಣೆಯನ್ನು ರದ್ದುಪಡಿಸಬೇಕೆ?"
+
+#: ../src/nautilus-properties-window.c:2136
+msgid "nothing"
+msgstr "ಏನೂ ಇಲ್ಲ"
+
+#: ../src/nautilus-properties-window.c:2138
+msgid "unreadable"
+msgstr "ಓದಲಾಗದ"
+
+#: ../src/nautilus-properties-window.c:2146
+#, c-format
+msgid "%'d item, with size %s"
+msgid_plural "%'d items, totalling %s"
+msgstr[0] "%'d ಅಂಶ, %s ಗಾತ್ರದೊಂದಿಗೆ"
+msgstr[1] "%'d ಅಂಶಗಳು, ಒಟ್ಟು %s"
+
+#: ../src/nautilus-properties-window.c:2155
+msgid "(some contents unreadable)"
+msgstr "(ಕೆಲವೊಂದು ಒಳಅಂಶಗಳನ್ನು ಓದಲಾಗಿಲ್ಲ)"
+
+#. Also set the title field here, with a trailing carriage return &
+#. * space if the value field has two lines. This is a hack to get the
+#. * "Contents:" title to line up with the first line of the
+#. * 2-line value. Maybe there's a better way to do this, but I
+#. * couldn't think of one.
+#.
+#: ../src/nautilus-properties-window.c:2172
+msgid "Contents:"
+msgstr "ಒಳ ಅಂಶಗಳು:"
+
+#. Translators: "used" refers to the capacity of the filesystem
+#: ../src/nautilus-properties-window.c:3028
+msgid "used"
+msgstr "ಬಳಸಿದ"
+
+#. Translators: "free" refers to the capacity of the filesystem
+#: ../src/nautilus-properties-window.c:3034
+msgid "free"
+msgstr "ಮುಕ್ತ"
+
+#: ../src/nautilus-properties-window.c:3036
+msgid "Total capacity:"
+msgstr "ಒಟ್ಟು ಸಾಮರ್ಥ್ಯ:"
+
+#: ../src/nautilus-properties-window.c:3039
+msgid "Filesystem type:"
+msgstr "ಕಡತವ್ಯವಸ್ಥೆಯ ಬಗೆ:"
+
+#: ../src/nautilus-properties-window.c:3175
+msgid "Basic"
+msgstr "ಮೂಲಭೂತ"
+
+#: ../src/nautilus-properties-window.c:3240
+msgid "Link target:"
+msgstr "ಸೂಚಿತ ಕೊಂಡಿ:"
+
+#: ../src/nautilus-properties-window.c:3259
+msgid "Location:"
+msgstr "ಸ್ಥಳ:"
+
+#: ../src/nautilus-properties-window.c:3267
+msgid "Volume:"
+msgstr "ಪರಿಮಾಣ:"
+
+#: ../src/nautilus-properties-window.c:3276
+msgid "Accessed:"
+msgstr "ನಿಲುಕಿಸಿಕೊಂಡಿದ್ದು:"
+
+#: ../src/nautilus-properties-window.c:3280
+msgid "Modified:"
+msgstr "ಮಾರ್ಪಾಟುಗೊಂಡಿದ್ದು:"
+
+#: ../src/nautilus-properties-window.c:3290
+msgid "Free space:"
+msgstr "ಮುಕ್ತ ಸ್ಥಳ:"
+
+#. translators: this gets concatenated to "no read",
+#. * "no access", etc. (see following strings)
+#.
+#: ../src/nautilus-properties-window.c:3941
+#: ../src/nautilus-properties-window.c:3952
+#: ../src/nautilus-properties-window.c:3964
+msgid "no "
+msgstr "ಇಲ್ಲ "
+
+#: ../src/nautilus-properties-window.c:3944
+msgid "list"
+msgstr "ಪಟ್ಟಿ"
+
+#: ../src/nautilus-properties-window.c:3946
+msgid "read"
+msgstr "ಓದು"
+
+#: ../src/nautilus-properties-window.c:3955
+msgid "create/delete"
+msgstr "ನಿರ್ಮಿಸು/ಅಳಿಸು"
+
+#: ../src/nautilus-properties-window.c:3957
+msgid "write"
+msgstr "ಬರೆ(write)"
+
+#: ../src/nautilus-properties-window.c:3966
+msgid "access"
+msgstr "ನಿಲುಕಣೆ"
+
+#: ../src/nautilus-properties-window.c:4031
+msgid "List files only"
+msgstr "ಪಟ್ಟಿ ಕಡತಗಳು ಮಾತ್ರ"
+
+#: ../src/nautilus-properties-window.c:4037
+msgid "Access files"
+msgstr "ಕಡತಗಳನ್ನು ನಿಲುಕಿಸು"
+
+#: ../src/nautilus-properties-window.c:4043
+msgid "Create and delete files"
+msgstr "ಕಡತಗಳನ್ನು ನಿರ್ಮಿಸು ಹಾಗು ಅಳಿಸು"
+
+#: ../src/nautilus-properties-window.c:4058
+msgid "Read-only"
+msgstr "ಓದಲು ಮಾತ್ರ"
+
+#: ../src/nautilus-properties-window.c:4064
+msgid "Read and write"
+msgstr "ಓದು ಹಾಗು ಬರೆ "
+
+#: ../src/nautilus-properties-window.c:4091
+msgid "Access:"
+msgstr "ನಿಲುಕಣೆ:"
+
+#: ../src/nautilus-properties-window.c:4093
+msgid "Folder access:"
+msgstr "ಕಡತಕೋಶದ ನಿಲುಕಣೆ:"
+
+#: ../src/nautilus-properties-window.c:4095
+msgid "File access:"
+msgstr "ಕಡತ ನಿಲುಕಣೆ:"
+
+#: ../src/nautilus-properties-window.c:4184
+msgid "_Owner:"
+msgstr "ಮಾಲಿಕ (_O):"
+
+#: ../src/nautilus-properties-window.c:4192
+#: ../src/nautilus-properties-window.c:4456
+msgid "Owner:"
+msgstr "ಮಾಲೀಕ:"
+
+#: ../src/nautilus-properties-window.c:4214
+msgid "_Group:"
+msgstr "ಸಮೂಹ (_G):"
+
+#: ../src/nautilus-properties-window.c:4222
+#: ../src/nautilus-properties-window.c:4470
+msgid "Group:"
+msgstr "ಸಮೂಹ:"
+
+#: ../src/nautilus-properties-window.c:4243
+msgid "Others"
+msgstr "ಇತರರು"
+
+#: ../src/nautilus-properties-window.c:4258
+msgid "Execute:"
+msgstr "ಕಾರ್ಯಗತಗೊಳಿಸು:"
+
+#: ../src/nautilus-properties-window.c:4261
+msgid "Allow _executing file as program"
+msgstr "ಕಡತವನ್ನು ಒಂದು ಪ್ರೋಗ್ರಾಂ ಆಗಿ ಕಾರ್ಯಗತಗೊಳಿಸಲು ಅನುಮತಿಸು (_e)"
+
+#: ../src/nautilus-properties-window.c:4437
+msgid "Change Permissions for Enclosed Files"
+msgstr "ಅಡಕಗೊಳಿಸಲಾದ ಕಡತಗಳಿಗೆ ಅನುಮತಿಗಳನ್ನು ಬದಲಾಯಿಸು"
+
+#: ../src/nautilus-properties-window.c:4441
+msgid "Change"
+msgstr "ಬದಲಾಯಿಸು"
+
+#: ../src/nautilus-properties-window.c:4484
+msgid "Others:"
+msgstr "ಇತರರು:"
+
+#: ../src/nautilus-properties-window.c:4525
+msgid "You are not the owner, so you cannot change these permissions."
+msgstr "ನೀವು ಮಾಲಿಕರಲ್ಲ, ಆದ್ದರಿಂದ ಈ ಅನುಮತಿಗಳನ್ನು ನೀವು ಬದಲಾಯಿಸುವಂತಿಲ್ಲ."
+
+#: ../src/nautilus-properties-window.c:4540
+msgid "Security context:"
+msgstr "ಸುರಕ್ಷಿತಾ ಸನ್ನಿವೇಶ:"
+
+#: ../src/nautilus-properties-window.c:4555
+msgid "Change Permissions for Enclosed Files…"
+msgstr "ಅಡಕಗೊಳಿಸಲಾದ ಕಡತಗಳಿಗೆ ಅನುಮತಿಗಳನ್ನು ಬದಲಾಯಿಸು…"
+
+#: ../src/nautilus-properties-window.c:4565
+#, c-format
+msgid "The permissions of “%s” could not be determined."
+msgstr "ಆರಿಸಲಾದ “%s” ಗೆ ಅನುಮತಿಗಳನ್ನು ನಿರ್ಧರಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-properties-window.c:4568
+msgid "The permissions of the selected file could not be determined."
+msgstr "ಆರಿಸಲಾದ ಕಡತದ ಅನುಮತಿಗಳನ್ನು ನಿರ್ಧರಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-properties-window.c:4812
+msgid "Open With"
+msgstr "ಇದರಿಂದ ತೆರೆ"
+
+#: ../src/nautilus-properties-window.c:5129
+msgid "Creating Properties window."
+msgstr "ಗುಣಲಕ್ಷಣಗಳ ಕಿಟಕಿಯನ್ನು ನಿರ್ಮಿಸಲಾಗುತ್ತಿದೆ."
+
+#: ../src/nautilus-properties-window.c:5413
+msgid "Select Custom Icon"
+msgstr "ಅಗತ್ಯಾನುಗುಣ ಚಿಹ್ನೆಯನ್ನು ಆರಿಸಿ"
+
+#: ../src/nautilus-properties-window.c:5415
+#| msgid "Never"
+msgid "_Revert"
+msgstr "ಹಿಮ್ಮರಳಿಸು (_R)"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-properties-window.c:5417 ../src/nautilus-view.c:7123
+#: ../src/nautilus-view.c:8543
+msgid "_Open"
+msgstr "ತೆರೆ (_O)"
+
+#: ../src/nautilus-query-editor.c:101
+msgid "File Type"
+msgstr "ಕಡತದ ಬಗೆ"
+
+#: ../src/nautilus-query-editor.c:321
+msgid "Documents"
+msgstr "ದಸ್ತಾವೇಜುಗಳು"
+
+#: ../src/nautilus-query-editor.c:339
+msgid "Music"
+msgstr "ಸಂಗೀತ"
+
+#: ../src/nautilus-query-editor.c:370
+msgid "Picture"
+msgstr "ಚಿತ್ರ"
+
+#: ../src/nautilus-query-editor.c:390
+msgid "Illustration"
+msgstr "ವಿಶದೀಕರಣ"
+
+#: ../src/nautilus-query-editor.c:429
+msgid "Pdf / Postscript"
+msgstr "pdf / ಪೋಸ್ಟ್ ಸ್ಕ್ರಿಪ್ಟ್"
+
+#: ../src/nautilus-query-editor.c:437
+msgid "Text File"
+msgstr "ಪಠ್ಯ ಕಡತ"
+
+#: ../src/nautilus-query-editor.c:516
+msgid "Select type"
+msgstr "ಬಗೆಗಳನ್ನು ಆರಿಸು"
+
+#: ../src/nautilus-query-editor.c:520
+msgid "Select"
+msgstr "ಆರಿಸು"
+
+#: ../src/nautilus-query-editor.c:600
+msgid "Any"
+msgstr "ಯಾವುದಾದರೂ"
+
+#: ../src/nautilus-query-editor.c:615
+msgid "Other Type…"
+msgstr "ಇತರೆ ಬಗೆ…"
+
+#: ../src/nautilus-query-editor.c:886
+msgid "Remove this criterion from the search"
+msgstr "ಹುಡುಕಾಟಯಿಂದ ಮಾನದಂಡವನ್ನು ತೆಗೆ"
+
+#. create the Current/All Files selector
+#: ../src/nautilus-query-editor.c:968
+msgid "Current"
+msgstr "ಪ್ರಸ್ತುತ"
+
+#: ../src/nautilus-query-editor.c:971
+msgid "All Files"
+msgstr "ಎಲ್ಲಾ ಕಡತಗಳು"
+
+#: ../src/nautilus-query-editor.c:993
+msgid "Add a new criterion to this search"
+msgstr "ಹುಡುಕಾಟಗೆ ಒಂದು ಹೊಸ ಮಾನದಂಡವನ್ನು ಸೇರಿಸು"
+
+#: ../src/nautilus-special-location-bar.c:51
+msgid "Files in this folder will appear in the New Document menu."
+msgstr "ಈ ಕಡತಕೋಶದಲ್ಲಿರುವ ಕಡತಗಳು ದಸ್ತಾವೇಜನ್ನು ಹೊಸ ಮೆನುವಿನಲ್ಲಿಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ."
+
+#: ../src/nautilus-special-location-bar.c:54
+msgid "Executable files in this folder will appear in the Scripts menu."
+msgstr ""
+"ಈ ಕಡತಕೋಶದಲ್ಲಿರುವ ಕಾರ್ಯಗತಗೊಳಿಸಬಹುದಾದಂತಹ ಕಡತಗಳು ಸ್ಕ್ರಿಪ್ಟುಗಳ "
+"ಮೆನುವಿನಲ್ಲಿಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ."
+
+#. Action Menu
+#: ../src/nautilus-toolbar.c:444
+msgid "Location options"
+msgstr "ಸ್ಥಳದ ಆಯ್ಕೆಗಳು"
+
+#: ../src/nautilus-toolbar.c:464
+msgid "View options"
+msgstr "ನೋಟದ ಆಯ್ಕೆಗಳು"
+
+#: ../src/nautilus-trash-bar.c:202
+msgid "Restore"
+msgstr "ಮರುಸ್ಥಾಪಿಸು"
+
+#: ../src/nautilus-trash-bar.c:205
+msgid "Restore selected items to their original position"
+msgstr "ಆರಿಸಲಾದ ಅಂಶಗಳನ್ನು ಅವುಗಳ ಮೂಲ ಸ್ಥಳಕ್ಕೆ ಮರಳಿಸಿ"
+
+#. Translators: "Empty" is an action (for the trash) , not a state
+#: ../src/nautilus-trash-bar.c:209
+msgid "Empty"
+msgstr "ಖಾಲಿ"
+
+#: ../src/nautilus-view.c:957
+#, c-format
+msgid "This will open %'d separate tab."
+msgid_plural "This will open %'d separate tabs."
+msgstr[0] "ಇದು ಪ್ರತ್ಯೇಕ %'d ಹಾಳೆಯನ್ನು ತೆರೆಯುತ್ತದೆ."
+msgstr[1] "ಇದು ಪ್ರತ್ಯೇಕ %'d ಹಾಳೆಗಳನ್ನು ತೆರೆಯುತ್ತದೆ."
+
+#: ../src/nautilus-view.c:960
+#, c-format
+msgid "This will open %'d separate window."
+msgid_plural "This will open %'d separate windows."
+msgstr[0] "ಇದು ಪ್ರತ್ಯೇಕ %'d ಕಿಟಕಿಯನ್ನು ತೆರೆಯುತ್ತದೆ."
+msgstr[1] "ಇದು ಪ್ರತ್ಯೇಕ %'d ಕಿಟಕಿಗಳನ್ನು ತೆರೆಯುತ್ತದೆ."
+
+#: ../src/nautilus-view.c:1475
+msgid "Select Items Matching"
+msgstr "ತಾಳೆಯಾಗುವ ಅಂಶಗಳನ್ನು ಆರಿಸು"
+
+#: ../src/nautilus-view.c:1480 ../src/nautilus-view.c:5949
+msgid "_Select"
+msgstr "ಆರಿಸು (_S)"
+
+#: ../src/nautilus-view.c:1488
+msgid "_Pattern:"
+msgstr "ನಮೂನೆಗಳು (_P):"
+
+#: ../src/nautilus-view.c:1494
+msgid "Examples: "
+msgstr "ಉದಾಹರಣೆಗಳು: "
+
+#: ../src/nautilus-view.c:1595
+msgid "Save Search as"
+msgstr "ಹುಡುಕನ್ನು ಹೀಗೆ ಉಳಿಸು"
+
+#: ../src/nautilus-view.c:1601
+msgid "_Save"
+msgstr "ಉಳಿಸು (_S)"
+
+#: ../src/nautilus-view.c:1618
+msgid "Search _name:"
+msgstr "ಹುಡುಕು ಹೆಸರು (_n):"
+
+#: ../src/nautilus-view.c:1635
+msgid "_Folder:"
+msgstr "ಕಡತಕೋಶ (_F):"
+
+#: ../src/nautilus-view.c:1640
+msgid "Select Folder to Save Search In"
+msgstr "ಹುಡುಕಿದ್ದನ್ನು ಉಳಿಸಲು ಕಡತಕೋಶವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
+
+#: ../src/nautilus-view.c:2284
+msgid ""
+"Nautilus 3.6 deprecated this directory and tried migrating this "
+"configuration to ~/.local/share/nautilus"
+msgstr ""
+"Nautilus 3.6 ಈ ಕೋಶವನ್ನು ಅಪ್ರಚಲಿತಗೊಳಿಸಿದೆ ಮತ್ತು ಈ ಸಂರಚನೆಯನ್ನು  ~/.config/share/"
+"nautilus ಗೆ ವರ್ಗಾಯಿಸಲು ಪ್ರಯತ್ನಿಸಿದೆ."
+
+#: ../src/nautilus-view.c:2709
+msgid "Content View"
+msgstr "ಒಳ ಅಂಶದ ನೋಟ"
+
+#: ../src/nautilus-view.c:2710
+msgid "View of the current folder"
+msgstr "ಪ್ರಸ್ತುತ ಕಡತದ ನೋಟ"
+
+#: ../src/nautilus-view.c:2907 ../src/nautilus-view.c:2942
+#, c-format
+msgid "“%s” selected"
+msgstr "“%s” ಆರಿಸಲ್ಪಟ್ಟಿದೆ"
+
+#: ../src/nautilus-view.c:2909
+#, c-format
+msgid "%'d folder selected"
+msgid_plural "%'d folders selected"
+msgstr[0] "%'d ಕಡತಕೋಶವು ಆರಿಸಲ್ಪಟ್ಟಿದೆ"
+msgstr[1] "%'d ಕಡತಕೋಶಗಳು ಆರಿಸಲ್ಪಟ್ಟಿವೆ"
+
+#: ../src/nautilus-view.c:2919
+#, c-format
+msgid "(containing %'d item)"
+msgid_plural "(containing %'d items)"
+msgstr[0] "(%'d ಅಂಶವನ್ನು ಹೊಂದಿದೆ)"
+msgstr[1] "(%'d ಅಂಶಗಳನ್ನು ಹೊಂದಿದೆ)"
+
+#. translators: this is preceded with a string of form 'N folders' (N more than 1)
+#: ../src/nautilus-view.c:2930
+#, c-format
+msgid "(containing a total of %'d item)"
+msgid_plural "(containing a total of %'d items)"
+msgstr[0] "(ಒಟ್ಟು %'d ಅಂಶವನ್ನು ಹೊಂದಿದೆ)"
+msgstr[1] "(ಒಟ್ಟು %'d ಅಂಶಗಳನ್ನು ಹೊಂದಿದೆ)"
+
+#: ../src/nautilus-view.c:2945
+#, c-format
+msgid "%'d item selected"
+msgid_plural "%'d items selected"
+msgstr[0] "%'d ಅಂಶವು ಆರಿಸಲ್ಪಟ್ಟಿದೆ"
+msgstr[1] "%'d ಅಂಶಗಳು ಆರಿಸಲ್ಪಟ್ಟಿವೆ"
+
+#. Folders selected also, use "other" terminology
+#: ../src/nautilus-view.c:2952
+#, c-format
+msgid "%'d other item selected"
+msgid_plural "%'d other items selected"
+msgstr[0] "%'d ಇತರೆ ಅಂಶವು ಆರಿಸಲ್ಪಟ್ಟಿದೆ"
+msgstr[1] "%'d ಇತರೆ ಅಂಶಗಳು ಆರಿಸಲ್ಪಟ್ಟಿವೆ"
+
+#. This is marked for translation in case a localiser
+#. * needs to use something other than parentheses. The
+#. * the message in parentheses is the size of the selected items.
+#.
+#: ../src/nautilus-view.c:2966
+#, c-format
+msgid "(%s)"
+msgstr "(%s)"
+
+#. This is marked for translation in case a localizer
+#. * needs to change ", " to something else. The comma
+#. * is between the message about the number of folders
+#. * and the number of items in those folders and the
+#. * message about the number of other items and the
+#. * total size of those items.
+#.
+#: ../src/nautilus-view.c:2990
+#, c-format
+msgid "%s %s, %s %s"
+msgstr "%s %s, %s %s"
+
+#: ../src/nautilus-view.c:4345
+#, c-format
+msgid "Open With %s"
+msgstr "%s ನೊಂದಿಗೆ ತೆರೆ"
+
+#: ../src/nautilus-view.c:4347
+#, c-format
+msgid "Use “%s” to open the selected item"
+msgid_plural "Use “%s” to open the selected items"
+msgstr[0] "ಆರಿಸಲ್ಪಟ್ಟ ಅಂಶವನ್ನು ತೆರೆಯಲು “%s” ಅನ್ನು ಬಳಸಿ"
+msgstr[1] "ಆರಿಸಲ್ಪಟ್ಟ ಅಂಶಗಳನ್ನು ತೆರೆಯಲು “%s” ಅನ್ನು ಬಳಸಿ"
+
+#: ../src/nautilus-view.c:5092
+#, c-format
+msgid "Run “%s” on any selected items"
+msgstr "“%s” ಅನ್ನು ಯಾವುದೇ ಆರಿಸಲ್ಪಟ್ಟ ಅಂಶಗಳೊಂದಿಗೆ ಚಲಾಯಿಸು"
+
+#: ../src/nautilus-view.c:5346
+#, c-format
+msgid "Create a new document from template “%s”"
+msgstr "“%s” ನಮೂನೆಯಿಂದ ಒಂದು ಹೊಸ ದಸ್ತಾವೇಜನ್ನು ರಚಿಸು"
+
+#: ../src/nautilus-view.c:5938
+#| msgid "Select Destination"
+msgid "Select Move Destination"
+msgstr "ಸ್ಥಳಾಂತರದ ಗುರಿಯನ್ನು ಆರಿಸಿ"
+
+#: ../src/nautilus-view.c:5940
+#| msgid "Select Destination"
+msgid "Select Copy Destination"
+msgstr "ಪ್ರತಿಮಾಡಬೇಕಿರುವ ಗುರಿಯನ್ನು ಆರಿಸಿ"
+
+#. Translators: %s is a file name formatted for display
+#: ../src/nautilus-view.c:6461
+#, c-format
+msgid "Unable to remove “%s”"
+msgstr "“%s” ಅನ್ನು ತೆಗೆದುಹಾಕಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#. Translators: %s is a file name formatted for display
+#: ../src/nautilus-view.c:6488
+#, c-format
+msgid "Unable to eject “%s”"
+msgstr "“%s” ಅನ್ನು ಹೊರ ತಳ್ಳಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../src/nautilus-view.c:6510
+msgid "Unable to stop drive"
+msgstr "ಡ್ರೈವನ್ನು ನಿಲ್ಲಿಸಲಾಗಿಲ್ಲ"
+
+#. Translators: %s is a file name formatted for display
+#: ../src/nautilus-view.c:6612
+#, c-format
+msgid "Unable to start “%s”"
+msgstr "“%s” ಅನ್ನು ಆರಂಭಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#. name, stock id, label
+#: ../src/nautilus-view.c:7103
+msgid "New _Document"
+msgstr "ಹೊಸ ದಸ್ತಾವೇಜು (_D)"
+
+#. name, stock id, label
+#: ../src/nautilus-view.c:7104
+msgid "Open Wit_h"
+msgstr "ಇದರಿಂದ ತೆರೆ (_h)"
+
+#: ../src/nautilus-view.c:7105
+msgid "Choose a program with which to open the selected item"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಅಂಶವನ್ನು ತೆರೆಯಲು ಒಂದು ಪ್ರೋಗ್ರಾಂ ಅನ್ನು ಆರಿಸಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7107 ../src/nautilus-view.c:7362
+#: ../src/nautilus-window-menus.c:463
+msgid "P_roperties"
+msgstr "ಗುಣಲಕ್ಷಣಗಳು (_r)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7108 ../src/nautilus-view.c:8689
+msgid "View or modify the properties of each selected item"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಪ್ರತಿ ಅಂಶದ ಗುಣಲಕ್ಷಣಗಳನ್ನು ವೀಕ್ಷಿಸು ಅಥವ ಮಾರ್ಪಡಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7115
+msgid "New _Folder"
+msgstr "ಹೊಸ ಕಡತಕೋಶ (_F)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7116
+msgid "Create a new empty folder inside this folder"
+msgstr "ಈ ಕಡತಕೋಶದಲ್ಲಿ ಒಂದು ಹೊಸ ಖಾಲಿ ಕಡತಕೋಶವನ್ನು ರಚಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7119
+msgid "New Folder with Selection"
+msgstr "ಆಯ್ಕೆಯಿಂದ ಹೊಸ ಕಡತಕೋಶ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7120
+msgid "Create a new folder containing the selected items"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಅಂಶಗಳನ್ನು ಹೊಂದಿರುವ ಒಂದು ಹೊಸ ಕಡತಕೋಶವನ್ನು ರಚಿಸು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7124
+msgid "Open the selected item in this window"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಪ್ರತಿಯೊಂದು ಅಂಶವನ್ನೂ ಈ ಕಿಟಕಿಯಲ್ಲಿ ತೆರೆ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7131
+#| msgid "Enter _Location"
+msgid "Open _Item Location"
+msgstr "ಅಂಶವು ಇರುವ ಸ್ಥಳವನ್ನು ತೆರೆ (_I)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7132
+#| msgid "Open the selected item in this window"
+msgid "Open the selected item's location in this window"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಅಂಶವು ಇರುವ ಸ್ಥಳವನ್ನು ಈ ಕಿಟಕಿಯಲ್ಲಿ ತೆರೆ"
+
+#. name, stock id
+#. label, accelerator
+#. Location-specific actions
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7135 ../src/nautilus-view.c:7303
+msgid "Open in Navigation Window"
+msgstr "ನ್ಯಾವಿಗೇಶನ್ ಕಿಟಕಿಯಲ್ಲಿ ತೆರೆ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7136
+msgid "Open each selected item in a navigation window"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಪ್ರತಿಯೊಂದು ಅಂಶವನ್ನೂ ನ್ಯಾವಿಗೇಶನ್ ಕಿಟಕಿಯಲ್ಲಿ ತೆರೆ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7139 ../src/nautilus-view.c:7307
+#: ../src/nautilus-view.c:8248 ../src/nautilus-view.c:8596
+msgid "Open in New _Tab"
+msgstr "ಹೊಸ ಹಾಳೆಯಲ್ಲಿ ತೆರೆ  (_T)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7140
+msgid "Open each selected item in a new tab"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಪ್ರತಿಯೊಂದು ಅಂಶವನ್ನೂ ಹೊಸ ಹಾಳೆಯಲ್ಲಿ ತೆರೆ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7143
+msgid "Other _Application…"
+msgstr "ಇತರೆ ಅನ್ವಯ (_A)…"
+
+#. tooltip
+#: ../src/nautilus-view.c:7144 ../src/nautilus-view.c:7148
+msgid "Choose another application with which to open the selected item"
+msgstr "ಆರಿಸಲಾದ ಅಂಶವನ್ನು ತೆರೆಯಲು ಬೇರೊಂದು ಅನ್ವಯವನ್ನು ಆರಿಸಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7147
+msgid "Open With Other _Application…"
+msgstr "ಇತರೆ ಅನ್ವಯದೊಂದಿಗೆ ತೆರೆ (_A)…"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7151
+msgid "_Open Scripts Folder"
+msgstr "ಸ್ಕ್ರಿಪ್ಟುಗಳ ಕಡತವನ್ನು ತೆರೆ (_O)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7152
+msgid "Show the folder containing the scripts that appear in this menu"
+msgstr "ಈ ಮೆನುವಿನಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುವ ಸ್ಕ್ರಿಪ್ಟನ್ನು ಹೊಂದಿದ ಕಡತಕೋಶವನ್ನು ತೋರಿಸು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7160
+msgid "Prepare the selected files to be moved with a Paste command"
+msgstr ""
+"ಆರಿಸಲಾದ ಕಡತಗಳನ್ನು 'ಅಂಟಿಸು' ಆದೇಶಯನ್ನು ಬಳಸಿಕೊಂಡು ಸ್ಥಳಾಂತರಿಸಲು ತಯಾರುಗೊಳಿಸು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7164
+msgid "Prepare the selected files to be copied with a Paste command"
+msgstr "ಆರಿಸಲಾದ ಕಡತಗಳನ್ನು 'ಅಂಟಿಸು' ಆದೇಶಯನ್ನು ಬಳಸಿಕೊಂಡು ಕಾಪಿ ಮಾಡಲು ತಯಾರುಗೊಳಿಸು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7168
+msgid "Move or copy files previously selected by a Cut or Copy command"
+msgstr ""
+"ಈ ಹಿಂದೆ ಆರಿಸಲಾದ ಕಡತಗಳನ್ನು 'ಕತ್ತರಿಸು' ಅಥವ 'ಕಾಪಿ ಮಾಡು' ಆದೇಶಯಿಂದ ಸ್ಥಳಾಂತರಿಸು ಅಥವ "
+"ಕಾಪಿ ಮಾಡು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7171 ../src/nautilus-view.c:7320
+msgid "_Paste Into Folder"
+msgstr "ಕಡತಕೋಶಕ್ಕೆ ಅಂಟಿಸು (_P)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7172
+msgid ""
+"Move or copy files previously selected by a Cut or Copy command into the "
+"selected folder"
+msgstr ""
+"ಈ ಹಿಂದೆ ಆರಿಸಲಾದ ಕಡತಗಳನ್ನು 'ಕತ್ತರಿಸು' ಅಥವ 'ಕಾಪಿ ಮಾಡು' ಆದೇಶಯಿಂದ ಈ ಕಡತಕೋಶಕ್ಕೆ "
+"ಸ್ಥಳಾಂತರಿಸು ಅಥವ ಕಾಪಿ ಮಾಡು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7175
+msgid "Copy To…"
+msgstr "ಇಲ್ಲಿಗೆ ಪ್ರತಿಮಾಡು…"
+
+#. tooltip
+#: ../src/nautilus-view.c:7176
+msgid "Copy selected files to another location"
+msgstr "ಆಯ್ಕೆ ಮಾಡಲಾದ ಕಡತವನ್ನು ಇನ್ನೊಂದು ಸ್ಥಳಕ್ಕೆ ಪ್ರತಿ ಮಾಡು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7179
+msgid "Move To…"
+msgstr "ಇಲ್ಲಿಗೆ ಜರುಗಿಸು…"
+
+#. tooltip
+#: ../src/nautilus-view.c:7180
+msgid "Move selected files to another location"
+msgstr "ಆಯ್ದ ಕಡತಗಳನ್ನು ಇನ್ನೊಂದು ಸ್ಥಳಕ್ಕೆ ಜರುಗಿಸು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7184
+msgid "Select all items in this window"
+msgstr "ಈ ಕಿಟಕಿಯ ಎಲ್ಲಾ ಅಂಶಗಳನ್ನು ಆರಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7187
+msgid "Select I_tems Matching…"
+msgstr "ತಾಳೆಯಾಗುವ ಅಂಶಗಳನ್ನು ಆರಿಸಿ (_t)…"
+
+#. tooltip
+#: ../src/nautilus-view.c:7188
+msgid "Select items in this window matching a given pattern"
+msgstr "ಒಂದು ಒದಗಿಸಲಾದ ವಿನ್ಯಾಸಕ್ಕೆ ಹೋಲುವ ಈ ಕಿಟಕಿಯಲ್ಲಿನ ಅಂಶಗಳನ್ನು ಮಾತ್ರವೆ ಆರಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7191
+msgid "_Invert Selection"
+msgstr "ತಿರುಗುಮುರುಗಾದ ಆಯ್ಕೆ (_I)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7192
+msgid "Select all and only the items that are not currently selected"
+msgstr "ಈಗ ಆರಿಸಲಾದುದನ್ನು ಹೊರತುಪಡಿಸಿ ಮಿಕ್ಕೆಲ್ಲವನ್ನು ಮಾತ್ರ ಆಯ್ಕೆ ಮಾಡು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7195 ../src/nautilus-view.c:8672
+msgid "Ma_ke Link"
+msgid_plural "Ma_ke Links"
+msgstr[0] "ಕೊಂಡಿಯನ್ನು ನಿರ್ಮಿಸು (_k)"
+msgstr[1] "ಕೊಂಡಿಗಳನ್ನು ನಿರ್ಮಿಸು (_k)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7196
+msgid "Create a symbolic link for each selected item"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಪ್ರತಿಯೊಂದು ಅಂಶಕ್ಕೂ ಸಾಂಕೇತಿಕ ಕೊಂಡಿಯನ್ನು ರಚಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7199
+msgid "Rena_me…"
+msgstr "ಮರಳಿ ಹೆಸರಿಸು (_m)…"
+
+#. tooltip
+#: ../src/nautilus-view.c:7200
+msgid "Rename selected item"
+msgstr "ಆರಿಸಲಾದ ಅಂಶದ ಹೆಸರನ್ನು ಬದಲಾಯಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7203
+msgid "Set as Wallpaper"
+msgstr "ಗೋಡೆಚಿತ್ರವಾಗಿ ಹೊಂದಿಸು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7204
+msgid "Make item the wallpaper"
+msgstr "ಅಂಶವನ್ನು ಗೋಡೆಚಿತ್ರವಾಗಿಸು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7212 ../src/nautilus-view.c:8619
+msgid "Move each selected item to the Trash"
+msgstr "ಆರಿಸಲಾದ ಪ್ರತಿಯೊಂದು ಅಂಶವನ್ನೂ ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7216 ../src/nautilus-view.c:8650
+msgid "Delete each selected item, without moving to the Trash"
+msgstr "ಆರಿಸಲಾದ ಅಂಶಗಳನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸದೆ ಅಳಿಸಿ ಹಾಕು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7219 ../src/nautilus-view.c:7333
+msgid "_Restore"
+msgstr "ಮರುಸ್ಥಾಪಿಸು (_R)"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7223
+msgid "_Undo"
+msgstr "ರದ್ದು ಮಾಡು (_U)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7224
+msgid "Undo the last action"
+msgstr "ಹಿಂದಿನ ಕ್ರಿಯೆಯನ್ನು ಮತ್ತೊಮ್ಮೆ ಮಾಡು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7227
+msgid "_Redo"
+msgstr "ಪುನಃ ಮಾಡು (_R)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7228
+msgid "Redo the last undone action"
+msgstr "ಹಿಂದೆ ರದ್ದು ಮಾಡಲಾದ ಕಾರ್ಯವನ್ನು ಪುನಃ ಮಾಡು"
+
+#.
+#. * multiview-TODO: decide whether "Reset to Defaults" should
+#. * be window-wide, and not just view-wide.
+#. * Since this also resets the "Show hidden files" mode,
+#. * it is a mixture of both ATM.
+#.
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7237
+msgid "Reset View to _Defaults"
+msgstr "ನೋಟಗಳನ್ನು ಪೂರ್ವನಿಯೋಜಿತಕ್ಕೆ ಮರು ಹೊಂದಿಸು (_D)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7238
+msgid "Reset sorting order and zoom level to match preferences for this view"
+msgstr ""
+"ಈ ನೋಟಕ್ಕೆ ಆದ್ಯತೆಗಳು ತಾಳೆಯಾಗುವಂತೆ ವಿಂಗಡಣಾ ಕ್ರಮ ಹಾಗು ಗಾತ್ರಬದಲಿಸುವ ಮಟ್ಟವನ್ನು ಮರು "
+"ಹೊಂದಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7241 ../src/nautilus-view.c:7265
+#: ../src/nautilus-view.c:7337
+msgid "_Mount"
+msgstr "ಆರೋಹಿಸು (_M)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7242
+msgid "Mount the selected volume"
+msgstr "ಆರಿಸಲಾದ ಪರಿಮಾಣವನ್ನು ಅವರೋಹಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7245 ../src/nautilus-view.c:7269
+#: ../src/nautilus-view.c:7341
+msgid "_Unmount"
+msgstr "ಅವರೋಹಿಸು (_U)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7246
+msgid "Unmount the selected volume"
+msgstr "ಆರಿಸಲಾದ ಪರಿಮಾಣವನ್ನು ಅವರೋಹಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7249 ../src/nautilus-view.c:7273
+#: ../src/nautilus-view.c:7345
+msgid "_Eject"
+msgstr "ಹೊರತಳ್ಳು (_E)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7250
+msgid "Eject the selected volume"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಪರಿಮಾಣವನ್ನು ಹೊರತಳ್ಳು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7253 ../src/nautilus-view.c:7277
+#: ../src/nautilus-view.c:7349 ../src/nautilus-view.c:7935
+#: ../src/nautilus-view.c:7939 ../src/nautilus-view.c:8022
+#: ../src/nautilus-view.c:8026 ../src/nautilus-view.c:8124
+#: ../src/nautilus-view.c:8128
+msgid "_Start"
+msgstr "ಆರಂಭಿಸು (_S)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7254
+msgid "Start the selected volume"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಪರಿಮಾಣವನ್ನು ಆರಂಭಿಸಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7257 ../src/nautilus-view.c:7281
+#: ../src/nautilus-view.c:7353 ../src/nautilus-view.c:7964
+#: ../src/nautilus-view.c:8051 ../src/nautilus-view.c:8153
+#: ../src/nautilus-window-menus.c:387
+msgid "_Stop"
+msgstr "ನಿಲ್ಲು (_S)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7258 ../src/nautilus-view.c:8154
+msgid "Stop the selected volume"
+msgstr "ಆರಿಸಲಾದ ಪರಿಮಾಣವನ್ನು ನಿಲ್ಲಿಸಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7261 ../src/nautilus-view.c:7285
+#: ../src/nautilus-view.c:7357
+msgid "_Detect Media"
+msgstr "ಮಾಧ್ಯಮವನ್ನು ಪತ್ತೆ ಮಾಡು (_D)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7262 ../src/nautilus-view.c:7286
+#: ../src/nautilus-view.c:7358
+msgid "Detect media in the selected drive"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಡ್ರೈವ್‌ನಲ್ಲಿನ ಮಾಧ್ಯಮವನ್ನು ಗುರುತಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7266
+msgid "Mount the volume associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಪರಿಮಾಣವನ್ನು ಆರೋಹಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7270
+msgid "Unmount the volume associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಪರಿಮಾಣವನ್ನು ಅವರೋಹಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7274
+msgid "Eject the volume associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಪರಿಮಾಣವನ್ನು ಹೊರ ತಳ್ಳಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7278
+msgid "Start the volume associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಪರಿಮಾಣವನ್ನು ಆರಂಭಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7282
+msgid "Stop the volume associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಪರಿಮಾಣವನ್ನು ನಿಲ್ಲಿಸಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7289
+msgid "Open File and Close window"
+msgstr "ಕಡತವನ್ನು ತೆರೆ ಹಾಗು ಕಿಟಕಿಯನ್ನು ಮುಚ್ಚಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7293
+msgid "Sa_ve Search"
+msgstr "ಹುಡುಕಲಾಗಿದ್ದನ್ನು ಉಳಿಸು (_v)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7294
+msgid "Save the edited search"
+msgstr "ಸಂಪಾದಿಸಲಾದ ಹುಡುಕನ್ನು ಉಳಿಸಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7297
+msgid "Sa_ve Search As…"
+msgstr "ಹುಡುಕಿದ್ದನ್ನು ಹೀಗೆ ಉಳಿಸು (_v)…"
+
+#. tooltip
+#: ../src/nautilus-view.c:7298
+msgid "Save the current search as a file"
+msgstr "ಈಗಿನ ಹುಡುಕನ್ನು ಒಂದು ಕಡತವಾಗಿ ಉಳಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7304
+msgid "Open this folder in a navigation window"
+msgstr "ಈ ಕಡತಕೋಶವನ್ನು ಒಂದು ನ್ಯಾವಿಗೇಶನ್ ಕಿಟಕಿಯಲ್ಲಿ ತೆರೆ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7308
+msgid "Open this folder in a new tab"
+msgstr "ಈ ಕಡತಕೋಶವನ್ನು ಒಂದು ಹೊಸ ಹಾಳೆಯಲ್ಲಿ ತೆರೆ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7313
+msgid "Prepare this folder to be moved with a Paste command"
+msgstr "'ಅಂಟಿಸು' ಆದೇಶಯನ್ನು ಬಳಸಿಕೊಂಡು ಸ್ಥಳಾಂತರಿಸಲು ಈ ಕಡತಕೋಶವನ್ನು ತಯಾರುಗೊಳಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7317
+msgid "Prepare this folder to be copied with a Paste command"
+msgstr "'ಅಂಟಿಸು' ಆದೇಶಯನ್ನು ಬಳಸಿಕೊಂಡು ಕಾಪಿ ಮಾಡಲು ಈ ಕಡತಕೋಶವನ್ನು ತಯಾರುಗೊಳಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7321
+msgid ""
+"Move or copy files previously selected by a Cut or Copy command into this "
+"folder"
+msgstr ""
+"ಈ ಹಿಂದೆ ಆರಿಸಲಾದ ಕಡತಗಳನ್ನು 'ಕತ್ತರಿಸು' ಅಥವ 'ಕಾಪಿ ಮಾಡು' ಆದೇಶಯಿಂದ ಈ ಕಡತಕೋಶಕ್ಕೆ "
+"ಸ್ಥಳಾಂತರಿಸಿ ಅಥವ ಕಾಪಿ ಮಾಡು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7326
+msgid "Move this folder to the Trash"
+msgstr "ಈ ಕಡತಕೋಶವನ್ನು ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7330
+msgid "Delete this folder, without moving to the Trash"
+msgstr "ಕಸದ ಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸದೆ, ಈ ಕಡತಕೋಶವನ್ನು ಅಳಿಸಿ ಹಾಕು"
+
+#. tooltip
+#: ../src/nautilus-view.c:7338
+msgid "Mount the volume associated with this folder"
+msgstr "ಈ ಕಡತಕೋಶಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಪರಿಮಾಣವನ್ನು ಆರೋಹಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7342
+msgid "Unmount the volume associated with this folder"
+msgstr "ಈ ಕಡತಕೋಶಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಪರಿಮಾಣವನ್ನು ಅವರೋಹಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7346
+msgid "Eject the volume associated with this folder"
+msgstr "ಈ ಕಡತಕೋಶಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಪರಿಮಾಣವನ್ನು ಹೊರ ತೆಗೆ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7350
+msgid "Start the volume associated with this folder"
+msgstr "ಈ ಕಡತಕೋಶಗಳಿಗೆ ಸಂಬಂಧಿತವಾದ ಪರಿಮಾಣವನ್ನು ಆರಂಭಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7354
+msgid "Stop the volume associated with this folder"
+msgstr "ಈ ಕಡತಕೋಶಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಪರಿಮಾಣವನ್ನು ನಿಲ್ಲಿಸಿ"
+
+#. tooltip
+#: ../src/nautilus-view.c:7363 ../src/nautilus-window-menus.c:464
+msgid "View or modify the properties of this folder"
+msgstr "ಈ ಕಡತಕೋಶದ ಗುಣಲಕ್ಷಣಗಳನ್ನು ವೀಕ್ಷಿಸಿ ಅಥವ ಮಾರ್ಪಡಿಸಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-view.c:7369
+msgid "Show _Hidden Files"
+msgstr "ಗೌಪ್ಯವಾಗಿರಸಲಾದ ಕಡತಗಳನ್ನು ತೋರಿಸು (_H)"
+
+#. tooltip
+#: ../src/nautilus-view.c:7370
+msgid "Toggle the display of hidden files in the current window"
+msgstr "ಪ್ರಸಕ್ತ ಕಿಟಕಿಯಲ್ಲಿ ಅಡಗಿಸಲಾದ ಕಡತಗಳನ್ನು ತೋರಿಸಲು ಟಾಗಲ್ ಮಾಡು"
+
+#: ../src/nautilus-view.c:7431
+msgid "Run or manage scripts"
+msgstr "ಸ್ಕ್ರಿಪ್ಟುಗಳನ್ನು ಚಲಾಯಿಸು ಅಥವ ನಿರ್ವಹಿಸು"
+
+#. Create a script action here specially because its tooltip is dynamic
+#: ../src/nautilus-view.c:7433
+msgid "_Scripts"
+msgstr "ಸ್ಕ್ರಿಪ್ಟುಗಳು (_S)"
+
+#: ../src/nautilus-view.c:7783
+#, c-format
+msgid "Move the open folder out of the trash to “%s”"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಗಳನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ “%s” ಗೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7787
+#, c-format
+msgid "Move the selected folder out of the trash to “%s”"
+msgstr "ಆರಿಸಲಾದ ಕಡತಕೋಶವನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ “%s” ಗೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7790
+#, c-format
+msgid "Move the selected folders out of the trash to “%s”"
+msgstr "ಆರಿಸಲಾದ ಕಡತಕೋಶಗಳನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ “%s” ಗೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7795
+msgid "Move the selected folder out of the trash"
+msgstr "ಆರಿಸಲಾದ ಕಡತಕೋಶವನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ ಹೊರಕ್ಕೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7797
+msgid "Move the selected folders out of the trash"
+msgstr "ಆರಿಸಲಾದ ಕಡತಕೋಶಗಳನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ ಹೊರಕ್ಕೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7803
+#, c-format
+msgid "Move the selected file out of the trash to “%s”"
+msgstr "ಆರಿಸಲಾದ ಕಡತವನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ “%s” ಗೆ ಸ್ಥಳಾಂತರಿಸಿ"
+
+#: ../src/nautilus-view.c:7806
+#, c-format
+msgid "Move the selected files out of the trash to “%s”"
+msgstr "ಆರಿಸಲಾದ ಕಡತಗಳನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ “%s” ಗೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7811
+msgid "Move the selected file out of the trash"
+msgstr "ಆರಿಸಲಾದ ಕಡತವನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ ಹೊರಕ್ಕೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7813
+msgid "Move the selected files out of the trash"
+msgstr "ಆರಿಸಲಾದ ಕಡತಗಳನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ ಹೊರಕ್ಕೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7819
+#, c-format
+msgid "Move the selected item out of the trash to “%s”"
+msgstr "ಆರಿಸಲಾದ ಅಂಶವನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ “%s” ಗೆ ಸ್ಥಳಾಂತರಿಸಿ"
+
+#: ../src/nautilus-view.c:7822
+#, c-format
+msgid "Move the selected items out of the trash to “%s”"
+msgstr "ಆರಿಸಲಾದ ಅಂಶಗಳನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ “%s” ಗೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7827
+msgid "Move the selected item out of the trash"
+msgstr "ಆರಿಸಲಾದ ಅಂಶವನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ ಹೊರಕ್ಕೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7829
+msgid "Move the selected items out of the trash"
+msgstr "ಆರಿಸಲಾದ ಅಂಶಗಳನ್ನು ಕಸದಬುಟ್ಟಿಯಿಂದ ಹೊರಕ್ಕೆ ಸ್ಥಳಾಂತರಿಸು"
+
+#: ../src/nautilus-view.c:7936 ../src/nautilus-view.c:7940
+#: ../src/nautilus-view.c:8125 ../src/nautilus-view.c:8129
+msgid "Start the selected drive"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಡ್ರೈವನ್ನು ಆರಂಭಿಸಿ"
+
+#: ../src/nautilus-view.c:7943 ../src/nautilus-view.c:8030
+#: ../src/nautilus-view.c:8132
+msgid "_Connect"
+msgstr "ಸಂಪರ್ಕ ಕಲ್ಪಿಸು (_C)"
+
+#: ../src/nautilus-view.c:7944 ../src/nautilus-view.c:8133
+msgid "Connect to the selected drive"
+msgstr "ಆರಿಸಲಾದ ಡ್ರೈವಿಗೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸಿ"
+
+#: ../src/nautilus-view.c:7947 ../src/nautilus-view.c:8034
+#: ../src/nautilus-view.c:8136
+msgid "_Start Multi-disk Drive"
+msgstr "ಬಹು-ಡಿಸ್ಕ್ ಡ್ರೈವನ್ನು ಆರಂಭಿಸು (_S)"
+
+#: ../src/nautilus-view.c:7948 ../src/nautilus-view.c:8137
+msgid "Start the selected multi-disk drive"
+msgstr "ಆರಿಸಲಾದ ಬಹು-ಡಿಸ್ಕ್ ಡ್ರೈವನ್ನು ಆರಂಭಿಸಿ"
+
+#: ../src/nautilus-view.c:7951
+msgid "U_nlock Drive"
+msgstr "ಡ್ರೈವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡು (_n)"
+
+#: ../src/nautilus-view.c:7952 ../src/nautilus-view.c:8141
+msgid "Unlock the selected drive"
+msgstr "ಆರಿಸಲಾದ ಡ್ರೈವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಿ"
+
+#: ../src/nautilus-view.c:7965
+msgid "Stop the selected drive"
+msgstr "ಆರಿಸಲಾದ ಡ್ರೈವನ್ನು ನಿಲ್ಲಿಸಿ"
+
+#: ../src/nautilus-view.c:7968 ../src/nautilus-view.c:8055
+#: ../src/nautilus-view.c:8157
+msgid "_Safely Remove Drive"
+msgstr "ಡ್ರೈವನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ತೆಗೆದು ಹಾಕು (_a)"
+
+#: ../src/nautilus-view.c:7969 ../src/nautilus-view.c:8158
+msgid "Safely remove the selected drive"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಡ್ರೈವನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ತೆಗೆದು ಹಾಕಿ"
+
+#: ../src/nautilus-view.c:7972 ../src/nautilus-view.c:8059
+#: ../src/nautilus-view.c:8161
+msgid "_Disconnect"
+msgstr "ಸಂಪರ್ಕ ಕಡಿದುಹಾಕು  (_D)"
+
+#: ../src/nautilus-view.c:7973 ../src/nautilus-view.c:8162
+msgid "Disconnect the selected drive"
+msgstr "ಆರಿಸಲಾದ ಡ್ರೈವಿನ ಸಂಪರ್ಕ ತಪ್ಪಿಸಿ"
+
+#: ../src/nautilus-view.c:7976 ../src/nautilus-view.c:8063
+#: ../src/nautilus-view.c:8165
+msgid "_Stop Multi-disk Drive"
+msgstr "ಬಹು-ಡಿಸ್ಕ್ ಡ್ರೈವನ್ನು ನಿಲ್ಲಿಸು (_S)"
+
+#: ../src/nautilus-view.c:7977 ../src/nautilus-view.c:8166
+msgid "Stop the selected multi-disk drive"
+msgstr "ಆರಿಸಲಾದ ಬಹು-ಡಿಸ್ಕ್ ಡ್ರೈವನ್ನು ನಿಲ್ಲಿಸಿ"
+
+#: ../src/nautilus-view.c:7980 ../src/nautilus-view.c:8067
+#: ../src/nautilus-view.c:8169
+msgid "_Lock Drive"
+msgstr "ಡ್ರೈವನ್ನು ಲಾಕ್ ಮಾಡು (_L)"
+
+#: ../src/nautilus-view.c:7981 ../src/nautilus-view.c:8170
+msgid "Lock the selected drive"
+msgstr "ಆರಿಸಲಾದ ಡ್ರೈವನ್ನು ಲಾಕ್ ಮಾಡಿ"
+
+#: ../src/nautilus-view.c:8023 ../src/nautilus-view.c:8027
+msgid "Start the drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಡ್ರೈವನ್ನು ಆರಂಭಿಸಿ"
+
+#: ../src/nautilus-view.c:8031
+msgid "Connect to the drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಡ್ರೈವಿನೊಂದಿಗೆ ಸಂಪರ್ಕಸಾಧಿಸಿ"
+
+#: ../src/nautilus-view.c:8035
+msgid "Start the multi-disk drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಬಹು-ಡಿಸ್ಕ್ ಡ್ರೈವನ್ನು ಆರಂಭಿಸಿ"
+
+#: ../src/nautilus-view.c:8038 ../src/nautilus-view.c:8140
+msgid "_Unlock Drive"
+msgstr "ಡ್ರೈವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡು (_U)"
+
+#: ../src/nautilus-view.c:8039
+msgid "Unlock the drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಡ್ರೈವನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಿ"
+
+#: ../src/nautilus-view.c:8052
+msgid "_Stop the drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಡ್ರೈವನ್ನು ನಿಲ್ಲಿಸು (_S)"
+
+#: ../src/nautilus-view.c:8056
+msgid "Safely remove the drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಡ್ರೈವನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ತೆಗೆದು ಹಾಕಿ"
+
+#: ../src/nautilus-view.c:8060
+msgid "Disconnect the drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಡ್ರೈವಿನೊಂದಿಗೆ ಸಂಪರ್ಕ ಕಡಿದು ಹಾಕಿ"
+
+#: ../src/nautilus-view.c:8064
+msgid "Stop the multi-disk drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಬಹು-ಡಿಸ್ಕ್ ಡ್ರೈವನ್ನು ನಿಲ್ಲಿಸಿ"
+
+#: ../src/nautilus-view.c:8068
+msgid "Lock the drive associated with the open folder"
+msgstr "ತೆರೆಯಲಾದ ಕಡತಕೋಶಕ್ಕೆ ಹೊಂದಿಕೊಂಡಿರುವ ಡ್ರೈವನ್ನು ಲಾಕ್ ಮಾಡಿ"
+
+#: ../src/nautilus-view.c:8240 ../src/nautilus-view.c:8576
+msgid "Open in New _Window"
+msgstr "ಹೊಸ ಕಿಟಕಿಯಲ್ಲಿ ತೆರೆ  (_W)"
+
+#: ../src/nautilus-view.c:8295 ../src/nautilus-view.c:8614
+msgid "_Delete Permanently"
+msgstr "ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಿಹಾಕು (_D)"
+
+#: ../src/nautilus-view.c:8296
+msgid "Delete the open folder permanently"
+msgstr "ತೆರೆಯಲ್ಪಟ್ಟ ಕಡತಕೋಶವನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಿಹಾಕು"
+
+#: ../src/nautilus-view.c:8300
+msgid "Move the open folder to the Trash"
+msgstr "ತೆರೆಯಲ್ಪಟ್ಟ ಕಡತಕೋಶವನ್ನು ಕಸದಬುಟ್ಟಿಗೆ ಸ್ಥಳಾಂತರಿಸಿ"
+
+#: ../src/nautilus-view.c:8486
+#, c-format
+msgid "New Folder with Selection (%'d Item)"
+msgid_plural "New Folder with Selection (%'d Items)"
+msgstr[0] "ಆಯ್ಕೆಯಿಂದ ಹೊಸ ಕಡತಕೋಶ (%'d ಅಂಶ)"
+msgstr[1] "ಆಯ್ಕೆಯಿಂದ ಹೊಸ ಕಡತಕೋಶ (%'d ಅಂಶಗಳು)"
+
+#: ../src/nautilus-view.c:8530
+#, c-format
+msgid "_Open With %s"
+msgstr "%s ನೊಂದಿಗೆ ತೆರೆ (_O)"
+
+#: ../src/nautilus-view.c:8541
+msgid "Run"
+msgstr "ಚಲಾಯಿಸು"
+
+#: ../src/nautilus-view.c:8578
+#, c-format
+msgid "Open in %'d New _Window"
+msgid_plural "Open in %'d New _Windows"
+msgstr[0] "ಹೊಸ %'d ಕಿಟಕಿಯಲ್ಲಿ ತೆರೆ (_W)"
+msgstr[1] "ಹೊಸ %'d ಕಿಟಕಿಗಳಲ್ಲಿ ತೆರೆ (_W)"
+
+#: ../src/nautilus-view.c:8598
+#, c-format
+msgid "Open in %'d New _Tab"
+msgid_plural "Open in %'d New _Tabs"
+msgstr[0] "ಹೊಸ %'d ಹಾಳೆಯಲ್ಲಿ ತೆರೆ (_T)"
+msgstr[1] "ಹೊಸ %'d ಹಾಳೆಗಳಲ್ಲಿ ತೆರೆ (_T)"
+
+#: ../src/nautilus-view.c:8615
+msgid "Delete all selected items permanently"
+msgstr "ಆರಿಸಲ್ಪಟ್ಟ ಎಲ್ಲಾ ಅಂಶಗಳನ್ನು ಶಾಶ್ವತವಾಗಿ ಅಳಿಸಿಹಾಕು"
+
+#: ../src/nautilus-view.c:8646
+msgid "Remo_ve from Recent"
+msgstr "ಇತ್ತೀಚಿನ"
+
+#: ../src/nautilus-view.c:8647
+msgid "Remove each selected item from the recently used list"
+msgstr "ಆರಿಸಲಾದ ಪ್ರತಿಯೊಂದು ಅಂಶವನ್ನು ಇತ್ತೀಚೆಗೆ ಬಳಸಲಾದ ಪಟ್ಟಿಯಿಂದ ತೆಗೆದು ಹಾಕು"
+
+#: ../src/nautilus-view.c:8687
+msgid "View or modify the properties of the open folder"
+msgstr "ತೆರೆಯಲ್ಪಟ್ಟ ಕಡತಕೋಶದ ಗುಣಲಕ್ಷಣಗಳನ್ನು ವೀಕ್ಷಿಸು ಅಥವ ಮಾರ್ಪಡಿಸು"
+
+#: ../src/nautilus-view-dnd.c:169 ../src/nautilus-view-dnd.c:203
+#: ../src/nautilus-view-dnd.c:294
+msgid "Drag and drop is not supported."
+msgstr "ಎಳೆದು ಸೇರಿಸುವಿಕೆಯು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-view-dnd.c:170
+msgid "Drag and drop is only supported on local file systems."
+msgstr "ಎಳೆದು ಸೇರಿಸುವಿಕೆಯು ಕೇವಲ ಸ್ಥಳೀಯ ಕಡತ ವ್ಯವಸ್ಥೆಗಳಲ್ಲಿ ಮಾತ್ರ ಬೆಂಬಲಿತವಾಗಿದೆ."
+
+#: ../src/nautilus-view-dnd.c:204 ../src/nautilus-view-dnd.c:295
+msgid "An invalid drag type was used."
+msgstr "ಒಂದು ಸರಿಯಲ್ಲದ ರೀತಿಯ ಎಳೆಯುವಿಕೆಯನ್ನು ಬಳಸಲಾಗಿದೆ."
+
+#. Translator: This is the filename used for when you dnd text to a directory
+#: ../src/nautilus-view-dnd.c:382
+msgid "Dropped Text.txt"
+msgstr "Text.txt ಅನ್ನು ಹಾಕಲಾಗಿದೆ"
+
+#. Translator: This is the filename used for when you dnd raw
+#. * data to a directory, if the source didn't supply a name.
+#.
+#: ../src/nautilus-view-dnd.c:480
+msgid "dropped data"
+msgstr "ಬಿಡಲಾದ ದತ್ತಾಂಶ"
+
+#: ../src/nautilus-window.c:827
+msgid "_Properties"
+msgstr "ಗುಣಲಕ್ಷಣಗಳು (_P)"
+
+#: ../src/nautilus-window.c:836
+msgid "_Format…"
+msgstr "ವಿನ್ಯಾಸಗೊಳಿಸು (_F)…"
+
+#: ../src/nautilus-window.c:1187
+msgid "_New Tab"
+msgstr "ಹೊಸ ಹಾಳೆ (_N)"
+
+#: ../src/nautilus-window.c:1197 ../src/nautilus-window-menus.c:456
+msgid "Move Tab _Left"
+msgstr "ಹಾಳೆಯನ್ನು ಎಡಕ್ಕೆ ಜರುಗಿಸು (_L)"
+
+#: ../src/nautilus-window.c:1205 ../src/nautilus-window-menus.c:459
+msgid "Move Tab _Right"
+msgstr "ಹಾಳೆಯನ್ನು ಬಲಕ್ಕೆ ಜರುಗಿಸು (_R)"
+
+#: ../src/nautilus-window.c:1216
+msgid "_Close Tab"
+msgstr "ಹಾಳೆಯನ್ನು ಮುಚ್ಚು (_C)"
+
+#: ../src/nautilus-window.c:2335
+msgid "Access and organize your files."
+msgstr "ನಿಮ್ಮ ಕಡತಗಳನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಿ ಹಾಗು ವ್ಯವಸ್ಥಿತವಾಗಿ ಜೋಡಿಸಿ."
+
+#. Translators should localize the following string
+#. * which will be displayed at the bottom of the about
+#. * box to give credit to the translator(s).
+#.
+#: ../src/nautilus-window.c:2344
+msgid "translator-credits"
+msgstr "ಅನುವಾದಕರ-ಮನ್ನಣೆಗಳು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:379
+msgid "_Close"
+msgstr "ಮುಚ್ಚು (_C)"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:380
+msgid "Close this folder"
+msgstr "ಈ ಕಡತಕೋಶವನ್ನು ಮುಚ್ಚು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:383
+msgid "Open _Parent"
+msgstr "ಮೂಲವನ್ನು ತೆರೆ (_P)"
+
+#: ../src/nautilus-window-menus.c:384
+msgid "Open the parent folder"
+msgstr "ಮೂಲ ಕಡತಕೋಶವನ್ನು ತೆರೆ"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:388
+msgid "Stop loading the current location"
+msgstr "ಪ್ರಸಕ್ತ ತಾಣವನ್ನು ಲೋಡ್ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:391
+msgid "_Reload"
+msgstr "ಪುನ: ಲೋಡ್ ಮಾಡು (_R)"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:392
+msgid "Reload the current location"
+msgstr "ಪ್ರಸಕ್ತ ತಾಣವನ್ನು ಪುನಃ ಲೋಡ್ ಮಾಡು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:399
+msgid "Zoom _In"
+msgstr "ಹಿಗ್ಗಿಸು (_I)"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:400
+msgid "Increase the view size"
+msgstr "ನೋಟದ ಗಾತ್ರವನ್ನು ಹಿಗ್ಗಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:411
+msgid "Zoom _Out"
+msgstr "ಕುಗ್ಗಿಸು (_O)"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:412
+msgid "Decrease the view size"
+msgstr "ನೋಟದ ಗಾತ್ರವನ್ನು ಚಿಕ್ಕದಾಗಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:419
+msgid "Normal Si_ze"
+msgstr "ಸಾಮಾನ್ಯ ಗಾತ್ರ (_z)"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:420
+msgid "Use the normal view size"
+msgstr "ಸಾಮಾನ್ಯ ನೋಟದ ಗಾತ್ರವನ್ನು ಬಳಸಿ"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:423 ../src/nautilus-window-menus.c:557
+msgid "_Home"
+msgstr "ನೆಲೆ (_H)"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:424
+msgid "Open your personal folder"
+msgstr "ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಕಡತಕೋಶವನ್ನು ತೆರೆಯಿರಿ"
+
+#. name, stock id
+#: ../src/nautilus-window-menus.c:427
+msgid "New _Tab"
+msgstr "ಹೊಸ ಹಾಳೆ (_T)"
+
+#: ../src/nautilus-window-menus.c:428
+msgid "Open another tab for the displayed location"
+msgstr "ತೋರಿಸಲಾದ ಚಿಹ್ನೆಗಾಗಿ ಇನ್ನೊಂದು ಹಾಳೆಯನ್ನು ತೆರೆ"
+
+#. name, stock id
+#: ../src/nautilus-window-menus.c:431
+msgid "_Back"
+msgstr "ಹಿಂದೆ (_B)"
+
+#: ../src/nautilus-window-menus.c:432
+msgid "Go to the previous visited location"
+msgstr "ಈ ಮೊದಲು ಭೇಟಿ ನೀಡಲಾದ ತಾಣಕ್ಕೆ ತೆರಳು"
+
+#. name, stock id
+#: ../src/nautilus-window-menus.c:435
+msgid "_Forward"
+msgstr "ಮುಂದಕ್ಕೆ (_F)"
+
+#: ../src/nautilus-window-menus.c:436
+msgid "Go to the next visited location"
+msgstr "ನಂತರ ಭೇಟಿ ನೀಡಲಾದ ತಾಣಕ್ಕೆ ತೆರಳು"
+
+#. name, stock id
+#: ../src/nautilus-window-menus.c:439
+msgid "Enter _Location…"
+msgstr "ಸ್ಥಳವನ್ನು ನಮೂದಿಸಿ (_L)…"
+
+#: ../src/nautilus-window-menus.c:440
+msgid "Specify a location to open"
+msgstr "ತೆರೆಯಲು ಒಂದು ತಾಣವನ್ನು ಸೂಚಿಸಿ"
+
+#. name, stock id
+#: ../src/nautilus-window-menus.c:443
+msgid "Bookmark this Location"
+msgstr "ಈ ಸ್ಥಳವನ್ನು ಪುಟಗುರುತು ಮಾಡು"
+
+#: ../src/nautilus-window-menus.c:444
+msgid "Add a bookmark for the current location"
+msgstr "ಈಗಿನ ಸ್ಥಳಕ್ಕಾಗಿ ಒಂದು ಪುಟಗುರುತನ್ನು ಸೇರಿಸು"
+
+#. name, stock id
+#: ../src/nautilus-window-menus.c:447
+msgid "_Bookmarks…"
+msgstr "ಪುಟಗುರುತುಗಳು (_B)…"
+
+#: ../src/nautilus-window-menus.c:448
+msgid "Display and edit bookmarks"
+msgstr "ಪುಟಗುರುತುಗಳನ್ನು ತೋರಿಸು ಮತ್ತು ಸಂಪಾದಿಸು"
+
+#: ../src/nautilus-window-menus.c:450
+msgid "_Previous Tab"
+msgstr "ಹಿಂದಿನ ಹಾಳೆ (_P)"
+
+#: ../src/nautilus-window-menus.c:451
+msgid "Activate previous tab"
+msgstr "ಹಿಂದಿನ ಹಾಳೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸು"
+
+#: ../src/nautilus-window-menus.c:453
+msgid "_Next Tab"
+msgstr "ಮುಂದಿನ ಹಾಳೆ (_N)"
+
+#: ../src/nautilus-window-menus.c:454
+msgid "Activate next tab"
+msgstr "ಮುಂದಿನ ಹಾಳೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸು"
+
+#: ../src/nautilus-window-menus.c:457
+msgid "Move current tab to left"
+msgstr "ಈಗಿನ ಹಾಳೆಯನ್ನು ಎಡಕ್ಕೆ ಜರುಗಿಸು"
+
+#: ../src/nautilus-window-menus.c:460
+msgid "Move current tab to right"
+msgstr "ಈಗಿನ ಹಾಳೆಯನ್ನು ಬಲಕ್ಕೆ ಜರುಗಿಸು"
+
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:478
+msgid "_Show Sidebar"
+msgstr "ಬದಿಯ ಪಟ್ಟಿಯನ್ನು ತೋರಿಸು (_S)"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:479
+msgid "Change the visibility of this window's side pane"
+msgstr "ಕಿಟಕಿಯ ಅಂಚಿನ ಫಲಕದ ಗೋಚರಿಕೆಯನ್ನು ಬದಲಾಯಿಸು"
+
+#. is_active
+#. name, stock id
+#. label, accelerator
+#: ../src/nautilus-window-menus.c:483
+msgid "_Search for Files…"
+msgstr "ಕಡತಗಳಿಗಾಗಿ ಹುಡುಕು (_S)…"
+
+#. tooltip
+#: ../src/nautilus-window-menus.c:484
+msgid "Search documents and folders by name"
+msgstr "ಹೆಸರು ಅಥವ ವಿಷಯದ ಮೇರೆಗೆ ದಸ್ತಾವೇಜುಗಳನ್ನು ಹಾಗು ಕಡತಕೋಶಗಳನ್ನು ಹುಡುಕಿ"
+
+#: ../src/nautilus-window-menus.c:490 ../src/nautilus-window-menus.c:492
+msgid "List"
+msgstr "ಪಟ್ಟಿ"
+
+#: ../src/nautilus-window-menus.c:491
+msgid "View items as a list"
+msgstr "ಅಂಶಗಳನ್ನು ಪಟ್ಟಿಯಾಗಿ ನೋಡು"
+
+#: ../src/nautilus-window-menus.c:493
+msgid "View items as a grid of icons"
+msgstr "ಅಂಶಗಳನ್ನು ಚಿಹ್ನೆಗಳ ಚೌಕಜಾಲದ ರೂಪದಲ್ಲಿ ನೋಡು"
+
+#: ../src/nautilus-window-menus.c:554
+msgid "_Up"
+msgstr "ಮೇಲೆ (_U)"
+
+#: ../src/nautilus-window-slot.c:1288 ../src/nautilus-window-slot.c:1460
+#, c-format
+msgid "Unable to load location"
+msgstr "ಸ್ಥಳವನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#: ../src/nautilus-window-slot.c:1615
+msgid "Unable to display the contents of this folder."
+msgstr "ಈ ಕಡತಕೋಶದಲ್ಲಿರುವ ವಿಷಯಗಳನ್ನು ತೋರಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-window-slot.c:1617
+msgid "This location doesn't appear to be a folder."
+msgstr "ಈ ಸ್ಥಳವು ಒಂದು ಕಡತಕೋಶವೆಂದು ತೋರುತ್ತಿಲ್ಲ."
+
+#: ../src/nautilus-window-slot.c:1622
+msgid ""
+"Unable to find the requested file. Please check the spelling and try again."
+msgstr ""
+"ಮನವಿ ಸಲ್ಲಿಸಲಾದ ಕಡತವು ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಕಾಗುಣಿತವನ್ನು ಪರೀಕ್ಷಿಸಿ ಹಾಗು ನಂತರ "
+"ಪ್ರಯತ್ನಿಸಿ."
+
+#: ../src/nautilus-window-slot.c:1627
+#, c-format
+msgid "“%s” locations are not supported."
+msgstr "“%s” ಸ್ಥಳಗಳಿಗೆ ಬೆಂಬಲವಿಲ್ಲ."
+
+#: ../src/nautilus-window-slot.c:1630
+msgid "Unable to handle this kind of location."
+msgstr "ಈ ಬಗೆಯ ಸ್ಥಳವನ್ನು ನಿಭಾಯಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-window-slot.c:1635
+msgid "Unable to access the requested location."
+msgstr "ಮನವಿ ಸಲ್ಲಿಸಲಾದ ಸ್ಥಳವನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
+
+#: ../src/nautilus-window-slot.c:1638
+msgid "Don't have permission to access the requested location."
+msgstr "ಮನವಿ ಸಲ್ಲಿಸಲಾದ ಸ್ಥಳವನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ನಿಮಗೆ ಅಗತ್ಯ ಅನುಮತಿಗಳಿಲ್ಲ."
+
+#. This case can be hit for user-typed strings like "foo" due to
+#. * the code that guesses web addresses when there's no initial "/".
+#. * But this case is also hit for legitimate web addresses when
+#. * the proxy is set up wrong.
+#.
+#: ../src/nautilus-window-slot.c:1646
+msgid ""
+"Unable to find the requested location. Please check the spelling or the "
+"network settings."
+msgstr ""
+"ಮನವಿ ಸಲ್ಲಿಸಲಾದ ಸ್ಥಳವು ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಕಾಗುಣಿತವನ್ನು ಅಥವ ಜಾಲಬಂಧದ "
+"ಸಿದ್ಧತೆಗಳನ್ನು "
+"ಪರೀಕ್ಷಿಸಿ."
+
+#: ../src/nautilus-window-slot.c:1657
+#, c-format
+msgid "Unhandled error message: %s"
+msgstr "ನಿಭಾಯಿಸಲಾಗದ ದೋಷ ಸಂದೇಶ: %s"
+
+#: ../src/nautilus-window-slot.c:2212
+msgid "Searching…"
+msgstr "ಹುಡುಕಲಾಗುತ್ತಿದೆ…"
+
+#: ../src/nautilus-x-content-bar.c:92
+msgid "Audio CD"
+msgstr "ಆಡಿಯೊ CD"
+
+#: ../src/nautilus-x-content-bar.c:94
+msgid "Audio DVD"
+msgstr "ಆಡಿಯೊ DVD"
+
+#: ../src/nautilus-x-content-bar.c:96
+msgid "Video DVD"
+msgstr "ವೀಡಿಯೋ DVD"
+
+#: ../src/nautilus-x-content-bar.c:98
+msgid "Video CD"
+msgstr "ವೀಡಿಯೊ CD"
+
+#: ../src/nautilus-x-content-bar.c:100
+msgid "Super Video CD"
+msgstr "ಸೂಪರ್ ವೀಡಿಯೊ CD"
+
+#: ../src/nautilus-x-content-bar.c:102
+msgid "Photo CD"
+msgstr "ಚಿತ್ರಗಳ CD"
+
+#: ../src/nautilus-x-content-bar.c:104
+msgid "Picture CD"
+msgstr "ಚಿತ್ರದ CD"
+
+#: ../src/nautilus-x-content-bar.c:106 ../src/nautilus-x-content-bar.c:139
+msgid "Contains digital photos"
+msgstr "ಡಿಜಿಟಲ್ ಚಿತ್ರಗಳನ್ನು ಹೊಂದಿದೆ"
+
+#: ../src/nautilus-x-content-bar.c:108
+msgid "Contains music"
+msgstr "ಸಂಗೀತವನ್ನು ಹೊಂದಿದೆ"
+
+#: ../src/nautilus-x-content-bar.c:110
+msgid "Contains software"
+msgstr "ತಂತ್ರಾಂಶವನ್ನು ಹೊಂದಿದೆ"
+
+#. fallback to generic greeting
+#: ../src/nautilus-x-content-bar.c:113
+#, c-format
+msgid "Detected as “%s”"
+msgstr "“%s” ಎಂದು ಕಂಡುಬಂದಿದೆ"
+
+#: ../src/nautilus-x-content-bar.c:135
+msgid "Contains music and photos"
+msgstr "ಚಿತ್ರಗಳನ್ನು ಮತ್ತು ಸಂಗೀತವನ್ನು ಹೊಂದಿದೆ"
+
+#: ../src/nautilus-x-content-bar.c:137
+msgid "Contains photos and music"
+msgstr "ಸಂಗೀತವನ್ನು ಮತ್ತು ಚಿತ್ರಗಳನ್ನು ಹೊಂದಿದೆ"
+
+#: ../src/nautilus-x-content-bar.c:201
+msgid "Open with:"
+msgstr "ಇದರಿಂದ ತೆರೆ:"
+
+#~ msgid "Input Methods"
+#~ msgstr "ಆದಾನ ಕ್ರಮಗಳು"
+
+#~ msgid "Set as _Background"
+#~ msgstr "ಹಿನ್ನಲೆಯ ಚಿತ್ರವಾಗಿ ಹೊಂದಿಸು (_t)"
+
+#~ msgid "Send To…"
+#~ msgstr "ಇಲ್ಲಿಗೆ ಕಳುಹಿಸಿ…"
+
+#~ msgid "--geometry cannot be used with more than one URI."
+#~ msgstr "--geometry ಅನ್ನು ಒಂದಕ್ಕಿಂತ ಹೆಚ್ಚಿನ URI ಜೊತೆಗೆ ಬಳಸುವ ಹಾಗಿಲ್ಲ."
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Browse the file system with the file manager"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "ಕಡತ ಮ್ಯಾನೇಜರನ್ನು ಬಳಸಿಕೊಂಡು ಕಡತ ವ್ಯವಸ್ಥೆಯನ್ನು ವೀಕ್ಷಿಸಿ"
+
+#~ msgid "Could not parse arguments"
+#~ msgstr "ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳನ್ನು ಪಾರ್ಸ್ ಮಾಡಲಾಗಿಲ್ಲ"
+
+#~ msgid "Connect to _Server"
+#~ msgstr "ಪೂರೈಕೆಗಣಕಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸು (_S)"
+
+#~ msgid "_About Files"
+#~ msgstr "ಕಡತಗಳ ಬಗ್ಗೆ  (_A)"
+
+#~ msgid "_Icons"
+#~ msgstr "ಚಿಹ್ನೆಗಳು (_I)"
+
+#~ msgid "The icon view encountered an error."
+#~ msgstr "ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ಒಂದು ದೋಷವು ಎದುರಾಗಿದೆ."
+
+#~ msgid "The icon view encountered an error while starting up."
+#~ msgstr "ಚಿಹ್ನೆಯ ನೋಟವು ಆರಂಭಗೊಳ್ಳುವಾಗ ಒಂದು ದೋಷವು ಎದುರಾಗಿದೆ."
+
+#~ msgid "Display this location with the icon view."
+#~ msgstr "ಈ ಚಿಹ್ನೆಯ ನೋಟದೊಂದಿಗೆ ಈ ಸ್ಥಳವನ್ನು ತೋರಿಸು."
+
+#~ msgid "There was an error displaying help."
+#~ msgstr "ಸಹಾಯವನ್ನು ತೋರಿಸುವಾಗ ಒಂದು ದೋಷ ಉಂಟಾಗಿದೆ."
+
+#~ msgid "Don't recognize this file server type."
+#~ msgstr "ಈ ಕಡತ ಪೂರೈಕೆಗಣಕದ ಬಗೆಯನ್ನು ಗುರುತಿಸಲಾಗಿಲ್ಲ."
+
+#~ msgid "_Browse"
+#~ msgstr "ವೀಕ್ಷಿಸು (_B)"
+
+#~ msgid "The desktop view encountered an error."
+#~ msgstr "ಗಣಕತೆರೆ ನೋಟದಲ್ಲಿ ಒಂದು ದೋಷವು ಎದುರಾಗಿದೆ."
+
+#~ msgid "The desktop view encountered an error while starting up."
+#~ msgstr "ಪ್ರಾರಂಭಿಸುವಾಗ ಗಣಕತೆರೆ ನೋಟದಲ್ಲಿ ಒಂದು ದೋಷವು ಎದುರಾಗಿದೆ."
+
+#~ msgid "_List"
+#~ msgstr "ಪಟ್ಟಿ (_L)"
+
+#~ msgid "The list view encountered an error."
+#~ msgstr "ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ದೋಷವು ಎದುರಾಗಿದೆ."
+
+#~ msgid "The list view encountered an error while starting up."
+#~ msgstr "ಪಟ್ಟಿ ನೋಟವು ಆರಂಭಗೊಳ್ಳುವಾಗ ಒಂದು ದೋಷವು ಎದುರಾಗಿದೆ."
+
+#~ msgid "Display this location with the list view."
+#~ msgstr "ಈ ಸ್ಥಳವನ್ನು ಪಟ್ಟಿ ನೋಟದಲ್ಲಿ ತೋರಿಸು."
+
+#~ msgid "Devices"
+#~ msgstr "ಸಾಧನಗಳು"
+
+#~ msgid "Places"
+#~ msgstr "ಸ್ಥಳಗಳು"
+
+#~ msgid "Recent"
+#~ msgstr "ಇತ್ತೀಚಿನ"
+
+#~ msgid "Recent files"
+#~ msgstr "ಇತ್ತೀಚಿನ ಕಡತಗಳು"
+
+#~ msgid "Open the contents of your desktop in a folder"
+#~ msgstr "ನಿಮ್ಮ ಗಣಕತೆರೆಯಲ್ಲಿರುವವುಗಳನ್ನು ಒಂದು ಕಡತಕೋಶದಲ್ಲಿ ತೆರೆ"
+
+#~ msgid "Open the trash"
+#~ msgstr "ಕಸದಬುಟ್ಟಿಯನ್ನು ತೆರೆ"
+
+#~ msgid "Mount and open %s"
+#~ msgstr "%s ಅನ್ನು ಆರೋಹಿಸಿ ಹಾಗು ತೆರೆಯಿರಿ"
+
+#~ msgid "Open the contents of the File System"
+#~ msgstr "ಕಡತ ವ್ಯವಸ್ಥೆಯಲ್ಲಿರುವ ಅಂಶಗಳನ್ನು ತೆರೆ"
+
+#~ msgid "Network"
+#~ msgstr "ಜಾಲಬಂಧ"
+
+#~ msgid "Browse Network"
+#~ msgstr "ಜಾಲಬಂಧವನ್ನು ವೀಕ್ಷಿಸು"
+
+#~ msgid "Browse the contents of the network"
+#~ msgstr "ಜಾಲಬಂಧದಲ್ಲಿನ ವಿಷಯಗಳನ್ನು ನೋಡಿ"
+
+#~ msgid "Connect to a network server address"
+#~ msgstr "ಜಾಲಬಂಧ ಪೂರೈಕೆಗಣಕ ವಿಳಾಸಕ್ಕೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸು"
+
+#~ msgid "_Power On"
+#~ msgstr "ಚಾಲನೆ ಮಾಡು (_P)"
+
+#~ msgid "_Connect Drive"
+#~ msgstr "ಡ್ರೈವಿನೊಂದಿಗೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸು (_C)"
+
+#~ msgid "_Disconnect Drive"
+#~ msgstr "ಡ್ರೈವಿನಿಂದ ಸಂಪರ್ಕ ತಪ್ಪಿಸು (_D)"
+
+#~ msgid "_Start Multi-disk Device"
+#~ msgstr "ಬಹು-ಡಿಸ್ಕ್ ಸಾಧನವನ್ನು ಆರಂಭಿಸು (_S)"
+
+#~ msgid "_Stop Multi-disk Device"
+#~ msgstr "ಬಹು-ಡಿಸ್ಕ್ ಸಾಧನವನ್ನು ನಿಲ್ಲಿಸು (_S)"
+
+#~ msgid "Unable to start %s"
+#~ msgstr "%s ಅನ್ನು ಆರಂಭಿಸುವಲ್ಲಿ ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#~ msgid "Unable to eject %s"
+#~ msgstr "%s ಅನ್ನು ಹೊರ ತಳ್ಳಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
+
+#~ msgid "Unable to poll %s for media changes"
+#~ msgstr "ಮಾಧ್ಯಮದ ಬದಲಾವಣೆಗೆ %s ಅನ್ನು ಪೋಲ್ ಮಾಡಲಾಗಲಿಲ್ಲ"
+
+#~ msgid "Unable to stop %s"
+#~ msgstr "%s ಅನ್ನು ನಿಲ್ಲಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
+
+#~ msgid "_Add Bookmark"
+#~ msgstr "ಬುಕ್ಮಾರ್ಕುಗಳನ್ನು ಸೇರಿಸು (_A)"
+
+#~ msgid "Rename…"
+#~ msgstr "ಮರುಹೆಸರಿಸು…"
+
+#~ msgid "Computer"
+#~ msgstr "ಗಣಕ"
+
+#~ msgid ""
+#~ "Files is free software; you can redistribute it and/or modify it under "
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software Foundation; either version 2 of the License, or (at your option) "
+#~ "any later version."
+#~ msgstr ""
+#~ "Files is free software; you can redistribute it and/or modify it under "
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software Foundation; either version 2 of the License, or (at your option) "
+#~ "any later version."
+
+#~ msgid ""
+#~ "Files is distributed in the hope that it will be useful, but WITHOUT ANY "
+#~ "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+#~ "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+#~ "details."
+#~ msgstr ""
+#~ "Files is distributed in the hope that it will be useful, but WITHOUT ANY "
+#~ "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+#~ "FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+#~ "details."
+
+#~ msgid ""
+#~ "You should have received a copy of the GNU General Public License along "
+#~ "with Nautilus; if not, write to the Free Software Foundation, Inc., 51 "
+#~ "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
+#~ msgstr ""
+#~ "You should have received a copy of the GNU General Public License along "
+#~ "with Nautilus; if not, write to the Free Software Foundation, Inc., 51 "
+#~ "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
+
+#~ msgid "Copyright © %Id–%Id The Files authors"
+#~ msgstr "ಹಕ್ಕು © %Id–%Id Files ಕತೃಗಳು"
+
+#~ msgid "Edit Nautilus preferences"
+#~ msgstr "Nautilus‍ ಆದ್ಯತೆಗಳನ್ನು ಸಂಪಾದಿಸು"
+
+#~ msgid "_All Topics"
+#~ msgstr "ಎಲ್ಲಾ ವಿಷಯಗಳು (_A)"
+
+#~ msgid "Display Nautilus help"
+#~ msgstr "Nautilus‍ ಸಹಾಯವನ್ನು ತೋರಿಸು"
+
+#~ msgid "Search for files"
+#~ msgstr "ಕಡತಗಳಿಗಾಗಿ ಹುಡುಕು"
+
+#~ msgid ""
+#~ "Locate files based on file name and type. Save your searches for later "
+#~ "use."
+#~ msgstr ""
+#~ "ಹೆಸರು ಮತ್ತು ಬಗೆಯ ಆಧಾರದಲ್ಲಿ ಕಡತಗಳನ್ನು ಹುಡುಕಿ. ನಿಮ್ಮ ಹುಡುಕಾಟಗಳನ್ನು ನಂತರದ "
+#~ "ಬಳಕೆಗಾಗಿ ಉಳಿಸಿಟ್ಟುಕೊಳ್ಳಿ."
+
+#~ msgid "Sort files and folders"
+#~ msgstr "ಕಡತಗಳನ್ನು ಮತ್ತು ಕಡತಕೋಶಗಳನ್ನು ಜೋಡಿಸು"
+
+#~ msgid "Arrange files by name, size, type, or when they were changed."
+#~ msgstr ""
+#~ "ಕಡತಗಳನ್ನು ಹೆಸರು, ಗಾತ್ರ, ಬಗೆ, ಅಥವ ಅವುಗಳನ್ನು ಯಾವಾಗ ಬದಲಾಯಿಸಲಾಯಿತು ಎನ್ನುವುದರ "
+#~ "ಆಧಾರದಲ್ಲಿ ಜೋಡಿಸಿ."
+
+#~ msgid "Find a lost file"
+#~ msgstr "ಕಳೆದುಹೋದ ಕಡತವನ್ನು ಹುಡುಕು"
+
+#~ msgid ""
+#~ "Follow these tips if you can't find a file you created or downloaded."
+#~ msgstr ""
+#~ "ನೀವು ರಚಿಸಲಾದ ಅಥವ ಇಳಿಸಿಕೊಳ್ಳಲಾದ ಯಾವುದೆ ಕಡತವು ಕಂಡುಬರದೆ ಇದ್ದಲ್ಲಿ ಈ ಸಲಹೆಗಳನ್ನು "
+#~ "ಅನುಸರಿಸಿ."
+
+#~ msgid "Share and transfer files"
+#~ msgstr "ಕಡತಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ ಹಾಗು ವರ್ಗಾಯಿಸು"
+
+#~ msgid ""
+#~ "Easily transfer files to your contacts and devices from the file manager."
+#~ msgstr ""
+#~ "ಕಡತ ವ್ಯವಸ್ಥಾಪಕದಿಂದ ನಿಮ್ಮ ಸಂಪರ್ಕವಿಳಾಸಗಳಿಗೆ ಮತ್ತು ಸಾಧನಗಳಿಗೆ ಸುಲಭವಾಗಿ ವರ್ಗಾಯಿಸಿ."
+
+#~ msgid "Display credits for the creators of Nautilus"
+#~ msgstr "Nautilus‍ನ ನಿರ್ಮಾತೃಗಳಿಗೆ ಮನ್ನಣೆಗಳನ್ನು ತೋರಿಸು"
+
+#~ msgid "Connect to a remote computer or shared disk"
+#~ msgstr "ಒಂದು ದೂರದ ಗಣಕಕ್ಕೆ ಅಥವ ಹಂಚಿಕೆ ಮಾಡಲಾದ ಡಿಸ್ಕ್‍ಗೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸು"
+
+#~ msgid "Open another Nautilus window for the displayed location"
+#~ msgstr "ತೋರಿಸಲಾದ ಚಿಹ್ನೆಗಾಗಿ ಇನ್ನೊಂದು Nautilus ಕಿಟಕಿಯನ್ನು ತೆರೆ"
+
+#~ msgid "Close _All Windows"
+#~ msgstr "ಎಲ್ಲಾ ಕಿಟಕಿಗಳನ್ನು ಮುಚ್ಚು (_A)"
+
+#~ msgid "Close all Navigation windows"
+#~ msgstr "ಎಲ್ಲಾ ನ್ಯಾವಿಗೇಶನ್ ಕಿಟಕಿಗಳನ್ನು ಮುಚ್ಚು"

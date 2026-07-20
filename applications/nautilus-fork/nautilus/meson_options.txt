@@ -1,0 +1,75 @@
+##############
+# Extensions #
+##############
+option(
+  'docs',
+  type: 'boolean',
+  value: false,
+  description: 'Build documentation for extension library',
+)
+option(
+  'extensions',
+  type: 'boolean',
+  value: true,
+  description: 'Build stock extensions',
+)
+option(
+  'introspection',
+  type: 'boolean',
+  value: true,
+  description: 'Build GObject introspection data for extension library',
+)
+##################
+# End extensions #
+##################
+
+############
+# Features #
+############
+option(
+  'packagekit',
+  type: 'boolean',
+  deprecated: true
+)
+option(
+  'selinux',
+  type: 'feature',
+  value: 'enabled',
+  deprecated: {'true': 'enabled', 'false': 'disabled'},
+  description: 'Enable SELinux context support in file properties dialog',
+)
+option(
+  'cloudproviders',
+  type: 'feature',
+  value: 'enabled',
+  deprecated: {'true': 'enabled', 'false': 'disabled'},
+  description: 'Enable the cloudproviders support',
+)
+################
+# End features #
+################
+
+###########
+# Testing #
+###########
+option(
+  'tests',
+  type: 'combo',
+  choices: [
+    'none',
+    'headless',
+    'all'
+  ],
+  value: 'headless',
+  description: 'Build selected tests',
+)
+###############
+# End testing #
+###############
+
+option(
+  'profile',
+  type: 'string',
+  value: '',
+  description: 'Build with specified application ID',
+)

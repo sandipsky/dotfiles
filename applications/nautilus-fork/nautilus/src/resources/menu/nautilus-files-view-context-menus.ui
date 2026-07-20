@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <menu id="background-menu">
+    <item>
+      <attribute name="label" translatable="yes">New _Folder…</attribute>
+      <attribute name="action">view.new-folder</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">New _Document</attribute>
+      <attribute name="nautilus-menu-item">templates-submenu</attribute>
+      <attribute name="show-in-mode">browse</attribute>
+      <link name="submenu" id="templates-submenu"/>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Open _With…</attribute>
+      <attribute name="action">view.open-current-directory-with-other-application</attribute>
+      <attribute name="show-in-mode">browse</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Open in Consol_e</attribute>
+      <attribute name="action">view.current-directory-console</attribute>
+      <attribute name="hidden-when">action-disabled</attribute>
+    </item>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Paste</attribute>
+        <attribute name="action">view.paste</attribute>
+        <attribute name="show-in-mode">browse</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Paste as _Link</attribute>
+        <attribute name="action">view.create-link</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Select _All</attribute>
+        <attribute name="action">view.select-all</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Visible Columns…</attribute>
+        <attribute name="action">view.visible-columns</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Captions…</attribute>
+        <attribute name="action">view.visible-captions</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Empty _Trash…</attribute>
+        <attribute name="action">view.empty-trash</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section id="background-extensions-section"/>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">P_roperties</attribute>
+        <attribute name="action">view.current-directory-properties</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="selection-menu">
+    <section id="new-folder-with-selection-section"/>
+    <section id="open-with-application-section">
+      <item>
+        <attribute name="label" translatable="yes">_Extract</attribute>
+        <attribute name="action">view.extract-here</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">E_xtract to…</attribute>
+        <attribute name="action">view.extract-to</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Open _With…</attribute>
+        <attribute name="action">view.open-with-other-application</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+        <attribute name="nautilus-menu-item">open_with_in_main_menu</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Run as a Program</attribute>
+        <attribute name="action">view.run-in-terminal</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Open</attribute>
+        <attribute name="nautilus-menu-item">open_in_view_submenu</attribute>
+        <attribute name="show-in-mode">browse</attribute>
+        <link name="submenu">
+          <section>
+            <item>
+              <attribute name="label" translatable="yes">Open</attribute>
+              <attribute name="action">view.open-with-default-application</attribute>
+              <attribute name="hidden-when">action-disabled</attribute>
+            </item>
+            <item>
+              <attribute name="label" translatable="yes">Open in New _Tab</attribute>
+              <attribute name="action">view.open-item-new-tab</attribute>
+              <attribute name="hidden-when">action-disabled</attribute>
+            </item>
+            <item>
+              <attribute name="label" translatable="yes">Open in New _Window</attribute>
+              <attribute name="action">view.open-item-new-window</attribute>
+              <attribute name="hidden-when">action-disabled</attribute>
+            </item>
+          </section>
+          <section>
+            <item>
+              <attribute name="label" translatable="yes">Open _With…</attribute>
+              <attribute name="action">view.open-with-other-application</attribute>
+              <attribute name="hidden-when">action-disabled</attribute>
+            </item>
+            <item>
+              <attribute name="label" translatable="yes">Open in Consol_e</attribute>
+              <attribute name="action">view.console</attribute>
+              <attribute name="hidden-when">action-disabled</attribute>
+            </item>
+          </section>
+        </link>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Open Item Location</attribute>
+        <attribute name="action">view.open-item-location</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <submenu>
+        <attribute name="show-in-mode">browse</attribute>
+        <attribute name="show-in-view">normal</attribute>
+        <attribute name="label" translatable="yes">_Scripts</attribute>
+        <attribute name="nautilus-menu-item">scripts-submenu</attribute>
+        <section id="scripts-submenu-section"/>
+        <section>
+          <item>
+            <attribute name="label" translatable="yes">_Open Scripts Folder</attribute>
+            <attribute name="action">view.open-scripts-folder</attribute>
+            <attribute name="hidden-when">action-disabled</attribute>
+          </item>
+        </section>
+      </submenu>
+    </section>
+    <section id="drive-section">
+      <item>
+        <attribute name="label" translatable="yes">_Mount</attribute>
+        <attribute name="action">view.mount-volume</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Unmount</attribute>
+        <attribute name="action">view.unmount-volume</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Eject</attribute>
+        <attribute name="action">view.eject-volume</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Start</attribute>
+        <attribute name="action">view.start-volume</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Stop</attribute>
+        <attribute name="action">view.stop-volume</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Detect Media</attribute>
+        <attribute name="action">view.detect-media</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section id="move-copy-section">
+      <attribute name="show-in-mode">browse</attribute>
+      <attribute name="show-in-view">normal</attribute>
+      <item>
+        <attribute name="label" translatable="yes">Cu_t</attribute>
+        <attribute name="action">view.cut</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Copy</attribute>
+        <attribute name="action">view.copy</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Move to…</attribute>
+        <attribute name="action">view.move-to</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Copy to…</attribute>
+        <attribute name="action">view.copy-to</attribute>
+      </item>
+    </section>
+    <section id="file-actions-section">
+      <attribute name="show-in-view">normal</attribute>
+      <item>
+        <attribute name="label" translatable="yes">Rena_me…</attribute>
+        <attribute name="action">view.rename</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Paste Into Folder</attribute>
+        <attribute name="action">view.paste-into</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Create _Link</attribute>
+        <attribute name="action">view.create-link-in-place</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">C_ompress…</attribute>
+        <attribute name="action">view.compress</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Set as Background…</attribute>
+        <attribute name="action">view.set-as-wallpaper</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes" comments="Translators: This is the transitive verb meaning 'to send via email' (e.g. 'email this document to Angela).">Email…</attribute>
+        <attribute name="action">view.send-email</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Mo_ve to Trash</attribute>
+        <attribute name="action">view.move-to-trash</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Delete From Trash…</attribute>
+        <attribute name="action">view.delete-from-trash</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Delete Permanently…</attribute>
+        <attribute name="action">view.delete-permanently-menu-item</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Delete Permanently…</attribute>
+        <attribute name="action">view.permanent-delete-permanently-menu-item</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Restore From Trash</attribute>
+        <attribute name="action">view.restore-from-trash</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Remove From Recent</attribute>
+        <attribute name="action">view.remove-from-recent</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes" comments="Unmarks a file as starred (starred)">Unstar</attribute>
+        <attribute name="action">view.unstar</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section id="network-view-section">
+      <attribute name="show-in-view">network</attribute>
+      <item>
+        <attribute name="label" translatable="yes">_Copy Address</attribute>
+        <attribute name="action">view.copy-network-address</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Remove</attribute>
+        <attribute name="action">view.remove-recent-server</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section id="selection-extensions-section"/>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">P_roperties</attribute>
+        <attribute name="action">view.properties</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

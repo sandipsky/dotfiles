@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>@appid@</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <name>Files</name>
+  <summary>Access and organize files</summary>
+  <description>
+    <p>
+      Files, also known as Nautilus, is the default file manager of the GNOME desktop.
+      It provides a  simple and integrated way of managing your files and browsing your file system.
+    </p>
+    <p>
+      Nautilus supports all the basic functions of a file manager and more.
+      It can search and manage your files and folders, both locally and on a network,
+      read and write data to and from removable media, run scripts, and launch apps.
+      It has three views: Icon Grid, Icon List, and Tree List.
+      Its functions can be extended with plugins and scripts.
+    </p>
+  </description>
+  <url type="bugtracker">https://gitlab.gnome.org/GNOME/nautilus/issues</url>
+  <url type="contact">https://discourse.gnome.org/tag/nautilus</url>
+  <url type="contribute">https://welcome.gnome.org/app/Nautilus/</url>
+  <url type="donation">https://www.gnome.org/donate/</url>
+  <url type="help">https://help.gnome.org/users/gnome-help/stable/files.html.en</url>
+  <url type="homepage">https://apps.gnome.org/Nautilus/</url>
+  <url type="translate">https://l10n.gnome.org/module/nautilus/</url>
+  <url type="vcs-browser">https://gitlab.gnome.org/GNOME/nautilus</url>
+  <launchable type="desktop-id">@appid@.desktop</launchable>
+  <releases>
+    <release version="@release-version@" type="snapshot"/>
+    <release version="50.2.2" type="stable" date="2026-05-25"/>
+    <release version="50.2" type="stable" date="2026-05-23"/>
+    <release version="50.1" type="stable" date="2026-04-11"/>
+    <release version="50.0" type="stable" date="2026-03-14"/>
+    <release version="50~rc" type="development" date="2026-03-01"/>
+    <release version="50~beta" type="development" date="2026-02-01"/>
+    <release version="50~alpha" type="development" date="2026-01-07"/>
+    <release version="49.4" type="stable" date="2026-02-02"/>
+    <release version="49.3" type="stable" date="2026-01-07"/>
+    <release version="49.2" type="stable" date="2025-11-23"/>
+    <release version="49.1" type="stable" date="2025-10-13"/>
+    <release version="49.0" type="stable" date="2025-09-15"/>
+  </releases>
+  <project_group>GNOME</project_group>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer id="org.gnome">
+    <name>The GNOME Project</name>
+  </developer>
+  <provides>
+    <binary>nautilus</binary>
+    <library>libnautilus-extension.so.4</library>
+    <dbus type="user">org.freedesktop.FileManager1</dbus>
+    <dbus type="user">org.freedesktop.impl.portal.Request</dbus>
+    <dbus type="user">org.freedesktop.impl.portal.FileChooser</dbus>
+    <dbus type="user">org.gnome.Nautilus.FileOperations2</dbus>
+    <dbus type="user">org.gnome.Shell.SearchProvider2</dbus>
+  </provides>
+  <screenshots>
+    <screenshot type="default" environment="gnome">
+      <image>https://static.gnome.org/appdata/gnome-48/files/grid.png</image>
+      <caption>Grid View</caption>
+    </screenshot>
+    <screenshot environment="gnome">
+      <image>https://static.gnome.org/appdata/gnome-48/files/list.png</image>
+      <caption>List View</caption>
+    </screenshot>
+    <screenshot environment="gnome">
+      <image>https://static.gnome.org/appdata/gnome-48/files/search.png</image>
+      <caption>Search</caption>
+    </screenshot>
+    <screenshot environment="gnome">
+      <image>https://static.gnome.org/appdata/gnome-48/files/thumbnails.png</image>
+      <caption>Selection of Multiple Files</caption>
+    </screenshot>
+  </screenshots>
+  <branding>
+    <color type="primary" scheme_preference="light">#99c1f1</color>
+    <color type="primary" scheme_preference="dark">#1a5fb4</color>
+  </branding>
+  <translation type="gettext">nautilus</translation>
+  <kudos>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>ModernToolkit</kudo>
+    <kudo>Notifications</kudo>
+    <kudo>SearchProvider</kudo>
+  </kudos>
+  <supports>
+    <control>touch</control>
+    <control>tablet</control>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <internet>offline-only</internet>
+  </supports>
+  <requires>
+    <display_length>360</display_length>
+  </requires>
+  <content_rating type="oars-1.1" />
+</component>

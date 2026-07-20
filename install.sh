@@ -63,15 +63,30 @@ yay -S --noconfirm --needed \
 
 sudo -u "$USERNAME" -H bash -c "curl -fsSL https://claude.ai/install.sh | bash"
 
-# noctalia-qs is built only from the vendored recipe in assets/ — upstream
+# noctalia-qs is built only from the vendored recipe in applications/ — upstream
 # discontinued the fork (v5 dropped Quickshell), so the AUR package is
 # unmaintained and must not be trusted for unattended --noconfirm builds.
 if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
     BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
-    sudo -u "$USERNAME" cp -r assets/noctalia-qs/. "$BUILD_DIR/"
+    sudo -u "$USERNAME" cp -r applications/noctalia-qs/. "$BUILD_DIR/"
     (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
     pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
     rm -rf "$BUILD_DIR"
+fi
+
+# Nautilus is replaced by the local fork vendored in applications/nautilus-fork/
+# (upstream source + local patches, see docs/nautilus-patches.md), built
+# fully offline from the repo tree. The repo nautilus installed above only
+# serves to pull in runtime deps before the fork overwrites it. IgnorePkg
+# then keeps pacman -Syu from replacing the fork with a newer repo package —
+# upgrades happen by bumping the vendored tree (see rebuild-nautilus.sh).
+BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
+sudo -u "$USERNAME" cp -r applications/nautilus-fork/. "$BUILD_DIR/"
+(cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
+pacman -U --noconfirm "$BUILD_DIR"/nautilus-*.pkg.tar.zst "$BUILD_DIR"/libnautilus-extension-*.pkg.tar.zst
+rm -rf "$BUILD_DIR"
+if ! grep -Eq '^[[:space:]]*IgnorePkg[[:space:]]*=.*nautilus' /etc/pacman.conf; then
+    sudo sed -i '/^\[options\]/a IgnorePkg = nautilus libnautilus-extension' /etc/pacman.conf
 fi
 
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules

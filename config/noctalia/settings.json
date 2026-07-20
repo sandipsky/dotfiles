@@ -44,7 +44,7 @@
     "bar": {
         "autoHideDelay": 200,
         "autoShowDelay": 0,
-        "backgroundOpacity": 0.93,
+        "backgroundOpacity": 0.75,
         "barType": "simple",
         "capsuleColorKey": "none",
         "capsuleOpacity": 1,
@@ -282,7 +282,7 @@
             }
         ],
         "diskPath": "/",
-        "position": "close_to_bar_button",
+        "position": "bottom_left",
         "shortcuts": {
             "left": [
                 {
@@ -293,9 +293,6 @@
                 },
                 {
                     "id": "WallpaperSelector"
-                },
-                {
-                    "id": "NoctaliaPerformance"
                 }
             ],
             "right": [

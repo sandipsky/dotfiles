@@ -1,0 +1,107 @@
+# Local fork of GNOME Nautilus, built ONLY from the vendored source tree in
+# nautilus/ (upstream 50.2.2, commit c6592e9c7fce37ad685d0ba24720893955b7835d,
+# plus local patches) — never from the Arch repos, AUR, or the network.
+# Adapted from Arch's official PKGBUILD; docs subpackage and test suite dropped.
+# pkgrel 1.1 makes this supersede the repo's 50.2.2-1; IgnorePkg (set by
+# install.sh / rebuild-nautilus.sh) keeps pacman -Syu from clobbering it later.
+pkgbase=nautilus
+pkgname=(
+  nautilus
+  libnautilus-extension
+)
+pkgver=50.2.2
+pkgrel=1.1
+pkgdesc="Default file manager for GNOME (local fork)"
+url="https://apps.gnome.org/Nautilus/"
+arch=(x86_64)
+license=(GPL-3.0-or-later)
+depends=(
+  cairo
+  dconf
+  gdk-pixbuf2
+  gexiv2
+  glib2
+  glibc
+  glycin
+  glycin-gtk4
+  gnome-autoar
+  gnome-desktop-4
+  graphene
+  gst-plugins-base-libs
+  gstreamer
+  gtk4
+  gvfs
+  hicolor-icon-theme
+  icu
+  libadwaita
+  libcloudproviders
+  libgcc
+  libportal
+  libportal-gtk4
+  libx11
+  localsearch
+  pango
+  tinysparql
+  wayland
+  xdg-user-dirs-gtk
+)
+makedepends=(
+  appstream
+  blueprint-compiler
+  glib2-devel
+  gobject-introspection
+  meson
+)
+options=(!debug)
+source=()
+
+prepare() {
+  cp -r "$startdir/nautilus" "$srcdir/nautilus"
+}
+
+build() {
+  local meson_options=(
+    -D docs=false
+    -D packagekit=false
+    -D selinux=false
+  )
+
+  arch-meson nautilus build "${meson_options[@]}"
+  meson compile -C build
+}
+
+_pick() {
+  local p="$1" f d; shift
+  for f; do
+    d="$srcdir/$p/${f#$pkgdir/}"
+    mkdir -p "$(dirname "$d")"
+    mv "$f" "$d"
+    rmdir -p --ignore-fail-on-non-empty "$(dirname "$f")"
+  done
+}
+
+package_nautilus() {
+  depends+=(libnautilus-extension.so)
+
+  meson install -C build --destdir "$pkgdir"
+
+  cd "$pkgdir"
+
+  _pick libne usr/include
+  _pick libne usr/lib/{girepository-1.0,libnautilus-extension*,pkgconfig}
+  _pick libne usr/share/gir-1.0
+}
+
+package_libnautilus-extension() {
+  pkgdesc="Extension interface for Nautilus"
+  depends=(
+    glib2
+    glibc
+    libgcc
+  )
+  provides=(libnautilus-extension.so)
+
+  mv libne/* "$pkgdir"
+}
+
+# vim:set sw=2 sts=-1 et:

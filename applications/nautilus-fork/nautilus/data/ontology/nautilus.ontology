@@ -1,0 +1,20 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix nrl: <http://tracker.api.gnome.org/ontology/v3/nrl#> .
+@prefix nautilus: <https://gitlab.gnome.org/GNOME/nautilus#> .
+
+nautilus: a nrl:Namespace, nrl:Ontology ;
+    nrl:prefix "nautilus" ;
+    nrl:lastModified "2020-05-01T10:00:00Z" .
+
+nautilus:File a rdfs:Class ;
+    rdfs:comment "Represents a file on disk by its URL. Equivalent to http://tracker.api.gnome.org/ontology/v3/nfo#FileDataObject" ;
+    rdfs:subClassOf rdfs:Resource ;
+    nrl:notify true .
+
+nautilus:starred a rdf:Property ;
+    rdfs:comment "Marks files that are starred in Nautilus." ;
+    rdfs:domain nautilus:File ;
+    rdfs:range xsd:boolean ;
+    nrl:maxCardinality 1 .

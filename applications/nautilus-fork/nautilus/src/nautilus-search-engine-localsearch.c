@@ -1,0 +1,537 @@
+/*
+ * Copyright (C) 2005 Mr Jamie McCracken
+ *
+ * Nautilus is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * Nautilus is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; see the file COPYING.  If not,
+ * see <http://www.gnu.org/licenses/>.
+ *
+ * Author: Jamie McCracken <jamiemcc@gnome.org>
+ *
+ */
+#define G_LOG_DOMAIN "nautilus-search"
+
+#include <config.h>
+#include "nautilus-search-engine-localsearch.h"
+
+#include "nautilus-file.h"
+#include "nautilus-query.h"
+#include "nautilus-search-hit.h"
+#include "nautilus-search-provider.h"
+#include "nautilus-localsearch-utilities.h"
+
+#include <string.h>
+#include <gio/gio.h>
+#include <tinysparql.h>
+
+typedef enum
+{
+    SEARCH_FEATURE_NONE = 0,
+    SEARCH_FEATURE_TERMS = 1 << 0,
+    SEARCH_FEATURE_CONTENT = 1 << 1,
+    SEARCH_FEATURE_MIMETYPE = 1 << 2,
+    SEARCH_FEATURE_RECURSIVE = 1 << 3,
+    SEARCH_FEATURE_ATIME = 1 << 4,
+    SEARCH_FEATURE_MTIME = 1 << 5,
+    SEARCH_FEATURE_CTIME = 1 << 6,
+    SEARCH_FEATURE_LOCATION = 1 << 7,
+} SearchFeatures;
+
+struct _NautilusSearchEngineLocalsearch
+{
+    NautilusSearchProvider parent_instance;
+
+    TrackerSparqlConnection *connection;
+    GHashTable *statements;
+
+    gboolean fts_enabled;
+};
+
+G_DEFINE_FINAL_TYPE (NautilusSearchEngineLocalsearch,
+                     nautilus_search_engine_localsearch,
+                     NAUTILUS_TYPE_SEARCH_PROVIDER)
+
+static void
+finalize (GObject *object)
+{
+    NautilusSearchEngineLocalsearch *self = NAUTILUS_SEARCH_ENGINE_LOCALSEARCH (object);
+
+    g_clear_pointer (&self->statements, g_hash_table_unref);
+    /* This is a singleton, no need to unref. */
+    self->connection = NULL;
+
+    G_OBJECT_CLASS (nautilus_search_engine_localsearch_parent_class)->finalize (object);
+}
+
+static void
+search_finished (NautilusSearchEngineLocalsearch *self,
+                 GError                          *error)
+{
+    if (error != NULL && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+    {
+        g_warning ("Localsearch search engine error %s", error->message);
+    }
+
+    nautilus_search_provider_finished (NAUTILUS_SEARCH_PROVIDER (self));
+}
+
+static void cursor_callback (GObject      *object,
+                             GAsyncResult *result,
+                             gpointer      user_data);
+
+static void
+cursor_next (NautilusSearchEngineLocalsearch *self,
+             TrackerSparqlCursor             *cursor)
+{
+    tracker_sparql_cursor_next_async (cursor,
+                                      nautilus_search_provider_get_cancellable (self),
+                                      cursor_callback,
+                                      self);
+}
+
+static void
+cursor_callback (GObject      *object,
+                 GAsyncResult *result,
+                 gpointer      user_data)
+{
+    NautilusSearchEngineLocalsearch *self = NAUTILUS_SEARCH_ENGINE_LOCALSEARCH (user_data);
+    GError *error = NULL;
+    TrackerSparqlCursor *cursor;
+    NautilusSearchHit *hit;
+    const char *uri;
+    const char *mtime_str;
+    const char *atime_str;
+    const char *ctime_str;
+    const gchar *snippet;
+    g_autoptr (GTimeZone) tz = NULL;
+    gdouble rank, match;
+    gboolean success;
+    gchar *basename;
+
+    cursor = TRACKER_SPARQL_CURSOR (object);
+    success = tracker_sparql_cursor_next_finish (cursor, result, &error);
+
+    if (!success)
+    {
+        search_finished (self, error);
+
+        g_clear_error (&error);
+        tracker_sparql_cursor_close (cursor);
+        g_clear_object (&cursor);
+
+        return;
+    }
+
+    /* We iterate result by result, not n at a time. */
+    uri = tracker_sparql_cursor_get_string (cursor, 0, NULL);
+    rank = tracker_sparql_cursor_get_double (cursor, 1);
+    mtime_str = tracker_sparql_cursor_get_string (cursor, 2, NULL);
+    ctime_str = tracker_sparql_cursor_get_string (cursor, 3, NULL);
+    atime_str = tracker_sparql_cursor_get_string (cursor, 4, NULL);
+    basename = g_path_get_basename (uri);
+
+    hit = nautilus_search_hit_new (uri);
+    match = nautilus_query_matches_string (nautilus_search_provider_get_query (self), basename);
+    nautilus_search_hit_set_fts_rank (hit, rank + match);
+    g_free (basename);
+
+    if (self->fts_enabled)
+    {
+        snippet = tracker_sparql_cursor_get_string (cursor, 5, NULL);
+        if (snippet != NULL)
+        {
+            g_autofree gchar *escaped = NULL;
+            g_autoptr (GString) buffer = NULL;
+            /* Escape for markup, before adding our own markup. */
+            escaped = g_markup_escape_text (snippet, -1);
+            buffer = g_string_new (escaped);
+            g_string_replace (buffer, "_NAUTILUS_SNIPPET_DELIM_START_", "<b>", 0);
+            g_string_replace (buffer, "_NAUTILUS_SNIPPET_DELIM_END_", "</b>", 0);
+
+            nautilus_search_hit_set_fts_snippet (hit, buffer->str);
+        }
+    }
+
+    if (mtime_str != NULL ||
+        atime_str != NULL ||
+        ctime_str != NULL)
+    {
+        tz = g_time_zone_new_local ();
+    }
+
+    if (mtime_str != NULL)
+    {
+        g_autoptr (GDateTime) date = g_date_time_new_from_iso8601 (mtime_str, tz);
+
+        if (date == NULL)
+        {
+            g_warning ("unable to parse mtime: %s", mtime_str);
+        }
+        nautilus_search_hit_set_modification_time (hit, date);
+    }
+
+    if (atime_str != NULL)
+    {
+        g_autoptr (GDateTime) date = g_date_time_new_from_iso8601 (atime_str, tz);
+
+        if (date == NULL)
+        {
+            g_warning ("unable to parse atime: %s", atime_str);
+        }
+        nautilus_search_hit_set_access_time (hit, date);
+    }
+
+    if (ctime_str != NULL)
+    {
+        g_autoptr (GDateTime) date = g_date_time_new_from_iso8601 (ctime_str, tz);
+
+        if (date == NULL)
+        {
+            g_warning ("unable to parse ctime: %s", ctime_str);
+        }
+        nautilus_search_hit_set_creation_time (hit, date);
+    }
+
+    nautilus_search_provider_add_hit (self, hit);
+
+    /* Get next */
+    cursor_next (self, cursor);
+}
+
+static void
+query_callback (GObject      *object,
+                GAsyncResult *result,
+                gpointer      user_data)
+{
+    NautilusSearchEngineLocalsearch *self = NAUTILUS_SEARCH_ENGINE_LOCALSEARCH (user_data);
+    TrackerSparqlStatement *stmt;
+    TrackerSparqlCursor *cursor;
+    GError *error = NULL;
+
+    stmt = TRACKER_SPARQL_STATEMENT (object);
+    cursor = tracker_sparql_statement_execute_finish (stmt,
+                                                      result,
+                                                      &error);
+
+    if (error != NULL)
+    {
+        search_finished (self, error);
+        g_error_free (error);
+    }
+    else
+    {
+        cursor_next (self, cursor);
+    }
+}
+
+static TrackerSparqlStatement *
+create_statement (NautilusSearchProvider *provider,
+                  SearchFeatures          features)
+{
+    NautilusSearchEngineLocalsearch *self = NAUTILUS_SEARCH_ENGINE_LOCALSEARCH (provider);
+    GString *sparql;
+    TrackerSparqlStatement *stmt;
+
+#define VARIABLES \
+        " ?url" \
+        " ?rank"  \
+        " ?mtime" \
+        " ?ctime" \
+        " ?atime" \
+        " ?snippet"
+
+#define TRIPLE_PATTERN \
+        "?file a nfo:FileDataObject;" \
+        "  nfo:fileLastModified ?mtime;" \
+        "  nfo:fileLastAccessed ?atime;" \
+        "  nfo:fileCreated ?ctime;" \
+        "  nie:url ?url."
+
+    sparql = g_string_new ("SELECT DISTINCT " VARIABLES " WHERE {");
+
+    if (features & SEARCH_FEATURE_MIMETYPE)
+    {
+        g_string_append (sparql,
+                         "  GRAPH ?g {"
+                         "    ?content nie:isStoredAs ?file;"
+                         "      nie:mimeType ?mime"
+                         "  }");
+    }
+
+    if (features & SEARCH_FEATURE_TERMS)
+    {
+        if (features & SEARCH_FEATURE_CONTENT)
+        {
+            g_string_append (sparql,
+                             " { "
+                             "   SELECT ?file " VARIABLES " {"
+                             "     GRAPH tracker:Documents {"
+                             "       ?file a nfo:FileDataObject ."
+                             "       ?content nie:isStoredAs ?file ."
+                             "       ?content fts:match ~match ."
+                             "       BIND(fts:rank(?content) AS ?rank) ."
+                             "       BIND(fts:snippet(?content,"
+                             "                        '_NAUTILUS_SNIPPET_DELIM_START_',"
+                             "                        '_NAUTILUS_SNIPPET_DELIM_END_',"
+                             "                        '…',"
+                             "                        20) AS ?snippet)"
+                             "     }"
+                             "     GRAPH tracker:FileSystem {"
+                             TRIPLE_PATTERN
+                             "     }"
+                             "   }"
+                             "   ORDER BY DESC (?rank)"
+                             " } UNION");
+        }
+
+        /* Note: Do not be fooled by `fts:match` below. It matches only the
+         * filename here, unlike its usage above. This is because it's used
+         * with `nfo:FileDataObject`, not `nie:InformationElement`. The only
+         * full-text indexed property of `nfo:FileDataObject` is `nfo:fileName`.
+         */
+        g_string_append (sparql,
+                         " {"
+                         "   SELECT ?file " VARIABLES " {"
+                         "     GRAPH tracker:FileSystem {"
+                         TRIPLE_PATTERN
+                         "       ?file fts:match ~match ."
+                         "       BIND(fts:rank(?file) AS ?rank) ."
+                         "     }"
+                         "   }"
+                         "   ORDER BY DESC (?rank)"
+                         " }");
+    }
+    else
+    {
+        g_string_append (sparql,
+                         " GRAPH tracker:FileSystem {"
+                         TRIPLE_PATTERN
+                         "   BIND (0 AS ?rank)"
+                         " }");
+    }
+
+    g_string_append (sparql, " . FILTER( ");
+
+    if (!(features & SEARCH_FEATURE_LOCATION))
+    {
+        /* Global search. Match any location. */
+        g_string_append (sparql, "true");
+    }
+    else if (!(features & SEARCH_FEATURE_RECURSIVE))
+    {
+        g_string_append (sparql, "tracker:uri-is-parent(~location, ?url)");
+    }
+    else
+    {
+        /* STRSTARTS is faster than tracker:uri-is-descendant().
+         * See https://gitlab.gnome.org/GNOME/tracker/-/issues/243
+         */
+        g_string_append (sparql, "STRSTARTS(?url, CONCAT (~location, '/'))");
+    }
+
+    if (features &
+        (SEARCH_FEATURE_ATIME | SEARCH_FEATURE_MTIME | SEARCH_FEATURE_CTIME))
+    {
+        g_string_append (sparql, " && ");
+
+        if (features & SEARCH_FEATURE_ATIME)
+        {
+            g_string_append (sparql, "?atime >= ~startTime^^xsd:dateTime");
+            g_string_append (sparql, " && ?atime <= ~endTime^^xsd:dateTime");
+        }
+        else if (features & SEARCH_FEATURE_MTIME)
+        {
+            g_string_append (sparql, "?mtime >= ~startTime^^xsd:dateTime");
+            g_string_append (sparql, " && ?mtime <= ~endTime^^xsd:dateTime");
+        }
+        else if (features & SEARCH_FEATURE_CTIME)
+        {
+            g_string_append (sparql, "?ctime >= ~startTime^^xsd:dateTime");
+            g_string_append (sparql, " && ?ctime <= ~endTime^^xsd:dateTime");
+        }
+    }
+
+    if (features & SEARCH_FEATURE_MIMETYPE)
+    {
+        g_string_append (sparql, " && CONTAINS(~mimeTypes, ?mime)");
+    }
+
+    g_string_append (sparql, ")}");
+
+    stmt = tracker_sparql_connection_query_statement (self->connection,
+                                                      sparql->str,
+                                                      NULL,
+                                                      NULL);
+    g_string_free (sparql, TRUE);
+
+    return stmt;
+}
+
+static const char *
+get_name (NautilusSearchProvider *provider)
+{
+    return "localsearch";
+}
+
+static gboolean
+should_search (NautilusSearchProvider *provider,
+               NautilusQuery          *query)
+{
+    NautilusSearchEngineLocalsearch *self = (NautilusSearchEngineLocalsearch *) provider;
+
+    return self->connection != NULL;
+}
+
+static void
+start_search (NautilusSearchProvider *provider)
+{
+    NautilusSearchEngineLocalsearch *self = NAUTILUS_SEARCH_ENGINE_LOCALSEARCH (provider);
+    g_autofree gchar *query_text = NULL;
+    g_autoptr (GPtrArray) date_range = NULL;
+    NautilusSearchTimeType type;
+    TrackerSparqlStatement *stmt;
+    SearchFeatures features = 0;
+    NautilusQuery *query = nautilus_search_provider_get_query (self);
+    g_autoptr (GFile) location = nautilus_query_get_location (query);
+
+    self->fts_enabled = nautilus_query_get_search_content (query);
+
+    query_text = nautilus_query_get_text (query);
+    date_range = nautilus_query_get_date_range (query);
+    type = nautilus_query_get_search_type (query);
+
+    if (query_text != NULL)
+    {
+        features |= SEARCH_FEATURE_TERMS;
+    }
+    if (self->fts_enabled)
+    {
+        features |= SEARCH_FEATURE_CONTENT;
+    }
+    if (nautilus_query_recursive (query))
+    {
+        features |= SEARCH_FEATURE_RECURSIVE;
+    }
+    if (nautilus_query_has_mime_types (query))
+    {
+        features |= SEARCH_FEATURE_MIMETYPE;
+    }
+
+    if (date_range)
+    {
+        if (type == NAUTILUS_SEARCH_TIME_TYPE_LAST_ACCESS)
+        {
+            features |= SEARCH_FEATURE_ATIME;
+        }
+        else if (type == NAUTILUS_SEARCH_TIME_TYPE_LAST_MODIFIED)
+        {
+            features |= SEARCH_FEATURE_MTIME;
+        }
+        else if (type == NAUTILUS_SEARCH_TIME_TYPE_CREATED)
+        {
+            features |= SEARCH_FEATURE_CTIME;
+        }
+    }
+
+    if (location != NULL)
+    {
+        features |= SEARCH_FEATURE_LOCATION;
+    }
+
+    stmt = g_hash_table_lookup (self->statements, GUINT_TO_POINTER (features));
+
+    if (!stmt)
+    {
+        stmt = create_statement (provider, features);
+        g_hash_table_insert (self->statements,
+                             GUINT_TO_POINTER (features), stmt);
+    }
+
+    if (location != NULL)
+    {
+        g_autofree gchar *location_uri = g_file_get_uri (location);
+        tracker_sparql_statement_bind_string (stmt, "location", location_uri);
+    }
+
+    if (query_text != NULL)
+    {
+        tracker_sparql_statement_bind_string (stmt, "match", query_text);
+    }
+
+    if (nautilus_query_has_mime_types (query))
+    {
+        g_autofree char *mimetype_str = nautilus_query_get_mime_type_str (query);
+
+        tracker_sparql_statement_bind_string (stmt, "mimeTypes", mimetype_str);
+    }
+
+    if (date_range)
+    {
+        g_autofree gchar *initial_date_format = NULL;
+        g_autofree gchar *end_date_format = NULL;
+        GDateTime *initial_date;
+        GDateTime *end_date;
+        g_autoptr (GDateTime) shifted_end_date = NULL;
+
+        initial_date = g_ptr_array_index (date_range, 0);
+        end_date = g_ptr_array_index (date_range, 1);
+        /* As we do for other searches, we want to make the end date inclusive.
+         * For that, add a day to it */
+        shifted_end_date = g_date_time_add_days (end_date, 1);
+
+        initial_date_format = g_date_time_format_iso8601 (initial_date);
+        end_date_format = g_date_time_format_iso8601 (shifted_end_date);
+
+        tracker_sparql_statement_bind_string (stmt, "startTime",
+                                              initial_date_format);
+        tracker_sparql_statement_bind_string (stmt, "endTime",
+                                              end_date_format);
+    }
+
+    tracker_sparql_statement_execute_async (stmt,
+                                            nautilus_search_provider_get_cancellable (self),
+                                            query_callback,
+                                            self);
+}
+
+static void
+nautilus_search_engine_localsearch_class_init (NautilusSearchEngineLocalsearchClass *class)
+{
+    GObjectClass *gobject_class = G_OBJECT_CLASS (class);
+    NautilusSearchProviderClass *search_provider_class = NAUTILUS_SEARCH_PROVIDER_CLASS (class);
+
+    gobject_class->finalize = finalize;
+    search_provider_class->get_name = get_name;
+    search_provider_class->should_search = should_search;
+    search_provider_class->start_search = start_search;
+}
+
+static void
+nautilus_search_engine_localsearch_init (NautilusSearchEngineLocalsearch *engine)
+{
+    g_autoptr (GError) error = NULL;
+
+    engine->statements = g_hash_table_new_full (NULL, NULL, NULL,
+                                                g_object_unref);
+    engine->connection = nautilus_localsearch_get_miner_fs_connection (&error);
+    if (error != NULL)
+    {
+        g_warning ("Could not establish a connection to Localsearch: %s", error->message);
+    }
+}
+
+
+NautilusSearchEngineLocalsearch *
+nautilus_search_engine_localsearch_new (void)
+{
+    return g_object_new (NAUTILUS_TYPE_SEARCH_ENGINE_LOCALSEARCH, NULL);
+}

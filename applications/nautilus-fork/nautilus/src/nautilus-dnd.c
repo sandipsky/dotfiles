@@ -1,0 +1,314 @@
+/* nautilus-dnd.h - Common Drag & drop handling code
+ *
+ * Authors: Pavel Cisler <pavel@eazel.com>,
+ *          Ettore Perazzoli <ettore@gnu.org>
+ * Copyright (C) 2000, 2001 Eazel, Inc.
+ * Copyright (C) 2022 The GNOME project contributors
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#include <glib/gi18n.h>
+
+#include "nautilus-directory.h"
+#include "nautilus-dnd.h"
+#include "nautilus-file.h"
+#include "nautilus-file-utilities.h"
+#include "nautilus-files-view.h"
+#include "nautilus-files-view-dnd.h"
+#include "nautilus-scheme.h"
+#include "nautilus-tag-manager.h"
+#include "nautilus-ui-utilities.h"
+
+static gboolean
+check_same_fs (NautilusFile *file1,
+               NautilusFile *file2)
+{
+    if (file1 == NULL || file2 == NULL)
+    {
+        return FALSE;
+    }
+
+    const char *id1 = nautilus_file_get_filesystem_id (file1);
+    const char *id2 = nautilus_file_get_filesystem_id (file2);
+
+    return id1 != NULL && id2 != NULL && strcmp (id1, id2) == 0;
+}
+
+static gboolean
+source_is_deletable (GFile *file)
+{
+    NautilusFile *naut_file;
+    gboolean ret;
+
+    /* if there's no a cached NautilusFile, it returns NULL */
+    naut_file = nautilus_file_get (file);
+    if (naut_file == NULL)
+    {
+        return FALSE;
+    }
+
+    ret = nautilus_file_can_delete (naut_file);
+    nautilus_file_unref (naut_file);
+
+    return ret;
+}
+
+#if 0 && NAUTILUS_DND_NEEDS_GTK4_REIMPLEMENTATION
+static void
+append_drop_action_menu_item (GtkWidget          *menu,
+                              const char         *text,
+                              GdkDragAction       action,
+                              gboolean            sensitive,
+                              DropActionMenuData *damd)
+{
+    GtkWidget *menu_item;
+
+    menu_item = gtk_button_new_with_mnemonic (text);
+    gtk_widget_set_sensitive (menu_item, sensitive);
+    gtk_box_append (GTK_BOX (menu), menu_item);
+
+    gtk_widget_add_css_class (menu_item, "flat");
+
+    g_object_set_data (G_OBJECT (menu_item),
+                       "action",
+                       GINT_TO_POINTER (action));
+
+    g_signal_connect (menu_item, "clicked",
+                      G_CALLBACK (drop_action_activated_callback),
+                      damd);
+
+    gtk_widget_show (menu_item);
+}
+#endif
+/* Pops up a menu of actions to perform on dropped files */
+GdkDragAction
+nautilus_drag_drop_action_ask (GtkWidget     *widget,
+                               GdkDragAction  actions)
+{
+#if 0
+    GtkWidget *popover;
+    GtkWidget *menu;
+    GtkWidget *menu_item;
+    DropActionMenuData damd;
+
+    /* Create the menu and set the sensitivity of the items based on the
+     * allowed actions.
+     */
+    popover = gtk_popover_new (widget);
+    gtk_popover_set_position (GTK_POPOVER (popover), GTK_POS_TOP);
+
+    menu = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    gtk_widget_set_margin_top (menu, 6);
+    gtk_widget_set_margin_bottom (menu, 6);
+    gtk_widget_set_margin_start (menu, 6);
+    gtk_widget_set_margin_end (menu, 6);
+    gtk_popover_set_child (GTK_POPOVER (popover), menu);
+    gtk_widget_show (menu);
+
+    append_drop_action_menu_item (menu, _("_Move Here"),
+                                  GDK_ACTION_MOVE,
+                                  (actions & GDK_ACTION_MOVE) != 0,
+                                  &damd);
+
+    append_drop_action_menu_item (menu, _("_Copy Here"),
+                                  GDK_ACTION_COPY,
+                                  (actions & GDK_ACTION_COPY) != 0,
+                                  &damd);
+
+    append_drop_action_menu_item (menu, _("_Link Here"),
+                                  GDK_ACTION_LINK,
+                                  (actions & GDK_ACTION_LINK) != 0,
+                                  &damd);
+
+    menu_item = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
+    gtk_box_append (GTK_BOX (menu), menu_item);
+    gtk_widget_show (menu_item);
+
+    append_drop_action_menu_item (menu, _("Cancel"), 0, TRUE, &damd);
+
+    damd.chosen = 0;
+    damd.loop = g_main_loop_new (NULL, FALSE);
+
+    g_signal_connect (popover, "closed",
+                      G_CALLBACK (menu_deactivate_callback),
+                      &damd);
+
+    gtk_grab_add (popover);
+
+    /* We don't have pointer coords here. Just pick the center of the widget. */
+    gtk_popover_set_pointing_to (GTK_POPOVER (popover),
+                                 &(GdkRectangle){ .x = 0.5 * gtk_widget_get_width (widget),
+                                                  .y = 0.5 * gtk_widget_get_height (widget),
+                                                  .width = 0, .height = 0 });
+
+    gtk_popover_popup (GTK_POPOVER (popover));
+
+    g_main_loop_run (damd.loop);
+
+    gtk_grab_remove (popover);
+
+    g_main_loop_unref (damd.loop);
+
+    g_object_ref_sink (popover);
+    g_object_unref (popover);
+
+    return damd.chosen;
+#endif
+    return 0;
+}
+
+GdkDragAction
+nautilus_dnd_get_preferred_action (NautilusFile *target_file,
+                                   GFile        *dropped)
+{
+    g_autoptr (NautilusDirectory) directory = NULL;
+    g_autoptr (GFile) target_location = NULL;
+    g_autoptr (NautilusFile) dropped_file = NULL;
+    gboolean same_fs;
+    gboolean source_deletable;
+
+    g_return_val_if_fail (NAUTILUS_IS_FILE (target_file), 0);
+    /* With non-local drops, it's normal for dropped to initially be NULL */
+    g_return_val_if_fail (dropped == NULL || G_IS_FILE (dropped), 0);
+
+    target_location = nautilus_file_get_location (target_file);
+    if (dropped != NULL && g_file_equal (target_location, dropped))
+    {
+        return 0;
+    }
+
+    /* First check target imperatives */
+    directory = nautilus_directory_get_for_file (target_file);
+
+    if (nautilus_is_file_roller_installed () &&
+        nautilus_file_is_archive (target_file))
+    {
+        return GDK_ACTION_COPY;
+    }
+    else if (nautilus_file_is_starred_location (target_file))
+    {
+        if (nautilus_tag_manager_can_star_contents (nautilus_tag_manager_get (), dropped))
+        {
+            return GDK_ACTION_COPY;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    else if (!nautilus_file_is_directory (target_file) ||
+             !nautilus_file_can_write (target_file) ||
+             !nautilus_directory_is_editable (directory))
+    {
+        /* No other file type other than archives and directories currently
+         * accepts drops */
+        return 0;
+    }
+    else if (nautilus_file_is_in_trash (target_file))
+    {
+        return GDK_ACTION_MOVE;
+    }
+
+    if (dropped == NULL)
+    {
+        return GDK_ACTION_COPY;
+    }
+
+    if (g_file_has_uri_scheme (dropped, SCHEME_TRASH))
+    {
+        return GDK_ACTION_MOVE;
+    }
+
+    dropped_file = nautilus_file_get (dropped);
+    same_fs = check_same_fs (target_file, dropped_file);
+    source_deletable = source_is_deletable (dropped);
+    if (same_fs && source_deletable)
+    {
+        return GDK_ACTION_MOVE;
+    }
+
+    return GDK_ACTION_COPY;
+}
+
+gboolean
+nautilus_dnd_perform_drop (NautilusFilesView *view,
+                           const GValue      *value,
+                           GdkDragAction      action,
+                           GFile             *target_location)
+{
+    g_autofree gchar *target_uri = g_file_get_uri (target_location);
+
+    if (!gdk_drag_action_is_unique (action))
+    {
+        /* TODO: Implement */
+        return FALSE;
+    }
+    else if (G_VALUE_HOLDS (value, G_TYPE_STRING))
+    {
+        nautilus_files_view_handle_text_drop (view,
+                                              g_value_get_string (value),
+                                              target_uri, action);
+        return TRUE;
+    }
+    else if (G_VALUE_HOLDS (value, GDK_TYPE_TEXTURE))
+    {
+        g_autofree char *dest_uri = g_file_get_uri (target_location);
+        GdkTexture *texture = g_value_get_object (value);
+
+        nautilus_file_view_save_image_from_texture (view, texture, dest_uri, _("Dropped Image"));
+    }
+    else if (G_VALUE_HOLDS (value, GDK_TYPE_FILE_LIST))
+    {
+        GSList *source_file_list = g_value_get_boxed (value);
+        GList *source_uri_list = NULL;
+
+        if (source_file_list == NULL)
+        {
+            return FALSE;
+        }
+
+        for (GSList *l = source_file_list; l != NULL; l = l->next)
+        {
+            source_uri_list = g_list_prepend (source_uri_list, g_file_get_uri (l->data));
+        }
+        source_uri_list = g_list_reverse (source_uri_list);
+
+        nautilus_files_view_drop_proxy_received_uris (view,
+                                                      source_uri_list,
+                                                      target_uri,
+                                                      action);
+        g_list_free_full (source_uri_list, g_free);
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+#define MAX_DRAWN_DRAG_ICONS 10
+
+GdkPaintable *
+get_paintable_for_drag_selection (GList *selection,
+                                  int    scale)
+{
+    g_return_val_if_fail (NAUTILUS_IS_FILE (selection->data), NULL);
+
+    g_autoqueue (GdkPaintable) icons = g_queue_new ();
+    NautilusFileIconFlags flags = NAUTILUS_FILE_ICON_FLAGS_USE_THUMBNAILS;
+    guint icon_size = NAUTILUS_DRAG_SURFACE_ICON_SIZE;
+
+    for (NautilusFileList *l = selection;
+         l != NULL && g_queue_get_length (icons) <= MAX_DRAWN_DRAG_ICONS;
+         l = l->next)
+    {
+        GdkPaintable *icon = nautilus_file_get_icon_paintable (l->data,
+                                                               icon_size,
+                                                               scale,
+                                                               flags);
+
+        g_queue_push_tail (icons, icon);
+    }
+
+    return nautilus_ui_draw_stacked_icons (icons, icon_size);
+}

@@ -17,7 +17,7 @@ fi
 # (upstream discontinued the fork when v5 dropped Quickshell).
 if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
     BUILD_DIR=$(mktemp -d)
-    cp -r "$SCRIPT_DIR/assets/noctalia-qs/." "$BUILD_DIR/"
+    cp -r "$SCRIPT_DIR/applications/noctalia-qs/." "$BUILD_DIR/"
     (cd "$BUILD_DIR" && makepkg -s --noconfirm)
     sudo pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
     rm -rf "$BUILD_DIR"

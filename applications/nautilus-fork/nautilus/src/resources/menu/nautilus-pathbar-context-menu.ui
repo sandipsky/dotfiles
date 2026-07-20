@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <menu id="button-menu">
+    <item>
+      <attribute name="label" translatable="yes">Open in New _Window</attribute>
+      <attribute name="action">pathbar.open-item-new-window</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Open in New _Tab</attribute>
+      <attribute name="action">pathbar.open-item-new-tab</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">_Properties</attribute>
+      <attribute name="action">pathbar.properties</attribute>
+    </item>
+  </menu>
+  <menu id="current-view-menu">
+    <item>
+      <attribute name="label" translatable="yes">New _Folder…</attribute>
+      <attribute name="action">view.new-folder</attribute>
+      <attribute name="accel">&lt;shift&gt;&lt;control&gt;n</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">New _Document</attribute>
+      <attribute name="nautilus-menu-item">templates-submenu</attribute>
+      <link name="submenu" id="templates-submenu"/>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Open _With…</attribute>
+      <attribute name="action">view.open-current-directory-with-other-application</attribute>
+    </item>
+    <item>
+      <attribute name="label" translatable="yes">Open in Consol_e</attribute>
+      <attribute name="action">view.current-directory-console</attribute>
+      <attribute name="hidden-when">action-disabled</attribute>
+    </item>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">R_eload</attribute>
+        <attribute name="action">slot.reload</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+        <attribute name="accel">F5</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">St_op</attribute>
+        <attribute name="action">slot.stop</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Add to _Bookmarks</attribute>
+        <attribute name="action">slot.bookmark-current-directory</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+        <attribute name="accel">&lt;control&gt;d</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Remove from _Bookmarks</attribute>
+        <attribute name="action">slot.unbookmark-current-directory</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Star Folder</attribute>
+        <attribute name="action">slot.star-current-directory</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Unstar Folder</attribute>
+        <attribute name="action">slot.unstar-current-directory</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Copy Location</attribute>
+        <attribute name="action">view.copy-current-location</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Open in File Manager</attribute>
+        <attribute name="action">view.open-current-directory-with-files</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Paste</attribute>
+        <attribute name="action">view.paste</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Paste as Lin_k</attribute>
+        <attribute name="action">view.create-link</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Select _All</attribute>
+        <attribute name="action">view.select-all</attribute>
+      </item>
+    </section>
+    <section id="background-extensions-section"/>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Empty _Trash…</attribute>
+        <attribute name="action">view.empty-trash</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">P_roperties</attribute>
+        <attribute name="action">view.current-directory-properties</attribute>
+        <attribute name="accel">&lt;alt&gt;Return</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+  </menu>
+</interface>

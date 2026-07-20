@@ -1,0 +1,5282 @@
+# Kurdish Sorani translation for nautilus.
+# Copyright (C) 2020 nautilus's COPYRIGHT HOLDER
+# This file is distributed under the same license as the nautilus package.
+# jwtiyar <jwtiyar@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus gnome-3-34\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/nautilus/issues\n"
+"POT-Creation-Date: 2020-08-08 17:14+0000\n"
+"PO-Revision-Date: 2020-09-21 09:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: Kurdish Sorani <ckb@li.org>\n"
+"Language: ckb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-DamnedLies-Scope: partial\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: data/nautilus-autorun-software.desktop.in:3
+msgid "Run Software"
+msgstr "دەسپێکردنی نەرمەکاڵا"
+
+#. “Files” is the generic application name and the suffix is
+#. * an arbitrary and deliberately unlocalized string only shown
+#. * in development builds.
+#.
+#: data/org.gnome.Nautilus.appdata.xml.in.in:5
+#: data/org.gnome.Nautilus.desktop.in.in:3 src/nautilus-mime-actions.c:102
+#: src/nautilus-window.c:2997
+#: src/resources/ui/nautilus-file-properties-change-permissions.ui:44
+msgid "Files"
+msgstr "پەڕگەکان"
+
+#: data/org.gnome.Nautilus.appdata.xml.in.in:6
+#: data/org.gnome.Nautilus.desktop.in.in:4
+msgid "Access and organize files"
+msgstr "چونەناو و ڕێکخستن"
+
+#: data/org.gnome.Nautilus.appdata.xml.in.in:8
+msgid ""
+"Files, also known as Nautilus, is the default file manager of the GNOME "
+"desktop. It provides a simple and integrated way of managing your files and "
+"browsing your file system."
+msgstr ""
+"پەڕگەکان، هەروەها بە ناوی ناوتیلەس بەناوبانگە، بریتیە لە نەرمەکاڵای بنەڕەتی "
+"بۆ بەڕێوەبردنی پەڕگە لە گنۆم. شیوازێکی سادە و گونجێنراو و تایبەتمەندی زۆر "
+"دابین دەکات بۆ ڕێکخستن و گەڕان بەناو پەڕگەکانی سیستمەکەت."
+
+#: data/org.gnome.Nautilus.appdata.xml.in.in:12
+msgid ""
+"Nautilus supports all the basic functions of a file manager and more. It can "
+"search and manage your files and folders, both locally and on a network, "
+"read and write data to and from removable media, run scripts, and launch "
+"applications. It has three views: Icon Grid, Icon List, and Tree List. Its "
+"functions can be extended with plugins and scripts."
+msgstr ""
+
+#: data/org.gnome.Nautilus.appdata.xml.in.in:34
+msgid "The GNOME Project"
+msgstr "پرۆژەی گنۆم"
+
+#: data/org.gnome.Nautilus.appdata.xml.in.in:38
+msgid "Tile View"
+msgstr "پیشاندنای تەخت"
+
+#: data/org.gnome.Nautilus.appdata.xml.in.in:42 src/nautilus-list-view.c:2417
+#: src/resources/ui/nautilus-preferences-window.ui:161
+#: src/resources/ui/nautilus-preferences-window.ui:1284
+msgid "List View"
+msgstr "پیشاندانی لیستەیی"
+
+#: data/org.gnome.Nautilus.appdata.xml.in.in:46 src/nautilus-query.c:536
+#: src/nautilus-search-directory-file.c:175
+#: src/nautilus-search-directory-file.c:232
+#: src/nautilus-search-directory-file.c:272
+#: src/resources/ui/nautilus-preferences-window.ui:871
+#: src/resources/ui/nautilus-search-popover.ui:341
+#: src/resources/ui/nautilus-toolbar.ui:510
+msgid "Search"
+msgstr "گەڕان"
+
+#: data/org.gnome.Nautilus.appdata.xml.in.in:50 src/nautilus-bookmark.c:111
+#: src/nautilus-file.c:4425 src/nautilus-file-utilities.c:323
+#: src/nautilus-pathbar.c:333
+msgid "Other Locations"
+msgstr "شوێنی تر"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Nautilus.desktop.in.in:6
+msgid "folder;manager;explore;disk;filesystem;nautilus;"
+msgstr ""
+
+#: data/org.gnome.Nautilus.desktop.in.in:20
+#: src/resources/ui/nautilus-toolbar.ui:27
+msgid "New Window"
+msgstr "پەنجەریەکی نوێ"
+
+#: eel/eel-canvas.c:1324 eel/eel-canvas.c:1325
+msgid "X"
+msgstr "X"
+
+#: eel/eel-canvas.c:1331 eel/eel-canvas.c:1332
+msgid "Y"
+msgstr "بەڵێ"
+
+#. Put up the timed wait window.
+#. Add buttons
+#: eel/eel-stock-dialogs.c:204 src/nautilus-file-conflict-dialog.c:325
+#: src/nautilus-file-operations.c:228 src/nautilus-files-view.c:1203
+#: src/nautilus-files-view.c:1756 src/nautilus-files-view.c:6074
+#: src/nautilus-files-view.c:6534 src/nautilus-location-entry.c:282
+#: src/nautilus-mime-actions.c:564 src/nautilus-mime-actions.c:568
+#: src/nautilus-mime-actions.c:650 src/nautilus-mime-actions.c:951
+#: src/nautilus-mime-actions.c:1291 src/nautilus-properties-window.c:5488
+#: src/nautilus-search-popover.c:583
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:12
+#: src/resources/ui/nautilus-file-properties-change-permissions.ui:13
+msgid "_Cancel"
+msgstr "_پاشگەزبوونەوە"
+
+#: eel/eel-stock-dialogs.c:213
+msgid "You can stop this operation by clicking cancel."
+msgstr "دەتوانی ئەم کارە بوەستێنی بەکرتە کردن لە پاشگەزبوونەوە"
+
+#. Title
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:105
+msgctxt "Title"
+msgid "Unknown"
+msgstr "نەزانراو"
+
+#. Artist
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:107
+msgctxt "Artist"
+msgid "Unknown"
+msgstr "نەزانراو"
+
+#. Album
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:109
+msgctxt "Album"
+msgid "Unknown"
+msgstr "نەزانراو"
+
+#. Year
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:111
+msgctxt "Year"
+msgid "Unknown"
+msgstr "نەزانراو"
+
+#. Container
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:117
+msgctxt "Media container"
+msgid "Unknown"
+msgstr "نەزانراو"
+
+#. Dimensions
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:120
+msgctxt "Dimensions"
+msgid "N/A"
+msgstr "نیە"
+
+#. Video Codec
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:122
+msgctxt "Video codec"
+msgid "N/A"
+msgstr "نیە"
+
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:125
+msgctxt "Video bit rate"
+msgid "N/A"
+msgstr "نیە"
+
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:128
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:236
+msgctxt "Frame rate"
+msgid "N/A"
+msgstr "نیە"
+
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:132
+msgctxt "Audio bit rate"
+msgid "N/A"
+msgstr "نیە"
+
+#. Audio Codec
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:134
+msgctxt "Audio codec"
+msgid "N/A"
+msgstr "نیە"
+
+#. Sample rate
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:136
+msgid "0 Hz"
+msgstr "٠ هێرتز"
+
+#. Channels
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:138
+msgid "0 Channels"
+msgstr "٠ چەناڵ"
+
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:154
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d  کاژێر"
+msgstr[1] "%d  کاژێر"
+
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:156
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d  خوولەک"
+msgstr[1] "%d  خوولەک"
+
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:159
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d  چرکە"
+msgstr[1] "%d  چرکە"
+
+#. 5 hours 2 minutes 12 seconds
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:165
+#, c-format
+msgctxt "time"
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. 2 minutes 12 seconds
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:168
+#, c-format
+msgctxt "time"
+msgid "%s %s"
+msgstr "%s %s"
+
+#. 0 seconds
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:174
+msgid "0 seconds"
+msgstr "٠ چرکە"
+
+#: extensions/audio-video-properties/bacon-video-widget-properties.c:234
+#, c-format
+msgid "%0.2f frame per second"
+msgid_plural "%0.2f frames per second"
+msgstr[0] ""
+msgstr[1] ""
+
+#: extensions/audio-video-properties/totem-properties-main.c:116
+#: extensions/audio-video-properties/totem-properties-view.c:275
+msgid "Audio/Video"
+msgstr "دەنگ/ڤیدیۆ"
+
+#: extensions/audio-video-properties/totem-properties-view.c:133
+msgid "N/A"
+msgstr "نیە"
+
+#: extensions/audio-video-properties/totem-properties-view.c:162
+msgctxt "Stream bit rate"
+msgid "N/A"
+msgstr "نیە"
+
+#: extensions/audio-video-properties/totem-properties-view.c:165
+#, c-format
+msgid "%d kbps"
+msgstr "%d kbps"
+
+#: extensions/audio-video-properties/totem-properties-view.c:182
+#, c-format
+msgid "%d × %d"
+msgstr "%d × %d"
+
+#: extensions/audio-video-properties/totem-properties-view.c:214
+#, c-format
+msgid "%d Hz"
+msgstr "%d هێرتز"
+
+#: extensions/audio-video-properties/totem-properties-view.c:222
+msgctxt "Sample rate"
+msgid "N/A"
+msgstr "نیە"
+
+#: extensions/audio-video-properties/totem-properties-view.c:230
+msgid "Surround"
+msgstr "سڕاوند"
+
+#: extensions/audio-video-properties/totem-properties-view.c:232
+msgid "Mono"
+msgstr "مۆنۆ"
+
+#: extensions/audio-video-properties/totem-properties-view.c:234
+msgid "Stereo"
+msgstr "ستیریۆ"
+
+#: extensions/audio-video-properties/totem-properties-view.c:245
+msgctxt "Number of audio channels"
+msgid "N/A"
+msgstr "نیە"
+
+#: extensions/audio-video-properties/totem-properties-view.c:277
+#: extensions/audio-video-properties/resources/ui/properties.ui:512
+#: src/nautilus-file.c:7473
+msgid "Audio"
+msgstr "دەنگ"
+
+#: extensions/audio-video-properties/totem-properties-view.c:279
+#: extensions/audio-video-properties/resources/ui/properties.ui:321
+#: src/nautilus-file.c:7481 src/nautilus-mime-actions.c:205
+msgid "Video"
+msgstr "ڤیدیۆ"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:23
+#: src/resources/ui/nautilus-preferences-window.ui:54
+msgid "General"
+msgstr "گشتی"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:47
+msgid "Title:"
+msgstr "ناونیشان:"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:67
+msgid "Artist:"
+msgstr "هونەرمەند:"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:87
+msgid "Duration:"
+msgstr "ماوە:"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:107
+msgid "Year:"
+msgstr "ساڵ:"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:127
+msgid "Album:"
+msgstr "ئەلبوم:"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:235
+msgid "Comment:"
+msgstr "لێدوان:"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:273
+msgid "Container:"
+msgstr ""
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:345
+msgid "Dimensions:"
+msgstr "دووریەکان:"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:365
+#: extensions/audio-video-properties/resources/ui/properties.ui:609
+msgid "Codec:"
+msgstr "کۆدیک:"
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:385
+msgid "Frame rate:"
+msgstr ""
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:405
+#: extensions/audio-video-properties/resources/ui/properties.ui:572
+msgid "Bit rate:"
+msgstr ""
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:536
+msgid "Sample rate:"
+msgstr ""
+
+#: extensions/audio-video-properties/resources/ui/properties.ui:646
+msgid "Channels:"
+msgstr "کەناڵەکان:"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:129
+#: src/nautilus-files-view.c:398 src/nautilus-list-model.c:471
+#: src/nautilus-window-slot.c:1032
+msgid "Loading…"
+msgstr "باردەکرێت..."
+
+#: extensions/image-properties/nautilus-image-properties-page.c:148
+msgid "Image Type"
+msgstr "جۆری وێنە"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:151
+#: extensions/image-properties/nautilus-image-properties-page.c:159
+#, c-format
+msgid "%d pixel"
+msgid_plural "%d pixels"
+msgstr[0] "%d پێکسڵ"
+msgstr[1] "%d پێکسڵ"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:156
+msgid "Width"
+msgstr "پانی"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:164
+msgid "Height"
+msgstr "بەرزی"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:228
+msgid "Camera Brand"
+msgstr "ناوی کۆمپانیای درووستکەر"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:229
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:28
+msgid "Camera Model"
+msgstr "مۆدێلی کامێرا"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:230
+msgid "Exposure Time"
+msgstr "کاتی پیشاندان"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:231
+msgid "Exposure Program"
+msgstr "داوانامەی پیشاندان"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:232
+msgid "Aperture Value"
+msgstr ""
+
+#: extensions/image-properties/nautilus-image-properties-page.c:233
+msgid "ISO Speed Rating"
+msgstr ""
+
+#: extensions/image-properties/nautilus-image-properties-page.c:234
+msgid "Flash Fired"
+msgstr ""
+
+#: extensions/image-properties/nautilus-image-properties-page.c:235
+msgid "Metering Mode"
+msgstr ""
+
+#: extensions/image-properties/nautilus-image-properties-page.c:236
+msgid "Focal Length"
+msgstr "درێژی تیشکۆ"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:237
+msgid "Software"
+msgstr "نەرمەکاڵا"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:238
+#: src/nautilus-batch-rename-dialog.h:163
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:53
+msgid "Title"
+msgstr "ناونیشان"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:239
+msgid "Description"
+msgstr "پێناسە"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:240
+msgid "Keywords"
+msgstr "کلیلەووشەکان"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:241
+msgid "Creator"
+msgstr "درووستکەر"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:242
+msgid "Created On"
+msgstr "دروستکراوە لە"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:243
+msgid "Copyright"
+msgstr "مافی لەبەرگرتنەوە"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:244
+msgid "Rating"
+msgstr "نرخاندن"
+
+#. Translators: These are the coordinates of a position where a picture was taken.
+#: extensions/image-properties/nautilus-image-properties-page.c:251
+#, c-format
+msgid "%f N / %f W (%.0f m)"
+msgstr "%f N / %f W (%.0f m)"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:253
+msgid "Coordinates"
+msgstr "ڕێکخەر"
+
+#: extensions/image-properties/nautilus-image-properties-page.c:277
+msgid "Failed to load image information"
+msgstr "نەتوانرا زانیاری وێنە بەدەستبخرێت"
+
+#: extensions/image-properties/nautilus-image-properties-page-provider.c:100
+#: src/nautilus-file.c:7475
+msgid "Image"
+msgstr "وێنە"
+
+#: extensions/sendto/nautilus-nste.c:105 extensions/sendto/nautilus-nste.c:112
+msgid "Send to…"
+msgstr "بینێرە بۆ..."
+
+#: extensions/sendto/nautilus-nste.c:106
+msgid "Send file by mail…"
+msgstr "ناردنی پەرگە بە پۆستی ئەلکترۆنی..."
+
+#: extensions/sendto/nautilus-nste.c:113
+msgid "Send files by mail…"
+msgstr "ناردنی پەرگە بە پۆستی ئەلکترۆنی..."
+
+#. Some sort of failure occurred. How 'bout we tell the user?
+#: src/nautilus-application.c:182 src/nautilus-window-slot.c:1698
+msgid "Oops! Something went wrong."
+msgstr "ئوپس! هەڵەیەک ڕوویدا."
+
+#: src/nautilus-application.c:185
+#, c-format
+msgid ""
+"Unable to create a required folder. Please create the following folder, or "
+"set permissions such that it can be created:\n"
+"%s"
+msgstr ""
+
+#: src/nautilus-application.c:192
+#, c-format
+msgid ""
+"Unable to create required folders. Please create the following folders, or "
+"set permissions such that they can be created:\n"
+"%s"
+msgstr ""
+
+#: src/nautilus-application.c:607
+msgid "--check cannot be used with other options."
+msgstr ""
+
+#: src/nautilus-application.c:615
+msgid "--quit cannot be used with URIs."
+msgstr ""
+
+#: src/nautilus-application.c:624
+msgid "--select must be used with at least an URI."
+msgstr ""
+
+#: src/nautilus-application.c:777
+#, c-format
+msgid ""
+"There was an error displaying help: \n"
+"%s"
+msgstr ""
+
+#: src/nautilus-application.c:969
+#, c-format
+msgid ""
+"“%s” is an internal protocol. Opening this location directly is not "
+"supported."
+msgstr ""
+
+#: src/nautilus-application.c:1069
+msgid "Perform a quick set of self-check tests."
+msgstr ""
+
+#: src/nautilus-application.c:1072
+msgid "Show the version of the program."
+msgstr ""
+
+#: src/nautilus-application.c:1074
+msgid "Always open a new window for browsing specified URIs"
+msgstr ""
+
+#: src/nautilus-application.c:1076
+msgid "Quit Nautilus."
+msgstr "داخستن"
+
+#: src/nautilus-application.c:1078
+msgid "Select specified URI in parent folder."
+msgstr ""
+
+#: src/nautilus-application.c:1079
+msgid "[URI…]"
+msgstr "[URI…]"
+
+#: src/nautilus-autorun-software.c:143 src/nautilus-autorun-software.c:146
+#, c-format
+msgid ""
+"Unable to start the program:\n"
+"%s"
+msgstr ""
+
+#: src/nautilus-autorun-software.c:149
+#, c-format
+msgid "Unable to locate the program"
+msgstr ""
+
+#: src/nautilus-autorun-software.c:159
+msgid "Oops! There was a problem running this software."
+msgstr ""
+
+#: src/nautilus-autorun-software.c:188
+#, c-format
+msgid ""
+"“%s” contains software intended to be automatically started. Would you like "
+"to run it?"
+msgstr ""
+
+#: src/nautilus-autorun-software.c:192
+msgid "If you don’t trust this location or aren’t sure, press Cancel."
+msgstr ""
+
+#: src/nautilus-autorun-software.c:223 src/nautilus-mime-actions.c:651
+msgid "_Run"
+msgstr "_جێبەجێکردن"
+
+#: src/nautilus-batch-rename-dialog.c:827
+#, c-format
+msgid "“%s” would not be a unique new name."
+msgstr ""
+
+#: src/nautilus-batch-rename-dialog.c:833
+#, c-format
+msgid "“%s” would conflict with an existing file."
+msgstr ""
+
+#: src/nautilus-batch-rename-dialog.c:1428
+msgid "Name cannot be empty."
+msgstr "ناو نابێت بە بۆشی بێت."
+
+#: src/nautilus-batch-rename-dialog.c:1434
+msgid "Name cannot contain “/”."
+msgstr "ناو نابێت هێمای \"/\" تیا بێت"
+
+#: src/nautilus-batch-rename-dialog.c:1440
+msgid "“.” is not a valid name."
+msgstr "“.”   ناوێکی گونجاو نیە."
+
+#: src/nautilus-batch-rename-dialog.c:1446
+msgid "“..” is not a valid name."
+msgstr "“..” ناوێکی گونجاو نیە."
+
+#: src/nautilus-batch-rename-dialog.c:2189
+#, c-format
+msgid "Rename %d Folder"
+msgid_plural "Rename %d Folders"
+msgstr[0] "ناولێنانی  %d بوخچە"
+msgstr[1] "ناولێنانی  %d بوخچە"
+
+#: src/nautilus-batch-rename-dialog.c:2197
+#, c-format
+msgid "Rename %d File"
+msgid_plural "Rename %d Files"
+msgstr[0] "ناولێنانی  %d پەڕگە"
+msgstr[1] "ناولێنانی  %d پەڕگە"
+
+#. To translators: %d is the total number of files and folders.
+#. * Singular case of the string is never used
+#: src/nautilus-batch-rename-dialog.c:2207
+#, c-format
+msgid "Rename %d File and Folder"
+msgid_plural "Rename %d Files and Folders"
+msgstr[0] "ناولێنانی  %d پەڕگە و بوخچە"
+msgstr[1] "ناولێنانی  %d پەڕگە و بوخچە"
+
+#: src/nautilus-batch-rename-dialog.h:87
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:73
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:187
+msgid "Original Name (Ascending)"
+msgstr "ناوی رەسەن (سەربەرەوژوور)"
+
+#: src/nautilus-batch-rename-dialog.h:92
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:78
+msgid "Original Name (Descending)"
+msgstr "ناوی ڕەسەن (سەربەرەوخوار)"
+
+#: src/nautilus-batch-rename-dialog.h:97
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:83
+msgid "First Modified"
+msgstr "یەکەم دەستکاریکردن"
+
+#: src/nautilus-batch-rename-dialog.h:102
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:88
+msgid "Last Modified"
+msgstr "دووادەستکاریکردن"
+
+#: src/nautilus-batch-rename-dialog.h:107
+msgid "First Created"
+msgstr "یەکەم درووستکردن"
+
+#: src/nautilus-batch-rename-dialog.h:112
+msgid "Last Created"
+msgstr "دووادرووستکردن"
+
+#: src/nautilus-batch-rename-dialog.h:121
+msgid "Camera model"
+msgstr "مۆدێلی کامێرا"
+
+#: src/nautilus-batch-rename-dialog.h:128
+msgid "Creation date"
+msgstr "ڕۆژی دروستکردن"
+
+#: src/nautilus-batch-rename-dialog.h:135
+msgid "Season number"
+msgstr "ژمارەی دانیشتن"
+
+#: src/nautilus-batch-rename-dialog.h:142
+msgid "Episode number"
+msgstr "ژمارەی زنجیرە"
+
+#: src/nautilus-batch-rename-dialog.h:149
+msgid "Track number"
+msgstr "ژمارەی تراک"
+
+#: src/nautilus-batch-rename-dialog.h:156
+msgid "Artist name"
+msgstr "ناوی هونەرمەند"
+
+#: src/nautilus-batch-rename-dialog.h:170
+msgid "Album name"
+msgstr "ناوی ئەلبوم"
+
+#: src/nautilus-batch-rename-dialog.h:177
+msgid "Original file name"
+msgstr "ناوی پەڕگە بنەڕەتی"
+
+#: src/nautilus-batch-rename-dialog.h:188
+msgid "1, 2, 3"
+msgstr "١،٢،٣"
+
+#: src/nautilus-batch-rename-dialog.h:195
+msgid "01, 02, 03"
+msgstr "٠١،٠٢،٠٣"
+
+#: src/nautilus-batch-rename-dialog.h:202
+msgid "001, 002, 003"
+msgstr "٠٠١،٠٠٢،٠٠٣"
+
+#: src/nautilus-bookmark.c:115 src/nautilus-file-utilities.c:304
+#: src/nautilus-list-view.c:1940 src/nautilus-pathbar.c:328
+#: src/nautilus-shell-search-provider.c:315 src/nautilus-window.c:193
+msgid "Home"
+msgstr "ماڵەوە"
+
+#: src/nautilus-canvas-container.c:1772
+msgid "The selection rectangle"
+msgstr ""
+
+#: src/nautilus-canvas-view-container.c:366
+#: src/resources/ui/nautilus-preferences-window.ui:1281
+msgid "Icon View"
+msgstr "پیشاندانی وێنۆچکەیی"
+
+#: src/nautilus-column-chooser.c:433
+msgid "Reset to De_fault"
+msgstr ""
+
+#: src/nautilus-column-chooser.c:435
+msgid "Replace the current List Columns settings with the default settings"
+msgstr ""
+
+#: src/nautilus-column-utilities.c:58 src/nautilus-list-view.c:2283
+#: src/resources/ui/nautilus-rename-file-popover.ui:23
+msgid "Name"
+msgstr "ناو"
+
+#: src/nautilus-column-utilities.c:59
+msgid "The name and icon of the file."
+msgstr "ناو و وێنۆچکەی پەڕگە"
+
+#: src/nautilus-column-utilities.c:65
+#: src/resources/ui/nautilus-properties-window.ui:225
+msgid "Size"
+msgstr "قەبارە"
+
+#: src/nautilus-column-utilities.c:66
+msgid "The size of the file."
+msgstr "قەبارەی پەڕگە"
+
+#: src/nautilus-column-utilities.c:72
+#: src/resources/ui/nautilus-properties-window.ui:132
+msgid "Type"
+msgstr "جۆر"
+
+#: src/nautilus-column-utilities.c:73
+msgid "The type of the file."
+msgstr "جۆری پەڕگە"
+
+#: src/nautilus-column-utilities.c:79
+#: src/resources/ui/nautilus-properties-window.ui:389
+msgid "Modified"
+msgstr "دەستکاریکراوە"
+
+#: src/nautilus-column-utilities.c:80 src/nautilus-column-utilities.c:138
+msgid "The date the file was modified."
+msgstr "ئەو رۆژەی کە پەڕگە دەستکاریکراوە"
+
+#: src/nautilus-column-utilities.c:88
+msgid "Detailed Type"
+msgstr "جۆری زانیاری"
+
+#: src/nautilus-column-utilities.c:89
+msgid "The detailed type of the file."
+msgstr "زانیاری پەڕگە."
+
+#: src/nautilus-column-utilities.c:95
+#: src/resources/ui/nautilus-properties-window.ui:363
+msgid "Accessed"
+msgstr ""
+
+#: src/nautilus-column-utilities.c:96
+msgid "The date the file was accessed."
+msgstr "ئەو ڕۆژەی پەڕگە چوونەناوی هەبووە."
+
+#: src/nautilus-column-utilities.c:105
+#: src/resources/ui/nautilus-file-properties-change-permissions.ui:72
+msgid "Owner"
+msgstr "خاوەن"
+
+#: src/nautilus-column-utilities.c:106
+msgid "The owner of the file."
+msgstr "خاوەنی پەڕگە"
+
+#: src/nautilus-column-utilities.c:113
+#: src/resources/ui/nautilus-file-properties-change-permissions.ui:107
+msgid "Group"
+msgstr "گرووپ"
+
+#: src/nautilus-column-utilities.c:114
+msgid "The group of the file."
+msgstr "گرووپی پەڕگە."
+
+#: src/nautilus-column-utilities.c:121
+#: src/resources/ui/nautilus-properties-window.ui:1245
+msgid "Permissions"
+msgstr "دەسەڵاتەکان"
+
+#: src/nautilus-column-utilities.c:122
+msgid "The permissions of the file."
+msgstr "ڕێپێدانەکانی پەڕگە."
+
+#: src/nautilus-column-utilities.c:129
+msgid "Location"
+msgstr "شوێن"
+
+#: src/nautilus-column-utilities.c:130
+msgid "The location of the file."
+msgstr "شوێنی پەڕگە."
+
+#: src/nautilus-column-utilities.c:137
+msgid "Modified — Time"
+msgstr ""
+
+#: src/nautilus-column-utilities.c:146
+msgid "Recency"
+msgstr ""
+
+#: src/nautilus-column-utilities.c:147
+msgid "The date the file was accessed by the user."
+msgstr ""
+
+#: src/nautilus-column-utilities.c:156
+msgid "Star"
+msgstr "ئەستێرە"
+
+#: src/nautilus-column-utilities.c:157
+msgid "Shows if file is starred."
+msgstr "پیشانی بدە ئەگەر پەڕگە ئەستێرە کراوە."
+
+#: src/nautilus-column-utilities.c:202
+msgid "Trashed On"
+msgstr "خراوەتە تەنەکەخۆڵ لە"
+
+#: src/nautilus-column-utilities.c:203
+msgid "Date when file was moved to the Trash"
+msgstr "ئەو ڕۆژەی کە پەڕگە کراوەتە تەنەکەخۆڵ"
+
+#: src/nautilus-column-utilities.c:210
+msgid "Original Location"
+msgstr "شوێنی ڕەسەن"
+
+#: src/nautilus-column-utilities.c:211
+msgid "Original location of file before moved to the Trash"
+msgstr ""
+
+#: src/nautilus-column-utilities.c:229
+msgid "Relevance"
+msgstr ""
+
+#: src/nautilus-column-utilities.c:230
+msgid "Relevance rank for search"
+msgstr ""
+
+#: src/nautilus-compress-dialog-controller.c:62
+msgid "Archive names cannot contain “/”."
+msgstr ""
+
+#: src/nautilus-compress-dialog-controller.c:67
+msgid "An archive cannot be called “.”."
+msgstr ""
+
+#: src/nautilus-compress-dialog-controller.c:72
+msgid "An archive cannot be called “..”."
+msgstr ""
+
+#: src/nautilus-compress-dialog-controller.c:77
+msgid "Archive name is too long."
+msgstr ""
+
+#. We must warn about the side effect
+#: src/nautilus-compress-dialog-controller.c:83
+msgid "Archives with “.” at the beginning of their name are hidden."
+msgstr ""
+
+#. Translators: this is of the format "hostname (uri-scheme)"
+#: src/nautilus-directory.c:673
+#, c-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/nautilus-dnd.c:794
+msgid "_Move Here"
+msgstr "_بیگوازەوە بۆ ئێرە"
+
+#: src/nautilus-dnd.c:799
+msgid "_Copy Here"
+msgstr "_لێرە لەبەریبگرەوە"
+
+#: src/nautilus-dnd.c:804
+msgid "_Link Here"
+msgstr "_بەستەرکردنی لێرە"
+
+#: src/nautilus-dnd.c:811 src/resources/ui/nautilus-compress-dialog.ui:165
+#: src/resources/ui/nautilus-create-folder-dialog.ui:63
+msgid "Cancel"
+msgstr "پاشگەزبوونەوە"
+
+#: src/nautilus-error-reporting.c:85
+#, c-format
+msgid "You do not have the permissions necessary to view the contents of “%s”."
+msgstr "دەسەڵاتی پێویستت نیە بۆ پیشاندانی ناوەڕۆکی “%s”."
+
+#: src/nautilus-error-reporting.c:92
+#, c-format
+msgid "“%s” could not be found. Perhaps it has recently been deleted."
+msgstr ""
+
+#: src/nautilus-error-reporting.c:104
+#, c-format
+msgid "Sorry, could not display all the contents of “%s”: %s"
+msgstr ""
+
+#: src/nautilus-error-reporting.c:115
+msgid "This location could not be displayed."
+msgstr ""
+
+#: src/nautilus-error-reporting.c:142
+#, c-format
+msgid "You do not have the permissions necessary to change the group of “%s”."
+msgstr ""
+
+#. fall through
+#: src/nautilus-error-reporting.c:165
+#, c-format
+msgid "Sorry, could not change the group of “%s”: %s"
+msgstr ""
+
+#: src/nautilus-error-reporting.c:170
+msgid "The group could not be changed."
+msgstr "ناتوانرێت گرووپ گۆڕانکاری تێدا بکرێت."
+
+#: src/nautilus-error-reporting.c:191
+#, c-format
+msgid "Sorry, could not change the owner of “%s”: %s"
+msgstr "ببورە، ناتوانی خاوەندارێتی “%s”: %s بگۆڕیت"
+
+#: src/nautilus-error-reporting.c:194
+msgid "The owner could not be changed."
+msgstr "ناتوانرێت خاوەن گۆڕانکاری تێدا بکرێت."
+
+#: src/nautilus-error-reporting.c:215
+#, c-format
+msgid "Sorry, could not change the permissions of “%s”: %s"
+msgstr ""
+
+#: src/nautilus-error-reporting.c:218
+msgid "The permissions could not be changed."
+msgstr "ڕێپێدانەکان گۆڕانکاری تێدا ناکرێت."
+
+#: src/nautilus-error-reporting.c:253
+#, c-format
+msgid ""
+"The name “%s” is already used in this location. Please use a different name."
+msgstr ""
+
+#: src/nautilus-error-reporting.c:261
+#, c-format
+msgid ""
+"There is no “%s” in this location. Perhaps it was just moved or deleted?"
+msgstr ""
+
+#: src/nautilus-error-reporting.c:269
+#, c-format
+msgid "You do not have the permissions necessary to rename “%s”."
+msgstr ""
+
+#: src/nautilus-error-reporting.c:278
+#, c-format
+msgid ""
+"The name “%s” is not valid because it contains the character “/”. Please use "
+"a different name."
+msgstr ""
+
+#: src/nautilus-error-reporting.c:284
+#, c-format
+msgid "The name “%s” is not valid. Please use a different name."
+msgstr ""
+
+#: src/nautilus-error-reporting.c:293
+#, c-format
+msgid "The name “%s” is too long. Please use a different name."
+msgstr ""
+
+#. fall through
+#: src/nautilus-error-reporting.c:317
+#, c-format
+msgid "Sorry, could not rename “%s” to “%s”: %s"
+msgstr ""
+
+#: src/nautilus-error-reporting.c:322
+msgid "The item could not be renamed."
+msgstr "ناتوانرێت ناوی بڕگە بگۆڕدرێت."
+
+#: src/nautilus-error-reporting.c:431
+#, c-format
+msgid "Renaming “%s” to “%s”."
+msgstr "گۆڕینی ناو لە “%s”  بۆ “%s”."
+
+#: src/nautilus-file.c:1341 src/nautilus-vfs-file.c:364
+msgid "This file cannot be mounted"
+msgstr ""
+
+#: src/nautilus-file.c:1395
+msgid "This file cannot be unmounted"
+msgstr ""
+
+#: src/nautilus-file.c:1438
+msgid "This file cannot be ejected"
+msgstr "پەڕگە دەرناپەڕێندرێت"
+
+#: src/nautilus-file.c:1479 src/nautilus-vfs-file.c:555
+msgid "This file cannot be started"
+msgstr ""
+
+#: src/nautilus-file.c:1538 src/nautilus-file.c:1578
+msgid "This file cannot be stopped"
+msgstr "پەڕگە ناوەستێنرێت"
+
+#: src/nautilus-file.c:1948
+#, c-format
+msgid "Slashes are not allowed in filenames"
+msgstr "سڵش ڕێگەپێدراو نیە لە ناوی پەڕگە"
+
+#: src/nautilus-file.c:1991
+#, c-format
+msgid "Toplevel files cannot be renamed"
+msgstr ""
+
+#: src/nautilus-file.c:2075
+#, c-format
+msgid "File not found"
+msgstr "پەڕگە نەدۆزرایەوە"
+
+#: src/nautilus-file.c:4429 src/nautilus-file-utilities.c:327
+#: src/nautilus-pathbar.c:338
+msgid "Starred"
+msgstr "ئەستێرەکراو"
+
+#. Translators: Time in 24h format
+#: src/nautilus-file.c:5502
+msgid "%H:%M"
+msgstr "%H:%M"
+
+#. Translators: Time in 12h format
+#: src/nautilus-file.c:5507
+msgid "%l:%M %p"
+msgstr "%l:%M %p"
+
+#: src/nautilus-file.c:5516
+#, no-c-format
+msgid "Yesterday"
+msgstr "دوێنێ"
+
+#. Translators: this is the word Yesterday followed by
+#. * a time in 24h format. i.e. "Yesterday 23:04"
+#: src/nautilus-file.c:5525
+#, no-c-format
+msgid "Yesterday %H:%M"
+msgstr "دوینێ %H:%M"
+
+#. Translators: this is the word Yesterday followed by
+#. * a time in 12h format. i.e. "Yesterday 9:04 PM"
+#: src/nautilus-file.c:5532
+#, no-c-format
+msgid "Yesterday %l:%M %p"
+msgstr "دوێنێ %l:%M %p"
+
+#: src/nautilus-file.c:5542
+#, no-c-format
+msgid "%a"
+msgstr "%a"
+
+#. Translators: this is the name of the week day followed by
+#. * a time in 24h format. i.e. "Monday 23:04"
+#: src/nautilus-file.c:5551
+#, no-c-format
+msgid "%a %H:%M"
+msgstr "%a %H:%M"
+
+#. Translators: this is the week day name followed by
+#. * a time in 12h format. i.e. "Monday 9:04 PM"
+#: src/nautilus-file.c:5558
+#, no-c-format
+msgid "%a %l:%M %p"
+msgstr "%a %l:%M %p"
+
+#. Translators: this is the day of the month followed
+#. * by the abbreviated month name i.e. "3 Feb"
+#: src/nautilus-file.c:5569
+#, no-c-format
+msgid "%-e %b"
+msgstr "%-e %b"
+
+#. Translators: this is the day of the month followed
+#. * by the abbreviated month name followed by a time in
+#. * 24h format i.e. "3 Feb 23:04"
+#: src/nautilus-file.c:5579
+#, no-c-format
+msgid "%-e %b %H:%M"
+msgstr "%-e %b %H:%M"
+
+#. Translators: this is the day of the month followed
+#. * by the abbreviated month name followed by a time in
+#. * 12h format i.e. "3 Feb 9:04"
+#: src/nautilus-file.c:5587
+#, no-c-format
+msgid "%-e %b %l:%M %p"
+msgstr "%-e %b %l:%M %p"
+
+#. Translators: this is the day of the month followed by the abbreviated
+#. * month name followed by the year i.e. "3 Feb 2015"
+#: src/nautilus-file.c:5598
+#, no-c-format
+msgid "%-e %b %Y"
+msgstr "%-e %b %Y"
+
+#. Translators: this is the day number followed
+#. * by the abbreviated month name followed by the year followed
+#. * by a time in 24h format i.e. "3 Feb 2015 23:04"
+#: src/nautilus-file.c:5608
+#, no-c-format
+msgid "%-e %b %Y %H:%M"
+msgstr "%-e %b %Y %H:%M"
+
+#. Translators: this is the day number followed
+#. * by the abbreviated month name followed by the year followed
+#. * by a time in 12h format i.e. "3 Feb 2015 9:04 PM"
+#: src/nautilus-file.c:5616
+#, no-c-format
+msgid "%-e %b %Y %l:%M %p"
+msgstr "%-e %b %Y %l:%M %p"
+
+#: src/nautilus-file.c:5628
+#, no-c-format
+msgid "%c"
+msgstr "%c"
+
+#: src/nautilus-file.c:6091
+#, c-format
+msgid "Not allowed to set permissions"
+msgstr "ڕێگەنەدراەە بۆ دانانی دەسەڵات"
+
+#: src/nautilus-file.c:6414
+#, c-format
+msgid "Not allowed to set owner"
+msgstr "ڕێگەنەدراوە بۆ دانانی خاوەن"
+
+#: src/nautilus-file.c:6433
+#, c-format
+msgid "Specified owner “%s” doesn’t exist"
+msgstr "خاوەنی دیاریکراو “%s”  بوونی نیە"
+
+#: src/nautilus-file.c:6718
+#, c-format
+msgid "Not allowed to set group"
+msgstr ""
+
+#: src/nautilus-file.c:6737
+#, c-format
+msgid "Specified group “%s” doesn’t exist"
+msgstr ""
+
+#. Translators: "Me" is used to indicate the file is owned by me (the current user)
+#: src/nautilus-file.c:6879
+msgid "Me"
+msgstr "من"
+
+#: src/nautilus-file.c:6911
+#, c-format
+msgid "%'u item"
+msgid_plural "%'u items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file.c:6912
+#, c-format
+msgid "%'u folder"
+msgid_plural "%'u folders"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file.c:6913
+#, c-format
+msgid "%'u file"
+msgid_plural "%'u files"
+msgstr[0] ""
+msgstr[1] ""
+
+#. This means no contents at all were readable
+#: src/nautilus-file.c:7390
+msgid "? bytes"
+msgstr "؟ بایت"
+
+#. This means no contents at all were readable
+#: src/nautilus-file.c:7402
+msgid "? items"
+msgstr "؟ بڕگر"
+
+#: src/nautilus-file.c:7410
+msgid "Unknown"
+msgstr "نەزانراو"
+
+#. Fallback, use for both unknown attributes and attributes
+#. * for which we have no more appropriate default.
+#.
+#: src/nautilus-file.c:7436 src/nautilus-properties-window.c:1313
+msgid "unknown"
+msgstr "نەزانراو"
+
+#: src/nautilus-file.c:7472 src/nautilus-file.c:7480 src/nautilus-file.c:7539
+msgid "Program"
+msgstr "داوانامە"
+
+#: src/nautilus-file.c:7474
+msgid "Font"
+msgstr "فۆنت"
+
+#: src/nautilus-file.c:7476
+msgid "Archive"
+msgstr "ئەرشیف"
+
+#: src/nautilus-file.c:7477
+msgid "Markup"
+msgstr ""
+
+#: src/nautilus-file.c:7478 src/nautilus-file.c:7479
+msgid "Text"
+msgstr "دەق"
+
+#: src/nautilus-file.c:7482
+msgid "Contacts"
+msgstr "پەیوەندیکەران"
+
+#: src/nautilus-file.c:7483
+msgid "Calendar"
+msgstr "ڕۆژژمێر"
+
+#: src/nautilus-file.c:7484
+msgid "Document"
+msgstr "بەڵگەنامە"
+
+#: src/nautilus-file.c:7485 src/nautilus-mime-actions.c:179
+msgid "Presentation"
+msgstr ""
+
+#: src/nautilus-file.c:7486 src/nautilus-mime-actions.c:187
+msgid "Spreadsheet"
+msgstr "خشتە"
+
+#. Refers to a file type which is known but not one of the basic types
+#: src/nautilus-file.c:7513
+msgid "Other"
+msgstr "هیتر"
+
+#: src/nautilus-file.c:7541
+msgid "Binary"
+msgstr ""
+
+#: src/nautilus-file.c:7546
+msgid "Folder"
+msgstr "بوخچە"
+
+#: src/nautilus-file.c:7585
+msgid "Link"
+msgstr "بەستەر"
+
+#. Note to localizers: convert file type string for file
+#. * (e.g. "folder", "plain text") to file type for symbolic link
+#. * to that kind of file (e.g. "link to folder").
+#.
+#. appended to new link file
+#: src/nautilus-file.c:7591 src/nautilus-file-operations.c:459
+#, c-format
+msgid "Link to %s"
+msgstr ""
+
+#: src/nautilus-file.c:7609 src/nautilus-file.c:7625 src/nautilus-file.c:7641
+msgid "Link (broken)"
+msgstr "بەستەر(شکاو)"
+
+#. Setup the expander for the rename action
+#: src/nautilus-file-conflict-dialog.c:291
+msgid "_Select a new name for the destination"
+msgstr ""
+
+#: src/nautilus-file-conflict-dialog.c:306
+#: src/resources/ui/nautilus-properties-window.ui:1296
+msgid "Reset"
+msgstr "ڕێکخستنەوە"
+
+#. Setup the checkbox to apply the action to all files
+#: src/nautilus-file-conflict-dialog.c:317
+msgid "Apply this action to all files and folders"
+msgstr ""
+
+#: src/nautilus-file-conflict-dialog.c:328 src/nautilus-file-operations.c:229
+msgid "_Skip"
+msgstr "_پەڕاندن"
+
+#: src/nautilus-file-conflict-dialog.c:332
+msgid "Re_name"
+msgstr "ناوگۆ_ڕین"
+
+#: src/nautilus-file-conflict-dialog.c:337
+msgid "Re_place"
+msgstr "جێ_گۆڕین"
+
+#: src/nautilus-file-name-widget-controller.c:143
+#: src/nautilus-rename-file-popover-controller.c:110
+msgid "File names cannot contain “/”."
+msgstr ""
+
+#: src/nautilus-file-name-widget-controller.c:148
+#: src/nautilus-rename-file-popover-controller.c:122
+msgid "A file cannot be called “.”."
+msgstr "ناتوانرێت بانگی پەڕگە بکرێت “.”."
+
+#: src/nautilus-file-name-widget-controller.c:153
+#: src/nautilus-rename-file-popover-controller.c:134
+msgid "A file cannot be called “..”."
+msgstr ""
+
+#: src/nautilus-file-name-widget-controller.c:158
+#: src/nautilus-rename-file-popover-controller.c:146
+msgid "File name is too long."
+msgstr ""
+
+#. We must warn about the side effect
+#: src/nautilus-file-name-widget-controller.c:164
+#: src/nautilus-rename-file-popover-controller.c:159
+msgid "Files with “.” at the beginning of their name are hidden."
+msgstr ""
+
+#: src/nautilus-file-name-widget-controller.c:186
+msgid "A folder with that name already exists."
+msgstr ""
+
+#: src/nautilus-file-name-widget-controller.c:191
+msgid "A file with that name already exists."
+msgstr ""
+
+#: src/nautilus-file-operations.c:230
+msgid "S_kip All"
+msgstr "هەمووی _بپەڕێنە"
+
+#: src/nautilus-file-operations.c:231
+msgid "_Retry"
+msgstr "_هەوڵدانەوە"
+
+#: src/nautilus-file-operations.c:232
+msgid "_Delete"
+msgstr "_سڕینەوە"
+
+#: src/nautilus-file-operations.c:233
+msgid "Delete _All"
+msgstr "هەمووی _بسڕەوە"
+
+#: src/nautilus-file-operations.c:234
+msgid "_Replace"
+msgstr "‫‫_جێگۆڕکێ"
+
+#: src/nautilus-file-operations.c:235
+msgid "Replace _All"
+msgstr "جێگۆڕکردنی _هەموو"
+
+#: src/nautilus-file-operations.c:236
+msgid "_Merge"
+msgstr "_تێهەڵکێش"
+
+#: src/nautilus-file-operations.c:237
+msgid "Merge _All"
+msgstr "_هەمووی تێکهەڵکێشبکە"
+
+#: src/nautilus-file-operations.c:238
+msgid "Copy _Anyway"
+msgstr ""
+
+#: src/nautilus-file-operations.c:239 src/nautilus-file-operations.c:2976
+#: src/nautilus-window.c:1331
+msgid "Empty _Trash"
+msgstr "_تەنەکەخۆڵ بەتاڵبکە"
+
+#: src/nautilus-file-operations.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%d  چرکە"
+msgstr[1] "%d  چرکە"
+
+#: src/nautilus-file-operations.c:345 src/nautilus-file-operations.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%d  خوولەک"
+msgstr[1] "%d  خوولەک"
+
+#: src/nautilus-file-operations.c:356 src/nautilus-file-operations.c:364
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%d  کاژێر"
+msgstr[1] "%d  کاژێر"
+
+#. appended to new link file
+#: src/nautilus-file-operations.c:466
+#, c-format
+msgid "Another link to %s"
+msgstr ""
+
+#. Localizers: Feel free to leave out the "st" suffix
+#. * if there's no way to do that nicely for a
+#. * particular language.
+#.
+#: src/nautilus-file-operations.c:487
+#, c-format
+msgid "%'dst link to %s"
+msgstr ""
+
+#. appended to new link file
+#: src/nautilus-file-operations.c:494
+#, c-format
+msgid "%'dnd link to %s"
+msgstr ""
+
+#. appended to new link file
+#: src/nautilus-file-operations.c:501
+#, c-format
+msgid "%'drd link to %s"
+msgstr ""
+
+#. appended to new link file
+#: src/nautilus-file-operations.c:508
+#, c-format
+msgid "%'dth link to %s"
+msgstr ""
+
+#. Localizers:
+#. * Feel free to leave out the st, nd, rd and th suffix or
+#. * make some or all of them match.
+#.
+#. localizers: tag used to detect the first copy of a file
+#: src/nautilus-file-operations.c:560
+msgid " (copy)"
+msgstr ""
+
+#. localizers: tag used to detect the second copy of a file
+#: src/nautilus-file-operations.c:562
+msgid " (another copy)"
+msgstr ""
+
+#. localizers: tag used to detect the x11th copy of a file
+#. localizers: tag used to detect the x12th copy of a file
+#. localizers: tag used to detect the x13th copy of a file
+#. localizers: tag used to detect the xxth copy of a file
+#: src/nautilus-file-operations.c:565 src/nautilus-file-operations.c:567
+#: src/nautilus-file-operations.c:569 src/nautilus-file-operations.c:579
+msgid "th copy)"
+msgstr ""
+
+#. localizers: tag used to detect the x1st copy of a file
+#: src/nautilus-file-operations.c:572
+msgid "st copy)"
+msgstr ""
+
+#. localizers: tag used to detect the x2nd copy of a file
+#: src/nautilus-file-operations.c:574
+msgid "nd copy)"
+msgstr ""
+
+#. localizers: tag used to detect the x3rd copy of a file
+#: src/nautilus-file-operations.c:576
+msgid "rd copy)"
+msgstr ""
+
+#. localizers: appended to first file copy
+#: src/nautilus-file-operations.c:593
+#, c-format
+msgid "%s (copy)%s"
+msgstr ""
+
+#. localizers: appended to second file copy
+#: src/nautilus-file-operations.c:595
+#, c-format
+msgid "%s (another copy)%s"
+msgstr ""
+
+#. localizers: appended to x11th file copy
+#. localizers: appended to x12th file copy
+#. localizers: appended to x13th file copy
+#. localizers: appended to xxth file copy
+#: src/nautilus-file-operations.c:598 src/nautilus-file-operations.c:600
+#: src/nautilus-file-operations.c:602 src/nautilus-file-operations.c:616
+#, c-format
+msgid "%s (%'dth copy)%s"
+msgstr ""
+
+#. localizers: if in your language there's no difference between 1st, 2nd, 3rd and nth
+#. * plurals, you can leave the st, nd, rd suffixes out and just make all the translated
+#. * strings look like "%s (copy %'d)%s".
+#.
+#. localizers: appended to x1st file copy
+#: src/nautilus-file-operations.c:610
+#, c-format
+msgid "%s (%'dst copy)%s"
+msgstr ""
+
+#. localizers: appended to x2nd file copy
+#: src/nautilus-file-operations.c:612
+#, c-format
+msgid "%s (%'dnd copy)%s"
+msgstr ""
+
+#. localizers: appended to x3rd file copy
+#: src/nautilus-file-operations.c:614
+#, c-format
+msgid "%s (%'drd copy)%s"
+msgstr ""
+
+#. localizers: opening parentheses to match the "th copy)" string
+#: src/nautilus-file-operations.c:729
+msgid " ("
+msgstr " ("
+
+#. localizers: opening parentheses of the "th copy)" string
+#: src/nautilus-file-operations.c:739
+#, c-format
+msgid " (%'d"
+msgstr " (%'d"
+
+#: src/nautilus-file-operations.c:1649
+#, c-format
+msgid "Are you sure you want to permanently delete “%s” from the trash?"
+msgstr ""
+
+#: src/nautilus-file-operations.c:1654
+#, c-format
+msgid ""
+"Are you sure you want to permanently delete the %'d selected item from the "
+"trash?"
+msgid_plural ""
+"Are you sure you want to permanently delete the %'d selected items from the "
+"trash?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:1664 src/nautilus-file-operations.c:1739
+msgid "If you delete an item, it will be permanently lost."
+msgstr "ئەگەر هەر دانەیەک بسڕیتەوە، ئەوا بەشیوەیەکی هەمیشەی دەسڕێتەوە."
+
+#: src/nautilus-file-operations.c:1685
+msgid "Empty all items from Trash?"
+msgstr "پاککردنەوەی هەموو بڕگەکان لە ناو تەنەکە خۆڵ؟"
+
+#: src/nautilus-file-operations.c:1689
+msgid "All items in the Trash will be permanently deleted."
+msgstr "هەموو بڕگە و پەڕەکانی ناو گڵێشدان بە هەمیشەیی دەسڕێنەوە."
+
+#: src/nautilus-file-operations.c:1725
+#, c-format
+msgid "Are you sure you want to permanently delete “%s”?"
+msgstr ""
+
+#: src/nautilus-file-operations.c:1730
+#, c-format
+msgid "Are you sure you want to permanently delete the %'d selected item?"
+msgid_plural ""
+"Are you sure you want to permanently delete the %'d selected items?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:1791
+#, c-format
+msgid "Deleted “%s”"
+msgstr "“%s” سڕایەوە"
+
+#: src/nautilus-file-operations.c:1795
+#, c-format
+msgid "Deleting “%s”"
+msgstr " “%s” سڕینەوەی"
+
+#: src/nautilus-file-operations.c:1806
+#, c-format
+msgid "Deleted %'d file"
+msgid_plural "Deleted %'d files"
+msgstr[0] "پەڕگەی  %'d سڕایەوە"
+msgstr[1] "پەڕگەکانی  %'d سڕایەوە"
+
+#: src/nautilus-file-operations.c:1812
+#, c-format
+msgid "Deleting %'d file"
+msgid_plural "Deleting %'d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#. To translators: %'d is the number of files completed for the operation,
+#. * so it will be something like 2/14.
+#: src/nautilus-file-operations.c:1839 src/nautilus-file-operations.c:1847
+#: src/nautilus-file-operations.c:1887 src/nautilus-file-operations.c:2229
+#: src/nautilus-file-operations.c:2237 src/nautilus-file-operations.c:2277
+#: src/nautilus-file-operations.c:4087 src/nautilus-file-operations.c:4095
+#: src/nautilus-file-operations.c:4166 src/nautilus-file-operations.c:8566
+#: src/nautilus-file-operations.c:8634
+#, c-format
+msgid "%'d / %'d"
+msgstr "%'d / %'d"
+
+#. To translators: %s will expand to a time duration like "2 minutes".
+#. * So the whole thing will be something like "1 / 5 -- 2 hours left (4 files/sec)"
+#. *
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %s argument).
+#.
+#: src/nautilus-file-operations.c:1866 src/nautilus-file-operations.c:2256
+#, c-format
+msgid "%'d / %'d — %s left"
+msgid_plural "%'d / %'d — %s left"
+msgstr[0] "%'d / %'d — %s ماوە"
+msgstr[1] "%'d / %'d — %s ماوە"
+
+#: src/nautilus-file-operations.c:1870 src/nautilus-file-operations.c:2259
+#, c-format
+msgid "(%d file/sec)"
+msgid_plural "(%d files/sec)"
+msgstr[0] "(%dپەڕگە/چرکە)"
+msgstr[1] "(%dپەڕگە/چرکە)"
+
+#: src/nautilus-file-operations.c:2029 src/nautilus-file-operations.c:3288
+msgid "Error while deleting."
+msgstr "هەڵە لە کاتی سڕینەوە."
+
+#: src/nautilus-file-operations.c:2040
+#, c-format
+msgid "There was an error deleting the folder “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:2043
+#, c-format
+msgid "You do not have sufficient permissions to delete the folder “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:2050
+#, c-format
+msgid "There was an error deleting the file “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:2053
+#, c-format
+msgid "You do not have sufficient permissions to delete the file “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:2180
+#, c-format
+msgid "Trashing “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:2184
+#, c-format
+msgid "Trashed “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:2195
+#, c-format
+msgid "Trashing %'d file"
+msgid_plural "Trashing %'d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:2201
+#, c-format
+msgid "Trashed %'d file"
+msgid_plural "Trashed %'d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: %s is a file name
+#: src/nautilus-file-operations.c:2349
+#, c-format
+msgid "“%s” can’t be put in the trash. Do you want to delete it immediately?"
+msgstr ""
+
+#: src/nautilus-file-operations.c:2361
+msgid "This remote location does not support sending items to the trash."
+msgstr ""
+
+#: src/nautilus-file-operations.c:2620
+msgid "Trashing Files"
+msgstr "پەڕگەکان دەخرێنە تەنەکەخۆڵ"
+
+#: src/nautilus-file-operations.c:2624
+msgid "Deleting Files"
+msgstr "پەڕگەکان دەسڕێنەوە"
+
+#: src/nautilus-file-operations.c:2781
+#, c-format
+msgid "Unable to eject %s"
+msgstr ""
+
+#: src/nautilus-file-operations.c:2786
+#, c-format
+msgid "Unable to unmount %s"
+msgstr ""
+
+#: src/nautilus-file-operations.c:2966
+msgid "Do you want to empty the trash before you unmount?"
+msgstr ""
+
+#: src/nautilus-file-operations.c:2968
+msgid ""
+"In order to regain the free space on this volume the trash must be emptied. "
+"All trashed items on the volume will be permanently lost."
+msgstr ""
+
+#: src/nautilus-file-operations.c:2974
+msgid "Do _not Empty Trash"
+msgstr "تەنەکەخۆڵ بەتاڵ _مەکە"
+
+#. Translators: %s is a file name formatted for display
+#: src/nautilus-file-operations.c:3116 src/nautilus-files-view.c:6757
+#, c-format
+msgid "Unable to access “%s”"
+msgstr "نەتوانرا بچێتەناو “%s”"
+
+#: src/nautilus-file-operations.c:3201
+#, c-format
+msgid "Preparing to copy %'d file (%s)"
+msgid_plural "Preparing to copy %'d files (%s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:3214
+#, c-format
+msgid "Preparing to move %'d file (%s)"
+msgid_plural "Preparing to move %'d files (%s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:3227
+#, c-format
+msgid "Preparing to delete %'d file (%s)"
+msgid_plural "Preparing to delete %'d files (%s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:3237
+#, c-format
+msgid "Preparing to trash %'d file"
+msgid_plural "Preparing to trash %'d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:3245
+#, c-format
+msgid "Preparing to compress %'d file"
+msgid_plural "Preparing to compress %'d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:3278 src/nautilus-file-operations.c:4690
+#: src/nautilus-file-operations.c:4861 src/nautilus-file-operations.c:4927
+#: src/nautilus-file-operations.c:5199
+msgid "Error while copying."
+msgstr "هەڵە لە کاتی لەبەرگرتنەوە."
+
+#: src/nautilus-file-operations.c:3283 src/nautilus-file-operations.c:4857
+#: src/nautilus-file-operations.c:4923 src/nautilus-file-operations.c:5195
+msgid "Error while moving."
+msgstr "هەڵە لە کاتی گواستنەوە."
+
+#: src/nautilus-file-operations.c:3293
+msgid "Error while moving files to trash."
+msgstr "هەڵە لە کاتی گواستنەوەی پەڕگە بۆ گڵێشدان."
+
+#: src/nautilus-file-operations.c:3297
+msgid "Error while compressing files."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3372
+#, c-format
+msgid ""
+"Files in the folder “%s” cannot be handled because you do not have "
+"permissions to see them."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3378 src/nautilus-file-operations.c:4873
+#, c-format
+msgid ""
+"There was an error getting information about the files in the folder “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3430
+#, c-format
+msgid ""
+"The folder “%s” cannot be handled because you do not have permissions to "
+"read it."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3436 src/nautilus-file-operations.c:4939
+#, c-format
+msgid "There was an error reading the folder “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3541
+#, c-format
+msgid ""
+"The file “%s” cannot be handled because you do not have permissions to read "
+"it."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3546
+#, c-format
+msgid "There was an error getting information about “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3672 src/nautilus-file-operations.c:3734
+#: src/nautilus-file-operations.c:3781 src/nautilus-file-operations.c:3825
+#, c-format
+msgid "Error while copying to “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3677
+msgid "You do not have permissions to access the destination folder."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3681
+msgid "There was an error getting information about the destination."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3735
+msgid "The destination is not a folder."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3782
+msgid ""
+"There is not enough space on the destination. Try to remove files to make "
+"space."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3786
+#, c-format
+msgid "%s more space is required to copy to the destination."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3826
+msgid "The destination is read-only."
+msgstr ""
+
+#: src/nautilus-file-operations.c:3903
+#, c-format
+msgid "Moving “%s” to “%s”"
+msgstr "گواستنەوەی  “%s” بۆ “%s”"
+
+#: src/nautilus-file-operations.c:3907
+#, c-format
+msgid "Moved “%s” to “%s”"
+msgstr "“%s”بۆ “%s” گواسترایەوە"
+
+#: src/nautilus-file-operations.c:3914
+#, c-format
+msgid "Copying “%s” to “%s”"
+msgstr "لەبەرگرتنەوە لە “%s” بۆ  “%s”"
+
+#: src/nautilus-file-operations.c:3918
+#, c-format
+msgid "Copied “%s” to “%s”"
+msgstr "لەبەرگرتنەوە کرا لە “%s” بۆ  “%s”"
+
+#: src/nautilus-file-operations.c:3952
+#, c-format
+msgid "Duplicating “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:3956
+#, c-format
+msgid "Duplicated “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:3975
+#, c-format
+msgid "Moving %'d file to “%s”"
+msgid_plural "Moving %'d files to “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:3981
+#, c-format
+msgid "Copying %'d file to “%s”"
+msgid_plural "Copying %'d files to “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:4000
+#, c-format
+msgid "Moved %'d file to “%s”"
+msgid_plural "Moved %'d files to “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:4006
+#, c-format
+msgid "Copied %'d file to “%s”"
+msgid_plural "Copied %'d files to “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:4029
+#, c-format
+msgid "Duplicating %'d file in “%s”"
+msgid_plural "Duplicating %'d files in “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:4039
+#, c-format
+msgid "Duplicated %'d file in “%s”"
+msgid_plural "Duplicated %'d files in “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#. To translators: %s will expand to a size like "2 bytes" or "3 MB", so something like "4 kb / 4 MB"
+#. To translators: %s will expand to a size like "2 bytes" or "3 MB".
+#. To translators: %s will expand to a size like "2 bytes" or
+#. * "3 MB", so something like "4 kb / 4 MB"
+#.
+#. To translators: %s will expand to a size like "2 bytes" or "3 MB", so something like "4 kb / 4 MB"
+#. To translators: %s will expand to a size like "2 bytes" or "3 MB".
+#: src/nautilus-file-operations.c:4077 src/nautilus-file-operations.c:4137
+#: src/nautilus-file-operations.c:8132 src/nautilus-file-operations.c:8306
+#: src/nautilus-file-operations.c:8561 src/nautilus-file-operations.c:8604
+#, c-format
+msgid "%s / %s"
+msgstr "%s / %s"
+
+#. To translators: %s will expand to a size like "2 bytes" or "3 MB", %s to a time duration like
+#. * "2 minutes". So the whole thing will be something like "2 kb / 4 MB -- 2 hours left (4kb/sec)"
+#. *
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %s argument).
+#.
+#. To translators: %s will expand to a size like "2 bytes" or
+#. * "3 MB", %s to a time duration like "2 minutes". So the whole
+#. * thing will be something like
+#. * "2 kb / 4 MB -- 2 hours left (4kb/sec)"
+#. *
+#. * The singular/plural form will be used depending on the
+#. * remaining time (i.e. the %s argument).
+#.
+#. To translators: %s will expand to a size like "2 bytes" or "3 MB", %s to a time duration like
+#. * "2 minutes". So the whole thing will be something like "2 kb / 4 MB -- 2 hours left (4kb/sec)"
+#. *
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %s argument).
+#.
+#: src/nautilus-file-operations.c:4121 src/nautilus-file-operations.c:8150
+#: src/nautilus-file-operations.c:8593
+#, c-format
+msgid "%s / %s — %s left (%s/sec)"
+msgid_plural "%s / %s — %s left (%s/sec)"
+msgstr[0] ""
+msgstr[1] ""
+
+#. To translators: %s will expand to a time duration like "2 minutes".
+#. * So the whole thing will be something like "1 / 5 -- 2 hours left (4kb/sec)"
+#. *
+#. * The singular/plural form will be used depending on the remaining time (i.e. the %s argument).
+#.
+#: src/nautilus-file-operations.c:4155 src/nautilus-file-operations.c:8623
+#, c-format
+msgid "%'d / %'d — %s left (%s/sec)"
+msgid_plural "%'d / %'d — %s left (%s/sec)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:4696
+#, c-format
+msgid ""
+"The folder “%s” cannot be copied because you do not have permissions to "
+"create it in the destination."
+msgstr ""
+
+#: src/nautilus-file-operations.c:4702
+#, c-format
+msgid "There was an error creating the folder “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:4868
+#, c-format
+msgid ""
+"Files in the folder “%s” cannot be copied because you do not have "
+"permissions to see them."
+msgstr ""
+
+#: src/nautilus-file-operations.c:4884
+msgid "_Skip files"
+msgstr "_پەڕگەکان بپەڕێنە"
+
+#: src/nautilus-file-operations.c:4934
+#, c-format
+msgid ""
+"The folder “%s” cannot be copied because you do not have permissions to read "
+"it."
+msgstr ""
+
+#: src/nautilus-file-operations.c:4997 src/nautilus-file-operations.c:5612
+#: src/nautilus-file-operations.c:6313
+#, c-format
+msgid "Error while moving “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:4998
+msgid "Could not remove the source folder."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5201
+msgid "There was an error getting information about the source."
+msgstr ""
+
+#. the run_warning() frees all strings passed in automatically
+#: src/nautilus-file-operations.c:5302 src/nautilus-file-operations.c:6115
+msgid "You cannot move a folder into itself."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5303 src/nautilus-file-operations.c:6116
+msgid "You cannot copy a folder into itself."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5304 src/nautilus-file-operations.c:6117
+msgid "The destination folder is inside the source folder."
+msgstr ""
+
+#. the run_warning() frees all strings passed in automatically
+#: src/nautilus-file-operations.c:5344
+msgid "You cannot move a file over itself."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5345
+msgid "You cannot copy a file over itself."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5346
+msgid "The source file would be overwritten by the destination."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5616 src/nautilus-file-operations.c:5704
+#, c-format
+msgid "Error while copying “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5619
+#, c-format
+msgid "Could not remove the already existing file with the same name in %s."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5706
+#, c-format
+msgid "There was an error copying the file into %s."
+msgstr ""
+
+#: src/nautilus-file-operations.c:5896
+msgid "Copying Files"
+msgstr "لەبەرگرتنەوەی پەڕگەکان"
+
+#: src/nautilus-file-operations.c:6016
+#, c-format
+msgid "Preparing to move to “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:6020
+#, c-format
+msgid "Preparing to move %'d file"
+msgid_plural "Preparing to move %'d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:6315
+#, c-format
+msgid "There was an error moving the file into %s."
+msgstr ""
+
+#: src/nautilus-file-operations.c:6563
+msgid "Moving Files"
+msgstr "گواستنەوەی پەڕگەکان"
+
+#: src/nautilus-file-operations.c:6654
+#, c-format
+msgid "Creating links in “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:6658
+#, c-format
+msgid "Making link to %'d file"
+msgid_plural "Making links to %'d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:6808
+#, c-format
+msgid "Error while creating link to %s."
+msgstr ""
+
+#: src/nautilus-file-operations.c:6812
+msgid "Symbolic links only supported for local files"
+msgstr ""
+
+#: src/nautilus-file-operations.c:6817
+msgid "The target doesn’t support symbolic links."
+msgstr ""
+
+#: src/nautilus-file-operations.c:6825
+#, c-format
+msgid "There was an error creating the symlink in %s."
+msgstr ""
+
+#: src/nautilus-file-operations.c:7155
+msgid "Setting permissions"
+msgstr ""
+
+#. localizers: the initial name of a new folder
+#: src/nautilus-file-operations.c:7434
+msgid "Untitled Folder"
+msgstr "بوخچەی بێناونیشان"
+
+#. localizers: the initial name of a new empty document
+#: src/nautilus-file-operations.c:7449
+msgid "Untitled Document"
+msgstr "بەڵگەی بێناونیشان"
+
+#: src/nautilus-file-operations.c:7732
+#, c-format
+msgid "Error while creating directory %s."
+msgstr ""
+
+#: src/nautilus-file-operations.c:7737
+#, c-format
+msgid "Error while creating file %s."
+msgstr ""
+
+#: src/nautilus-file-operations.c:7741
+#, c-format
+msgid "There was an error creating the directory in %s."
+msgstr ""
+
+#: src/nautilus-file-operations.c:8004
+msgid "Emptying Trash"
+msgstr "بەتاڵکردنی تەنەکەخۆڵ"
+
+#: src/nautilus-file-operations.c:8046
+msgid "Verifying destination"
+msgstr ""
+
+#: src/nautilus-file-operations.c:8090
+#, c-format
+msgid "Extracting “%s”"
+msgstr "دەرهێنانی “%s”"
+
+#: src/nautilus-file-operations.c:8194 src/nautilus-file-operations.c:8256
+#, c-format
+msgid "Error extracting “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:8198
+#, c-format
+msgid "There was an error while extracting “%s”."
+msgstr ""
+
+#: src/nautilus-file-operations.c:8259
+#, c-format
+msgid "Not enough free space to extract %s"
+msgstr ""
+
+#: src/nautilus-file-operations.c:8289
+#, c-format
+msgid "Extracted “%s” to “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:8295
+#, c-format
+msgid "Extracted %'d file to “%s”"
+msgid_plural "Extracted %'d files to “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:8329
+msgid "Preparing to extract"
+msgstr ""
+
+#: src/nautilus-file-operations.c:8458
+msgid "Extracting Files"
+msgstr "دەرهێنانی پەڕگەکان"
+
+#: src/nautilus-file-operations.c:8517
+#, c-format
+msgid "Compressing “%s” into “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:8523
+#, c-format
+msgid "Compressing %'d file into “%s”"
+msgid_plural "Compressing %'d files into “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:8671
+#, c-format
+msgid "Error compressing “%s” into “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:8677
+#, c-format
+msgid "Error compressing %'d file into “%s”"
+msgid_plural "Error compressing %'d files into “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:8687
+msgid "There was an error while compressing files."
+msgstr ""
+
+#: src/nautilus-file-operations.c:8712
+#, c-format
+msgid "Compressed “%s” into “%s”"
+msgstr ""
+
+#: src/nautilus-file-operations.c:8718
+#, c-format
+msgid "Compressed %'d file into “%s”"
+msgid_plural "Compressed %'d files into “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-operations.c:8810
+msgid "Compressing Files"
+msgstr ""
+
+#: src/nautilus-files-view.c:398
+msgid "Searching…"
+msgstr "گەڕان..."
+
+#: src/nautilus-files-view.c:1191 src/nautilus-mime-actions.c:939
+msgid "Are you sure you want to open all files?"
+msgstr ""
+
+#: src/nautilus-files-view.c:1194
+#, c-format
+msgid "This will open %'d separate tab."
+msgid_plural "This will open %'d separate tabs."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-files-view.c:1199
+#, c-format
+msgid "This will open %'d separate window."
+msgid_plural "This will open %'d separate windows."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-files-view.c:1203 src/nautilus-location-entry.c:282
+#: src/nautilus-mime-actions.c:951 src/nautilus-mime-actions.c:1137
+msgid "_OK"
+msgstr "_باشە"
+
+#: src/nautilus-files-view.c:1753
+msgid "Select Items Matching"
+msgstr ""
+
+#: src/nautilus-files-view.c:1758 src/nautilus-files-view.c:6075
+#: src/nautilus-files-view.c:6535
+msgid "_Select"
+msgstr "_دیاریبکە"
+
+#: src/nautilus-files-view.c:1766
+msgid "_Pattern:"
+msgstr ""
+
+#: src/nautilus-files-view.c:1772
+msgid "Examples: "
+msgstr "نموونە:"
+
+#: src/nautilus-files-view.c:2747
+msgid "Could not paste files"
+msgstr "نەتوانرا پەڕگە بلکێنرێت"
+
+#: src/nautilus-files-view.c:2748
+msgid "Permissions do not allow pasting files in this directory"
+msgstr ""
+
+#: src/nautilus-files-view.c:2911
+msgid ""
+"Nautilus 3.6 deprecated this directory and tried migrating this "
+"configuration to ~/.local/share/nautilus"
+msgstr ""
+
+#: src/nautilus-files-view.c:3408 src/nautilus-files-view.c:3455
+#, c-format
+msgid "“%s” selected"
+msgstr "“%s” دیاریکراوە"
+
+#: src/nautilus-files-view.c:3412
+#, c-format
+msgid "%'d folder selected"
+msgid_plural "%'d folders selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-files-view.c:3426
+#, c-format
+msgid "(containing %'d item)"
+msgid_plural "(containing %'d items)"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: this is preceded with a string of form 'N folders' (N more than 1)
+#: src/nautilus-files-view.c:3441
+#, c-format
+msgid "(containing a total of %'d item)"
+msgid_plural "(containing a total of %'d items)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-files-view.c:3460
+#, c-format
+msgid "%'d item selected"
+msgid_plural "%'d items selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Folders selected also, use "other" terminology
+#: src/nautilus-files-view.c:3469
+#, c-format
+msgid "%'d other item selected"
+msgid_plural "%'d other items selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#. This is marked for translation in case a localiser
+#. * needs to use something other than parentheses. The
+#. * the message in parentheses is the size of the selected items.
+#.
+#: src/nautilus-files-view.c:3484
+#, c-format
+msgid "(%s)"
+msgstr "(%s)"
+
+#. This is marked for translation in case a localizer
+#. * needs to change ", " to something else. The comma
+#. * is between the message about the number of folders
+#. * and the number of items in those folders and the
+#. * message about the number of other items and the
+#. * total size of those items.
+#.
+#: src/nautilus-files-view.c:3517
+#, c-format
+msgid "%s %s, %s %s"
+msgstr "%s %s, %s %s"
+
+#: src/nautilus-files-view.c:6062
+msgid "Select Move Destination"
+msgstr ""
+
+#: src/nautilus-files-view.c:6066
+msgid "Select Copy Destination"
+msgstr ""
+
+#: src/nautilus-files-view.c:6531
+msgid "Select Extract Destination"
+msgstr ""
+
+#: src/nautilus-files-view.c:6719
+msgid "Wallpapers"
+msgstr "پاشبنەما"
+
+#. Translators: %s is a file name formatted for display
+#: src/nautilus-files-view.c:6787
+#, c-format
+msgid "Unable to remove “%s”"
+msgstr ""
+
+#. Translators: %s is a file name formatted for display
+#: src/nautilus-files-view.c:6817
+#, c-format
+msgid "Unable to eject “%s”"
+msgstr "نەتوانرا %s دەربکرێت"
+
+#: src/nautilus-files-view.c:6842
+msgid "Unable to stop drive"
+msgstr ""
+
+#. Translators: %s is a file name formatted for display
+#: src/nautilus-files-view.c:6955
+#, c-format
+msgid "Unable to start “%s”"
+msgstr "نەتوانرا %s دەستپێبکرێت"
+
+#: src/nautilus-files-view.c:7873
+#, c-format
+msgid "New Folder with Selection (%'d Item)"
+msgid_plural "New Folder with Selection (%'d Items)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-files-view.c:7931
+#, c-format
+msgid "Open With %s"
+msgstr "بیکەرەوە لەڕێگەی %s"
+
+#: src/nautilus-files-view.c:7943
+msgid "Run"
+msgstr "جێبەجێکردن"
+
+#: src/nautilus-files-view.c:7948
+msgid "Extract Here"
+msgstr "لێرە دەریبهێنە"
+
+#: src/nautilus-files-view.c:7949
+msgid "Extract to…"
+msgstr "دەرهێنان بۆ ..."
+
+#: src/nautilus-files-view.c:7953
+msgid "Open"
+msgstr "کردنەوە"
+
+#: src/nautilus-files-view.c:8009
+#: src/resources/ui/nautilus-files-view-context-menus.ui:102
+msgid "_Start"
+msgstr "_دەستپێکردن"
+
+#: src/nautilus-files-view.c:8015 src/gtk/nautilusgtkplacesview.c:1736
+msgid "_Connect"
+msgstr "_پەیوەندیگرتن"
+
+#: src/nautilus-files-view.c:8021
+msgid "_Start Multi-disk Drive"
+msgstr ""
+
+#: src/nautilus-files-view.c:8027
+msgid "U_nlock Drive"
+msgstr ""
+
+#: src/nautilus-files-view.c:8045
+msgid "Stop Drive"
+msgstr ""
+
+#: src/nautilus-files-view.c:8051
+msgid "_Safely Remove Drive"
+msgstr "_بێترس وەگەڕەکە دەربهێنە"
+
+#: src/nautilus-files-view.c:8057 src/gtk/nautilusgtkplacesview.c:1726
+msgid "_Disconnect"
+msgstr "_پچڕاندنی پەیوەندی"
+
+#: src/nautilus-files-view.c:8063
+msgid "_Stop Multi-disk Drive"
+msgstr ""
+
+#: src/nautilus-files-view.c:8069
+msgid "_Lock Drive"
+msgstr ""
+
+#: src/nautilus-files-view.c:9834
+msgid "Content View"
+msgstr "پیشاندانی ناوەڕۆک"
+
+#: src/nautilus-files-view.c:9835
+msgid "View of the current folder"
+msgstr ""
+
+#: src/nautilus-files-view-dnd.c:61 src/nautilus-files-view-dnd.c:95
+#: src/nautilus-files-view-dnd.c:157
+msgid "Drag and drop is not supported."
+msgstr "هێنان و دانان پشتگیرینەکراوە."
+
+#: src/nautilus-files-view-dnd.c:62
+msgid "Drag and drop is only supported on local file systems."
+msgstr ""
+
+#: src/nautilus-files-view-dnd.c:96 src/nautilus-files-view-dnd.c:158
+msgid "An invalid drag type was used."
+msgstr ""
+
+#. Translator: This is the filename used for when you dnd text to a directory
+#: src/nautilus-files-view-dnd.c:249
+msgid "Dropped Text.txt"
+msgstr ""
+
+#. Translator: This is the filename used for when you dnd raw
+#. * data to a directory, if the source didn't supply a name.
+#.
+#: src/nautilus-files-view-dnd.c:340
+msgid "dropped data"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:176
+#: src/resources/ui/nautilus-window.ui:78
+msgid "Undo"
+msgstr "گەڕانەوە"
+
+#: src/nautilus-file-undo-operations.c:180
+msgid "Undo last action"
+msgstr "گەڕانەوە بۆ دووا کردار"
+
+#: src/nautilus-file-undo-operations.c:185
+msgid "Redo"
+msgstr "چوونەپێش"
+
+#: src/nautilus-file-undo-operations.c:189
+msgid "Redo last undone action"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:452
+#, c-format
+msgid "Move %d item back to “%s”"
+msgid_plural "Move %d items back to “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:455
+#, c-format
+msgid "Move %d item to “%s”"
+msgid_plural "Move %d items to “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:459
+#, c-format
+msgid "_Undo Move %d item"
+msgid_plural "_Undo Move %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:462
+#, c-format
+msgid "_Redo Move %d item"
+msgid_plural "_Redo Move %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:468
+#, c-format
+msgid "Move “%s” back to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:469
+#, c-format
+msgid "Move “%s” to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:471
+msgid "_Undo Move"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:472
+msgid "_Redo Move"
+msgstr "_جوڵەوە بگەڕێنەوە"
+
+#: src/nautilus-file-undo-operations.c:477
+msgid "_Undo Restore from Trash"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:478
+msgid "_Redo Restore from Trash"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:482
+#, c-format
+msgid "Move %d item back to trash"
+msgid_plural "Move %d items back to trash"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:485
+#: src/nautilus-file-undo-operations.c:1614
+#, c-format
+msgid "Restore %d item from trash"
+msgid_plural "Restore %d items from trash"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:491
+#, c-format
+msgid "Move “%s” back to trash"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:492
+#, c-format
+msgid "Restore “%s” from trash"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:499
+#, c-format
+msgid "Delete %d copied item"
+msgid_plural "Delete %d copied items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:502
+#, c-format
+msgid "Copy %d item to “%s”"
+msgid_plural "Copy %d items to “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:506
+#, c-format
+msgid "_Undo Copy %d item"
+msgid_plural "_Undo Copy %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:509
+#, c-format
+msgid "_Redo Copy %d item"
+msgid_plural "_Redo Copy %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:515
+#: src/nautilus-file-undo-operations.c:542
+#: src/nautilus-file-undo-operations.c:826
+#: src/nautilus-file-undo-operations.c:2371
+#: src/nautilus-file-undo-operations.c:2533
+#, c-format
+msgid "Delete “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:516
+#, c-format
+msgid "Copy “%s” to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:518
+msgid "_Undo Copy"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:519
+msgid "_Redo Copy"
+msgstr "_لەبەرگرتنەوە بگەڕێنەوە"
+
+#: src/nautilus-file-undo-operations.c:526
+#, c-format
+msgid "Delete %d duplicated item"
+msgid_plural "Delete %d duplicated items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:529
+#, c-format
+msgid "Duplicate %d item in “%s”"
+msgid_plural "Duplicate %d items in “%s”"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:533
+#, c-format
+msgid "_Undo Duplicate %d item"
+msgid_plural "_Undo Duplicate %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:536
+#, c-format
+msgid "_Redo Duplicate %d item"
+msgid_plural "_Redo Duplicate %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:543
+#, c-format
+msgid "Duplicate “%s” in “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:546
+msgid "_Undo Duplicate"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:547
+msgid "_Redo Duplicate"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:554
+#, c-format
+msgid "Delete links to %d item"
+msgid_plural "Delete links to %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:557
+#, c-format
+msgid "Create links to %d item"
+msgid_plural "Create links to %d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:563
+#, c-format
+msgid "Delete link to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:564
+#, c-format
+msgid "Create link to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:566
+msgid "_Undo Create Link"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:567
+msgid "_Redo Create Link"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:830
+#, c-format
+msgid "Create an empty file “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:832
+msgid "_Undo Create Empty File"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:833
+msgid "_Redo Create Empty File"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:837
+#, c-format
+msgid "Create a new folder “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:839
+msgid "_Undo Create Folder"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:840
+msgid "_Redo Create Folder"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:844
+#, c-format
+msgid "Create new file “%s” from template "
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:846
+msgid "_Undo Create from Template"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:847
+msgid "_Redo Create from Template"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1047
+#: src/nautilus-file-undo-operations.c:1048
+#, c-format
+msgid "Rename “%s” as “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1050
+msgid "_Undo Rename"
+msgstr "_گێڕانەوە لە ناوگۆڕێن"
+
+#: src/nautilus-file-undo-operations.c:1051
+msgid "_Redo Rename"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1166
+#: src/nautilus-file-undo-operations.c:1170
+#, c-format
+msgid "Batch rename %d file"
+msgid_plural "Batch rename %d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:1175
+msgid "_Undo Batch Rename"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1176
+msgid "_Redo Batch Rename"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1392
+#: src/nautilus-file-undo-operations.c:1409
+#, c-format
+msgid "Unstar %d file"
+msgid_plural "Unstar %d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:1396
+#: src/nautilus-file-undo-operations.c:1405
+#, c-format
+msgid "Star %d file"
+msgid_plural "Star %d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:1400
+msgid "_Undo Starring"
+msgstr "_گەڕانەوە لە بە ئەستێرەکردن"
+
+#: src/nautilus-file-undo-operations.c:1401
+msgid "_Redo Starring"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1413
+msgid "_Undo Unstarring"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1414
+msgid "_Redo Unstarring"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1617
+#, c-format
+msgid "Move %d item to trash"
+msgid_plural "Move %d items to trash"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:1631
+#, c-format
+msgid "Restore “%s” to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1638
+#, c-format
+msgid "Move “%s” to trash"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1643
+msgid "_Undo Trash"
+msgstr "_گەڕانەوە لە تەنەکەخۆڵکردن"
+
+#: src/nautilus-file-undo-operations.c:1644
+msgid "_Redo Trash"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1939
+#, c-format
+msgid "Restore original permissions of items enclosed in “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1940
+#, c-format
+msgid "Set permissions of items enclosed in “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1942
+#: src/nautilus-file-undo-operations.c:2095
+msgid "_Undo Change Permissions"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:1943
+#: src/nautilus-file-undo-operations.c:2096
+msgid "_Redo Change Permissions"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2092
+#, c-format
+msgid "Restore original permissions of “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2093
+#, c-format
+msgid "Set permissions of “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2205
+#, c-format
+msgid "Restore group of “%s” to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2207
+#, c-format
+msgid "Set group of “%s” to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2210
+msgid "_Undo Change Group"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2211
+msgid "_Redo Change Group"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2215
+#, c-format
+msgid "Restore owner of “%s” to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2217
+#, c-format
+msgid "Set owner of “%s” to “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2220
+msgid "_Undo Change Owner"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2221
+msgid "_Redo Change Owner"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2357
+msgid "_Undo Extract"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2358
+msgid "_Redo Extract"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2375
+#, c-format
+msgid "Delete %d extracted file"
+msgid_plural "Delete %d extracted files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:2389
+#, c-format
+msgid "Extract “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2393
+#, c-format
+msgid "Extract %d file"
+msgid_plural "Extract %d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:2544
+#, c-format
+msgid "Compress “%s”"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2548
+#, c-format
+msgid "Compress %d file"
+msgid_plural "Compress %d files"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-file-undo-operations.c:2554
+msgid "_Undo Compress"
+msgstr ""
+
+#: src/nautilus-file-undo-operations.c:2555
+msgid "_Redo Compress"
+msgstr ""
+
+#: src/nautilus-file-utilities.c:891
+#, c-format
+msgid "Could not determine original location of “%s” "
+msgstr ""
+
+#: src/nautilus-file-utilities.c:895
+msgid "The item cannot be restored from trash"
+msgstr ""
+
+#. translators: these describe the contents of removable media
+#: src/nautilus-file-utilities.c:1010
+msgid "Audio CD"
+msgstr "سی-دی دەنگی"
+
+#: src/nautilus-file-utilities.c:1014
+msgid "Audio DVD"
+msgstr ""
+
+#: src/nautilus-file-utilities.c:1018
+msgid "Video DVD"
+msgstr ""
+
+#: src/nautilus-file-utilities.c:1022
+msgid "Video CD"
+msgstr "سی-دی ڤیدیۆیی"
+
+#: src/nautilus-file-utilities.c:1026
+msgid "Super Video CD"
+msgstr "سی-دی ڤیدیۆیی سوپەر"
+
+#: src/nautilus-file-utilities.c:1030
+msgid "Photo CD"
+msgstr ""
+
+#: src/nautilus-file-utilities.c:1034
+msgid "Picture CD"
+msgstr "سی-دی وێنە"
+
+#: src/nautilus-file-utilities.c:1038 src/nautilus-file-utilities.c:1086
+msgid "Contains digital photos"
+msgstr ""
+
+#: src/nautilus-file-utilities.c:1042
+msgid "Contains music"
+msgstr "میوزیکی تێدایە"
+
+#: src/nautilus-file-utilities.c:1046
+msgid "Contains software to run"
+msgstr "نەرمەکاڵای تێدایە بۆ ئەوەی جێبەجێبکرێت"
+
+#: src/nautilus-file-utilities.c:1050
+msgid "Contains software to install"
+msgstr "نەرمەکاڵای تێدایە بۆ ئەوەی دابمەزرێت"
+
+#. fallback to generic greeting
+#: src/nautilus-file-utilities.c:1055
+#, c-format
+msgid "Detected as “%s”"
+msgstr ""
+
+#. translators: these describe the contents of removable media
+#: src/nautilus-file-utilities.c:1078
+msgid "Contains music and photos"
+msgstr ""
+
+#: src/nautilus-file-utilities.c:1082
+msgid "Contains photos and music"
+msgstr ""
+
+#: src/nautilus-list-model.c:467
+msgid "(Empty)"
+msgstr "(بەتاڵ)"
+
+#: src/nautilus-list-view.c:1591
+msgid "Use Default"
+msgstr ""
+
+#: src/nautilus-list-view.c:3400
+#, c-format
+msgid "%s Visible Columns"
+msgstr ""
+
+#: src/nautilus-list-view.c:3420
+msgid "Choose the order of information to appear in this folder:"
+msgstr ""
+
+#: src/nautilus-location-entry.c:267
+#, c-format
+msgid "Do you want to view %d location?"
+msgid_plural "Do you want to view %d locations?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-location-entry.c:271 src/nautilus-mime-actions.c:947
+#, c-format
+msgid "This will open %d separate window."
+msgid_plural "This will open %d separate windows."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-mime-actions.c:98
+#: src/resources/ui/nautilus-search-popover.ui:275
+msgid "Anything"
+msgstr "هەرشتێک"
+
+#: src/nautilus-mime-actions.c:108
+#: src/resources/ui/nautilus-file-properties-change-permissions.ui:58
+msgid "Folders"
+msgstr "بوخچەکان"
+
+#: src/nautilus-mime-actions.c:112
+msgid "Documents"
+msgstr "بەڵگەنامەکان"
+
+#: src/nautilus-mime-actions.c:129
+msgid "Illustration"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:141
+msgid "Music"
+msgstr "میوزیک"
+
+#: src/nautilus-mime-actions.c:154
+msgid "PDF / PostScript"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:161
+msgid "Picture"
+msgstr "وێنە"
+
+#: src/nautilus-mime-actions.c:202
+msgid "Text File"
+msgstr "پەڕگەی دەق"
+
+#: src/nautilus-mime-actions.c:542
+#, c-format
+msgid "The link “%s” is broken. Move it to Trash?"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:546
+#, c-format
+msgid "The link “%s” is broken."
+msgstr ""
+
+#: src/nautilus-mime-actions.c:553
+msgid "This link cannot be used because it has no target."
+msgstr ""
+
+#: src/nautilus-mime-actions.c:557
+#, c-format
+msgid "This link cannot be used because its target “%s” doesn’t exist."
+msgstr ""
+
+#: src/nautilus-mime-actions.c:568
+#: src/resources/ui/nautilus-files-view-context-menus.ui:151
+msgid "Mo_ve to Trash"
+msgstr "بیکە_رە تەنەکەی خۆڵ"
+
+#: src/nautilus-mime-actions.c:639
+#, c-format
+msgid "Do you want to run “%s”, or display its contents?"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:641
+#, c-format
+msgid "“%s” is an executable text file."
+msgstr ""
+
+#: src/nautilus-mime-actions.c:647
+msgid "Run in _Terminal"
+msgstr "جێبەجێکردن لە _تێرمیناڵ"
+
+#: src/nautilus-mime-actions.c:648
+msgid "_Display"
+msgstr "_پیشاندان"
+
+#: src/nautilus-mime-actions.c:942
+#, c-format
+msgid "This will open %d separate tab."
+msgid_plural "This will open %d separate tabs."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-mime-actions.c:1014
+#, c-format
+msgid "Could Not Display “%s”"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:1117
+msgid "The file is of an unknown type"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:1122
+#, c-format
+msgid "There is no application installed for “%s” files"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:1135
+msgid "_Select Application"
+msgstr "_داوانامەکە دیاریبکە"
+
+#: src/nautilus-mime-actions.c:1173
+msgid "There was an internal error trying to search for applications:"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:1175
+msgid "Unable to search for application"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:1286
+#, c-format
+msgid ""
+"There is no application installed for “%s” files. Do you want to search for "
+"an application to open this file?"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:1292
+msgid "_Search in Software"
+msgstr "_گەڕان لە ناو نەرمەکاڵا"
+
+#. if it wasn't cancelled show a dialog
+#: src/nautilus-mime-actions.c:1657 src/nautilus-mime-actions.c:1956
+#: src/gtk/nautilusgtkplacesview.c:1231 src/gtk/nautilusgtkplacesview.c:1306
+msgid "Unable to access location"
+msgstr "نەتوانرا بچێتەناو شوێن"
+
+#: src/nautilus-mime-actions.c:2047
+msgid "Unable to start location"
+msgstr ""
+
+#: src/nautilus-mime-actions.c:2140
+#, c-format
+msgid "Opening “%s”."
+msgstr "کردنەوەی “%s”."
+
+#: src/nautilus-mime-actions.c:2145
+#, c-format
+msgid "Opening %d item."
+msgid_plural "Opening %d items."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-new-folder-dialog-controller.c:55
+#: src/nautilus-rename-file-popover-controller.c:106
+msgid "Folder names cannot contain “/”."
+msgstr ""
+
+#: src/nautilus-new-folder-dialog-controller.c:60
+#: src/nautilus-rename-file-popover-controller.c:118
+msgid "A folder cannot be called “.”."
+msgstr ""
+
+#: src/nautilus-new-folder-dialog-controller.c:65
+#: src/nautilus-rename-file-popover-controller.c:130
+msgid "A folder cannot be called “..”."
+msgstr ""
+
+#: src/nautilus-new-folder-dialog-controller.c:70
+#: src/nautilus-rename-file-popover-controller.c:142
+msgid "Folder name is too long."
+msgstr ""
+
+#. We must warn about the side effect
+#: src/nautilus-new-folder-dialog-controller.c:76
+#: src/nautilus-rename-file-popover-controller.c:155
+msgid "Folders with “.” at the beginning of their name are hidden."
+msgstr ""
+
+#: src/nautilus-new-folder-dialog-controller.c:145
+#: src/resources/ui/nautilus-compress-dialog.ui:173
+msgid "Create"
+msgstr "دروستکردن"
+
+#: src/nautilus-new-folder-dialog-controller.c:146
+#: src/nautilus-rename-file-popover-controller.c:380
+msgid "Folder name"
+msgstr "ناوی بوخچە"
+
+#: src/nautilus-new-folder-dialog-controller.c:147
+#: src/resources/ui/nautilus-toolbar.ui:71
+msgid "New Folder"
+msgstr "بوخچەی نوێ"
+
+#: src/nautilus-notebook.c:373
+msgid "Close tab"
+msgstr "بازدەر دابخە"
+
+#: src/nautilus-operations-ui-manager.c:142
+#, c-format
+msgid ""
+"You are trying to replace the destination folder “%s” with a symbolic link."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:144
+#, c-format
+msgid ""
+"This is not allowed in order to avoid the deletion of the destination "
+"folder’s contents."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:145
+msgid "Please rename the symbolic link or press the skip button."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:149
+#, c-format
+msgid "Merge folder “%s”?"
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:152
+msgid ""
+"Merging will ask for confirmation before replacing any files in the folder "
+"that conflict with the files being copied."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:157
+#, c-format
+msgid "An older folder with the same name already exists in “%s”."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:162
+#, c-format
+msgid "A newer folder with the same name already exists in “%s”."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:167
+#, c-format
+msgid "Another folder with the same name already exists in “%s”."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:173
+#, c-format
+msgid "Replace folder “%s”?"
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:175
+msgid "Replacing it will remove all files in the folder."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:176
+#, c-format
+msgid "A folder with the same name already exists in “%s”."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:182
+#, c-format
+msgid "Replace file “%s”?"
+msgstr "جێگۆڕکێی پەڕگەی “%s”؟"
+
+#: src/nautilus-operations-ui-manager.c:185
+msgid "Replacing it will overwrite its content."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:189
+#, c-format
+msgid "An older file with the same name already exists in “%s”."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:194
+#, c-format
+msgid "A newer file with the same name already exists in “%s”."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:199
+#, c-format
+msgid "Another file with the same name already exists in “%s”."
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:274
+#: src/resources/ui/nautilus-properties-window.ui:279
+msgid "Original folder"
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:275
+#: src/nautilus-operations-ui-manager.c:307
+msgid "Contents:"
+msgstr "ناوەڕۆک:"
+
+#: src/nautilus-operations-ui-manager.c:279
+msgid "Original file"
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:280
+#: src/nautilus-operations-ui-manager.c:312
+msgid "Size:"
+msgstr "قەبارە:"
+
+#: src/nautilus-operations-ui-manager.c:285
+#: src/nautilus-operations-ui-manager.c:317
+msgid "Type:"
+msgstr "جۆر:"
+
+#: src/nautilus-operations-ui-manager.c:288
+#: src/nautilus-operations-ui-manager.c:320
+msgid "Last modified:"
+msgstr "دوواـدەستکاریکراو"
+
+#: src/nautilus-operations-ui-manager.c:306
+msgid "Merge with"
+msgstr "تێهەڵکێشی بکە لەگەڵ"
+
+#: src/nautilus-operations-ui-manager.c:306
+#: src/nautilus-operations-ui-manager.c:311
+msgid "Replace with"
+msgstr "جێگۆڕکێی پێبکە لەگەڵ"
+
+#: src/nautilus-operations-ui-manager.c:360
+msgid "Merge"
+msgstr "تێهەڵکێش"
+
+#: src/nautilus-operations-ui-manager.c:384
+msgid "Merge Folder"
+msgstr "بوخچە تێهەڵکێش بکە"
+
+#: src/nautilus-operations-ui-manager.c:385
+#: src/nautilus-operations-ui-manager.c:390
+msgid "File and Folder conflict"
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:391
+msgid "File conflict"
+msgstr ""
+
+#: src/nautilus-operations-ui-manager.c:533
+msgid ""
+"Password-protected archives are not yet supported. This list contains "
+"applications that can open the archive."
+msgstr ""
+
+#. Translators: This is the label used in the pathbar when seeing
+#. * the root directory (also known as /)
+#: src/nautilus-pathbar.c:316 src/gtk/nautilusgtkplacesview.c:1121
+msgid "Computer"
+msgstr "کۆمپیوتەر"
+
+#. Translators: This is the filesystem root directory (also known
+#. * as /) when seen as administrator
+#: src/nautilus-pathbar.c:323
+msgid "Administrator Root"
+msgstr ""
+
+#. Translators: this is referred to captions under icons.
+#. Translators: this is referred to the permissions
+#. * the user has in a directory.
+#.
+#: src/nautilus-preferences-window.c:153 src/nautilus-properties-window.c:3702
+#: src/nautilus-properties-window.c:3732
+msgid "None"
+msgstr "هیج"
+
+#: src/nautilus-preferences-window.c:367
+#, c-format
+msgid "%d MB"
+msgstr ""
+
+#: src/nautilus-program-choosing.c:379
+msgid "Sorry, but you cannot execute commands from a remote site."
+msgstr ""
+
+#: src/nautilus-program-choosing.c:380
+msgid "This is disabled due to security considerations."
+msgstr ""
+
+#: src/nautilus-program-choosing.c:392 src/nautilus-program-choosing.c:469
+#: src/nautilus-properties-window.c:2722
+msgid "There was an error launching the application."
+msgstr ""
+
+#. all files are non-local
+#. some files are non-local
+#: src/nautilus-program-choosing.c:421 src/nautilus-program-choosing.c:433
+msgid "This drop target only supports local files."
+msgstr ""
+
+#: src/nautilus-program-choosing.c:422
+msgid ""
+"To open non-local files copy them to a local folder and then drop them again."
+msgstr ""
+
+#: src/nautilus-program-choosing.c:434
+msgid ""
+"To open non-local files copy them to a local folder and then drop them "
+"again. The local files you dropped have already been opened."
+msgstr ""
+
+#: src/nautilus-program-choosing.c:468
+msgid "Details: "
+msgstr "زانیاری زیاتر:"
+
+#: src/nautilus-progress-info.c:306
+msgid "Canceled"
+msgstr "پوچەڵکرایەوە"
+
+#: src/nautilus-progress-info.c:353 src/nautilus-progress-info.c:374
+msgid "Preparing"
+msgstr "ئامادەکردن"
+
+#: src/nautilus-progress-persistence-handler.c:106
+#: src/nautilus-progress-persistence-handler.c:146
+msgid "File Operations"
+msgstr ""
+
+#: src/nautilus-progress-persistence-handler.c:108
+msgid "Show Details"
+msgstr "زانیاری پیشان بدە"
+
+#: src/nautilus-progress-persistence-handler.c:111
+#, c-format
+msgid "%'d file operation active"
+msgid_plural "%'d file operations active"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-progress-persistence-handler.c:148
+msgid "All file operations have been successfully completed"
+msgstr ""
+
+#: src/nautilus-properties-window.c:549
+msgid "You cannot assign more than one custom icon at a time!"
+msgstr ""
+
+#: src/nautilus-properties-window.c:550
+msgid "Please drop just one image to set a custom icon."
+msgstr ""
+
+#: src/nautilus-properties-window.c:567
+msgid "The file that you dropped is not local."
+msgstr ""
+
+#: src/nautilus-properties-window.c:568 src/nautilus-properties-window.c:575
+msgid "You can only use local images as custom icons."
+msgstr ""
+
+#: src/nautilus-properties-window.c:574
+msgid "The file that you dropped is not an image."
+msgstr ""
+
+#: src/nautilus-properties-window.c:660
+#: src/resources/ui/nautilus-properties-window.ui:82
+msgid "_Name"
+msgid_plural "_Names"
+msgstr[0] "_ناو"
+msgstr[1] "ناو"
+
+#: src/nautilus-properties-window.c:904
+#, c-format
+msgid "Properties"
+msgstr "تایبەتمەندی"
+
+#. To translators: %s is the name of the folder.
+#: src/nautilus-properties-window.c:917
+#, c-format
+msgctxt "folder"
+msgid "%s Properties"
+msgstr "%s تایبەتمەندییەکان"
+
+#. To translators: %s is the name of the file.
+#: src/nautilus-properties-window.c:922
+#, c-format
+msgctxt "file"
+msgid "%s Properties"
+msgstr "%s تایبەتمەندییەکان"
+
+#: src/nautilus-properties-window.c:1387
+#, c-format
+msgctxt "MIME type description (MIME type)"
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: src/nautilus-properties-window.c:1457
+msgid "Cancel Group Change?"
+msgstr "پاشگازبونەوە لە گۆڕینی گرووپ؟"
+
+#: src/nautilus-properties-window.c:1837
+msgid "Cancel Owner Change?"
+msgstr "پاشگەزبوونەوە لە گۆڕینی خاوەندارێتی؟"
+
+#: src/nautilus-properties-window.c:2175
+msgid "nothing"
+msgstr "هیچ"
+
+#: src/nautilus-properties-window.c:2179
+msgid "unreadable"
+msgstr "ناخوێندرێتەوە"
+
+#: src/nautilus-properties-window.c:2191
+#, c-format
+msgid "%'d item, with size %s"
+msgid_plural "%'d items, totalling %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-properties-window.c:2201
+msgid "(some contents unreadable)"
+msgstr ""
+
+#: src/nautilus-properties-window.c:2721
+#, c-format
+msgid "Details: %s"
+msgstr "زانیاری زیاتر: %s"
+
+#. translators: this gets concatenated to "no read",
+#. * "no access", etc. (see following strings)
+#.
+#: src/nautilus-properties-window.c:3604 src/nautilus-properties-window.c:3619
+#: src/nautilus-properties-window.c:3636
+msgid "no "
+msgstr "نەخێر "
+
+#: src/nautilus-properties-window.c:3608
+msgid "list"
+msgstr "لیستە"
+
+#: src/nautilus-properties-window.c:3612
+msgid "read"
+msgstr "خوێندنەوە"
+
+#: src/nautilus-properties-window.c:3623
+msgid "create/delete"
+msgstr "دروستکردن/سڕینەوە"
+
+#: src/nautilus-properties-window.c:3627
+msgid "write"
+msgstr "نووسین"
+
+#: src/nautilus-properties-window.c:3638
+msgid "access"
+msgstr "چونەناو "
+
+#: src/nautilus-properties-window.c:3709
+msgid "List files only"
+msgstr "تەنها پەڕگەکان لیستە بکە"
+
+#: src/nautilus-properties-window.c:3715
+msgid "Access files"
+msgstr "چونەناوی پەڕگەکان"
+
+#: src/nautilus-properties-window.c:3721
+msgid "Create and delete files"
+msgstr "دروستکردن و سڕینەوەی پەڕگەکان"
+
+#: src/nautilus-properties-window.c:3739
+msgid "Read-only"
+msgstr "تەنها خوێندنەوە"
+
+#: src/nautilus-properties-window.c:3745
+msgid "Read and write"
+msgstr "خوێندنەوە و دەستکاریکردن"
+
+#: src/nautilus-properties-window.c:4293
+#, c-format
+msgid "The permissions of “%s” could not be determined."
+msgstr ""
+
+#: src/nautilus-properties-window.c:4547
+#, c-format
+msgid "Error while adding “%s”: %s"
+msgstr ""
+
+#: src/nautilus-properties-window.c:4549
+msgid "Could not add application"
+msgstr ""
+
+#: src/nautilus-properties-window.c:4582
+msgid "Could not forget association"
+msgstr ""
+
+#: src/nautilus-properties-window.c:4607
+msgid "Forget association"
+msgstr ""
+
+#: src/nautilus-properties-window.c:4646
+#, c-format
+msgid "Error while setting “%s” as default application: %s"
+msgstr ""
+
+#: src/nautilus-properties-window.c:4648
+msgid "Could not set as default"
+msgstr ""
+
+#. Translators: the %s here is a file extension
+#: src/nautilus-properties-window.c:4731
+#, c-format
+msgid "%s document"
+msgstr ""
+
+#. Translators; %s here is a mime-type description
+#: src/nautilus-properties-window.c:4741
+#, c-format
+msgid "Open all files of type “%s” with"
+msgstr ""
+
+#. Translators: first %s is filename, second %s is mime-type description
+#: src/nautilus-properties-window.c:4750
+#, c-format
+msgid "Select an application to open “%s” and other files of type “%s”"
+msgstr ""
+
+#: src/nautilus-properties-window.c:5223
+msgid "Creating Properties window."
+msgstr "پەنجەریەکی نوێ."
+
+#: src/nautilus-properties-window.c:5485
+msgid "Select Custom Icon"
+msgstr "وێنۆچکەی خوزراو دیاریبکە"
+
+#: src/nautilus-properties-window.c:5487
+msgid "_Revert"
+msgstr "_گێڕانەوە"
+
+#. Open item is always present
+#: src/nautilus-properties-window.c:5489 src/gtk/nautilusgtkplacesview.c:1681
+msgid "_Open"
+msgstr "_کردنەوە"
+
+#: src/nautilus-query.c:539
+#, c-format
+msgid "Search for “%s”"
+msgstr "بگەڕێ بۆ  “%s”"
+
+#: src/nautilus-rename-file-popover-controller.c:381
+msgid "File name"
+msgstr "ناوی پەڕگە"
+
+#: src/nautilus-search-engine.c:353
+msgid "Unable to complete the requested search"
+msgstr ""
+
+#: src/nautilus-search-popover.c:301
+msgid "Show a list to select the date"
+msgstr "لیستە پیشان بدە بۆ دیاریکردنی ڕۆژ "
+
+#: src/nautilus-search-popover.c:307
+#: src/resources/ui/nautilus-search-popover.ui:96
+msgid "Show a calendar to select the date"
+msgstr "ڕۆژژمێر پیشان بدە بۆ دیاریکردنی ڕۆژ"
+
+#. Add the no date filter element first
+#: src/nautilus-search-popover.c:423
+msgid "Any time"
+msgstr "هەرکاتێک"
+
+#. Other types
+#: src/nautilus-search-popover.c:520
+msgid "Other Type…"
+msgstr "جۆری تر..."
+
+#: src/nautilus-search-popover.c:580
+msgid "Select type"
+msgstr "جۆر دیاریبکە"
+
+#: src/nautilus-search-popover.c:584
+msgid "Select"
+msgstr "دیاریبکە"
+
+#: src/nautilus-search-popover.c:669
+#: src/resources/ui/nautilus-search-popover.ui:51
+msgid "Select Dates…"
+msgstr "ڕۆژەکان دیاریبکە ..."
+
+#. trash
+#: src/nautilus-shell-search-provider.c:320 src/nautilus-trash-bar.c:201
+#: src/resources/ui/nautilus-preferences-window.ui:696
+msgid "Trash"
+msgstr "تەنەکەخۆڵ  "
+
+#: src/nautilus-special-location-bar.c:56
+msgid "Put files in this folder to use them as templates for new documents."
+msgstr ""
+
+#: src/nautilus-special-location-bar.c:57
+msgid ""
+"<a href=\"help:gnome-help/files-templates\" title=\"GNOME help for templates"
+"\">Learn more…</a>"
+msgstr ""
+
+#: src/nautilus-special-location-bar.c:63
+msgid "Executable files in this folder will appear in the Scripts menu."
+msgstr ""
+
+#: src/nautilus-toolbar.c:840 src/resources/ui/nautilus-toolbar.ui:396
+msgid "_Undo"
+msgstr "_گەڕانەوە"
+
+#: src/nautilus-toolbar.c:847 src/resources/ui/nautilus-toolbar.ui:410
+msgid "_Redo"
+msgstr "نە_کردن"
+
+#: src/nautilus-trash-bar.c:209
+msgid "_Restore"
+msgstr "_هێنانەوە"
+
+#: src/nautilus-trash-bar.c:212
+msgid "Restore selected items to their original position"
+msgstr "بڕگە دیاریکراوەکان بهێنەوە بۆن شوێنی سەرەتای خۆیان"
+
+#. Translators: "Empty" is an action (for the trash) , not a state
+#: src/nautilus-trash-bar.c:216
+msgid "_Empty"
+msgstr "_بەتاڵ"
+
+#: src/nautilus-trash-bar.c:219
+msgid "Delete all items in the Trash"
+msgstr "هەموو بڕگەکان بسڕەوە لە ناو تەنەکە خۆڵ"
+
+#: src/nautilus-ui-utilities.c:186
+#, c-format
+msgid "Since %d day ago"
+msgid_plural "Since %d days ago"
+msgstr[0] "%d ڕۆژ پێش ئێستا"
+msgstr[1] "%d ڕۆژ پێش ئێستا"
+
+#: src/nautilus-ui-utilities.c:187
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "‫%d ڕۆژ پێش ئێستا"
+msgstr[1] "‏‫%d ڕۆژ پێش ئێس"
+
+#: src/nautilus-ui-utilities.c:193
+#, c-format
+msgid "Since last week"
+msgid_plural "Since %d weeks ago"
+msgstr[0] "لە هەفتەی پێشووەوە"
+msgstr[1] "لە  %d  هەفتەی پێشووەوە"
+
+#: src/nautilus-ui-utilities.c:194
+#, c-format
+msgid "Last week"
+msgid_plural "%d weeks ago"
+msgstr[0] "هەفتەی پێشوو"
+msgstr[1] "%d هەفتە پێش ئێستا"
+
+#: src/nautilus-ui-utilities.c:200
+#, c-format
+msgid "Since last month"
+msgid_plural "Since %d months ago"
+msgstr[0] "لە مانگی پێشووەوە"
+msgstr[1] "لە %d مانگی پێشووەوە"
+
+#: src/nautilus-ui-utilities.c:201
+#, c-format
+msgid "Last month"
+msgid_plural "%d months ago"
+msgstr[0] "مانگی پێشوو"
+msgstr[1] " %d مانگ پێش ئێستا"
+
+#: src/nautilus-ui-utilities.c:206
+#, c-format
+msgid "Since last year"
+msgid_plural "Since %d years ago"
+msgstr[0] "لە ساڵی پێشووەوە"
+msgstr[1] "لە %d ساڵی پێشووەوە"
+
+#: src/nautilus-ui-utilities.c:207
+#, c-format
+msgid "Last year"
+msgid_plural "%d years ago"
+msgstr[0] "ساڵی پێشوو"
+msgstr[1] "%d ساڵ پێش ئێستا "
+
+#: src/nautilus-view.c:154
+msgid "Show grid"
+msgstr "پیشاندانی چوارخانەی"
+
+#: src/nautilus-view.c:158
+msgid "Show list"
+msgstr "لیستە پیشان بدە"
+
+#: src/nautilus-view.c:162
+msgid "Show List"
+msgstr "لیستە پیشان بدە"
+
+#: src/nautilus-window.c:192 src/resources/ui/nautilus-properties-window.ui:251
+msgid "Parent folder"
+msgstr "بوخچەی سەرەتا"
+
+#: src/nautilus-window.c:194
+msgid "New tab"
+msgstr "بازدەرێکی نوێ"
+
+#: src/nautilus-window.c:195
+msgid "Close current view"
+msgstr "پیشاندانی ئێستا دابخە"
+
+#: src/nautilus-window.c:196
+msgid "Back"
+msgstr "بڕۆدواوە"
+
+#: src/nautilus-window.c:197
+msgid "Forward"
+msgstr "بڕۆ پێشەوە"
+
+#: src/nautilus-window.c:1350
+#: src/resources/ui/nautilus-pathbar-context-menu.ui:14
+msgid "_Properties"
+msgstr "تایبەتمەندی"
+
+#: src/nautilus-window.c:1362
+msgid "_Format…"
+msgstr "_فۆرمات..."
+
+#. Translators: only one item has been deleted and %s is its name.
+#: src/nautilus-window.c:1639
+#, c-format
+msgid "“%s” deleted"
+msgstr "“%s” سڕایەوە"
+
+#. Translators: one or more items might have been deleted, and %d
+#. * is the count.
+#: src/nautilus-window.c:1646
+#, c-format
+msgid "%d file deleted"
+msgid_plural "%d files deleted"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: one item has been unstarred and %s is its name.
+#: src/nautilus-window.c:1667
+#, c-format
+msgid "“%s” unstarred"
+msgstr ""
+
+#. Translators: one or more items have been unstarred, and %d
+#. * is the count.
+#: src/nautilus-window.c:1673
+#, c-format
+msgid "%d file unstarred"
+msgid_plural "%d files unstarred"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/nautilus-window.c:1811
+#, c-format
+msgid "Open %s"
+msgstr "“%s” بکەرەوە"
+
+#: src/nautilus-window.c:1889
+msgid "_New Tab"
+msgstr "_بازدەرێکی نوێ"
+
+#: src/nautilus-window.c:1899
+msgid "Move Tab _Left"
+msgstr ""
+
+#: src/nautilus-window.c:1907
+msgid "Move Tab _Right"
+msgstr "بازدەر ببە لای _ڕاست"
+
+#: src/nautilus-window.c:1918
+msgid "_Close Tab"
+msgstr "_بازدەر دابخە"
+
+#: src/nautilus-window.c:3002
+msgid "Access and organize your files"
+msgstr "چونەناو و ڕێکخستنی پەڕگەکانت"
+
+#. Translators should localize the following string
+#. * which will be displayed at the bottom of the about
+#. * box to give credit to the translator(s).
+#.
+#: src/nautilus-window.c:3013
+msgid "translator-credits"
+msgstr "وەرگێڕەکان"
+
+#: src/nautilus-window-slot.c:1168
+msgid "Searching locations only"
+msgstr "گەڕان تەنها بۆ شوێن"
+
+#: src/nautilus-window-slot.c:1172
+msgid "Searching network locations only"
+msgstr "گەڕان تەنها بۆ شوێنی ڕایەڵە"
+
+#: src/nautilus-window-slot.c:1177
+msgid "Remote location — only searching the current folder"
+msgstr ""
+
+#: src/nautilus-window-slot.c:1181
+msgid "Only searching the current folder"
+msgstr ""
+
+#: src/nautilus-window-slot.c:1704
+msgid "Unable to display the contents of this folder."
+msgstr ""
+
+#: src/nautilus-window-slot.c:1708
+msgid "This location doesn’t appear to be a folder."
+msgstr ""
+
+#: src/nautilus-window-slot.c:1717
+msgid ""
+"Unable to find the requested file. Please check the spelling and try again."
+msgstr ""
+
+#: src/nautilus-window-slot.c:1726
+#, c-format
+msgid "“%s” locations are not supported."
+msgstr "“%s”  شوێنە پشتیگری ناکرێت."
+
+#: src/nautilus-window-slot.c:1731
+msgid "Unable to handle this kind of location."
+msgstr ""
+
+#: src/nautilus-window-slot.c:1739
+msgid "Unable to access the requested location."
+msgstr ""
+
+#: src/nautilus-window-slot.c:1745
+msgid "Don’t have permission to access the requested location."
+msgstr ""
+
+#. This case can be hit for user-typed strings like "foo" due to
+#. * the code that guesses web addresses when there's no initial "/".
+#. * But this case is also hit for legitimate web addresses when
+#. * the proxy is set up wrong.
+#.
+#: src/nautilus-window-slot.c:1756
+msgid ""
+"Unable to find the requested location. Please check the spelling or the "
+"network settings."
+msgstr ""
+
+#. This case can be hit when server application is not installed
+#. * or is inactive in the system user is trying to connect to.
+#.
+#: src/nautilus-window-slot.c:1765
+msgid ""
+"The server has refused the connection. Typically this means that the "
+"firewall is blocking access or that the remote service is not running."
+msgstr ""
+
+#: src/nautilus-window-slot.c:1784
+#, c-format
+msgid "Unhandled error message: %s"
+msgstr ""
+
+#: src/nautilus-window-slot.c:1959
+#, c-format
+msgid "Unable to load location"
+msgstr ""
+
+#: src/nautilus-x-content-bar.c:141
+msgid "Open with:"
+msgstr "بیکەرەوە لەڕێگەی:"
+
+#: src/resources/gtk/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "General"
+msgstr "گشتی"
+
+#: src/resources/gtk/help-overlay.ui:17
+msgctxt "shortcut window"
+msgid "New window"
+msgstr "پەنجەرەیەکی نوێ"
+
+#: src/resources/gtk/help-overlay.ui:24
+msgctxt "shortcut window"
+msgid "Close window or tab"
+msgstr "پەنجەرە یا نازدەر دابخە"
+
+#: src/resources/gtk/help-overlay.ui:31
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "دەرچوون"
+
+#: src/resources/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "گەڕان"
+
+#: src/resources/gtk/help-overlay.ui:45
+msgctxt "shortcut window"
+msgid "Bookmark current location"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:52
+msgctxt "shortcut window"
+msgid "Show help"
+msgstr "یارمەتی پێشان بدە"
+
+#: src/resources/gtk/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "Shortcuts"
+msgstr "قەدبڕ"
+
+#: src/resources/gtk/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Undo"
+msgstr "گەڕانەوە"
+
+#: src/resources/gtk/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Redo"
+msgstr "چوونەپێش"
+
+#: src/resources/gtk/help-overlay.ui:82
+msgctxt "shortcut window"
+msgid "Opening"
+msgstr "کردنەوە"
+
+#: src/resources/gtk/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Open"
+msgstr "کردنەوە"
+
+#: src/resources/gtk/help-overlay.ui:93
+msgctxt "shortcut window"
+msgid "Open in new tab"
+msgstr "بازدەرێکی نوێ بکەرەوە"
+
+#: src/resources/gtk/help-overlay.ui:100
+msgctxt "shortcut window"
+msgid "Open in new window"
+msgstr "پەنجەریەکی نوێ بکەرەوە"
+
+#: src/resources/gtk/help-overlay.ui:107
+msgctxt "shortcut window"
+msgid "Open item location (search and recent only)"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:114
+msgctxt "shortcut window"
+msgid "Open file and close window"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:121
+msgctxt "shortcut window"
+msgid "Open with default application"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:130
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "بازدەر"
+
+#: src/resources/gtk/help-overlay.ui:134
+msgctxt "shortcut window"
+msgid "New tab"
+msgstr "بازدەرێکی نوێ"
+
+#: src/resources/gtk/help-overlay.ui:141
+msgctxt "shortcut window"
+msgid "Go to previous tab"
+msgstr "بگەڕێوە بۆ بازدەری پێشوو"
+
+#: src/resources/gtk/help-overlay.ui:148
+msgctxt "shortcut window"
+msgid "Go to next tab"
+msgstr "بچۆ بۆ بازدەری دوواتر"
+
+#: src/resources/gtk/help-overlay.ui:155
+msgctxt "shortcut window"
+msgid "Open tab"
+msgstr "بازدەر بکەرەوە"
+
+#: src/resources/gtk/help-overlay.ui:162
+msgctxt "shortcut window"
+msgid "Move tab left"
+msgstr "بازدەر بگوێزەوە بۆ لای چەپ"
+
+#: src/resources/gtk/help-overlay.ui:169
+msgctxt "shortcut window"
+msgid "Move tab right"
+msgstr "بازدەر بگوێزەوە بۆ لای ڕاست"
+
+#: src/resources/gtk/help-overlay.ui:176
+msgctxt "shortcut window"
+msgid "Restore tab"
+msgstr "بازدەر بهێنەوە"
+
+#: src/resources/gtk/help-overlay.ui:185
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "ڕێدۆزی"
+
+#: src/resources/gtk/help-overlay.ui:189
+msgctxt "shortcut window"
+msgid "Go back"
+msgstr "بڕۆدواوە"
+
+#: src/resources/gtk/help-overlay.ui:196
+msgctxt "shortcut window"
+msgid "Go forward"
+msgstr "بڕۆ پێشەوە"
+
+#: src/resources/gtk/help-overlay.ui:203
+msgctxt "shortcut window"
+msgid "Go up"
+msgstr "بڕۆ سەرەوە"
+
+#: src/resources/gtk/help-overlay.ui:210
+msgctxt "shortcut window"
+msgid "Go down"
+msgstr "بڕۆ خوارەوە"
+
+#: src/resources/gtk/help-overlay.ui:217
+msgctxt "shortcut window"
+msgid "Go to home folder"
+msgstr "بڕۆ بۆ بوخچەی ماڵەوە"
+
+#: src/resources/gtk/help-overlay.ui:224
+msgctxt "shortcut window"
+msgid "Enter location"
+msgstr "شوێن بنووسە"
+
+#: src/resources/gtk/help-overlay.ui:231
+msgctxt "shortcut window"
+msgid "Location bar with root location"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:238
+msgctxt "shortcut window"
+msgid "Location bar with home location"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:247
+msgctxt "shortcut window"
+msgid "View"
+msgstr "پیشاندان"
+
+#: src/resources/gtk/help-overlay.ui:251
+msgctxt "shortcut window"
+msgid "Zoom in"
+msgstr "نزیکردنەوە"
+
+#: src/resources/gtk/help-overlay.ui:258
+msgctxt "shortcut window"
+msgid "Zoom out"
+msgstr "دوورکردنەوە"
+
+#: src/resources/gtk/help-overlay.ui:265
+msgctxt "shortcut window"
+msgid "Reset zoom"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:272
+msgctxt "shortcut window"
+msgid "Refresh view"
+msgstr "نوێکردنەوەی پیشاندان"
+
+#: src/resources/gtk/help-overlay.ui:279
+msgctxt "shortcut window"
+msgid "Show/hide hidden files"
+msgstr "پیشاندان/شاردنەوە پەەڕگە شاراوەکان"
+
+#: src/resources/gtk/help-overlay.ui:286
+msgctxt "shortcut window"
+msgid "Show/hide sidebar"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:293
+msgctxt "shortcut window"
+msgid "Show/hide action menu"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:300
+msgctxt "shortcut window"
+msgid "List view"
+msgstr "پیشاندانی لیستەیی"
+
+#: src/resources/gtk/help-overlay.ui:307
+msgctxt "shortcut window"
+msgid "Grid view"
+msgstr "پیشاندانی چوارخانەی"
+
+#: src/resources/gtk/help-overlay.ui:316
+msgctxt "shortcut window"
+msgid "Editing"
+msgstr "دەستکاریکردن"
+
+#: src/resources/gtk/help-overlay.ui:320
+msgctxt "shortcut window"
+msgid "Create folder"
+msgstr "دروستکردنی بوخچە"
+
+#: src/resources/gtk/help-overlay.ui:327
+msgctxt "shortcut window"
+msgid "Rename"
+msgstr "ناولێنان"
+
+#: src/resources/gtk/help-overlay.ui:334
+msgctxt "shortcut window"
+msgid "Move to trash"
+msgstr "بیگوازەوە بۆ تەنەکەخۆڵ"
+
+#: src/resources/gtk/help-overlay.ui:341
+msgctxt "shortcut window"
+msgid "Delete permanently"
+msgstr "سڕینەوەی هەمیشەیی"
+
+#: src/resources/gtk/help-overlay.ui:348
+msgctxt "shortcut window"
+msgid "Create link to copied item"
+msgstr "دروستکردنی بەستەر بۆ پەڕگەی لەبەرگیراو"
+
+#: src/resources/gtk/help-overlay.ui:355
+msgctxt "shortcut window"
+msgid "Create link to selected item"
+msgstr "دروستکردنی بەستەر بۆ پەڕگەی دیاریکراو"
+
+#: src/resources/gtk/help-overlay.ui:362
+msgctxt "shortcut window"
+msgid "Cut"
+msgstr "بڕین"
+
+#: src/resources/gtk/help-overlay.ui:369
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "لەبەرگرتنەوە"
+
+#: src/resources/gtk/help-overlay.ui:376
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "لکاندن"
+
+#: src/resources/gtk/help-overlay.ui:383
+msgctxt "shortcut window"
+msgid "Select all"
+msgstr "هەمووی دیاریبکە"
+
+#: src/resources/gtk/help-overlay.ui:390
+msgctxt "shortcut window"
+msgid "Invert selection"
+msgstr "دیاریکردن بگەڕینەوە"
+
+#: src/resources/gtk/help-overlay.ui:397
+msgctxt "shortcut window"
+msgid "Select items matching"
+msgstr ""
+
+#: src/resources/gtk/help-overlay.ui:404
+msgctxt "shortcut window"
+msgid "Show item properties"
+msgstr "تایبەتمەندی بڕگە پیشان بدە"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:6
+msgid "Automatic Numbers"
+msgstr "ژمارەی خۆکار"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:8
+msgid "1, 2, 3, 4"
+msgstr "١،٢،٣"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:12
+msgid "01, 02, 03, 04"
+msgstr "٠١،٠٢،٠٣"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:16
+msgid "001, 002, 003, 004"
+msgstr "٠٠١،٠٠٢،٠٠٣"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:21
+msgid "Metadata"
+msgstr "مێتاداتا"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:23
+msgid "Creation Date"
+msgstr "ڕۆژی دروستکردن"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:33
+msgid "Season Number"
+msgstr "ژمارەی دانیشتن"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:38
+msgid "Episode Number"
+msgstr "ژمارەی زنجیرە"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:43
+msgid "Track Number"
+msgstr "ژمارەی تراک"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:48
+msgid "Artist Name"
+msgstr "ناوی هونەرمەند"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:58
+msgid "Album Name"
+msgstr "ناوی ئەلبوم"
+
+#: src/resources/ui/nautilus-batch-rename-dialog-menu.ui:65
+msgid "Original File Name"
+msgstr "ناوی پەڕگە بنەڕەتی"
+
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:20
+#: src/resources/ui/nautilus-rename-file-popover.ui:48
+msgid "_Rename"
+msgstr "ناولێنان"
+
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:55
+msgid "Rename _using a template"
+msgstr ""
+
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:66
+msgid "Find and replace _text"
+msgstr "دۆزینەوە و گۆڕینی _دەق"
+
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:139
+msgid "Add"
+msgstr "زیادکردن"
+
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:169
+msgid "Automatic Numbering Order"
+msgstr "ڕێکخستنی ژمارەیی خۆکارانە"
+
+#. Translators: This is a noun, not a verb
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:214
+msgid "Format"
+msgstr "فۆرمات"
+
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:231
+msgid "Existing Text"
+msgstr "دەقی بەردەست"
+
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:260
+msgid "Replace With"
+msgstr "جێگۆڕکێی پێبکە لەگەڵ"
+
+#: src/resources/ui/nautilus-batch-rename-dialog.ui:287
+msgctxt "title"
+msgid "Replace"
+msgstr "جێگۆڕکێ"
+
+#: src/resources/ui/nautilus-compress-dialog.ui:5
+msgid "Create Archive"
+msgstr "ئەرشیف درووستبکە"
+
+#: src/resources/ui/nautilus-compress-dialog.ui:22
+msgid "Archive name"
+msgstr "ناوی ئەرشیف"
+
+#: src/resources/ui/nautilus-compress-dialog.ui:118
+msgid "Compatible with all operating systems."
+msgstr "گونجاوە لەگەڵ هەموو سیستمەکارپێکراوەکان."
+
+#: src/resources/ui/nautilus-compress-dialog.ui:131
+msgid "Smaller archives but Linux and Mac only."
+msgstr "ئەرشێفی بچووکتر بەڵام تەنها لینوکس و ماک."
+
+#: src/resources/ui/nautilus-compress-dialog.ui:144
+msgid "Smaller archives but must be installed on Windows and Mac."
+msgstr "ئەرشیفی بچوکتر بەڵام دەبێت دابمەزرێت لەسەر ویندۆز و ماک."
+
+#: src/resources/ui/nautilus-file-properties-change-permissions.ui:5
+msgid "Change Permissions for Enclosed Files"
+msgstr ""
+
+#: src/resources/ui/nautilus-file-properties-change-permissions.ui:20
+msgid "C_hange"
+msgstr "گۆڕ_ین"
+
+#: src/resources/ui/nautilus-file-properties-change-permissions.ui:162
+#: src/resources/ui/nautilus-properties-window.ui:1036
+msgid "Others"
+msgstr "هیتر"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:5
+msgid "New _Folder"
+msgstr "_بوخچەی نوێ"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:9
+msgid "New _Document"
+msgstr "بەڵگەنامەیەکی _نوێ"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:14
+msgid "Add to _Bookmarks"
+msgstr "زیادکردن بۆ _دڵخوازەکان"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:19
+#: src/resources/ui/nautilus-files-view-context-menus.ui:128
+msgid "Create _Link"
+msgstr "بەستەر_دروستبکە"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:26
+msgid "_Paste"
+msgstr "_لكاندن"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:30
+msgid "Select _All"
+msgstr "هەمووی _دیاریبکە"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:38
+#: src/resources/ui/nautilus-files-view-context-menus.ui:232
+msgid "P_roperties"
+msgstr "تا_یبەتمەندی"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:50
+msgid "_Scripts"
+msgstr "_نووسراو"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:55
+msgid "_Open Scripts Folder"
+msgstr "_کردنەوەی بوخچەی نووسراو"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:63
+msgid "_Open Item Location"
+msgstr "_کردنەوەی شوێنی بڕگە"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:68
+msgid "Open In New _Tab"
+msgstr "لە بازدەرێکی_نوێ بیکەرەوە"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:73
+msgid "Open In New _Window"
+msgstr "لە پەنجەریەکی_نوێ بیکەرەوە"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:80
+msgid "Open With Other _Application"
+msgstr "کردنەوەی لە ڕێگەی _نەرمەواڵەی تر"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:87
+#: src/gtk/nautilusgtkplacesview.c:1736
+msgid "_Mount"
+msgstr "_گرێدان"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:92
+#: src/gtk/nautilusgtkplacesview.c:1726
+msgid "_Unmount"
+msgstr "_گرێنەدان"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:97
+msgid "_Eject"
+msgstr "_دەرکردن"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:107
+msgid "_Stop"
+msgstr "_وەستاندن"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:112
+msgid "_Detect Media"
+msgstr "_دۆزینەوە میدیا"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:119
+msgid "Cu_t"
+msgstr "بڕ_ین"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:123
+msgid "_Copy"
+msgstr "لەبەرگرتنەوە"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:134
+msgid "_Paste Into Folder"
+msgstr "_لکاندن بۆ بوخچە"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:141
+msgid "Move to…"
+msgstr "بیگوازەوە بۆ ..."
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:145
+msgid "Copy to…"
+msgstr "لەبەریبگرەوە بۆ ..."
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:156
+msgid "_Delete from Trash"
+msgstr "_سڕینەوە لە تەنەکەخۆڵ"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:161
+#: src/resources/ui/nautilus-files-view-context-menus.ui:166
+msgid "_Delete Permanently"
+msgstr "_سڕینەوەی هەمیشەیی"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:171
+msgid "_Restore From Trash"
+msgstr "_هێنانەوە لە تەنەکەخۆڵ"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:178
+msgid "Rena_me…"
+msgstr "ناوگۆ_ڕین..."
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:184
+msgid "Set As Wallpaper"
+msgstr "بیکە وێنەی پاشبنەما"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:191
+msgid "_Remove from Recent"
+msgstr "_سڕینەوە لە دووا کردارەکان"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:198
+msgid "_Extract Here"
+msgstr "_لێرە دەریبهێنە"
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:203
+msgid "E_xtract to…"
+msgstr "دە_ریبکە بۆ..."
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:208
+msgid "C_ompress…"
+msgstr "پە_ستاندن..."
+
+#: src/resources/ui/nautilus-files-view-context-menus.ui:215
+msgid "Tags"
+msgstr "تاگەکان"
+
+#. Marks a file as starred (starred)
+#: src/resources/ui/nautilus-files-view-context-menus.ui:220
+msgctxt "menu item"
+msgid "Star"
+msgstr "ئەستێرە"
+
+#. Unmarks a file as starred (starred)
+#: src/resources/ui/nautilus-files-view-context-menus.ui:225
+msgctxt "menu item"
+msgid "Unstar"
+msgstr "لابردنی ئەستێرە"
+
+#: src/resources/ui/nautilus-folder-is-empty.ui:31
+msgid "Folder is Empty"
+msgstr "بوخچە بەتاڵە"
+
+#: src/resources/ui/nautilus-no-search-results.ui:31
+msgid "No Results Found"
+msgstr "هیچ ئەنجامێک نەدۆزرایەوە"
+
+#: src/resources/ui/nautilus-no-search-results.ui:46
+#: src/gtk/nautilusgtkplacesview.ui:274
+msgid "Try a different search"
+msgstr "گەڕانێکی نوێ ئەنجام بدە"
+
+#: src/resources/ui/nautilus-pathbar-context-menu.ui:6
+#: src/gtk/nautilusgtkplacesview.c:1702
+msgid "Open in New _Window"
+msgstr "لە پەنجەریەکی_نوێ بیکەرەوە"
+
+#: src/resources/ui/nautilus-pathbar-context-menu.ui:10
+#: src/gtk/nautilusgtkplacesview.c:1691
+msgid "Open in New _Tab"
+msgstr "لە بازدەرێکی_نوێ بیکەرەوە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:13
+msgid "Preferences"
+msgstr "هەڵبژاردەکان"
+
+#: src/resources/ui/nautilus-preferences-window.ui:71
+msgid "_Show sidebar"
+msgstr "_لاتەنیشت پیشان بدە"
+
+#. Translators: a title in the preferences dialog with an option to sort folder before files "Sort folders before files".
+#: src/resources/ui/nautilus-preferences-window.ui:105
+msgctxt "preferences"
+msgid "Sort"
+msgstr "ڕێکخستن"
+
+#: src/resources/ui/nautilus-preferences-window.ui:122
+msgid "Sort _folders before files"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:178
+msgid "Allow folders to be _expanded"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:217
+msgid "Icon View Captions"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:236
+msgid ""
+"Add information to be displayed beneath file and folder names. More "
+"information will appear when zooming closer."
+msgstr ""
+
+#. Translators: This is an ordinal number
+#: src/resources/ui/nautilus-preferences-window.ui:371
+msgctxt "the n-th position of an icon caption"
+msgid "Second"
+msgstr "دووەم"
+
+#. Translators: This is an ordinal number
+#: src/resources/ui/nautilus-preferences-window.ui:389
+msgctxt "the n-th position of an icon caption"
+msgid "Third"
+msgstr "سێهەم"
+
+#. Translators: This is an ordinal number
+#: src/resources/ui/nautilus-preferences-window.ui:407
+msgctxt "the n-th position of an icon caption"
+msgid "First"
+msgstr "یەکەم"
+
+#: src/resources/ui/nautilus-preferences-window.ui:452
+msgid "Views"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:475
+msgid "Open Action"
+msgstr "کردار بکەرەوە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:492
+msgid "_Single click to open items"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:509
+msgid "_Double click to open items"
+msgstr "_جوو کرتە بکە بۆ کردنەوەی بڕگەکە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:549
+msgid "Link Creation"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:566
+msgid "Show action to create symbolic _links"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:605
+msgid "Executable Text Files"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:622
+msgid "_Display them"
+msgstr "_پیشانیان بدە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:639
+msgid "_Run them"
+msgstr "_جێبەجێیان بکە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:656
+msgid "_Ask what to do"
+msgstr "_پرسیاربکە کە چی بکات"
+
+#: src/resources/ui/nautilus-preferences-window.ui:713
+msgid "Ask before _emptying the Trash"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:729
+msgid "Show action to _permanently delete files and folders"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:768
+msgid "Behavior"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:798
+msgid "Choose the order of information to appear in the list view."
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:847
+msgid "List Columns"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:887
+msgid "Search in subfolders:"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:901
+msgid "_On this computer only"
+msgstr "_تەنها لەسەر ئەم کۆمپیوتەرە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:918
+msgid "_All locations"
+msgstr "_هەموو شوێنەکان"
+
+#: src/resources/ui/nautilus-preferences-window.ui:935
+msgid "_Never"
+msgstr "_هیچ کاتێک"
+
+#: src/resources/ui/nautilus-preferences-window.ui:975
+msgid "Thumbnails"
+msgstr "وێنۆچکەکان"
+
+#: src/resources/ui/nautilus-preferences-window.ui:991
+msgid "Show thumbnails:"
+msgstr "وێنۆچکەکان پیشان بدە:"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1005
+msgid "_Files on this computer only"
+msgstr "_تەنها پەڕگەکانی سەر ئەم کۆمپیوتەرە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1022
+msgid "A_ll files"
+msgstr "هە_موو پەڕگەکان"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1039
+msgid "N_ever"
+msgstr "هیچ_کاتێك"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1063
+msgid "Onl_y for files smaller than:"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:1121
+msgid "File count"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:1137
+msgid "Count number of files in folders:"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:1151
+msgid "F_olders on this computer only"
+msgstr "تەنها بوخ_چەی سەر ئەم کۆمپیوتەرە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1168
+msgid "All folder_s"
+msgstr "هەموو بوخچە_کان"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1185
+msgid "Ne_ver"
+msgstr "هیچ _کاتێک"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1220
+msgid "Search & Preview"
+msgstr ""
+
+#: src/resources/ui/nautilus-preferences-window.ui:1247
+#: src/resources/ui/nautilus-preferences-window.ui:1295
+#: src/resources/ui/nautilus-preferences-window.ui:1355
+msgid "Always"
+msgstr "هەموو کات"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1250
+#: src/resources/ui/nautilus-preferences-window.ui:1298
+#: src/resources/ui/nautilus-preferences-window.ui:1358
+msgid "Local Files Only"
+msgstr "تەنها پەڕگەی ناوەکی"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1253
+#: src/resources/ui/nautilus-preferences-window.ui:1301
+#: src/resources/ui/nautilus-preferences-window.ui:1361
+msgid "Never"
+msgstr "هیچ کات"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1264
+#: src/resources/ui/nautilus-preferences-window.ui:1338
+msgid "Small"
+msgstr "بچووک"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1267
+#: src/resources/ui/nautilus-preferences-window.ui:1341
+msgid "Standard"
+msgstr "ستاندارد"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1270
+#: src/resources/ui/nautilus-preferences-window.ui:1344
+msgid "Large"
+msgstr "گەورە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1312
+msgid "By Name"
+msgstr "بەپێی ناو"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1315
+msgid "By Size"
+msgstr "بە پێی قەبارە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1318
+msgid "By Type"
+msgstr "بەپێی جۆر"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1321
+msgid "By Modification Date"
+msgstr "بەپێی ئەو ڕۆژەی دەستکاریکراوە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1324
+msgid "By Access Date"
+msgstr "بەپێی ئەو ڕۆژەی چوونەناوی هەبووە"
+
+#: src/resources/ui/nautilus-preferences-window.ui:1327
+msgid "By Trashed Date"
+msgstr "بەپێی ئەو ڕۆژەی کراوەتە تەنەکە خۆڵەوە"
+
+#: src/resources/ui/nautilus-properties-window.ui:160
+msgid "Link target"
+msgstr "بەستەری ئامانج"
+
+#: src/resources/ui/nautilus-properties-window.ui:189
+msgid "Contents"
+msgstr "ناوەڕۆک"
+
+#: src/resources/ui/nautilus-properties-window.ui:307
+msgid "Volume"
+msgstr "پلەی دەنگ"
+
+#: src/resources/ui/nautilus-properties-window.ui:335
+msgid "Trashed on"
+msgstr "سڕاوەتەوە لە"
+
+#: src/resources/ui/nautilus-properties-window.ui:415
+msgid "Free space"
+msgstr "بۆشای بەردەست"
+
+#: src/resources/ui/nautilus-properties-window.ui:519
+msgid "Total capacity"
+msgstr "توانای گشتی"
+
+#: src/resources/ui/nautilus-properties-window.ui:536
+msgid "Filesystem type"
+msgstr "جۆری فایل سیستەم"
+
+#. Refers to the capacity of the filesystem
+#: src/resources/ui/nautilus-properties-window.ui:605
+msgid "used"
+msgstr "بەکارهێنراو"
+
+#. Refers to the capacity of the filesystem
+#: src/resources/ui/nautilus-properties-window.ui:618
+msgid "free"
+msgstr "بەتاڵ"
+
+#: src/resources/ui/nautilus-properties-window.ui:653
+msgid "Open in Disks"
+msgstr "کردنەوە لەڕێگەی پەپکە"
+
+#: src/resources/ui/nautilus-properties-window.ui:729
+msgid "Basic"
+msgstr "سەرەتایی"
+
+#: src/resources/ui/nautilus-properties-window.ui:743
+msgid "You are not the owner, so you cannot change these permissions."
+msgstr "تۆ خاوەنی نیت. بۆیە ناتوانی ئەم دەسەڵاتانە بگۆڕیت."
+
+#: src/resources/ui/nautilus-properties-window.ui:770
+msgid "The permissions of the selected file could not be determined."
+msgstr ""
+
+#: src/resources/ui/nautilus-properties-window.ui:792
+msgid "_Owner"
+msgstr "_خاوەن"
+
+#: src/resources/ui/nautilus-properties-window.ui:842
+#: src/resources/ui/nautilus-properties-window.ui:965
+#: src/resources/ui/nautilus-properties-window.ui:1050
+msgid "Access"
+msgstr "چونەناو و ڕێکخستن"
+
+#: src/resources/ui/nautilus-properties-window.ui:856
+#: src/resources/ui/nautilus-properties-window.ui:979
+#: src/resources/ui/nautilus-properties-window.ui:1064
+msgid "Folder access"
+msgstr "چونەناو بۆ بوخچە"
+
+#: src/resources/ui/nautilus-properties-window.ui:870
+#: src/resources/ui/nautilus-properties-window.ui:993
+#: src/resources/ui/nautilus-properties-window.ui:1078
+msgid "File access"
+msgstr "چونەناو بۆ پەڕگە"
+
+#: src/resources/ui/nautilus-properties-window.ui:913
+msgid "_Group"
+msgstr "_گرووپ"
+
+#: src/resources/ui/nautilus-properties-window.ui:1120
+msgid "Execute"
+msgstr "جێبەجێکردن"
+
+#: src/resources/ui/nautilus-properties-window.ui:1135
+msgid "Security context"
+msgstr ""
+
+#: src/resources/ui/nautilus-properties-window.ui:1165
+msgid "Change Permissions for Enclosed Files…"
+msgstr ""
+
+#: src/resources/ui/nautilus-properties-window.ui:1184
+msgid "Allow _executing file as program"
+msgstr "ڕێگە بدەـجێبەجێبکرێت وەک داوانامە"
+
+#: src/resources/ui/nautilus-properties-window.ui:1310
+msgid "_Add"
+msgstr "_زیادکردن"
+
+#: src/resources/ui/nautilus-properties-window.ui:1324
+msgid "Set as default"
+msgstr ""
+
+#: src/resources/ui/nautilus-properties-window.ui:1352
+msgid "Open With"
+msgstr "بیکەرەوە لەڕێگەی"
+
+#: src/resources/ui/nautilus-search-popover.ui:18
+msgid "When"
+msgstr "چ کاتێ"
+
+#: src/resources/ui/nautilus-search-popover.ui:45
+msgid "Select a date"
+msgstr "ڕۆژ دیاریبکە"
+
+#: src/resources/ui/nautilus-search-popover.ui:67
+msgid "Clear the currently selected date"
+msgstr ""
+
+#: src/resources/ui/nautilus-search-popover.ui:127
+msgid "Since…"
+msgstr ""
+
+#: src/resources/ui/nautilus-search-popover.ui:194
+msgid "Last _modified"
+msgstr "دووا_دەستکاریکراو"
+
+#: src/resources/ui/nautilus-search-popover.ui:211
+msgid "Last _used"
+msgstr "دووا_بەکارهێنراو"
+
+#: src/resources/ui/nautilus-search-popover.ui:240
+msgid "What"
+msgstr "چی"
+
+#: src/resources/ui/nautilus-search-popover.ui:264
+msgid "Which file types will be searched"
+msgstr "چ جۆرە پەڕگەیەک گەڕانی بۆ بکرێت"
+
+#: src/resources/ui/nautilus-search-popover.ui:360
+msgid "Full Text"
+msgstr "هەموو دەقەکە"
+
+#: src/resources/ui/nautilus-search-popover.ui:364
+msgid "Search on the file content and name"
+msgstr ""
+
+#: src/resources/ui/nautilus-search-popover.ui:379
+msgid "File Name"
+msgstr "ناوی پەڕگە"
+
+#: src/resources/ui/nautilus-search-popover.ui:383
+msgid "Search only on the file name"
+msgstr ""
+
+#: src/resources/ui/nautilus-starred-is-empty.ui:31
+msgid "Starred files will appear here"
+msgstr "پەڕگە ئەستێرەکراوەکان لێرە دەردەکەون"
+
+#: src/resources/ui/nautilus-toolbar.ui:49
+msgid "New Tab"
+msgstr "بازدەرێکی نوێ"
+
+#: src/resources/ui/nautilus-toolbar.ui:120
+msgid "Edit"
+msgstr "دەسکاریکردن"
+
+#: src/resources/ui/nautilus-toolbar.ui:133
+msgid "Cut"
+msgstr "بڕین"
+
+#. Translators: This is a verb
+#: src/resources/ui/nautilus-toolbar.ui:157
+msgid "Copy"
+msgstr "لەبەرگرتنەوە"
+
+#: src/resources/ui/nautilus-toolbar.ui:180
+msgid "Paste"
+msgstr "لکاندن"
+
+#: src/resources/ui/nautilus-toolbar.ui:224
+msgid "Select All"
+msgstr "هەمووی دیاریبکە"
+
+#: src/resources/ui/nautilus-toolbar.ui:250
+msgid "Show _Hidden Files"
+msgstr "پەڕگەـشاراوەکان پیشان بدە"
+
+#: src/resources/ui/nautilus-toolbar.ui:265
+msgid "Show _Sidebar"
+msgstr "لاتەنیشت _پیشانبدە"
+
+#: src/resources/ui/nautilus-toolbar.ui:291
+msgid "_Preferences"
+msgstr "_هەڵبژاردەکان"
+
+#: src/resources/ui/nautilus-toolbar.ui:305
+msgid "_Keyboard Shortcuts"
+msgstr "_قەدبڕەکانی تەختەکلیل"
+
+#: src/resources/ui/nautilus-toolbar.ui:319
+msgid "_Help"
+msgstr "_یارمەتی"
+
+#: src/resources/ui/nautilus-toolbar.ui:333
+msgid "_About Files"
+msgstr "_دەربارەی پەڕگەکان"
+
+#: src/resources/ui/nautilus-toolbar.ui:546
+msgid "Go back"
+msgstr "بڕۆدواوە"
+
+#: src/resources/ui/nautilus-toolbar.ui:573
+msgid "Go forward"
+msgstr "بڕۆ پێشەوە"
+
+#: src/resources/ui/nautilus-toolbar.ui:617
+msgid "Show operations"
+msgstr "کارەکان پیشان بدە"
+
+#: src/resources/ui/nautilus-toolbar.ui:656
+msgid "Toggle view"
+msgstr ""
+
+#. “View” is a noun
+#: src/resources/ui/nautilus-toolbar.ui:680
+msgid "View options"
+msgstr "هەڵبژاردنەکانی پیشاندان"
+
+#. Translators: a menu item in a group of sorting options in a toolbar menu, with criterions such as "A-Z" or "Last Modified".
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:33
+msgctxt "menu item"
+msgid "Sort"
+msgstr "ڕێکخستن"
+
+#. This is used to sort by name in the toolbar view menu
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:52
+msgctxt "Sort Criterion"
+msgid "_A-Z"
+msgstr "_ا-ی"
+
+#. This is used to sort by name, in descending order in the toolbar view menu
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:67
+msgctxt "Sort Criterion"
+msgid "_Z-A"
+msgstr ""
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:82
+msgid "Last _Modified"
+msgstr "دوواـدەستکاریکردن"
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:97
+msgid "_First Modified"
+msgstr "_یەکەم دەستکاریکردن"
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:112
+msgid "_Size"
+msgstr "_قەبارە"
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:127
+msgid "_Type"
+msgstr "_جۆر"
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:141
+msgid "Last _Trashed"
+msgstr "کۆتا کراوە _تەنەکەخۆڵەوە"
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:174
+msgid "_Visible Columns…"
+msgstr ""
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:188
+msgid "R_eload"
+msgstr "با_رکردنەوە"
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:201
+msgid "St_op"
+msgstr "بوە_ستە"
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:225
+msgid "Zoom out"
+msgstr "دوورکردنەوە"
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:247
+msgid "Reset zoom"
+msgstr ""
+
+#: src/resources/ui/nautilus-toolbar-view-menu.ui:268
+msgid "Zoom in"
+msgstr "نزیکردنەوە"
+
+#: src/resources/ui/nautilus-trash-is-empty.ui:31
+msgid "Trash is Empty"
+msgstr "تەنەکەخۆڵ بەتاڵە"
+
+#: src/resources/ui/nautilus-window.ui:5
+msgid "_Files"
+msgstr "ـپەڕگەکانی"
+
+#: src/gtk/nautilusgtkplacesview.c:897
+msgid "Searching for network locations"
+msgstr "گەڕان بۆ شوێنی ڕایەڵە"
+
+#: src/gtk/nautilusgtkplacesview.c:904
+msgid "No network locations found"
+msgstr "هیچ شوێنێکی ڕایەڵە نەدۆزرایەوە"
+
+#. Restore from Cancel to Connect
+#: src/gtk/nautilusgtkplacesview.c:1249 src/gtk/nautilusgtkplacesview.ui:317
+msgid "Con_nect"
+msgstr "پەویوەندی _گرتن"
+
+#. if it wasn't cancelled show a dialog
+#: src/gtk/nautilusgtkplacesview.c:1369
+msgid "Unable to unmount volume"
+msgstr ""
+
+#. Allow to cancel the operation
+#: src/gtk/nautilusgtkplacesview.c:1470
+msgid "Cance_l"
+msgstr "هەوڵوەشاندنەو_ە"
+
+#: src/gtk/nautilusgtkplacesview.c:1633
+msgid "AppleTalk"
+msgstr "AppleTalk"
+
+#. Translators: do not translate ftp:// and ftps://
+#: src/gtk/nautilusgtkplacesview.c:1637
+msgid "File Transfer Protocol"
+msgstr "شێوازنامەی گواستنەوەی پەڕگە"
+
+#: src/gtk/nautilusgtkplacesview.c:1637
+msgid "ftp:// or ftps://"
+msgstr "ftp:// یان ftps://"
+
+#: src/gtk/nautilusgtkplacesview.c:1640
+msgid "Network File System"
+msgstr "سیستەمی پەڕگەی ڕایەڵە"
+
+#: src/gtk/nautilusgtkplacesview.c:1643
+msgid "Samba"
+msgstr "سامبا"
+
+#. Translators: do not translate sftp:// and ssh://
+#: src/gtk/nautilusgtkplacesview.c:1647
+msgid "SSH File Transfer Protocol"
+msgstr "شێوازنامەی گواستنەوەی پەڕگەی SSH"
+
+#: src/gtk/nautilusgtkplacesview.c:1647
+msgid "sftp:// or ssh://"
+msgstr "sftp:// یان ssh://"
+
+#. Translators: do not translate dav:// and davs://
+#: src/gtk/nautilusgtkplacesview.c:1651
+msgid "WebDAV"
+msgstr "WebDAV"
+
+#: src/gtk/nautilusgtkplacesview.c:1651
+msgid "dav:// or davs://"
+msgstr "dav:// or davs://"
+
+#: src/gtk/nautilusgtkplacesview.c:1877
+msgid "Unable to get remote server location"
+msgstr ""
+
+#: src/gtk/nautilusgtkplacesview.c:2072 src/gtk/nautilusgtkplacesview.c:2081
+msgid "Networks"
+msgstr "ڕایەڵە"
+
+#: src/gtk/nautilusgtkplacesview.c:2072 src/gtk/nautilusgtkplacesview.c:2081
+msgid "On This Computer"
+msgstr "لەم کۆمپیوتەرەدا"
+
+#. Translators: respectively, free and total space of the drive. The plural form
+#. * should be based on the free space available.
+#. * i.e. 1 GB / 24 GB available.
+#.
+#: src/gtk/nautilusgtkplacesviewrow.c:136
+#, c-format
+msgid "%s / %s available"
+msgid_plural "%s / %s available"
+msgstr[0] "%s / %s بەردەستە"
+msgstr[1] "%s / %s بەردەستە"
+
+#: src/gtk/nautilusgtkplacesviewrow.c:483
+msgid "Disconnect"
+msgstr "بێ پەیوەندیە"
+
+#: src/gtk/nautilusgtkplacesviewrow.c:483
+#: src/gtk/nautilusgtkplacesviewrow.ui:72
+msgid "Unmount"
+msgstr "گرێنەدان"
+
+#: src/gtk/nautilusgtkplacesview.ui:30
+msgid "Server Addresses"
+msgstr "ناونیشانی ڕاژە"
+
+#: src/gtk/nautilusgtkplacesview.ui:43
+msgid ""
+"Server addresses are made up of a protocol prefix and an address. Examples:"
+msgstr ""
+
+#: src/gtk/nautilusgtkplacesview.ui:78
+msgid "Available Protocols"
+msgstr "شێوازنامی بەردەست"
+
+#: src/gtk/nautilusgtkplacesview.ui:92
+msgid "Prefix"
+msgstr "پێشگر"
+
+#. Translators: Server as any successfully connected network address
+#: src/gtk/nautilusgtkplacesview.ui:135
+msgid "No recent servers found"
+msgstr "هیچ ڕاژەیەکی نەدۆزرایەوە"
+
+#: src/gtk/nautilusgtkplacesview.ui:158
+msgid "Recent Servers"
+msgstr "دوواترین ڕاژەکان"
+
+#: src/gtk/nautilusgtkplacesview.ui:261
+msgid "No results found"
+msgstr "هیچ ئەنجامێک نەدۆزرایەوە"
+
+#: src/gtk/nautilusgtkplacesview.ui:307
+msgid "Connect to _Server"
+msgstr "پەیوەندی گرتن بەـڕاژەوە"
+
+#: src/gtk/nautilusgtkplacesview.ui:340
+msgid "Enter server address…"
+msgstr "ناونیشانی ڕاژە بنووسە..."
+
+#~ msgid "Parent folder:"
+#~ msgstr "بوخچەی سەرەتا:"
+
+#~ msgid "Original folder:"
+#~ msgstr "بوخچەی سەرەکی:"
+
+#~ msgid "Accessed:"
+#~ msgstr "چوونەناو:"
+
+#~ msgid "Modified:"
+#~ msgstr "دەستکاریکراوە:"
+
+#~ msgid "Owner:"
+#~ msgstr "خاوەن:"
+
+#~ msgid "Group:"
+#~ msgstr "گرووپ:"
+
+#~ msgid "Others:"
+#~ msgstr "هیتر:"
+
+#~ msgid "New _Folder…"
+#~ msgstr "بوخچەیـنوێ..."

@@ -1,0 +1,4099 @@
+Major Changes in 50.2.2
+=======================
+* Bugfixes:
+- Fix app chooser breaking translation domains (Khalid Abu Shawarib)
+
+Major Changes in 50.2
+=====================
+* Enhancements:
+- Add Lao translation (Saikeo Kavhanxay)
+- Flush search results based on time instead of file count (Khalid Abu Shawarib)
+- Allow opening multiple files with different extensions (pagarao)
+
+* Fixed regressions:
+- Added search entry to applicaton chooser (Khalid Abu Shawarib, Peter Eisenmann)
+
+* Bugfixes:
+- Fix app staying in the background after properties windows are closed (Khalid Abu Shawarib)
+- Fix possible crash with properties window (Khalid Abu Shawarib)
+- Fix thumbnails not appearing in remote locations (Khalid Abu Shawarib)
+- Fix fallback icons not changing size with zoom level (Khalid Abu Shawarib)
+- Fix duplicate conflict dialog when moving files across volumes (Kristóf Széles)
+- Handle trailing '.' character for FAT volumes (iwasMateo)
+- Fix search recursion for directories with no ID (Khalid Abu Shawarib)
+- Fix off-by-one insertion of bookmarks (eric)
+- Fix templates unique naming with a file extension (Khalid Abu Shawarib)
+- Fix a thin line of checker pattern appearing in thumbnails (Khalid Abu Shawarib)
+- Fix opening files with nautilus itself (Khalid Abu Shawarib)
+- Avoid potential crash in list view (Khalid Abu Shawarib)
+
+* Cleanups:
+- Don't create trash monitor when not needed (Ondrej Holy)
+- Correctly clear name-cell callbacks on disposal (Marc Rendiet)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 50.1
+=====================
+* Bugfixes:
+- Fix a crash on empty MIME type (Khalid Abu Shawarib)
+- Fix read-only/not accessible emblems (Peter Eisenmann)
+- Assure view item deduplication on slow machines (Ondrej Holy)
+- Fix error icon size (Khalid Abu Shawarib)
+- Restore default focus for permanent delete dialog (Peter Eisenmann)
+- Autocomplete folders with trailing slash again (Peter Eisenmann)
+- Fix opening folder with many custom icons (Khalid Abu Shawarib)
+- Fix showing properties for encrypted partition (Khalid Abu Shawarib)
+- Fix image rounding (Khalid Abu Shawarib)
+
+* Cleanups:
+- Don't allow editing custom icons for trash or trashed files (Khalid Abu Shawarib)
+- Use GIcon for launch context (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 50.0
+=====================
+* Enhancements:
+- More thumbnailing tests (Khalid Abu Shawarib)
+- Add ARM64 CI pipeline (Khalid Abu Shawarib)
+
+* Bugfixes:
+- Correctly handle canceling archive extraction (Khalid Abu Shawarib)
+
+* Cleanups:
+- Remove last remaining bits of eel library (Khalid Abu Shawarib)
+- Make archive operation tests run reliably (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 50.rc
+======================
+* Enhancements:
+- Add a test for file chooser (Khalid Abu Shawarib)
+- Distinguish automatic and manual file selections (Khalid Abu Shawarib)
+- Avoid unnecessary delay in operation dialogs (parzival, Peter Eisenmann)
+- Add accessible roles to icons (Sergio Costas)
+- Constrain file chooser label to single line (Khalid Abu Shawarib)
+- Add release script (Peter Eisenmann)
+
+* Bugfixes:
+- Query filesystem info async (Khalid Abu Shawarib)
+- Correctly launch files from shell search provider (Khalid Abu Shawarib)
+- Make archive test run reliably (Khalid Abu Shawarib)
+- Fix crash when cancelling file enumeration (Khalid Abu Shawarib)
+- Fix file chooser portal choice states (Khalid Abu Shawarib)
+- Fix potential icon cache crash (Khalid Abu Shawarib)
+- Rework and fix location entry autocompletion functionality broken since beta (Peter Eisenmann)
+- Add glycin fallback for image properties e.g. for svg (Peter Eisenmann)
+- Fix search popover time type setting (Peter Eisenmann)
+- Revert direct calling of callbacks which caused various issues (Peter Eisenmann)
+- Fix timing issue with search result submission (Peter Eisenmann)
+- Make free-floating property windows not block main window (Peter Eisenmann)
+- No checkerboard icon background for multi-file properties (Peter Eisenmann)
+- Fix image properties with recent files (Khalid Abu Shawarib)
+- Don't set file chooser name entry on auto selections (Khalid Abu Shawarib)
+- Make batch rename dialog entries uniform again (Khalid Abu Shawarib)
+
+* Cleanups:
+- Various test adjustments (Khalid Abu Shawarib, Peter Eisenmann)
+- Use AdwDialog:focus-widget (Lukáš Tyrychtr, Peter Eisenmann)
+- Add .editorconfig rules and Thread Sanitizer suppression file (Khalid Abu Shawarib)
+- Rework trash directory empty check (Peter Eisenmann)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 50.beta
+========================
+* Build:
+- Add glycin dependency
+- Add blueprint-compiler dependency
+
+* Enhancements:
+- Move grid view captions to a dedicated dialog in the view menu (Khalid Abu Shawarib)
+- Add button to pop-out properties dialog (Peter Eisenmann)
+- Use glycin for thumbnails (Khalid Abu Shawarib, Peter Eisenmann, Shivam)
+- Rework icon caching (Khalid Abu Shawarib, Peter Eisenmann)
+- Make path completion case-insensitive (Abhinandan Thakur, Peter Eisenmann, Khalid Abu Shawarib)
+- Use AdwShortcutsDialog (automerisnaranja, Allan Day)
+- Add checkerboard background to thumbnails in properties (Adithya)
+- Improve multi-file properties dialog (Peter Eisenmann)
+- Add renaming tests (Khalid Abu Shawarib)
+- Use Blueprint for UI files (Peter Eisenmann)
+- Change public folder banner based on sharing setting (Peter Eisenmann)
+- Fix handling of early rename popover closure (Alessandro Astone)
+
+* Bugfixes:
+- Fix crash with gone MTP devices (Adithya)
+- Do not count children for autofs mountpoints (Ondrej Holy)
+- Fix d'n'd placeholder style in sidebar (Khalid Abu Shawarib)
+- Correctly check for invalid thumbnails (Khalid Abu Shawarib)
+- Fix path for script run from Recent (Khalid Abu Shawarib)
+- Fix leak from .alpha in move operation (Khalid Abu Shawarib)
+- Fix crash on trashing in bind mounts (Khalid Abu Shawarib)
+- Make type of time independent for each search (Peter Eisenmann)
+- Fix icon cache (Khalid Abu Shawarib, Peter Eisenmann)
+
+* Cleanups:
+- Integrate renaming into operations set (Khalid Abu Shawarib, Peter Eisenmann)
+- Bundle search provider functionality in parent class (Peter Eisenmann)
+- Use AdwDialog for properties (Peter Eisenmann)
+- Remove unused desktop file launcher (Khalid Abu Shawarib)
+- Show untrimmed error messages in dialogs (Peter Eisenmann)
+- Performance enhancements for search and sorting (Peter Eisenmann)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 50.alpha
+=========================
+* Enhancements:
+- Improved thumbnail loading through new custom widget (Khalid Abu Shawarib)
+- Significantly increase code coverage by adding tests for thumbnail sizes, batch renaming, redoing, bookmarks, and many more (Khalid Abu Shawarib)
+- Rework batch rename mechanism and avoid freezes on cyclic collisions (Khalid Abu Shawarib)
+- Strip whitespaces in editable file names (Abhinandan Thakur, Peter Eisenmann)
+- Strip newlines from file name in file chooser (M B SURYANARAYANAN, Khalid Abu Shawarib)
+- Reduce memory usage by trimming on window/tab closure (tytan652, Peter Eisenmann)
+- Use shorter operation status message in sidebar (Corey Berla, Peter Eisenmann)
+- Support multiple file type search filters (Khalid Abu Shawarib)
+- Use highlight for batch rename replacement text (Abhinandan Thakur)
+- Use AdwAlertDialog for file operation dialogs (Peter Eisenmann)
+- Add settings menu item to context menu for trash and recent (Khalid Abu Shawarib)
+- Focus password entry on extraction (Peter Eisenmann)
+- Make file type filter buttons more accessible (Khalid Abu Shawarib)
+- Add Fedora CI (Khalid Abu Shawarib)
+- Add alternative bindings for copy and paste (Tomasz Hołubowicz)
+- Remove drag icon from column chooser (Khalid Abu Shawarib)
+- Pass activation_token to previewer (Tau Gärtli)
+
+* Bugfixes:
+- Fix potential outdated view item usage (Peter Eisenmann)
+
+* Cleanups:
+- Read image properties without GdkPixbuf (Peter Eisenmann)
+- Drop superfluous thumbnail prioritizing (Khalid Abu Shawarib)
+- Detect videos via xdg/shared-mime-info over intern list (Peter Eisenmann)
+- Drop usages of goto (Peter Eisenmann)
+- Replace some deprecated GTK APIs (Peter Eisenmann)
+- Use media queries for high contrast style (Peter Eisenmann)
+- Avoid redundant folder name in completion toast (Shone Binu)
+- Cleanup bookmark list API to use GFile (Peter Eisenmann)
+- Make NautilusHashQueue more useful with destroy funcs (Khalid Abu Shawarib)
+- Continued search-related rework (Peter Eisenmann)
+- Cleanup controls in metainfo (Maximiliano)
+- NautilusFile/Directory constructor-related cleanups (Peter Eisenmann)
+- Remove NautilusWindowSlot usage from NautilusApplication (Peter Eisenmann)
+- Drop deprecated FileOperations interface (Peter Eisenmann)
+- Deprecate packagekit build option (Peter Eisenmann)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 49.2
+=====================
+* Bugfixes:
+- Fix handling of unset XDG directories (Khalid Abu Shawarib)
+- Reduce memory usage of thumbnails by correct scaling (Khalid Abu Shawarib)
+- Fix potential rescaling of item when switching to cut icon (Sebastian Keller, Khalid Abu Shawarib)
+- Fix crash on empty file lists in drops (Khalid Abu Shawarib)
+- Correct sorting of loopback devices (Khalid Abu Shawarib)
+- Don't skip the first file from batch rename progress monitoring (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 49.1
+=====================
+* Bugfixes:
+- Fix crash due to internal callback handling (Khalid Abu Shawarib)
+- Fix pasting images with bigger sizes (Zander Brown)
+- Fix contrast of cut items (Jakub Steiner, Khalid Abu Shawarib)
+- Use correct start point for sidebar drag'n'drop (Khalid Abu Shawarib)
+- Fix default app chooser focus (Peter Eisenmann)
+- Fix running long-running archive operation tests (Khalid Abu Shawarib)
+
+* Known regression:
+- Searching in app chooser does not work anymore since 49.0
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 49.0
+=====================
+* Enhancements:
+- Add tests for replacing files (Khalid Abu Shawarib)
+
+* Bugfixes:
+- Fix hidden state of edited files (Khalid Abu Shawarib)
+- Fix thumbnail canceling (Khalid Abu Shawarib)
+- Fix moving of starred files (Khalid Abu Shawarib)
+
+* Cleanups:
+- Use GSettings memory backend for tests (Khalid Abu Shawarib)
+- Skip thumbnail tests without sandbox (Alessandro Astone)
+- Fix multiple leaks (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 49.rc
+======================
+* Enhancements:
+- Add Thumbnailing Tests (Khalid Abu Shawarib)
+- Show files in MTP-backed directories incrementally (Jonas Dreßler)
+- Remove artificial delay for already loaded or search directories (Khalid Abu Shawarib)
+- Add slash to the path entered by pressing ~ (Khalid Abu Shawarib)
+
+* Bugfixes:
+- Update file thumbnail after thumbnail creation (Khalid Abu Shawarib)
+- Place background menu opened from keyboard correctly in RTL (Khalid Abu Shawarib)
+- Fix app chooser default focus again (Peter Eisenmann)
+
+* Cleanups:
+- FilesView simplifications (Peter Eisenmann, Khalid Abu Shawarib)
+- Suppress some static analyzer warnings (Khalid Abu Shawarib)
+- Add nautilus list aliases  (Peter Eisenmann)
+- Integrate sidebar code properly (Peter Eisenmann)
+- Rework more search-related code (Peter Eisenmann)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 49.beta
+========================
+* Enhancements:
+- Redesigned search popover (Peter Eisenmann, Anuraag Reddy Patllollu, Allan Day)
+- Add coverage test to CI (Khalid Abu Shawarib)
+- Add tests for archive operations (Khalid Abu Shawarib)
+- Add tests for showing hidden files (Khalid Abu Shawarib)
+- Use headless wayland for running CI tests (Khalid Abu Shawarib)
+- Improve extension documentation (Corey Berla, Khalid Abu Shawarib)
+- Copy network addresses in network view (Khalid Abu Shawarib)
+- Don't open starred on drag and drop hover (Khalid Abu Shawarib)
+- Add 'Context Menu' shortcut to help-overlay (Johan G.) 
+
+* Bugfixes:
+- Fix appchooser default focus (Lukáš Tyrychtr, automerisnaranja)
+- Fix broken localsearch test (Alessandro Astone)
+
+* Cleanups:
+- Rework some search-related code (Peter Eisenmann)
+- Drop redundant view interface (Peter Eisenmann)
+- Use".Devel" suffix for nightly flatpak version (Jeff Fortin)
+- Disallow running as root (Khalid Abu Shawarib)
+- Drop unused open flags from window-slot (Peter Eisenmann)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 49.alpha
+=========================
+* Enhancements:
+- Use dashed border and scissor icon for cut files (Khalid Abu Shawarib)
+- Use transparency for hidden files (Khalid Abu Shawarib)
+- Modernize and make batch rename dialog adaptive (Markus Göllnitz)
+- Use ICU for date formatting (Khalid Abu Shawarib)
+- Use AdwDialog for app chooser dialog (Automeris naranja)
+- Replace long press touch gesture with enhanced folder menu (Christopher Davis)
+- Add "Ctrl + dot" shortcut for opening current dir in console (Sid)
+- Announce file star state with a11y (nteodosio)
+- Add test coverage job to CI (Khalid Abu Shawarib)
+- Sort local mounts in the sidebar by device name (Khalid Abu Shawarib)
+- Hide rename in sidebar when not available (Khalid Abu Shawarib)
+- Add tooltip to the stop button in floating bar (Lukáš Tyrychtr)
+- New icon for finished operations (Fernando Gouveia Lima)
+
+* Bugfixes:
+- Don't assume that file chooser choice IDs are usable as action names (Khalid Abu Shawarib)
+
+* Cleanups:
+- Batch rename refactoring and performance improvements (Khalid Abu Shawarib)
+- Use fixed size Gtk layout for grid view (Sergey Bugaev, Khalid Abu Shawarib)
+- View refactoring and performance improvements (Khalid Abu Shawarib)
+- Cleanup and fixes related to file moving (Corey Berla, Khalid Abu Shawarib)
+- Cleanup and refactoring of sidebar code (Khalid Abu Shawarib)
+- Search engine refactoring and performance improvements (Khalid Abu Shawarib, Peter Eisenmann)
+- Un-round popover buttons (Khalid Abu Shawarib)
+- Various performance optimizations (Khalid Abu Shawarib, Laurent Lyaudet)
+- Corrections in files-view tests (Khalid Abu Shawarib)
+- Don't use ratio as time separator (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 48.3
+=====================
+* Bugfixes:
+- Inhibit logout during file operations (Ignacy Kuchciński)
+- Allow opening current diretroy in multiple-dir mode (Michael Terry)
+- Prevent crash in location entry completions (Lukáš Tyrychtr)
+- Fix focusing window from other apps via DBus (Sebastian Keller)
+- Correctly close wait dialogs (Lukáš Tyrychtr)
+- Prevent file chooser crash on opening an empty location (Nelson Ben)
+- Use existing replacement for icon removed from theme (Peter Eisenmann)
+- Fix file leaking in directory (Corey Berla)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 48.2
+=====================
+* Bugfixes:
+- Load directory before thumbnail attributes are ready (Khalid Abu Shawarib)
+- Fix trash banner visibiltiy (Alessandro Astone)
+- Fix sporadic crash when loading new view (Khalid Abu Shawarib)
+- Improve container-related media property handling (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 48.1
+=====================
+* Bugfixes:
+- Fix switching from tree view to grid (Khalid Abu Shawarib)
+- Fix opening new window of starred folder (Lukáš Tyrychtr)
+- Fix selecting Google Drive files with file chooser (Khalid Abu Shawarib)
+- Run script files in their location (Peter Eisenmann)
+- Disallow duplicate bookmarks (Cole Stowell)
+
+* Cleanups:
+- Update screenshots (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 48
+===================
+* Reversals:
+- Replace uselocale with Glib gettext variant (Khalid Abu Shawarib)
+
+* Bugfixes:
+- Generate thumbnails by order in view (Khalid Abu Shawarib)
+- Try more icons before using generic fallback (Khalid Abu Shawarib)
+- Focus filename entry in save mode by default (Ian Off)
+- Fix tree view and outdated file info crashes introduced in 48.rc (Khalid Abu Shawarib)
+- Use colored icon for filesystem root properties (Khalid Abu Shawarib)
+- Set search popover row heights (Khalid Abu Shawarib)
+
+* Cleanups:
+- Various performance enhancements around sorting, hidden files and image decoding (Khalid Abu Shawarib)
+- Add build summary (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 48.rc
+======================
+* Enhancements:
+- Run code formatting in parallel (Khalid Abu Shawarib)
+- Rework CI image job to freedesktop template (Khalid Abu Shawarib)
+- Rework and speedup adding of files to view (Khalid Abu Shawarib)
+- Add basic unit tests for files view (Khalid Abu Shawarib)
+- Load thumbnail info separate from other file infos (Khalid Abu Shawarib)
+
+* Reversals:
+- Revert port of properties dialog to AdwDialog due to outstanding issues
+
+* Bugfixes:
+- Fix app chooser widget sizing (Automeris naranja)
+- Fix free space calculation for archive extraction (Peter Eisenmann)
+- Fix shell search result order (Khalid Abu Shawarib)
+- Fix floating bar style when unfocused (Peter Eisenmann)
+
+* Cleanups:
+- Rework view switching code of window-slot (António Fernandes)
+- Use AdwSpinner in floating bar (Automeris naranja)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 48.beta
+========================
+* Enhancements:
+- Improve directory loading performance (Khalid Abu Shawarib, Peter Eisenmann)
+- Use AdwDialog for list view column chooser and properties dialog (Automeris naranja)
+- Change tab behavior for the sidebar (Lukáš Tyrychtr)
+- Create about dialog from appdata (Felipe Borges, Matthijs Velsink, Peter Eisenmann)
+- Port various dialogs to AdwAlertDialog (Automeris naranja)
+- Keep mount monitor around for caching in gvfs to work (Khalid Abu Shawarib)
+- Adjust to localsearch changes (Bobby Rong, Carlos Garnacho, Khalid Abu Shawarib, Sam Thursfield)
+- Hide Trash banner when empty (Isaac Yeo)
+- Ellipsize sidebar labels in the middle (Peter Eisenmann)
+- Add a CONTRIBUTING file (Corey Berla)
+- Allow removing bookmarks from pathbar (Isaac Yeo)
+- Various UI tweaks and label changes (Automeris naranja, Brage Fuglseth, Jamie Gravendeel, Khalid Abu Shawarib)
+- Various speedups (Corey Berla, Khalid Abu Shawarib)
+
+* Bugfixes:
+- Fix unintended grid relayouting on thumbnail loading (Calvin Walton)
+- Fix double a11y presentation of the filename in grid view (Lukáš Tyrychtr)
+- Keep CI running (Khalid Abu Shawarib, Peter Eisenmann)
+- Fix query editor translation (Aleksandr Melman)
+- Hide empty extensions list in properties (Khalid Abu Shawarib)
+- Fix NULL dereference with extensions (Philipp Unger)
+
+* Cleanups:
+- Improve grid selection implementation (Adrien Plazas)
+- Avoid setting up unnecessary directory monitors (Corey Berla)
+- Replace uselocale with Glib gettext variant (Khalid Abu Shawarib)
+- Stop setting invisible menu icons (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 47.2
+=====================
+* Enhancements:
+ - Adopt CI release workflow (Khalid Abu Shawarib)
+ - Speed up batch file deletions (Khalid Abu Shawarib)
+ - Speed up simple recursive search through mount monitors (Khalid Abu Shawarib)
+
+* Bugfixes:
+ - Fix thumbnails for changed files (Khalid Abu Shawarib)
+ - Fix parent path URIs for remote path (rain)
+ - Fix potential crashes in directory callbacks (Khalid Abu Shawarib)
+
+* Translation updates (GNOME Translation Project contributors)
+
+Major Changes in 47.1
+=====================
+* Enhancements:
+ - Speed up thumbnail loading (Khalid Abu Shawarib)
+* Bugfixes:
+ - Do not force reload when error is present to avoid showing auth dialog (Gary Li)
+ - Open folder in correct window during a DnD hover (Khalid Abu Shawarib)
+ - Show username in file properties if name is an empty string (Khalid Abu Shawarib)
+ - Various a11y fixes (Khalid Abu Shawarib)
+ - Fix number placement when making new name for directory (Khalid Abu Shawarib)
+ - Various pathbar fixes (Corey Berla, Khalid Abu Shawarib)
+ - Show alert dialog when a symlink is broken (Automeris naranja)
+ - Fix crashes when opening (Khalid Abu Shawarib)
+ - Various sidebar fixes (Khalid Abu Shawarib, sid)
+ - Fix ctrl + scroll to zoom in and out of view (Corey Berla)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 47.0
+=====================
+* Enhancements
+ - Show new folder button in Open Folder(s) modes (Corey Berla)
+ - Persist window size for file chooser (Corey Berla)
+* Bugfixes:
+ - Fix grammar error (Khalid Abu Shawarib)
+ - Fix build error (Jami Kettunen)
+ - Escape toast button mnemonics (Khalid Abu Shawarib)
+ * File chooser fixes:
+  - Don't show undo button when suggested name doesn't exist (Corey Berla)
+  - Show filter name more consistently (Corey Berla)
+  - Stop crashing when using "Open Item Location" (Corey Berla)
+  - Fix issue where new folder button disappears (Corey Berla)
+  - Fix flat dropdown styles (Alice Mikhaylenko)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 47.rc
+=====================
+* Enhancements
+- Polish the file chooser (António Fernandes)
+- Implement file chooser "choices" menu (Corey Berla)
+- Allow extracting bzip2 tar files (Khalid Abu Shawarib)
+- Allow dropping items into the file chooser (Corey Berla)
+- Add the background menu to the file chooser (Corey Berla)
+- Allow vertical scrolling in the pathbar (Liam Rust)
+- Activate the accept button by default in file chooser (Dylan McCall)
+* Bugfixes:
+- Fix various file chooser crashes (Corey Berla)
+- Don't hide file chooser filters with long filenames or in narrow mode (Corey Berla)
+- Make sure the pathbar always shows the current folder (Corey Berla)
+- Fix overlapping filename widget in file chooser (Corey Berla)
+- Make nautilus previewer work between the main window and file chooser (António Fernandes)
+- Various fixes for file chooser paths and save locations (Corey Berla)
+- Set focus correctly in file chooser (Corey Berla)
+- Allow unselecting an item in file chooser (Corey Berla)
+- Add a tooltip to the network address bar button (Automeris naranja)
+- Disallow conventional DnD into the pathbar in file chooser mode (Corey Berla)
+- Don't overflow window in file chooser (Corey Berla)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 47.beta
+=====================
+* Enhancements
+- Implement file chooser portal and introduce file chooser ui (António Fernandes)
+- Redesign and modernize the compression dialog (Automeris naranja)
+- Modernize the new folder dialog (Automeris naranja, António Fernandes)
+- Replace Search Banner with Search Info Popover (Anuraag Reddy Patllollu)
+- Redesign "Other Types" search (Khalid Abu Shawarib)
+- Port to new adwaita widgets (Automeris naranja, Khalid Abu Shawarib, Peter Eisenmann)
+- Update emblems with symbolics (Sam Hewitt, Khalid Abu Shawarib, Peter Eisenmann)
+* Bugfixes:
+- Use correct path for email (Peter Eisenmann)
+- File chooser bug fixes (Corey Berla)
+- Disable bookmarking the network view (Corey Berla)
+- Change files view accent to grey (Alice Mikhaylenko)
+- Fix dragging on touch devices (Lukas Swierzy, Gary Li)
+- Misc bugfixes (Khalid Abu Shawarib, Peter Eisenmann, António Fernandes, Corey Berla)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 47.alpha
+=====================
+* Enhancements
+ - Add the Network view (António Fernandes, Allan Day)
+ - Show xdg dirs in sidebar as regular (removable) bookmarks (António Fernandes)
+ - Show sidebar bookmarks before mounts (António Fernandes)
+ - Remove "Other Locations" and show mounts directly on the sidebar (António Fernandes)
+ - Improve view performance (Khalid Abu Shawarib)
+ - Use new adw views (Automeris naranja)
+ - Improve internal NautilusFile performance (Peter Eisenmann)
+ - Improve ui for progress indicator (Peter Eisenmann)
+ - Improve ui to floating bar (Sam Hewitt, piegames)
+ - Allow staring from the context menu (José Guilherme)
+ - Redesign trash dialog (Anuraag Reddy Patllollu, Allan Day)
+ - Allow Scripts in flatpak (Anuraag Reddy Patllollu)
+ - Open mounts in original tab instead of focused tab (Gary Li)
+ - Allow simultaneous mounting (Khalid Abu Shawarib)
+* Bugfixes:
+  - Create archive with Enter on Compress dialog (Lukáš Tyrychtr)
+  - Accessibility fixes (Automeris naranja, Sabri Ünal)
+  - Move focus correctly when item is removed (Khalid Abu Shawarib)
+  - Don't reset permissions when copying from a non-isofs readonly filesystem (Fina Wilke)
+  - Open correct panel in GNOME Settings for trash settings (Khalid Abu Shawarib)
+  - Disable paste in Trash, Recent, and Starred (Jonathan Lin)
+  - Fix error when passing invalid location to portals (Khalid Abu Shawarib)
+  - Fix memory leaks (Khalid Abu Shawarib, António Fernandes)
+  - Call shutdown() on modules (Corey Berla)
+  - Don't show banners in global search (Khalid Abu Shawarib)
+  - Prevent a crash (Khalid Abu Shawarib, Gary Li)
+  - Keep correct file list order in a DnD (Khalid Abu Shawarib)
+  - Don't display future dates as "Today" or "Yesterday" (Grey Nicholson)
+  - Prevent freeze (Peter Eisenmann)
+  - Fix broken sort order when switching views (Gary Li)
+  - Don't irreversibly hide sidebar with touch gesture (Khalid Abu Shawarib)
+  - Don't unnecessarily re-set selection in search (Gary Li)
+  - Don't scale up images in properties preview (Khalid Abu Shawarib)
+  - Actually drop wayland export handles (António Fernandes)
+  - Fix potentially incorrect file operation (Khalid Abu Shawarib)
+  - Batch rename fix tags, and allow illegal characters (Anuraag Reddy Patllollu)
+  - Allow xdp to fail (Balló György)
+  - Fix typo (Alexandre Franke)
+* Cleanups
+  - Use property styling for adw rows (Automeris naranja, Anton Snigirev)
+  - Code cleanup (Khalid Abu Shawarib, Peter Eisenmann, Corey Berla, António Fernandes)
+  - Significant refactoring and cleanup to prepare to Nautilus as a file chooser (António Fernandes)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 46.0
+=====================
+* Bugfixes:
+  - Remove char limit on size label in properties dialog (Khalid Abu Shawarib)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 46.rc
+========================
+* Enhancements
+  - Adjust empty status page and progress tooltip strings (Allan Day, Khalid Abu Shawarib)
+  - Add input hints and purpose properties to entries (Khalid Abu Shawarib)
+  - Refine operations hover background (Sam Hewitt, António Fernandes)
+* Bugfixes:
+  - Position loop mounts correctly in the sidebar (António Fernandes)
+  - Fix internationalization issues (Khalid Abu Shawarib, Peter Eisenmann)
+  - Revert crashes-causing multi-file properties performance optimization (Peter Eisenmann)
+  - Reestablish location signals if location change failed (Corey Berla)
+  - Fix regression which disallowed dropping files on empty folders (Corey Berla, António Fernandes)
+* Cleanups
+  - Remove architecture-sensitive duplicate filename unit test (Peter Eisenmann, Jeremy Bicha)
+  - Refine Appstream metainfo (Sophie Herold, Alexandre Franke)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 46.beta
+========================
+* Postponed
+  - The network view from 46.alpha.1 was deemed to require more work
+* Enhancements
+  - Added a global search mode (António Fernandes)
+  - Use 'text entry' cursor on pathbar hover (Corey Berla)
+  - Add drop shadow to file property dialog icons (kramo)
+  - Improve progress info icons and tooltips (Bharat Tyagi, Sam Hewitt)
+* Bugfixes:
+  - Avoid crashes with column chooser (Peter Eisenmann)
+  - Avoid crash when navigating back to same folder (António Fernandes)
+  - Avoid infinite loop on file creation naming conflict (Corey Berla)
+  - Fix displaying parent folder of multi-files (Anton Snigirev)
+  - Clear location entry on editing of internal locations (Peter Eisenmann)
+  - Ensure search's clear button is hidden when empty (António Fernandes)
+  - Hide search popover after opening a dialog (Khalid Abu Shawarib)
+  - Correctly open empty folders from search (António Fernandes)
+  - Don't reload view only to change selection (António Fernandes)
+  - Use smaller icons in progress indicator (António Fernandes, Sam Hewitt)
+  - Fix various leaks (Khalid Abu Shawarib, António Fernandes)
+  - Added extra tentacles to confuse AI-generated blogs (Via Matrix)
+* Cleanups
+  - Made various string HIG compatible (Bart Gravendeel, Automeris naranja)
+  - Modernize column chooser widgetry (Automeris naranja)
+  - Detect potfile errors via CI (Corey Berla)
+  - Replace deprecated GTK point computing functions (N.Pranav Krishna)
+
+Major changes in 46.alpha.1
+=======================
+* Enhancements
+  - Views can be switched without a folder reload (António Fernandes)
+  - Operations are listed in the bottom of the sidebar (Corey Berla, António Fernandes, Allan Day)
+  - Network view replaces Other Locations (António Fernandes, Allan Day)
+  - Mounted drives are shown in the sidebar (António Fernandes)
+  - Selected files are recorded in back and forward history (António Fernandes)
+  - Subfolder loading indication (António Fernandes)
+  - Various view performance improvements (António Fernandes)
+  - Improved performance of multi-file properties dialog (Khalid Abu Shawarib)
+* Bugfixes:
+  - Correctly prioritize thumbnails for non-alphabetical sort order (Corey Berla)
+  - Notify view item name changes for accessibility (Corey Berla, António Fernandes)
+  - Open real folder for documents in Recent from Properties (Anton Snigirev)
+  - Pattern match (Ctrl+S) all expanded list view directories (António Fernandes)
+  - Display sampling frequency in kHz with thousand separators (Hariharan D)
+  - Treat markdown files as text documents in search (Hariharan D)
+  - Improve UI text capitalization and mnemonics (Automeris naranja)
+  - Fix tab tooltip texts for markup and search (Corey Berla)
+  - Fix extension linkage with C++ (Khalid Abu Shawarib)
+  - Add a tooltip to the star button (Lukáš Tyrychtr)
+  - Show correct shortcut for Redo on the menu (Divyansh Jain)
+  - Prevent use-after-free with mount and stop (António Fernandes)
+  - Improve virtual files handling  (António Fernandes)
+  - Fix various view-related bugs, leaks and warnings (António Fernandes)
+* Cleanups:
+  - Significant restructuring of view architecture (António Fernandes)
+  - Remove dead code in views and css styles (António Fernandes)
+  - Update man page, remove documentation for removed self-check functionality (Corey Berla)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 46.alpha.0
+=======================
+* Enhancements
+  - Confirm password when creating protected ZIP archives (Eric Daigle)
+  - Make custom folder icon feature discoverable (Khalid Abu Shawarib)
+  - Make URI entry discoverable (Alynx Zhou, Barnabás Pőcze)
+  - Allow changing owner/group and any permissions under admin:/// (António Fernandes)
+  - Add detailed date and time format option (Ondrej Holy, Peter Eisenmann)
+  - Detect copy/move over 4GiB file limit on FAT (Corey Berla)
+  - Give feedback on completion of quick operations (António Fernandes)
+  - New-style banners, unstar animation, and other visual refinements (Peter Eisenmann, Automeris naranja)
+  - Allow Alt+Down to revert more than one Alt+Up (vmkul)
+  - Close overlaid sidebar on location change (Khalid Abu Shawarib)
+* Bugfixes:
+  - Don't skip files in deep count/size (António Fernandes)
+  - Don't move files around as thumbnails load (Corey Berla)
+  - Reveal highlighted file without delay  (Corey Berla)
+  - Stop crashing in various situations (Sebastian Keller, António Fernandes, Corey Berla, Khalid Abu Shawarib)
+  - Resolve UI text inconsistencies (Automeris naranja, getsnoopy, kramo, Khalid Abu Shawarib, Ondrej Holy, Matthijs Velsink)
+  - Fix memory leaks, template disposal, and warnings (Khalid Abu Shawarib)
+  - Fix interface problems in Properties (Peter Eisenmann, António Fernandes, Khalid Abu Shawarib)
+  - Don't keep viewing unmounted locations (Ondrej Holy, António Fernandes, Khalid Abu Shawarib)
+  - Refined appdata (Sabri Ünal, António Fernandes)
+  - Resolve wrong scroll positioning bugs (Gary Li, António Fernandes)
+  - Fix automatic file duplicate naming (Peter Eisenmann)
+  - Properly reorder bookmarks by drag and drop (Khalid Abu Shawarib)
+  - Set current modification time on file created from templates (Khalid Abu Shawarib)
+  - Fix missing/wrong mime type icons (António Fernandes)
+  - Don't reload on autofs timeout (António Fernandes)
+* Cleanups
+  - Remove obsolete profiling, custom debug logging, and self-checking (Peter Eisenmann, Khalid Abu Shawarib)
+  - Streamline and expand tests (Khalid Abu Shawarib, Peter Eisenmann)
+  - Reduce usage of GtkDialog and other deprecated API (Khalid Abu Shawarib, Peter Eisenmann)
+  - Replace custom switch row with AdwSwitchRow (Óscar Fernández Díaz)
+  - Drop obsolete code (Peter Eisenmann, António Fernandes, Corey Berla)
+  - Reduce unnecessary string copies (Peter Eisenmann)
+  - Unify numbered filename apendix handling (Peter Eisenmann, Khalid Abu Shawarib)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 45.rc
+=====================
+
+* Avoid slowness when many files are selected (Corey Berla, António Fernandes)
+* Make tooltip and menu for Preferences back button not empty (Domenico Iezzi)
+* Revert patch which could cause loss of data (Corey Berla, Ondrej Holy)
+* Fix sizing and styling of Visible Columns (António Fernandes)
+* Change sidebar title (António Fernandes)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 45.beta2
+=====================
+
+* Feature enhancements:
+  - New "Search Everywhere" buttons to expand search scope (Allan Day, António Fernandes)
+  - Modern full-height sidebar layout (Marco Melorio, António Fernandes)
+  - Refined sidebar sizing and folding treshold (Tobias Bernard, Corey Berla, António Fernandes)
+* Performance enhancements:
+  - Flickerless transition into and from search (António Fernandes)
+  - Accelerated generation of multiple thumbnail (Khalid Abu Shawarib, Corey Berla)
+  - Avoid DBus-activating other apps when starting (Corey Berla)
+* Bugfixes:
+  - Delete partially copied file on cancelled copy (Corey Berla)
+  - Don't restrict shell search results do %HOME (António Fernandes)
+  - Don't open trash on drag hover (Jakob Landbo)
+  - Fix multiple search bugs (Khalid Abu Shawarib, Peter Eisenmann, António Fernandes)
+  - Avoid crashes on search (Khalid Abu Shawarib, Corey Berla)
+  - Fix "sort after rename" regression (António Fernandes)
+  - Fix various styling issues (Alice Mikhaylenko)
+  - Don't allow to resize Properties too small (Automeris naranja)
+* Maintenance:
+  - Disable deprecation warnings, fix other warnings (Peter Eisenmann, Luciano Santos)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 45.beta
+=====================
+
+* Enhancements:
+  - Use new navigation view and flat headerbar for Properties (Peter Eisenmann, António Fernandes)
+  - Don't switch view mode when searching (António Fernandes)
+  - Don't add search to history stack (António Fernandes)
+  - Optimize view performance when selecting or removing many items (Corey Berla)
+* Bugfixes:
+  - Prefent mixed-language date and time labels (António Fernandes)
+  - Multiple starred files view bugfixes (Corey Berla, António Fernandes)
+  - Context menu capitalization (Alessandro Bono)
+* Maintenance:
+  - Replace some eel API with direct GLib API (Peter Eisenmann)
+  - Cleanup URI scheme checking (Peter Eisenmann, António Fernandes)
+  - Use newer async API for creating thumbnails (Khalid Abu Shawarib)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 45.alpha
+=====================
+
+* Enhancements:
+  - Boost search performance (Carlos Garnacho, António Fernandes)
+  - Redesign Visible Columns options, allow changing default columns (Corey Berla, Peter Eisenmann)
+  - Support dropping images from web pages (Corey Berla)
+  - Show bytes size as tooltip for folder properties too (Raihan)
+  - Indicate starred files in grid view (Gary Li)
+  - Support skipping errors while creating compressed archives (Gary Li)
+  - Make date and time format more consistent (Allan Day, Venkata Kesav Venna, Ondrej Holy)
+  - Make Ctrl+F refocus search bar, not cancel search (Khalid Abu Shawarib)
+  - Adapt sidebar width to window width, and use a breakpoint for adaptiveness (Christopher Davis)
+  - Allow moving keyboard focus within list rows (Corey Berla)
+  - Replace GtkComboBox with GtkDropDown (Corey Berla)
+  - Simplify Keyboard Shortcuts window definition (Sabri Ünal)
+  - Improve file opening experience while sandboxed (António Fernandes)
+* Bugfixes:
+  - Fix results ordering, and other search bugs (Eric Daigle, António Fernandes, Carlos Garnacho, Khalid Abu Shawarib)
+  - Fix tooltips, a11y labels, and i18n issues (sunflowerskater, Khalid Abu Shawarib, Automeris naranja, Sabri Ünal)
+  - Fix sushi integration bugs (Corey Berla)
+  - Don't hide incompletely deleted folders (Corey Berla)
+  - Show file renamed to hidden again on undo (Corey Berla)
+  - Don't state file was "deleted" if it was moved to trash (Sayan Bhattacharjee)
+  - Fix rubberband range behavior on list view (António Fernandes)
+  - Respect modifiers when dropping on tabs; disable broken tab drop target on X11 (Corey Berla)
+  - Fix bugs when reloading on autofs timeouts (Ondrej Holy)
+  - Don't offer to format volumes which cannot be formatted, e.g. MTP (Ondrej Holy)
+  - Fix multiple crashes (Corey Berla, António Fernandes)
+  - Fix multiple leaks (Khalid Abu Shawarib, António Fernandes)
+* Maintenance:
+  - Rename default branch to 'main' (Peter Eisenmann)
+  - Make libcloudproviders dependency optional again (Ondrej Holy)
+  - Improve reproducibility (Khem Raj)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 44.1
+=====================
+* Resolve some crashes (Peter Eisenmann, Gary Li, António Fernandes)
+* Visual bugfixes:
+  - Tweak style colors in view items (António Fernandes, Sam Hewitt, Peter Eisenmann)
+  - Show custom emblems from extensions again (António Fernandes)
+  - Relayout SELinux property row (Peter Eisenmann)
+  - Flip switches correctly (Peter Eisenmann)
+* Other bugfixes:
+  - Disable some actions when not useful (Sayan Bhattacharjee, Khalid Abu Shawarib)
+  - Fix dead characters handling in batch rename dialog (Gary Li)
+  - Fix crashes when rapidly opening and closing windows (Gary Li)
+  - Prevent location change when autofs timeouts (Ondrej Holy)
+  - Fix issues with translations in libadwaita widgets (Peter Eisenmann)
+  - Drop workarounds for fixed GTK bugs (Corey Berla)
+  - Fix other issues (Carlos Garnacho, Sebastian Keller, António Fernandes, Corey Berla, Peter Eisenmann, Ondrej Holy)
+* Enhancements:
+  - Dismiss toast on undo (Corey Berla)
+  - Select right items after some operations (Corey Berla)
+  - Paste into expanded folders (Corey Berla)
+  - Allow extraction of .tar.zst and .zstd archives (Ondrej Holy)
+  - Performance optimization (Sebastian Keller)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 44.0
+=====================
+* Bugfixes:
+  - Prevent rubberband selection instead of drag and drop (Ondrej Holy)
+  - Fix critical errors with recent GLib versions (Ondrej Holy)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 44.rc
+======================
+* Bugfixes:
+  - Fix crashes caused by extra free call (Corey Berla)
+  - Fix file order after renaming (Corey Berla)
+  - Fix libadwaita include path (Barnabás Pőcze)
+  - Fix handling of missing dates from Tracker (Pablo Correa Gomez)
+  - Cache clock format setting (Corey Berla)
+  - Try to own dbus name at the correct time (Ondrej Holy)
+  - Exchange mismatched error messages (Ondrej Holy)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 44.beta
+========================
+* Enhacements:
+  - Make various appdata and desktop file improvements (Christopher Davis)
+  - Make rubberband to have rounded corners (sunflowerskater)
+  - Make several documentation improvements (Corey Berla)
+* Bugfixes:
+  - Fix crashes caused by inverted g_assert condition (Ondrej Holy)
+  - Fix various drag and drop issues (Corey Berla, Peter Eisenmann)
+  - Fix several memory leaks (Corey Berla)
+  - Fix various three expander issues (António Fernandes, Corey Berla)
+  - Export FileManager1 iface from dbus_register vfunc (Ondrej Holy)
+  - Fix other issues (Corey Berla, Ondrej Holy, Jeremy Bicha, Athul Iddya)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 44.alpha
+=========================
+* Enhancements:
+  - Allow expanding subfolders in the list (António Fernandes, Corey Berla)
+  - Enrich tab context menus (Corey Berla)
+  - Allow pasting image data into new PNG file (Corey Berla)
+  - Use pregenerated thumbnails when available, e.g. MTP (Ondrej Holy)
+  - Add shortcut for Preferences (Sabri Ünal)
+  - Show full filename in grid, using tooltips (António Fernandes)
+  - Reintroduce 64px icon size for grid view (António Fernandes)
+  - Remove upper limit on thumbnailing file size range (Peter Eisenmann)
+  - Reword "application" to "app" (sunflowerskater)
+  - Other papercuts (António Fernandes, Hari Rana, sunflowerskater)
+* Other bugfixes:
+  - Avoid many crashes (Corey Berla, Gary li, António Fernandes, Aleksandar Dezelin)
+  - Fix and improve autorun support (Will Thompson, António Fernandes)
+  - Fix some drag-and-drop issues (Corey Berla, Liu Yuyang)
+  - Fix some view focus and selection issues (Corey Berla, António Fernandes)
+  - Fix properties extensions bugs (António Fernandes)
+  - Fix memory leaks (Ignacy Kuchciński, António Fernandes)
+  - Fix building on certain cases (Leonardo Hernández)
+  - Fix bugs with file operations (Corey Berla, Gary Li, Bastien Nocera)
+  - Resolve some performance issues (Corey Berla, Jeff Fortin Tam)
+  - Resolve stuttering scrolling (Corey Berla)
+  - Save and restore sort column (Corey Berla)
+  - Launch search from shell correctly (Corey Berla)
+  - Reimplement view navigation from the previewer (António Fernandes)
+  - Stop showing � in the type on Properties (Aleksandar Dezelin)
+  - Stop blocking on the tracker connection (Corey Berla)
+  - Add missing trailing ellipsis and mnemonics in menus (Gotam Gorabh, Peter Eisenmann)
+  - Allow opening current view in new tab from sidebar (Colin Kinloch)
+  - Share settings with GTK4 filechooser (Colin Sane)
+  - Don't allow hiding name column (Corey Berla)
+* Code cleanups
+  - Drop workarounds for resolved GTK4 issues (Corey Berla)
+  - Use fewer deprecated GTK 4 API (Corey Berla, Peter Eisenmann)
+  - Don't use deprecated GLib API (Corey Berla)
+  - Remove unused obsolete code (Peter Eisenmann, Benjamin Otte, Corey Berla, Antóino Fernandes, Sabri Ünal)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 43.0
+=========================
+* Bugfixes
+  - Open first search result with Enter, as before (Corey Berla)
+  - Don't freeze when opening media storage (Corey Berla)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 43.rc
+=========================
+* Resolving regressions from the GTK 3 to 4 switch:
+  - Restore accessible labels for view items (Corey Berla)
+  - HiDPI icons and thumbnails (António Fernandes)
+  - Restore transient location entry behavior (António Fernandes)
+  - Restore spacebar shortcut to trigger sushi file previewer (António Fernandes)
+  - Restore ability to create new file from dropped text (Corey Berla)
+  - Restore ability to duplicate via DND + Ctrl (Corey Berla)
+* Drag-and-drop enhancements:
+  - Allow dropping files into Starred to star them (Corey Berla)
+  - Prevent "open on hover" while moving pointer (Corey Berla, António Fernandes)
+* Menu enhancements:
+  - Add menu item to remove files from Starred list (Corey Berla)
+  - Don't activate menu button when clicking folder name (António Fernandes)
+  - Don't offer "Properties" and "Add to Bookmarks" actions when they don't make sense (Eric Daigle, Corey Berla, António Fernandes)
+* Properties enhancements
+  - Wrap long filename words in Properties (anarchistcat)
+  - Refine properties for root directory (Corey Berla)
+  - Show error state for extensions properties (António Fernandes)
+* General enhancements
+  - Redesign trash infobar (Ignacy Kuchciński, Sam Hewitt)
+  - Add tooltips to every headerbar control (Ronen Margolin)
+  - Update and modernize libnautilus-extension documentation (Jan Tojnar)
+  - Update appdata screenshots (Christopher Davis)
+* Bugfixes
+  - Fix various app chooser issues (Corey Berla)
+  - Fix various batch rename dialog issues (Corey Berla)
+  - Fix Highcontrast styles (Ignacy Kuchciński, António Fernandes)
+  - Fix focus misbehaviours in the new views (Corey Berla)
+  - Don't show URI escape codes in tooltips (Antonio Teixeira)
+  - Show sharing infobar in gnome-user-share's fallback location (Corey Berla)
+  - Fix icon size in file conflict dialog (António Fernandes)
+  - Fix operations indicator animation (António Fernandes)
+  - Mark missing translatable strings (Sabri Ünal)
+  - Fix various memory leaks (Ignacy Kuchciński, Corey Berla)
+  - Fix compilation errors (Jeremy Bicha, Ondrey Holy, Timo)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 43.beta.1
+==========================
+* Restore view options tooltip (António Fernandes)
+* Mark new files for translation (Piotr Drąg)
+* Look for extensions in their new installation directory (Jeremy Bicha)
+
+Major changes in 43.beta
+=========================
+* Adapting main window elements to smaller sizes (Christopher Davis);
+  - Make sidebar foldable.
+  - Split toolbar contorls into top and bottom toolbars at small sizes.
+* Restoring Disks integration (Corey Berla):
+  - Open storage unit in Disks from Properties.
+  - Format with Disks from the sidebar context menu.
+* Absorbing features from core plug-ins (Corey Brela):
+  - Provide infobar for Public folder, instead of gnome-user-share
+  - Provide context menu action to open folders in Console.
+  - Replace nautilus-send-to extension with Email portal.
+* Remodeling plug-ins
+  - List installed extensions plug-ins in About. (Corey Berla)
+  - Implement new Properties API and port Image and Audio/Video (António Fernades)
+  - Remove GTK-dependent API from libnautilus-extension (António Fernandes)
+  - Bump libnautilus-extension versions.
+* Improving search UI design
+  - Use modern design patterns for type filter chooser (António Fernandes)
+  - Elaborate FTS snippets and place them in a container (António Fernandes, Alan Day)
+* Modernizing Properties window
+  - Implement new "pages and rows" design (Peter Eisenmann, António Fernandes)
+  - Move ability to set default app into Open With dialog (António Fernandes, Corey Berla)
+* Reorganizing context menus (Allan Day, António Fernandes).
+* Refining view visual styles
+  - Saturate selection colors (Allan Day, Alexander Mikhay)
+  - Add icon shadows (Jakub Steiner)
+  - Refine layout of column editor dialog. (Allan Day, António Fernandes)
+* Using more modern widgetry
+  - Use AdwTabBar for detatchable tabs (Alexander Mikhaylenko, António Fernandes, Christopher Davis)
+  - Use AdwEmptyState for empty folder views (Christopher Davis, António Fernandes).
+  - Use AdwMessageDialog instead of GtkMessage. (Christopher Davis, Ondrej Holy)
+* Resolving regressions from the GTK 3 to 4 switch:
+  - Restore Accessibility relations (Corey Berla).
+  - Restore location entry suggestions (Corey Berla).
+  - Restore libcloudproviders integration (Ondrej Holy)
+* Opening new tab with middle click on next and forward buttons (Corey Berla)
+* Miscellaneous bugfixes (multiple contributos)
+* Translation updates (GNOME Translation Project contributors)
+
+Leftover known regressions in 43.beta
+  - Lacks HiDPI icons
+  - Lacks attention-grabbing animation on operations button
+
+Major changes in 43.alpha
+=========================
+* Resolving regressions from the GTK 3 to 4 switch:
+  - Reintroduce clipboard with GTK 4 (António Fernandes)
+  - Reintroduce Drag’n’Drop with GTK 4 (Corey Berla, António Fernandes)
+  - Reintroduce emblems independently of file icon (António Fernandes)
+  - Reintroduce filter search tags with GTK 4 (António Fernandes)
+  - Port audio-video-properties extension to GTK 4 (Corey Berla)
+  - Restore sidebar features from GTK 3 (Corey Berla)
+  - Fix other regressions from the GTK 3 to 4 switch (António Fernandes, Noëlle,Óscar Fernández Díaz, Ondrej Holy, Corey Berla, Ákos Horváth, Corey Berla)
+* Modernizing view widgets
+  - Port files grid view mode to GtkGridView (António Fernandes)
+  - Reimplement files list view mode with GtkColumnView (António Fernandes)
+  - Add checkerboard background for thumbnails with transparency (Utkarsh Gandhi, António Fernandes)
+* Enhancing menus:
+  - New menu item to open current folder in another application (António Fernandes)
+  - Add menu item to copy current path to clipboard (Utkarsh Gandhi)
+  - Redesign zoom controls as icon size controls (António Fernandes)
+  - Context menu bugfixes (Owen D'Aprile, Ignacy Kuchciński)
+  - Add context menu item to show Properties in Other Locations (Corey Berla)
+  - Improve support for context menus on touchscreens
+  - Show extensions in templates names (Roshan R)
+  - Show sort menu options in list virw mode (António Fernandes)
+  - Allow sorting in recent and search (António Fernandes)
+* Other enhancements:
+  - Use better in-app notifications with AdwToast (Christopher Davis)
+  - Modernize "About" with AdwAboutWindow (Christopher Davis)
+  - Refine pathbar appearance (Utkarsh Gandhi, António Fernandes)
+  - Label '/' with the OS name (StarShot)
+  - Keyboard shortcuts overlay updates (Tero Gusto)
+* Miscellaneous bugfixes:
+  - Search engine bugfixes (Ondrej Holy)
+  - Floating satus bar bugfixes (Ignacy Kuchciński)
+  - Fix popover crashes (Corey Berla)
+  - Allow copying to a ramfs (Alister Sanders)
+  - Stop computing remote folders item count when didabled (Corey Berla)
+  - Fix batch rename for files with the same name in search results (Corey Berla)
+  - Don't trigger keyboard shortcuts ouside their intended scope (Vanadiae)
+* Maintenance work
+  - Adapt to thumbnails API changes (Michael Catanzaro)
+  - Depend on libportal and drop wallpaper fallback setting (Jeremy Bicha, António Fernandes)
+  - Modernize build with new meson features (Maximiliano)
+  - Bump extensions library version (António Fernandes)
+* Translation updates (GNOME Translation Project contributors)
+
+Leftover known regressions in 43.alpha
+  - Lacks HiDPI icons
+  - Lacks attention-grabbing animation on operations button
+
+Major changes in 42.alpha
+=========================
+* Improve design of the file renaming UI (Peter Eisenmann, Allan Day)
+* Improve visuals of the file conflict UI (Joshua Lee)
+* Use GtkBuilder UI definitions for more components (António Fernandes, Apoorv Sachan)
+* Fix "Move to"/"Copy to" from Starred (DillyPickly)
+* Improve disposition of shell search provider (Marco Trevisan)
+* Sort by subtype within type (rajat jain)
+* Allow searching by creation time (Nishit Patel)
+* Replace deprecated gexiv2 functions (Nishal Kulkarni)
+* Fix extension API introspection annotations (Aaron Jacobs)
+* Expand on extension API documentation (Aaron Jacobs)
+* Add compressed archives to Recent files (Manny)
+* Preparations for GTK 4 switch (Ernestas Kulik, António Fernandes, Matt Jakeman, Álvaro Costa, Suhaas Joshi)
+* Complete the GtkFlowBox-based grid view (António Fernandes)
+* Remove EelCanvas-based grid view (António Fernandes)
+* Improve design of the path bar (António Fernandes)
+* Fix geographical coordinates displayed format (Michael von Gunten)
+* Port to GTK 4 (António Fernandes)
+* Fix some GTK 4 switch regressions/warnings (António Fernandes, Ondrej Holy)
+* Translation updates (GNOME Translation Project contributors)
+
+Known major regressions in 42.alpha
+  - Lacks Drag-and-Drop interatcion
+  - Lacks clipboard interaction
+  - Lacks HiDPI icons
+  - Lacks MIME-type icons in list view
+  - Has poor performance for large directories in grid view
+  - Lacks attention-grabbing animation on operations button.
+  - Doesn't display emblems
+  - Doesn't display file filters as tags
+  - Lacks "Format" context menu item in sidebar
+  - Lacks Audio/Video properties page
+
+Major changes in 41.1
+=====================
+* Cache Scripts and New Document menus to avoid lags (António Fernandes)
+* Ellipsize subtitle label in trash bar to reduce minimum width (António Fernandes)
+* Fix build with meson 0.60.0 (Albert Vaca Cintora)
+* Don't change action when unchecking in File Conflict dialog (António Fernandes)
+* Fix progress reporting when skipping during extraction (Ondrej Holy)
+* Offer skipping in case of extraction failure only when there are more files (Ondrej Holy)
+* Remove leftover files after extraction failure (Ondrej Holy)
+* Set keyboard focus on the row with the selected archive format (Clyde Laforge)
+* Translation updates
+
+Major changes in 41.0
+=====================
+* Translation updates
+
+Major changes in 41.rc
+=========================
+* Disable background "Properties" while searching (Felipe Borges)
+* Don't duplicate set wallpaper when not using portal (Barnabás Pőcze)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 41.beta
+=========================
+* Fix comma placement in the floating status bar (Nick Montalbano)
+* Use standard::edit-name attribute where appropriate (Anubhav Tyagi)
+* Bring "Open with..." options together in context menu (Luis Bosque)
+* Fix "Compress..." acting on file that was not the selected one (Anubhav Tyagi)
+* Redesign "Compress..." dialog (Ondrej Holy, Allan Day)
+* Provide creation of password-protected ZIP archives (Ondrej Holy)
+* Fix search by date not working with Tracker engine (Nishit Patel)
+* Add link to Privacy Settings from Trash (Eric Daigle)
+* Indicate whether trash automatic emptying is enabled (Eric Daigle)
+* Translation updates (GNOME Translation Project contributors)
+
+Major changes in 41.alpha
+=========================
+* Replace deprecated gexiv2 symbols (Ondrej Holy)
+* Make NautilusWindowSlot non-derivable (António Fernandes, Ernestas Kulik)
+* Prevent closing popover when "Show Hidden Files" is toggled (Rodrigo Pedro)
+* Hand preview updating over to FilesView (António Fernandes)
+* Provide source .svg icon (Jakub Steiner)
+* Fix missing "Open Scripts Folder" menu item (Ondrej Holy)
+* Prevent reopening of previewer on window focus (Felipe Borges)
+* Keep working directory when executing scripts (António Fernandes)
+* Translation updates
+
+Major changes in 40.1
+=====================
+* Fix File conflict dialog crashes on extensionless filenames (António Fernandes)
+* Fix crashes when extracting encrypted archives (Ondrej Holy)
+* Fix duplicated context menu entries for RAR archives (Marcos Simental)
+* Translation updates
+
+Major changes in 40.0
+=====================
+* Translation updates
+
+Major changes in 40.rc
+======================
+* Group files depending on the opening app (Bastien Nocera, António Fernandes)
+* Fix crashes when closing the last tab (António Fernandes)
+* Revert text-based clipboard workaround and use the dedicated type again (António Fernandes)
+* Use GNOME 40 empty view styling (Christopher Davis, António Fernandes)
+* Translation updates
+
+Major changes in 40.beta
+========================
+* Improve tab completion in the location entry (James Westman, António Fernandes)
+* Make manual rename more convenient in File conflict dialog (António Fernandes)
+* Add support for extracting password-protected archives (Felipe Borges, Ondrej Holy)
+* Implement new single-page design of Preferences dialog (Adrien Plazas, António Fernandes)
+* Use libhandy for window and headerbar (Christopher Davis, Adrien Plazas)
+* Fix detection and handling of remote files (António Fernandes)
+* Fix progress reporting in various cases (Ondrej Holy, Sachin Daluja)
+* Fix Batch rename dialog crashes (Sachin Daluja)
+* Preserve mtime of non-empty directories on move (Maxim Mikityanskiy)
+* Translation updates
+
+Major changes in 40.alpha
+=========================
+* Add support for creation date (António Fernandes)
+* Fix several memory leaks (António Fernandes)
+* Do not use default location instead of root in path bar (Ondrej Holy)
+* Don't save window state when tiled (Elias Projahn)
+* Search for tracker3 in PATH (Antoine Jacoutot)
+* Use xdg-desktop-portal for setting wallpapers (Felipe Borges)
+* Handle rotated images in Preferences dialog (James Westman)
+* Fix Batch rename dialog crashes (Ondrej Holy)
+* Fix double-click row check (António Fernandes)
+* Translation updates
+
+Major changes in 3.38.1
+* Update starred URIs on move & rename (António Fernandes)
+* Prevent recursion to speed up emptying trash (Ondrej Holy)
+* Prevent stale items to be shown in starred view (António Fernandes)
+* Revert icon emblem fixes in order to prevent performance issues (António Fernandes)
+
+Major changes in 3.38.0:
+* Fix missing Extract/Compress menu items (António Fernandes)
+* Translation updates
+
+Major changes in 3.37.92:
+* Port to Tracker 3 (Sam Thursfield)
+* Translation updates
+
+Major changes in 3.37.91:
+* Fix batch renaming using metadata (Max)
+* Translation updates
+
+Major changes in 3.37.90:
+* Port Properties dialog to GtkBuilder including various enhancements (Apoorv Sachan, António Fernandes)
+* Prevent crashes when file operation is cancelled (Ondrej Holy)
+* Auto-escape filenames on NTFS and exFAT mounts (ignapk)
+* Preserve navigation history after opening Other Locations (Sachin Daluja)
+* Use g_clear_signal_handler instead of custom codes (Joshua Lee)
+* Translation updates
+
+Major changes in 3.37.3:
+* Allow changing file owner under admin:/// scheme (Apoorv Sachan)
+* Update outdated appdata info (Ondrej Holy)
+* Translation updates
+
+Major changes in 3.37.2:
+* Fix broken tracker search engine under some locales (Cristiano Nunes, António Fernandes)
+* Use tabular numbers for progress info (Diego Escalante Urrelo)
+* Disable select-all while directory is loading (Ujjwal Kumar)
+* Add newly created files to Recent (Sachin Daluja)
+* Port to new PackageKit DBus API (Romeo Calota)
+* Translation updates
+
+Major changes in 3.37.1.1:
+* Prevent jump to the old scrolling position after changing location (António Fernandes)
+* Add org.gnome.Nautilus.FileOperations2 interface (Alberts Muktupāvels)
+* Fix content type detection when opening files from remote locations (Ondrej Holy)
+* Show notification on completion of file transfers if the window isn't focused (Sachin Daluja)
+* Add support for zoom media keys (Sabri Ünal)
+* Add dynamic tooltip for the toggle views button (Ujjwal Kumar)
+
+Major changes in 3.37.1:
+* Always show pathbar background to fix styling glitches (António Fernandes)
+* Fix check to not clear clipboard after each move/copy operation (Artem Serostanov)
+* Ignore hidden directories in the templates folder (Ondrej Holy)
+* Add several missing shortcuts to the Keyboard Shortcuts dialog (Sabri Ünal)
+* Unify pathbar and background context menus (Sachin Daluja)
+* Refactor menu handling to fix repeated popover animations (António Fernandes)
+* Mark Empty Trash and Delete All buttons as destructive actions (Alexey Chernyshov)
+* Show infobar to allow installation of OSTree software (Philip Withnall)
+* Honor umask when creating new files from templates (Ondrej Holy)
+* Fix endless content size calculations in properties dialog (Ondrej Holy)
+
+Major changes in 3.36.0:
+* Translation updates
+
+Major changes in 3.35.92:
+* Fix crashes often happening when searching (Ondrej Holy)
+* Say "Trash is Empty" only in the root of trash folder (Abdul Rauf)
+
+Major changes in 3.35.91.1:
+* Add support for hidden template files (Ondrej Holy)
+* Fix conflict dialog for google-drive (Ondrej Holy)
+
+Major changes in 3.35.90:
+* Fix crashes after conflict dialog response (Ondrej Holy)
+* Add support for numeric keypad for zooming (Sabri Ünal)
+* Fix missing filename results when searching (Ondrej Holy)
+* Fix compilation on Wayland-only systems (Javier Jardón)
+
+Major changes in 3.35.2:
+* Don't use hyphens when breaking filenames in multiple lines (António Fernandes)
+* Fix drag and drop on scaled displays (Robert Mader)
+* Add and use new icon for the development profile (Jakub Steiner, António Fernandes)
+* Fix criticals and crashes when closing properties dialog (Ondrej Holy)
+* Fix opening file previews in Sushi (Jan Alexander Steffens)
+* Fix criticals after trashing file (Ondrej Holy)
+
+Major changes in 3.34.0:
+* Fix emblems not appearing on files in some cases (Colin Atkinson)
+* Respect recursivity setting in shell search provider (Jiří Černý)
+* Make recursive permission changes apply only to children (Carlo Lobrano)
+
+Major changes in 3.33.90:
+* Add tooltip to view menu button
+* Show warning in read-only directories when pasting files (George Mocanu)
+
+Major changes in 3.32.0:
+* Much smoother search, no more hang ups (Xiang Fan)
+
+Major changes in 3.31.90:
+* New path bar design that improves discoverability of buttons (Carlos Soriano)
+* Improve high contrast layout for accesibility (Jordan Petridis)
+* New Nautilus icon (Jakub Steiner)
+* Add coverage report (Carlos Soriano)
+* Fix crashes (Antonio Fernandes, Ernestas Kulik, Marco Trevinho)
+* Remove app menu (Peter)
+* Add issue triaging automation (Carlos Soriano)
+* Make CI centralized (Jordan Petridis)
+* Make starred files feature available on Tracker tracked directories (Carlos Soriano)
+
+Major changes in 3.30.0:
+* Nothing new, enjoy 🍹
+
+Major changes in 3.29.92:
+* Revert showing search filter popover on ctrl-f (António Fernandes)
+* Add more tests (Alexandru Fazakas) (woo!)
+* Replace ambiguous slash with trash icon in path bar (Yi-Soo An)
+* Fix path bar buttons not working with keyboard (António Fernandes, Carlo Lobrano)
+* t (Carlos Soriano)
+* Fix crash when opening broken bookmarks from other locations (Ernestas Kulik)
+* Add warning about exceeded file name limit when renaming, etc. (António Fernandes)
+* Add plumbing for desktop extension (clipboard, undo/redo, etc.) (Carlos Soriano)
+* Tweak path bar styling (António Fernandes, Alexander Mikhaylenko, Jakub Steiner)
+
+Major changes in 3.29.90.1:
+* Flatpak improvements. Improved user facing experience and developer experience (Ernestas Kulik, Carlos Soriano)
+* CI & CD set up. Increases stability, buildability and feedback cycle (Jordan Petridis, Ernestas Kulik, Carlos Soriano)
+* Distribute icons horizontally in the icon view (Nikita Churaev)
+* Implement new pathbar/search design (Allan Day, Antonio Ferndandes, Piotr Drag, Carlos Soriano)
+* Implement new toolbar menus design (Carlos Soriano)
+* Add background actions to the path bar (Carlos Soriano)
+* Get background work ready for gtk4 port (Ernestas Kulik)
+* Add recent search engine (Marco Trevisan)
+* Implement tests for Nautilus most critical operations (Alexandru Fazakas)
+* Show Recency column in recent view (Rahul Verma)
+* Avoid recursivity in symbolic links (Ernestas Kulik)
+* Add a button in properties dialog to open GNOME Disks (Rahul Verma)
+* Add touch support for menus in views (Jan-Michael Brummer)
+* Fix error when accesing a file with x-nautilus-search (Rahul Verma)
+* Allow right clickin expanders (Alexandru Fazakas)
+* Allow trashing/deleting Desktop dir (Antonion Fernandes)
+* Improve about dialog visuals (Juraj Fiala)
+* Fix path bar changing size when navigating (Nikita Churaev)
+* Fix MB/MiB confusion in preferences dialog (Christophe Fergeau)
+* Fix openning files failing from other applications in some cases due to DBus race (Ernestas Kulik)
+* Implement devel style to differentiate development builds (Carlos Soriano)
+* Improve handling for impaired (Joanmarie Diggs, Peter Vagner)
+* Fix wrong labels and file count in operations progress (Antonio Fernandes)
+* Remove special treatment for desktop files (Carlos Soriano)
+* Remove special treatment for computer:/// (Carlos Soriano)
+* Fix triggering maximum file name when renaming (Ernestas Kulik)
+* Open search filters with popover open when using <ctrl>f (Stratila Andrei)
+* Expose active windows for Ubuntu dash support (Philip Langdale)
+* Show "Open With" for files in trash (George Mocanu)
+* Provide more information in prperties dialog for files in trash (George Mocanu)
+* Implement showing properties of current view from path bar (Wong Heung Sang)
+* Avoid fuzzy icons in small sizes (Sam Hewitt)
+* Warn if the renamed file will be hidden once renamed (Yash Jain)
+* Improve and fix visuals in the new views (Carlos Soriano)
+* Add show sidebar setting to the preferences dialog (Carlos Soriano)
+* Remove experimental views UI setting in preferences dialog (Carlos Soriano)
+
+Major changes in 3.28.0:
+* Fix build failure (Ernestas Kulik)
+* Translation updates
+
+Major changes in 3.27.92.1:
+* Fix build failures (António Fernandes, Ernestas Kulik)
+* Break the build (Ernestas Kulik)
+
+Major changes in 3.27.92:
+* Don’t open files when double-clicking star icon (Alexandru Fazakas)
+* Fix crashes caused by extremely long error messages (Ernestas Kulik)
+* Don’t strip extensions from folder names in “Compress…” dialog (Rahul Verma)
+* Set keyboard focus when programmatically selecting in list view (António Fernandes)
+* Remove new folder name suggestion when there is an active selection (Alexandru Fazakas)
+* Hide thumbnails when using small icons (Alexandru Fazakas)
+* Reduce help overlay size (Carlos Soriano)
+
+Major changes in 3.27.90:
+* Enable closing tabs by middle-clicking (Carlos Soriano)
+* Rename “favorite” files to “starred” (Carlos Soriano)
+* Fix starring files with special characters (Carlos Soriano)
+* Ellipsize tab labels less aggressively for large numbers of tabs (António Fernandes)
+* Fix infinite loop when extracting encrypted archives (Ernestas Kulik)
+* Remove support for external bulk rename tools (Carlos Soriano)
+* Only show option to star files in indexed locations (Carlos Soriano)
+* Fix batch renaming for files with special characters in metadata (Ernestas Kulik)
+* Refactor extension library (Ernestas Kulik)
+* Show notification when unstarring files and allow undo (Carlos Soriano)
+* Fix AppStream metadata being installed in a deprecated location (Jeremy Bicha)
+
+Major changes in 3.27.4:
+* Better touch support (Jan-Michael Brummer, Antonio Fernandes)
+* Remove desktop icons (Ernestas Kulik, Antonio Fernandes, Carlos Soriano)
+* Add a close button for the path bar (Karuna Grewal)
+* Improve Flatpak support, now access to devices too (Carlos Soriano)
+* Improve trash performance (Ondrej Holy)
+* Improve window default position (Ernestas Kulik)
+* Improve starring files reliability (Alex Pandelea)
+* Add Microsoft Office types for search (Carlos Soriano)
+* Fix crash when detaching tabs (Nelson Benitez)
+* Add XF86Back and XF86Forward as key shortcuts (Antonio Fernandes)
+* Add keyboard navigability to the new views (Ernestas Kulik)
+* Make wallpaper folder translatable (Carlos Soriano)
+* Forbid more characters for FAT systems when renaming files (Ernestas Kulik)
+* Add DjVu as pdf type (Carlos Soriano)
+* Fix crash when expanding folders (Antonie Fernandes)
+
+Major changes in 3.27.2:
+* Add starring files (Alexandru Pandelea)
+* Fix timestamps for files in the future (Pete Bantock)
+* Never soft folders before files in search (Antonio Fernandes)
+* Remove fts setting from preferences (Alexandru Pandelea)
+* Reveal item when opened from the recent view (Nelson Benitez)
+* Fix crash when expanding folders in list view (Antonio Fernandes)
+
+Major changes in 3.26.0:
+* Translations
+
+Major changes in 3.25.92:
+* Fix desktop file parsing errors (Jeremy Bicha)
+* Bump GTK+ dependency version to 3.22.6 (António Fernandes)
+* Add mnemonic to replace button in file conflict dialog (Martin Bříza)
+* Show prefix matches first when searching (Alexandru Pandelea)
+* Enable keyboard navigation in search type list (Ernestas Kulik)
+* Fix list view column picker not being centered in certain locales (Robert Mibus)
+* Make the path bar a drop target for files again (António Fernandes)
+* Make sidebar visibility setting persistent (Jason Crain)
+* Use spin button for thumbnailable file size limit setting (Vyas Giridhar)
+* Only allow directories to be dragged onto sidebar for bookmarking (Nelson Benítez León)
+* Make path bar clicks add new history entries (António Fernandes)
+* Allow hiding unfocused search bar by pressing Escape (Ernestas Kulik)
+* Hide location entry after losing keyboard focus (Ernestas Kulik)
+* Allow deleting files with numpad delete key (António Fernandes)
+* Forbid overwriting directories with files (Ernestas Kulik)
+
+Major changes in 3.25.90:
+* Fix use of return key for conflict dialog (Evgeny Shulgin)
+* Fix use of return key when searching not activating the selected file (Alexandru Pandelea)
+* Add stable Flatpak builds (Carlos Soriano)
+* Fix wrapping file names after a dot (Jeremy Bicha)
+* Use header bar for all dialogs (Carlos Soriano)
+* Use portals for launching files in a sandbox with Flatpak (Ernestas Kulik)
+* Show error on empty name on batch rename dialog (Diana Grecu)
+* Change keyboard shortcuts for navigation of tabs similar to Firefox/Chrome etc. (Ernestas Kulik)
+* Add a restore tab funcionality, similar to web browsers (Alexandru Pandelea)
+* Fix rubberband with Wacom tablets (Jason Gerecke)
+* Add Full Text Search (fts) to Nautilus so we search inside files content too (Alexandru Pandelea)
+* Disable create link when clipboard is empty (Tiberiu Lepadatu)
+* Disable zoom button if percentage is 100% (Diana Grecu)
+* Bump Tracker dependency to version 2.0 (Carlos Garnacho)
+* Make Tracker a hard dependency (Bastian Nocera)
+* Assume Nautilus project is GPL3+ (Carlos Soriano)
+* Allow decompressing archives on remote locations (Bastian Nocera)
+* Add license to Nautilus extensions (Ernestas Kulik)
+* Only use location in description for GNOME Shell search (Florian Mullner)
+* Add tablet pad controllers for common actions (Carlos Garnacho)
+* Fix <ctrl>+z when renaming a file not undoing the text (Ernestas Kulik)
+* Use upstream and newer fallback icons (Ernestas Kulik)
+* Provide mime type support for compressed archives, so Nautilus can be used for handling compressed archives outside of Nautilus too (Carlos Soriano)
+
+Major changes in 3.25.1:
+* Ported to Meson build system (Ernestas Kulik)
+* Fix replacing directory with symlink (echo-devim)
+* Focus when a new folder is created (Kevin Lopez)
+* Do not consider directory names with dots as extensions (Evgeny Shulgin)
+* Fix move to/copy to when searching (Alex Pandelea)
+* Various fixes to the new experimental views (Carlos Soriano)
+* Fix scripts order in submenu (Carlos Soriano)
+* Fix open in new tab/window in Other Places (Carlos Soriano)
+* Show new networks available while in Other Places view (Georges Basile Stavracas Neto)
+* Avoid extraction of files if not enough space (Vyas)
+* Fix not being able to drag the window from the path bar (Carlos Soriano)
+* Add user preference for using the new views (Carlos Soriano)
+* Fix DnD when using Google Drive (Ondrej Holy)
+
+Major changes in 3.24.0:
+* Translations
+
+Major changes in 3.23.92:
+* Fix count progress in operations when skipping files (Ernestas Kulik)
+* Improve meson build (Ernestas Kulik)
+* Selection and menus fixed for the experimental icon view (Carlos Soriano)
+* Make Nautilus work with Flatpak and Builder (Carlos Soriano)
+
+Major changes in 3.23.91:
+* Fix long-time, hard to reproduce, and common crash on desktop with "auto layout" icons (Alex Pandelea)
+* Port building system to meson (Ernestas Kulik)
+* Make F2 toggle between selection modes, full file name or only file name withouth extension (Ernestas Kulik)
+* Recent files are now always files that only the user used, rather than any program/daemon like Dropbox updating the access time (Carlos Soriano)
+* Fix Nautilus tests with extexnsions points (Jan Tojnar)
+* Fix crash on desktop when refreshing (Alex Pandelea)
+
+Major changes in 3.23.90:
+* Add <ctrl> Return as shortcut to open selected folder in new window (Felipe Borges)
+* <ctrl> N now opens the window in the same location as the current view (Felibe Borges)
+* Fixes on managing menus with keyboard (djb)
+* Remove unused <ctrl> B shortcut (Jeremy Bicha)
+* Use a better empty state for trash (Mohammed Sadiq)
+* Fix floating bar hide on hover when using tabs (Ernestas Kulik)
+* Syncronize gtk+ and Nautilus setting for sorting the folder first (Felipe Borges)
+* Select entire names for folder when renaming (Razvan Chitu)
+* Support to open folders withouth permission using polkit and the admin backend (Carlos Soriano)
+* Fix trash operations progress report (Carlos Soriano)
+* Improve performance setting metadata only when necesary (Carlos Soriano)
+* Fix progress reporting when copying (rpm-build)
+* Prevent toolbar menu dissapearing when "Hidden files" menu item is toggled (Neil Herald)
+* Update app icon (Jakub Steiner, Lapo Calamandrei)
+* Fix icon scale computation when changing DPI (Lionel Landwerlin)
+* Add <ctrl> M as alternate shortcut for renaming for those laptops withouth "f" keys (Cristian Nancu)
+* Fix crash when pressing enter on search (Alexandru Pandelea)
+* Fix failed build with tracker disabled (Ernestas Kulik)
+* Ask the user for using desktop files from unknown sources (Carlos Soriano)
+* Improve the operations button animation in order to not need to show the operations popover (Carlos Soriano)
+* Add an experimental icon view based on flow box with extra niceties under a gsetting preference (Carlos Soriano)
+
+Major changes in 3.22.1:
+* Multiple batch renaming fixes (Alex Pandelea, Carlos Soriano)
+* Multiple compression integration fixes (Razvan Chitu, Carlos Soriano)
+* Fix not showing "eject" and other options for devices in the context menu in the desktop (victoryang)
+* Rework clipboard handling, fixing desktop<->Nautilus interaction (Carlos Soriano)
+* Fix overlaping icons on desktop in some cases, noticeabily in Ubuntu (Ian Lane)
+* Fix wrong progress information in operations when skipping files (Razvan Chitu)
+* Fix gnome-shell search only searching for whole words (Jiri Cerny)
+* Show location as default for list view on Recent (Carlos Soriano)
+* Fix context menu position in Wayland or other non-global coordinates systems (Carlos Soriano)
+* Update man page of nautilus (Ernestas Kulik)
+* Add revealer for warnings in batch rename dialog (Lavinia Stefania)
+* Add tooltips to batch rename dialog file names (Alex Pandelea)
+* Port nautilus classes to G_DECLARE (Lavinia Stefania)
+* Extend Nautilus File API for regular files (Neha Yadav)
+* Don't crash for simple leaks on the views (Carlos Soriano)
+
+Major changes in 3.22.0:
+* Increase gtk+ depencency version (Michael Biebl)
+
+Major changes in 3.21.92:
+* Fix libgd warning (Bastien Nocera)
+* Numerous batch renaming improvements and fixes (Alex Pandelea, Carlos Soriano)
+* Detect .bz and .xz as extensions for renaming (Alex Pandelea)
+* Fix operations popover too small (Ernestas Kulik)
+* Add dummy --no-desktop option so Dropbox plugin works again (Carlos Soriano)
+* Fix build when using the --disable-tracker compile time option (Carlos Soriano)
+
+Major changes in 3.21.91:
+* Implement batch renaming tool (Alex Pandelea)
+* Implement compressed files support (Razvan Chitu)
+* Rework the view menus (Neil Herald)
+* Separate desktop handling from Nautilus (Carlos Soriano)
+* Add missing cut shortcut (Pedro Beja)
+* Add <ctrl>= as "zoom in" shortcut (Ernestas Kulik)
+
+Major changes in 3.20.3:
+* Support HDPI in desktop margins (Andrea Azzarone)
+* Fix opaque desktop background after changing themes (Ernestas Kulik)
+* Fix gnome-shell search not providing results or making the CPU at 100% even if closed (Carlos Soriano)
+
+Major changes in 3.20.2:
+* Fix white desktop background after changing themes (Sebastien Keller)
+* Improve double click detection (Johannes Oertel)
+* Fix path bar menu on wayland appearing on random places (Olivier Fourdan)
+* Only save zoom level if the level has changed (Mike Gorse)
+* Fix date difference calculation for attributes like Modified Date (Ernestas Kulik)
+* Hide floating bar on hover (Carlos Soriano)
+* Fix detection of remote systems for not thumbnailing (Ernestas Kulik)
+* Fix sorting on Japanese locale (Ernestas Kulik)
+* Fix gnome shell search provider not being recursive (Carlos Soriano)
+* Fix copy operation lags (Razvan Chitu)
+* Avoid unresponsiveness when file chooser is opened (Ernestas Kulik)
+* Fix renaming duplicated logic on search and recent (Ernestas Kulik)
+* Fix trash handling to delete files if disk is full (Mario Sanchez Prada)
+
+Major changes in 3.20.1:
+* Fix crash if using scripts (Carlos Soriano)
+* Fix shortcuts to change views mode (Razvan Chitu)
+* Do not switch focus to created tabs (Razvan Chitu)
+* Fix margins on sidebar context popover (Sebastian Bacher)
+* Fix the empty states icons blocking clicks for activating context menus (Georges Basile Stavracas)
+* Show same name in the path bar as in other locations when using mounts (Razvan Chitu)
+* Make more dialogs modal (Ernestas Kulik)
+* Allow "move to" action in network locations (Carlos Soriano)
+* Fix crash when searching and closing with multiple windows (Carlos Soriano)
+* Fix path bar not updating to the new location when finalizing search (Carlos Soriano)
+* Show an error dialog on falied connection to servers in the other locations view (Ernestas Kulik)
+* Fix odd empty operations popover (Neil Herald)
+* Fix hamburguer menu action not being available when closing a tab (Carlos Soriano)
+* Select first item in the views only when searching (Carlos Soriano)
+* Fix crash when creating a new window of nautilus from the shell when the application was not running (Carlos Soriano)
+* Allow more applications to be set as default in network locations (Carlos Soriano)
+* Make renamed or created files scroll the view to the position of the files (Carlos Soriano)
+
+Major changes in 3.20.0:
+* Improve path bar sliders sizing, making them less prominent (Carlos Soriano, Lapo Calamandrei)
+
+Major changes in 3.19.93:
+* Use better arrows for the path bar (Carlos Soriano)
+
+sMajor changes in 3.19.2:
+* Show free space in Other Places (Georges Stravacas)
+* Add shortcuts window (Felipe Borges)
+* Fix new window Gnome Shell dash item (Carlos Soriano)
+* Add kudos data for Gnome Software (Cosimo Cechi)
+* Check availability of PackageKit for installing extra apps (Cosimo Cechi)
+* Fix overflow in 32 bits systems (Sebastian Bacher)
+* Fix renaming popover misplaced in the desktop (Iain Lane)
+* Fix blank square in the view after changing view modes or locations (Carlos Soriano)
+* Fix crash when clicking preferences (Carlos Soriano)
+* Widespread work on removing leaks, that usually causes crashes (Carlos Soriano)
+* Operations start visibility improved, showing the popover (Carlos Soriano)
+* Fix wrong date calculation (Carlos Soriano)
+* Fix another issue with nautilus opening location in the wrong window (Carlos Soriano)
+* Fix "move to" action (Carlos Soriano)
+* Show SD cards and external hard drives in the sidebar, not in the Other Places view (Carlos Soriano)
+* Fix nautilus not opening a new window when used from command line (Carlos Soriano)
+* Fix crash using samba (Iain Lane)
+* Allow 3rd party themes to tweak operations button color (Elias Aebi)
+* Fix recurrent crash when closing Nautilus (Debarshi Ray)
+* Avoid empty operations popover (Carlos Soriano)
+* Fix nautilus opening locations in a different window than the one the user is using (Carlos Soriano)
+* Fix Other Places lock ups (Benjamin Otte & Emmanuelle Bassi)
+* Adapt rename entry to the width of the file and increase the minimum (Carlos Soriano)
+* Increase max width of operations popover to fix ellipsize translations (Carlos Soriano)
+* Fix recurrent crashers (Carlos Soriano)
+
+Major changes in 3.18.1:
+* Multiple crash fixes (Carlos Soriano)
+* Use GtkPlacesSidebar hints to improve drag and drop experience (Carlos Soriano)
+* Fix remote filesystem check for google drive (Carlos Soriano)
+* Fix properties not being available on some file systems (Carlos Soriano)
+* Fix not being able to trash on some file systems (Carlos Soriano)
+* Fix calculation of operations button that was not showing soon enough in big operations (Carlos Soriano)
+* Get filesystem type asynchronously, so the view is never frozen (Carlos Soriano)
+* Make the delete shortcut also work for delete permanently on filesystem that does not support trash (Carlos Soriano)
+
+Major changes in 3.18.0:
+* Fixed various sidebar crashes (Carlos Soriano)
+* Use a correct file number for copy/move operations (Carlos Soriano)
+* Fix various operations crashes (Carlos Soriano)
+* Google Drive support (Debarshi Ray)
+* Fix desktop icons not appearing for the first time (Carlos Soriano)
+* Fix searching on recursive mode but not working properly (Carlos Soriano)
+* Fix remote warning label not showing sometimes (Carlos Soriano)
+* Use better file renaming positioning when using keyboard shortcut (Andreas Reis)
+* Fix a crash on Other Locations (Mathias Clasen)
+
+Major changes in 3.17.91:
+* Ground work for code isolation and clean up of views (Carlos Soriano)
+* Don't add more items on the filechooser sidebar (Carlos Soriano)
+* Adjust animation for progress button (Jakub Steiner)
+* Track and fix all translation issues (Piotr Drag, Alexander Franke, Carlos Soriano)
+* Improvements and fixes in the new "Other Locations" view (Carlos Soriano)
+* Disable sorting on Recent and Search and ensure criterion correcteness (Carlos Soriano)
+* Add a preference and disable by default automatic opening of folders while hovering on drag an drop operations (Carlos Soriano)
+* Don't search recursively on remote locations, and provide feedback when that happens (Carlos Soriano)
+* Fix major crashers and races (Carlos Soriano)
+
+Major changes in 3.17.90:
+* Don't show sort menu on search (Carlos Soriano)
+* Use watch cursor with pointer (Carlos Soriano)
+* Use popover for renaming (Carlos Soriano)
+* Improve operations button feedback (Carlos Soriano)
+* Code isolation of the model and view of nautilus (Georges Basile Stavracas Neto)
+* Add a new "other places" view for networks and internal partitions (Georges Basile Stavracas Neto)
+
+Major changes in 3.17.3:
+* Ignore no desktop if not firt launch (Chow Loong Jin)
+* Make the toolbar menu settings the only and permanent settings (Carlos Soriano)
+* Use Modified Time for all locations except Recent (Carlos Soriano)
+* Implement new design for operations feedback (Carlos Soriano)
+* Hide sort menu on Recent (Carlos Soriano)
+* Switch to list view if searching (Carlos Soriano)
+* Provide smarter location displayed names (Carlos Soriano)
+* Show feedback when there is no search results (Carlos Soriano)
+* Fix floating bar loading feedback (Carlos Soriano)
+* Add feedback when the current shown folder is empty (Carlos Soriano)
+
+Major changes in 3.17.2:
+* Fix window focus issues when starting nautilus (Carlos Soriano)
+* Fix handling of command line options in diferent cases (Carlos Soriano)
+* Decrease the padding on list view (Carlos Soriano)
+* Use a dialog for creating folders (Georges Basile Stavracas Neto)
+* Use a dialog for renaming files (Carlos Soriano)
+* Allow F5 and ctrl+r as shortcuts for refresh the view (Carlos Soriano)
+* Make the zoom slider the preference itself (Carlos Soriano)
+* Allow opening with a different app than default for multiple files (Carlos Soriano)
+* Fix view scrolling when selecting with ctrl + mouse (Georges Basile Stavracas Neto)
+* Don't always make the sidebar visible on start (Antonio Fernandes)
+* Allow opening folders with another app (Carlos Soriano)
+* Show Delete Permanently on systems that does not support Trash (Carlos Soriano)
+* Add Alt<down> shorcut for opening
+* Fix some icons sizes inconsistency (Cosimo Cechi)
+* Add public API documentation for Nautilus extensions (Cosimo Cechi)
+* Add a gsetting to toggle recursive search (Felipe Borges)
+
+Major changes in 3.16.0:
+* Support multiple desktop names in XDG_CURRENT_DESKTOP (Dmitry Shachnev)
+* Workaround distcheck (Carlos Soriano)
+
+Major changes in 3.15.92:
+* Fix double-clicking on password-protected webdav share, not showing the password dialog (Ross Lagerwall)
+* Don't create desktop on protocols diferents than X11 (Carlos Soriano)
+
+Major changes in 3.15.91:
+* Dimmed labels for list columns (Cosimo Cechi)
+* Fix new folder shortcut (Georges Basile Stavracas Neto)
+* Fix delete shortcut in the trash (Carlos Soriano)
+* Don't use libgd notifications and implement them with Gtk+ (Carlos soriano)
+* Don't show notifications in desktop (Carlos Soriano)
+* Esc shortcut for exiting search mode (Georges Basile Stavracas Neto)
+* Fix translation problems with notifications (Carlos Soriano)
+* Fix cluttered desktop icons due to the icon size changes (Carlos Soriano)
+* Make toolbar buttons accesible for A11y (Carlos Soriano)
+* Fix open with another app for multiple selection (Isaac Ge)
+
+Major changes in 3.15.90:
+* Bug fixes and clean ups for the GAction port (Cosimo Cechi)
+* Add path as description of the Gnome shell provider (Carlos Soriano)
+* Add in app notification when deleting items (Carlos Soriano)
+* Set move to trash shortcut to just the Delete key (Carlos Soriano)
+* Avoid hiding the search on small windows (Cosimo Cechi, Carlos Soriano)
+* Improve file operations dialogs UI (Carlos Soriano)
+* Show a warning dialog when the user uses the old move to trash shortcut (Carlos Soriano)
+* Improve list view columns (Carlos Soriano)
+* Add a new modified column with the time (Carlos Soriano)
+
+Major changes in 3.15.4:
+* Port to GAction
+* Rework menus and zoom levels
+* Use monospace font for permissions column (Matthias Clasen)
+* Port to GNotification (Florian Müllner)
+* Stop loading custom accel maps file
+* Use inline toolbar for column chooser dialog (Robert Roth)
+* Fix new window activation with desktop icons enabled
+* Fix regression with --new-window option (Lubomir Rintel)
+* Use mount name if available for file operations progress report
+* Set max-width for value labels in properties (Lars Uebernickel)
+* Increase default window width (Michael Catanzaro)
+
+Changes in 3.14.0:
+* Translation updates
+
+Major changes in 3.13.92:
+* Improve toolbar and pathbar styling with GTK 3.14
+* Expand properties dialog notebook in its parent container
+* Fix crash when using the rename field context menu in list view
+* Fix crash when using a screen reader in canvas view
+* Fix crash when changing icon captions setting (Volker Sobek)
+
+Major changes in 3.13.91:
+* Performance improvements for canvas and list views
+* Remove duplicate actions in gear menu when app menu is not in use
+* Fix CSS style for new GTK (Lapo Calamandrei, Alex Diavatis, António Fernandes)
+* Fix handling of sort-directories-first setting (Matthias Clasen)
+
+Major changes in 3.13.90:
+* Fix problems with fast group/owner changes
+* Fix user list for owner changes
+* Use margin-start/end instead of deprecated margin-left/right
+* Fix floating bar CSS style after Adwaita GTK move
+* Fix build glitch with enums file (Volker Sobek)
+* Translation updates
+
+Major changes in 3.13.2:
+* Fix a missing unref (Robert Ancell)
+* Fix a crash in selection handling (Iain Lane)
+* Use header bar for properties dialog (Matthias Clasen)
+* Use new gear menu icon (Matthias)
+* Include application-specific theming for Adwaita (Matthias)
+* Share pathbar styling with GTK+ (Matthias)
+* Translation updates
+
+Major changes in 3.13.1:
+* Port to be a DBusActivatable application
+* Fix a crash when switching back from the trash folder
+* Do not use legacy emblem names (David King)
+* Sync the GTK+ setting for sort-directories-first (Matthias Clasen)
+* Fix crash when enumerating windows (Robert Ancell)
+* Use spaces between em dashes in file operations (Ross Lagerwall)
+* Use headerbar in bookmarks window (Yosef Or Boczko)
+* Fix arrow in connect server dialog for RTL languages (Yosef Or Boczko)
+
+Major changes in 3.12.0:
+* Translation updates
+
+Major changes in 3.11.92:
+* Only show one button for mixed Video CD/Video DVD media
+* Add a force-desktop action to NautilusApplication (Ray Strode)
+
+Major changes in 3.11.90:
+* Port to GtkHeaderBar (Yosef Or Boczko, Matthias Clasen)
+* Fix tab label not being update on removals or renames
+* Fix minimum size requisition of Nautilus windows
+* Fix remote mounts not being detected as removed (Daniel Schürmann)
+* Fix high CPU usage when searching with criteria (Daniel Wyatt)
+* Fix unwanted search entries on the desktop (Marc Deslauriers)
+* Fix initial value of start-with-sidebar
+* Fix some critical assertions
+* Fix a crash when selecting an unsupported custom image (Nelson Benítez León)
+* Remove Set as Background action on interactive DND
+* Use unity-control-center when under Unity (Robert Ancell)
+* Add film strip in nautilus rather than in totem (Bastien Nocera)
+
+Major changes in 3.11.3:
+* Don't perform deep counts on regular files (Ross Lagerwall)
+* Fix overlapping filenames on hover in canvas view (Manuel Bachmann)
+* Fix crasher when changing the symlinks cache (Michael Catanzaro)
+* Standardize Help/About/Quit for the app menu (Michael Catanzaro)
+* Remove Enter Location from the app menu (Michael Catanzaro)
+* Use search bar style for the query editor (William Jon McCann)
+* Support building against Tracker 0.18 (Dominique Leuenberger)
+
+Major changes in 3.11.2:
+- Bring back eject button in sidebar (Matthias Clasen)
+- Fix rename entry rendering (Alex Larsson)
+- Fix rename entry positioning (Alex Larsson)
+- Avoid a crash if inhibit fails (Ross Lagerwall)
+- Center tab labels (William Jon McCann)
+- Fix DND move (Nelson Benitez Leon)
+- Translation updates
+
+Major changes in 3.10.0:
+- Make search provider return results again (David King)
+- Translation updates
+
+Major changes in 3.9.92:
+* Use new gtk_drag_begin_full API (Jasper St. Pierre)
+* Increase default window width to fit four icons (Michael Catanzaro)
+* Don't filter out NoDisplay applications from "Open With..."
+* Fix desktop file categories (Elad Alfassa)
+
+Major changes in 3.9.91:
+* Use a GtkRevealer for the search bar
+* Don't present redundant options for operations on single
+  files (William Kunkel)
+* Fix desktop window for newer GTK+ client side decorations
+  (Christian Hergert, Matthias Clasen)
+* Fix double menu when right clicking on the pathbar (Stefano Facchini)
+* Fix headerbar appearance with latest GTK+ (Yosef or Boczko)
+* Fix copy/cut/paste accels not working correctly
+
+Major changes in 3.9.90:
+* Fix support for HiDpi displays
+* Replace control characters when fixing filenames for FAT
+* Fix crash while dragging an expander in list view
+* Don't use deprecated GtkStock and GtkImageMenuItem
+* Fix "Reset to Defaults" not resetting columns in List
+  view (Garret Regier)
+* Use more friendly strings in the Location column in
+  List view (Garret Regier)
+* Add Access Date column in Recent (Garret Regier)
+* Add Location column by default in search views (Garret Reiger)
+* Fix search not remembering per-view settings (Garret Reiger)
+* Use new GTK titlebar look (Yosef Or Boczko)
+* Fix hidden files setting not correctly refreshing on
+  change (Srinivasa Ragavan)
+* Fix incorrect click target in canvas view under certain
+  circumstances (Srinivasa Ragavan)
+* Fix DnD glitches on pathbar buttons (Nelson Benitez Leon)
+* Show invalid filename dialog when copying, if required (Nelson Benitez Leon)
+
+Major changes in 3.9.3:
+* Shade rubberbands on the desktop using the wallpaper color (Ted Gould)
+* Port to GtkPlacesSidebar (Federico Mena Quintero)
+* Check for available mail clients before enabling sendto
+  extension (Plamena Manolova)
+* Enter location bar upon entering "~" (Garrett Regier)
+* Add a menu item to open parent folder of search/recent
+  items (Garrett Regier)
+* Use Shift+Ctrl+Z, not Ctrl+Y, for Redo (Adam Dingle)
+* Remove multicontext menu items from editable entries
+
+Major changes in 3.8.2:
+* Don't grab focus to search entry needlessly (Rui Matos)
+* Increase default size to fit 4 columns of icons (Michael Catanzaro)
+* Remove no-longer-existing keys from GConf conversion
+* Change 'x-nautilus-search:' To 'Search' in tooltips (Ting-Wei Lan)
+* Translation updates
+
+Major changes in 3.8.1 are:
+* Use a consistent name for applications in the Open With context menu
+* Don't follow symbolic links when searching recursively
+* Increase default sidebar width
+* Fix resetting view to default preferences not working (Michael Wood)
+* Fix behavior of search entry with external Input Methods (Rui Matos)
+* Fix partial ranking order of search results
+* Fix move of special icons on the Desktop triggering file operations
+* Fix copy action not working in Recent
+
+Major changes in 3.8.0 are:
+* Fix inconsistency in handling of NoDisplay=true applications
+* Translation updates
+
+Major changes in 3.7.92 are:
+* Ensure target directories exist when restoring trash contents
+* Export non-VFS URIs to DnD selections
+* Hide Change Background desktop action g-c-c is not installed
+* Fix double tap not working on certain touchscreen devices
+* Fix for removal of org.gnome.desktop.background draw-background setting
+* Fix inability to move desktop icons to non-primary displays in certain
+  configurations
+
+Major changes in 3.7.91 are:
+* Export an OpenLocations property over DBus (Marco Trevisan)
+* Add a way to reuse and raise existing windows already opened to a
+  given location (Marco Trevisan)
+* Use an ARGB window for the desktop (Matthias Clasen)
+* Stop drawing the desktop background
+* Register our GtkApplication with gnome-session
+* Fix Tracker search not working correctly
+* Fix activation of search provider results
+* Fix nautilus --quit from terminal not working
+
+Major changes in 3.7.90 are:
+* Add back a Treeview option for list view. This is off by default, and
+  is backed by a checkbox in the Preferences dialog
+* Add a "Connect to Server" item in the Network section of the sidebar
+* Add a "Format..." item in volume context menus in the sidebar
+* Fix accelerators not showing up in gear and view menus
+* Use G_APP_INFO_CREATE_NEEDS_TERMINAL instead of handrolled
+  code (William Jon McCann)
+
+Major changes in 3.7.5 are:
+* Switch to hovered locations on DnD (William Jon McCann)
+* Support a --force-desktop commandline option for classic mode
+* Add a separate desktop file for classic mode integration
+* Use a better position for navigation button popup menus
+* Fix many memory leaks (Pavel Vasin)
+* Fix a crasher when a file in trash has reserved characters in the filename
+* Fix a crasher when closing the sidebar immediately after construction
+* Fix a crasher closing the properties dialog while calculating folder size
+* Fix backup files showing up in search provider results
+* Fix floating bar buttons being added twice
+
+Major changes in 3.7.4 are:
+* Support a --select commandline option to force selection of the passed-in URI
+* Add source hints to notifications (Matthias Clasen)
+* Modernize build infrastructure (Javier Jardon)
+* Use public GTK-a11y support instead of our own hacks
+* Fix a crasher in the Shell search provider
+
+Major changes in 3.7.3 are:
+* Update search provider to org.gnome.Shell.SearchProvider2 interface
+* Rely on GIO to parse ".hidden" files
+* Consistently use unicode ellipsis instead of three periods (Jeremy Bicha)
+* Use a different label for removing a file from "Recent" (Paolo Borelli)
+* Restore the previous behavior wrt. framing for custom icons
+* Share the "show hidden" GSetting option with the GTK+
+  file chooser (Timothy Arceri)
+* Fix missing unmount sync notification under some circumstances
+* Fix infinite loop while deep counting the size of "/" (Phillip Susi)
+* Fix wrong filename when restoring file from trash (Timothy Arceri)
+
+Major changes in 3.7.2 are:
+* Request to render larger thumbnails by default
+* Don't quote the current location name in search bar
+* Use "Run" in menus when launchine executables
+* Fix stray Empty Document item in New Document menu
+
+Major changes in 3.6.3 are:
+* Fix symbolic links on remote volumes not activating default action
+* Fix duplicated query editor filter rows when changing search location
+* Fix search toolbar disappearing with very long folder names
+* Fix missing Trash action after "Recent" was visited
+* Fix missing frame around thumbnails for some zoom factors
+* Fix crash when unmounting remote volumes
+
+Major changes in 3.6.2 are:
+* Open default location for remote shares when mounting
+* Fix missing search results from Tracker for names that contain hyphens
+* Fix missing item selection in the sidebar when starting up
+* Fix search string being eaten by a hidden entry under certain circumstances
+* Fix missing tooltips on stock toolbar buttons
+
+Major changes in 3.7.1 are:
+* Turn on again recursive search for the simple engine
+* Enable incremental loading for search directories
+* Add extra information to image properties page
+* Show free space pie chart for the local root filesystem
+* Resolve symbolic links before launching a file
+* Avoid sync I/O when reading bookmark locations
+* Don't add non-existent XDG folders to the sidebar
+* Don't offer to remove built-in XDG folder bookmarks
+* Fix black input field when renaming a file in icon view with XIM enabled
+* Fix wrong return location when unmounting a remote mount
+* Fix notebook tabs not properly switching after timeout when hovered
+* Fix search toggle button state inconsistent when switching between tabs
+* Fix crasher when using the Tracker engine from the Shell search provider
+* Fix crasher in Shell search provider
+* Fix crasher when unmounting a volume under certain circumstances
+
+Major changes in 3.6.1 are:
+* Fix floating bar not disappearing on search finish
+* Fix fullcolor icons appearing in the pathbar for mount roots
+* Fix drag and drop of multiple rows in list view
+* Fix search relevance not being applied correctly when searching
+* Fix sidebar visibility switch applying to all windows
+* Fix search location when moving to a search directory in Back/Forward
+  history
+* Fix missing search results with non-ASCII characters
+* Fix Home/Trash not showing up in shell provider results
+* Fix startup notification not working when opening multiple windows
+* Fix search results not focusing when activated from the Shell
+* Fix error dialog not showing up when entering a non-existant location
+  in Connect to Server
+* Fix inability to open files after cancelling a rename in list view under
+  some circumstances
+* Fix desktop icons not following the primary monitor workarea when multihead
+  is used with the desktop enabled
+* Fix crasher when search string changes too fast
+* Fix crasher when enabling search while loading a directory
+* Fix crasher when trying to open a saved search file
+* Fix crasher when Tracker is installed but not running
+* Fix crasher in the shell search provider for bookmarks/mounts with an
+  empty name
+
+Major changes in 3.6.0 are:
+* Fix toggling of hidden files visibility in searches
+* Fix base directory appearing in search results
+* Fix missing search results under some locales
+* Fix unmounted mounts showing in shell search provider results
+* Fix a crasher when a window is closed while the view is loading
+
+Major changes in 3.5.92 are:
+* Add a Shell search results provider
+* Add a NautilusDirectory-based search engine implementation for network
+  directories
+* Improve performance and stability of the search engine
+* Change the Type column to only show basic type information
+* Preserve view selection when exiting search
+* Use a symbolic icon for the location entry
+* Fix wrong order of files when searching in canvas view
+* Fix inability to drop on current directory in list view
+* Fix crash when trying to undo failed directory creations
+* Fix positioning of detached tabs
+* Fix symlink creation for remote shares
+* Fix duplicate entries in the sidebar
+* Fix inability to clear entry in Connect to Server dialog
+* Fix view selector flashing while switching views
+* Plug a number of memory leaks
+* Tweak the color scheme for the pie chart in mount properties
+* Remove the SELinux context column for list view
+
+Major changes in 3.5.91 are:
+* New design for the Connect to Server dialog
+* Add the possibility to detach tabs using drag and drop
+* Add paste and location properties actions to the gear menu
+* Use symbolic icons in the sidebar for drives and mounts
+* Follow 12h/24h GSettings preference for view date display
+* Cleanup icon view caption strings
+* Fix wrong zoom level restored at startup
+* Fix unparented mount/eject error dialogs
+* Fix drag and drop for unwritable locations
+* Fix stray templates bar when no templates directory is defined
+* Fix Open With menu showing for apps that don't support URIs and files
+* Fix item count not updating in realtime for directories in Properties
+* Fix missing keybindings for Back/Forward/Up/Go Home
+* Fix missing history context menu on navigation buttons
+* Fix missing Create Link context action
+* Fix missing frame around custom icons
+* Fix broken behavior with multiline filenames
+* Plug a number of memory leaks
+* Remove context menu on blank list view space
+
+Major changes in 3.5.90 are:
+* Reorganize application and gear menu, and add a menu for view actions
+* Add a View options selector to the toolbar
+* Add cluebars for Templates and Scripts special directories
+* Add ability to reorder bookmarks
+* Improve strings in the Autorun prompt
+* Improve error message strings
+* Improve the image Properties page
+* Improve the Permissions page in the Properties window
+* Improve the layout of the Bookmarks dialog
+* Use the dropped text paragraph as name when creating new files
+  using DnD of text snippets
+* Use double quotes instead of ASCII quotes for filenames
+* Change default action for executable text files to Display
+* Change the view mode and zoom level to be per-window instead of per-folder
+* Remove support for Manual layouting in icon views outside of Desktop
+* Remove the Octal permissions list view column
+* Fix segfault when no search results are found
+
+Major changes in 3.5.5 are:
+* Combine results from both search providers
+* Use a ranking algorithm for search results
+* Preselect first search result
+* Add a keybinding for the gear menu
+* Improve styling for the search query editor
+* Fix Ctrl+V not working correctly
+* Fix previewers not being activated correctly
+* Fix search not to trigger on the desktop window
+* Fix pathbar scroll button styling bugs
+
+Major changes in 3.5.4 are:
+* Add Copy To and Move To actions
+* Add a notification while ejecting volumes
+* List view:
+  - New date format display
+  - Use a list model instead of a tree model for list view
+  - Use a better default column order
+  - Change some list column names
+  - Use 32px icons by default
+  - Tweak padding
+* Search:
+  - "Just type" search
+  - Combine the search bar and the query editor
+  - Tracker engine performance improvements and fixes
+* Sidebar:
+  - Add a recent files place
+  - Use symbolic icons
+  - Improve order of the items
+* Toolbar:
+  - Change toolbar layout to the GNOME 3 style
+  - Don't show titlebar when maximized
+  - Use a linked style for the pathbar
+* Menus:
+  - Migrate the menubar to a gear menu
+  - Remove "Go" menu
+  - Remove "Bookmarks" menu
+* Remove "Text beside icons" option for icon view
+* Fix loading string not disappearing in image properties on load
+
+Major changes in 3.5.3 are:
+* Fix accessibility implementation of rename entries and icon view
+* Fix DnD not working on sidebar bookmarks
+* Fix thumbnails failing to display in icon view
+* Fix crasher after ejecting a volume from the sidebar
+* Fix crasher on gtk-shell-shows-app-menu GtkSetting change
+* Fix possible crasher when cancelling a rename operation
+* Use GtkSearchEntry
+
+Major changes in 3.5.2 are:
+* Add a way to create a new directory for selection
+* Don't pack multiple x-content bars in the view
+* Show icons x-content bar application launchers
+* Hide New Document menu when no templates are installed
+* Remove statusbar
+* Remove "Go->Computer"
+* Remove compact view
+* Remove extra panes and tree sidebar
+* Fix pathbar buttons disappearing for too long titles
+* Fix sidebar typeahead find being triggered
+* Fix image properties label not wrapping for long width
+* Don't trigger context menu for sidebar headings
+* Don't show old 'note' emblems
+* Reintroduce GTK accel map loading/saving and migrate it to XDG dirs
+* Remove markup from GtkBuilder strings
+
+Major changes in 3.5.1 are:
+* Add an application menu
+* Don't show sliders up to the file system root in the pathbar
+* Add support for AFP shares in the Connect to Server dialog
+* Don't remove selection when clicking on a row out of name boundaries
+* Fix a wrapping issue with numeric strings in some circumstances
+* Fix rename field selection color for backdrop state
+* Don't select all icons on Ctrl+A when the search entry is focused
+* Remove desktop-is-home-dir GSetting
+* Remove custom accel map loading/saving
+* Use new XDG location for GTK bookmarks file
+
+Major changes in 3.4.1 are:
+* Don't display comment field for desktop files
+* Fix off-by-one error in file operation counts
+* Fix mouse hardware back/forward buttons not working correctly
+* Fix "Undo Trash" for files with non-ASCII characters
+* Fix name corruption for untitled files under some circumstances
+
+Major changes in 3.4.0 are:
+* Fix a regression where "Open With" was hidden for folders
+* Translation updates
+
+Major changes in 3.3.92 are:
+* Fix scrolling in compact view to work with latest GTK
+* Fix Ctrl+Scroll zooming to work with latest GTK
+* Don't hide Open With applications for subtypes of application/x-desktop
+* Add support for the "network" GVolume class identifier
+* Fix a crash at exit with certain extensions that keep refs of the
+  NautilusFileInfos
+* Fix initial focus row when moving the focus into the Places sidebar
+* Fix Shift+Click selection when going back/forward in browsing history
+* Fix packing of desktop file box in properties view
+* Fix pathbar button sizing when a file watched by the pathbar changes name
+* Fix properties window not being able to shrink size
+* Remove unused --enable-profiler configure option
+
+Major changes in 3.3.91 are:
+* Ensure pathbar scrolling works with latest GTK
+* Fix a crash when unmounting volumes with non-empty trash
+* Fix a race condition leading to a crash when closing window slots
+  under certain circumstances
+
+Major changes in 3.3.90 are:
+* Don't make the inactive pane UI elements insensitive
+* Fix a crash when searching in list and compact view
+* Fix a crash when creating a file from a template
+* Use ngettext plural forms for undo strings
+
+Major changes in 3.3.5 are:
+* Introduce Undo support for common file operations
+* Fix a crash when middle clicking icons on the desktop
+* Fix split view actions not updating properly
+* Fix wrong places sidebar selection under some locales
+* Fix a crash when enabling desktop icons handling
+* Support build against Tracker 0.13/0.14
+* Make the rubberband animation obey the global GtkSetting
+
+Major changes in 3.3.4 are:
+* Show both the current file counter and the total files in file operations UI
+* Lazily initialize the notification daemon
+* Move the UI files and icons into GResources
+* Refactor of NautilusWindowPane and NautilusWindowSlot code
+* libnautilus-extension GIR coverage has been improved
+
+Major changes in 3.3.3 are:
+* Implement the org.freedesktop.FileManager1 DBus interface
+* Show context menu for current folder when clicking empty space
+  in list view
+* Sort XDG dirs in the places sidebar according to the current locale
+* Fix handling of Ctrl+T on the desktop window
+* Fix icon view wrap-around key navigation
+* Fix rubberband scrolling in maximized windows
+* Fix a crasher when closing a window
+* Don't use deprecated GLib and GTK functions
+
+Major changes in 3.3.1 are:
+* Show a Properties item in the sidebar for mounts
+* Use GtkStyleContext to draw editable label elements
+* Port to use GtkGrid
+* Don't use deprecated GThread API
+* Fix pie chart background rendering in Properties view
+* Fix a crasher when activating a sidebar item
+* Cleanup old libeel boilerplate code
+
+Major changes in 3.2.1 are:
+* Consolidate typeahead find entry for icon view
+* Fix a crasher when middle-clicking empty space in the places sidebar
+* Fix a crasher when trying to delete files from the tree sidebar
+* Fix a crasher when ejecting a removable device under some circumstances
+* Fix a crasher when trying to activate the previewer in a list view
+  with no selection
+* Fix a crasher when symbolic icon theme is not available
+* Plug some memory leaks
+* Fix the build when Tracker FTS is enabled
+
+Major changes in 3.2.0 are:
+* Fix a couple of drawing regressions introduced in 3.1.92
+* Lots of translation updates
+
+Major changes in 3.1.92 are:
+* Hopefully fix once and for all NautilusWindow keybindings
+* Don't hide the floating bar on hover if it's interactive
+* Fix canvas accessibility implementation for GTK 3.2
+* Don't warn when opening multiple files with one application
+* Correctly remember remote passwords when asked so
+* Add a new topic-based help menu
+* Fix default list view sorting order
+* Don't warn when a mount operation fails with ALREADY_MOUNTED
+* Select the item on right click in the Tree sidebar
+* Scroll to the selected file when opening an URI from the cmdline
+* Read the emblem icon names from the metadata
+* Use libtracker-sparql directly as an optional dependency
+* Streamline icon container rendering code to use gtk_render_*
+* Correctly remember "Keep Aligned" and other desktop metadata
+* Invalidate the text size when changing the DPI xsetting
+* Strip the hardcoded theme bits
+* Add Unity desktop file compatibility
+* Use XDG_CURRENT_DESKTOP when possible
+
+Major changes in 3.1.90 are:
+* Remove the built-in audio previewer
+
+Major changes in 3.1.4 are:
+* Remove the 'Create Launcher' options from the desktop
+* Improve the 'File System' entry in the places sidebar
+* Remove 'Clear History' from the 'Go' menu
+* Fix location bar not expanding full width in the toolbar
+* Use new g_format_size() instead of g_format_size_for_display()
+
+Major changes in 3.1.3 are:
+* Add an 'Add Bookmark' item in sidepane context menu
+* Fix --no-default-window not working when an URI is specified
+* Use g_cclosure_marshal_generic()
+
+Major changes in 3.1.2 are:
+* Use GtkOverlay for the floating bar
+* Move the floating bar away from the cursor on hover
+* Add an autostart desktop file
+* Add metadata::custom-icon-name key for custom icons
+* Fix opening the wrong directory when launching an instance
+  from the command line
+* Misc crashers
+
+Major changes in 3.1.1 are:
+* Add a DBus previewer interface to support e.g. the Sushi previewer
+* Rework handling of _NETSCAPE_URL dnd links
+* Optimizations in the sorting/layouting code for Icon View
+* Misc bugfixes
+
+Major changes in 3.0.1.1 are:
+* Fix some crashers
+* Don't show file transfer progress twice
+
+Major changes in 3.0.1 are:
+* Fix white background bug when drawing desktop icons
+* Fix crash while ejecting volumes from the places sidebar
+* Fix enter not working in the places sidebar
+* Fix conflict dialog labels and entry sizing
+* Fix drawing artifacts in the search bar
+* Fix single click preferences mismatch
+* Fix additional details label colors when using a11y themes
+* Fix some minor/sporadic crashers
+* Fix libnotify and libexif version checks
+
+Major changes in 3.0 are:
+* Use Ctrl+Delete as keyboard shortcut to trash files
+* Make sure we always open new windows from the desktop
+* Fix a crasher
+
+Major changes in 2.91.4 are:
+* Fix eject button hover in places sidebar
+* Use new gnome-help pages for help buttons
+* Fix a crasher when toggling desktop_is_home_dir
+* Fix a memory leak
+
+Major changes in 2.91.93 are:
+* Fix some memory leaks
+
+Major changes in 2.91.92 are:
+* Use a raised button for Search
+* Tweak the floating bar background
+* Only show the "Loading..." floating bar after half a second of loading
+* Style cluebars according to mockups
+* Fix some split view regressions
+* Misc bugfixes
+
+Major changes in 2.91.91 are:
+* Allow the dbus manager to run as a service
+* Create folders in subdirectories in list view, when possible
+* Make sure we don't focus headers in the places sidebar
+* Don't activate 'Rename' in the sidebar for non-bookmarks
+* Fix the list view not updating anymore after creating an empty file
+* Fix regressions in rename widget focus
+* Fix some UI regressions from the latest changes
+
+Major changes in 2.91.90.1 are:
+* Make modules of extensions pulling in ORBit resident, to avoid
+  ORBit's atexit()'s handler to call into unloaded code
+* Cleanup some unused code
+
+Major changes in 2.91.90 are:
+* Huge changes in the user interface, to match GNOME3 mockups
+* Remove the spatial mode
+* Updated tracker search engine to use libtracker-sparql
+* Consistently use "Home" instead of the username
+* Rename the GSettings schema path to /org/gnome/nautilus
+* Remove the ability for extensions to create toolbar items
+
+Major changes in 2.91.9 are:
+* Remove GConf dependency completely
+* Fade-out eyecandy for selection rubberband
+* Use notifications instead of a status icon for transfer progress
+* Change launcher name to 'Files'
+* Fix a couple of crashers and UI regressions
+
+Major changes in 2.91.8 are:
+* Propagate custom icons to bookmarks
+* Don't quit the application if there are file operations running
+* Better keynav in the places sidebar
+* Use symbolic icons for the notification area
+* Fix some drawing regressions while renaming
+* Fix issues with the default sort order selection
+* Completely remove GConf dependency
+* Large refactor of NautilusWindow/NautilusView architecture
+* Cleanup installed desktop files
+* Fix a couple of crashers
+* Build with GCC 4.6
+
+Major changes in 2.91.7 are:
+* Adapt to GTK+ 2.99.0 deprecations
+* Fix a crasher in the pathbar
+* Use a consistent name for the Home folder
+* Use a consistent name for the 'Create New Folder/Document' menu items
+* Build tweaks
+
+Major changes in 2.91.6 are:
+* Fix build with GTK+ 2.91.7
+
+Major changes in 2.91.5 are:
+* Tweak sidebar appearance with CSS
+* Remove 'exit-with-last-window' preference
+* Remove support for saving state with XSMP
+* Fix some UI GtkStyleContext regressions
+* Fix a11y for NautilusIconCanvasItem
+* Properly support '~' in the location bar
+
+Major changes in 2.91.4 are:
+* Port to the new GtkAppChooser widget family
+* Port to GtkStyleContext
+* Add DBus interfaces for copying files and emptying trash
+* Remove Beagle search support
+* Remove History and Notes sidebar
+* Use a new simpler debug infrastructure
+* Make the preferences an app-wide singleton window
+* Fix some drawing regressions
+
+Major changes in 2.91.3 are:
+* Remove autorun and automount machinery, it moved to gnome-settings-daemon
+* Don't install the 'File Management Properties' binary; there's now
+  a capplet in gnome-control-center for the autorun system settings.
+* Fix interaction with the session manager
+* Don't use gtk_[h|v]_separator_new
+* Identify OGG Vorbis files as music in the search UI
+* Require new gnome-desktop
+
+Major changes in 2.91.2 are:
+* Use GSettings for desktop background
+* Cleanups of the emblem-related code
+* Fix some bad interactions with GApplication
+* Fix an annoying crasher
+
+Major changes in 2.91.1 are:
+* Fix a number of GTK+ 3 regressions
+* Port to the new GApplication API
+* Add a settings key to make the background fade effect optional
+* Add a settings key to register an external mass-renamer
+* Drop support for old EXIF/XMP APIs
+* Move the nautilus-sendto extension module in-tree
+
+Major changes in  2.91.0.1 are:
+* Fix a crash related to GtkSpinner
+* Fix the filename cell renderer to use the new GtkSizeRequest functions
+
+Major changes in 2.91.0 are:
+* New UI for the 'Places' sidebar
+* New UI for the 'Connect to server' dialogue
+* Highlight the eject button upon hovering in the Places sidebar
+* Make file conflict dialog strings I18N-friendly
+* Port to GTK3 new drawing functions
+* Cleanup background-related code
+* Various crashers and glitches fixes
+
+Major changes in 2.90.1 are:
+* Port to GSettings
+* Port to cairo drawing
+* Remove the "Backgrounds and Emblems" feature
+* Use GEmblemedIcon to draw icon emblems in list/tree views
+* Cleanup of libeel's obsolete code
+* Always show free space in the status string
+* Disable icon scaling outside the desktop
+* Various minor UI fixes
+
+Major changes in 2.31.5 are:
+* Expand and collapse folders with +/- in list view
+* Ask for confirmation when opening a large number of files
+* Rename .desktop files also change their name on disk
+* Support overriding .gnome2 directory
+* Save passwords for the session by default
+* Remove deleted folders from the pathbar
+* Require GTK+ 2.90.5
+
+Major changes in 2.31.4 are:
+* Depend on GTK+ 3.0
+* Replace libunique with GApplication
+* Don't show 'File Browser' anymore in the window title
+
+Major changes in 2.31.3 are:
+* Port to GDBus
+* Change the default order for files in special directories
+* Support relative paths in the location entry/dialog.
+* Translation updates
+
+Major changes in 2.31.2 are:
+* Use folder icons as window icons in browser and spatial mode
+* Add 'Trashed On' and 'Original Location' columns in the trash
+* Implement transparent icons for cut files
+* Change default thumbnail size
+* Fix a number of bugs related to bookmarks
+* Translation updates
+
+Major changes in 2.31.1 are:
+* New dialog to handle conflicts within file copy/move operations
+* New button in the trashbar to restore selected items
+* Use XDG_CONFIG dir to store configuration. The old configuration files
+  will be migrated there automatically.
+* Use async I/O to save .gtk-bookmarks
+* Fix a number of issues related to DnD in the places sidebar
+* New icon for audio preview
+* Don't show Unmount when showing Eject/Safe Removal
+* Bump libnautilus-extension API version
+* Fix a number of UI glitches
+* Translation updates
+
+Major changes in 2.30.1 are:
+* Translation updates
+* Support for tracker 0.8.0
+* Fix crashes
+* Fix emblem scaling in zoomed view
+* Fix sensitivity of split-view related menu items
+* Control-L closes the extra view first, not the window
+
+Major changes in 2.30.0 are:
+* By default, don't exit with last window even if desktop is
+  not visible. This way we still run to handle e.g. volume
+  monitoring. If you don't want this, change
+  /apps/nautilus/preferences/exit_with_last_window
+  to True in gconf
+* Don't show weird border around desktop
+* Correctly put focus on view for new windows
+* Extra view does not get focus when created
+* Add nicer thumbnail border
+* Fix crash when hiding search bar
+* Fix build on sun compiler
+* Support AIFF for audio preview
+* Translation updates
+
+Major changes in 2.29.92.1 are:
+* Fix compilation due to deprecated GTK_WIDGET_STATE symbol
+* Fix libm linking
+* Updated Portuguese translation
+
+Major changes in 2.29.92 are:
+* Make view default focus in new windows
+* Put tabs at the top again
+* Don't use deprecated gtk widgets
+* Allow Alt-<num> to switch tabs
+* Dynamically load tracker support
+* Don't auto-close the window you initiated an unmount in
+
+Major changes in 2.29.91 are:
+* Make it possible to have backgrounds spanning multiple monitors.
+* Better handling of closing windows when device is unmounted
+* Use GtkSpinner instead of custom widget
+* Translation updates
+
+Major changes in 2.29.90 are:
+* Fix copy-pasted tooltip string
+* Translation updates
+
+Major changes in 2.29.2 are:
+* Align sidebar header and location bar
+* Remove tabs menu
+* Update translations
+
+Major changes in 2.29.1 are:
+* Make browser mode the default
+* Add split view mode
+* Browser UI reorganization
+* Better background support on multi-monitor setups
+* Support new "default location" on mounts (supported by ftp and sftp)
+* Add extension api to lookup NautilusFileInfo objects
+* Make the search toolbar button a toggle button
+* Ctrl+shift does multiple range selection in list view
+
+Major changes in 2.28.0 are:
+* Translation updates
+* Don't load non-images for thumbnailing when zoomed
+* Made desktop window a native X window for nicer redrawing
+* Fix leaks
+
+Major changes in 2.27.92 are:
+* Fix crash on logout
+* Translation updates
+* Always show app icon in open with popup menu
+* fix duplicate id in ui file
+* Fix warning in new power manager inhibiting
+
+Major changes in 2.27.91 are:
+* Migrate old-style nautilus metadata to gvfs metadata
+* Fix viewing of very small image files
+* Respect disable_command_line option
+* Reverse mouse button used for back/forward to same as firefox
+* Always show menu icons for menu items representing files
+* Inhibit suspend during file operations
+* Cancel audio preview when deleting the previewed file
+
+Major changes in 2.27.4 are:
+* Add support for starting and stopping drives
+* Use the new GVfs metadata framework
+* Support new style unmount operations; this will provide a nice dialog when
+  unmounting a busy drive mount
+* Add application icons to the Open With context menu
+* Reload xdg-user-dirs according to the user preferences
+
+Major changes in 2.27.2 are:
+* Support ctrl-drop in list view
+* Allow user defined keyboard shortcuts for extension items
+* Fix crash on click on toolbar
+* Fix crash on entering empty location
+* Added daemon-mode (don't exit with last window)
+* Display info about the selected item in the information sidebar
+* Sort applications in open with
+
+Major changes in 2.27.1 are:
+* Drop GTK+ deprecated symbols
+* Display the application icon in the popup menu
+* Fix autorun hints for Win32 software media
+* Allow shift+return during typeahead find
+* Update desktop icons according to DPI changes
+* Use the correct folder icon fallbacks
+* Autogenerate ChangeLog and use shave to display the build output
+
+Major changes in 2.26.2 are:
+* Fix issue with default dnd type when dragging to a parent directory
+* Fix icon view RTL layout in compact view
+* Make sure spatial geometry is always saved when closing windows
+* Save and load custom accelerator maps
+* Check for PackageKit before showing dialog using it
+* Add "location" column
+* Show both unmount and eject in menus for mounts that support both
+
+Major changes in 2.26.1 are:
+* Better handling of thumbnail scaling
+* Support XDS in list view
+* Make session loading work
+* Start Nautilus on requested screen
+* Fix crashes
+* Fix possible infinite layout loop in compact mode
+* Update fallback icon to not look like gnome 1.x
+* Fix some cases of sync i/o
+* Handle non-gvfs uris like e.g. mailto and http links with queries in links
+
+Major changes in 2.26.0 are:
+* Stable release
+* Fix crash due to broken gdk-pixbuf tga loader
+* make sure thumbnails are updated even when zoomed up
+* fix crash in media settings preferences
+
+Major changes in 2.25.93 are:
+* Use ConsoleKit to make sure we only autorun on active sessions
+* Never show unmount if we show an eject menu item
+* Show the gvfs reported owner/group names
+* Don't allow changing default app for folders
+* Fix "can't unmount same location twice" bug
+
+Major changes in 2.25.92 are:
+* Set mmap limit to avoid desktop background memory not being returned to the os
+* Warn when source overwrites destination in move
+* Don't put "link to ..." in front of symlinks unless there are name conflicts
+* Fix desktop flicker on theme change
+* Require desktop file app launchers to be executable
+* Support making symlinks on remote locations (if supported by backend)
+
+Major changes in 2.25.91 are:
+* Use G_DEFINE_TYPE_* instead of hand-written types
+* fix: opening a new window restores minimised ones
+* fix renaming of desktop files
+* Handle new kinds of GIcons
+* Don't display shadowed mounts
+
+Major changes in 2.25.4 are:
+* Don't show desktop files from other desktops than Gnome on the desktop
+* Support crossfades of desktop backgrounds
+* Don't snap desktop icons outside right margin
+* Fix crashes and leaks
+
+Major changes in 2.25.3 are:
+* Remove CD/DVD creator from places menu and sidebar
+* Allow deleting custom emblems
+* Fix crashes
+* Don't show read-only emblems in trash
+* Trash performance fixes
+* General performance fixes
+* Update to new PackageKit API
+
+Major changes in 2.25.2 are:
+* Merged eel into nautilus
+* Use single glib/gtk includes
+* Support PackageKit application search
+* Fix new windows not appearing after successful mount
+* Remove support for old KDE trash dirs
+
+Major changes in 2.25.1 are:
+* Remove depencency on libgnome & gnome-vfs
+* Fix crashes
+* Chop trailing space characters when moving to FAT file system
+* When DnD'ing, COPY instead of MOVE, when the source is not deletable
+* Don't set default when opening with other app, just add to open with list.
+* Don't make copies of files from readonly source (e.g. CDROM) readonly
+* Don't show cancel dialog when showing the "run or display" dialog
+
+Major changes in 2.24.0 are:
+* Icon/compact view:
+   * Follow run-time changes to set of icon text attributes to be displayed
+   * Invalidate icon label when changing zoom level or “text besides icon”
+* List view:
+   * Properly offer textual drag target
+* Request centered autorun dialog
+* Always sort folders before files, even if sort criterion is reversed
+* Always assume that trash directories are local
+* Fix Small leaks and thinkos
+
+Major changes in 2.23.92 are:
+* Icon/compact view:
+   * Allow to select range in addition to current selection, when pressing ctrl
+     and shift at once [not yet doable in list view]
+   * Fix layout timestamp storage when moving items around on desktop
+* List view:
+    Default to reverse sort order for date columns (i.e. recent to old)
+* Improve “Clear History” confirmation dialog
+* Use GdkAppLaunchContext instead of EelAppLaunchContext
+* Fix small leaks
+
+Major changes in 2.23.91 are:
+* Make autorun work for blank media
+* No more pixelated SVGs displayed for desktop items with absolute icon SVG paths
+* Use consistent labels, mnemonics and icons for trash and delete actions
+* Icon container (i.e. icon view and compact view)
+  * RTL support for vertical layout
+  * Always reveal entire rows or columns of icons
+  * Nicer icon container bounds
+  * (Again) vastly improved keyboard navigation, especially in RTL mode
+  * No more overlapping desktop icons, when files are added or volumes mounted
+    while Nautilus is not running. This is implemented with metadata timestamps when
+    the desktop icons are laid out.
+  * Rewrite large chunks of icon canvas text size handling
+  * Clear underlying items if hovered or selected item overlaps them
+* List View
+  * Make scripts work when items in nested list view subdirectories are selected
+* Usual minor fix & polish galore
+
+Major changes in 2.23.90 are:
+* Truncate long item labels in the icon view and on the desktop
+   + icon_view/text_ellipsis_limit and desktop/text_ellipsis_limit GConf
+     preferences added (defaults to three lines)
+   + expand when hovering, or when selecting a file
+* Support restoring of multiple items from trash at once
+* Handle scroll events on the path bar
+* Fix “same file system” (i.e. copy vs. move) DND check for desktop
+* Fix search for content type in simple search backend
+* Fix running of scripts on the desktop
+* Use more archive file types for file-roller integration for remote locations
+* Consolidate zoom handling internals
+* Show file name instead of URI in the bookmark editor window for local files
+* Polish “Visible Columns“ list view dialog
+
+Major changes in 2.23.6.1 are:
+* Fix display name of computer:// icons
+
+Major changes in 2.23.6 are:
+* Support transferring files with reserved FAT characters to a FAT file system
+  Replace them with an underscore if neccessary
+* Use x-content/* MIME type to associate applications with hotpluggable media
+* Path bar
+  * enable control-left click and middle-click interaction for path bar buttons
+  * dynamically handle hierarchy changes in the path bar
+* Icon view keyboard navigation
+  * Use linear selection instead of rectangle selection in when pressing shift
+  * Still offer rectangular selection when pressing ctrl and shift
+  * Only wrap around horizontally in horizontal layout mode,
+  * Only wrap around vertically in vertical layout mode
+  * Never wrap around when in rectangle selection
+* Icon view now remembers last position when reloading in vertical layout
+* List view: Do not request mass redraw when dragging
+* Clear display name when changing file name
+* Only show "... All" actions ("Skip All", ...) in file operation dialogs if more
+  than one file is transferred
+* Identify to GNOME session as file manager, not as generic desktop application
+
+Major changes in 2.23.5.1 are:
+* Fix crasher in spatial mode when closing window with ctrl-w
+* Work around GTK+ tree view bug for sidebar eject button click area
+* Some popup menu fixes
+* Do not use C_() due to intltool bug
+
+Major changes in 2.23.5 are:
+* Add tab support to browser mode
+* Add "restore from trash" functionality (only per item)
+* Path bar and notebooks can be used as fully functional URI drop targets
+* Places sidebar
+  * Add eject buttons to volumes
+  * Fix bookmark reordering
+  * Make DND indication consistent with GTK+ file chooser
+* Async I/O
+  * Use NautilusFile instead of GFile for path bar display name
+  * Use NautilusFile for DND "same FS" check
+* Fix navigation where window was inconsistently "stuck" between two
+  directories, i.e. the view was not completely changed.
+* Fix huge leak - status bar messages were never popped from the stack
+* Always grab focus on location change, even if view is reused
+* Icon view fixes
+  * If no icon is selected, but an icon has the keyboard focus, select it when
+    pressing space.
+  * Move keyboard focus after a file has been removed
+  * Fix double-clicking of half-shown items
+* Thumbnailing changes
+  * Never scale up any thumbnails
+  * Compose and scale thumbnails on the fly
+  * Speed up loading of large image files used as their own thumbnails
+* Display emblems for small icon sizes
+* Offer clipboard contents as text/uri-list
+* Use UTF-8 dash for properties window instead of "--"
+* Misc
+  * Allow to build without XMP
+  * Require beagle 0.2.4
+  * Require intltool 0.36.3.
+
+Major changes in 2.23.4 are:
+* Fix background extension submenus for background context menus
+* Fix thumbnailing
+  * Always re-thumbnail if a file without any thumbnail changes
+  * Always re-thumbnail if a failed thumbnail is not up to date
+* Make zoom level specifications consistent (33% vs. 25%), round to 66% rather than 67%.
+* Never hide hidden or backup files in trash
+* Always copy file entire metadata when copying. Fixes timestamp preservation.
+* Remove desktop emblem from desktop directory, since the folder now uses a desktop icon
+
+Major changes in 2.23.3 are:
+* Use bilinear interpolation instead of hyperbolic. Massively speeds up thumbnailing.
+* Fix thumbnail frame size calculation
+* Rework properties dialog
+  * Remove "Launcher" tab, and move all the launcher properties to "Basic"
+  * Hide useless file info widgets from "Basic" tab for special locations like "computer:///".
+* Support adding files to archives via file-roller
+* Add location popup context menu to all path bar buttons
+* Fix location popup context menu separators
+* Add "Paste Into" item to location popup context menu
+* Do not count the same inode twice when calculating directory sizes
+* Never copy to "trash:///", never move to "burn:///"
+* Never maximize windows opened from shell if a custom geometry has been specified
+* Properly close windows displaying the media root location when ejecting a medium
+* Empty the clipboard when copying/moving with DND to a container
+* Remove libbackground
+* Require eel 2.23.2 due to directory background API changes.
+
+Major changes in 2.23.2 are:
+* Increase default thumbnailing size limit
+* Various fixes to keyboard handling in icon and list view
+* Use description from gio as window title
+* Fix double click behaviour in list view
+* Remember windows size when closed while maximized
+* Always use single click policy in the places sidebar
+* Fix selection handling after canceling delete operation
+* Improve autorun behaviour
+* Improve internal error handling
+* Fix adding emblems
+* Fix gconf preferences description
+* Improve list column page indentation
+* Prevent recursive move/copy into itself
+* Show mount dialog for already mounted shares too
+* Prevent autogenerated file names from overflowing the max filename length
+* Use ellipsis as per HIG
+* Fix leaks
+* Fix crashes
+* Build fixes
+* Translation updates
+
+Major changes in 2.23.1 are:
+* Support new gnome-session autostart semantics.
+* Unify session save/restore routines with "--restart" and "--load-session"
+* Allow to invert selection
+* Do not automount mount points inside hidden hierarchies
+* Add NautilusFileInfo APIs: can_write(), get_mount(), get_parent_info()
+* Add initial Gtk-doc support.
+* Remove some dead code.
+
+Major changes in 2.22.1 are:
+* Fix crashes and leaks
+* Fix emblem display in property page
+* Fix mime choosing to not always create application/x-ext-<extension> type
+* Actually mount location in external connect to server dialog
+* Fix thumbnail size limit checks
+* Fix "show hidden" to also show backup files
+  (was broken in some situations)
+* Verify that tracker is running before using it
+* Fix desktop file icon handling with absolute filenames
+* Use GDesktopAppInfos to launch desktop files
+* Don't follow symlinks for deep file count
+* Fix audio preview with later gstreamer
+* Make "move file over directory" overwrite case work
+* Sometimes we failed to ask for overwrite when move
+  operations falled back to copy + delete
+* Make sure we correctly transcode filenames when merging
+  directories if the directory is on another filesystem.
+* Some moves were reported as copies, not moves in the ui
+  which could cause not up-to-date directory displays
+* Don't center file progress dialog if its already displayed
+
+Major changes in 2.22.0 are:
+* Fix typo in strings
+* Fix crashes
+* Use a better icon for the progress dialog
+* Have a mount menu for mountable files, not an unmount one
+* Handle broken bookmark files bette
+* Sniff x-content type asynchronously
+* Don't look for autorun stuff on non-local files
+* Allow setting permissions on remote shares
+* Fix "delete all" button in delete dialog
+* Show custom icons at right size
+* Fix some performance issues on nonlocal mounts
+
+Major changes in 2.21.92 are:
+* Build fixes
+* Fix crashes and leaks
+* Fix handling of desktop file launchers
+* Better handling of desktop file icons
+* Semitransparent DnD icon support (when composited)
+* Avoid showing progress info when dialogs are shown
+* Allow minimize of progress window
+* Handle beagle >= 0.3.0
+* Close properties dialog on escape
+* Make custom icons work again
+* Fix fuzzy icons
+* Duplicate file if copies to the source directory
+* Support open with dialog for multiple selected files
+* Ressurect connect to server dialog
+* Allow theming of free diskspace chart colors
+
+Major changes in 2.21.91 are:
+* String cleanups
+* Inhibit autorun for things we mount ourselves
+* Fix crashes and leaks
+* Only show selinux context if selinux detected
+* Default to move, not copy when dragging from trash
+* Don't autorun/automount non-local mounts
+* Fix case where we could run out of file descriptors
+* Handle drop of files on the desktop
+* Fix sensitiveness of delete from trash menu item
+* Fix open with context menu in always-use-browser mode
+
+Major changes in 2.21.90 are:
+* Use thousand separators in all numbers (if used by locale)
+* Fix leaks
+* Performance improvements
+* Update to latest glib APIs
+* Fix bug that lost metadata from older versions
+* Fix crashes
+* Enable paste into folder for desktop icons
+* Better finding of autorun files on case sensitive media
+
+Major changes in 2.21.6 are:
+* Regenerate thumbnails when files change
+* Fix crashes
+* New autorun and automount support
+* Allow unmount of current location if its a mountpoint
+
+Major changes in 2.21.5 are:
+* Add autorun/automount feature
+* Better handling of sensitivity of delete menu items
+* Better handling of mount/unmount/eject in many places
+* Fix for extensions with submenus
+* Fix crashes
+* Updated some icons to the Tango look
+* Fix some portability issues
+
+Major changes in 2.21.2 are:
+* Update pkg-config files with new extensions dir
+* Add some gio features to extension API
+* Handle dnd of desktop icons
+* Update to latest gvfs/gio API
+* Implement some missing unmount/eject operations
+
+Major changes in 2.21.1 are:
+* Totally replaced gnome-vfs use with gio
+* New implementation of file operations like copy/move with
+  a shared progress dialog
+* Lots of cleanup
+
+Major changes in 2.20.0 are:
+* Load thumbnails asynchronously
+* Support direct save DnD (XDS)
+* Fix up octal permission display
+* Store window keep-above and stickines state across sessions
+
+Major changes in 2.19.91 are:
+* Be more robust against broken extensions
+* Set current working directory right on desktop when running scripts
+* Fix crash on file:///#
+* Update to cope with the new size of emblem icons
+
+Major changes in 2.19.90 are:
+* Auto-size list view filename column again
+* New message for service unavailable error
+* UI terminology consistency fix
+* Build fix
+
+Major changes in 2.19.6 are:
+* Fixes to UI manager usage
+* Better string ellipsation
+* Consistent focus behaviour for toolbar buttons
+* Support for XMP image metadata
+* Improved keyboard handling in connect to server dialog
+* I18n fixes and string clarifications
+* Add more tooltips and use new gtk+ tootips API
+* Better handling of unreadable directories during search
+* Fix various crashes
+* Translation updates
+
+Major changes in 2.19.5 are:
+* Build fixes
+* Fix leaks
+* Fix crash
+* Improved JPEG metadata handling
+* Fix information sidebar layout
+* Translation updates
+
+Major changes in 2.19.4 are:
+* Allow activating the zoom context menu by keyboard
+* Allow renaming of the network servers icons
+* Use new desktop capplet
+* Better handling of unicode search terms
+* Fix program name in about dialog
+* Fix keyboard shortcuts in preferences dialog
+* Fix leak in zoom context menu
+* Fix typos in error and warning messages
+* Fix crash in properties dialog
+
+Major changes in 2.19.3 are:
+* Added support for xdg-user-dirs
+* A11y fix in the file properties dialog
+* Build fix
+* Don't show folder handler in menu editor
+* Added alpha support for icon frames
+* Updated thumbnail frame
+
+Major changes in 2.19.2 are:
+* Fix crashes and leaks
+* Add open in place sidebar context menu
+* Make default icon sizes match xdg icon sizes better
+* Fix hang with recursive symlinks
+* Make name column wider
+* Add trash to places sidebar
+* Support for thumbnail icon size preference
+* Disk free pie chart in properties dialog
+
+Major changes in 2.18.0.1 are:
+* Reverted accidental commit
+
+Major changes in 2.18.0 are:
+* Fix up desktop file categories
+* Some sparse code cleanups
+* Don't make filename column expand
+
+Major changes in 2.17.92 are:
+* Don't display homedir as "desktop" in pathbar when in home-as-desktop mode
+* Use GtkLabel ellipsizing
+* Ellipsize filename column in list view
+* Don't show unsupported methods in connect-to-server dialog
+* Fix crashes
+
+Major changes in 2.17.91 are:
+* Change file management capplet category
+* Avoid showing "empty" in the tree while loading directory
+* Prompt for empty trash on unmount
+* Capitalize lin" in "Link to ..." names
+* Fix crashes and memory leaks
+
+Major changes in 2.17.90 are:
+* Add nautilus_file_info_get_activation_uri for extensions
+* Zero-pad seconds in progress display
+* Fix permissions of files created from templates
+* Support multimedia keys
+* Fix leaks
+* Fix crashes
+
+Major changes in 2.17.1 are:
+* Empty trash button in trash
+* New menu icons for new document/folder/window
+* Ring buffer for debugging
+* Fix spinner size
+* Open location dialog on desktop defaults to home
+* Remove metadata on external delete events
+* Draw text selection rectangle using cairo
+* Jump to selection on sort order change
+* Fix gsequence crash
+* Freeze icon view while renaming
+* New theming features for icon view
+* New icon in about dialog
+* Handle scroll button while rubberbanding
+* Ellipsize menu button at 16 chars
+
+Major changes in 2.16.3 are:
+* Revert a patch that caused icons to move around
+* Fix crash introduced in 2.16.2
+
+Major changes in 2.16.2 are:
+* Fix a lot of crashes
+* Handle throbbers with different sizes
+* Don't add a newline when pasting filenames
+* Better a11y relationships betweeen widgets
+* Make nautilus --quit not be restarted by session
+* Fix occasional stuck grabs when rubberband selecting
+* Don't timeout typeahead when scrolling with mouse wheel
+* Add X-GNOME-Bugzilla-Version to desktop files
+* Fix desktop icon overlap problem
+
+Major changes in 2.16.1 are:
+* Default to search in current directory for non-indexed search
+* Fix clash with symbol names in gtk+
+
+Major changes in 2.16.0 are:
+* Handle enter activation when using typeahead search
+* Avoid using gnome_vfs_is_local in wrong places
+* Translations
+
+Major changes in 2.15.92.1 are:
+* Fix crash on startup
+
+Major changes in 2.15.92 are:
+* Fix crash on changing owner/group of file
+* Fix double free
+* Make sure all strings are displayed translated
+
+Major changes in 2.15.91 are:
+* Use gtk recent files code
+* Fix file change notification regression
+* Don't display raw form of selinux contexts
+* Import lates EggSequence with bugfixes
+* DnD fixes
+* Read .hidden symlinks
+* Fix down navigation in last column, next to last row
+
+Major changes in 2.15.90 are:
+* Submenu support for extensions
+* Improved beagle daemon detection
+* Enable D'n'D reordering in the places sidebar
+* New icons for trash operations
+* Add a button/text toggle button to the location bar
+* Fix leak
+
+Major changes in 2.15.4 are:
+* New permission dialog with recursion and selinx support
+* Improve extension interface
+* Add complete session management
+* Handle removal of the displayed location more elegantly
+* Use proper nautilus-cd-burner icon
+* Support dropping uris, urls and text to subfolders
+* Fix leaks and warnings
+
+Major changes in 2.15.2 are:
+* Don't allow formating of mounted floppies
+* Perfomance fixes
+* Don't use deprecated eel features
+* Use less memory when thumbnailing
+
+Major changes in 2.15.1 are:
+* Improve startup performance
+* Use GOption
+* Fix selection box width calculation
+* Improve file permission handling
+* Add volume operations to the file menu, tree and places sidebar
+* New po/LINGUAS handling
+* Smarter date handling for images
+* HIG fixes
+* Fix various typos
+* Fix about dialog to work with current gtk+
+* Fix crashes
+* Show network volumes in the places sidebar
+* Fix progress dialog showing the wrong file
+* Code cleanups
+
+Major changes in 2.14.1 are:
+* Translation updates
+* Code cleanups
+* Use --no-desktop option for all desktop files
+* Startup performance improvements
+* Make files copied from read-only source writeable
+* Don't allow bookmarking x-desktop:///
+* Add help buttons to several dialogs
+* Fix SVG file identification
+* Properly break down URIs for connect to server ui
+* Don't reposition icons on reload
+* Show unmounted but user-visible drives in the places sidebar
+* Display more info in the progress dialog when preparing
+* Smarter DnD target selection
+* Smaller close icon in the sidebar title
+* GnomeGoals: Use po/LINGUAS
+
+Major changes in 2.14.0 are:
+* Fix deadlock when dragging over list view in some conditions
+* Fix keynav details in text beside icon mode
+* Don't show folder count for smb shares
+* Fix crash on middle click of file
+* Fix a crash when leaving a directory
+* Close window when folder moves to trash
+* Fix deep count in properties dialog in some cases
+* Avoid calculating mime lists for activation
+* Fix text drawing in RTL mode when using text besides icons
+* Remove blank error dialog on mount when using gnome-mount
+
+Major changes in 2.13.92 are:
+* Better filename linebreaking at punctuation marks.
+* List view: If a rename moves the file in the view, scroll to the new position
+* Better handling of broken filename encoding for link targets
+* Some desktop icon positioning fixes
+* Browser mode: don't close window on up if current directory has been removed
+* Pass original files, not target files to property page providers.
+  This allows property page extensions to look at desktop files and symlinks.
+* Various small optimizations
+* Leak fixes
+* Build fixes
+
+Major changes in 2.13.91 are:
+* Fix a desktop icon positioning bug
+* Fix opening saved searches file from outside nautilus
+
+Major changes in 2.13.90 are:
+* Add option to always use the location bar to the preferences dialog
+* Enable the icons in the places sidebar as drop targets
+* Fix for desktop volume icon positioning
+* Show detailed file size in the properties dialog
+* HIG fix for the delete from trash dialog
+* Fix icon scaling for images with extreme ratios
+* Fix leaks & crashes
+
+Major changes in 2.13.4 are:
+* Open modules with BIND_LOCAL
+* Disable network icon on desktop by default
+* Add Network to places menu
+* Fix sort by atime
+* Some HIG fixes
+* Add support for searching for custom mime type
+* store custom icons for folders as relative patch if in folder
+* Much better activation of multiple files
+* Bumped the default image size thumbnailing limit
+* Handle new background image zooming mode
+* Add optional support for Tracker indexer
+* Fix leaks & crashes
+
+Major changes in 2.13.3 are:
+* Added initial support for search
+* Fixed memleaks
+* Don't frame thumbnails with alpha channel
+* Better handling of opening multiple files
+* New resize knob icon
+* View update optimizations
+* No titles for alert dialogs
+* Add network desktop icon
+* Use access() to determine permissions
+
+Major changes in 2.13.2 are:
+* Fix mime list problem introduced with sort change
+* Build fixes
+* Keyboard support for icon stretching
+* Finally fix tree sidebar crash
+* ctrl-shift-g goes backwards in typeahead
+* Add Skip all button in copy/move conflict dialog
+* Position new files/folders correctly in manual layout mode
+* Nicer UI for setting custom file icons
+* Fix CD icon positioning on desktop
+* Fix desktop redraw issues on non-100% zoom levels
+* Use the same home icon always
+
+Major changes in 2.13.1 are:
+* Adds volume/drive api for modules
+* Better sizes of stock icons in many places
+* GtkTreeView style typeahead
+* '/' opens location dialog/entry
+* middle click in browser mode opens new window
+* Handle cancellation of authentication better
+* Add format menu item for floppy drives
+
+Major changes in 2.12.1 are:
+* Pass all selected files to menu extensions, not only one per mimetype
+* Use much fewer file monitors
+* Fix text size on startup with non-standard default zoom size
+* Some fixes to trash handling and unmount
+* Fix some desktop icon positioning details
+* Copy thumbnails when copying files
+* Autofill connect to server dialog when possible
+* Always show deep counts in properties page
+* Fix leaks and crashes
+* Correctly escape filenames for display in progress dialog
+
+Major changes in 2.12.0 are:
+* Fix icon layout in text-beside-icons mode in some cases
+* Fix template creation on volumes other than the same as /tmp
+* Expand file uris correctly on desktop when passing to scripts
+* Workaround crash on audio preview in burn:
+* Fix handling of global show hidden files preference
+* Fix crash caused by earlier memleak fix
+* Don't redraw windows/desktop on focus in/out
+
+Major changes in 2.11.92 are:
+* Enable emblem dropping to the list view
+* Disallow deleting special locations from the location button popup
+* Don't show "Open Folder" as application option in context menus
+* Disallow custom icons for the trash
+* Cleanups & Leak fixed
+
+Major changes in 2.11.91 are:
+* Don't allow renaming of the desktop folder
+* Make moves within burn:// possible
+* Fixes to property browser drag and drop code
+* Add Explorer-style keybindings
+* Add timestamps to metafiles
+* Make ESC switch back to the pathbar
+* Use saner check for mime mismatching
+* Make progress dialog minimizable
+* UI fixes
+
+Major changes in 2.11.90 are:
+* Handle dnd more efficently
+* Use file-manager icon for browser windows
+* Use hover underline and cursor for single click mode
+* Make labels selectable in the sidebar
+* Improve sound preview process handling
+* UI fixes to path- and sidebar
+
+Major changes in 2.11.4 are:
+* Allow dnd of text on view to create a new file
+* show hostname in progress dialogs
+* use pathbar in location toolbar
+* busy curson when loading folder in browser mode too
+
+Major changes in 2.11.3 are:
+* Turn the list view into a tree
+* No dnd drop rect on the desktop
+* Use gtk bookmars as bookmark source
+* Add bookmarks to spatial mode
+* New places sidebar
+* better sort order for filenames with numbers in them
+  (needs glib 2.7.x)
+* Better handling of font sizes wrt zoom in icon view
+* Fix leaks
+
+Major changes in 2.11.2 are:
+* Fix sort order for size/count/time
+* ctrl+scrollwheel changes zoom, ctrl-= zooms in
+* better handling of cut and paste in notes text view
+* Add smb domain field in connect to server dialog
+* nicer handling of drops from mozilla
+* no properties menu item for desktop context menu
+* shift-f2 renames with the whole name initially selected
+* sort by emblem only looks at user-set emblems
+* scroll to icon when selected and partially visible
+
+Major changes in 2.11.1 are:
+* Use authentication in external connect to server app
+* UI polish
+* Allow DnD of location button icon.
+* Context menus on location button and location label in browser
+* Fix memory leaks
+* Fix crashes
+* Speed up delete in list view
+* Fix rename in list view breaking when there was a file change
+* Removed "new terminal" from desktop context menu
+  If you want this, install the nautilus-open-terminal extension,
+  its much better than this feature ever was.
+* Don't thumbnail files constantly if they're changing
+* Fixed a loop that could happen on remote locations when removing
+  a directory.
+* Add properties of the current folder menu item to background
+  context menu
+* Use --no-desktop in default folder handler to avoid taking over
+  the desktop if you don't run gnome.
+
+Major changes in 2.10.1 are:
+* Use less memory for desktop background
+* Make authentication work for the external connect-to-server dialog
+* Fix leaks
+* Redraw less in the list view when deleting
+
+Major changes in 2.10.0 are:
+* Some fixes for startup notification to avoid focus-stealing
+* Center the file management prefs dialog
+
+Major changes in 2.9.92 are:
+* Avoid doing i/o to tree root nodes before they are used.
+  This means we don't get authentication callbacks.
+* Correct handling of startup notification
+* Fix crashers in desktop icon context menus when unmounting volumes
+* Make property page for home icon on desktop show the right size
+* Prevent the progress dialog from displaying strange ETAs
+* Make backspace key open parent folder in list view
+
+Major changes in 2.9.91 are:
+* Fix some crashes
+* Don't pop up mozilla dnd ask dialog under windows
+* Change the look of the path button to make it easier to find
+* Some changes to the look/text of the progress dialog
+* Fix panel size detection on 64bit machines
+* Allow open with menu on folders
+
+Major changes in 2.9.90 are:
+* Better window titles for browser windows
+* Better icons for burn: & computer: in the ui
+* Allow eject of unmounted devices
+* Better handling of DnD from mozilla
+* Make connect to server dialog available as separate app
+* Use GtkAboutDialog
+
+Major changes in 2.9.2 are:
+* Use the new mime API
+* Fixed bug in finding empty spots on the desktop
+* Handle drags to special desktop icons (trash...)
+* Fix crash in clipboard code
+* Fix crash with non-unique volume filenames
+* Better handling of sizes for image-file-as-icon
+* Fill in ctrl-l dialog correctly for desktop
+* Fix crash in bookmark dialog if parent window goes away
+
+Major changes since 2.8.2 are:
+* Bonobo not used for nautilus views
+* GtkUIManager used for the ui, not BonoboUI
+
+Major changes since 2.8.1 are:
+* On mime mismatch, allow open with default app as open with
+* On dnd of mozilla link, create desktop file with .desktop ending
+* Delay activation when keyboard navigating in tree sidebar
+* Add open new window menu item in browser mode
+* Fix race condition that made up not alway select the folder
+* Better error message when there is no handler for a file
+* Fix throbber right-alignment with latest bonoboui
+* Alt-up selects the directory you came from
+* Display a frame on DnD hover if accepting
+* Fix off-by-one bug in icon positioning on DnD
+* Make creating new files in list view auto-rename
+* Add the icon text to the DnD icon
+* Add eject to volumes in free sidebar
+* Don't close browser window when the showed path is unmounted
+* Save browser window geometry
+* Handle the new env vars for filesystem charset
+
+Major changes since 2.8.0 are:
+* Update to latest egg-recent
+* Fix memory leaks
+* Clear clipboard after a cut file is pasted
+* Properly escape uris created by connect to server dialog
+* Better alignment of icon labels
+* Allow move (not copy) of a file to another filesystem
+* Fix reordering of selection when a listview is resorted
+* Allow keynav on desktop
+* Fix crash in sort-by-emblems mode
+* Performance fixes when selecting files
+* Performance increase in folder load
+* Allow pasting files as text
+* Fix nautilus extensions such as file-roller menus
+* Made select by pattern work in trash
+* Fixed cut/paste of text when renaming in listview
+* Always use homedir icon for homedir
+
+Major changes since 2.7.92 are:
+* Destroy metadata hashtable in right way, fixes crash
+* Fix crash in list view when changing views
+* Translation updates
+
+Major changes since 2.7.4 are:
+* Fix crash when transfer rate near zero
+* Fix crash when renaming in list view and changing directory
+* Fix double call of eel_preferences_remove_callback on shutdown
+* Use default folder view from gconf instead of now broken gnome-vfs mime setting
+* Some fixes to the handling of open with
+* Faster way to get the group list for a user
+* Don't make progress dialog on copy to desktop appear on all workspaces
+* Fix sort by size in computer view
+
+Major changes since 2.7.2 are:
+
+* Fix remaining time reporting in progress dialog
+* Nicer connect to server dialog
+* Various bugfixes and memleak fixes
+
+Major changes since 2.7.1 are:
+
+* Added spatial/browser pref to the prefs dialog
+* Use ctrl+q to add all windows
+* On shift-double-click on a non-folder, close the window after.
+* Bug fixes
+* Show estimated time remaining in the progress dialog.
+* per-window show hidden files setting
+* Don't warn about mime-type mismatches if the handler is the same
+  for both mime-types.
+* Date formatting improvements
+* Killed start-here
+* Changed to use the new mime spec and UI
+
+Major changes since 2.6.2 are:
+* Desktop file editior property page
+* Display server name in window title for remote URIs
+* Add setting to not show volumes on desktop
+* Prevents read-only emblem from being shown on desktop icons
+  when user is in root group
+* Fix dnd start coordinates when zoomed
+* Start apps in the directory they are launched from
+* Add close all windows to spatial window menu
+
+Major changes since 2.6.1 are:
+* Accessibility/keynav/theming fixes
+* Leak fixes
+* .desktop file updates
+* Fixed help buttons in the preferences dialog
+* Portability fix
+* Use initial click position to anchor icon dnd
+* Crash fix in the file properties dialog
+* Don't overlap the close icon and text label when the sidepane
+  is very small.
+
+Major changes since 2.6.0 are:
+* Fix various crashes and leaks
+* Use correct icon for filesystem in treeview
+* Place unplaced windows over the parent window
+* Fix non-ascii typeahead
+* Faster property dialog for operations on many files
+* Faster list view
+* Fill open location dialog with initial path
+* Add down arrow to location button
+* Make shift close window behind in more places
+* Allow smaller spatial windows
+* Allow svg backgrounds
+* Fix ignore kde trash directory hack
+* By default set per-folder background in spatial mode
+
+Major changes since 2.5.91 are:
+* Translation updates
+
+Major changes since 2.5.90 are:
+* Handle failures when opening new window better (don't loop)
+* visiting and accept modifiers were reversed in list view
+* Build fixes
+
+Major changes since 2.5.8 are:
+* Beter typeahead in list view
+* "browse" context menu item in more places
+* Added go -> cd burner in browser mode
+* Fallback to normal icon view if there is a problem launching another view
+* Close windows on unmounted directories
+* Fix crashes
+* Longer delay until cancel open dialog opens
+
+Major changes since 2.5.7 are:
+* Fix crash
+* Nicer names for toplevel uris
+* Browse folder works in more places
+* Added preference to always use browser windows
+* Warn when sniffed/extension-matched mime type disagrees
+* Show applications for both sniffed and extension-matched
+  mimetype in the open with menu
+
+Major changes since 2.5.6 are:
+* Fix icon lookup crash
+* Fix property page crash
+* Some a11y fixes
+* Use new background capplet name
+* Fix rename keyfocus issue
+* Scroll to icon after rename
+* Fix ogg previewing
+* Some HIG rephrasing of strings
+* Fix crash on rename of empty selection
+* Update help userguide links
+* Paste menu sensitivity fix
+* Rename selection keynav now behaves better from the start
+
+Major changes since 2.5.5 are:
+* hig/ui tweaks
+* ngettext support
+* distribute nautilus-list-view-ui.xml
+* New mimetype detection approach
+* performance fixes
+* non-modal open with other dialog
+* Don't show small svgs as themseleves (always thumbnail)
+* update egg-recent
+
+Major changes since 2.5.4 are:
+* Extension system for emblem, property page, menu item, and
+  list view column plugins.
+* Editable list view columns
+* Don't expand symlinks when following them.
+* Busy cursor in loading spatial windows
+* Icon-view style typeahead in the list view.
+* Emblems in the list view
+* Added a location button to spatial windows
+* Removed tab icon nav from the icon view
+* Add a context menu to the tree side pane.
+* Pop up folder menu in list view background
+* Turn on home icon on the desktop by default
+* Added status bar info when no files are selected
+* Got rid of unnecessary EelGenerousBin/EelInputEventBox usage
+* HIG fixes
+* Bugfixes
+
+Major changes since 2.5.3 are:
+* Use GtkIconTheme instead of GnomeIconTheme
+* Show visited folders differently
+* Better mouse/keynav in icon and list view
+* Save window geometry on window close
+* HIG message dialogs
+* File templates support
+
+Major changes since 2.5.2 are:
+* Accessibility fixes
+* Better initial size of navigation window
+* Close all parents closes all parents
+* Focus the next item after delete in list view
+
+Major changes since 2.5.1.1 are:
+* Don't do unnecessary i/o on remote locations
+* handle broken symlinks that go unbroken
+* various bug fixes
+* some accessibility fixes
+
+Major changes since 2.5.1 are:
+
+* Fixed a NautilusFile leak
+* DISABLE_DEPRECATED fixes.
+
+Major changes since 2.5.0 are:
+
+* Start of new volume handling system
+* deprecaton clean
+* fixed leaks
+* performance fixes
+
+Major changes since 2.4.0 are:
+
+* Spatial / Navigational split
+
+* Themed icon for desktop window
+
+* Exif image properties
+
+* Fixes for query-drags
+
+* Don't allow renames to "" in list view
+
+* Expand treeview rows on double click
+
+* Change desktop grid size
+
+* Don't disable deprecated API
+
+* Pattern selection
+
+* No incremental display of files
+
+* Various bug fixes
+
+Major changes since 2.3.90 are:
+
+* don't migrate .gnome-desktop if it is a symlink
+
+* Fix messed up home/trash icons for new users
+
+* Handle xpm icons correctly in desktop files
+
+* Handle non-utf8 user names
+
+Major changes since 2.3.9 are:
+
+* Fix warning on theme changes
+
+* Sometimes the home and trash icons became blank and unusable
+
+* Auto-hide KDE trash directory in desktop directory.
+
+Major changes since 2.3.8 are:
+
+* Fix history sidepane crash
+
+* Add keynav rectangle selection
+
+* Better error string for missing proxy hostnames
+
+* Handle arrow keys on numerical keypad
+
+Major changes since 2.3.7 are:
+
+* Handle write protected gconf keys better
+
+* Make "Write to CD" button higher priority
+
+* Small bugfixes
+
+Major changes since 2.3.6 are:
+
+* Fixed zoom-to-fit in the zoom control.
+
+* Selected files are colorized with the selection color.
+
+* Doesn't create new windows when mounting CD-ROMS.
+
+* Improved the gutter-on-the-right problem.
+
+* Updates the disks menu when fstab changes
+
+* Performance enhancements for icon layout.
+
+* Added support for total size and total count for multi-file property dialogs.
+
+* String fixes
+
+* Added documentation on nautilus internals
+
+* Various fixes
+
+Major changes since 2.3.5 are:
+
+* .hidden file support
+
+* Improved context menus
+
+* Speed improvements in the list and tree views
+
+* Multi-rooted tree view
+
+* Update emblems list after adding custom emblems
+
+* Prefer existing windows from the command line in open-in-new-window
+  mode
+
+Major changes since 2.3.4 are:
+
+* Startup notification support when launching files.
+
+* Selection fixes
+
+* Crash fix in the properties dialog
+
+* Icon theme changes in the tree view fixed
+
+* gcc 3.3 build fixes
+
+* Desktop icon bug fixes
+
+* Panel transparency fix
+
+Major changes since 2.3.3 are:
+
+* Added a "text beside icons" pref to the icon view
+
+* Use the authentication manager in the adapter component
+
+* Bonobo context menus can supply an icon
+
+* Zoom control uses stock widgets
+
+* The property dialog can edit multiple files
+
+* HIG-compliance improvements
+
+Major changes since 2.3.2 are:
+
+* Made the throbber themable using icon themes
+  (requires gnome-icon-theme 1.0.4)
+
+* Get manager selection for desktop
+
+* Fix some bugs in new desktop code
+
+* fixed icon position for DnD in the listview
+
+* Fixed spacing in dialogs to comply better with the HIG
+
+* Use the authentication manager from libgnomeui instead
+  of our own.
+
+* Fix keynav bug with space in listview
+
+
+Major changes since 2.3.1 are:
+
+* Disabled the limit on the number of files in a directory.
+
+* Change desktop directory to ~/Desktop
+
+* Major change to how desktop icons are handled
+
+* Some accessibility fixes
+
+Major changes since 2.2.3 are:
+
+* Performance increases on directory loads.
+
+* Integrate nautilus-cd-burner
+
+* "Keep Aligned" mode on desktop
+
+* Cygwin & AIX port
+
+* Uses new gnome_vfs_show_url API to activate files
+
+* Better bookmarks UI
+
+* Change in how attributes are stored internally.
+
+Major changes since 2.2.2 are:
+
+* Lots of fixes to the list view keyboard and mouse handling
+
+* Lots of fixes to the icon view keyboard and mouse handling
+
+* Automatic notes emblem (requires gnome-icon-theme 1.0.2)
+
+* Correctly scale icons in list view
+
+* No more tearing when zooming the icon view
+
+* Don't select the extension for rename in the list view
+
+* Easier to trigger auto scrolling during drag and drop in the icon
+  view
+
+* Much better thumbnail queue handling. Visible thumbnails are
+  prioritized.
+
+* Scroll to previous position on directory reload
+
+* Show volume and free space in the property dialog for directories
+
+* Clean up by name doesn't leave icons outside the screen anymore
+
+* Fix show backup/hidden files and some default view preferences
+
+* Set the Nautilus application name used when grouping in the task
+  list.
+
+* Converted NautilusFile to a GObject
+
+* Make the thumbnail size prefs not affect external thumbnailers, as
+  it makes little sense for e.g. videos.
+
+* Allow you to exit nautilus-file-management-properties
+
+* Fix crash when droping from other app to Nautilus
+
+* Use startup notification when launching Nautilus
+
+* Don't save window geometry when maximized
+
+* Added code to migrate Nautilus 1.0.x scripts
+
+* Added some docs about keyboard and mouse navigation in nautilus views.
+
+* Better accessibility support in the icon view
+
+* Some other small bugfixes and polish
+
+Major changes since 2.2.1 are:
+
+* Going back/forwards scrolls to the position you left
+
+* Better support for Gtk+ themes on the toolbar and location bar
+
+* Disable the "switch to manual layout" dialog
+
+* Ctrl-dragging on a selected file doesn't de-select it
+
+* Save the current active side pane
+
+* Now easier to hit icons, since you can also click on the transparent
+  parts.
+
+* Select the directory name for renaming when creating a new directory
+
+* Select the base name (not extension) when renaming a file
+
+* List view smaller zoomlevel by default
+
+* Text view has copy to clipboard functionallity
+
+* Padding and alignment changes in the preferences dialog
+
+* Performance enhancement for embedded text
+
+* The delete key now works on the desktop
+
+* Added back the "erase" emblem to the Backgrounds & emblems dialog
+
+* Better accessibility support for the icon view
+
+* Refresh listview when icon theme changes
+
+* Correct font size when renaming and not 100% zoomed view
+
+* Remove all usage of deprecated APIs
+
+* Use monospace font in text view
+
+* Added 1 gigabyte pref tor max thumbnailing size
+
+* Handle floppies and cdroms mounted outside /mnt
+
+* Fix duplicated entries in context menu.
+
+* Don't session manage NautilusViews
+
+* Multi-head fixes for the preference dialog
+
+* Leak fixes
+
+* Fix bonobo-activation forkbomb
+
+
+Major changes since 2.2.0.2 are:
+
+* Fix name collisions in trash
+
+* fix image properties crash
+
+* multihead fixes
+
+* allow .svgz rendering
+
+* correct icons dor zip disks
+
+* fix button ordering for transfer error dialogs
+
+* memory leaks fixed
+
+* "slow context menu" fixed
+
+* Fixed smb passwords getting "stuck".
+
+Major changes since 2.2.0.1 are:
+
+* Background crash fix
+
+* Embedded text fix
+
+Major changes since 2.2.0 are:
+
+* NautilusView refcounting fix
+
+* New translations
+
+Major changes since 2.1.91 are:
+
+* i18n fixes
+
+* List view fixes
+
+* Reverted the symlink change.  Now resolves symlinks when following
+  them.
+
+* Context menu corba usage fix
+
+* Reload thumbnails when files changes
+
+* Small fixes
+
+Major changes since 2.1.6 are:
+
+* No flicker on startup.
+
+* Faster expose of the desktop
+
+* Don't resolve symlinks when follow them
+
+* Small bugfixes
+
+Major changes since 2.1.6 are:
+
+* Multihead fixes
+
+* Fixed delete-in-rename-deletes-file bug
+
+* UI review improvements
+
+* Resolved the conflict between Edit and Empty Trash that was causing
+  the desktop to be badly stuck.
+
+* Small bugfixes
+
+Major changes since 2.1.5 are:
+
+* Don't depend on libgnomecanvas
+
+* Don't put icons under panel
+
+* Use new icons for start-here
+
+* Better window titles for e.g. fonts:///
+
+* Handle thumbnail preferences
+
+
+Major changes since 2.1.4 are:
+
+* Handle icon theme changes better
+
+* Query drag with middle button instead of right-click.
+  This allows faster context menus.
+
+* Bugfixes
+
+Major changes since 2.1.2 are:
+
+* Remove unused code.
+
+* Lots of smalll bugfixes.
+
+* Make bonobo property pages regular controls instead of NautilusViews.
+
+* Mimetype-sensitive context menu plugins
+
+* Restructure the cut-and-paste code.
+
+Major changes since 2.1.1 are:
+
+* New preferences dialog and capplet.
+
+* Pluggable file property pages.
+
+* New Image properties page.
+
+* Emblem sidebar work.
+
+* Handle rootwindow drops.
+
+* Background drag and drop changes
+
+* The music view has been removed.
+
+Major changes since 2.1.0 are:
+
+* Multihead support
+
+* Emblem sidebar
+
+* Emblems handled with icon themes
+
+* Uses new pango wrap mode in icon view
+
+* Work on exterminating Nautilus themes
+
+* Recent files support
+
+Major changes since 2.0.7 are:
+
+* Nautilus now uses the system icon theme.
+
+* The sidebar tabs have been replaced with a new widget.
+
+* The icon container uses the new eel canvas.
+
+* UI cleanups.
+
+* Various bugfixes.
+
+Major changes since 2.0.6 are:
+
+* Fixed the assertion failure on startup
+
+* CD handling updates
+
+Major changes since 2.0.5 are:
+
+* Fixed volume handling bug with thrash that made it impossible
+  to unmount removable media while using fam.
+
+Major changes since 2.0.4 are:
+
+* Follow thumbnailing prefs for svgs too
+
+* Correctly handle old non-utf8 trash and home links
+
+* Fix the "icons stacked in top left corner" bug
+
+* Various small bugfixes.
+
+Major changes since 2.0.3 are:
+
+* Don't show progress dialog for fast operations
+
+* Mime handling fixes
+
+* crux theme tweak
+
+* small performance enhancements
+
+* Various bugfixes.
+
+
+Major changes since 2.0.2 are:
+
+* Drag and drop has been implemented in the list view.
+
+* Performance enhancements in the icon factory.
+
+* Various bugfixes.
+
+
+Major changes since 2.0.1 are:
+
+* List view doesn't hang anymore.
+
+* Reflect changes in the eel background api.
+
+* Fix for crash when invoking "nautilus -q".
+
+
+Major changes since 2.0.0 are:
+
+* Various UI cleanups from the ui review
+
+* Various bugfixes
+
+* The Gnome Nautilus theme now follows the gtk+ theme better
+
+* Window geometry is stored even in open-directories-in-same-window mode
+
+* All executable bonobo components moved into libexec.
+
+* Some performance improvements
+
+* Accessibility fixes
+
+* Add support for kernel supermount patch
+
+* Read desktop file icons according to the icon theme specification
+
+* New throbber for the gnome theme
+
+* large version of trash icon
+
+* Better handling of disk ejecting
+
+* Proper handling of launching desktop files according to the spec
+
+
+
+Major changes since 1.0.x are:
+
+* Port to Gtk+ 2 and the Gnome 2 platform.
+
+* Major performance improvements.
+
+* Userlevels are removed.
+
+* Lots of small UI changes in order to comply with the Gnome 2 Human
+  Interface Guidelines.
+
+* Preferences dialog has been trimmed down.
+
+* Anti-aliased mode has been removed. If you want anti-aliased text,
+  you need to use the Gtk+ 2 anti-aliased text mode.
+
+* New emblems added to the default set of emblems.
+
+* Support for editing vfolder menus using nautilus.
+
+* Made most normal component in-process.
+
+* Accessibility support.
+
+* Drop support for public metadata.
+
+* The news was sidebar disabled/removed
+
+* Image view component removed, we now use Eye of Gnome.
+
+* Bugfixes
+
+
+Minor new features:
+
+* Drop-shadow for text on the desktop
+
+* Alt-drag image and pick set-as-background
+
+* New progress dialog window-icon shows progress visually.
+
+* You can use Alt-left/right/up/down to navigate the icon view using
+  the keyboard.
+
+* Ability to easily create launchers on the desktop.
