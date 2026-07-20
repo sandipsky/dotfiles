@@ -53,6 +53,9 @@ G_BEGIN_DECLS
 #define NAUTILUS_WINDOW_STATE_INITIAL_SIZE_FILE_CHOOSER         "initial-size-file-chooser"
 #define NAUTILUS_WINDOW_STATE_SIDEBAR_WIDTH			"sidebar-width"
 
+/* Local patch: folder image previews */
+#define NAUTILUS_PREFERENCES_SHOW_FOLDER_PREVIEWS		"show-folder-previews"
+
 /* Sorting order */
 #define NAUTILUS_PREFERENCES_SORT_DIRECTORIES_FIRST		"sort-directories-first"
 #define NAUTILUS_PREFERENCES_DEFAULT_SORT_ORDER			"default-sort-order"

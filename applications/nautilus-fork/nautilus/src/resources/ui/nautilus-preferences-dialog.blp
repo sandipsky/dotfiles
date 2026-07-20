@@ -59,6 +59,13 @@ Adw.PreferencesDialog preferences_dialog {
         use-underline: true;
       }
 
+      /* Local patch: folder image previews toggle */
+      Adw.SwitchRow show_folder_previews_row {
+        title: _("Folder _Image Previews");
+        subtitle: _("Show a preview of a contained image on folder icons");
+        use-underline: true;
+      }
+
       Adw.ComboRow count_row {
         title: _("_Count Number of Files in Folders");
         use-underline: true;

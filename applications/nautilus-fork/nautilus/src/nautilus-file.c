@@ -127,6 +127,8 @@ static GHashTable *symbolic_links;
 
 static guint64 cached_thumbnail_limit;
 static NautilusSpeedTradeoffValue show_file_thumbs;
+/* Local patch: folder image previews toggle */
+static gboolean show_folder_previews = TRUE;
 
 static NautilusSpeedTradeoffValue show_directory_item_count;
 
@@ -5126,6 +5128,11 @@ folder_preview_start (NautilusFile *file)
 static gboolean
 folder_preview_should_show (NautilusFile *file)
 {
+    if (!show_folder_previews)
+    {
+        return FALSE;
+    }
+
     if (!nautilus_file_is_directory (file) || has_custom_icon (file))
     {
         return FALSE;
@@ -5255,9 +5262,12 @@ nautilus_file_get_icon (NautilusFile          *file,
         icon = nautilus_file_get_thumbnail_icon (file, size, scale, flags);
     }
 
-    /* Local patch: folder icons preview an image contained in the folder. */
+    /* Local patch: folder icons preview an image contained in the folder.
+     * Note: no USE_THUMBNAILS gate — the grid/list cells call this with
+     * FLAGS_NONE for the NautilusImage *fallback* paintable (real file
+     * thumbnails are loaded by NautilusImage itself via glycin, which fails
+     * for directories), so the fallback is exactly where this must hook. */
     if (icon == NULL &&
-        flags & NAUTILUS_FILE_ICON_FLAGS_USE_THUMBNAILS &&
         size >= NAUTILUS_THUMBNAIL_MINIMUM_ICON_SIZE &&
         folder_preview_should_show (file))
     {
@@ -8823,6 +8833,22 @@ show_thumbnails_changed_callback (gpointer user_data)
     emit_change_signals_for_all_files_in_all_directories ();
 }
 
+/* Local patch: folder image previews toggle */
+static void
+update_show_folder_previews (void)
+{
+    show_folder_previews = g_settings_get_boolean (nautilus_preferences,
+                                                   NAUTILUS_PREFERENCES_SHOW_FOLDER_PREVIEWS);
+}
+
+static void
+show_folder_previews_changed_callback (gpointer user_data)
+{
+    update_show_folder_previews ();
+
+    emit_change_signals_for_all_files_in_all_directories ();
+}
+
 static void
 update_show_directory_item_count (void)
 {
@@ -9126,9 +9152,14 @@ nautilus_file_class_init (NautilusFileClass *class)
                               G_CALLBACK (thumbnail_limit_changed_callback),
                               NULL);
     update_show_thumbnails ();
+    update_show_folder_previews ();
     g_signal_connect_swapped (nautilus_preferences,
                               "changed::" NAUTILUS_PREFERENCES_SHOW_FILE_THUMBNAILS,
                               G_CALLBACK (show_thumbnails_changed_callback),
+                              NULL);
+    g_signal_connect_swapped (nautilus_preferences,
+                              "changed::" NAUTILUS_PREFERENCES_SHOW_FOLDER_PREVIEWS,
+                              G_CALLBACK (show_folder_previews_changed_callback),
                               NULL);
     update_show_directory_item_count ();
     g_signal_connect_swapped (nautilus_preferences,

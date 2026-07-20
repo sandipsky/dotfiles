@@ -389,3 +389,11 @@ rubberband {
 .toolbar.no-bottom-padding {
   padding-bottom: 0px;
 }
+
+/* Local patch: small gap between a context menu and its nested submenu
+ * (margin on both sides so the gap is kept when the submenu flips to the
+ * left near the screen edge). */
+popover.menu popover.menu > contents {
+  margin-left: 8px;
+  margin-right: 8px;
+}

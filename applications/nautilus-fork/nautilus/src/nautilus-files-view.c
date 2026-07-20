@@ -8475,6 +8475,239 @@ nautilus_files_view_update_toolbar_menus (NautilusFilesView *self)
     nautilus_files_view_reset_view_menu (self);
 }
 
+/* Local patch: Windows-style NESTED context menus without pointer grabs.
+ *
+ * On Wayland a grab confines input to the popup chain that owns it. With
+ * GTK's default grabbing popovers, the nested submenus' grab hand-off breaks
+ * on some compositors (a submenu auto-closing on hover can leave a stale grab
+ * that keeps the parent menu from dismissing on outside clicks); with only
+ * the parent grabbing, the non-grabbing submenus can never receive input at
+ * all. So the context menus take NO grab whatsoever — input flows normally
+ * to every popover — and dismissal is reimplemented manually with window-level
+ * controllers while a menu is open:
+ *   - a capture-phase click on anything that isn't the menu or one of its
+ *     submenus closes the menu (and is swallowed, like a native menu);
+ *   - Escape closes the menu;
+ *   - the window losing focus closes the menu.
+ * The controllers are added when the menu pops up and removed when it closes.
+ */
+static void
+on_nested_menu_item_clicked (GtkWidget *toplevel_menu)
+{
+    /* Runs after GtkModelButton's own handler, i.e. after the item's action
+     * has been activated and the submenu popped down — close the rest. */
+    if (gtk_widget_get_visible (toplevel_menu))
+    {
+        gtk_popover_popdown (GTK_POPOVER (toplevel_menu));
+    }
+}
+
+/* Disables grabs on every nested submenu popover, and makes activating a
+ * submenu item close the whole menu: GtkModelButton only pops down its own
+ * ancestor popover (the submenu), leaving the parent menu open. GtkModelButton
+ * is private in GTK4, so it is matched by type name and its "clicked" signal
+ * and "popover" property are used generically. */
+static void
+prepare_nested_menus_recurse (GtkWidget *widget,
+                              GtkWidget *toplevel_menu,
+                              gboolean   in_submenu)
+{
+    for (GtkWidget *child = gtk_widget_get_first_child (widget);
+         child != NULL;
+         child = gtk_widget_get_next_sibling (child))
+    {
+        gboolean child_in_submenu = in_submenu;
+
+        if (GTK_IS_POPOVER (child))
+        {
+            gtk_popover_set_autohide (GTK_POPOVER (child), FALSE);
+            child_in_submenu = TRUE;
+        }
+
+        if (in_submenu &&
+            g_str_equal (G_OBJECT_TYPE_NAME (child), "GtkModelButton"))
+        {
+            g_autoptr (GtkWidget) item_submenu = NULL;
+
+            g_object_get (child, "popover", &item_submenu, NULL);
+
+            if (item_submenu == NULL)
+            {
+                g_signal_connect_object (child, "clicked",
+                                         G_CALLBACK (on_nested_menu_item_clicked),
+                                         toplevel_menu,
+                                         G_CONNECT_SWAPPED | G_CONNECT_AFTER);
+            }
+        }
+
+        prepare_nested_menus_recurse (child, toplevel_menu, child_in_submenu);
+    }
+}
+
+static gboolean
+event_targets_menu (GtkEventController *controller,
+                    GtkWidget          *menu)
+{
+    GdkEvent *event = gtk_event_controller_get_current_event (controller);
+    GdkSurface *event_surface = (event != NULL) ? gdk_event_get_surface (event) : NULL;
+
+    if (event_surface != NULL)
+    {
+        GtkNative *event_native = gtk_native_get_for_surface (event_surface);
+        GtkWidget *event_widget = (event_native != NULL) ? GTK_WIDGET (event_native) : NULL;
+
+        if (event_widget != NULL &&
+            (event_widget == menu || gtk_widget_is_ancestor (event_widget, menu)))
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static void
+on_no_grab_menu_outside_press (GtkGestureClick *gesture,
+                               int              n_press,
+                               double           x,
+                               double           y,
+                               gpointer         user_data)
+{
+    GtkWidget *menu = user_data;
+
+    if (!gtk_widget_get_visible (menu) ||
+        event_targets_menu (GTK_EVENT_CONTROLLER (gesture), menu))
+    {
+        return;
+    }
+
+    /* Swallow the press, like a native menu's outside-click would be. */
+    gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_CLAIMED);
+    gtk_popover_popdown (GTK_POPOVER (menu));
+}
+
+static gboolean
+on_no_grab_menu_key (GtkEventControllerKey *controller,
+                     guint                  keyval,
+                     guint                  keycode,
+                     GdkModifierType        state,
+                     gpointer               user_data)
+{
+    GtkWidget *menu = user_data;
+
+    if (keyval == GDK_KEY_Escape && gtk_widget_get_visible (menu))
+    {
+        gtk_popover_popdown (GTK_POPOVER (menu));
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void
+on_no_grab_menu_window_active_changed (GtkWidget  *menu,
+                                       GParamSpec *pspec,
+                                       GtkWindow  *window)
+{
+    if (!gtk_window_is_active (window) && gtk_widget_get_visible (menu))
+    {
+        gtk_popover_popdown (GTK_POPOVER (menu));
+    }
+}
+
+static void
+on_no_grab_menu_closed (GtkPopover *menu,
+                        gpointer    user_data)
+{
+    GtkWidget *root = g_object_get_data (G_OBJECT (menu), "nautilus-dismiss-root");
+    GtkEventController *click = g_object_get_data (G_OBJECT (menu), "nautilus-dismiss-click");
+    GtkEventController *key = g_object_get_data (G_OBJECT (menu), "nautilus-dismiss-key");
+
+    if (root != NULL)
+    {
+        if (click != NULL)
+        {
+            gtk_widget_remove_controller (root, click);
+        }
+        if (key != NULL)
+        {
+            gtk_widget_remove_controller (root, key);
+        }
+    }
+
+    g_object_set_data (G_OBJECT (menu), "nautilus-dismiss-root", NULL);
+    g_object_set_data (G_OBJECT (menu), "nautilus-dismiss-click", NULL);
+    g_object_set_data (G_OBJECT (menu), "nautilus-dismiss-key", NULL);
+}
+
+static void
+setup_no_grab_context_menu (NautilusFilesView *self,
+                            GtkWidget         *menu)
+{
+    GtkRoot *root = gtk_widget_get_root (GTK_WIDGET (self));
+
+    gtk_popover_set_autohide (GTK_POPOVER (menu), FALSE);
+    prepare_nested_menus_recurse (menu, menu, FALSE);
+
+    if (root == NULL)
+    {
+        return;
+    }
+
+    GtkGesture *click_gesture = gtk_gesture_click_new ();
+
+    gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (click_gesture), 0);
+    gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (click_gesture),
+                                                GTK_PHASE_CAPTURE);
+    g_signal_connect (click_gesture, "pressed",
+                      G_CALLBACK (on_no_grab_menu_outside_press), menu);
+    gtk_widget_add_controller (GTK_WIDGET (root), GTK_EVENT_CONTROLLER (click_gesture));
+
+    GtkEventController *key_controller = gtk_event_controller_key_new ();
+
+    gtk_event_controller_set_propagation_phase (key_controller, GTK_PHASE_CAPTURE);
+    g_signal_connect (key_controller, "key-pressed",
+                      G_CALLBACK (on_no_grab_menu_key), menu);
+    gtk_widget_add_controller (GTK_WIDGET (root), key_controller);
+
+    g_object_set_data (G_OBJECT (menu), "nautilus-dismiss-root", root);
+    g_object_set_data (G_OBJECT (menu), "nautilus-dismiss-click", click_gesture);
+    g_object_set_data (G_OBJECT (menu), "nautilus-dismiss-key", key_controller);
+
+    g_signal_connect (menu, "closed",
+                      G_CALLBACK (on_no_grab_menu_closed), NULL);
+    g_signal_connect_object (root, "notify::is-active",
+                             G_CALLBACK (on_no_grab_menu_window_active_changed), menu,
+                             G_CONNECT_SWAPPED);
+}
+
+/* Local patch: a submenu entry has no action of its own, so it can't be
+ * disabled through the menu model. Gray out every submenu-opening button in
+ * the given menu (the background menu only has one: "New") to match. */
+static void
+set_submenu_buttons_sensitive_recurse (GtkWidget *widget,
+                                       gboolean   sensitive)
+{
+    for (GtkWidget *child = gtk_widget_get_first_child (widget);
+         child != NULL;
+         child = gtk_widget_get_next_sibling (child))
+    {
+        if (g_str_equal (G_OBJECT_TYPE_NAME (child), "GtkModelButton"))
+        {
+            g_autoptr (GtkWidget) item_submenu = NULL;
+
+            g_object_get (child, "popover", &item_submenu, NULL);
+
+            if (item_submenu != NULL)
+            {
+                gtk_widget_set_sensitive (child, sensitive);
+            }
+        }
+
+        set_submenu_buttons_sensitive_recurse (child, sensitive);
+    }
+}
+
 static void
 nautilus_files_view_pop_up_selection_context_menu (NautilusFilesView *self,
                                                    graphene_point_t  *point)
@@ -8490,7 +8723,10 @@ nautilus_files_view_pop_up_selection_context_menu (NautilusFilesView *self,
      * and showing old model temporarily. We don't do this when popover is
      * closed because it wouldn't activate the actions then. */
     g_clear_pointer (&self->selection_menu, gtk_widget_unparent);
-    self->selection_menu = gtk_popover_menu_new_from_model (NULL);
+    /* Local patch: NESTED — submenus open beside the parent menu
+     * (Windows-style) instead of sliding in place of it. */
+    self->selection_menu = gtk_popover_menu_new_from_model_full (NULL,
+                                                                 GTK_POPOVER_MENU_NESTED);
 
     /* There's something related to NautilusFilesView that isn't grabbing the
      * focus back when the popover is closed. Let's force it as a workaround. */
@@ -8503,6 +8739,7 @@ nautilus_files_view_pop_up_selection_context_menu (NautilusFilesView *self,
 
     gtk_popover_menu_set_menu_model (GTK_POPOVER_MENU (self->selection_menu),
                                      G_MENU_MODEL (self->selection_menu_model));
+    setup_no_grab_context_menu (self, self->selection_menu);
 
     if (point == NULL)
     {
@@ -8539,7 +8776,10 @@ nautilus_files_view_pop_up_background_context_menu (NautilusFilesView *self,
      * and showing old model temporarily. We don't do this when popover is
      * closed because it wouldn't activate the actions then. */
     g_clear_pointer (&self->background_menu, gtk_widget_unparent);
-    self->background_menu = gtk_popover_menu_new_from_model (NULL);
+    /* Local patch: NESTED — submenus open beside the parent menu
+     * (Windows-style) instead of sliding in place of it. */
+    self->background_menu = gtk_popover_menu_new_from_model_full (NULL,
+                                                                  GTK_POPOVER_MENU_NESTED);
 
     /* There's something related to NautilusFilesView that isn't grabbing the
      * focus back when the popover is closed. Let's force it as a workaround. */
@@ -8551,6 +8791,16 @@ nautilus_files_view_pop_up_background_context_menu (NautilusFilesView *self,
     gtk_widget_set_halign (self->background_menu, GTK_ALIGN_START);
     gtk_popover_menu_set_menu_model (GTK_POPOVER_MENU (self->background_menu),
                                      G_MENU_MODEL (self->background_menu_model));
+    setup_no_grab_context_menu (self, self->background_menu);
+
+    /* Local patch: gray out the New submenu when files can't be created here
+     * (read-only directory), matching the disabled New Folder item. */
+    GAction *new_file_action = g_action_map_lookup_action (G_ACTION_MAP (self->view_action_group),
+                                                           "new-empty-file");
+
+    set_submenu_buttons_sensitive_recurse (self->background_menu,
+                                           new_file_action != NULL &&
+                                           g_action_get_enabled (new_file_action));
 
     GdkRectangle rect = { 0 };
 

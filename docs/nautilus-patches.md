@@ -83,6 +83,42 @@ is restored in `nautilus_window_constructed()` via
 `nautilus_window_set_up_sidebar_resize()`. Disabled while the split view is
 collapsed (narrow-window breakpoint).
 
+### Context menus: Windows-style nested submenus
+
+File: `src/nautilus-files-view.c` (`update_selection_menu` /
+`update_background_menu` popover creation). Both context-menu popovers are
+created with `gtk_popover_menu_new_from_model_full (NULL,
+GTK_POPOVER_MENU_NESTED)`, so submenus (New, Open, Scripts…) open in their own
+popover beside the parent menu — keeping both visible, like Windows — instead
+of GTK’s default slide-in-place drill-down. `style.css` adds an 8 px gap
+between parent and submenu.
+
+Grab handling (the hard part): on Wayland a pointer grab confines input to
+the popup chain that owns it. With GTK’s stock grabbing popovers, the grab
+hand-off between parent and nested submenus breaks under Hyprland (a submenu
+auto-closing on hover leaves a stale grab → the parent menu stops dismissing
+on outside clicks); conversely a submenu without its own grab can never
+receive input while the parent holds one. So the fork’s context menus take
+**no grab at all** (`autohide: FALSE` on the menu and, via
+`disable_menu_grabs_recurse()`, on every eagerly-created nested submenu) and
+`setup_no_grab_context_menu()` reimplements dismissal with window-level
+controllers that live only while the menu is open: a capture-phase click on
+anything that isn’t the menu/submenus closes it (the press is claimed, like a
+native menu), Escape closes it, and the window losing focus closes it.
+Trade-off: arrow-key menu navigation is lost (keyboard stays on the window
+surface), and clicks on other apps don’t dismiss (window focus loss covers
+that).
+
+Two more nested-menu fixups in `nautilus-files-view.c` (GtkModelButton is
+private in GTK4, so both match it by type name and use its properties/signals
+generically): activating an item inside a nested submenu only pops down the
+submenu itself upstream — `prepare_nested_menus_recurse()` connects an
+after-handler to those items’ `clicked` signal that closes the whole menu once
+the action has run. And since a submenu entry has no action to disable it
+through the model, `set_submenu_buttons_sensitive_recurse()` grays the
+background menu’s “New” submenu button off the `new-empty-file` action’s
+enabled state (read-only directories), matching the disabled New Folder item.
+
 ### 5–8. Context-menu items (New / Open as Root / Terminal / Code)
 
 Files: `src/nautilus-files-view.c`,
@@ -116,7 +152,13 @@ the enable-state block in `nautilus_files_view_update_actions_state()`):
 
 Files: `src/nautilus-file.c`, `src/nautilus-file-private.h`. In
 `nautilus_file_get_icon()`, native directories (thumbnails enabled per the
-existing speed-tradeoff preference, no custom icon) get a preview: the folder
+existing speed-tradeoff preference, no custom icon) get a preview. Important:
+the branch must NOT be gated on `NAUTILUS_FILE_ICON_FLAGS_USE_THUMBNAILS` —
+nautilus 50 grid/list cells call `nautilus_file_get_icon_paintable()` with
+`FLAGS_NONE` only to obtain the NautilusImage *fallback* paintable (file
+thumbnails are loaded by NautilusImage itself via glycin, which fails for
+directories), so that fallback is exactly where the composite hooks in.
+The preview: the folder
 is enumerated asynchronously (batches of 100, max 500 entries, priority LOW)
 for the alphabetically-first non-hidden `image/*` child; its thumbnail is
 loaded from the cache when GIO reports `thumbnail::is-valid`, otherwise
@@ -126,6 +168,12 @@ resulting texture is cached on the file (`folder_preview_*` fields in
 themed folder icon with a rounded-rect clip (64% × 46% of the icon, aspect
 fill). `nautilus_file_changed()` re-renders the cell when the preview arrives,
 and the cache invalidates when the folder’s mtime changes.
+
+Toggle: Preferences → Performance → “Folder Image Previews” (default on),
+backed by the `show-folder-previews` boolean key added to the
+`org.gnome.nautilus.preferences` schema; flipping it re-emits change signals
+for all files so icons refresh immediately (`show_folder_previews_changed_callback`
+in `nautilus-file.c`, row bound in `nautilus-preferences-dialog.c`/`.blp`).
 
 ## Build / install
 

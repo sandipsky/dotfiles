@@ -134,6 +134,11 @@
       <summary>When to show thumbnails of files</summary>
       <description>Speed trade-off for when to show a file as a thumbnail. If set to “always” then always thumbnail, even if the folder is on a remote server. If set to “local-only” then only show thumbnails for local file systems. If set to “never” then never bother to thumbnail files, just use a generic icon. Despite what the name may suggest, this applies to any previewable file type.</description>
     </key>
+    <key type="b" name="show-folder-previews">
+      <default>true</default>
+      <summary>Whether folder icons preview a contained image</summary>
+      <description>If true, folder icons on local file systems show a small preview of an image contained in the folder, similar to other file managers. Also requires thumbnails to be enabled.</description>
+    </key>
     <key type="t" name="thumbnail-limit">
       <default>50</default>
       <summary>Maximum image size for thumbnailing</summary>

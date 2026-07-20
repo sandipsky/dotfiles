@@ -50,6 +50,8 @@
         "search_recursive_row"
 #define NAUTILUS_PREFERENCES_DIALOG_THUMBNAILS_ROW                       \
         "thumbnails_row"
+#define NAUTILUS_PREFERENCES_DIALOG_FOLDER_PREVIEWS_ROW                       \
+        "show_folder_previews_row"
 #define NAUTILUS_PREFERENCES_DIALOG_COUNT_ROW                       \
         "count_row"
 
@@ -181,6 +183,9 @@ nautilus_preferences_dialog_setup (GtkBuilder *builder)
     bind_builder_bool (builder, nautilus_preferences,
                        NAUTILUS_PREFERENCES_DIALOG_CREATE_LINK_WIDGET,
                        NAUTILUS_PREFERENCES_SHOW_CREATE_LINK);
+    bind_builder_bool (builder, nautilus_preferences,
+                       NAUTILUS_PREFERENCES_DIALOG_FOLDER_PREVIEWS_ROW,
+                       NAUTILUS_PREFERENCES_SHOW_FOLDER_PREVIEWS);
     bind_builder_bool (builder, nautilus_preferences,
                        NAUTILUS_PREFERENCES_DIALOG_DELETE_PERMANENTLY_WIDGET,
                        NAUTILUS_PREFERENCES_SHOW_DELETE_PERMANENTLY);
