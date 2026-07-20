@@ -22,5 +22,13 @@ template $NautilusHistoryControls: Adw.Bin {
       action-name: "slot.forward";
       icon-name: "go-next-symbolic";
     }
+
+    /* Local patch: parent-folder button, like other file managers. */
+    Button up_button {
+      tooltip-text: _("Parent Folder");
+      valign: center;
+      action-name: "slot.up";
+      icon-name: "go-up-symbolic";
+    }
   };
 }

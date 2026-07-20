@@ -91,6 +91,12 @@ struct NautilusFilePrivate
 	time_t thumbnail_mtime;
         GCancellable *thumbnail_cancellable;
 
+	/* Local patch: folder icons preview an image contained in the folder */
+	GdkTexture *folder_preview_texture;
+	GCancellable *folder_preview_cancellable;
+	time_t folder_preview_mtime;
+	guint folder_preview_state : 2;
+
 	char *activation_uri;
 
 	/* used during DND, for checking whether source and destination are on

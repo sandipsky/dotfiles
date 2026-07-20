@@ -58,8 +58,7 @@ sudo pacman -S --noconfirm --needed \
     uwsm
 
 yay -S --noconfirm --needed \
-    breezex-cursor-theme \
-    nautilus-open-any-terminal
+    breezex-cursor-theme
 
 sudo -u "$USERNAME" -H bash -c "curl -fsSL https://claude.ai/install.sh | bash"
 
@@ -188,7 +187,6 @@ gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
 EOF
 
 sudo -u "$USERNAME" -H xdg-mime default org.gnome.Loupe.desktop image/jpeg
@@ -197,8 +195,6 @@ sudo -u "$USERNAME" -H xdg-mime default org.gnome.Loupe.desktop image/webp
 
 sudo -u "$USERNAME" -H xdg-mime default org.gnome.TextEditor.desktop text/plain
 sudo -u "$USERNAME" -H xdg-mime default org.gnome.TextEditor.desktop application/x-shellscript
-
-sudo -u "$USERNAME" -H bash -c "$(wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh)"
 
 sudo -u "$USERNAME" -H xdg-user-dirs-update
 

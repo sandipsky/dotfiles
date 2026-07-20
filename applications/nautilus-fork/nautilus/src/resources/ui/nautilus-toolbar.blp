@@ -3,6 +3,10 @@ using Adw 1;
 
 template $NautilusToolbar: Adw.Bin {
   Adw.HeaderBar {
+    /* Local patch: window controls live on the tab-bar row above. */
+    show-start-title-buttons: false;
+    show-end-title-buttons: false;
+
     [title]
     Box header_toolbar {
       spacing: 6;
@@ -39,29 +43,14 @@ template $NautilusToolbar: Adw.Bin {
           };
         }
 
-        StackPage {
-          name: "search";
-
-          child: Box search_container {
-            orientation: vertical;
-          };
-        }
       }
 
-      Stack search_button_stack {
-        hhomogeneous: true;
-        transition-type: crossfade;
-
-        ToggleButton search_button {
-          tooltip-text: _("Search Current Folder");
-          halign: center;
-          valign: center;
-          action-name: "slot.search-visible";
-          icon-name: "nautilus-folder-search-symbolic";
-          active: bind template.window-slot as <$NautilusWindowSlot>.search-visible;
-        }
-
-        Adw.Bin search_button_placeholder {}
+      /* Local patch: the search (query editor) box is always visible in
+       * place of the old search toggle button; focusing it starts a search. */
+      Box search_container {
+        orientation: vertical;
+        valign: center;
+        width-request: 260;
       }
     }
 

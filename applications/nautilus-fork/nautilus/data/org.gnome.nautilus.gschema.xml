@@ -255,5 +255,10 @@
       <summary>Initial size of the file chooser window</summary>
       <description>A tuple containing the initial width and height of the file chooser window.</description>
     </key>
+    <key type="i" name="sidebar-width">
+      <default>240</default>
+      <summary>Width of the sidebar</summary>
+      <description>The width of the places sidebar in pixels, adjustable by dragging the sidebar edge.</description>
+    </key>
   </schema>
 </schemalist>

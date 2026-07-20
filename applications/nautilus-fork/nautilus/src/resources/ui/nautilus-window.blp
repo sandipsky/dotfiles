@@ -158,17 +158,55 @@ template $NautilusWindow: Adw.ApplicationWindow {
         };
 
         content: Adw.ToolbarView {
+          /* Local patch: tab bar sits above the toolbar (Windows-11-style),
+           * always visible, with compact tabs, a new-tab button right after
+           * the last tab, and the window controls on this top row (the
+           * toolbar's header bar hides its own). The WindowHandle keeps the
+           * empty area usable for dragging the window. */
+          [top]
+          WindowHandle {
+            child: Box {
+              /* The clamp's natural width is n-tabs × fixed tab width (set in
+               * nautilus-window.c), so tabs keep a Win11-like constant size
+               * and only compress once the row is actually full. */
+              $NautilusTabBarClamp tab_bar_clamp {
+                hexpand: false;
+
+                child: Adw.TabBar tab_bar {
+                  view: tab_view;
+                  autohide: false;
+                };
+              }
+
+              Button {
+                icon-name: "tab-new-symbolic";
+                tooltip-text: _("New Tab");
+                action-name: "win.new-tab";
+                valign: center;
+                margin-start: 3;
+
+                styles [
+                  "flat",
+                ]
+              }
+
+              Box {
+                hexpand: true;
+              }
+
+              WindowControls {
+                side: end;
+                valign: center;
+              }
+            };
+          }
+
           [top]
           $NautilusToolbar toolbar {
             show-view-controls: true;
             show-history-controls: true;
             sidebar-button-active: bind split_view.show-sidebar bidirectional;
             window-slot: bind template.active-slot;
-          }
-
-          [top]
-          Adw.TabBar tab_bar {
-            view: tab_view;
           }
 
           content: Adw.TabView tab_view {

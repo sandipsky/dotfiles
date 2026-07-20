@@ -2457,6 +2457,231 @@ action_current_dir_open_console (GSimpleAction *action,
     real_open_console (self->directory_as_file, self);
 }
 
+/* Local patch: built-in "New > File / Document", "Open in Terminal"
+ * (alacritty/kitty), "Open in Code" (VS Code) and "Open as Root" context-menu
+ * actions, replacing the nautilus-open-any-terminal and code-nautilus
+ * third-party extensions. */
+static const char *
+get_terminal_program (void)
+{
+    static const char *terminal = NULL;
+    static gsize initialized = 0;
+
+    if (g_once_init_enter (&initialized))
+    {
+        static const char *candidates[] = { "alacritty", "kitty" };
+
+        for (guint i = 0; i < G_N_ELEMENTS (candidates); i++)
+        {
+            g_autofree char *program = g_find_program_in_path (candidates[i]);
+
+            if (program != NULL)
+            {
+                terminal = candidates[i];
+                break;
+            }
+        }
+
+        g_once_init_leave (&initialized, 1);
+    }
+
+    return terminal;
+}
+
+static gboolean
+code_editor_is_available (void)
+{
+    static gboolean available = FALSE;
+    static gsize initialized = 0;
+
+    if (g_once_init_enter (&initialized))
+    {
+        g_autofree char *program = g_find_program_in_path ("code");
+
+        available = (program != NULL);
+        g_once_init_leave (&initialized, 1);
+    }
+
+    return available;
+}
+
+static char *
+get_file_local_path (NautilusFile *file)
+{
+    g_autoptr (GFile) location = nautilus_file_get_location (file);
+
+    return g_file_get_path (location);
+}
+
+static void
+real_open_terminal (NautilusFile      *file,
+                    NautilusFilesView *view)
+{
+    const char *terminal = get_terminal_program ();
+    g_autofree char *path = get_file_local_path (file);
+
+    if (terminal == NULL || path == NULL)
+    {
+        return;
+    }
+
+    /* alacritty and kitty spell their working-directory flag differently */
+    g_autofree char *command = g_strconcat (terminal,
+                                            g_str_equal (terminal, "kitty") ?
+                                            " --directory" : " --working-directory",
+                                            NULL);
+
+    nautilus_launch_application_from_command (gtk_widget_get_display (GTK_WIDGET (view)),
+                                              command, FALSE, path, NULL);
+}
+
+static void
+action_open_terminal (GSimpleAction *action,
+                      GVariant      *state,
+                      gpointer       user_data)
+{
+    NautilusFilesView *self = user_data;
+    g_autolist (NautilusFile) selection = nautilus_files_view_get_selection (self);
+
+    g_return_if_fail (list_len_is_one (selection));
+
+    real_open_terminal (NAUTILUS_FILE (selection->data), self);
+}
+
+static void
+action_current_dir_open_terminal (GSimpleAction *action,
+                                  GVariant      *state,
+                                  gpointer       user_data)
+{
+    g_return_if_fail (NAUTILUS_IS_FILES_VIEW (user_data));
+
+    NautilusFilesView *self = user_data;
+    real_open_terminal (self->directory_as_file, self);
+}
+
+static void
+action_open_in_code (GSimpleAction *action,
+                     GVariant      *state,
+                     gpointer       user_data)
+{
+    NautilusFilesView *self = user_data;
+    g_autolist (NautilusFile) selection = nautilus_files_view_get_selection (self);
+    g_autoptr (GPtrArray) paths = g_ptr_array_new_with_free_func (g_free);
+
+    for (GList *l = selection; l != NULL; l = l->next)
+    {
+        char *path = get_file_local_path (NAUTILUS_FILE (l->data));
+
+        if (path != NULL)
+        {
+            g_ptr_array_add (paths, path);
+        }
+    }
+
+    if (paths->len == 0)
+    {
+        return;
+    }
+
+    g_ptr_array_add (paths, NULL);
+    nautilus_launch_application_from_command_array (gtk_widget_get_display (GTK_WIDGET (self)),
+                                                    "code", FALSE,
+                                                    (const char * const *) paths->pdata);
+}
+
+static void
+action_current_dir_open_in_code (GSimpleAction *action,
+                                 GVariant      *state,
+                                 gpointer       user_data)
+{
+    g_return_if_fail (NAUTILUS_IS_FILES_VIEW (user_data));
+
+    NautilusFilesView *self = user_data;
+    g_autofree char *path = get_file_local_path (self->directory_as_file);
+
+    if (path == NULL)
+    {
+        return;
+    }
+
+    nautilus_launch_application_from_command (gtk_widget_get_display (GTK_WIDGET (self)),
+                                              "code", FALSE, path, NULL);
+}
+
+static void
+real_open_as_root (NautilusFile *file)
+{
+    g_autofree char *path = get_file_local_path (file);
+
+    if (path == NULL)
+    {
+        return;
+    }
+
+    /* The admin:// GVfs backend prompts via polkit and gives a root view. */
+    g_autofree char *escaped_path = g_uri_escape_string (path,
+                                                         G_URI_RESERVED_CHARS_ALLOWED_IN_PATH,
+                                                         TRUE);
+    g_autofree char *admin_uri = g_strconcat ("admin://", escaped_path, NULL);
+    g_autoptr (GFile) location = g_file_new_for_uri (admin_uri);
+
+    nautilus_application_open_location_full (NAUTILUS_APPLICATION (g_application_get_default ()),
+                                             location, NAUTILUS_OPEN_FLAG_NEW_TAB, NULL, NULL);
+}
+
+static void
+action_open_as_root (GSimpleAction *action,
+                     GVariant      *state,
+                     gpointer       user_data)
+{
+    NautilusFilesView *self = user_data;
+    g_autolist (NautilusFile) selection = nautilus_files_view_get_selection (self);
+
+    g_return_if_fail (list_len_is_one (selection));
+
+    real_open_as_root (NAUTILUS_FILE (selection->data));
+}
+
+static void
+action_current_dir_open_as_root (GSimpleAction *action,
+                                 GVariant      *state,
+                                 gpointer       user_data)
+{
+    g_return_if_fail (NAUTILUS_IS_FILES_VIEW (user_data));
+
+    NautilusFilesView *self = user_data;
+
+    real_open_as_root (self->directory_as_file);
+}
+
+static void
+action_new_empty_file (GSimpleAction *action,
+                       GVariant      *state,
+                       gpointer       user_data)
+{
+    g_assert (NAUTILUS_IS_FILES_VIEW (user_data));
+
+    NautilusFilesView *self = user_data;
+    g_autofree char *container_uri = nautilus_files_view_get_backing_uri (self);
+
+    nautilus_files_view_new_file_with_initial_contents (self, container_uri,
+                                                        _("New File"), NULL, 0);
+}
+
+static void
+action_new_text_document (GSimpleAction *action,
+                          GVariant      *state,
+                          gpointer       user_data)
+{
+    g_assert (NAUTILUS_IS_FILES_VIEW (user_data));
+
+    NautilusFilesView *self = user_data;
+    g_autofree char *container_uri = nautilus_files_view_get_backing_uri (self);
+
+    nautilus_files_view_new_file_with_initial_contents (self, container_uri,
+                                                        _("New Document.txt"), NULL, 0);
+}
+
 static void
 action_properties (GSimpleAction *action,
                    GVariant      *state,
@@ -6871,6 +7096,15 @@ const GActionEntry view_entries[] =
     { .name = "send-email", .activate = action_send_email },
     { .name = "console", .activate = action_open_console },
     { .name = "current-directory-console", .activate = action_current_dir_open_console },
+    /* Local patch: built-in Terminal / Code / Open-as-Root / New-file actions */
+    { .name = "open-terminal", .activate = action_open_terminal },
+    { .name = "current-directory-terminal", .activate = action_current_dir_open_terminal },
+    { .name = "open-in-code", .activate = action_open_in_code },
+    { .name = "current-directory-code", .activate = action_current_dir_open_in_code },
+    { .name = "open-as-root", .activate = action_open_as_root },
+    { .name = "current-directory-open-as-root", .activate = action_current_dir_open_as_root },
+    { .name = "new-empty-file", .activate = action_new_empty_file },
+    { .name = "new-text-document", .activate = action_new_text_document },
     { .name = "properties", .activate = action_properties},
     { .name = "current-directory-properties", .activate = action_current_dir_properties},
     { .name = "run-in-terminal", .activate = action_run_in_terminal },
@@ -7635,6 +7869,72 @@ nautilus_files_view_update_actions_state (NautilusFilesView *self)
                                  mode == NAUTILUS_MODE_BROWSE &&
                                  nautilus_dbus_launcher_is_available (nautilus_dbus_launcher_get (),
                                                                       NAUTILUS_DBUS_LAUNCHER_CONSOLE));
+
+    /* Local patch: Terminal / Code / Open-as-Root / New-file actions */
+    {
+        gboolean single_local_dir_selected = FALSE;
+        g_autofree char *current_dir_path = NULL;
+
+        if (list_len_is_one (selection) &&
+            nautilus_file_is_directory (NAUTILUS_FILE (selection->data)))
+        {
+            g_autofree char *selected_path = get_file_local_path (NAUTILUS_FILE (selection->data));
+
+            single_local_dir_selected = (selected_path != NULL);
+        }
+
+        if (self->directory_as_file != NULL)
+        {
+            current_dir_path = get_file_local_path (self->directory_as_file);
+        }
+
+        action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
+                                             "open-terminal");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                     mode == NAUTILUS_MODE_BROWSE &&
+                                     single_local_dir_selected &&
+                                     get_terminal_program () != NULL);
+        action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
+                                             "current-directory-terminal");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                     mode == NAUTILUS_MODE_BROWSE &&
+                                     current_dir_path != NULL &&
+                                     get_terminal_program () != NULL);
+        action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
+                                             "open-in-code");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                     mode == NAUTILUS_MODE_BROWSE &&
+                                     selection != NULL &&
+                                     !selection_contains_recent &&
+                                     !selection_contains_starred &&
+                                     code_editor_is_available ());
+        action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
+                                             "current-directory-code");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                     mode == NAUTILUS_MODE_BROWSE &&
+                                     current_dir_path != NULL &&
+                                     code_editor_is_available ());
+        action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
+                                             "open-as-root");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                     mode == NAUTILUS_MODE_BROWSE &&
+                                     single_local_dir_selected);
+        action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
+                                             "current-directory-open-as-root");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                     mode == NAUTILUS_MODE_BROWSE &&
+                                     current_dir_path != NULL);
+        action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
+                                             "new-empty-file");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                     mode == NAUTILUS_MODE_BROWSE &&
+                                     can_create_files);
+        action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
+                                             "new-text-document");
+        g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                                     mode == NAUTILUS_MODE_BROWSE &&
+                                     can_create_files);
+    }
     action = g_action_map_lookup_action (G_ACTION_MAP (view_action_group),
                                          "properties");
     g_simple_action_set_enabled (G_SIMPLE_ACTION (action),

@@ -924,6 +924,13 @@ finalize (GObject *object)
         g_object_unref (file->details->thumbnail);
     }
 
+    if (file->details->folder_preview_cancellable != NULL)
+    {
+        g_cancellable_cancel (file->details->folder_preview_cancellable);
+        g_clear_object (&file->details->folder_preview_cancellable);
+    }
+    g_clear_object (&file->details->folder_preview_texture);
+
     g_clear_object (&file->details->mount);
 
     g_clear_pointer (&file->details->filesystem_id, g_ref_string_release);
@@ -4903,6 +4910,322 @@ nautilus_file_get_thumbnail_icon (NautilusFile          *file,
     return icon;
 }
 
+/* Local patch: folder icons preview an image contained in the folder, like
+ * the Windows 11 file explorer and KDE Dolphin. The folder is enumerated
+ * asynchronously; the alphabetically-first non-hidden image gets thumbnailed
+ * (reusing the cached thumbnail when GIO reports a valid one) and the result
+ * is composited onto the themed folder icon. */
+enum
+{
+    FOLDER_PREVIEW_STATE_UNCHECKED = 0,
+    FOLDER_PREVIEW_STATE_LOADING,
+    FOLDER_PREVIEW_STATE_READY,
+    FOLDER_PREVIEW_STATE_NONE,
+};
+
+#define FOLDER_PREVIEW_MAX_ENTRIES 500
+#define FOLDER_PREVIEW_BATCH_SIZE 100
+
+typedef struct
+{
+    NautilusFile *file;             /* strong reference */
+    GFile *location;
+    GFileEnumerator *enumerator;
+    guint entries_left;
+
+    /* best (alphabetically-first) image candidate so far */
+    char *name;
+    char *mime_type;
+    char *thumbnail_path;           /* non-NULL when a valid cached thumbnail exists */
+    guint64 mtime;
+} FolderPreviewData;
+
+static void
+folder_preview_data_free (FolderPreviewData *data)
+{
+    g_clear_object (&data->enumerator);
+    g_clear_object (&data->location);
+    nautilus_file_unref (data->file);
+    g_free (data->name);
+    g_free (data->mime_type);
+    g_free (data->thumbnail_path);
+    g_free (data);
+}
+
+static void
+folder_preview_finish (FolderPreviewData *data,
+                       GdkTexture        *texture)
+{
+    NautilusFile *file = data->file;
+
+    file->details->folder_preview_texture = texture;
+    file->details->folder_preview_state = (texture != NULL) ?
+                                          FOLDER_PREVIEW_STATE_READY :
+                                          FOLDER_PREVIEW_STATE_NONE;
+    g_clear_object (&file->details->folder_preview_cancellable);
+
+    if (texture != NULL)
+    {
+        nautilus_file_changed (file);
+    }
+
+    folder_preview_data_free (data);
+}
+
+static void
+folder_preview_thumbnail_cb (GObject      *source_object,
+                             GAsyncResult *res,
+                             gpointer      user_data)
+{
+    FolderPreviewData *data = user_data;
+    g_autoptr (GError) error = NULL;
+    g_autoptr (GdkPixbuf) pixbuf = nautilus_create_thumbnail_finish (res, &error);
+    GdkTexture *texture = (pixbuf != NULL) ? gdk_texture_new_for_pixbuf (pixbuf) : NULL;
+
+    folder_preview_finish (data, texture);
+}
+
+static void
+folder_preview_next_files_cb (GObject      *source_object,
+                              GAsyncResult *res,
+                              gpointer      user_data)
+{
+    FolderPreviewData *data = user_data;
+    GList *infos = g_file_enumerator_next_files_finish (G_FILE_ENUMERATOR (source_object),
+                                                        res, NULL);
+
+    for (GList *l = infos; l != NULL; l = l->next)
+    {
+        GFileInfo *info = l->data;
+        const char *name = g_file_info_get_name (info);
+        const char *content_type = g_file_info_get_content_type (info);
+
+        if (name == NULL || content_type == NULL ||
+            g_file_info_get_is_hidden (info) ||
+            !g_str_has_prefix (content_type, "image/"))
+        {
+            continue;
+        }
+
+        if (data->name == NULL || g_utf8_collate (name, data->name) < 0)
+        {
+            const char *thumbnail_path = g_file_info_get_attribute_byte_string (info,
+                                                                                G_FILE_ATTRIBUTE_THUMBNAIL_PATH);
+            gboolean thumbnail_valid = g_file_info_get_attribute_boolean (info,
+                                                                          G_FILE_ATTRIBUTE_THUMBNAIL_IS_VALID);
+
+            g_free (data->name);
+            g_free (data->mime_type);
+            g_free (data->thumbnail_path);
+            data->name = g_strdup (name);
+            data->mime_type = g_strdup (content_type);
+            data->mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
+            data->thumbnail_path = (thumbnail_path != NULL && thumbnail_valid) ?
+                                   g_strdup (thumbnail_path) : NULL;
+        }
+    }
+
+    guint n_infos = g_list_length (infos);
+
+    g_list_free_full (infos, g_object_unref);
+
+    if (n_infos > 0 && data->entries_left > n_infos)
+    {
+        data->entries_left -= n_infos;
+        g_file_enumerator_next_files_async (data->enumerator,
+                                            FOLDER_PREVIEW_BATCH_SIZE,
+                                            G_PRIORITY_LOW,
+                                            data->file->details->folder_preview_cancellable,
+                                            folder_preview_next_files_cb,
+                                            data);
+        return;
+    }
+
+    if (data->name == NULL)
+    {
+        folder_preview_finish (data, NULL);
+        return;
+    }
+
+    if (data->thumbnail_path != NULL)
+    {
+        GdkTexture *texture = gdk_texture_new_from_filename (data->thumbnail_path, NULL);
+
+        if (texture != NULL)
+        {
+            folder_preview_finish (data, texture);
+            return;
+        }
+    }
+
+    g_autoptr (GFile) child = g_file_get_child (data->location, data->name);
+    g_autofree char *uri = g_file_get_uri (child);
+
+    if (!nautilus_can_thumbnail (uri, data->mime_type, (time_t) data->mtime))
+    {
+        folder_preview_finish (data, NULL);
+        return;
+    }
+
+    nautilus_create_thumbnail_async (uri, data->mime_type, (time_t) data->mtime,
+                                     data->file->details->folder_preview_cancellable,
+                                     folder_preview_thumbnail_cb, data);
+}
+
+static void
+folder_preview_enumerate_cb (GObject      *source_object,
+                             GAsyncResult *res,
+                             gpointer      user_data)
+{
+    FolderPreviewData *data = user_data;
+
+    data->enumerator = g_file_enumerate_children_finish (G_FILE (source_object), res, NULL);
+
+    if (data->enumerator == NULL)
+    {
+        folder_preview_finish (data, NULL);
+        return;
+    }
+
+    g_file_enumerator_next_files_async (data->enumerator,
+                                        FOLDER_PREVIEW_BATCH_SIZE,
+                                        G_PRIORITY_LOW,
+                                        data->file->details->folder_preview_cancellable,
+                                        folder_preview_next_files_cb,
+                                        data);
+}
+
+static void
+folder_preview_start (NautilusFile *file)
+{
+    FolderPreviewData *data;
+
+    file->details->folder_preview_state = FOLDER_PREVIEW_STATE_LOADING;
+    file->details->folder_preview_mtime = file->details->mtime;
+    file->details->folder_preview_cancellable = g_cancellable_new ();
+
+    data = g_new0 (FolderPreviewData, 1);
+    data->file = nautilus_file_ref (file);
+    data->location = nautilus_file_get_location (file);
+    data->entries_left = FOLDER_PREVIEW_MAX_ENTRIES;
+
+    g_file_enumerate_children_async (data->location,
+                                     G_FILE_ATTRIBUTE_STANDARD_NAME ","
+                                     G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE ","
+                                     G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN ","
+                                     G_FILE_ATTRIBUTE_TIME_MODIFIED ","
+                                     G_FILE_ATTRIBUTE_THUMBNAIL_PATH ","
+                                     G_FILE_ATTRIBUTE_THUMBNAIL_IS_VALID,
+                                     G_FILE_QUERY_INFO_NONE,
+                                     G_PRIORITY_LOW,
+                                     file->details->folder_preview_cancellable,
+                                     folder_preview_enumerate_cb,
+                                     data);
+}
+
+static gboolean
+folder_preview_should_show (NautilusFile *file)
+{
+    if (!nautilus_file_is_directory (file) || has_custom_icon (file))
+    {
+        return FALSE;
+    }
+
+    /* Only preview native directories; virtual locations (trash, recent,
+     * network, admin) keep their special icons and stay cheap. */
+    g_autoptr (GFile) location = nautilus_file_get_location (file);
+
+    if (location == NULL || !g_file_is_native (location))
+    {
+        return FALSE;
+    }
+
+    return get_speed_tradeoff_preference_for_file (file, show_file_thumbs);
+}
+
+static NautilusIconInfo *
+nautilus_file_get_folder_preview_icon (NautilusFile          *file,
+                                       int                    size,
+                                       int                    scale,
+                                       NautilusFileIconFlags  flags)
+{
+    struct NautilusFilePrivate *details = file->details;
+
+    /* The folder mtime changes when entries are added/removed — refresh. */
+    if ((details->folder_preview_state == FOLDER_PREVIEW_STATE_READY ||
+         details->folder_preview_state == FOLDER_PREVIEW_STATE_NONE) &&
+        details->folder_preview_mtime != details->mtime)
+    {
+        g_clear_object (&details->folder_preview_texture);
+        details->folder_preview_state = FOLDER_PREVIEW_STATE_UNCHECKED;
+    }
+
+    if (details->folder_preview_state == FOLDER_PREVIEW_STATE_UNCHECKED)
+    {
+        folder_preview_start (file);
+    }
+
+    if (details->folder_preview_state != FOLDER_PREVIEW_STATE_READY ||
+        details->folder_preview_texture == NULL)
+    {
+        return NULL;
+    }
+
+    /* Composite the preview onto the themed folder icon. */
+    g_autoptr (GIcon) gicon = nautilus_file_get_gicon (file, flags);
+    g_autoptr (NautilusIconInfo) base_info = nautilus_icon_info_lookup (gicon, size, scale);
+    g_autoptr (GdkPaintable) base_paintable = nautilus_icon_info_get_paintable (base_info);
+
+    if (base_paintable == NULL)
+    {
+        return NULL;
+    }
+
+    GdkTexture *texture = details->folder_preview_texture;
+    double icon_size = size;
+    g_autoptr (GtkSnapshot) snapshot = gtk_snapshot_new ();
+
+    gdk_paintable_snapshot (base_paintable, GDK_SNAPSHOT (snapshot), icon_size, icon_size);
+
+    /* Preview sits inside the folder body. */
+    double overlay_w = icon_size * 0.64;
+    double overlay_h = icon_size * 0.46;
+    double overlay_x = (icon_size - overlay_w) / 2;
+    double overlay_y = icon_size * 0.38;
+    GskRoundedRect rounded_rect;
+
+    gsk_rounded_rect_init_from_rect (&rounded_rect,
+                                     &GRAPHENE_RECT_INIT (overlay_x, overlay_y,
+                                                          overlay_w, overlay_h),
+                                     icon_size * 0.06);
+    gtk_snapshot_push_rounded_clip (snapshot, &rounded_rect);
+
+    /* Aspect-fill the preview into the overlay rectangle. */
+    double texture_w = gdk_texture_get_width (texture);
+    double texture_h = gdk_texture_get_height (texture);
+    double fill_scale = MAX (overlay_w / texture_w, overlay_h / texture_h);
+    double draw_w = texture_w * fill_scale;
+    double draw_h = texture_h * fill_scale;
+
+    gtk_snapshot_save (snapshot);
+    gtk_snapshot_translate (snapshot,
+                            &GRAPHENE_POINT_INIT (overlay_x + (overlay_w - draw_w) / 2,
+                                                  overlay_y + (overlay_h - draw_h) / 2));
+    gdk_paintable_snapshot (GDK_PAINTABLE (texture), GDK_SNAPSHOT (snapshot), draw_w, draw_h);
+    gtk_snapshot_restore (snapshot);
+    gtk_snapshot_pop (snapshot);
+
+    g_autoptr (GdkPaintable) result =
+        gtk_snapshot_to_paintable (snapshot, &GRAPHENE_SIZE_INIT (icon_size, icon_size));
+
+    if (result == NULL)
+    {
+        return NULL;
+    }
+
+    return nautilus_icon_info_new_for_paintable (result);
+}
+
 NautilusIconInfo *
 nautilus_file_get_icon (NautilusFile          *file,
                         int                    size,
@@ -4930,6 +5253,15 @@ nautilus_file_get_icon (NautilusFile          *file,
         nautilus_file_should_show_thumbnail (file))
     {
         icon = nautilus_file_get_thumbnail_icon (file, size, scale, flags);
+    }
+
+    /* Local patch: folder icons preview an image contained in the folder. */
+    if (icon == NULL &&
+        flags & NAUTILUS_FILE_ICON_FLAGS_USE_THUMBNAILS &&
+        size >= NAUTILUS_THUMBNAIL_MINIMUM_ICON_SIZE &&
+        folder_preview_should_show (file))
+    {
+        icon = nautilus_file_get_folder_preview_icon (file, size, scale, flags);
     }
 
     if (icon == NULL)

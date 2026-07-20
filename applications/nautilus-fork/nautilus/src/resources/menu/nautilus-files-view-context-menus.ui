@@ -2,6 +2,22 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <menu id="background-menu">
+    <!-- Local patch: New > File / Document (txt) submenu above New Folder -->
+    <submenu>
+      <attribute name="label" translatable="yes">Ne_w</attribute>
+      <section>
+        <item>
+          <attribute name="label" translatable="yes">_File</attribute>
+          <attribute name="action">view.new-empty-file</attribute>
+          <attribute name="hidden-when">action-disabled</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">_Document (txt)</attribute>
+          <attribute name="action">view.new-text-document</attribute>
+          <attribute name="hidden-when">action-disabled</attribute>
+        </item>
+      </section>
+    </submenu>
     <item>
       <attribute name="label" translatable="yes">New _Folder…</attribute>
       <attribute name="action">view.new-folder</attribute>
@@ -56,6 +72,26 @@
       </item>
     </section>
     <section id="background-extensions-section"/>
+    <!-- Local patch: built-in Code / Terminal / Open-as-Root items, in their
+         own section above Properties (same spot the old third-party
+         extensions used) -->
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Open in _Code</attribute>
+        <attribute name="action">view.current-directory-code</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Open in _Terminal</attribute>
+        <attribute name="action">view.current-directory-terminal</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Open as _Root</attribute>
+        <attribute name="action">view.current-directory-open-as-root</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
     <section>
       <item>
         <attribute name="label" translatable="yes">P_roperties</attribute>
@@ -276,6 +312,25 @@
       </item>
     </section>
     <section id="selection-extensions-section"/>
+    <!-- Local patch: built-in Code / Terminal / Open-as-Root items, in their
+         own section above Properties -->
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Open in _Code</attribute>
+        <attribute name="action">view.open-in-code</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Open in _Terminal</attribute>
+        <attribute name="action">view.open-terminal</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Open as _Root</attribute>
+        <attribute name="action">view.open-as-root</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
     <section>
       <item>
         <attribute name="label" translatable="yes">P_roperties</attribute>

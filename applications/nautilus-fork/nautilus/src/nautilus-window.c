@@ -95,12 +95,17 @@ struct _NautilusWindow
 
     AdwTabView *tab_view;
     AdwTabBar *tab_bar;
+    GtkWidget *tab_bar_clamp;
     AdwTabPage *menu_page;
 
     GList *slots;
     NautilusWindowSlot *active_slot; /* weak reference */
 
     GtkWidget *split_view;
+
+    /* Local patch: sidebar resizing by dragging its edge */
+    double sidebar_resize_start_width;
+    gboolean sidebar_resizing;
 
     /* Side Pane */
     NautilusSidebar *places_sidebar;
@@ -1184,6 +1189,252 @@ notify_decoration_layout_cb (NautilusWindow *self)
     }
 }
 
+/* Local patch: Windows-11-like constant-width tabs. AdwTabBar is designed to
+ * fill its container and divide that width among the tabs, so the tab bar is
+ * wrapped in a clamp whose NATURAL width is n-tabs × TAB_WIDTH while its
+ * minimum stays the tab bar's own (small, scrollable) minimum. The top-row
+ * GtkBox then gives the tab bar its ideal width whenever there is room —
+ * tabs stay 220 px and the "+" button trails the last tab — and compresses
+ * the tabs evenly once the row (up to the window controls) is actually full,
+ * instead of stopping at an arbitrary cap. */
+#define TAB_BAR_TAB_WIDTH 220
+
+#define NAUTILUS_TYPE_TAB_BAR_CLAMP (nautilus_tab_bar_clamp_get_type ())
+G_DECLARE_FINAL_TYPE (NautilusTabBarClamp, nautilus_tab_bar_clamp, NAUTILUS, TAB_BAR_CLAMP, AdwBin)
+
+struct _NautilusTabBarClamp
+{
+    AdwBin parent_instance;
+
+    int desired_width;
+};
+
+G_DEFINE_FINAL_TYPE (NautilusTabBarClamp, nautilus_tab_bar_clamp, ADW_TYPE_BIN)
+
+/* Note: these run through a GtkCustomLayout set on the instance — a widget
+ * with a layout manager (AdwBin has GtkBinLayout) never has its measure
+ * vfunc called, so overriding the vfunc would be silently ignored. */
+static void
+tab_bar_clamp_measure_func (GtkWidget      *widget,
+                            GtkOrientation  orientation,
+                            int             for_size,
+                            int            *minimum,
+                            int            *natural,
+                            int            *minimum_baseline,
+                            int            *natural_baseline)
+{
+    GtkWidget *child = gtk_widget_get_first_child (widget);
+
+    *minimum = 0;
+    *natural = 0;
+    *minimum_baseline = -1;
+    *natural_baseline = -1;
+
+    if (child != NULL)
+    {
+        gtk_widget_measure (child, orientation, for_size, minimum, natural, NULL, NULL);
+    }
+
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    {
+        *natural = MAX (*natural, NAUTILUS_TAB_BAR_CLAMP (widget)->desired_width);
+    }
+}
+
+static void
+tab_bar_clamp_allocate_func (GtkWidget *widget,
+                             int        width,
+                             int        height,
+                             int        baseline)
+{
+    GtkWidget *child = gtk_widget_get_first_child (widget);
+
+    if (child != NULL)
+    {
+        gtk_widget_allocate (child, width, height, baseline, NULL);
+    }
+}
+
+static void
+nautilus_tab_bar_clamp_class_init (NautilusTabBarClampClass *klass)
+{
+}
+
+static void
+nautilus_tab_bar_clamp_init (NautilusTabBarClamp *self)
+{
+    gtk_widget_set_layout_manager (GTK_WIDGET (self),
+                                   gtk_custom_layout_new (NULL,
+                                                          tab_bar_clamp_measure_func,
+                                                          tab_bar_clamp_allocate_func));
+}
+
+static void
+update_tab_bar_width (NautilusWindow *window)
+{
+    NautilusTabBarClamp *clamp = NAUTILUS_TAB_BAR_CLAMP (window->tab_bar_clamp);
+    int desired_width = adw_tab_view_get_n_pages (window->tab_view) * TAB_BAR_TAB_WIDTH;
+
+    if (clamp->desired_width != desired_width)
+    {
+        clamp->desired_width = desired_width;
+        gtk_widget_queue_resize (window->tab_bar_clamp);
+    }
+}
+
+/* Local patch: make the sidebar width adjustable by dragging its edge,
+ * persisted in the window-state "sidebar-width" gsettings key. The
+ * AdwOverlaySplitView has no user-facing resize handle, so a capture-phase
+ * drag gesture on the split view is claimed only when the press happens
+ * within a few pixels of the sidebar/content boundary. */
+#define SIDEBAR_RESIZE_HANDLE_WIDTH 6
+#define SIDEBAR_RESIZE_MIN_WIDTH 160
+#define SIDEBAR_RESIZE_MAX_WIDTH 600
+
+static void
+sidebar_set_fixed_width (AdwOverlaySplitView *split_view,
+                         double               width)
+{
+    /* Keep min <= max at every intermediate step. */
+    if (width >= adw_overlay_split_view_get_max_sidebar_width (split_view))
+    {
+        adw_overlay_split_view_set_max_sidebar_width (split_view, width);
+        adw_overlay_split_view_set_min_sidebar_width (split_view, width);
+    }
+    else
+    {
+        adw_overlay_split_view_set_min_sidebar_width (split_view, width);
+        adw_overlay_split_view_set_max_sidebar_width (split_view, width);
+    }
+}
+
+static gboolean
+sidebar_resize_is_available (NautilusWindow *window)
+{
+    AdwOverlaySplitView *split_view = ADW_OVERLAY_SPLIT_VIEW (window->split_view);
+
+    return !adw_overlay_split_view_get_collapsed (split_view) &&
+           adw_overlay_split_view_get_show_sidebar (split_view);
+}
+
+static void
+on_sidebar_resize_drag_begin (GtkGestureDrag *gesture,
+                              double          start_x,
+                              double          start_y,
+                              gpointer        user_data)
+{
+    NautilusWindow *window = NAUTILUS_WINDOW (user_data);
+    AdwOverlaySplitView *split_view = ADW_OVERLAY_SPLIT_VIEW (window->split_view);
+    double sidebar_width = adw_overlay_split_view_get_max_sidebar_width (split_view);
+
+    if (!sidebar_resize_is_available (window) ||
+        ABS (start_x - sidebar_width) > SIDEBAR_RESIZE_HANDLE_WIDTH)
+    {
+        gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_DENIED);
+        return;
+    }
+
+    window->sidebar_resize_start_width = sidebar_width;
+    window->sidebar_resizing = TRUE;
+    gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_CLAIMED);
+}
+
+static void
+on_sidebar_resize_drag_update (GtkGestureDrag *gesture,
+                               double          offset_x,
+                               double          offset_y,
+                               gpointer        user_data)
+{
+    NautilusWindow *window = NAUTILUS_WINDOW (user_data);
+
+    if (!window->sidebar_resizing)
+    {
+        return;
+    }
+
+    double width = CLAMP (window->sidebar_resize_start_width + offset_x,
+                          SIDEBAR_RESIZE_MIN_WIDTH,
+                          SIDEBAR_RESIZE_MAX_WIDTH);
+
+    sidebar_set_fixed_width (ADW_OVERLAY_SPLIT_VIEW (window->split_view), width);
+}
+
+static void
+on_sidebar_resize_drag_end (GtkGestureDrag *gesture,
+                            double          offset_x,
+                            double          offset_y,
+                            gpointer        user_data)
+{
+    NautilusWindow *window = NAUTILUS_WINDOW (user_data);
+
+    if (!window->sidebar_resizing)
+    {
+        return;
+    }
+
+    window->sidebar_resizing = FALSE;
+
+    AdwOverlaySplitView *split_view = ADW_OVERLAY_SPLIT_VIEW (window->split_view);
+
+    g_settings_set_int (nautilus_window_state,
+                        NAUTILUS_WINDOW_STATE_SIDEBAR_WIDTH,
+                        (int) adw_overlay_split_view_get_max_sidebar_width (split_view));
+}
+
+static void
+on_sidebar_resize_motion (GtkEventControllerMotion *controller,
+                          double                    x,
+                          double                    y,
+                          gpointer                  user_data)
+{
+    NautilusWindow *window = NAUTILUS_WINDOW (user_data);
+    AdwOverlaySplitView *split_view = ADW_OVERLAY_SPLIT_VIEW (window->split_view);
+    double sidebar_width = adw_overlay_split_view_get_max_sidebar_width (split_view);
+    gboolean near_edge = (sidebar_resize_is_available (window) &&
+                          ABS (x - sidebar_width) <= SIDEBAR_RESIZE_HANDLE_WIDTH);
+
+    if (near_edge || window->sidebar_resizing)
+    {
+        gtk_widget_set_cursor_from_name (window->split_view, "col-resize");
+    }
+    else
+    {
+        gtk_widget_set_cursor (window->split_view, NULL);
+    }
+}
+
+static void
+nautilus_window_set_up_sidebar_resize (NautilusWindow *window)
+{
+    AdwOverlaySplitView *split_view = ADW_OVERLAY_SPLIT_VIEW (window->split_view);
+    int width = g_settings_get_int (nautilus_window_state,
+                                    NAUTILUS_WINDOW_STATE_SIDEBAR_WIDTH);
+
+    sidebar_set_fixed_width (split_view,
+                             CLAMP (width,
+                                    SIDEBAR_RESIZE_MIN_WIDTH,
+                                    SIDEBAR_RESIZE_MAX_WIDTH));
+
+    GtkGesture *drag_gesture = gtk_gesture_drag_new ();
+
+    gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (drag_gesture),
+                                                GTK_PHASE_CAPTURE);
+    g_signal_connect (drag_gesture, "drag-begin",
+                      G_CALLBACK (on_sidebar_resize_drag_begin), window);
+    g_signal_connect (drag_gesture, "drag-update",
+                      G_CALLBACK (on_sidebar_resize_drag_update), window);
+    g_signal_connect (drag_gesture, "drag-end",
+                      G_CALLBACK (on_sidebar_resize_drag_end), window);
+    gtk_widget_add_controller (window->split_view, GTK_EVENT_CONTROLLER (drag_gesture));
+
+    GtkEventController *motion_controller = gtk_event_controller_motion_new ();
+
+    gtk_event_controller_set_propagation_phase (motion_controller, GTK_PHASE_CAPTURE);
+    g_signal_connect (motion_controller, "motion",
+                      G_CALLBACK (on_sidebar_resize_motion), window);
+    gtk_widget_add_controller (window->split_view, motion_controller);
+}
+
 static void
 nautilus_window_constructed (GObject *self)
 {
@@ -1203,6 +1454,11 @@ nautilus_window_constructed (GObject *self)
                                  NAUTILUS_WINDOW_DEFAULT_HEIGHT);
 
     setup_tab_view (window);
+
+    g_signal_connect_object (window->tab_view, "notify::n-pages",
+                             G_CALLBACK (update_tab_bar_width), window,
+                             G_CONNECT_SWAPPED);
+    update_tab_bar_width (window);
 
     /* Only allow tab DnD in Wayland.  We are using a hack in list-base to
      * get the preferred action which we can not replicate here because we
@@ -1228,6 +1484,7 @@ nautilus_window_constructed (GObject *self)
     notify_decoration_layout_cb (window);
 
     nautilus_window_set_up_sidebar (window);
+    nautilus_window_set_up_sidebar_resize (window);
 
 
     g_signal_connect_object (nautilus_file_undo_manager_get (), "undo-changed",
@@ -1577,6 +1834,7 @@ nautilus_window_init (NautilusWindow *window)
     g_type_ensure (NAUTILUS_TYPE_PLACES_SIDEBAR);
     g_type_ensure (NAUTILUS_TYPE_PROGRESS_INDICATOR);
     g_type_ensure (NAUTILUS_TYPE_SHORTCUT_MANAGER);
+    g_type_ensure (NAUTILUS_TYPE_TAB_BAR_CLAMP);
     gtk_widget_init_template (GTK_WIDGET (window));
 
     g_signal_connect (window, "notify::maximized",
@@ -1702,6 +1960,7 @@ nautilus_window_class_init (NautilusWindowClass *class)
     gtk_widget_class_bind_template_child (wclass, NautilusWindow, toast_overlay);
     gtk_widget_class_bind_template_child (wclass, NautilusWindow, tab_view);
     gtk_widget_class_bind_template_child (wclass, NautilusWindow, tab_bar);
+    gtk_widget_class_bind_template_child (wclass, NautilusWindow, tab_bar_clamp);
     gtk_widget_class_bind_template_child (wclass, NautilusWindow, network_address_bar);
 
     signals[LOCATIONS_CHANGED] =

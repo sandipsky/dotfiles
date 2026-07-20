@@ -47,9 +47,6 @@ struct _NautilusToolbar
     GtkWidget *toolbar_switcher;
     GtkWidget *path_bar;
     GtkWidget *location_entry;
-    GtkWidget *search_button_stack;
-    GtkWidget *search_button;
-    GtkWidget *search_button_placeholder;
 
     gboolean show_location_entry;
     GtkWidget *focus_before_location_entry;
@@ -93,12 +90,10 @@ toolbar_update_appearance (NautilusToolbar *self)
                           g_settings_get_boolean (nautilus_preferences,
                                                   NAUTILUS_PREFERENCES_ALWAYS_USE_LOCATION_ENTRY);
 
-    if (self->window_slot != NULL &&
-        nautilus_window_slot_get_search_visible (self->window_slot))
-    {
-        gtk_stack_set_visible_child_name (GTK_STACK (self->toolbar_switcher), "search");
-    }
-    else if (show_location_entry)
+    /* Local patch: the query editor is permanently visible on the right, so
+     * the switcher only ever toggles between the path bar and the location
+     * entry — even while a search is active. */
+    if (show_location_entry)
     {
         gtk_stack_set_visible_child_name (GTK_STACK (self->toolbar_switcher), "location");
     }
@@ -110,10 +105,23 @@ toolbar_update_appearance (NautilusToolbar *self)
     /* Adjust to global search mode. */
     gboolean search_global = (self->window_slot != NULL &&
                               nautilus_window_slot_get_search_global (self->window_slot));
-    gtk_stack_set_visible_child (GTK_STACK (self->search_button_stack),
-                                 search_global ? self->search_button_placeholder : self->search_button);
     gtk_stack_set_visible_child (GTK_STACK (self->history_controls_stack),
                                  search_global ? self->history_controls_placeholder : self->history_controls);
+}
+
+/* Local patch: focusing the always-visible query editor starts a search on
+ * the active slot, mirroring what the old search toggle button did. */
+static void
+on_search_container_focus_enter (GtkEventControllerFocus *controller,
+                                 gpointer                 user_data)
+{
+    NautilusToolbar *self = NAUTILUS_TOOLBAR (user_data);
+
+    if (self->window_slot != NULL &&
+        !nautilus_window_slot_get_search_visible (self->window_slot))
+    {
+        g_object_set (self->window_slot, "search-visible", TRUE, NULL);
+    }
 }
 
 static void
@@ -277,6 +285,13 @@ nautilus_toolbar_init (NautilusToolbar *self)
     ADD_SHORTCUT_FOR_ACTION (shortcuts, "toolbar.prompt-home-location", "asciitilde|dead_tilde");
 
 #undef ADD_SHORTCUT_FOR_ACTION
+
+    /* Setup the always-visible search box */
+    GtkEventController *search_focus_controller = gtk_event_controller_focus_new ();
+
+    gtk_widget_add_controller (self->search_container, search_focus_controller);
+    g_signal_connect (search_focus_controller, "enter",
+                      G_CALLBACK (on_search_container_focus_enter), self);
 
     /* Setup path bar */
     g_signal_connect_object (self->path_bar, "open-location",
@@ -504,9 +519,6 @@ nautilus_toolbar_class_init (NautilusToolbarClass *klass)
     gtk_widget_class_bind_template_child (widget_class, NautilusToolbar, search_container);
     gtk_widget_class_bind_template_child (widget_class, NautilusToolbar, path_bar);
     gtk_widget_class_bind_template_child (widget_class, NautilusToolbar, location_entry);
-    gtk_widget_class_bind_template_child (widget_class, NautilusToolbar, search_button_stack);
-    gtk_widget_class_bind_template_child (widget_class, NautilusToolbar, search_button);
-    gtk_widget_class_bind_template_child (widget_class, NautilusToolbar, search_button_placeholder);
 
     gtk_widget_class_bind_template_callback (widget_class, nautilus_toolbar_close_location_entry);
 
