@@ -185,9 +185,9 @@ in `nautilus-file.c`, row bound in `nautilus-preferences-dialog.c`/`.blp`).
   uninstall step. The script also removes the `nautilus-open-any-terminal`
   package and the code-nautilus extension if present (their features are
   built into the fork).
-- Fresh install: [install.sh](../install.sh) does the same after installing the
-  repo `nautilus` (which only serves to pull in runtime deps before the fork
-  overwrites it).
+- Fresh install: [install.sh](../install.sh) does the same; the official
+  `nautilus` package is never installed (`pacman -U` resolves the fork's
+  runtime deps from the repos itself).
 - The fork is versioned `50.2.2-1.1` (pkgrel bump over the repo's `-1`) and
   both scripts add `IgnorePkg = nautilus libnautilus-extension` to
   `/etc/pacman.conf` so `pacman -Syu` never replaces it. Remove that line to go

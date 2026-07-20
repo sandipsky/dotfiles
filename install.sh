@@ -47,7 +47,6 @@ sudo pacman -S --noconfirm --needed \
     grim \
     slurp \
     gnome-calculator \
-    nautilus \
     evince \
     loupe \
     file-roller \
@@ -73,12 +72,12 @@ if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
     rm -rf "$BUILD_DIR"
 fi
 
-# Nautilus is replaced by the local fork vendored in applications/nautilus-fork/
-# (upstream source + local patches, see docs/nautilus-patches.md), built
-# fully offline from the repo tree. The repo nautilus installed above only
-# serves to pull in runtime deps before the fork overwrites it. IgnorePkg
-# then keeps pacman -Syu from replacing the fork with a newer repo package —
-# upgrades happen by bumping the vendored tree (see rebuild-nautilus.sh).
+# Nautilus comes only from the local fork vendored in applications/nautilus-fork/
+# (upstream source + local patches, see docs/nautilus-patches.md), built from
+# the repo tree — the official package is never installed; pacman -U resolves
+# the fork's runtime deps from the repos itself. IgnorePkg then keeps
+# pacman -Syu from replacing the fork with a newer repo package — upgrades
+# happen by bumping the vendored tree (see rebuild-nautilus.sh).
 BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
 sudo -u "$USERNAME" cp -r applications/nautilus-fork/. "$BUILD_DIR/"
 (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
