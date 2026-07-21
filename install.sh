@@ -41,6 +41,7 @@ sudo pacman -S --noconfirm --needed \
     brightnessctl \
     imagemagick \
     ffmpeg \
+    luajit \
     qt6-multimedia \
     python \
     wlr-randr \
