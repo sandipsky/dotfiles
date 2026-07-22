@@ -170,7 +170,13 @@ ExecStart=-/usr/bin/agetty --autologin $USERNAME --skip-login --nonewline --nois
 Type=idle
 EOF
 
-tee "/home/$USERNAME/.zprofile" >/dev/null <<'EOF'
+LOGIN_SHELL=$(getent passwd "$USERNAME" | cut -d: -f7)
+if [[ "$(basename "$LOGIN_SHELL")" == "zsh" ]]; then
+    AUTOSTART_PROFILE="/home/$USERNAME/.zprofile"
+else
+    AUTOSTART_PROFILE="/home/$USERNAME/.bash_profile"
+fi
+tee "$AUTOSTART_PROFILE" >/dev/null <<'EOF'
 if [[ -z "$WAYLAND_DISPLAY" && "$(tty)" == "/dev/tty1" ]]; then
     if uwsm check may-start; then
         exec uwsm start hyprland.desktop >/dev/null 2>&1
