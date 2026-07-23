@@ -3,6 +3,21 @@ set -e
 
 USERNAME=$(logname)
 
+# System-level steps below use sudo, but the script itself must run as the
+# normal user — yay and makepkg refuse to build packages as root.
+if [[ $EUID -eq 0 ]]; then
+    echo "Run this as your normal user (./install.sh), not with sudo — it asks for the password itself." >&2
+    exit 1
+fi
+
+# Ask for the sudo password once, up front, and keep the credential cache
+# fresh in the background — the pacman/yay/makepkg steps outlast sudo's
+# 15-minute timeout, and a mid-run re-prompt would stall the install.
+sudo -v
+( while kill -0 "$$" 2>/dev/null; do sleep 60; sudo -n -v; done ) 2>/dev/null &
+SUDO_KEEPALIVE=$!
+trap 'kill "$SUDO_KEEPALIVE" 2>/dev/null' EXIT
+
 # Some routers hand out dead DNS servers via DHCP (the GLX router's first one,
 # 110.44.112.200, never answers and glibc stalls 5 s per lookup on it). Prefer
 # known-good resolvers globally — Domains=~. outranks any network's DHCP DNS —
@@ -69,7 +84,7 @@ if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
     BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
     sudo -u "$USERNAME" cp -r applications/noctalia-qs/. "$BUILD_DIR/"
     (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
-    pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
+    sudo pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
     rm -rf "$BUILD_DIR"
 fi
 
@@ -82,7 +97,7 @@ fi
 BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
 sudo -u "$USERNAME" cp -r applications/nautilus-fork/. "$BUILD_DIR/"
 (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
-pacman -U --noconfirm "$BUILD_DIR"/nautilus-*.pkg.tar.zst "$BUILD_DIR"/libnautilus-extension-*.pkg.tar.zst
+sudo pacman -U --noconfirm "$BUILD_DIR"/nautilus-*.pkg.tar.zst "$BUILD_DIR"/libnautilus-extension-*.pkg.tar.zst
 rm -rf "$BUILD_DIR"
 if ! grep -Eq '^[[:space:]]*IgnorePkg[[:space:]]*=.*nautilus' /etc/pacman.conf; then
     sudo sed -i '/^\[options\]/a IgnorePkg = nautilus libnautilus-extension' /etc/pacman.conf
