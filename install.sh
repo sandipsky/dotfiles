@@ -64,10 +64,12 @@ sudo pacman -S --noconfirm --needed \
     slurp \
     gnome-calculator \
     evince \
+    libreoffice-fresh \
     loupe \
     file-roller \
     gnome-text-editor \
     gvfs-mtp \
+    ntfsprogs \
     gnome-themes-extra \
     adwaita-icon-theme \
     uwsm
@@ -162,6 +164,39 @@ for file in "${files[@]}"; do
     fi
 done
 
+# LibreOffice: only Writer, Calc and Impress stay visible in the launcher.
+# These .desktop files can't use the plain append above — they end with a
+# [Desktop Action] section (so an appended key lands in the wrong section),
+# and startcenter/math ship an explicit NoDisplay=false that overrides any
+# earlier NoDisplay=true (GKeyFile takes the last occurrence of a key).
+# NoDisplay=true must therefore be the last key of [Desktop Entry], i.e.
+# inserted right before the Actions= line.
+for src in /usr/share/applications/libreoffice-*.desktop; do
+    name=$(basename "$src")
+    case "$name" in
+        libreoffice-writer.desktop|libreoffice-calc.desktop|libreoffice-impress.desktop)
+            continue ;;
+    esac
+    dest="$APPS_DIR/$name"
+    sudo -u "$USERNAME" cp "$src" "$dest"
+    if grep -q '^Actions=' "$dest"; then
+        sudo -u "$USERNAME" sed -i '/^Actions=/i NoDisplay=true' "$dest"
+    else
+        sudo -u "$USERNAME" bash -c "echo 'NoDisplay=true' >> '$dest'"
+    fi
+done
+
+# OBS Studio and qBittorrent (Qt apps) render too small — launch them at
+# 125% scaling via local .desktop overrides.
+for file in com.obsproject.Studio.desktop org.qbittorrent.qBittorrent.desktop; do
+    src="/usr/share/applications/$file"
+    dest="$APPS_DIR/$file"
+    if [[ -f "$src" ]]; then
+        sudo -u "$USERNAME" cp "$src" "$dest"
+        sudo -u "$USERNAME" sed -i 's|^Exec=|Exec=env QT_SCALE_FACTOR=1.25 |' "$dest"
+    fi
+done
+
 sudo -u "$USERNAME" update-desktop-database "$APPS_DIR"
 
 sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/
@@ -222,6 +257,25 @@ sudo -u "$USERNAME" -H xdg-user-dirs-update
 sudo -u "$USERNAME" -H bash -c "cd '$PWD/applications/music' && echo Y | ./install.sh"
 
 sudo -u "$USERNAME" rm -f /home/$USERNAME/.gnupg/public-keys.d/pubring.db.lock
+
+# Spotify with ad blocking (AUR). Its build imports upstream GPG keys, which
+# needs the stale pubring lock removed first (done above) — still best-effort:
+# on failure just carry on to the reboot. On success the package pulls in
+# plain spotify too, so hide spotify.desktop and present the adblock entry as
+# plain "Spotify".
+if sudo -u "$USERNAME" yay -S --noconfirm --needed spotify-adblock; then
+    if [[ -f /usr/share/applications/spotify.desktop ]]; then
+        sudo -u "$USERNAME" cp /usr/share/applications/spotify.desktop "$APPS_DIR/spotify.desktop"
+        sudo -u "$USERNAME" bash -c "echo 'NoDisplay=true' >> '$APPS_DIR/spotify.desktop'"
+    fi
+    if [[ -f /usr/share/applications/spotify-adblock.desktop ]]; then
+        sudo -u "$USERNAME" cp /usr/share/applications/spotify-adblock.desktop "$APPS_DIR/spotify-adblock.desktop"
+        sudo -u "$USERNAME" sed -i 's/^Name=.*/Name=Spotify/' "$APPS_DIR/spotify-adblock.desktop"
+    fi
+else
+    echo "spotify-adblock install failed — skipping, continuing to reboot." >&2
+fi
+
 sudo sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 
