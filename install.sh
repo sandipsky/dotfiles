@@ -47,6 +47,7 @@ sudo pacman -S --noconfirm --needed \
     xdg-desktop-portal-hyprland \
     wlsunset \
     power-profiles-daemon \
+    polkit-gnome \
     blueman \
     jq \
     alacritty \
@@ -197,8 +198,6 @@ for file in com.obsproject.Studio.desktop org.qbittorrent.qBittorrent.desktop; d
     fi
 done
 
-sudo -u "$USERNAME" update-desktop-database "$APPS_DIR"
-
 sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/
 
 # extract-audio: pulls audio out of videos as MP3 (Resolve on Linux can't
@@ -276,7 +275,10 @@ else
     echo "spotify-adblock install failed — skipping, continuing to reboot." >&2
 fi
 
+# After every .desktop override is in place (including spotify's above).
+sudo -u "$USERNAME" update-desktop-database "$APPS_DIR"
+
 sudo sed -i 's/^%wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
 
-reboot
+sudo reboot
