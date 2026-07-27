@@ -117,6 +117,24 @@ if [[ -f /etc/bluetooth/main.conf ]]; then
     fi
 fi
 
+# systemd-rfkill persists rfkill soft blocks across reboots (e.g. one left by
+# Noctalia's airplane mode), and BlueZ can't power a blocked adapter — the bar
+# widget's Bluetooth toggle would silently fail forever. Clear the block every
+# boot; the adapter still stays off until toggled (AutoEnable=false above).
+sudo tee /etc/systemd/system/bluetooth-rfkill-unblock.service >/dev/null <<'EOF'
+[Unit]
+Description=Clear persisted Bluetooth rfkill soft block
+After=systemd-rfkill.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rfkill unblock bluetooth
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl enable bluetooth-rfkill-unblock.service
+
 sudo -u "$USERNAME" -H dbus-run-session -- dconf load /org/gnome/nautilus/ < assets/nautilus
 
 sudo -u "$USERNAME" mkdir -p "/home/$USERNAME/.local/share/applications"

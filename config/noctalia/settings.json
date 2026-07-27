@@ -257,11 +257,11 @@
                 "id": "profile-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "shortcuts-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "audio-card"
             },
             {
@@ -269,7 +269,7 @@
                 "id": "brightness-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "weather-card"
             },
             {
@@ -368,10 +368,10 @@
         "clockStyle": "custom",
         "compactLockScreen": false,
         "dimmerOpacity": 0.2,
-        "enableBlurBehind": true,
+        "enableBlurBehind": false,
         "enableLockScreenCountdown": true,
         "enableLockScreenMediaControls": false,
-        "enableShadows": true,
+        "enableShadows": false,
         "forceBlackScreenCorners": false,
         "iRadiusRatio": 1,
         "keybinds": {
@@ -407,7 +407,7 @@
         "lockScreenMonitors": [
         ],
         "lockScreenTint": 0,
-        "lockScreenWallpaper": "/home/USERNAME/Pictures/0018.jpg",
+        "lockScreenWallpaper": "/home/USERNAME/Pictures/Wallpapers/lockscreen/0018.jpg",
         "passwordChars": true,
         "radiusRatio": 1,
         "reverseScroll": false,
@@ -543,8 +543,8 @@
         "countdownDuration": 10000,
         "enableCountdown": false,
         "largeButtonsLayout": "single-row",
-        "largeButtonsStyle": true,
-        "position": "center",
+        "largeButtonsStyle": false,
+        "position": "bottom_left",
         "powerOptions": [
             {
                 "action": "lock",
@@ -651,7 +651,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/USERNAME/Pictures/",
+        "directory": "/home/USERNAME/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [

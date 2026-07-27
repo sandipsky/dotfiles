@@ -353,6 +353,19 @@ during measurement. Note that Quickshell hot reloads retain the previous compone
 tree, so RSS climbs with every reset.sh-less iteration session — restart via reset.sh
 to reclaim.
 
+## 12. Bluetooth toggle: clear rfkill soft block on enable
+
+File: `Services/Networking/BluetoothService.qml`.
+
+`setBluetoothEnabled(true)` only set `adapter.enabled` via BlueZ, which cannot power
+an rfkill-blocked adapter — if a soft block was left behind (airplane mode does
+`rfkill block all` in `NetworkService.qml`, and systemd-rfkill persists the block
+across reboots), the bar/control-center toggle became a silent no-op. Enabling now
+also runs `rfkill unblock bluetooth && bluetoothctl power on` detached, so the toggle
+recovers from a blocked state on its own. Disabling is unchanged (BlueZ power off
+only, no rfkill block). Belt-and-braces with install.sh's
+`bluetooth-rfkill-unblock.service`, which clears any persisted block at every boot.
+
 ## Re-applying on a new codebase
 
 Priority if porting incrementally: the lock screen (1) and the taskbar/workspace behavior
