@@ -171,7 +171,11 @@
       "Bash(echo \"delete rc=$?\")",
       "Bash(nmcli -t -f NAME connection show)",
       "Bash(ping -4 -c 2 -W 3 1.1.1.1)",
-      "Bash(whois 147.135.15.16)"
+      "Bash(whois 147.135.15.16)",
+      "Bash(git -C /home/sandip/dotfiles diff install.sh)",
+      "Bash(pacman -Q nautilus libnautilus-extension)",
+      "Bash(pacman -Qi nautilus)",
+      "Read(//usr/bin/**)"
     ],
     "additionalDirectories": [
       "/home/sandip/.config/noctalia"

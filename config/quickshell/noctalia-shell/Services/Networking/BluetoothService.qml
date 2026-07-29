@@ -153,6 +153,12 @@ Singleton {
       return;
     }
     try {
+      if (state) {
+        // BlueZ can't power an rfkill-blocked adapter (a block persisted by
+        // systemd-rfkill, e.g. from airplane mode, would make this toggle a
+        // silent no-op) — clear it, then power on once the block is gone.
+        Quickshell.execDetached(["sh", "-c", "rfkill unblock bluetooth && bluetoothctl power on"]);
+      }
       adapter.enabled = state;
       Logger.i("Bluetooth", "SetBluetoothEnabled", state);
     } catch (e) {
