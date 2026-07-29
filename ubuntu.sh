@@ -233,6 +233,8 @@ sudo -u "$USERNAME" -H gtk-update-icon-cache -q -t -f "/home/$USERNAME/.local/sh
 # shadows the stock nautilus package (PATH, XDG_DATA_DIRS and D-Bus activation
 # all prefer /usr/local). The stock package stays installed for its runtime
 # deps (gvfs, tracker, etc.) but its binary is never the one that runs.
+# Day-to-day fork changes: run ./rebuild-nautilus-ubuntu.sh (as your user) —
+# it reinstalls the overlay on top; the stock package is never touched.
 # `apt build-dep nautilus` needs deb-src entries enabled first.
 if [[ -f /etc/apt/sources.list.d/ubuntu.sources ]]; then
     sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
