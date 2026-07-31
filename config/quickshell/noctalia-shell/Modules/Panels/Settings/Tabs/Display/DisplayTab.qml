@@ -37,7 +37,7 @@ ColumnLayout {
   // Check for wlsunset availability when enabling Night Light
   Process {
     id: wlsunsetCheck
-    command: ["sh", "-c", "command -v wlsunset"]
+    command: ["sh", "-c", "command -v hyprsunset"]
     running: false
 
     onExited: function (exitCode) {

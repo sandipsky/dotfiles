@@ -22,7 +22,7 @@ Singleton {
   readonly property var programsToCheck: ({
                                             "bluetoothctlAvailable": ["sh", "-c", "command -v bluetoothctl"],
                                             "nmcliAvailable": ["sh", "-c", "command -v nmcli"],
-                                            "wlsunsetAvailable": ["sh", "-c", "command -v wlsunset"],
+                                            "wlsunsetAvailable": ["sh", "-c", "command -v hyprsunset"],
                                             "gnomeCalendarAvailable": ["sh", "-c", "command -v gnome-calendar"],
                                             "wtypeAvailable": ["sh", "-c", "command -v wtype"],
                                             "pythonAvailable": ["sh", "-c", "command -v python3"]

@@ -20,7 +20,7 @@ Singleton {
   // Manual schedule tracking
   property bool _manualNightPhase: false
 
-  // Kill any stale wlsunset processes on startup to prevent issues after shell restart
+  // Kill any stale night light processes on startup to prevent issues after shell restart
   Component.onCompleted: {
     killStaleProcess.running = true;
   }
@@ -28,10 +28,10 @@ Singleton {
   Process {
     id: killStaleProcess
     running: false
-    command: ["pkill", "-x", "wlsunset"]
+    command: ["sh", "-c", "pkill -x hyprsunset; pkill -x wlsunset"]
     onExited: function (code, status) {
       if (code === 0) {
-        Logger.i("NightLight", "Killed stale wlsunset process from previous session");
+        Logger.i("NightLight", "Killed stale night light process from previous session");
       }
       // Now apply the settings after cleanup
       root.apply();
@@ -45,7 +45,7 @@ Singleton {
     onTriggered: {
       if (root.params.enabled && !runner.running) {
         Logger.w("NightLight", "Restarting after crash...");
-        if (root.isManualMode()) {
+        if (root.isScheduledMode()) {
           root.applyManualSchedule();
         } else {
           runner.running = true;
@@ -68,15 +68,37 @@ Singleton {
     return parts[0] * 60 + parts[1];
   }
 
-  function isManualMode() {
-    return !params.forced && !params.autoSchedule;
+  // hyprsunset has no built-in scheduling, so every non-forced mode is scheduled by us
+  function isScheduledMode() {
+    return !params.forced;
+  }
+
+  // Sunrise/sunset in minutes-since-midnight; auto mode reads today's real times
+  // from the weather data, falling back to the manual settings until it arrives
+  function scheduleTimes() {
+    if (params.autoSchedule) {
+      var w = LocationService.data.weather;
+      if (w && w.daily && w.daily.sunrise && w.daily.sunrise.length > 0) {
+        var sr = new Date(w.daily.sunrise[0]);
+        var ss = new Date(w.daily.sunset[0]);
+        return {
+          "sunrise": sr.getHours() * 60 + sr.getMinutes(),
+          "sunset": ss.getHours() * 60 + ss.getMinutes()
+        };
+      }
+    }
+    return {
+      "sunrise": timeToMinutes(params.manualSunrise),
+      "sunset": timeToMinutes(params.manualSunset)
+    };
   }
 
   function isCurrentlyNight() {
     var now = new Date();
     var nowMin = now.getHours() * 60 + now.getMinutes();
-    var sunsetMin = timeToMinutes(params.manualSunset);
-    var sunriseMin = timeToMinutes(params.manualSunrise);
+    var times = scheduleTimes();
+    var sunsetMin = times.sunset;
+    var sunriseMin = times.sunrise;
 
     if (sunsetMin < sunriseMin) {
       // Inverted: e.g. sunset=03:00, sunrise=07:00 → night is [03:00, 07:00)
@@ -90,8 +112,9 @@ Singleton {
   function msUntilNextBoundary() {
     var now = new Date();
     var nowMin = now.getHours() * 60 + now.getMinutes();
-    var sunsetMin = timeToMinutes(params.manualSunset);
-    var sunriseMin = timeToMinutes(params.manualSunrise);
+    var times = scheduleTimes();
+    var sunsetMin = times.sunset;
+    var sunriseMin = times.sunrise;
 
     var targetMin = isCurrentlyNight() ? sunriseMin : sunsetMin;
     var diffMin = targetMin - nowMin;
@@ -111,12 +134,14 @@ Singleton {
     var night = isCurrentlyNight();
     _manualNightPhase = night;
 
-    if (night) {
-      var cmd = ["wlsunset"];
-      cmd.push("-t", `${params.nightTemp}`, "-T", `${params.dayTemp}`);
-      cmd.push("-S", "23:59");
-      cmd.push("-s", "00:00");
-      cmd.push("-d", 1);
+    if (!night && `${params.dayTemp}` === "6500") {
+      // Day phase at neutral temperature: no filter process needed
+      lastCommand = [];
+      runner.running = false;
+      Logger.i("NightLight", "Schedule: day phase - hyprsunset stopped");
+    } else {
+      var temp = night ? params.nightTemp : params.dayTemp;
+      var cmd = ["hyprsunset", "-t", `${temp}`];
 
       if (JSON.stringify(cmd) !== JSON.stringify(lastCommand) || !runner.running) {
         lastCommand = cmd;
@@ -124,11 +149,7 @@ Singleton {
         runner.running = false;
         runner.running = true;
       }
-      Logger.i("NightLight", "Manual schedule: night phase - wlsunset forced on");
-    } else {
-      lastCommand = [];
-      runner.running = false;
-      Logger.i("NightLight", "Manual schedule: day phase - wlsunset stopped");
+      Logger.i("NightLight", "Schedule: " + (night ? "night" : "day") + " phase - hyprsunset at " + temp + "K");
     }
 
     var ms = msUntilNextBoundary();
@@ -143,15 +164,15 @@ Singleton {
       return;
     }
 
-    // Manual mode: handle scheduling ourselves
-    if (isManualMode() && params.enabled) {
+    // Scheduled mode (manual or auto): handle scheduling ourselves
+    if (isScheduledMode() && params.enabled) {
       _crashCount = 0;
       restartTimer.stop();
       applyManualSchedule();
       return;
     }
 
-    // Not in manual mode - clean up manual timer
+    // Not in scheduled mode - clean up schedule timer
     manualScheduleTimer.stop();
 
     var command = buildCommand();
@@ -168,20 +189,11 @@ Singleton {
   }
 
   function buildCommand() {
-    var cmd = ["wlsunset"];
+    // Only forced mode reaches here; scheduled modes go through applyManualSchedule
+    var cmd = ["hyprsunset"];
     if (params.forced) {
       // Force immediate full night temperature regardless of time
-      // Keep distinct day/night temps but set times so we're effectively always in "night"
-      cmd.push("-t", `${params.nightTemp}`, "-T", `${params.dayTemp}`);
-      // Night spans from sunset (00:00) to sunrise (23:59) covering almost the full day
-      cmd.push("-S", "23:59"); // sunrise very late
-      cmd.push("-s", "00:00"); // sunset at midnight
-      // Near-instant transition
-      cmd.push("-d", 1);
-    } else if (params.autoSchedule) {
-      cmd.push("-t", `${params.nightTemp}`, "-T", `${params.dayTemp}`);
-      cmd.push("-l", `${LocationService.stableLatitude}`, "-L", `${LocationService.stableLongitude}`);
-      cmd.push("-d", 60 * 15); // 15min progressive fade at sunset/sunrise
+      cmd.push("-t", `${params.nightTemp}`);
     }
     return cmd;
   }
@@ -251,38 +263,38 @@ Singleton {
     id: runner
     running: false
     onStarted: {
-      Logger.i("NightLight", "Wlsunset started:", runner.command);
+      Logger.i("NightLight", "Hyprsunset started:", runner.command);
       // Reset crash count on successful start
       if (root._crashCount > 0) {
         root._crashCount = 0;
       }
     }
     onExited: function (code, status) {
-      if (root.params.enabled && root.isManualMode()) {
-        // Manual mode: only treat as crash if we're in the night phase
+      if (root.params.enabled && root.isScheduledMode()) {
+        // Scheduled mode: only treat as crash if we're in the night phase
         if (root._manualNightPhase) {
           root._crashCount++;
           if (root._crashCount <= root._maxCrashes) {
-            Logger.w("NightLight", "Wlsunset exited unexpectedly during manual night phase (code: " + code + "), restarting in 2s... (attempt " + root._crashCount + "/" + root._maxCrashes + ")");
+            Logger.w("NightLight", "Hyprsunset exited unexpectedly during night phase (code: " + code + "), restarting in 2s... (attempt " + root._crashCount + "/" + root._maxCrashes + ")");
             restartTimer.start();
           } else {
-            Logger.e("NightLight", "Wlsunset crashed too many times (" + root._maxCrashes + "), giving up");
+            Logger.e("NightLight", "Hyprsunset crashed too many times (" + root._maxCrashes + "), giving up");
           }
         } else {
-          Logger.i("NightLight", "Wlsunset exited (manual day phase):", code, status);
+          Logger.i("NightLight", "Hyprsunset exited (day phase):", code, status);
           root._crashCount = 0;
         }
       } else if (root.params.enabled) {
-        // Non-manual mode: any exit while enabled is a crash
+        // Forced mode: any exit while enabled is a crash
         root._crashCount++;
         if (root._crashCount <= root._maxCrashes) {
-          Logger.w("NightLight", "Wlsunset exited unexpectedly (code: " + code + "), restarting in 2s... (attempt " + root._crashCount + "/" + root._maxCrashes + ")");
+          Logger.w("NightLight", "Hyprsunset exited unexpectedly (code: " + code + "), restarting in 2s... (attempt " + root._crashCount + "/" + root._maxCrashes + ")");
           restartTimer.start();
         } else {
-          Logger.e("NightLight", "Wlsunset crashed too many times (" + root._maxCrashes + "), giving up");
+          Logger.e("NightLight", "Hyprsunset crashed too many times (" + root._maxCrashes + "), giving up");
         }
       } else {
-        Logger.i("NightLight", "Wlsunset exited (disabled):", code, status);
+        Logger.i("NightLight", "Hyprsunset exited (disabled):", code, status);
         root._crashCount = 0;
       }
     }

@@ -1980,7 +1980,7 @@
     "night-light": {
       "forced": "Forced activation",
       "normal": "Normal mode",
-      "not-installed": "wlsunset not installed"
+      "not-installed": "hyprsunset not installed"
     },
     "noctalia-performance": {
       "disabled": "Performance mode disabled",

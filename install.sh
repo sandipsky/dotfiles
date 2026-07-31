@@ -45,7 +45,7 @@ sudo pacman -S --noconfirm --needed \
     cliphist \
     wtype \
     xdg-desktop-portal-hyprland \
-    wlsunset \
+    hyprsunset \
     power-profiles-daemon \
     polkit-gnome \
     blueman \
