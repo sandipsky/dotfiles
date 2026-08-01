@@ -34,7 +34,7 @@ The script runs as the normal user, never as root — it exits early if `$EUID` 
 
 The script consistently uses `/home/$USERNAME/…` rather than `~`/`$HOME` (a holdover from the run-as-root layout that also keeps paths unambiguous inside `sudo` heredocs) — keep doing that.
 
-Reload Hyprland config in a running session with `Super+Shift+N` (bound to `hyprctl reload`). Restart Noctalia by killing `qs` and relaunching `qs -c noctalia-shell`.
+The Lua config auto-reloads on save; `Super+Shift+N` (bound to `hyprctl reload`) forces a reload manually. Restart Noctalia by killing `qs` and relaunching `qs -c noctalia-shell`.
 
 ## Top-level layout
 
@@ -45,11 +45,11 @@ Reload Hyprland config in a running session with `Super+Shift+N` (bound to `hypr
 
 ## Hyprland config
 
-[config/hypr/hyprland.conf](config/hypr/hyprland.conf) is intentionally tiny — it just sets the monitor and `source =`s every file in [config/hypr/conf/](config/hypr/conf/) (`animations`, `autostart`, `environment`, `keybinds`, `layout`, `windowrules`). To change behavior, edit the file in `conf/`, not the top-level `hyprland.conf`.
+The config uses Hyprland's **Lua format** (the hyprlang `.conf` format was deprecated in Hyprland 0.55 and is removed in 0.57 — never reintroduce `.conf` files). [config/hypr/hyprland.lua](config/hypr/hyprland.lua) is intentionally tiny — it just sets the monitor and `require()`s every file in [config/hypr/conf/](config/hypr/conf/) (`animations`, `autostart`, `environment`, `keybinds`, `layout`, `windowrules`). To change behavior, edit the file in `conf/`, not the top-level `hyprland.lua`.
 
-[autostart.conf](config/hypr/conf/autostart.conf) launches only the polkit agent and `qs -c noctalia-shell` — there are deliberately no idle/night-light/wallpaper/clipboard daemons there, because Noctalia owns all of those (see below).
+[autostart.lua](config/hypr/conf/autostart.lua) (via the `hyprland.start` event) launches only the polkit agent and `qs -c noctalia-shell` — there are deliberately no idle/night-light/wallpaper/clipboard daemons there, because Noctalia owns all of those (see below).
 
-Media/brightness keys, screenshot bindings (`grim`/`slurp`/`wl-copy`), and all Noctalia panel/action bindings live in [keybinds.conf](config/hypr/conf/keybinds.conf).
+Media/brightness keys, screenshot bindings (`grim`/`slurp`/`wl-copy`), and all Noctalia panel/action bindings live in [keybinds.lua](config/hypr/conf/keybinds.lua).
 
 ## Noctalia (the UI layer)
 
@@ -59,9 +59,9 @@ Points that matter when changing things:
 
 - **Vendored source.** Edit UI/behavior directly in [config/quickshell/noctalia-shell/](config/quickshell/); local patches are just git diffs against the vendored upstream snapshot. To see a change live, run [reset.sh](reset.sh) (syncs the tree to `~/.config/quickshell/noctalia-shell/` and restarts the shell); for rapid iteration, edit `~/.config/quickshell/noctalia-shell/` directly instead — Quickshell hot-reloads on file change — then copy the result back into the repo. To bump upstream: clone the new tag, overlay it onto the vendored dir (`rsync -a --delete`, keeping only `.git`-less content like the AUR package's `cp -r ./*` did), review `git diff` to re-apply local patches, and sync install.sh's dep list with the new PKGBUILD.
 - **Settings.** [config/noctalia/settings.json](config/noctalia/settings.json) is a snapshot of the machine's `~/.config/noctalia/settings.json` (Noctalia deep-merges it over its built-in defaults). It contains `/home/USERNAME/...` paths with a literal `USERNAME` token that install.sh `sed`s at install time — keep the token in the repo copy. The Settings GUI on the machine rewrites the live file at runtime; those changes don't flow back into the repo (re-running install.sh overwrites them), so refresh the snapshot with `sed 's|/home/<user>|/home/USERNAME|g' ~/.config/noctalia/settings.json > config/noctalia/settings.json` when the current setup should become the installed default.
-- **IPC.** Keybinds call `qs -c noctalia-shell ipc call <target> <function>` via the `$noctalia` variable in keybinds.conf. Targets currently bound: `launcher` (toggle / clipboard), `controlCenter toggle` (Super+A), `sessionMenu` (toggle on Super+X, `lockAndSuspend` on lid close), `lockScreen lock` (Super+L / XF86Lock), `wallpaper` (toggle on Super+Shift+W, random on Super+P), `volume` and `brightness` (media keys, so Noctalia's OSD shows). Run `qs -c noctalia-shell ipc show` on the machine to list every available target.
+- **IPC.** Keybinds call `qs -c noctalia-shell ipc call <target> <function>` via the `noctalia()` helper function in keybinds.lua. Targets currently bound: `launcher` (toggle / clipboard), `controlCenter toggle` (Super+A), `sessionMenu` (toggle on Super+X, `lockAndSuspend` on lid close), `lockScreen lock` (Super+L / XF86ScreenSaver), `wallpaper` (toggle on Super+Shift+W, random on Super+P), `volume` and `brightness` (media keys, so Noctalia's OSD shows). Run `qs -c noctalia-shell ipc show` on the machine to list every available target.
 - **Idle/lock.** Idle behavior lives in settings.json: lock at 600 s, screen off at 660 s, suspend at 3600 s, lock-before-suspend enabled. There is no media-playback exemption — use Noctalia's Keep-Awake toggle (control center / `idleInhibitor` IPC) when watching video.
-- **Clipboard.** Noctalia spawns its own `wl-paste` → `cliphist` watchers (text *and* images) because `appLauncher.enableClipboardHistory` is true — do not add a cliphist watcher back to autostart.conf.
+- **Clipboard.** Noctalia spawns its own `wl-paste` → `cliphist` watchers (text *and* images) because `appLauncher.enableClipboardHistory` is true — do not add a cliphist watcher back to autostart.lua.
 - **Theming.** Colors are generated from the current wallpaper (`colorSchemes.useWallpaperColors`, dark mode); wallpapers are read from `~/Pictures/Wallpapers`. Switch to a fixed scheme in Settings → Color scheme if ever needed.
 
 ## Nautilus (file manager fork)
