@@ -240,12 +240,15 @@ false — enabled per-widget in bar settings; note this machine's live settings.
   parses `hyprctl monitors -j`, collecting the distinct rounded rates from
   `availableModes` strings (`"1920x1080@60.00Hz"`) **at the monitor's current resolution
   only**; a display is "supported" when it has >1 rate. Switching runs
-  `hyprctl keyword monitor <name>,<WxH>@<rate>,<XxY>,<scale>[,transform,<t>]` —
+  `hyprctl eval 'hl.monitor({ output = "<name>", mode = "<WxH>@<rate>", position = "<XxY>", scale = <s>[, transform = <t>] })'` —
   preserving position, scale, and transform — then toasts success/failure and re-queries.
+  Originally this used `hyprctl keyword monitor …`, but Hyprland ≥ 0.56 with the Lua
+  config rejects `keyword` ("can't work with non-legacy parsers") **while still exiting
+  0**, so success is now judged by the command replying `ok` on stdout, not by exit code.
   A `revision` counter property is bumped on every re-query so QML bindings re-evaluate
   (map properties don't notify on deep change). The panel refreshes rates on open.
-  Caveat carried by design: a rate set this way is a runtime `hyprctl keyword` override —
-  Hyprland's monitors.conf line reapplies on config reload.
+  Caveat carried by design: a rate set this way is a runtime override —
+  hyprland.lua's `hl.monitor` line reapplies on config reload.
 
 ---
 

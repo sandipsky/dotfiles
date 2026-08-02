@@ -52,14 +52,17 @@ Singleton {
     if (!info)
       return;
 
+    // Hyprland >= 0.56 (Lua config) rejects `hyprctl keyword` but still exits 0,
+    // so go through the Lua API via `hyprctl eval` and verify its output instead.
     var res = info.width + "x" + info.height + "@" + rate;
     var pos = info.x + "x" + info.y;
-    var arg = screenName + "," + res + "," + pos + "," + info.scale;
+    var lua = 'hl.monitor({ output = "' + screenName + '", mode = "' + res + '", position = "' + pos + '", scale = ' + info.scale;
     if (info.transform && info.transform !== 0)
-      arg += ",transform," + info.transform;
+      lua += ", transform = " + info.transform;
+    lua += " })";
 
     setProc.pendingRate = rate;
-    setProc.command = ["hyprctl", "keyword", "monitor", arg];
+    setProc.command = ["hyprctl", "eval", lua];
     setProc.running = true;
   }
 
@@ -119,9 +122,12 @@ Singleton {
   Process {
     id: setProc
     property int pendingRate: 0
-    stdout: StdioCollector {}
+    stdout: StdioCollector {
+      id: setProcOut
+    }
     onExited: (exitCode, exitStatus) => {
-      if (exitCode === 0) {
+      // hyprctl can exit 0 on failure; require an explicit "ok" reply.
+      if (exitCode === 0 && setProcOut.text.trim().startsWith("ok")) {
         ToastService.showNotice(I18n.tr("common.refresh-rate"), I18n.tr("toast.refresh-rate.changed", {
                                                                           "rate": setProc.pendingRate
                                                                         }), "refresh");
