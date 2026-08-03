@@ -289,7 +289,20 @@ sed -i "s|^Icon=.*|Icon=$ICON_DIR/org.gnome.Nautilus.svg|" \
 
 update-desktop-database /usr/local/share/applications 2>/dev/null || true
 
+### -------- FIRA SANS FONT (assets/fira) --------
+# Same interface font as arch.sh sets ('Fira Sans Book 12'). Debian/Ubuntu
+# convention puts TTFs in a subdir of /usr/share/fonts/truetype.
+mkdir -p /usr/share/fonts/truetype/fira
+cp "$REPO_DIR"/assets/fira/*.ttf /usr/share/fonts/truetype/fira/
+fc-cache -f
+
+sudo -u "$USERNAME" -H dbus-run-session -- bash <<'EOF'
+gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
+gsettings set org.gnome.desktop.interface document-font-name 'Fira Sans Book 12'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Fira Sans Bold 12'
+EOF
+
 echo
 echo "INSTALLATION COMPLETE"
 echo " - Reboot to apply the silent/fast boot changes."
-echo " - Log out and back in for the docker group to take effect."
+echo " - Log out and back in for the docker group and Fira Sans font to take effect."
