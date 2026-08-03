@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+# Keep the screen awake while a gamepad/joystick is in use, the way
+# mouse/keyboard input does natively.
+#
+# Watches evdev devices that expose gamepad/joystick buttons (hotplug-aware;
+# udev's uaccess rule grants the console user an ACL on joystick event nodes)
+# and on activity pings Noctalia's idle inhibitor:
+#
+#     qs -c noctalia-shell ipc call idleInhibitor enableFor <secs>
+#
+# Repeated calls just refresh the timeout, and Noctalia expires it on its
+# own, so a crashed daemon can never leave the screen stuck awake.
+
+import subprocess
+import sys
+import time
+from select import select
+
+import evdev
+from evdev import ecodes
+
+INHIBIT_SECS = 120   # one ping keeps the screen awake this long
+PING_INTERVAL = 30   # min seconds between IPC pings
+RESCAN_SECS = 5      # hotplug poll interval
+ABS_FRACTION = 0.15  # axis must move this fraction of its range to count
+
+
+def log(*args):
+    print(*args, flush=True)
+
+
+def is_gamepad(dev):
+    keys = dev.capabilities().get(ecodes.EV_KEY, [])
+    return ecodes.BTN_GAMEPAD in keys or ecodes.BTN_JOYSTICK in keys
+
+
+def abs_thresholds(dev):
+    # Per-axis minimum movement that counts as user activity. Resting
+    # analog sticks jitter constantly; require a real move.
+    thresholds = {}
+    for code, info in dev.capabilities().get(ecodes.EV_ABS, []):
+        span = info.max - info.min
+        thresholds[code] = max(1, span * ABS_FRACTION)
+    return thresholds
+
+
+class Watcher:
+    def __init__(self):
+        self.devices = {}    # fd -> evdev.InputDevice
+        self.thresholds = {}  # fd -> {abs_code: min_delta}
+        self.last_abs = {}   # fd -> {abs_code: last_value}
+        self.last_ping = 0.0
+        self.last_scan = 0.0
+
+    def scan(self):
+        self.last_scan = time.monotonic()
+        known = {dev.path for dev in self.devices.values()}
+        for path in evdev.list_devices():
+            if path in known:
+                continue
+            try:
+                dev = evdev.InputDevice(path)
+                if not is_gamepad(dev):
+                    dev.close()
+                    continue
+                self.devices[dev.fd] = dev
+                self.thresholds[dev.fd] = abs_thresholds(dev)
+                self.last_abs[dev.fd] = {}
+                log(f"watching {dev.path}: {dev.name}")
+            except OSError:
+                continue
+
+    def drop(self, fd):
+        dev = self.devices.pop(fd, None)
+        self.thresholds.pop(fd, None)
+        self.last_abs.pop(fd, None)
+        if dev is not None:
+            log(f"lost {dev.path}: {dev.name}")
+            try:
+                dev.close()
+            except OSError:
+                pass
+
+    def is_activity(self, fd, event):
+        if event.type == ecodes.EV_KEY:
+            return True
+        if event.type == ecodes.EV_ABS:
+            last = self.last_abs[fd].get(event.code)
+            self.last_abs[fd][event.code] = event.value
+            if last is None:
+                return False
+            return abs(event.value - last) >= self.thresholds[fd].get(event.code, 1)
+        return False
+
+    def ping(self):
+        now = time.monotonic()
+        if now - self.last_ping < PING_INTERVAL:
+            return
+        self.last_ping = now
+        try:
+            result = subprocess.run(
+                ["/usr/bin/qs", "-c", "noctalia-shell", "ipc", "call",
+                 "idleInhibitor", "enableFor", str(INHIBIT_SECS)],
+                capture_output=True, text=True, timeout=10)
+            if result.returncode != 0:
+                log(f"ipc failed: {result.stderr.strip() or result.stdout.strip()}")
+        except (OSError, subprocess.TimeoutExpired) as e:
+            log(f"ipc failed: {e}")
+
+    def run(self):
+        self.scan()
+        while True:
+            readable, _, _ = select(list(self.devices), [], [], RESCAN_SECS)
+            for fd in readable:
+                try:
+                    events = list(self.devices[fd].read())
+                except OSError:
+                    self.drop(fd)
+                    continue
+                if any(self.is_activity(fd, ev) for ev in events):
+                    self.ping()
+            if time.monotonic() - self.last_scan >= RESCAN_SECS:
+                self.scan()
+
+
+if __name__ == "__main__":
+    try:
+        Watcher().run()
+    except KeyboardInterrupt:
+        sys.exit(0)

@@ -1,0 +1,12 @@
+[Unit]
+Description=Keep screen awake on joystick input
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/joystick-wake
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target

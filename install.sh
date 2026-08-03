@@ -60,6 +60,7 @@ sudo pacman -S --noconfirm --needed \
     luajit \
     qt6-multimedia \
     python \
+    python-evdev \
     wlr-randr \
     grim \
     slurp \
@@ -228,6 +229,14 @@ sudo cp assets/fonts/* /usr/share/fonts/
 sudo fc-cache -f
 
 sudo -u "$USERNAME" cp -r config/* "/home/$USERNAME/.config/"
+
+# joystick-wake: gamepad input keeps the screen awake (Noctalia's idle
+# service only counts mouse/keyboard). python-evdev is in the pacman list
+# above. Enabled via the static wants symlink because the install runs from
+# a bare tty where `systemctl --user` has no session bus.
+sudo -u "$USERNAME" install -Dm755 assets/bin/joystick-wake "/home/$USERNAME/.local/bin/joystick-wake"
+sudo -u "$USERNAME" mkdir -p "/home/$USERNAME/.config/systemd/user/graphical-session.target.wants"
+sudo -u "$USERNAME" ln -sf ../joystick-wake.service "/home/$USERNAME/.config/systemd/user/graphical-session.target.wants/joystick-wake.service"
 
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
 sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf >/dev/null <<EOF
