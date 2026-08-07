@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 # Post-install setup for a FRESH **Fedora Workstation** (GNOME) install — the
-# Fedora counterpart of ubuntu.sh, sharing its sections with
-# fedora-hyprland.sh minus everything Hyprland/Noctalia. GNOME stays the
-# desktop. Run it from the repo root as your normal user:
+# Fedora counterpart of ubuntu.sh. GNOME stays the desktop; nothing
+# Hyprland/Noctalia is installed. Run it from the repo root as your normal
+# user:
 #
 #   ./fedora.sh
-#
-# (For the Hyprland + Noctalia desktop on a Fedora *minimal* install, run
-# ./fedora-hyprland.sh instead.)
 #
 # Like the other scripts it targets a fresh machine, never uninstalls prior
 # setups, is destructive in places (writes /etc units and udev-adjacent
@@ -18,21 +15,24 @@
 # GTX 1650 hybrid graphics):
 # - NVIDIA driver (RPM Fusion akmod) with runtime D3 power management, and
 #   the Secure Boot MOK signing flow (mokutil prompts for a one-time
-#   password mid-run — expected, not a hang).
+#   password mid-run — expected, not a hang). Skipped inside any VM;
+#   VirtualBox guests get the guest additions instead.
 # - Power tuning: 80% battery charge threshold, audio codec suspend, zram
 #   sized like the Arch box, TRIM, VA-API on the iGPU.
 # - Boot: hidden GRUB (Windows boots via the firmware boot menu — Esc on
 #   ASUS), quiet/fast kernel args. Workstation already shows Plymouth's bgrt
-#   splash, so unlike fedora-hyprland.sh there is nothing to add there.
-# - Chrome + VS Code from the vendors' rpm repos; dev stack (node/JDK/
-#   Angular CLI, git identity); zsh + starship as the login shell; wine/
-#   winetricks/lutris.
+#   splash, so there is no splash work to do.
+# - Chrome + VS Code from the vendors' rpm repos; zsh + starship as the login
+#   shell; GNOME Terminal replacing Ptyxis/Console; git identity (only when
+#   unset). The dev stack (node/JDK/Angular CLI) and the gaming stack
+#   (wine/winetricks/lutris) are each prompted up front.
 # - GNOME Shell extensions: Dash to Dock (Fedora's package) and "Disable
 #   Workspace Switcher Overlay" (e.g.o #6358, fetched for the running Shell).
-# - The vendored Nautilus fork as a /usr/local overlay (same arrangement as
-#   ubuntu.sh; day-to-day helper: ./rebuild-nautilus-ubuntu.sh), custom app
-#   icons, extract-audio, the Fira Sans + Microsoft fonts, Spotify with
-#   adblock, and the meson-built music app into ~/.local.
+# - Custom app icons, extract-audio, the Fira Sans + Microsoft fonts,
+#   Spotify with adblock, and the meson-built music app into ~/.local.
+#   Nautilus is Workstation's stock package (the vendored fork is Arch-only).
+# - Optional NTFS data partition mounted at /mnt/HOME via fstab (prompted up
+#   front, same as arch.sh/ubuntu.sh; blank to skip).
 set -e
 
 USERNAME=$(logname)
@@ -44,9 +44,8 @@ warn() { printf '\033[1;33m==>\033[0m %s\n' "$*" >&2; }
 die()  { printf '\033[1;31m==>\033[0m %s\n' "$*" >&2; exit 1; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
-# Run a command against the user's session bus when one exists (the normal
-# case — this script is usually run from a GNOME terminal), else in a
-# throwaway bus. gsettings/dconf/gnome-extensions all need one.
+# Run a command against the user's session bus when one exists, else in a
+# throwaway bus — gsettings/dconf/gnome-extensions all need one.
 as_session() {
     if [[ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]]; then
         "$@"
@@ -66,6 +65,10 @@ fi
 [[ "${ID:-}" == "fedora" ]] || die "This is the Fedora script — /etc/os-release says ID=${ID:-unknown}."
 FEDORA_REL=$(rpm -E %fedora)
 
+# "oracle" = VirtualBox; systemd-detect-virt exits non-zero on bare metal.
+# In any VM the NVIDIA driver and its power tweaks are skipped.
+VIRT=$(systemd-detect-virt 2>/dev/null) || VIRT=none
+
 # Ask for the sudo password once, up front, and keep the credential cache
 # fresh in the background — the dnf and compile steps outlast sudo's default
 # timeout, and a mid-run re-prompt would stall the install.
@@ -74,11 +77,19 @@ sudo -v
 SUDO_KEEPALIVE=$!
 trap 'kill "$SUDO_KEEPALIVE" 2>/dev/null' EXIT
 
+### -------- PROMPTS (everything interactive happens up front) --------
+# Only the Secure Boot MOK password can still ask mid-run.
+echo
+lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS
+echo
+read -rp "NTFS partition to mount at /mnt/HOME (e.g. /dev/nvme1n1p1, blank to skip): " NTFS_DRIVE
+read -rp "Install the development stack (node, JDK, Angular CLI)? [Y/n]: " INSTALL_DEV
+read -rp "Install the gaming stack (wine, winetricks, lutris)? [Y/n]: " INSTALL_GAMING
+
 ### -------- DNS --------
-# Some routers hand out dead DNS servers via DHCP (the GLX router's first one,
-# 110.44.112.200, never answers and glibc stalls 5 s per lookup on it). Prefer
-# known-good resolvers globally — Domains=~. outranks any network's DHCP DNS —
-# and cache via systemd-resolved, which also auto-skips unresponsive servers.
+# The GLX router's first DHCP DNS server (110.44.112.200) is dead and glibc
+# stalls 5 s per lookup on it — pin known-good resolvers globally
+# (Domains=~. outranks any network's DHCP DNS) via systemd-resolved.
 info "Pinning DNS resolvers"
 sudo mkdir -p /etc/systemd/resolved.conf.d
 sudo tee /etc/systemd/resolved.conf.d/10-global-dns.conf > /dev/null <<'EOF'
@@ -97,9 +108,8 @@ for _ in $(seq 1 30); do
 done
 
 ### -------- DNF TUNING --------
-# dnf downloads one package at a time, from whichever mirror it happened to
-# pick — the slowest part of a fresh install. Values already present are
-# left alone.
+# dnf downloads serially from one mirror by default; values already present
+# are left alone.
 DNF_CONF=/etc/dnf/dnf.conf
 sudo mkdir -p /etc/dnf
 sudo touch "$DNF_CONF"
@@ -159,9 +169,8 @@ dnfi \
 # Full ffmpeg (RPM Fusion) replacing Workstation's ffmpeg-free.
 sudo dnf install -y --allowerasing ffmpeg || dnfi ffmpeg-free
 
-# Verify what the rest of the script depends on. --skip-unavailable above
-# means a renamed package is a warning, not a failed transaction, so check
-# the commands themselves rather than trusting the package names.
+# --skip-unavailable makes a renamed package a warning, not a failure — so
+# verify the commands themselves rather than trusting the package names.
 MISSING=()
 for cmd in git jq curl alacritty nmcli bluetoothctl gsettings dconf \
            gnome-extensions update-desktop-database fc-cache xdg-mime; do
@@ -176,23 +185,14 @@ for cmd in ffmpeg dbus-run-session; do
     have "$cmd" || warn "$cmd is missing — the features using it will be degraded."
 done
 
-### -------- CURSOR THEME --------
-# Same cursor as the Hyprland setups. Fedora has no package for it (Arch
-# pulls breezex-cursor-theme from the AUR), so take the upstream release
-# tarball. Cosmetic, so a failure here is not fatal.
-install_cursor_theme() {
-    [[ -d /usr/share/icons/BreezeX-Light ]] && return 0
-    local tmp url
-    tmp=$(mktemp -d) || return 1
-    url=$(curl -fsSL https://api.github.com/repos/ful1e5/BreezeX_Cursor/releases/latest \
-        | jq -r '.assets[] | select(.name == "BreezeX-Light.tar.xz") | .browser_download_url') || return 1
-    [[ -n "$url" && "$url" != "null" ]] || return 1
-    curl -fsSL "$url" -o "$tmp/BreezeX-Light.tar.xz" || return 1
-    sudo tar -xJf "$tmp/BreezeX-Light.tar.xz" -C /usr/share/icons || return 1
-    rm -rf "$tmp"
-}
-info "Installing the BreezeX-Light cursor theme"
-install_cursor_theme || { warn "BreezeX-Light install failed — cursors fall back to Adwaita."; FAILURES+=("BreezeX-Light cursor theme"); }
+### -------- GNOME TERMINAL (replace Console/Ptyxis) --------
+# Same swap ubuntu.sh does — GNOME Terminal in, whatever console app the
+# release shipped (Ptyxis on current Fedora, gnome-console before it) out.
+info "Installing GNOME Terminal"
+dnfi gnome-terminal
+for pkg in ptyxis gnome-console; do
+    rpm -q "$pkg" >/dev/null 2>&1 && sudo dnf remove -y "$pkg" || true
+done
 
 ### -------- CLAUDE CODE --------
 info "Installing Claude Code"
@@ -257,21 +257,36 @@ EOF
     # the first boot has no nvidia module until akmods.service catches up.
     sudo akmods --force || return 1
 }
-info "Installing the NVIDIA driver (RPM Fusion akmod)"
-if install_nvidia; then
-    NVIDIA_OK=1
+if [[ "$VIRT" != "none" ]]; then
+    info "Virtual machine detected ($VIRT) — skipping the NVIDIA driver and its power tweaks"
 else
-    warn "NVIDIA driver install failed — the desktop still runs fine on the Intel iGPU."
-    FAILURES+=("NVIDIA driver (akmod-nvidia)")
+    info "Installing the NVIDIA driver (RPM Fusion akmod)"
+    if install_nvidia; then
+        NVIDIA_OK=1
+    else
+        warn "NVIDIA driver install failed — the desktop still runs fine on the Intel iGPU."
+        FAILURES+=("NVIDIA driver (akmod-nvidia)")
+    fi
+fi
+
+### -------- VIRTUALBOX GUEST ADDITIONS --------
+if [[ "$VIRT" == "oracle" || "$VIRT" == "virtualbox" ]]; then
+    info "VirtualBox detected — installing guest additions"
+    if dnfi virtualbox-guest-additions; then
+        # Shared folders mount as root:vboxsf — same usermod arch.sh does.
+        getent group vboxsf >/dev/null && sudo usermod -aG vboxsf "$USERNAME" || true
+        sudo systemctl enable vboxservice.service 2>/dev/null || true
+    else
+        warn "Guest additions install failed — clipboard/resolution integration won't work."
+        FAILURES+=("VirtualBox guest additions")
+    fi
 fi
 
 ### -------- POWER / PERFORMANCE --------
-# arch.sh's laptop tuning, ported: audio codec suspend (also a precondition
-# for the dGPU reaching D3cold — the HDA function must idle), the 80% battery
-# charge threshold, zram sized like the Arch box, periodic TRIM, and VA-API
-# on the iGPU so video decode doesn't burn CPU. Profile switching stays with
-# whatever Workstation ships (GNOME's quick settings drive it) — the
-# Hyprland setups' AC-plug udev automation is not carried over here.
+# arch.sh's laptop tuning, ported. Audio codec suspend is also a precondition
+# for the dGPU reaching D3cold (the HDA function must idle). Profile switching
+# stays with GNOME — the Hyprland setups' AC-plug udev automation is not
+# carried over here.
 info "Applying power/performance tuning"
 sudo tee /etc/modprobe.d/audio-powersave.conf >/dev/null <<'EOF'
 options snd_hda_intel power_save=1 power_save_controller=Y
@@ -308,11 +323,10 @@ EOF
 sudo systemctl enable fstrim.timer 2>/dev/null || true
 
 ### -------- BOOT (hidden GRUB + kernel args) --------
-# Workstation already boots with Plymouth's bgrt splash, so unlike
-# fedora-hyprland.sh there is no splash work — just hide the GRUB menu and
-# add arch.sh's quiet/fast kernel args. Windows stays untouched on its own
-# partitions — boot it from the firmware boot menu (Esc on ASUS); os-prober
-# stays off so it never reappears in (and slows down) grub2-mkconfig.
+# Workstation already shows Plymouth's bgrt splash — just hide the GRUB menu
+# and add arch.sh's quiet/fast kernel args. Windows boots via the firmware
+# boot menu (Esc on ASUS); os-prober stays off so it never reappears in (and
+# slows down) grub2-mkconfig.
 info "Hiding GRUB and applying kernel args"
 
 # Append missing args to every installed kernel's BLS entry. New kernels
@@ -352,6 +366,27 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg \
 # Biggest boot-time win: don't block boot waiting for the network.
 sudo systemctl mask NetworkManager-wait-online.service systemd-networkd-wait-online.service 2>/dev/null || true
 
+### -------- NTFS DRIVE --------
+# Same /mnt/HOME arrangement as arch.sh and ubuntu.sh (ntfs-3g is in the
+# package list above).
+if [[ -n "${NTFS_DRIVE:-}" ]]; then
+    NTFS_UUID=$(sudo blkid -s UUID -o value "$NTFS_DRIVE" 2>/dev/null) || NTFS_UUID=""
+    if [[ -n "$NTFS_UUID" ]]; then
+        sudo mkdir -p /mnt/HOME
+        if ! grep -q "UUID=$NTFS_UUID" /etc/fstab; then
+            echo "UUID=$NTFS_UUID /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0" \
+                | sudo tee -a /etc/fstab >/dev/null
+        fi
+        sudo systemctl daemon-reload
+        sudo mount -a || { warn "Mounting $NTFS_DRIVE failed — check /etc/fstab."; FAILURES+=("NTFS mount ($NTFS_DRIVE)"); }
+    else
+        warn "No UUID found on $NTFS_DRIVE — skipping the NTFS mount."
+        FAILURES+=("NTFS mount ($NTFS_DRIVE)")
+    fi
+else
+    echo "No NTFS drive specified, skipping..."
+fi
+
 ### -------- GOOGLE CHROME + VS CODE --------
 # The vendors' own repos, in rpm form (same sources ubuntu.sh uses as debs).
 info "Installing Google Chrome and VS Code"
@@ -377,21 +412,27 @@ EOF
 sudo dnf install -y google-chrome-stable || { warn "Google Chrome install failed."; FAILURES+=("Google Chrome"); }
 sudo dnf install -y code || { warn "VS Code install failed."; FAILURES+=("VS Code"); }
 
-### -------- DEVELOPMENT STACK --------
-# arch.sh's dev half: node + npm, a current JDK (newest available, mirroring
-# arch.sh's jdk25), the Angular CLI into ~/.local, and the git identity.
-info "Installing the development stack"
-dnfi nodejs npm
-sudo dnf install -y java-25-openjdk-devel \
-    || sudo dnf install -y java-latest-openjdk-devel \
-    || sudo dnf install -y java-21-openjdk-devel \
-    || { warn "No OpenJDK available."; FAILURES+=("OpenJDK"); }
-npm install -g @angular/cli --prefix="/home/$USERNAME/.local" \
-    || { warn "Angular CLI install failed."; FAILURES+=("Angular CLI"); }
+### -------- DEVELOPMENT STACK (optional) --------
+if [[ "$INSTALL_DEV" =~ ^[Nn] ]]; then
+    info "Skipping the development stack"
+else
+    info "Installing the development stack"
+    dnfi nodejs npm
+    sudo dnf install -y java-25-openjdk-devel \
+        || sudo dnf install -y java-latest-openjdk-devel \
+        || sudo dnf install -y java-21-openjdk-devel \
+        || { warn "No OpenJDK available."; FAILURES+=("OpenJDK"); }
+    npm install -g @angular/cli --prefix="/home/$USERNAME/.local" \
+        || { warn "Angular CLI install failed."; FAILURES+=("Angular CLI"); }
+fi
 
-git config --global user.name "sandipsky"
-git config --global user.email "sandipshakya75@gmail.com"
-git config --global core.pager cat
+### -------- GIT GLOBAL CONFIG (only when not already set) --------
+git config --global user.name >/dev/null 2>&1 \
+    || git config --global user.name "sandipsky"
+git config --global user.email >/dev/null 2>&1 \
+    || git config --global user.email "sandipshakya75@gmail.com"
+git config --global core.pager >/dev/null 2>&1 \
+    || git config --global core.pager cat
 
 ### -------- ZSH / STARSHIP --------
 info "Setting up zsh"
@@ -439,24 +480,24 @@ if [[ -n "$ZSH_BIN" && "$(getent passwd "$USERNAME" | cut -d: -f7)" != "$ZSH_BIN
     sudo usermod -s "$ZSH_BIN" "$USERNAME"
 fi
 
-### -------- GAMING STACK --------
-# arch.sh's list is mostly lib32-* runtime deps that Arch makes you spell out
-# by hand; Fedora's wine packaging pulls its own multilib set, so the list
-# collapses to the actual programs. The .i686 GPU bits are what 32-bit
-# Windows games need to reach the drivers.
-info "Installing the gaming stack"
-dnfi wine winetricks lutris
-dnfi mesa-dri-drivers.i686 mesa-vulkan-drivers.i686
-if (( NVIDIA_OK )); then
-    dnfi xorg-x11-drv-nvidia-libs.i686
+### -------- GAMING STACK (optional) --------
+# Fedora's wine packaging pulls its own multilib set (no lib32-* lists like
+# arch.sh); the .i686 GPU bits are what 32-bit Windows games need.
+if [[ "$INSTALL_GAMING" =~ ^[Nn] ]]; then
+    info "Skipping the gaming stack"
+else
+    info "Installing the gaming stack"
+    dnfi wine winetricks lutris
+    dnfi mesa-dri-drivers.i686 mesa-vulkan-drivers.i686
+    if (( NVIDIA_OK )); then
+        dnfi xorg-x11-drv-nvidia-libs.i686
+    fi
 fi
 
 ### -------- GNOME SHELL EXTENSIONS --------
-# Dash to Dock is packaged by Fedora (the package tracks the release's GNOME
-# version). "Disable Workspace Switcher Overlay" (the popup when switching
-# workspaces) only exists on extensions.gnome.org, so it installs from the
-# e.g.o API for the running Shell version. Both take effect at next login —
-# the reboot at the end covers that.
+# Dash to Dock comes from Fedora's package; "Disable Workspace Switcher
+# Overlay" only exists on extensions.gnome.org, so it installs from the e.g.o
+# API for the running Shell version. Both take effect at next login.
 info "Installing GNOME Shell extensions"
 dnfi gnome-shell-extension-dash-to-dock
 
@@ -497,67 +538,10 @@ else
     FAILURES+=("GNOME extension: Dash to Dock")
 fi
 
-### -------- NAUTILUS FORK --------
-# No makepkg on Fedora, so the vendored tree (upstream 50.2.2 + local patches,
-# see docs/nautilus-patches.md) is built with meson into /usr/local, which
-# shadows the stock nautilus package: PATH, XDG_DATA_DIRS (.desktop file,
-# GSettings schema, D-Bus activation) and — after the ld.so.conf.d drop-in
-# below — the linker all prefer it. Stock nautilus stays installed for its
-# runtime deps but its binary is never the one that runs — the same
-# arrangement ubuntu.sh uses, so ./rebuild-nautilus-ubuntu.sh is the
-# iteration helper here too.
-build_nautilus_fork() {
-    dnfi nautilus meson ninja-build gcc blueprint-compiler appstream \
-        desktop-file-utils gettext glib2-devel gobject-introspection-devel \
-        libselinux-devel || return 1
-    sudo dnf builddep -y nautilus \
-        || sudo dnf builddep -y --enablerepo='*-source' nautilus \
-        || dnfi gtk4-devel libadwaita-devel gnome-desktop4-devel gnome-autoar-devel \
-                libportal-gtk4-devel tinysparql-devel libglycin-devel libglycin-gtk4-devel \
-                libcloudproviders-devel gexiv2-devel gdk-pixbuf2-devel \
-                gstreamer1-plugins-base-devel libicu-devel \
-        || return 1
-
-    local build
-    build=$(mktemp -d) || return 1
-    meson setup "$build" "$REPO_DIR/applications/nautilus-fork/nautilus" \
-        --prefix=/usr/local \
-        --libdir=lib64 \
-        -D docs=false \
-        -D tests=none \
-        -D selinux=enabled || return 1
-    meson compile -C "$build" || return 1
-    sudo meson install -C "$build" || return 1
-    rm -rf "$build"
-
-    # Fedora's linker does not search /usr/local by default (Debian's does,
-    # which is why ubuntu.sh gets away without this).
-    sudo tee /etc/ld.so.conf.d/zz-usrlocal.conf >/dev/null <<'EOF'
-/usr/local/lib
-/usr/local/lib64
-EOF
-    sudo ldconfig
-    sudo glib-compile-schemas /usr/local/share/glib-2.0/schemas 2>/dev/null || true
-    sudo update-desktop-database /usr/local/share/applications 2>/dev/null || true
-    sudo restorecon -R /usr/local 2>/dev/null || true
-    [[ -x /usr/local/bin/nautilus ]] || return 1
-}
-if (( FEDORA_REL < 44 )); then
-    warn "Fedora $FEDORA_REL is older than 44 — skipping the Nautilus fork (its GNOME 50 deps are not in this release). Stock Nautilus stays as the file manager."
-    FAILURES+=("Nautilus fork skipped (needs Fedora 44+); stock Nautilus stays")
-else
-    info "Building the Nautilus fork from applications/nautilus-fork/"
-    if ! build_nautilus_fork; then
-        warn "Nautilus fork build failed — stock Nautilus (no patched context menus) stays in place."
-        FAILURES+=("Nautilus fork build")
-    fi
-fi
-
 ### -------- BLUETOOTH --------
 # Don't power the adapter on at boot; toggle it from quick settings when
-# needed. (fedora-hyprland.sh's rfkill-unblock unit is deliberately absent
-# here: GNOME manages rfkill itself, and airplane mode persisting across
-# reboots is expected GNOME behavior.)
+# needed. (No rfkill-unblock unit here: GNOME manages rfkill itself, and
+# airplane mode persisting across reboots is expected GNOME behavior.)
 if [[ -f /etc/bluetooth/main.conf ]]; then
     if grep -q '^#*AutoEnable=' /etc/bluetooth/main.conf; then
         sudo sed -i 's/^#*AutoEnable=.*/AutoEnable=false/' /etc/bluetooth/main.conf
@@ -651,25 +635,16 @@ sudo mkdir -p "$ICON_DIR"
 sudo cp "$REPO_DIR"/assets/icons/* "$ICON_DIR/"
 # Papers is Evince's successor; reuse the same icon under its name.
 sudo cp "$REPO_DIR/assets/icons/org.gnome.Evince.svg" "$ICON_DIR/org.gnome.Papers.svg"
-# The Nautilus fork installs its own icon under /usr/local/share, which comes
-# first in XDG_DATA_DIRS and would otherwise shadow the custom one.
-if [[ -d /usr/local/share/icons/hicolor/scalable/apps ]]; then
-    sudo cp "$REPO_DIR/assets/icons/org.gnome.Nautilus.svg" \
-        /usr/local/share/icons/hicolor/scalable/apps/
-fi
 sudo gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor 2>/dev/null || true
-sudo gtk-update-icon-cache -q -t -f /usr/local/share/icons/hicolor 2>/dev/null || true
 
 ### -------- extract-audio --------
-# Pulls audio out of videos as MP3 (Resolve on Linux can't decode AAC, so
-# H.264 clips import silent without it). /usr/local/bin so it works from any
-# shell/directory.
+# Pulls audio out of videos as MP3 — Resolve on Linux can't decode AAC, so
+# H.264 clips import silent without it.
 sudo install -Dm755 "$REPO_DIR/assets/bin/extract-audio" /usr/local/bin/extract-audio
 sudo restorecon -F /usr/local/bin/extract-audio 2>/dev/null || true
 
 ### -------- FONTS --------
-# Fedora convention is one directory per family. assets/fira carries the
-# interface font ('Fira Sans Book'), which nothing in the repos would supply;
+# assets/fira is the interface font ('Fira Sans Book' — no repo supplies it);
 # assets/fonts are the Microsoft faces documents need.
 info "Installing fonts"
 sudo mkdir -p /usr/share/fonts/fira /usr/share/fonts/msfonts
@@ -694,7 +669,6 @@ as_session bash <<'EOF'
 gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-gsettings set org.gnome.desktop.interface cursor-theme 'BreezeX-Light'
 gsettings set org.gnome.desktop.privacy remember-recent-files false
 EOF
 
@@ -708,9 +682,8 @@ for mime in text/plain application/x-shellscript; do
 done
 
 ### -------- MUSIC APP --------
-# applications/music/install.sh is pacman-gated, so install the Fedora
-# equivalents of its dep list and drive meson directly, exactly as that
-# script's own fallback instructions describe. Installs to the user's ~/.local.
+# Its own install.sh is pacman-gated — install the Fedora equivalents of its
+# dep list and drive meson directly, into the user's ~/.local.
 build_music_app() {
     dnfi meson ninja-build gcc pkgconf-pkg-config gtk4-devel libadwaita-devel \
         gstreamer1-devel gstreamer1-plugins-base-devel gstreamer1-plugins-good \
@@ -734,9 +707,8 @@ if ! build_music_app; then
 fi
 
 ### -------- SPOTIFY (+ adblock) --------
-# Fedora has no AUR. The native client comes from negativo17's Spotify repo
-# (the same upstream binary, repackaged) and spotify-adblock is built from
-# source with cargo — together the equivalent of install.sh's spotify-adblock
+# Native client from negativo17's repo (the upstream binary, repackaged);
+# spotify-adblock built from source with cargo — the equivalent of install.sh's
 # AUR package. Best-effort: any failure just skips Spotify.
 install_spotify() {
     if [[ ! -f /etc/yum.repos.d/fedora-spotify.repo ]]; then
@@ -791,8 +763,6 @@ Worth knowing:
   - The dGPU powers off when idle; right-click an app in GNOME for "Launch
     using Discrete Graphics Card". Check with: cat /sys/class/drm/card*/device/power_state
   - The battery stops charging at 80% (battery-charge-threshold.service).
-  - Nautilus fork changes: ./rebuild-nautilus-ubuntu.sh (the /usr/local
-    overlay is identical on Fedora).
 EOF
 
 echo

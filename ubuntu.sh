@@ -4,12 +4,14 @@
 #   sudo ./ubuntu.sh
 #
 # Notes:
-# - Nautilus fork + music app build from the vendored trees in applications/.
-#   The Nautilus fork is upstream 50.2.2, so this expects an Ubuntu release
-#   shipping GNOME 50 (26.04+) — `apt build-dep nautilus` pulls the right devs.
+# - The music app builds from the vendored tree in applications/. Nautilus is
+#   the stock Ubuntu package (the vendored fork is Arch-only).
 # - Chrome / VS Code / Docker come from the vendors' own apt repos (the deb
 #   equivalent of a PPA). Postman has no deb, so it installs from the official
-#   tarball into /opt.
+#   tarball into /opt. Spotify comes from Spotify's apt repo with
+#   spotify-adblock built from source, same as fedora.sh.
+# - The dev stack and the gaming stack are each prompted up front; VirtualBox
+#   guests get the guest additions automatically.
 set -e
 
 if [[ $EUID -ne 0 ]]; then
@@ -24,11 +26,16 @@ export DEBIAN_FRONTEND=noninteractive
 . /etc/os-release
 CODENAME="${VERSION_CODENAME}"
 
+# "oracle" = VirtualBox; systemd-detect-virt exits non-zero on bare metal.
+VIRT=$(systemd-detect-virt 2>/dev/null) || VIRT=none
+
 ### -------- PROMPTS (everything interactive happens up front) --------
 echo
 lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINTS
 echo
 read -rp "NTFS partition to mount at /mnt/HOME (e.g. /dev/nvme1n1p1, blank to skip): " NTFS_DRIVE
+read -rp "Install the development stack (node, JDK, Angular CLI, Docker, Postman)? [Y/n]: " INSTALL_DEV
+read -rp "Install the gaming stack (wine, winetricks, lutris)? [Y/n]: " INSTALL_GAMING
 
 ### -------- BASE UPDATE --------
 apt-get update
@@ -60,7 +67,9 @@ Pin-Priority: -10
 EOF
 
 ### -------- THIRD-PARTY APT REPOS (Chrome, VS Code, Docker) --------
-apt-get install -y curl wget gpg apt-transport-https ca-certificates
+# git and jq live here, not in the dev stack — Spotify-adblock and the GNOME
+# extension installer below need them even when the dev stack is skipped.
+apt-get install -y curl wget gpg apt-transport-https ca-certificates git jq
 install -d -m 0755 /etc/apt/keyrings
 
 # Google Chrome
@@ -84,24 +93,39 @@ echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.d
 apt-get update
 apt-get install -y google-chrome-stable code
 
-### -------- WINE / GAMING STACK --------
-dpkg --add-architecture i386
-
-# WineHQ staging (falls back to Ubuntu's own wine if WineHQ doesn't carry
-# this release's codename yet).
-if wget -q -O "/etc/apt/sources.list.d/winehq-$CODENAME.sources" \
-        "https://dl.winehq.org/wine-builds/ubuntu/dists/$CODENAME/winehq-$CODENAME.sources"; then
-    wget -q -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
-    apt-get update
-    apt-get install -y --install-recommends winehq-staging
+### -------- WINE / GAMING STACK (optional) --------
+if [[ "$INSTALL_GAMING" =~ ^[Nn] ]]; then
+    echo "Skipping the gaming stack."
 else
-    rm -f "/etc/apt/sources.list.d/winehq-$CODENAME.sources"
-    echo "WineHQ has no repo for '$CODENAME' yet — installing Ubuntu's wine instead."
-    apt-get update
-    apt-get install -y --install-recommends wine
+    dpkg --add-architecture i386
+
+    # WineHQ staging (falls back to Ubuntu's own wine if WineHQ doesn't carry
+    # this release's codename yet).
+    if wget -q -O "/etc/apt/sources.list.d/winehq-$CODENAME.sources" \
+            "https://dl.winehq.org/wine-builds/ubuntu/dists/$CODENAME/winehq-$CODENAME.sources"; then
+        wget -q -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+        apt-get update
+        apt-get install -y --install-recommends winehq-staging
+    else
+        rm -f "/etc/apt/sources.list.d/winehq-$CODENAME.sources"
+        echo "WineHQ has no repo for '$CODENAME' yet — installing Ubuntu's wine instead."
+        apt-get update
+        apt-get install -y --install-recommends wine
+    fi
+
+    apt-get install -y winetricks lutris
 fi
 
-apt-get install -y winetricks lutris
+### -------- VIRTUALBOX GUEST ADDITIONS --------
+if [[ "$VIRT" == "oracle" || "$VIRT" == "virtualbox" ]]; then
+    echo "VirtualBox detected — installing guest additions."
+    apt-get install -y virtualbox-guest-utils virtualbox-guest-x11 \
+        || apt-get install -y virtualbox-guest-utils \
+        || echo "Guest additions install failed — clipboard/resolution integration won't work."
+    # Shared folders mount as root:vboxsf.
+    getent group vboxsf >/dev/null && usermod -aG vboxsf "$USERNAME" || true
+    systemctl enable virtualbox-guest-utils.service 2>/dev/null || true
+fi
 
 ### -------- PROGRAMS --------
 apt-get install -y \
@@ -120,32 +144,34 @@ apt-get purge -y gnome-software-plugin-flatpak gnome-software-plugin-snap 2>/dev
 apt-get install -y gnome-terminal
 apt-get purge -y ptyxis 2>/dev/null || true
 
-### -------- DEVELOPMENT STACK --------
-apt-get install -y build-essential git pkg-config jq
+### -------- DEVELOPMENT STACK (optional) --------
+if [[ "$INSTALL_DEV" =~ ^[Nn] ]]; then
+    echo "Skipping the development stack."
+else
+    apt-get install -y build-essential pkg-config
 
-# Node.js LTS via NodeSource (Ubuntu's own nodejs is too old)
-curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
-apt-get install -y nodejs
+    # Node.js LTS via NodeSource (Ubuntu's own nodejs is too old)
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+    apt-get install -y nodejs
 
-# JDK — newest available, mirroring arch.sh's jdk25
-apt-get install -y openjdk-25-jdk 2>/dev/null \
-    || apt-get install -y openjdk-21-jdk 2>/dev/null \
-    || apt-get install -y default-jdk
+    # JDK — newest available, mirroring arch.sh's jdk25
+    apt-get install -y openjdk-25-jdk 2>/dev/null \
+        || apt-get install -y openjdk-21-jdk 2>/dev/null \
+        || apt-get install -y default-jdk
 
-sudo -u "$USERNAME" -H npm install -g @angular/cli --prefix="/home/$USERNAME/.local"
+    sudo -u "$USERNAME" -H npm install -g @angular/cli --prefix="/home/$USERNAME/.local"
 
-# Docker CLI + engine (CLI alone can't do anything without a daemon)
-apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-usermod -aG docker "$USERNAME"
+    apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    usermod -aG docker "$USERNAME"
 
-# Postman — no deb/apt package exists; official tarball into /opt
-POSTMAN_TAR=$(mktemp)
-curl -fsSL https://dl.pstmn.io/download/latest/linux_64 -o "$POSTMAN_TAR"
-rm -rf /opt/Postman
-tar -xzf "$POSTMAN_TAR" -C /opt
-rm -f "$POSTMAN_TAR"
-ln -sf /opt/Postman/Postman /usr/local/bin/postman
-cat > /usr/share/applications/postman.desktop <<'EOF'
+    # Postman has no deb — official tarball into /opt.
+    POSTMAN_TAR=$(mktemp)
+    curl -fsSL https://dl.pstmn.io/download/latest/linux_64 -o "$POSTMAN_TAR"
+    rm -rf /opt/Postman
+    tar -xzf "$POSTMAN_TAR" -C /opt
+    rm -f "$POSTMAN_TAR"
+    ln -sf /opt/Postman/Postman /usr/local/bin/postman
+    cat > /usr/share/applications/postman.desktop <<'EOF'
 [Desktop Entry]
 Name=Postman
 Exec=/opt/Postman/Postman %U
@@ -154,11 +180,15 @@ Type=Application
 Categories=Development;
 Terminal=false
 EOF
+fi
 
-### -------- GIT GLOBAL CONFIG --------
-sudo -u "$USERNAME" -H git config --global user.name "sandipsky"
-sudo -u "$USERNAME" -H git config --global user.email "sandipshakya75@gmail.com"
-sudo -u "$USERNAME" -H git config --global core.pager cat
+### -------- GIT GLOBAL CONFIG (only when not already set) --------
+sudo -u "$USERNAME" -H git config --global user.name >/dev/null 2>&1 \
+    || sudo -u "$USERNAME" -H git config --global user.name "sandipsky"
+sudo -u "$USERNAME" -H git config --global user.email >/dev/null 2>&1 \
+    || sudo -u "$USERNAME" -H git config --global user.email "sandipshakya75@gmail.com"
+sudo -u "$USERNAME" -H git config --global core.pager >/dev/null 2>&1 \
+    || sudo -u "$USERNAME" -H git config --global core.pager cat
 
 ### -------- BATTERY CHARGE THRESHOLD (80%) --------
 cat > /etc/systemd/system/battery-charge-threshold.service <<'EOF'
@@ -189,6 +219,13 @@ if grep -q '^GRUB_RECORDFAIL_TIMEOUT=' /etc/default/grub; then
 else
     echo 'GRUB_RECORDFAIL_TIMEOUT=0' >> /etc/default/grub
 fi
+# Windows boots via the firmware boot menu (Esc on ASUS) — keep os-prober off
+# so it never reappears in (and slows down) update-grub.
+if grep -q '^GRUB_DISABLE_OS_PROBER=' /etc/default/grub; then
+    sed -i 's/^GRUB_DISABLE_OS_PROBER=.*/GRUB_DISABLE_OS_PROBER=true/' /etc/default/grub
+else
+    echo 'GRUB_DISABLE_OS_PROBER=true' >> /etc/default/grub
+fi
 update-grub
 
 # Biggest boot-time win: don't block boot waiting for the network.
@@ -197,21 +234,24 @@ systemctl mask NetworkManager-wait-online.service systemd-networkd-wait-online.s
 ### -------- NTFS DRIVE --------
 if [[ -n "$NTFS_DRIVE" ]]; then
     apt-get install -y ntfs-3g
-    NTFS_UUID=$(blkid -s UUID -o value "$NTFS_DRIVE")
-    mkdir -p /mnt/HOME
-    if ! grep -q "UUID=$NTFS_UUID" /etc/fstab; then
-        echo "UUID=$NTFS_UUID /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0" >> /etc/fstab
+    NTFS_UUID=$(blkid -s UUID -o value "$NTFS_DRIVE" 2>/dev/null) || NTFS_UUID=""
+    if [[ -n "$NTFS_UUID" ]]; then
+        mkdir -p /mnt/HOME
+        if ! grep -q "UUID=$NTFS_UUID" /etc/fstab; then
+            echo "UUID=$NTFS_UUID /mnt/HOME auto nosuid,nodev,nofail,x-gvfs-show 0 0" >> /etc/fstab
+        fi
+        systemctl daemon-reload
+        mount -a || echo "Mounting $NTFS_DRIVE failed — check /etc/fstab."
+    else
+        echo "No UUID found on $NTFS_DRIVE — skipping the NTFS mount."
     fi
-    systemctl daemon-reload
-    mount -a
 else
     echo "No NTFS drive specified, skipping..."
 fi
 
 ### -------- MUSIC APP (applications/music) --------
-# Its install.sh is Arch-only (pacman), so install the deb equivalents of its
-# dep list here and drive meson directly, as the script's own fallback
-# instructions describe. Installs to the user's ~/.local.
+# Its own install.sh is Arch-only (pacman) — install the deb equivalents of
+# its dep list and drive meson directly, into the user's ~/.local.
 apt-get install -y \
     meson ninja-build gcc \
     libgtk-4-dev libadwaita-1-dev \
@@ -227,35 +267,43 @@ rm -rf "$MUSIC_BUILD"
 sudo -u "$USERNAME" -H update-desktop-database "/home/$USERNAME/.local/share/applications" 2>/dev/null || true
 sudo -u "$USERNAME" -H gtk-update-icon-cache -q -t -f "/home/$USERNAME/.local/share/icons/hicolor" 2>/dev/null || true
 
-### -------- NAUTILUS FORK (applications/nautilus-fork) --------
-# No makepkg on Ubuntu, so the vendored tree (upstream 50.2.2 + local patches,
-# see docs/nautilus-patches.md) is built with meson into /usr/local, which
-# shadows the stock nautilus package (PATH, XDG_DATA_DIRS and D-Bus activation
-# all prefer /usr/local). The stock package stays installed for its runtime
-# deps (gvfs, tracker, etc.) but its binary is never the one that runs.
-# Day-to-day fork changes: run ./rebuild-nautilus-ubuntu.sh (as your user) —
-# it reinstalls the overlay on top; the stock package is never touched.
-# `apt build-dep nautilus` needs deb-src entries enabled first.
-if [[ -f /etc/apt/sources.list.d/ubuntu.sources ]]; then
-    sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
-else
-    sed -i 's/^# deb-src/deb-src/' /etc/apt/sources.list
-fi
-apt-get update
-apt-get build-dep -y nautilus
-apt-get install -y nautilus   # keep stock installed for runtime deps, then shadow it
+### -------- SPOTIFY (+ adblock) --------
+# Spotify's own apt repo + spotify-adblock built from source and preloaded via
+# a .desktop override in /usr/local — same arrangement as fedora.sh.
+# Best-effort: any failure just skips Spotify.
+install_spotify() {
+    curl -fsSL https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg \
+        | gpg --dearmor --yes -o /etc/apt/keyrings/spotify.gpg || return 1
+    echo "deb [signed-by=/etc/apt/keyrings/spotify.gpg] http://repository.spotify.com stable non-free" \
+        > /etc/apt/sources.list.d/spotify.list
+    # Drop the repo again on failure so it can't poison every later apt update.
+    if ! apt-get update; then
+        rm -f /etc/apt/sources.list.d/spotify.list
+        apt-get update || true
+        return 1
+    fi
+    apt-get install -y spotify-client || return 1
 
-NAUTILUS_BUILD=$(mktemp -d)
-meson setup "$NAUTILUS_BUILD" "$REPO_DIR/applications/nautilus-fork/nautilus" \
-    --prefix=/usr/local \
-    -D docs=false \
-    -D packagekit=false \
-    -D selinux=false
-meson compile -C "$NAUTILUS_BUILD"
-meson install -C "$NAUTILUS_BUILD"
-rm -rf "$NAUTILUS_BUILD"
-ldconfig
-glib-compile-schemas /usr/local/share/glib-2.0/schemas 2>/dev/null || true
+    apt-get install -y cargo make || return 1
+    local build so
+    build=$(mktemp -d) || return 1
+    git clone --depth 1 https://github.com/abba23/spotify-adblock.git "$build/spotify-adblock" || return 1
+    make -C "$build/spotify-adblock" || return 1
+    so=$(find "$build/spotify-adblock/target/release" -maxdepth 1 -name 'lib*.so' | head -1)
+    [[ -n "$so" ]] || return 1
+    install -Dm755 "$so" /usr/lib/spotify-adblock.so || return 1
+    install -Dm644 "$build/spotify-adblock/config.toml" /etc/spotify-adblock/config.toml || return 1
+    rm -rf "$build"
+
+    if [[ -f /usr/share/applications/spotify.desktop ]]; then
+        mkdir -p /usr/local/share/applications
+        cp /usr/share/applications/spotify.desktop /usr/local/share/applications/spotify.desktop
+        sed -i 's|^Exec=|Exec=env LD_PRELOAD=/usr/lib/spotify-adblock.so |' \
+            /usr/local/share/applications/spotify.desktop
+    fi
+}
+echo "Installing Spotify with ad blocking..."
+install_spotify || echo "Spotify/spotify-adblock install failed — skipping. (Did Spotify rotate its apt signing key? Check https://www.spotify.com/download/linux/)"
 
 ### -------- APP ICONS (assets/icons) --------
 ICON_DIR=/usr/share/icons/hicolor/scalable/apps
@@ -274,6 +322,7 @@ declare -A ICON_OVERRIDES=(
     [org.gnome.Evince.desktop]=org.gnome.Evince.svg
     [org.gnome.Papers.desktop]=org.gnome.Papers.svg
     [org.gnome.Software.desktop]=org.gnome.Software.svg
+    [org.gnome.Nautilus.desktop]=org.gnome.Nautilus.svg
 )
 for desktop in "${!ICON_OVERRIDES[@]}"; do
     src="/usr/share/applications/$desktop"
@@ -283,15 +332,11 @@ for desktop in "${!ICON_OVERRIDES[@]}"; do
         "/usr/local/share/applications/$desktop"
 done
 
-# The Nautilus fork's .desktop already lives in /usr/local — repoint it too.
-sed -i "s|^Icon=.*|Icon=$ICON_DIR/org.gnome.Nautilus.svg|" \
-    /usr/local/share/applications/org.gnome.Nautilus.desktop
-
 update-desktop-database /usr/local/share/applications 2>/dev/null || true
 
 ### -------- FIRA SANS FONT (assets/fira) --------
-# Same interface font as arch.sh sets ('Fira Sans Book 12'). Debian/Ubuntu
-# convention puts TTFs in a subdir of /usr/share/fonts/truetype.
+# Same interface font as arch.sh sets; Debian convention puts TTFs under
+# /usr/share/fonts/truetype.
 mkdir -p /usr/share/fonts/truetype/fira
 cp "$REPO_DIR"/assets/fira/*.ttf /usr/share/fonts/truetype/fira/
 fc-cache -f
@@ -301,6 +346,33 @@ gsettings set org.gnome.desktop.interface font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.interface document-font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Fira Sans Bold 12'
 EOF
+
+### -------- GNOME SHELL EXTENSION --------
+# "Disable Workspace Switcher Overlay" from extensions.gnome.org, fetched for
+# the running Shell version — same as fedora.sh. No Dash to Dock here: Ubuntu
+# already ships its own dock.
+install_ego_extension() {
+    local pk=$1 shell_ver meta uuid url tmp
+    shell_ver=$(gnome-shell --version 2>/dev/null | grep -oE '[0-9]+' | head -1)
+    [[ -n "$shell_ver" ]] || return 1
+    meta=$(curl -fsSL "https://extensions.gnome.org/extension-info/?pk=$pk&shell_version=$shell_ver") || return 1
+    uuid=$(jq -r '.uuid // empty' <<<"$meta")
+    url=$(jq -r '.download_url // empty' <<<"$meta")
+    [[ -n "$uuid" && -n "$url" ]] || return 1
+    tmp=$(mktemp -d) || return 1
+    curl -fsSL "https://extensions.gnome.org$url" -o "$tmp/ext.zip" || return 1
+    # The zip must be readable by the user — mktemp -d as root is 0700.
+    chmod 755 "$tmp" && chmod 644 "$tmp/ext.zip"
+    sudo -u "$USERNAME" -H gnome-extensions install --force "$tmp/ext.zip" >&2 || return 1
+    rm -rf "$tmp"
+    echo "$uuid"
+}
+if EXT_UUID=$(install_ego_extension 6358); then
+    sudo -u "$USERNAME" -H dbus-run-session -- gnome-extensions enable "$EXT_UUID" \
+        || echo "Installed but could not enable $EXT_UUID — enable it in the Extensions app."
+else
+    echo "Could not install 'Disable Workspace Switcher Overlay' (e.g.o #6358) — no build for this GNOME Shell?"
+fi
 
 echo
 echo "INSTALLATION COMPLETE"
