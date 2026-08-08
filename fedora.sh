@@ -709,6 +709,13 @@ sudo restorecon -F /usr/local/bin/extract-audio 2>/dev/null || true
 # assets/fira is the interface font ('Fira Sans Book' — no repo supplies it);
 # assets/fonts are the Microsoft faces documents need.
 info "Installing fonts"
+# The same font set arch.sh installs, in Fedora's package names (Fedora has
+# no Fira Sans package — assets/fira below covers it; liberation-fonts is
+# split into the three face packages here).
+dnfi google-noto-sans-fonts google-noto-serif-fonts \
+     google-noto-color-emoji-fonts google-noto-sans-cjk-fonts \
+     liberation-sans-fonts liberation-serif-fonts liberation-mono-fonts \
+     dejavu-fonts-all fontawesome4-fonts jetbrains-mono-fonts-all
 sudo mkdir -p /usr/share/fonts/fira /usr/share/fonts/msfonts
 sudo cp "$REPO_DIR"/assets/fira/*.ttf /usr/share/fonts/fira/
 sudo cp "$REPO_DIR"/assets/fonts/* /usr/share/fonts/msfonts/

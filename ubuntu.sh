@@ -335,9 +335,15 @@ done
 
 update-desktop-database /usr/local/share/applications 2>/dev/null || true
 
-### -------- FIRA SANS FONT (assets/fira) --------
-# Same interface font as arch.sh sets; Debian convention puts TTFs under
-# /usr/share/fonts/truetype.
+### -------- FONTS --------
+# The same font set arch.sh installs, in Debian package names (no Fira Sans
+# package exists — assets/fira below covers it).
+apt-get install -y \
+    fonts-noto-core fonts-noto-extra fonts-noto-color-emoji fonts-noto-cjk \
+    fonts-liberation fonts-dejavu fonts-font-awesome fonts-jetbrains-mono
+
+# Fira Sans from assets — the interface font arch.sh sets; Debian convention
+# puts TTFs under /usr/share/fonts/truetype.
 mkdir -p /usr/share/fonts/truetype/fira
 cp "$REPO_DIR"/assets/fira/*.ttf /usr/share/fonts/truetype/fira/
 fc-cache -f
