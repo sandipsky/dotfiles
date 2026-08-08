@@ -23,9 +23,10 @@
 #   ASUS), quiet/fast kernel args. Workstation already shows Plymouth's bgrt
 #   splash, so there is no splash work to do.
 # - Chrome + VS Code from the vendors' rpm repos; zsh + starship as the login
-#   shell; GNOME Console replacing Ptyxis, wearing GNOME Terminal's icon;
-#   git identity (only when unset). The dev stack (node/JDK/Angular CLI)
-#   and the gaming stack (wine/winetricks/lutris) are each prompted up front.
+#   shell; the stock terminal (Ptyxis) stays but wears GNOME Terminal's
+#   icon; git identity (only when unset). The dev stack (node/JDK/Angular
+#   CLI) and the gaming stack (wine/winetricks/lutris) are each prompted up
+#   front.
 # - GNOME Shell extensions: Dash to Dock (Fedora's package), "Disable
 #   Workspace Switcher Overlay" (e.g.o #6358, fetched for the running Shell)
 #   and the Extensions app; the stock system extensions (Apps Menu,
@@ -194,23 +195,6 @@ fi
 for cmd in ffmpeg dbus-run-session; do
     have "$cmd" || warn "$cmd is missing — the features using it will be degraded."
 done
-
-### -------- GNOME CONSOLE (replace Ptyxis) --------
-# Same swap ubuntu.sh does — GNOME Console (kgx) in, whatever other terminal
-# the release shipped (Ptyxis on current Fedora, gnome-terminal on older
-# ones) out. It gets GNOME Terminal's icon in the app-icons step below.
-info "Installing GNOME Console"
-dnfi gnome-console
-# Only drop the stock terminal once kgx is really there — a failed install
-# must not leave the machine with no terminal at all.
-if have kgx; then
-    for pkg in ptyxis gnome-terminal; do
-        rpm -q "$pkg" >/dev/null 2>&1 && sudo dnf remove -y "$pkg" || true
-    done
-else
-    warn "GNOME Console (kgx) did not install — keeping the stock terminal."
-    FAILURES+=("GNOME Console")
-fi
 
 ### -------- CLAUDE CODE --------
 info "Installing Claude Code"
@@ -705,9 +689,14 @@ sudo mkdir -p "$ICON_DIR"
 sudo cp "$REPO_DIR"/assets/icons/* "$ICON_DIR/"
 # Papers is Evince's successor; reuse the same icon under its name.
 sudo cp "$REPO_DIR/assets/icons/org.gnome.Evince.svg" "$ICON_DIR/org.gnome.Papers.svg"
-# GNOME Console wears GNOME Terminal's icon (overwrites the package's own
-# copy — a gnome-console update restores stock until the next run).
-sudo cp "$REPO_DIR/assets/icons/org.gnome.Terminal.svg" "$ICON_DIR/org.gnome.Console.svg"
+# The stock terminal (Ptyxis on current Fedora) wears GNOME Terminal's icon
+# (overwrites the package's own copy — a ptyxis update restores stock until
+# the next run). gnome-console's name is covered too, for releases shipping
+# that instead; a gnome-terminal default is already covered by the assets
+# copy above (its icon IS org.gnome.Terminal.svg).
+for icon in org.gnome.Ptyxis.svg org.gnome.Console.svg; do
+    sudo cp "$REPO_DIR/assets/icons/org.gnome.Terminal.svg" "$ICON_DIR/$icon"
+done
 sudo gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor 2>/dev/null || true
 
 ### -------- extract-audio --------

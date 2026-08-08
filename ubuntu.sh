@@ -140,13 +140,6 @@ apt-get install -y \
 apt-get install -y --no-install-recommends gnome-software packagekit
 apt-get purge -y gnome-software-plugin-flatpak gnome-software-plugin-snap 2>/dev/null || true
 
-### -------- GNOME CONSOLE (replace Ptyxis / GNOME Terminal) --------
-# GNOME Console (kgx) in; it gets GNOME Terminal's icon in the app-icons
-# step below. Separate purges — one absent package must not spare the other.
-apt-get install -y gnome-console
-apt-get purge -y ptyxis 2>/dev/null || true
-apt-get purge -y gnome-terminal 2>/dev/null || true
-
 ### -------- DEVELOPMENT STACK (optional) --------
 if [[ "$INSTALL_DEV" =~ ^[Nn] ]]; then
     echo "Skipping the development stack."
@@ -320,7 +313,12 @@ gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor 2>/dev/null || true
 # hicolor, so point the .desktop files at the SVGs directly, via overrides in
 # /usr/local/share/applications (which outranks /usr/share).
 mkdir -p /usr/local/share/applications
+# The terminal entries cover whichever one the release ships (Ptyxis on
+# current Ubuntu, GNOME Terminal on older ones) — the loop below skips any
+# .desktop that doesn't exist.
 declare -A ICON_OVERRIDES=(
+    [org.gnome.Ptyxis.desktop]=org.gnome.Terminal.svg
+    [org.gnome.Terminal.desktop]=org.gnome.Terminal.svg
     [org.gnome.Console.desktop]=org.gnome.Terminal.svg
     [org.gnome.Evince.desktop]=org.gnome.Evince.svg
     [org.gnome.Papers.desktop]=org.gnome.Papers.svg
