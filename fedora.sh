@@ -23,11 +23,16 @@
 #   ASUS), quiet/fast kernel args. Workstation already shows Plymouth's bgrt
 #   splash, so there is no splash work to do.
 # - Chrome + VS Code from the vendors' rpm repos; zsh + starship as the login
-#   shell; GNOME Terminal replacing Ptyxis/Console; git identity (only when
-#   unset). The dev stack (node/JDK/Angular CLI) and the gaming stack
-#   (wine/winetricks/lutris) are each prompted up front.
-# - GNOME Shell extensions: Dash to Dock (Fedora's package) and "Disable
-#   Workspace Switcher Overlay" (e.g.o #6358, fetched for the running Shell).
+#   shell; GNOME Console replacing Ptyxis, wearing GNOME Terminal's icon;
+#   git identity (only when unset). The dev stack (node/JDK/Angular CLI)
+#   and the gaming stack (wine/winetricks/lutris) are each prompted up front.
+# - GNOME Shell extensions: Dash to Dock (Fedora's package), "Disable
+#   Workspace Switcher Overlay" (e.g.o #6358, fetched for the running Shell)
+#   and the Extensions app; the stock system extensions (Apps Menu,
+#   Background Logo, Launch New Instance, Places, Window List) and a set of
+#   preinstalled GNOME apps (Contacts, Help, Boxes, Tour, Weather, Maps,
+#   Connections, Document Scanner, the stock audio/video/camera apps) are
+#   removed.
 # - Custom app icons, extract-audio, the Fira Sans + Microsoft fonts,
 #   Spotify with adblock, and the meson-built music app into ~/.local.
 #   Nautilus is Workstation's stock package (the vendored fork is Arch-only).
@@ -152,12 +157,12 @@ fi
 # Only what Workstation lacks; everything GNOME already ships stays stock.
 info "Installing packages"
 dnfi \
-    alacritty \
     git \
     jq \
     curl \
     obs-studio \
     qbittorrent \
+    vlc \
     libreoffice-writer \
     libreoffice-calc \
     libreoffice-impress \
@@ -169,10 +174,15 @@ dnfi \
 # Full ffmpeg (RPM Fusion) replacing Workstation's ffmpeg-free.
 sudo dnf install -y --allowerasing ffmpeg || dnfi ffmpeg-free
 
+# VLC itself is in Fedora proper; its full-codec plugin set lives in RPM
+# Fusion. Best-effort — stock VLC still plays the free formats without it.
+sudo dnf install -y vlc-plugins-freeworld \
+    || warn "vlc-plugins-freeworld not installed — VLC keeps the free-codec set."
+
 # --skip-unavailable makes a renamed package a warning, not a failure — so
 # verify the commands themselves rather than trusting the package names.
 MISSING=()
-for cmd in git jq curl alacritty nmcli bluetoothctl gsettings dconf \
+for cmd in git jq curl nmcli bluetoothctl gsettings dconf \
            gnome-extensions update-desktop-database fc-cache xdg-mime; do
     have "$cmd" || MISSING+=("$cmd")
 done
@@ -185,14 +195,22 @@ for cmd in ffmpeg dbus-run-session; do
     have "$cmd" || warn "$cmd is missing — the features using it will be degraded."
 done
 
-### -------- GNOME TERMINAL (replace Console/Ptyxis) --------
-# Same swap ubuntu.sh does — GNOME Terminal in, whatever console app the
-# release shipped (Ptyxis on current Fedora, gnome-console before it) out.
-info "Installing GNOME Terminal"
-dnfi gnome-terminal
-for pkg in ptyxis gnome-console; do
-    rpm -q "$pkg" >/dev/null 2>&1 && sudo dnf remove -y "$pkg" || true
-done
+### -------- GNOME CONSOLE (replace Ptyxis) --------
+# Same swap ubuntu.sh does — GNOME Console (kgx) in, whatever other terminal
+# the release shipped (Ptyxis on current Fedora, gnome-terminal on older
+# ones) out. It gets GNOME Terminal's icon in the app-icons step below.
+info "Installing GNOME Console"
+dnfi gnome-console
+# Only drop the stock terminal once kgx is really there — a failed install
+# must not leave the machine with no terminal at all.
+if have kgx; then
+    for pkg in ptyxis gnome-terminal; do
+        rpm -q "$pkg" >/dev/null 2>&1 && sudo dnf remove -y "$pkg" || true
+    done
+else
+    warn "GNOME Console (kgx) did not install — keeping the stock terminal."
+    FAILURES+=("GNOME Console")
+fi
 
 ### -------- CLAUDE CODE --------
 info "Installing Claude Code"
@@ -400,10 +418,13 @@ gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 EOF
 
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc || true
+# Microsoft moved this repo from yumrepos/code to yumrepos/vscode (the old
+# path 404s); their own config.repo ships gpgcheck=0, but the rpms are still
+# signed with the regular Microsoft key, so keep the check on.
 sudo tee /etc/yum.repos.d/vscode.repo >/dev/null <<'EOF'
 [code]
 name=Visual Studio Code
-baseurl=https://packages.microsoft.com/yumrepos/code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
 enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
@@ -498,8 +519,21 @@ fi
 # Dash to Dock comes from Fedora's package; "Disable Workspace Switcher
 # Overlay" only exists on extensions.gnome.org, so it installs from the e.g.o
 # API for the running Shell version. Both take effect at next login.
+# gnome-extensions-app is the Extensions app (org.gnome.Extensions), for
+# managing them from the desktop.
 info "Installing GNOME Shell extensions"
-dnfi gnome-shell-extension-dash-to-dock
+dnfi gnome-shell-extension-dash-to-dock gnome-extensions-app
+
+# Drop the stock system extensions (Apps Menu, Background Logo, Launch New
+# Instance, Places Status Indicator, Window List). Removing apps-menu &
+# friends also takes the GNOME Classic session with them — intended.
+for pkg in gnome-shell-extension-apps-menu \
+           gnome-shell-extension-background-logo \
+           gnome-shell-extension-launch-new-instance \
+           gnome-shell-extension-places-menu \
+           gnome-shell-extension-window-list; do
+    rpm -q "$pkg" >/dev/null 2>&1 && sudo dnf remove -y "$pkg" || true
+done
 
 # Download and install an extension from extensions.gnome.org by its numeric
 # id (the /extension/<pk>/... part of its page URL). Prints the uuid.
@@ -557,6 +591,26 @@ else
     warn "No session bus and no dbus-run-session — skipped the Nautilus dconf import."
 fi
 
+### -------- REMOVE PREINSTALLED APPS --------
+# Workstation apps this setup never uses. Audio/video/camera cover both the
+# current GNOME core apps (Decibels/Showtime/Snapshot) and their older
+# equivalents (Music/Totem/Cheese) — whichever this release shipped. The
+# music role is filled by the vendored app built further down.
+info "Removing preinstalled GNOME apps"
+for pkg in gnome-contacts \
+           yelp \
+           gnome-boxes \
+           decibels gnome-music \
+           showtime totem \
+           snapshot cheese \
+           gnome-tour \
+           gnome-weather \
+           gnome-maps \
+           simple-scan \
+           gnome-connections; do
+    rpm -q "$pkg" >/dev/null 2>&1 && sudo dnf remove -y "$pkg" || true
+done
+
 ### -------- DESKTOP ENTRIES --------
 APPS_DIR="/home/$USERNAME/.local/share/applications"
 mkdir -p "$APPS_DIR"
@@ -570,9 +624,7 @@ files=(
     qvidcap.desktop
     cmake-gui.desktop
     lstopo.desktop
-    java-java25-openjdk.desktop
-    jconsole-java25-openjdk.desktop
-    jshell-java25-openjdk.desktop
+    winetricks.desktop
     assistant.desktop
     designer.desktop
     linguist.desktop
@@ -591,6 +643,24 @@ for file in "${files[@]}"; do
 
     if [[ -f "$src" ]]; then
         cp "$src" "$dest"
+        echo 'NoDisplay=true' >> "$dest"
+    fi
+done
+
+# Entries that can't be listed by fixed name: Fedora splits wine's accessory
+# apps (Notepad, Regedit, Wine Boot, …) into wine-*.desktop files, wine pulls
+# in DOSBox Staging, and the OpenJDK entries embed the full version-release
+# in their filenames. Same Actions-aware NoDisplay as the LibreOffice loop
+# below, in case an entry ends with a [Desktop Action] section.
+for src in /usr/share/applications/wine-*.desktop \
+           /usr/share/applications/*dosbox*.desktop \
+           /usr/share/applications/*openjdk*.desktop; do
+    [[ -f "$src" ]] || continue
+    dest="$APPS_DIR/$(basename "$src")"
+    cp "$src" "$dest"
+    if grep -q '^Actions=' "$dest"; then
+        sed -i '/^Actions=/i NoDisplay=true' "$dest"
+    else
         echo 'NoDisplay=true' >> "$dest"
     fi
 done
@@ -635,6 +705,9 @@ sudo mkdir -p "$ICON_DIR"
 sudo cp "$REPO_DIR"/assets/icons/* "$ICON_DIR/"
 # Papers is Evince's successor; reuse the same icon under its name.
 sudo cp "$REPO_DIR/assets/icons/org.gnome.Evince.svg" "$ICON_DIR/org.gnome.Papers.svg"
+# GNOME Console wears GNOME Terminal's icon (overwrites the package's own
+# copy — a gnome-console update restores stock until the next run).
+sudo cp "$REPO_DIR/assets/icons/org.gnome.Terminal.svg" "$ICON_DIR/org.gnome.Console.svg"
 sudo gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor 2>/dev/null || true
 
 ### -------- extract-audio --------
@@ -657,8 +730,6 @@ sudo fc-cache -f
 # Only the desktop-agnostic pieces of config/ — the rest (hypr, quickshell,
 # noctalia, the systemd user units) is the Hyprland desktop's and stays out.
 info "Installing configs"
-mkdir -p "/home/$USERNAME/.config/alacritty"
-cp -r "$REPO_DIR"/config/alacritty/. "/home/$USERNAME/.config/alacritty/"
 if [[ -d "$REPO_DIR/config/vim" ]]; then
     cp -r "$REPO_DIR/config/vim" "/home/$USERNAME/.config/"
 fi
