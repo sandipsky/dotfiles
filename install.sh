@@ -110,6 +110,20 @@ fi
 sudo cp assets/99-power.rules /etc/udev/rules.d/99-power.rules
 sudo sed -i "s/USERNAME/$USERNAME/g" /etc/udev/rules.d/99-power.rules
 
+# GTK's Vulkan renderer (4.16+) enumerates every GPU at startup, waking the
+# runtime-suspended NVIDIA dGPU — an ~1.5 s stall on each GTK4 app launch even
+# though rendering happens on the Intel iGPU. /etc/environment (PAM) covers
+# the whole session — Hyprland, its children, AND dbus-/systemd-activated
+# apps — so this is the single place the fix lives (not environment.lua,
+# which would miss the dbus-activated ones).
+# Replace-or-append so a stale hand-set value gets corrected on re-runs; the
+# leading \n keeps the entry intact even if the file lacks a trailing newline.
+if grep -q '^GDK_DISABLE=' /etc/environment 2>/dev/null; then
+    sudo sed -i 's/^GDK_DISABLE=.*/GDK_DISABLE=vulkan/' /etc/environment
+else
+    printf '\nGDK_DISABLE=vulkan\n' | sudo tee -a /etc/environment >/dev/null
+fi
+
 if [[ -f /etc/bluetooth/main.conf ]]; then
     if grep -q '^#*AutoEnable=' /etc/bluetooth/main.conf; then
         sudo sed -i 's/^#*AutoEnable=.*/AutoEnable=false/' /etc/bluetooth/main.conf

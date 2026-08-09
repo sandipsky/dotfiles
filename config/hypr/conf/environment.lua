@@ -13,11 +13,11 @@ hl.env("SDL_VIDEODRIVER", "wayland")
 hl.env("WLR_NO_HARDWARE_CURSORS", "1")
 hl.env("WLR_DRM_NO_ATOMIC", "1")
 
--- GTK APPS
--- GTK 4.22's Vulkan renderer enumerates all GPUs at startup, waking the
--- runtime-suspended NVIDIA dGPU (~1.5s stall on every app launch) even though
--- GTK renders on the Intel iGPU anyway. Force the GL renderer instead.
-hl.env("GDK_DISABLE", "vulkan")
+-- GTK4's Vulkan renderer wakes the runtime-suspended NVIDIA dGPU on every
+-- app launch (~1.5s stall). The fix (GDK_DISABLE=vulkan) deliberately lives
+-- in /etc/environment (written by install.sh), not here — hl.env would miss
+-- dbus-/systemd-activated apps. On a machine installed before this existed,
+-- apply it once by hand:  echo 'GDK_DISABLE=vulkan' | sudo tee -a /etc/environment
 
 -- QT APPS
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")

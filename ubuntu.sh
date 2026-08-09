@@ -354,6 +354,49 @@ gsettings set org.gnome.desktop.interface document-font-name 'Fira Sans Book 12'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Fira Sans Bold 12'
 EOF
 
+### -------- GDM GREETER FONT --------
+# The login screen runs as the gdm user, so the gsettings above never reach
+# it. Debian's mechanism is /etc/gdm3/greeter.dconf-defaults, compiled into
+# the greeter's dconf db by dpkg-reconfigure gdm3 (noninteractive via the
+# DEBIAN_FRONTEND export up top). The shipped interface section is entirely
+# commented out, so appending one real section — once, hence the grep guard —
+# is safe.
+# Anchored on the key so a changed value gets replaced, not appended as a
+# duplicate section; the exact-line check keeps re-runs from re-running the
+# gdm3 postinst for nothing. Best-effort — a gdm3 hiccup must not abort the
+# rest of the run.
+if [[ -f /etc/gdm3/greeter.dconf-defaults ]]; then
+    if ! grep -q "^font-name='Fira Sans Book 12'$" /etc/gdm3/greeter.dconf-defaults; then
+        if grep -q '^font-name=' /etc/gdm3/greeter.dconf-defaults; then
+            sed -i "s/^font-name=.*/font-name='Fira Sans Book 12'/" /etc/gdm3/greeter.dconf-defaults
+        else
+            cat >> /etc/gdm3/greeter.dconf-defaults <<'EOF'
+
+[org/gnome/desktop/interface]
+font-name='Fira Sans Book 12'
+EOF
+        fi
+        dpkg-reconfigure gdm3 \
+            || echo "dpkg-reconfigure gdm3 failed — the greeter keeps its current font."
+    fi
+else
+    echo "No /etc/gdm3/greeter.dconf-defaults — skipped the GDM greeter font."
+fi
+
+### -------- GTK4 dGPU LAUNCH STALL --------
+# GTK's Vulkan renderer (4.16+) enumerates every GPU at startup, waking the
+# runtime-suspended NVIDIA dGPU — an ~1.5 s stall on each GTK4 app launch
+# even though rendering happens on the Intel iGPU anyway. This script installs
+# no NVIDIA driver itself, but Ubuntu's installer/ubuntu-drivers commonly
+# does; the variable is inert without the dGPU.
+# Replace-or-append so a stale hand-set value gets corrected on re-runs; the
+# leading \n keeps the entry intact even if the file lacks a trailing newline.
+if grep -q '^GDK_DISABLE=' /etc/environment 2>/dev/null; then
+    sed -i 's/^GDK_DISABLE=.*/GDK_DISABLE=vulkan/' /etc/environment
+else
+    printf '\nGDK_DISABLE=vulkan\n' >> /etc/environment
+fi
+
 ### -------- GNOME SHELL EXTENSION --------
 # "Disable Workspace Switcher Overlay" from extensions.gnome.org, fetched for
 # the running Shell version — same as fedora.sh. No Dash to Dock here: Ubuntu

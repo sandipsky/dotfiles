@@ -271,6 +271,22 @@ else
     fi
 fi
 
+### -------- GTK4 dGPU LAUNCH STALL --------
+# GTK's Vulkan renderer (4.16+) enumerates every GPU at startup, waking the
+# runtime-suspended NVIDIA dGPU — an ~1.5 s stall on each GTK4 app launch
+# even though rendering happens on the Intel iGPU anyway. Disable GTK's
+# Vulkan path session-wide. Set unconditionally (not inside install_nvidia):
+# it's inert without the dGPU, and this way a later manual driver install
+# can't reintroduce the stall.
+# Replace-or-append so a stale hand-set value gets corrected on re-runs; the
+# leading \n keeps the entry intact even if the file lacks a trailing newline.
+# No restorecon: appending never changes the existing file's SELinux label.
+if grep -q '^GDK_DISABLE=' /etc/environment 2>/dev/null; then
+    sudo sed -i 's/^GDK_DISABLE=.*/GDK_DISABLE=vulkan/' /etc/environment
+else
+    printf '\nGDK_DISABLE=vulkan\n' | sudo tee -a /etc/environment >/dev/null
+fi
+
 ### -------- VIRTUALBOX GUEST ADDITIONS --------
 if [[ "$VIRT" == "oracle" || "$VIRT" == "virtualbox" ]]; then
     info "VirtualBox detected — installing guest additions"
@@ -721,6 +737,28 @@ sudo cp "$REPO_DIR"/assets/fira/*.ttf /usr/share/fonts/fira/
 sudo cp "$REPO_DIR"/assets/fonts/* /usr/share/fonts/msfonts/
 sudo restorecon -R /usr/share/fonts 2>/dev/null || true
 sudo fc-cache -f
+
+### -------- GDM GREETER FONT --------
+# The login screen runs as the gdm user (DCONF_PROFILE=gdm), so the session
+# gsettings below never reach it — give it Fira Sans via a system dconf db.
+# The profile file is the canonical three lines from the GNOME/RHEL docs
+# (Fedora ships no /etc/dconf/profile/gdm; this also guarantees system-db:gdm
+# is actually in the profile).
+info "Setting the GDM greeter font"
+sudo mkdir -p /etc/dconf/profile /etc/dconf/db/gdm.d
+sudo tee /etc/dconf/profile/gdm > /dev/null <<'EOF'
+user-db:user
+system-db:gdm
+file-db:/usr/share/gdm/greeter-dconf-defaults
+EOF
+sudo tee /etc/dconf/db/gdm.d/10-font > /dev/null <<'EOF'
+[org/gnome/desktop/interface]
+font-name='Fira Sans Book 12'
+EOF
+sudo restorecon -R /etc/dconf 2>/dev/null || true
+# Best-effort: dconf update recompiles every /etc/dconf/db/*.d, so a broken
+# keyfile in a db this script never wrote must not abort the rest of the run.
+sudo dconf update || warn "dconf update failed — the greeter font applies after the next successful dconf update."
 
 ### -------- CONFIG --------
 # Only the desktop-agnostic pieces of config/ — the rest (hypr, quickshell,
