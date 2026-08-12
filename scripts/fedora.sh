@@ -4,7 +4,7 @@
 # Hyprland/Noctalia is installed. Run it from the repo root as your normal
 # user:
 #
-#   ./fedora.sh
+#   ./scripts/fedora.sh
 #
 # Like the other scripts it targets a fresh machine, never uninstalls prior
 # setups, is destructive in places (writes /etc units and udev-adjacent
@@ -42,7 +42,8 @@
 set -e
 
 USERNAME=$(logname)
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# The script lives in scripts/ — the repo root is one level up.
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 FAILURES=()
 
 info() { printf '\n\033[1;32m==>\033[0m %s\n' "$*"; }
@@ -64,7 +65,7 @@ as_session() {
 # normal user — the source builds compile in the user's own temp dirs and
 # the Claude Code installer refuses to run as root.
 if [[ $EUID -eq 0 ]]; then
-    die "Run this as your normal user (./fedora.sh), not with sudo — it asks for the password itself."
+    die "Run this as your normal user (./scripts/fedora.sh), not with sudo — it asks for the password itself."
 fi
 
 . /etc/os-release
@@ -190,7 +191,7 @@ done
 if (( ${#MISSING[@]} )); then
     die "These commands are still missing after the package step: ${MISSING[*]}
     Nothing else has been configured yet. Find the Fedora $FEDORA_REL package that
-    provides each (dnf provides '*/bin/<cmd>'), install it, then re-run ./fedora.sh."
+    provides each (dnf provides '*/bin/<cmd>'), install it, then re-run ./scripts/fedora.sh."
 fi
 for cmd in ffmpeg dbus-run-session; do
     have "$cmd" || warn "$cmd is missing — the features using it will be degraded."

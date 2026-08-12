@@ -1,0 +1,6 @@
+# Everything here deploys to Linux — a CRLF ending breaks the shebang line
+# ("env: 'bash\r' not found") and bash/makepkg parsing, so pin LF regardless
+# of the OS (or core.autocrlf setting) the repo is edited on.
+*.sh text eol=lf
+PKGBUILD text eol=lf
+assets/bin/* text eol=lf

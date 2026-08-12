@@ -29,7 +29,7 @@
 #   (NetworkManager regenerates /etc/resolv.conf; a backup of the old file
 #    is also saved next to it as /etc/resolv.conf.backup-<timestamp>)
 #
-# Run with:  sudo ./fix-dns.sh
+# Run with:  sudo ./scripts/fix-dns.sh
 
 set -euo pipefail
 

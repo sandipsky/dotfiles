@@ -6,7 +6,8 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# The script lives in scripts/ — the repo root is one level up.
+REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if pacman -Qq noctalia-shell >/dev/null 2>&1; then
     sudo pacman -D --asexplicit noctalia-qs
@@ -17,7 +18,7 @@ fi
 # (upstream discontinued the fork when v5 dropped Quickshell).
 if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
     BUILD_DIR=$(mktemp -d)
-    cp -r "$SCRIPT_DIR/applications/noctalia-qs/." "$BUILD_DIR/"
+    cp -r "$REPO_DIR/applications/noctalia-qs/." "$BUILD_DIR/"
     (cd "$BUILD_DIR" && makepkg -s --noconfirm)
     sudo pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
     rm -rf "$BUILD_DIR"
@@ -25,7 +26,7 @@ fi
 
 mkdir -p "$HOME/.config/quickshell"
 rm -rf "$HOME/.config/quickshell/noctalia-shell.new"
-cp -r "$SCRIPT_DIR/config/quickshell/noctalia-shell" "$HOME/.config/quickshell/noctalia-shell.new"
+cp -r "$REPO_DIR/config/quickshell/noctalia-shell" "$HOME/.config/quickshell/noctalia-shell.new"
 rm -rf "$HOME/.config/quickshell/noctalia-shell"
 mv "$HOME/.config/quickshell/noctalia-shell.new" "$HOME/.config/quickshell/noctalia-shell"
 

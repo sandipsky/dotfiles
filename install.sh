@@ -97,7 +97,7 @@ fi
 # the repo tree — the official package is never installed; pacman -U resolves
 # the fork's runtime deps from the repos itself. IgnorePkg then keeps
 # pacman -Syu from replacing the fork with a newer repo package — upgrades
-# happen by bumping the vendored tree (see rebuild-nautilus.sh).
+# happen by bumping the vendored tree (see scripts/rebuild-nautilus.sh).
 BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
 sudo -u "$USERNAME" cp -r applications/nautilus-fork/. "$BUILD_DIR/"
 (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)

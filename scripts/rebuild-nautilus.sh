@@ -6,7 +6,8 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# The script lives in scripts/ — the repo root is one level up.
+REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 # The fork has "Open in Terminal" / "Open in Code" built in — remove the
 # third-party extensions so the menu items don't show up twice. (-R without
@@ -23,7 +24,7 @@ rm -f "$HOME/.local/share/nautilus-python/extensions/code-nautilus.py"
 # nautilus is newer than the vendored fork (e.g. GNOME got updated), the
 # right move is bumping the vendored tree (see docs/nautilus-patches.md),
 # not forcing an older build onto a newer GNOME stack.
-FORK_VER=$(sed -n 's/^pkgver=//p' "$SCRIPT_DIR/applications/nautilus-fork/PKGBUILD")
+FORK_VER=$(sed -n 's/^pkgver=//p' "$REPO_DIR/applications/nautilus-fork/PKGBUILD")
 INSTALLED_VER=$(pacman -Q nautilus 2>/dev/null | awk '{print $2}' || true)
 
 if [[ -n "$INSTALLED_VER" ]] && [[ "$(vercmp "${INSTALLED_VER%-*}" "$FORK_VER")" -gt 0 ]]; then
@@ -43,7 +44,7 @@ fi
 # The fork builds as the same "nautilus" package with a higher pkgrel, so
 # pacman -U below replaces the official package in place — no -R needed.
 BUILD_DIR=$(mktemp -d)
-cp -r "$SCRIPT_DIR/applications/nautilus-fork/." "$BUILD_DIR/"
+cp -r "$REPO_DIR/applications/nautilus-fork/." "$BUILD_DIR/"
 (cd "$BUILD_DIR" && makepkg -s --noconfirm)
 
 # Deliberately NOT --noconfirm: if pacman ever proposes removing conflicting

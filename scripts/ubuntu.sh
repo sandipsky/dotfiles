@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Post-install setup for a FRESH Ubuntu install (GNOME desktop).
-# Ubuntu counterpart of arch.sh — run it from the repo root with:
-#   sudo ./ubuntu.sh
+# Ubuntu counterpart of arch.sh (which lives in its own repo) — run it with:
+#   sudo ./scripts/ubuntu.sh
 #
 # Notes:
 # - The music app builds from the vendored tree in applications/. Nautilus is
@@ -15,12 +15,13 @@
 set -e
 
 if [[ $EUID -ne 0 ]]; then
-    echo "Run this script with sudo: sudo ./ubuntu.sh"
+    echo "Run this script with sudo: sudo ./scripts/ubuntu.sh"
     exit 1
 fi
 
 USERNAME=$(logname)
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# The script lives in scripts/ — the repo root is one level up.
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export DEBIAN_FRONTEND=noninteractive
 
 . /etc/os-release
