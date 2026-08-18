@@ -555,9 +555,9 @@
     ]
   },
   {
-    "labelKey": "panels.color-scheme.color-source-use-wallpaper-colors-label",
-    "descriptionKey": "panels.color-scheme.color-source-use-wallpaper-colors-description",
-    "widget": "NToggle",
+    "labelKey": "panels.color-scheme.accent-color-custom-label",
+    "descriptionKey": "panels.color-scheme.accent-color-custom-desc",
+    "widget": "NLabel",
     "tab": 2,
     "tabLabel": "panels.color-scheme.title",
     "subTab": 0,
@@ -1587,6 +1587,24 @@
     "subTabLabel": "common.general"
   },
   {
+    "labelKey": "panels.launcher.settings-show-view-toggle-label",
+    "descriptionKey": "panels.launcher.settings-show-view-toggle-description",
+    "widget": "NToggle",
+    "tab": 8,
+    "tabLabel": "panels.launcher.title",
+    "subTab": 0,
+    "subTabLabel": "common.general"
+  },
+  {
+    "labelKey": "panels.launcher.settings-show-results-count-label",
+    "descriptionKey": "panels.launcher.settings-show-results-count-description",
+    "widget": "NToggle",
+    "tab": 8,
+    "tabLabel": "panels.launcher.title",
+    "subTab": 0,
+    "subTabLabel": "common.general"
+  },
+  {
     "labelKey": "panels.launcher.settings-show-categories-label",
     "descriptionKey": "panels.launcher.settings-show-categories-description",
     "widget": "NToggle",
@@ -1659,27 +1677,6 @@
     "subTabLabel": "common.general"
   },
   {
-    "labelKey": "panels.lock-screen.clock-style-label",
-    "descriptionKey": "panels.lock-screen.clock-style-description",
-    "widget": "NComboBox",
-    "tab": 11,
-    "tabLabel": "panels.lock-screen.title",
-    "subTab": 0,
-    "subTabLabel": "common.appearance"
-  },
-  {
-    "labelKey": "panels.lock-screen.clock-format-label",
-    "descriptionKey": "panels.lock-screen.clock-format-description",
-    "widget": "NTextInput",
-    "tab": 11,
-    "tabLabel": "panels.lock-screen.title",
-    "subTab": 0,
-    "subTabLabel": "common.appearance",
-    "visibleWhen": [
-      "Settings.data.general.clockStyle === \"custom\""
-    ]
-  },
-  {
     "labelKey": "panels.lock-screen.password-chars-label",
     "descriptionKey": "panels.lock-screen.password-chars-description",
     "widget": "NToggle",
@@ -1687,27 +1684,6 @@
     "tabLabel": "panels.lock-screen.title",
     "subTab": 0,
     "subTabLabel": "common.appearance"
-  },
-  {
-    "labelKey": "panels.lock-screen.compact-lockscreen-label",
-    "descriptionKey": "panels.lock-screen.compact-lockscreen-description",
-    "widget": "NToggle",
-    "tab": 11,
-    "tabLabel": "panels.lock-screen.title",
-    "subTab": 0,
-    "subTabLabel": "common.appearance"
-  },
-  {
-    "labelKey": "panels.lock-screen.enable-lockscreen-media-controls-label",
-    "descriptionKey": "panels.lock-screen.enable-lockscreen-media-controls-description",
-    "widget": "NToggle",
-    "tab": 11,
-    "tabLabel": "panels.lock-screen.title",
-    "subTab": 0,
-    "subTabLabel": "common.appearance",
-    "visibleWhen": [
-      "!Settings.data.general.compactLockScreen"
-    ]
   },
   {
     "labelKey": "panels.lock-screen.lock-screen-animations-label",

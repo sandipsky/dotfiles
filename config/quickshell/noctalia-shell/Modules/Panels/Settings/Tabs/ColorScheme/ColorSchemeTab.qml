@@ -39,33 +39,6 @@ ColumnLayout {
     Qt.callLater(populateTimeOptions);
   }
 
-  // Download popup
-  Loader {
-    id: downloadPopupLoader
-    active: false
-    sourceComponent: SchemeDownloader {
-      parent: Overlay.overlay
-    }
-
-    property bool pendingOpen: false
-
-    function open() {
-      pendingOpen = true;
-      active = true;
-      if (item) {
-        item.open();
-        pendingOpen = false;
-      }
-    }
-
-    onItemChanged: {
-      if (item && pendingOpen) {
-        item.open();
-        pendingOpen = false;
-      }
-    }
-  }
-
   NTabBar {
     id: subTabBar
     Layout.fillWidth: true
@@ -97,7 +70,6 @@ ColumnLayout {
     ColorsSubTab {
       screen: root.screen
       timeOptions: timeOptions
-      onOpenDownloadPopup: downloadPopupLoader.open()
     }
     TemplatesSubTab {}
   }

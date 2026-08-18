@@ -138,6 +138,11 @@ Examples:
     )
 
     parser.add_argument(
+        '--seed-color',
+        help='Hex accent color (e.g. "#0078D4") used as the generation seed instead of extracting one from the image'
+    )
+
+    parser.add_argument(
         '--default-mode',
         choices=['dark', 'light'],
         default='dark',
@@ -201,11 +206,27 @@ def main() -> int:
             print(f"Error processing scheme: {e}", file=sys.stderr)
             return 1
 
-    # Path 2: Image-based extraction (default)
+    # Path 2: Accent seed color (--seed-color flag) — generate the full scheme
+    # from a user-chosen accent instead of extracting a seed from the wallpaper.
+    elif args.seed_color:
+        hex_str = args.seed_color.lstrip('#')
+        if len(hex_str) != 6:
+            print(f"Error: Invalid seed color: {args.seed_color}", file=sys.stderr)
+            return 1
+        try:
+            r, g, b = (int(hex_str[i:i + 2], 16) for i in (0, 2, 4))
+        except ValueError:
+            print(f"Error: Invalid seed color: {args.seed_color}", file=sys.stderr)
+            return 1
+        palette = [Color(r, g, b)]
+        for mode in modes:
+            result[mode] = generate_theme(palette, mode, args.scheme_type)
+
+    # Path 3: Image-based extraction (default)
     else:
         # Validate image argument is provided
         if args.image is None:
-            print("Error: Image path is required (unless --scheme is used)", file=sys.stderr)
+            print("Error: Image path is required (unless --scheme or --seed-color is used)", file=sys.stderr)
             return 1
 
         # Validate image path

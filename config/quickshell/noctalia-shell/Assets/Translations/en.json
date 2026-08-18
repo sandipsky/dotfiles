@@ -927,6 +927,11 @@
       "widgets-title": "Widgets positioning"
     },
     "color-scheme": {
+      "accent-color-auto": "Auto (from wallpaper)",
+      "accent-color-custom-desc": "Pick any color as the generation seed.",
+      "accent-color-custom-label": "Custom accent",
+      "accent-color-desc": "By default the accent is extracted from the wallpaper. Pick a color to generate the whole scheme from that accent instead.",
+      "accent-color-title": "Accent color",
       "color-source-use-wallpaper-colors-description": "Generate color schemes from your wallpaper. Automatically extracts colors to create a cohesive theme.",
       "color-source-use-wallpaper-colors-label": "Use wallpaper colors",
       "dark-mode-mode-description": "Enables automatic switching between Light and Dark Mode.",

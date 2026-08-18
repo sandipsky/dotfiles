@@ -488,8 +488,15 @@ Singleton {
 
   IpcHandler {
     target: "colorScheme"
-    function set(schemeName: string) {
-      ColorSchemeService.setPredefinedScheme(schemeName);
+    function setAccentColor(hexColor: string) {
+      if (/^#[0-9a-fA-F]{6}$/.test(hexColor)) {
+        Settings.data.colorSchemes.accentColor = hexColor;
+      } else {
+        Logger.w("IPC", "Invalid accent color received: " + hexColor);
+      }
+    }
+    function clearAccentColor() {
+      Settings.data.colorSchemes.accentColor = "";
     }
     function setGenerationMethod(method: string) {
       var valid = false;

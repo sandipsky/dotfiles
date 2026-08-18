@@ -411,6 +411,48 @@ callers). Ported one-to-one from the win11 branch's `BatteryIndicator.qml`:
   follows `mOnHover` (tracked via the pill's `entered`/`exited` signals); the green/amber
   fill stays.
 
+## 14. Colors: predefined schemes removed, accent-color seed added
+
+Files: `Services/Theming/ColorSchemeService.qml` (**gutted** — now only gsettings
+appearance sync + dark-mode toast), `Services/Theming/AppThemeService.qml`,
+`Services/Theming/TemplateProcessor.qml`, `Scripts/python/src/theming/template-processor.py`,
+`Commons/Settings.qml`, `Services/Control/IPCService.qml`,
+`Modules/Panels/Settings/Tabs/ColorScheme/ColorsSubTab.qml` (**rewritten**) +
+`ColorSchemeTab.qml`, `SchemeDownloader.qml` (**deleted**),
+`Assets/ColorScheme/` (**deleted**, all 10 presets), `Scripts/dev/colorscheme-registry.sh`
+(**deleted**), `Modules/Panels/SetupWizard/SetupAppearanceStep.qml`,
+`Modules/Panels/Wallpaper/WallpaperPanel.qml`, `Services/UI/WallpaperService.qml`,
+`en.json`/`en-GB.json` (`panels.color-scheme.accent-color-*`), regenerated
+`Assets/settings-search-index.json`.
+
+Colors are now **always generated** by the material pipeline — predefined schemes,
+the scheme grid, and the scheme downloader are gone:
+
+- **Default:** seed extracted from the wallpaper (previous `useWallpaperColors: true`
+  behavior; that setting now defaults to true and has no UI — the key is kept only so
+  old settings.json files load, same for the deprecated `predefinedScheme`).
+- **Accent seed:** new setting `colorSchemes.accentColor` ("" = auto). When set to a
+  `#rrggbb` color, generation seeds from it instead of the wallpaper:
+  `template-processor.py` gained `--seed-color '#hex'` (bypasses image extraction,
+  runs `generate_theme([Color(seed)], mode, scheme_type)`), and
+  `TemplateProcessor.getSeedColorArgs()` appends it to both the built-in and
+  user-template python invocations. `AppThemeService` regenerates on
+  `onAccentColorChanged`; generation method (tonal-spot etc.) still applies to the seed.
+- **Settings UI (Colors sub-tab):** wallpaper-colors toggle and predefined grid replaced
+  by an accent row — an "Auto (from wallpaper)" swatch, 8 preset accent swatches
+  (win11-ish palette), and an `NColorPicker` for a custom color. Monitor-source combo is
+  disabled while an accent is set (the wallpaper no longer drives colors).
+- **IPC:** `colorScheme set <name>` replaced by `colorScheme setAccentColor <#hex>` /
+  `colorScheme clearAccentColor`; `setGenerationMethod` unchanged.
+- **Favorites (WallpaperService):** per-favorite `colorScheme` field dropped; applying a
+  favorite forces `useWallpaperColors = true` and keeps its generation method.
+- **Wallpaper panel:** color-extraction toggle button removed; the combo now always
+  lists generation methods.
+- Dead-but-harmless: `TemplateProcessor`'s `processPredefinedScheme`/`executePredefinedScheme`
+  path and `ShellState.colorSchemesList` remain with no callers (kept to minimize diff);
+  `Color.qml` inline `defaultColors` (the old Noctalia-default dark palette) are still the
+  pre-first-generation fallback.
+
 ## Re-applying on a new codebase
 
 Priority if porting incrementally: the lock screen (1) and the taskbar/workspace behavior

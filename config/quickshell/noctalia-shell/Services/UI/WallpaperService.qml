@@ -1375,7 +1375,6 @@ Singleton {
     return {
       "path": path,
       "appearance": app,
-      "colorScheme": Settings.data.colorSchemes.predefinedScheme,
       "darkMode": app === "dark" // TODO: remove per-favorite field (see Favorites section note)
                   ,
       "useWallpaperColors": Settings.data.colorSchemes.useWallpaperColors,
@@ -1501,8 +1500,7 @@ Singleton {
     var darkModeChanging = Settings.data.colorSchemes.darkMode !== targetDark;
     var useWallpaperColorsChanging = Settings.data.colorSchemes.useWallpaperColors !== favorite.useWallpaperColors;
 
-    Settings.data.colorSchemes.useWallpaperColors = favorite.useWallpaperColors;
-    Settings.data.colorSchemes.predefinedScheme = favorite.colorScheme;
+    Settings.data.colorSchemes.useWallpaperColors = true;
     Settings.data.colorSchemes.generationMethod = favorite.generationMethod;
     Settings.data.colorSchemes.darkMode = targetDark;
 

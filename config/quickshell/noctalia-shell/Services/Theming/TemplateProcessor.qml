@@ -204,9 +204,8 @@ Singleton {
     var lines = [];
     var mode = Settings.data.colorSchemes.darkMode ? "dark" : "light";
 
-    if (Settings.data.colorSchemes.useWallpaperColors) {
-      addWallpaperTheming(lines, mode);
-    }
+    // Colors are always generated now (wallpaper or accent seed) — no predefined schemes.
+    addWallpaperTheming(lines, mode);
 
     addApplicationTheming(lines, mode);
 
@@ -326,6 +325,15 @@ Singleton {
     return false;
   }
 
+  // Extra CLI args for the accent seed color, or "" when auto (wallpaper extraction)
+  function getSeedColorArgs() {
+    const accent = Settings.data.colorSchemes.accentColor;
+    if (accent && /^#[0-9a-fA-F]{6}$/.test(accent)) {
+      return ` --seed-color '${accent}'`;
+    }
+    return "";
+  }
+
   // Get scheme type, defaulting to tonal-spot if not a recognized value
   function getSchemeType() {
     const method = Settings.data.colorSchemes.generationMethod;
@@ -349,7 +357,7 @@ Singleton {
       // Don't pass --mode so templates get both dark and light colors (e.g., zed.json needs both)
       // Pass --default-mode so "default" in templates resolves to the current theme mode
       const schemeType = getSchemeType();
-      script += `python3 "${templateProcessorScript}" "$NOCTALIA_WP_PATH" --scheme-type ${schemeType} --config '${pathEsc}' --default-mode ${mode}\n`;
+      script += `python3 "${templateProcessorScript}" "$NOCTALIA_WP_PATH" --scheme-type ${schemeType}${getSeedColorArgs()} --config '${pathEsc}' --default-mode ${mode}\n`;
     }
 
     script += buildUserTemplateCommand("$NOCTALIA_WP_PATH", mode);
@@ -374,7 +382,7 @@ Singleton {
     const schemeType = getSchemeType();
     // Don't pass --mode so user templates get both dark and light colors
     // Pass --default-mode so "default" in templates resolves to the current theme mode
-    script += `  python3 "${templateProcessorScript}" ${inputQuoted} --scheme-type ${schemeType} --config '${userConfigPath}' --default-mode ${mode}\n`;
+    script += `  python3 "${templateProcessorScript}" ${inputQuoted} --scheme-type ${schemeType}${getSeedColorArgs()} --config '${userConfigPath}' --default-mode ${mode}\n`;
     script += "fi";
 
     return script;

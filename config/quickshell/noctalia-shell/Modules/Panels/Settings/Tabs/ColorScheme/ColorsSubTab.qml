@@ -15,97 +15,17 @@ ColumnLayout {
   Layout.fillWidth: true
 
   property var timeOptions
-  property var schemeColorsCache: ({})
-  property int cacheVersion: 0
   property var screen
 
-  signal openDownloadPopup
+  // Preset accent seeds; the full scheme is generated from the chosen color
+  // by the same material pipeline used for wallpaper colors.
+  readonly property var accentPresets: ["#0078D4", "#744DA9", "#C30052", "#E81123", "#F7630C", "#FFB900", "#107C10", "#00B7C3"]
 
-  function extractSchemeName(schemePath) {
-    var pathParts = schemePath.split("/");
-    var filename = pathParts[pathParts.length - 1];
-    var schemeName = filename.replace(".json", "");
+  readonly property string currentAccent: Settings.data.colorSchemes.accentColor
 
-    if (schemeName === "Noctalia-default") {
-      schemeName = "Noctalia (default)";
-    } else if (schemeName === "Noctalia-legacy") {
-      schemeName = "Noctalia (legacy)";
-    } else if (schemeName === "Tokyo-Night") {
-      schemeName = "Tokyo Night";
-    } else if (schemeName === "Rosepine") {
-      schemeName = "Rose Pine";
-    }
-
-    return schemeName;
-  }
-
-  function getSchemeColor(schemeName, colorKey) {
-    var _ = cacheVersion;
-
-    if (schemeColorsCache[schemeName]) {
-      var entry = schemeColorsCache[schemeName];
-      var variant = entry;
-
-      if (entry.dark || entry.light) {
-        variant = Settings.data.colorSchemes.darkMode ? (entry.dark || entry.light) : (entry.light || entry.dark);
-      }
-
-      if (variant && variant[colorKey]) {
-        return variant[colorKey];
-      }
-    }
-
-    if (colorKey === "mSurface")
-      return Color.mSurfaceVariant;
-    if (colorKey === "mPrimary")
-      return Color.mPrimary;
-    if (colorKey === "mSecondary")
-      return Color.mSecondary;
-    if (colorKey === "mTertiary")
-      return Color.mTertiary;
-    if (colorKey === "mError")
-      return Color.mError;
-    return Color.mOnSurfaceVariant;
-  }
-
-  function schemeLoaded(schemeName, jsonData) {
-    var value = jsonData || {};
-    schemeColorsCache[schemeName] = value;
-    cacheVersion++;
-  }
-
-  Connections {
-    target: ColorSchemeService
-    function onSchemesChanged() {
-      root.schemeColorsCache = {};
-      root.cacheVersion++;
-    }
-  }
-
-  Item {
-    id: fileLoaders
-    visible: false
-
-    Repeater {
-      model: ColorSchemeService.schemes
-      delegate: Item {
-        FileView {
-          path: modelData
-          blockLoading: false
-          onLoaded: {
-            var schemeName = root.extractSchemeName(path);
-
-            try {
-              var jsonData = JSON.parse(text());
-              root.schemeLoaded(schemeName, jsonData);
-            } catch (e) {
-              Logger.w("ColorSchemeTab", "Failed to parse JSON for scheme:", schemeName, e);
-              root.schemeLoaded(schemeName, null);
-            }
-          }
-        }
-      }
-    }
+  function setAccent(hexColor) {
+    Settings.data.colorSchemes.accentColor = hexColor;
+    // AppThemeService regenerates via onAccentColorChanged
   }
 
   NToggle {
@@ -114,7 +34,6 @@ ColumnLayout {
     checked: Settings.data.colorSchemes.darkMode
     onToggled: checked => {
                  Settings.data.colorSchemes.darkMode = checked;
-                 root.cacheVersion++;
                }
   }
 
@@ -209,29 +128,113 @@ ColumnLayout {
     Layout.fillWidth: true
   }
 
-  NToggle {
-    label: I18n.tr("panels.color-scheme.color-source-use-wallpaper-colors-label")
-    description: I18n.tr("panels.color-scheme.color-source-use-wallpaper-colors-description")
-    checked: Settings.data.colorSchemes.useWallpaperColors
-    defaultValue: Settings.getDefaultValue("colorSchemes.useWallpaperColors")
-    onToggled: checked => {
-                 Settings.data.colorSchemes.useWallpaperColors = checked;
-                 if (checked) {
-                   AppThemeService.generate();
-                 } else {
-                   ToastService.showNotice(I18n.tr("toast.wallpaper-colors.label"), I18n.tr("toast.wallpaper-colors.disabled"), "settings-color-scheme");
-                   if (Settings.data.colorSchemes.predefinedScheme) {
-                     ColorSchemeService.applyScheme(Settings.data.colorSchemes.predefinedScheme);
-                   }
-                 }
-               }
+  // ====================================================================
+  // Accent color: auto (wallpaper) or a chosen seed color
+  // ====================================================================
+  ColumnLayout {
+    spacing: Style.marginM
+    Layout.fillWidth: true
+
+    NHeader {
+      label: I18n.tr("panels.color-scheme.accent-color-title")
+      description: I18n.tr("panels.color-scheme.accent-color-desc")
+      Layout.fillWidth: true
+    }
+
+    RowLayout {
+      id: accentRow
+      spacing: Style.marginM
+      Layout.fillWidth: true
+
+      readonly property int diameter: Math.round(Style.baseWidgetSize * 0.9 * Style.uiScaleRatio)
+
+      // Auto: extract the seed from the wallpaper
+      Rectangle {
+        implicitWidth: accentRow.diameter
+        implicitHeight: accentRow.diameter
+        radius: accentRow.diameter * 0.5
+        color: Color.mSurfaceVariant
+        border.width: Style.borderM
+        border.color: (root.currentAccent === "" || autoMouseArea.containsMouse) ? Color.mOnSurface : Color.mOutline
+
+        NIcon {
+          icon: "wallpaper-selector"
+          pointSize: Style.fontSizeM
+          color: Color.mOnSurfaceVariant
+          anchors.centerIn: parent
+        }
+
+        MouseArea {
+          id: autoMouseArea
+          anchors.fill: parent
+          hoverEnabled: true
+          cursorShape: Qt.PointingHandCursor
+          onEntered: TooltipService.show(parent, I18n.tr("panels.color-scheme.accent-color-auto"))
+          onExited: TooltipService.hide()
+          onClicked: root.setAccent("")
+        }
+      }
+
+      // Preset accent swatches
+      Repeater {
+        model: root.accentPresets
+
+        Rectangle {
+          implicitWidth: accentRow.diameter
+          implicitHeight: accentRow.diameter
+          radius: accentRow.diameter * 0.5
+          color: modelData
+          border.width: Style.borderM
+          border.color: (root.currentAccent.toLowerCase() === modelData.toLowerCase() || presetMouseArea.containsMouse) ? Color.mOnSurface : Color.mOutline
+
+          NIcon {
+            visible: root.currentAccent.toLowerCase() === modelData.toLowerCase()
+            icon: "check"
+            pointSize: Style.fontSizeS
+            color: "#FFFFFF"
+            anchors.centerIn: parent
+          }
+
+          MouseArea {
+            id: presetMouseArea
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: root.setAccent(modelData)
+          }
+        }
+      }
+    }
+
+    // Custom accent via the color picker dialog
+    RowLayout {
+      spacing: Style.marginM
+      Layout.fillWidth: true
+
+      NLabel {
+        label: I18n.tr("panels.color-scheme.accent-color-custom-label")
+        description: I18n.tr("panels.color-scheme.accent-color-custom-desc")
+      }
+
+      NColorPicker {
+        screen: root.screen
+        selectedColor: root.currentAccent !== "" ? root.currentAccent : Color.mPrimary
+        onColorSelected: color => {
+                           root.setAccent(color.toString());
+                         }
+      }
+    }
+  }
+
+  NDivider {
+    Layout.fillWidth: true
   }
 
   NComboBox {
     Layout.fillWidth: true
     label: I18n.tr("panels.color-scheme.wallpaper-monitor-source-label")
     description: I18n.tr("panels.color-scheme.wallpaper-monitor-source-description")
-    enabled: Settings.data.colorSchemes.useWallpaperColors
+    enabled: root.currentAccent === ""
     model: {
       var m = [];
       if (Quickshell.screens) {
@@ -258,7 +261,6 @@ ColumnLayout {
     Layout.fillWidth: true
     label: I18n.tr("panels.color-scheme.wallpaper-method-label")
     description: I18n.tr("panels.color-scheme.wallpaper-method-description")
-    enabled: Settings.data.colorSchemes.useWallpaperColors
     model: TemplateProcessor.schemeTypes
     currentKey: Settings.data.colorSchemes.generationMethod
     onSelected: key => {
@@ -268,7 +270,6 @@ ColumnLayout {
   }
 
   NBox {
-    visible: Settings.data.colorSchemes.useWallpaperColors
     Layout.fillWidth: true
     implicitHeight: descriptionColumn.implicitHeight + Style.margin2L
     color: Color.mSurface
@@ -306,155 +307,6 @@ ColumnLayout {
           }
         }
       }
-    }
-  }
-
-  NDivider {
-    Layout.fillWidth: true
-  }
-
-  ColumnLayout {
-    spacing: Style.marginM
-    Layout.fillWidth: true
-    enabled: !Settings.data.colorSchemes.useWallpaperColors
-
-    NHeader {
-      label: I18n.tr("panels.color-scheme.predefined-title")
-      description: I18n.tr("panels.color-scheme.predefined-desc")
-      Layout.fillWidth: true
-    }
-
-    GridLayout {
-      columns: 2
-      rowSpacing: Style.marginM
-      columnSpacing: Style.marginM
-      Layout.fillWidth: true
-
-      Repeater {
-        model: ColorSchemeService.schemes
-
-        Rectangle {
-          id: schemeItem
-
-          property string schemePath: modelData
-          property string schemeName: root.extractSchemeName(modelData)
-
-          opacity: enabled ? 1.0 : 0.6
-          Layout.fillWidth: true
-          Layout.alignment: Qt.AlignHCenter
-          height: 50 * Style.uiScaleRatio
-          radius: Style.radiusS
-          color: root.getSchemeColor(schemeName, "mSurface")
-          border.width: Style.borderL
-          border.color: {
-            if ((Settings.data.colorSchemes.predefinedScheme === schemeName) && schemeItem.enabled) {
-              return Color.mSecondary;
-            }
-            if (itemMouseArea.containsMouse) {
-              return Color.mHover;
-            }
-            return Color.mOutline;
-          }
-
-          RowLayout {
-            id: scheme
-            anchors.fill: parent
-            anchors.margins: Style.marginL
-            spacing: Style.marginS
-
-            NText {
-              text: schemeItem.schemeName
-              pointSize: Style.fontSizeS
-              color: Color.mOnSurface
-              Layout.fillWidth: true
-              elide: Text.ElideRight
-              verticalAlignment: Text.AlignVCenter
-              wrapMode: Text.WordWrap
-              maximumLineCount: 1
-            }
-
-            property int diameter: 16 * Style.uiScaleRatio
-
-            Rectangle {
-              width: scheme.diameter
-              height: scheme.diameter
-              radius: scheme.diameter * 0.5
-              color: root.getSchemeColor(schemeItem.schemeName, "mPrimary")
-            }
-
-            Rectangle {
-              width: scheme.diameter
-              height: scheme.diameter
-              radius: scheme.diameter * 0.5
-              color: root.getSchemeColor(schemeItem.schemeName, "mSecondary")
-            }
-
-            Rectangle {
-              width: scheme.diameter
-              height: scheme.diameter
-              radius: scheme.diameter * 0.5
-              color: root.getSchemeColor(schemeItem.schemeName, "mTertiary")
-            }
-
-            Rectangle {
-              width: scheme.diameter
-              height: scheme.diameter
-              radius: scheme.diameter * 0.5
-              color: root.getSchemeColor(schemeItem.schemeName, "mError")
-            }
-          }
-
-          MouseArea {
-            id: itemMouseArea
-            anchors.fill: parent
-            enabled: schemeItem.enabled
-            hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
-            onClicked: {
-              Settings.data.colorSchemes.useWallpaperColors = false;
-              Logger.i("ColorSchemeTab", "Disabled wallpaper colors");
-
-              Settings.data.colorSchemes.predefinedScheme = schemeItem.schemeName;
-              ColorSchemeService.applyScheme(Settings.data.colorSchemes.predefinedScheme);
-            }
-          }
-
-          Rectangle {
-            visible: (Settings.data.colorSchemes.predefinedScheme === schemeItem.schemeName) && schemeItem.enabled
-            anchors.right: parent.right
-            anchors.top: parent.top
-            anchors.rightMargin: 0
-            anchors.topMargin: -3
-            width: 20
-            height: 20
-            radius: Math.min(Style.radiusL, width / 2)
-            color: Color.mSecondary
-            border.width: Style.borderS
-            border.color: Color.mOnSecondary
-
-            NIcon {
-              icon: "check"
-              pointSize: Style.fontSizeXS
-              color: Color.mOnSecondary
-              anchors.centerIn: parent
-            }
-          }
-
-          Behavior on border.color {
-            ColorAnimation {
-              duration: Style.animationNormal
-            }
-          }
-        }
-      }
-    }
-
-    NButton {
-      text: I18n.tr("panels.color-scheme.download-button")
-      icon: "download"
-      onClicked: root.openDownloadPopup()
-      Layout.alignment: Qt.AlignRight
-      Layout.topMargin: Style.marginS
     }
   }
 }

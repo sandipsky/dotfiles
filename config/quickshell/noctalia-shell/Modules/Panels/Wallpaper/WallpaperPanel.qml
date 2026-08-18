@@ -482,20 +482,6 @@ SmartPanel {
                               }
             }
 
-            NIconButton {
-              icon: "color-swatch"
-              tooltipText: Settings.data.colorSchemes.useWallpaperColors ? I18n.tr("wallpaper.panel.color-extraction-enabled") : I18n.tr("wallpaper.panel.color-extraction-disabled")
-              baseSize: Style.baseWidgetSize * 0.8
-              onClicked: {
-                Settings.data.colorSchemes.useWallpaperColors = !Settings.data.colorSchemes.useWallpaperColors;
-                if (Settings.data.colorSchemes.useWallpaperColors) {
-                  AppThemeService.generate();
-                } else {
-                  ColorSchemeService.setPredefinedScheme(Settings.data.colorSchemes.predefinedScheme);
-                }
-              }
-            }
-
             NComboBox {
               id: colorSchemeComboBox
               Layout.fillWidth: false
@@ -508,11 +494,8 @@ SmartPanel {
                                                     _initialized = true;
                                                   })
 
-              model: Settings.data.colorSchemes.useWallpaperColors ? TemplateProcessor.schemeTypes : ColorSchemeService.schemes.map(s => ({
-                                                                                                                                            "key": ColorSchemeService.getBasename(s),
-                                                                                                                                            "name": ColorSchemeService.getBasename(s)
-                                                                                                                                          }))
-              currentKey: Settings.data.colorSchemes.useWallpaperColors ? Settings.data.colorSchemes.generationMethod : Settings.data.colorSchemes.predefinedScheme
+              model: TemplateProcessor.schemeTypes
+              currentKey: Settings.data.colorSchemes.generationMethod
               onCurrentKeyChanged: {
                 if (!_initialized)
                   return;
@@ -524,12 +507,8 @@ SmartPanel {
               }
               onSelected: key => {
                             _userChanging = true;
-                            if (Settings.data.colorSchemes.useWallpaperColors) {
-                              Settings.data.colorSchemes.generationMethod = key;
-                              AppThemeService.generate();
-                            } else {
-                              ColorSchemeService.setPredefinedScheme(key);
-                            }
+                            Settings.data.colorSchemes.generationMethod = key;
+                            AppThemeService.generate();
                             Qt.callLater(() => {
                                            _userChanging = false;
                                          });

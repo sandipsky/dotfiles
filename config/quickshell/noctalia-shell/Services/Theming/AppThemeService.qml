@@ -21,15 +21,10 @@ Singleton {
       if (screenName !== effectiveMonitor)
         return;
 
-      if (Settings.data.colorSchemes.useWallpaperColors) {
-        generateFromWallpaper();
-      } else if (ColorSchemeService.lastPredefinedSchemeData) {
-        // Regenerate templates only; skip applyScheme so colors.json and scheme reload stay untouched
-        // when outputs are unchanged (see template processor skip-identical writes).
-        generateFromPredefinedScheme(ColorSchemeService.lastPredefinedSchemeData);
-      } else {
-        ColorSchemeService.applyScheme(Settings.data.colorSchemes.predefinedScheme);
-      }
+      // Colors are always generated (from the wallpaper, or from the accent seed when set).
+      // With an accent seed the palette is stable across wallpapers, but regeneration is
+      // idempotent (skip-identical writes) and keeps wallpaper-dependent templates fresh.
+      generateFromWallpaper();
     }
   }
 
@@ -49,6 +44,10 @@ Singleton {
       Logger.d("AppThemeService", "Generation method changed to:", Settings.data.colorSchemes.generationMethod);
       generate();
     }
+    function onAccentColorChanged() {
+      Logger.d("AppThemeService", "Accent color changed to:", Settings.data.colorSchemes.accentColor);
+      generate();
+    }
   }
 
   // PUBLIC FUNCTIONS
@@ -57,12 +56,7 @@ Singleton {
   }
 
   function generate() {
-    if (Settings.data.colorSchemes.useWallpaperColors) {
-      generateFromWallpaper();
-    } else {
-      // applyScheme will trigger template generation via schemeReader.onLoaded
-      ColorSchemeService.applyScheme(Settings.data.colorSchemes.predefinedScheme);
-    }
+    generateFromWallpaper();
   }
 
   function generateFromWallpaper() {
@@ -80,14 +74,4 @@ Singleton {
     TemplateProcessor.processWallpaperColors(wp, mode);
   }
 
-  function generateFromPredefinedScheme(schemeData) {
-    Logger.i("AppThemeService", "Generating templates from predefined color scheme");
-    const mode = Settings.data.colorSchemes.darkMode ? "dark" : "light";
-    var effectiveMonitor = Settings.data.colorSchemes.monitorForColors;
-    if (effectiveMonitor === "" || effectiveMonitor === undefined) {
-      effectiveMonitor = Screen.name;
-    }
-    const wallpaperPath = WallpaperService.getWallpaper(effectiveMonitor) || "";
-    TemplateProcessor.processPredefinedScheme(schemeData, mode, wallpaperPath);
-  }
 }

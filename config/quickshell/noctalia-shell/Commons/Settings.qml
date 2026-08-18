@@ -743,8 +743,12 @@ Singleton {
     }
 
     property JsonObject colorSchemes: JsonObject {
-      property bool useWallpaperColors: false
-      property string predefinedScheme: "Noctalia (default)"
+      property bool useWallpaperColors: true
+      // Optional accent seed color ("" = auto, extract from wallpaper).
+      // When set, the scheme is generated from this color instead of the wallpaper.
+      property string accentColor: ""
+      // Deprecated: predefined schemes were removed; kept so old settings.json files load cleanly.
+      property string predefinedScheme: ""
       property bool darkMode: true
       property string schedulingMode: "off"
       property string manualSunrise: "06:30"
