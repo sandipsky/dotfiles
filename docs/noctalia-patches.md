@@ -453,6 +453,27 @@ the scheme grid, and the scheme downloader are gone:
   `Color.qml` inline `defaultColors` (the old Noctalia-default dark palette) are still the
   pre-first-generation fallback.
 
+## 15. Panels: widget popups dock to the screen-edge corner
+
+File: `Modules/MainScreen/SmartPanel.qml` (the two `useButtonPosition` positioning
+branches).
+
+Win11-style flyout placement for every panel opened from a bar widget (battery,
+bluetooth, volume, network, clock, control center, …) — anything that reaches
+SmartPanel's `useButtonPosition` path (a widget item, a widget-name lookup like
+`toggle(null, "Volume")`, or click coordinates):
+
+- **Vertical (left/right) bar:** instead of centering the panel on the clicked
+  widget's Y, `panelY` starts at `root.height` and the pre-existing clamps pull it
+  to the lowest allowed position — bottom edge flush with the screen (floating /
+  framed bars keep their corner insets via the same clamps).
+- **Horizontal (top/bottom) bar:** instead of centering on the widget's X,
+  `panelX` starts at `root.width` and clamps right-dock it — flush with the right
+  screen edge.
+
+Panels opened without a button (IPC without a widget name, explicitly anchored
+panels like the launcher) keep their upstream anchor positioning.
+
 ## Re-applying on a new codebase
 
 Priority if porting incrementally: the lock screen (1) and the taskbar/workspace behavior

@@ -434,8 +434,10 @@ Item {
           calculatedX = panelX;
         }
       } else {
-        // For horizontal bars, center panel on button X position
-        var panelX = root.buttonPosition.x + root.buttonWidth / 2 - panelWidth / 2;
+        // For horizontal bars, dock the popup to the right side of the screen
+        // (win11-style flyout placement); existing clamps keep it inside
+        // floating/framed bar bounds.
+        var panelX = root.width;
         if (panelContent.allowAttach) {
           var cornerInset = root.barFloating ? Style.radiusL * 2 : 0;
           var barLeftEdge = (root.isFramed ? root.frameThickness - root.attachmentOverlap : root.barMarginH) + cornerInset;
@@ -568,7 +570,9 @@ Item {
           calculatedY = root.height - (root.isFramed ? 0 : root.barMarginV) - root.barHeight - panelHeight - Style.marginM;
         }
       } else if (root.barIsVertical) {
-        var panelY = root.buttonPosition.y + root.buttonHeight / 2 - panelHeight / 2;
+        // Dock the popup to the bottom of the screen (win11-style flyout
+        // placement); existing clamps keep it inside floating/framed bar bounds.
+        var panelY = root.height;
         var extraPadding = (panelContent.allowAttach && root.barFloating) ? Style.radiusL : 0;
         if (panelContent.allowAttach) {
           var cornerInset = extraPadding + (root.barFloating ? Style.radiusL : 0);
