@@ -56,8 +56,8 @@ with a minimal two-stage design driven by a `stage` property (`"cover"` / `"logi
   `general.lockScreenAnimations` is true, else a cheap 530 ms Timer toggle (explicitly to
   avoid per-frame GPU repaints); Ctrl+A selects all; caret x is computed from cursor
   position (FontMetrics in plain mode, proportional in dots mode).
-- **Bottom-right (both stages):** battery icon + percentage (icon tinted primary while
-  charging), and a power button (baseSize 30, shown per
+- **Bottom-right (both stages):** battery icon + percentage (the win11-style Segoe glyph
+  — see §13 — with a green fill while charging), and a power button (baseSize 30, shown per
   `general.showSessionButtonsOnLockScreen`) opening a small popup menu anchored above it:
   Suspend, Logout, (Hibernate if `general.showHibernateOnLockScreen`), Reboot, Shutdown —
   shutdown row highlights in error color. Menu actions go through the upstream countdown
@@ -368,6 +368,48 @@ also runs `rfkill unblock bluetooth && bluetoothctl power on` detached, so the t
 recovers from a blocked state on its own. Disabling is unchanged (BlueZ power off
 only, no rfkill block). Belt-and-braces with install.sh's
 `bluetooth-rfkill-unblock.service`, which clears any persisted block at every boot.
+
+## 13. Battery: win11-style Segoe Fluent glyphs everywhere
+
+Files: `Widgets/NBatteryWin11.qml` (**new**), `Widgets/NBattery.qml` (**deleted**),
+`Modules/Bar/Widgets/Battery.qml`, `Modules/Bar/Extras/BarPill.qml` +
+`BarPillHorizontal.qml` + `BarPillVertical.qml`, `Modules/Panels/Battery/BatteryPanel.qml`,
+`Modules/LockScreen/LockScreen.qml` + `LockScreenPanel.qml`,
+`Modules/Panels/Settings/Tabs/Connections/BluetoothSubTab.qml`,
+`Modules/Panels/Settings/Bar/WidgetSettings/BatterySettings.qml`, registry defaults,
+`Assets/settings-widgets-default.json`.
+
+Every battery icon (bar widget, battery panel header + per-device rows, lock screen,
+Bluetooth device battery levels) is rendered by the new `NBatteryWin11` widget instead
+of the tabler font names from `BatteryService.getIcon()` (which still exists but has no
+callers). Ported one-to-one from the win11 branch's `BatteryIndicator.qml`:
+
+- **Font:** `Segoe Fluent Icons` (installed system-wide by install.sh from
+  `assets/fonts/SegoeIcons.ttf`).
+- **10 decile levels** (`Battery1..Battery10`, `\uE851..\uE859,\uE83F`), index
+  `clamp(ceil(pct/10)-1, 0, 9)` — instead of upstream's 5 tabler tiers. Unknown/not-ready
+  shows `BatteryUnknown` (`\uE996`).
+- **Two stacked Text layers** so only the interior level bars get tinted: bottom = plain
+  level glyph in the fill color; top = the matching empty frame of the active family
+  (`\uE850` plain / `\uE85A` charging-bolt / `\uE863` saver-leaf) in the frame color,
+  drawn only when tinted.
+- **Fill tints:** green `#9fd89f` while charging, amber `#eaa300` in power-saver
+  (`PowerProfileService.profile === PowerProfile.PowerSaver`); otherwise the frame color.
+  "Charging" includes any plugged-in state (`isCharging || isPluggedIn` — mirrors win11
+  treating `Full`/`Not charging` as charging).
+- **`glyphScale: 1.3`** compensates for Segoe battery glyphs sitting smaller in the em
+  square than the tabler icons the call sites were sized for.
+- **Pill plumbing:** `BarPill`/`BarPillHorizontal`/`BarPillVertical` gained an optional
+  `iconComponent` (a `Component` rendered centered in the icon circle in place of NIcon;
+  `hasIcon` accounts for it). The Battery widget passes the win11 glyph through it.
+- **Graphic mode removed:** the `graphic`/`graphic-clean` display modes (capsule +
+  `NBattery` renderer) are gone — `NBattery.qml` deleted, the two options dropped from
+  `BatterySettings.qml`, registry + `settings-widgets-default.json` defaults changed to
+  `icon-only`, and old stored `graphic*` values are coerced to `icon-only` in the widget.
+- **Capsule tinting:** charging no longer turns the pill primary; only low/critical (and
+  not plugged in) keeps the red `mError` capsule as a safety cue. On hover the frame
+  follows `mOnHover` (tracked via the pill's `entered`/`exited` signals); the green/amber
+  fill stays.
 
 ## Re-applying on a new codebase
 

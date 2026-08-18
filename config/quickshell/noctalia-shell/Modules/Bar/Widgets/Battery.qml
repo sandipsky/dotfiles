@@ -6,6 +6,7 @@ import Quickshell.Services.UPower
 import qs.Commons
 import qs.Modules.Bar.Extras
 import qs.Services.Hardware
+import qs.Services.Power
 import qs.Services.Networking
 import qs.Services.UI
 import qs.Widgets
@@ -38,8 +39,11 @@ Item {
   readonly property bool isBarVertical: barPosition === "left" || barPosition === "right"
   readonly property real capsuleHeight: Style.getCapsuleHeightForScreen(screenName)
 
-  readonly property string displayMode: widgetSettings.displayMode !== undefined ? widgetSettings.displayMode : widgetMetadata.displayMode
-  readonly property bool useGraphicMode: displayMode === "graphic" || displayMode === "graphic-clean"
+  readonly property string displayMode: {
+    var mode = widgetSettings.displayMode !== undefined ? widgetSettings.displayMode : widgetMetadata.displayMode;
+    // Graphic modes were removed with the win11-style glyph; coerce old settings.
+    return (mode === "graphic" || mode === "graphic-clean") ? "icon-only" : mode;
+  }
 
   readonly property bool hideIfNotDetected: widgetSettings.hideIfNotDetected !== undefined ? widgetSettings.hideIfNotDetected : widgetMetadata.hideIfNotDetected
   readonly property bool hideIfIdle: widgetSettings.hideIfIdle !== undefined ? widgetSettings.hideIfIdle : widgetMetadata.hideIfIdle
@@ -52,6 +56,12 @@ Item {
   readonly property bool isPluggedIn: isReady ? BatteryService.isPluggedIn(selectedDevice) : false
   readonly property bool isLowBattery: isReady ? BatteryService.isLowBattery(selectedDevice) : false
   readonly property bool isCriticalBattery: isReady ? BatteryService.isCriticalBattery(selectedDevice) : false
+  // win11 semantics: any plugged-in state renders the charging family
+  readonly property bool showAsCharging: isCharging || isPluggedIn
+  readonly property bool isPowerSaver: PowerProfileService.available && PowerProfileService.profile === PowerProfile.PowerSaver
+  // Low-battery red capsule stays as a safety cue; charging no longer tints the capsule
+  readonly property bool lowState: (isLowBattery || isCriticalBattery) && !showAsCharging
+  property bool pillHovered: false
 
   // Visibility: show if hideIfNotDetected is false, or if battery is ready
   readonly property bool shouldShow: !hideIfNotDetected || (isReady && (hideIfIdle ? !isPluggedIn : true))
@@ -122,8 +132,8 @@ Item {
   visible: shouldShow
   opacity: shouldShow ? 1.0 : 0.0
 
-  implicitWidth: useGraphicMode ? capsule.width : pill.width
-  implicitHeight: useGraphicMode ? capsule.height : pill.height
+  implicitWidth: pill.width
+  implicitHeight: pill.height
 
   NPopupContextMenu {
     id: contextMenu
@@ -146,100 +156,35 @@ Item {
                  }
   }
 
-  // ==================== GRAPHIC MODE ====================
-
-  // Capsule background (graphic mode only)
-  Rectangle {
-    id: capsule
-    visible: root.useGraphicMode
-    anchors.centerIn: nBattery
-    width: root.isBarVertical ? root.capsuleHeight : nBattery.width + Style.margin2S
-    height: root.isBarVertical ? nBattery.height + Style.margin2S : root.capsuleHeight
-    radius: Math.min(Style.radiusL, width / 2)
-    color: graphicMouseArea.containsMouse ? Color.mHover : Style.capsuleColor
-    border.color: Style.capsuleBorderColor
-    border.width: Style.capsuleBorderWidth
-
-    Behavior on color {
-      enabled: !Color.isTransitioning
-      ColorAnimation {
-        duration: Style.animationFast
-        easing.type: Easing.InOutQuad
-      }
-    }
-  }
-
-  NBattery {
-    id: nBattery
-    visible: root.useGraphicMode
-    anchors.centerIn: parent
-    baseSize: (Style.getBarHeightForScreen(root.screenName) / root.capsuleHeight) * Style.fontSizeXXS
-    showPercentageText: root.displayMode !== "graphic-clean"
-    vertical: root.isBarVertical
-    percentage: root.percent
-    ready: root.isReady
-    charging: root.isCharging
-    pluggedIn: root.isPluggedIn
-    low: root.isLowBattery
-    critical: root.isCriticalBattery
-    baseColor: graphicMouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface
-    textColor: graphicMouseArea.containsMouse ? Color.mHover : Color.mSurface
-  }
-
-  MouseArea {
-    id: graphicMouseArea
-    visible: root.useGraphicMode
-    anchors.fill: parent
-    hoverEnabled: true
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
-    cursorShape: Qt.PointingHandCursor
-    onEntered: {
-      if (!getBatteryPanel()?.isPanelOpen && root.tooltipContent) {
-        TooltipService.show(root, root.tooltipContent, BarService.getTooltipDirection(root.screen?.name));
-        tooltipRefreshTimer.start();
-      }
-    }
-    onExited: {
-      tooltipRefreshTimer.stop();
-      TooltipService.hide();
-    }
-    onClicked: mouse => {
-                 TooltipService.hide();
-                 if (mouse.button === Qt.RightButton) {
-                   PanelService.showContextMenu(contextMenu, nBattery, screen);
-                 } else {
-                   toggleBatteryPanel();
-                 }
-               }
-  }
-
-  Timer {
-    id: tooltipRefreshTimer
-    interval: 1000
-    repeat: true
-    onTriggered: {
-      if (graphicMouseArea.containsMouse) {
-        TooltipService.updateText(root.tooltipContent);
-      }
-    }
-  }
-
   // ==================== ICON MODE ====================
 
   BarPill {
     id: pill
-    visible: !root.useGraphicMode
     screen: root.screen
     oppositeDirection: BarService.getPillDirection(root)
-    icon: BatteryService.getIcon(root.percent, root.isCharging, root.isPluggedIn, root.isReady)
+    // win11-style Segoe Fluent glyph instead of the tabler icon font
+    icon: ""
+    iconComponent: Component {
+      NBatteryWin11 {
+        percentage: root.percent
+        charging: root.showAsCharging
+        powerSaver: root.isPowerSaver
+        ready: root.isReady
+        pointSize: Style.toOdd(root.capsuleHeight * 0.48)
+        applyUiScale: false
+        frameColor: root.pillHovered ? Color.mOnHover : (root.lowState ? Color.mOnError : Color.mOnSurface)
+      }
+    }
     text: root.isReady ? root.percent : "-"
     suffix: "%"
     autoHide: false
     forceOpen: root.isReady && root.displayMode === "icon-always"
     forceClose: root.displayMode === "icon-only" || !root.isReady
-    customBackgroundColor: root.isCharging ? Color.mPrimary : ((root.isLowBattery || root.isCriticalBattery) ? Color.mError : "transparent")
-    customTextIconColor: root.isCharging ? Color.mOnPrimary : ((root.isLowBattery || root.isCriticalBattery) ? Color.mOnError : "transparent")
+    customBackgroundColor: root.lowState ? Color.mError : "transparent"
+    customTextIconColor: root.lowState ? Color.mOnError : "transparent"
     tooltipText: !getBatteryPanel()?.isPanelOpen ? root.tooltipContent : ""
+    onEntered: root.pillHovered = true
+    onExited: root.pillHovered = false
     onClicked: toggleBatteryPanel()
     onRightClicked: PanelService.showContextMenu(contextMenu, pill, screen)
   }

@@ -134,10 +134,13 @@ SmartPanel {
           anchors.margins: Style.marginM
           spacing: Style.marginM
 
-          NIcon {
+          NBatteryWin11 {
             pointSize: Style.fontSizeXXL
-            color: (BatteryService.isCharging(primaryDevice) || BatteryService.isPluggedIn(primaryDevice)) ? Color.mPrimary : (BatteryService.isCriticalBattery(primaryDevice) || BatteryService.isLowBattery(primaryDevice)) ? Color.mError : Color.mOnSurface
-            icon: BatteryService.getIcon(BatteryService.getPercentage(primaryDevice), BatteryService.isCharging(primaryDevice), BatteryService.isPluggedIn(primaryDevice), BatteryService.isDeviceReady(primaryDevice))
+            percentage: BatteryService.getPercentage(primaryDevice)
+            charging: BatteryService.isCharging(primaryDevice) || BatteryService.isPluggedIn(primaryDevice)
+            powerSaver: PowerProfileService.available && PowerProfileService.profile === PowerProfile.PowerSaver
+            ready: BatteryService.isDeviceReady(primaryDevice)
+            frameColor: (BatteryService.isCriticalBattery(primaryDevice) || BatteryService.isLowBattery(primaryDevice)) ? Color.mError : Color.mOnSurface
           }
 
           ColumnLayout {
@@ -200,9 +203,12 @@ SmartPanel {
                         id: batteryInfoRow
                         anchors.fill: parent
 
-                        NIcon {
-                          icon: BatteryService.getIcon(BatteryService.getPercentage(modelData), BatteryService.isCharging(modelData), BatteryService.isPluggedIn(modelData), BatteryService.isDeviceReady(modelData))
-                          color: (BatteryService.isCharging(modelData) || BatteryService.isPluggedIn(modelData)) ? Color.mPrimary : (BatteryService.isCriticalBattery(modelData) || BatteryService.isLowBattery(modelData)) ? Color.mError : Color.mOnSurface
+                        NBatteryWin11 {
+                          percentage: BatteryService.getPercentage(modelData)
+                          charging: BatteryService.isCharging(modelData) || BatteryService.isPluggedIn(modelData)
+                          powerSaver: PowerProfileService.available && PowerProfileService.profile === PowerProfile.PowerSaver
+                          ready: BatteryService.isDeviceReady(modelData)
+                          frameColor: (BatteryService.isCriticalBattery(modelData) || BatteryService.isLowBattery(modelData)) ? Color.mError : Color.mOnSurface
                         }
 
                         NText {

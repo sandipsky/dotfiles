@@ -450,13 +450,12 @@ Item {
             RowLayout {
               visible: modelData.batteryAvailable
               spacing: Style.marginS
-              NIcon {
-                icon: {
-                  var b = BluetoothService.getBatteryPercent(modelData);
-                  return BatteryService.getIcon(b !== null ? b : 0, false, false, b !== null);
-                }
+              NBatteryWin11 {
+                readonly property var _pct: BluetoothService.getBatteryPercent(modelData)
+                percentage: _pct !== null ? _pct : 0
+                ready: _pct !== null
                 pointSize: Style.fontSizeXS
-                color: Qt.alpha(device.getContentColors()[1], Style.opacityHeavy)
+                frameColor: Qt.alpha(device.getContentColors()[1], Style.opacityHeavy)
               }
               NText {
                 text: {
@@ -601,13 +600,12 @@ Item {
               Layout.fillWidth: true
               Layout.preferredWidth: 1
               spacing: Style.marginXS
-              NIcon {
-                icon: {
-                  var b = BluetoothService.getBatteryPercent(modelData);
-                  return BatteryService.getIcon(b !== null ? b : 0, false, false, b !== null);
-                }
+              NBatteryWin11 {
+                readonly property var _pct: BluetoothService.getBatteryPercent(modelData)
+                percentage: _pct !== null ? _pct : 0
+                ready: _pct !== null
                 pointSize: Style.fontSizeXS
-                color: Color.mOnSurface
+                frameColor: Color.mOnSurface
               }
               NText {
                 text: {

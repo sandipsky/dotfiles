@@ -3,7 +3,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 import qs.Commons
+import Quickshell.Services.UPower
 import qs.Services.Compositor
+import qs.Services.Power
 import qs.Services.System
 import qs.Widgets
 
@@ -533,10 +535,13 @@ Item {
       spacing: Style.marginXS
       visible: batteryIndicator.isReady
 
-      NIcon {
-        icon: batteryIndicator.icon
+      NBatteryWin11 {
         pointSize: Style.fontSizeXL
-        color: batteryIndicator.charging ? Color.mPrimary : Color.mOnSurface
+        percentage: batteryIndicator.percent
+        charging: batteryIndicator.charging || batteryIndicator.pluggedIn
+        powerSaver: PowerProfileService.available && PowerProfileService.profile === PowerProfile.PowerSaver
+        ready: batteryIndicator.isReady
+        frameColor: Color.mOnSurface
       }
 
       NText {

@@ -11,6 +11,7 @@ Item {
   required property ShellScreen screen
 
   property string icon: ""
+  property Component iconComponent: null
   property string text: ""
   property string suffix: ""
   property var tooltipText
@@ -56,7 +57,7 @@ Item {
 
   // Effective shown state (true if animated open or forced, but not if force closed)
   readonly property bool revealed: !forceClose && (forceOpen || showPill)
-  readonly property bool hasIcon: root.icon !== ""
+  readonly property bool hasIcon: root.icon !== "" || root.iconComponent !== null
 
   // Always prioritize hover color, then the custom one and finally the fallback color
   readonly property color bgColor: hovered ? Color.mHover : (customBackgroundColor.a > 0) ? customBackgroundColor : Style.capsuleColor
@@ -197,6 +198,7 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
 
     NIcon {
+      visible: root.iconComponent === null
       icon: root.icon
       pointSize: iconSize
       applyUiScale: false
@@ -205,6 +207,13 @@ Item {
       x: (iconCircle.width - width) / 2
       // Center vertically accounting for font metrics
       y: (iconCircle.height - height) / 2 + (height - contentHeight) / 2
+    }
+
+    // Custom icon rendering (e.g. the win11 battery glyph) replaces NIcon
+    Loader {
+      active: root.iconComponent !== null
+      sourceComponent: root.iconComponent
+      anchors.centerIn: parent
     }
   }
 

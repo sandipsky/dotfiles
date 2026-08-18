@@ -10,6 +10,9 @@ Item {
   required property ShellScreen screen
 
   property string icon: ""
+  // Optional component rendered in place of the default NIcon (e.g. the
+  // win11-style battery glyph). Instantiated centered in the icon circle.
+  property Component iconComponent: null
   property string iconPosition: ""
   property string text: ""
   property string suffix: ""
@@ -56,6 +59,7 @@ Item {
       BarPillVertical {
         screen: root.screen
         icon: root.icon
+        iconComponent: root.iconComponent
         iconPosition: root.iconPosition
         text: root.text
         suffix: root.suffix
@@ -86,6 +90,7 @@ Item {
       BarPillHorizontal {
         screen: root.screen
         icon: root.icon
+        iconComponent: root.iconComponent
         iconPosition: root.iconPosition
         text: root.text
         suffix: root.suffix
