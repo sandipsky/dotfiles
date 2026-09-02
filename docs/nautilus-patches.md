@@ -140,8 +140,10 @@ the enable-state block in `nautilus_files_view_update_actions_state()`):
   current directory.
 - `open-terminal` / `current-directory-terminal` — label is generic
   (“Open in _Terminal”); tries `ptyxis`, then `alacritty`, then `kitty`,
-  launching the first one found with `--working-directory <path>`
-  (kitty spells it `--directory`). Program lookup is cached with
+  launching the first one found with `--working-directory <path>` (kitty
+  spells it `--directory`; ptyxis additionally gets `--tab`, since it is
+  single-instance via D-Bus and otherwise ignores the working-directory
+  flag when a daemon is already running). Program lookup is cached with
   `g_once_init_*`. Replaces the nautilus-open-any-terminal extension.
 - `open-in-code` / `current-directory-code` — launches `code` with the
   selected local paths (or the current directory). Replaces the code-nautilus
