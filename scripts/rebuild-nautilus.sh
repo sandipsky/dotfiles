@@ -18,14 +18,23 @@ fi
 rm -f "$HOME/.local/share/nautilus-python/extensions/code-nautilus.py"
 
 UPSTREAM_URL="https://gitlab.gnome.org/GNOME/nautilus.git"
+SCRIPTS_URL="https://github.com/root9191/nautilus_scripts.git"
 # Upstream tag the vendored fork tree was cut from
 # (see docs/nautilus-patches.md → Baseline).
 BASELINE_TAG=50.2.2
 
-# Target tag: $1 if given, else the latest stable upstream release tag.
-if [[ -n "$1" ]]; then
-    TARGET_TAG="$1"
-else
+# Args: any -scripts / --scripts flag installs the user's nautilus context-
+# menu scripts from $SCRIPTS_URL; anything else is treated as the target
+# upstream tag (default: latest stable X.Y[.Z] tag on gitlab.gnome.org).
+INSTALL_SCRIPTS=0
+TARGET_TAG=""
+for arg in "$@"; do
+    case "$arg" in
+        -scripts|--scripts) INSTALL_SCRIPTS=1 ;;
+        *) TARGET_TAG="$arg" ;;
+    esac
+done
+if [[ -z "$TARGET_TAG" ]]; then
     TARGET_TAG=$(git ls-remote --tags --refs --sort=-v:refname "$UPSTREAM_URL" \
         | awk -F/ '{print $NF}' \
         | grep -E '^[0-9]+\.[0-9]+(\.[0-9]+)?$' \
@@ -75,3 +84,19 @@ fi
 nautilus -q >/dev/null 2>&1 || true
 
 echo "Nautilus fork installed: $(pacman -Q nautilus)"
+
+# Optional: install the user's nautilus context-menu scripts. They land in
+# the standard XDG scripts dir and show up under Right-click → Scripts.
+if [[ $INSTALL_SCRIPTS -eq 1 ]]; then
+    SCRIPTS_DIR="$HOME/.local/share/nautilus/scripts"
+    echo "Installing nautilus scripts into $SCRIPTS_DIR from $SCRIPTS_URL"
+    mkdir -p "$SCRIPTS_DIR"
+    SCRIPTS_TMP=$(mktemp -d)
+    git clone --depth 1 "$SCRIPTS_URL" "$SCRIPTS_TMP/scripts"
+    # Copy every top-level file except the README, forcing +x so scripts
+    # committed without the exec bit still work.
+    find "$SCRIPTS_TMP/scripts" -maxdepth 1 -type f ! -name README.md \
+         -exec install -m 755 {} "$SCRIPTS_DIR/" \;
+    rm -rf "$SCRIPTS_TMP"
+    echo "Installed: $(ls "$SCRIPTS_DIR" | tr '\n' ' ')"
+fi
