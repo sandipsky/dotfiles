@@ -17,41 +17,52 @@ if pacman -Qq nautilus-open-any-terminal >/dev/null 2>&1; then
 fi
 rm -f "$HOME/.local/share/nautilus-python/extensions/code-nautilus.py"
 
-# DE-safety: the fork replaces the official nautilus package IN PLACE (same
-# package name, provides libnautilus-extension.so), so anything that depends
-# on nautilus — a full GNOME desktop included — keeps its dependency
-# satisfied. Never silently downgrade, though: on a system whose installed
-# nautilus is newer than the vendored fork (e.g. GNOME got updated), the
-# right move is bumping the vendored tree (see docs/nautilus-patches.md),
-# not forcing an older build onto a newer GNOME stack.
-FORK_VER=$(sed -n 's/^pkgver=//p' "$REPO_DIR/applications/nautilus-fork/PKGBUILD")
-INSTALLED_VER=$(pacman -Q nautilus 2>/dev/null | awk '{print $2}' || true)
+UPSTREAM_URL="https://gitlab.gnome.org/GNOME/nautilus.git"
+# Upstream tag the vendored fork tree was cut from
+# (see docs/nautilus-patches.md → Baseline).
+BASELINE_TAG=50.2.2
 
-if [[ -n "$INSTALLED_VER" ]] && [[ "$(vercmp "${INSTALLED_VER%-*}" "$FORK_VER")" -gt 0 ]]; then
-    echo "WARNING: installed nautilus ${INSTALLED_VER} is NEWER than the vendored fork (${FORK_VER})." >&2
-    echo "Installing would DOWNGRADE nautilus under the rest of the desktop stack." >&2
-    echo "Prefer bumping the vendored tree first (docs/nautilus-patches.md, 'Bumping upstream')." >&2
-    read -r -p "Downgrade anyway? [y/N] " reply
-    if [[ ! "$reply" =~ ^[Yy]$ ]]; then
-        echo "Aborted."
-        exit 1
-    fi
+# Target tag: $1 if given, else the latest stable upstream release tag.
+if [[ -n "$1" ]]; then
+    TARGET_TAG="$1"
+else
+    TARGET_TAG=$(git ls-remote --tags --refs --sort=-v:refname "$UPSTREAM_URL" \
+        | awk -F/ '{print $NF}' \
+        | grep -E '^[0-9]+\.[0-9]+(\.[0-9]+)?$' \
+        | head -1)
 fi
+[[ -n "$TARGET_TAG" ]] || { echo "Could not determine target upstream tag." >&2; exit 1; }
+echo "Building nautilus $TARGET_TAG with local fork patches (baseline $BASELINE_TAG)."
 
-# Build the vendored fork only — the source tree in applications/nautilus-fork/
-# (upstream + local patches, see docs/nautilus-patches.md) is the sole source;
-# nothing is fetched from the Arch repos, AUR, or the network.
-# The fork builds as the same "nautilus" package with a higher pkgrel, so
-# pacman -U below replaces the official package in place — no -R needed.
-BUILD_DIR=$(mktemp -d)
-cp -r "$REPO_DIR/applications/nautilus-fork/." "$BUILD_DIR/"
-(cd "$BUILD_DIR" && makepkg -s --noconfirm)
+WORK=$(mktemp -d)
+
+# 1. Diff the vendored fork against a pristine baseline checkout, so the
+#    local patches float free of any specific upstream version.
+git clone --depth 1 --branch "$BASELINE_TAG" "$UPSTREAM_URL" "$WORK/a"
+rm -rf "$WORK/a/.git"
+mkdir "$WORK/b"
+cp -a "$REPO_DIR/applications/nautilus-fork/nautilus/." "$WORK/b/"
+(cd "$WORK" && diff -urN a b > fork.patch) || true  # non-zero when diffs exist
+
+# 2. Fetch the target upstream tag and replay the fork's patch onto it.
+#    If the patch doesn't apply cleanly, patch(1) exits non-zero → set -e
+#    aborts and leaves $WORK in place for inspection.
+git clone --depth 1 --branch "$TARGET_TAG" "$UPSTREAM_URL" "$WORK/nautilus"
+rm -rf "$WORK/nautilus/.git"
+patch -d "$WORK/nautilus" -p1 --no-backup-if-mismatch < "$WORK/fork.patch"
+
+# 3. Build with the shared PKGBUILD, overriding pkgver at the target tag.
+BUILD=$WORK/build
+mkdir "$BUILD"
+cp "$REPO_DIR/applications/nautilus-fork/PKGBUILD" "$BUILD/PKGBUILD"
+sed -i "s/^pkgver=.*/pkgver=$TARGET_TAG/" "$BUILD/PKGBUILD"
+mv "$WORK/nautilus" "$BUILD/nautilus"
+(cd "$BUILD" && makepkg -s --noconfirm)
 
 # Deliberately NOT --noconfirm: if pacman ever proposes removing conflicting
 # packages here, it must be shown and explicitly confirmed, never auto-agreed.
-# A normal run only shows the two fork packages as targets.
-sudo pacman -U "$BUILD_DIR"/nautilus-*.pkg.tar.zst "$BUILD_DIR"/libnautilus-extension-*.pkg.tar.zst
-rm -rf "$BUILD_DIR"
+sudo pacman -U "$BUILD"/nautilus-*.pkg.tar.zst "$BUILD"/libnautilus-extension-*.pkg.tar.zst
+rm -rf "$WORK"
 
 # Keep pacman -Syu from replacing the fork with the repo package.
 if ! grep -Eq '^[[:space:]]*IgnorePkg[[:space:]]*=.*nautilus' /etc/pacman.conf; then
