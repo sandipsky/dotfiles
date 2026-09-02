@@ -2469,7 +2469,7 @@ get_terminal_program (void)
 
     if (g_once_init_enter (&initialized))
     {
-        static const char *candidates[] = { "alacritty", "kitty" };
+        static const char *candidates[] = { "ptyxis", "alacritty", "kitty" };
 
         for (guint i = 0; i < G_N_ELEMENTS (candidates); i++)
         {
