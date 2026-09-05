@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Post-install setup for a FRESH **Fedora Workstation** (GNOME) install — the
 # Fedora counterpart of ubuntu.sh. GNOME stays the desktop; nothing
-# Hyprland/Noctalia is installed. Run it from the repo root as your normal
+# Hyprland or hypr-shell is installed. Run it from the repo root as your normal
 # user:
 #
 #   ./scripts/fedora.sh
@@ -762,8 +762,8 @@ sudo restorecon -R /etc/dconf 2>/dev/null || true
 sudo dconf update || warn "dconf update failed — the greeter font applies after the next successful dconf update."
 
 ### -------- CONFIG --------
-# Only the desktop-agnostic pieces of config/ — the rest (hypr, quickshell,
-# noctalia, the systemd user units) is the Hyprland desktop's and stays out.
+# Only the desktop-agnostic pieces of config/ — the rest (hypr, hypr-shell,
+# the systemd user units) is the Hyprland desktop's and stays out.
 info "Installing configs"
 if [[ -d "$REPO_DIR/config/vim" ]]; then
     cp -r "$REPO_DIR/config/vim" "/home/$USERNAME/.config/"

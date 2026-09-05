@@ -3,9 +3,9 @@
 # user (./scripts/kde.sh). Same fresh-machine assumptions as install.sh: never
 # uninstalls prior setups, destructive in places, ends with a reboot.
 #
-# Deliberate differences from install.sh (the Hyprland + Noctalia desktop) —
+# Deliberate differences from install.sh (the Hyprland + hypr-shell desktop) —
 # don't "fix" these back:
-# - Plasma instead of Hyprland; nothing Noctalia/Quickshell is installed.
+# - Plasma instead of Hyprland; hypr-shell is not installed.
 # - Dolphin is the file manager — the vendored Nautilus fork is the Hyprland
 #   setup's only; no IgnorePkg edit here.
 # - Konsole (KDE default) instead of alacritty; KDE apps for the rest:
@@ -15,11 +15,11 @@
 #   breezex-cursor-theme; Plasma keeps stock Breeze).
 # - AC-plug power-profile switching, idle/lock, rfkill and clipboard handling
 #   all stay with Plasma (PowerDevil/KScreenLocker/Klipper) — none of
-#   install.sh's udev rules, systemd user units or joystick-wake carry over.
+#   install.sh's udev rules or systemd user units carry over.
 # - No QT_SCALE_FACTOR .desktop overrides: Plasma scales Qt apps natively,
 #   so the 125% hack would double-scale OBS/qBittorrent here.
 # - Only the desktop-agnostic piece of config/ is installed (vim) — the rest
-#   (hypr, quickshell, noctalia, gtk-3.0, alacritty, the systemd user units)
+#   (hypr, hypr-shell, gtk-3.0, alacritty, the systemd user units)
 #   belongs to the Hyprland desktop.
 set -e
 
@@ -110,7 +110,7 @@ fi
 
 # Don't power the Bluetooth adapter on at boot; toggle it from the Plasma
 # applet when needed. (No rfkill-unblock unit here: Plasma manages rfkill
-# itself — the unit in install.sh exists for Noctalia's airplane mode.)
+# itself — the unit in install.sh exists for hypr-shell's airplane mode.)
 if [[ -f /etc/bluetooth/main.conf ]]; then
     if grep -q '^#*AutoEnable=' /etc/bluetooth/main.conf; then
         sudo sed -i 's/^#*AutoEnable=.*/AutoEnable=false/' /etc/bluetooth/main.conf

@@ -55,13 +55,8 @@ sudo pacman -S --noconfirm --needed \
     obs-studio \
     qbittorrent \
     brightnessctl \
-    imagemagick \
     ffmpeg \
     luajit \
-    qt6-multimedia \
-    python \
-    python-evdev \
-    wlr-randr \
     grim \
     slurp \
     gnome-calculator \
@@ -81,16 +76,19 @@ yay -S --noconfirm --needed \
 
 sudo -u "$USERNAME" -H bash -c "curl -fsSL https://claude.ai/install.sh | bash"
 
-# noctalia-qs is built only from the vendored recipe in applications/ — upstream
-# discontinued the fork (v5 dropped Quickshell), so the AUR package is
-# unmaintained and must not be trusted for unattended --noconfirm builds.
-if ! pacman -Qq noctalia-qs >/dev/null 2>&1; then
-    BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
-    sudo -u "$USERNAME" cp -r applications/noctalia-qs/. "$BUILD_DIR/"
-    (cd "$BUILD_DIR" && sudo -u "$USERNAME" makepkg -s --noconfirm)
-    sudo pacman -U --noconfirm "$BUILD_DIR"/noctalia-qs-0*.pkg.tar.zst
-    rm -rf "$BUILD_DIR"
-fi
+# hypr-shell — the GTK4 bar/shell (bar, launcher, control center, notifications,
+# lock/idle, night light, wallpaper, OSDs). Built from the vendored source
+# tarball in applications/hypr-shell/ (a `git archive` of the hypr-shell repo,
+# refreshed by running ./package.sh in that repo and copying
+# dist/hypr-shell.tar.gz here) instead of cloning it: the install reproduces offline and can't be affected
+# by the repo moving. Its own install.sh installs the pacman build deps it is
+# missing (gtkmm-4.0, gtk4-layer-shell, libadwaita, ...) and builds into
+# ~/.local (binaries, icon fonts, desktop entry); autostart.lua and the
+# keybinds call /home/$USERNAME/.local/bin/hypr-shell by absolute path.
+BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
+sudo -u "$USERNAME" tar -xzf applications/hypr-shell/hypr-shell.tar.gz -C "$BUILD_DIR"
+(cd "$BUILD_DIR/hypr-shell" && sudo -u "$USERNAME" -H ./install.sh)
+rm -rf "$BUILD_DIR"
 
 # Nautilus comes only from the local fork vendored in applications/nautilus-fork/
 # (upstream source + local patches, see docs/nautilus-patches.md), built from
@@ -133,7 +131,7 @@ if [[ -f /etc/bluetooth/main.conf ]]; then
 fi
 
 # systemd-rfkill persists rfkill soft blocks across reboots (e.g. one left by
-# Noctalia's airplane mode), and BlueZ can't power a blocked adapter — the bar
+# an airplane-mode toggle), and BlueZ can't power a blocked adapter — the bar
 # widget's Bluetooth toggle would silently fail forever. Clear the block every
 # boot; the adapter still stays off until toggled (AutoEnable=false above).
 sudo tee /etc/systemd/system/bluetooth-rfkill-unblock.service >/dev/null <<'EOF'
@@ -244,14 +242,6 @@ sudo fc-cache -f
 
 sudo -u "$USERNAME" cp -r config/* "/home/$USERNAME/.config/"
 
-# joystick-wake: gamepad input keeps the screen awake (Noctalia's idle
-# service only counts mouse/keyboard). python-evdev is in the pacman list
-# above. Enabled via the static wants symlink because the install runs from
-# a bare tty where `systemctl --user` has no session bus.
-sudo -u "$USERNAME" install -Dm755 assets/bin/joystick-wake "/home/$USERNAME/.local/bin/joystick-wake"
-sudo -u "$USERNAME" mkdir -p "/home/$USERNAME/.config/systemd/user/graphical-session.target.wants"
-sudo -u "$USERNAME" ln -sf ../joystick-wake.service "/home/$USERNAME/.config/systemd/user/graphical-session.target.wants/joystick-wake.service"
-
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
 sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf >/dev/null <<EOF
 [Service]
@@ -274,7 +264,10 @@ if [[ -z "$WAYLAND_DISPLAY" && "$(tty)" == "/dev/tty1" ]]; then
 fi
 EOF
 
-sudo -u "$USERNAME" sed -i "s|USERNAME|$USERNAME|g" "/home/$USERNAME/.config/noctalia/settings.json"
+# the Hyprland Lua config and hypr-shell's config.json carry absolute paths
+for f in hypr/conf/keybinds.lua hypr/conf/autostart.lua hypr-shell/config.json; do
+    sudo -u "$USERNAME" sed -i "s|USERNAME|$USERNAME|g" "/home/$USERNAME/.config/$f"
+done
 sudo -u "$USERNAME" cp assets/profile.png "/home/$USERNAME/.face"
 
 sudo -u "$USERNAME" -H dbus-run-session -- bash <<'EOF'

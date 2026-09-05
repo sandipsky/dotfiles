@@ -1,0 +1,106 @@
+{
+  "bar": {
+    "active_window": {
+      "hide_mode": "visible",
+      "no_window_text": "desktop",
+      "show_icon": true,
+      "title_mode": "appname"
+    },
+    "app_menu": {
+      "columns": 6,
+      "display": "icon_text",
+      "icon": "grid-dots"
+    },
+    "background_opacity": 1.0,
+    "bluetooth": {
+      "auto_connect": false
+    },
+    "control_center": {
+      "show_audio": true,
+      "show_brightness": true,
+      "show_media": true,
+      "show_sysmon": true
+    },
+    "height": 0,
+    "layout": {
+      "center": [],
+      "left": [
+        "app_menu",
+        "launcher",
+        "workspaces",
+        "active_window"
+      ],
+      "right": [
+        "bluetooth",
+        "battery",
+        "network",
+        "volume",
+        "clock",
+        "notifications",
+        "session"
+      ]
+    },
+    "modules": {
+      "active_window": true,
+      "battery": true,
+      "clock": true,
+      "network": true,
+      "volume": true
+    },
+    "position": "top",
+    "show_on_workspace_switch": false,
+    "show_when_workspace_empty": true,
+    "taskbar": {
+      "colorize_icons": false,
+      "hide_mode": "hidden",
+      "only_active_workspaces": true,
+      "only_same_monitor": true,
+      "show_pinned_apps": true
+    },
+    "visibility": "visible",
+    "workspaces": {
+      "fixed_count": 6,
+      "mode": "fixed",
+      "scroll_wrap": false
+    }
+  },
+  "clipboard": {
+    "enabled": true,
+    "paste_on_click": true,
+    "show_images": false
+  },
+  "launcher": {
+    "enable_web_search": true,
+    "show_all_apps": false,
+    "show_result_count": true
+  },
+  "lock_screen": {
+    "background": "/home/USERNAME/Pictures/Wallpapers/lockscreen/0018.jpg",
+    "blur": 0.35
+  },
+  "night_light": {
+    "enabled": true,
+    "forced": true,
+    "manual_sunrise": "06:30",
+    "manual_sunset": "18:30",
+    "night_temp": 4785
+  },
+  "notifications": {
+    "do_not_disturb": false,
+    "enabled": true
+  },
+  "session": {
+    "fullscreen_layout": "single_row",
+    "mode": "dropdown"
+  },
+  "ui": {
+    "accent": "#3584e4",
+    "dark_mode": true,
+    "font": "Fira Sans"
+  },
+  "wallpaper": {
+    "current": "/home/USERNAME/Pictures/Wallpapers/0189.jpg",
+    "directory": "~/Pictures/Wallpapers",
+    "slideshow": true
+  }
+}

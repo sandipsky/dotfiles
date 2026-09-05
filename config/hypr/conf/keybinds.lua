@@ -10,9 +10,16 @@ local browser     = "google-chrome-stable"
 local filemanager = "nautilus"
 local calculator  = "gnome-calculator"
 
-local function noctalia(args)
-    return hl.dsp.exec_cmd("qs -c noctalia-shell ipc call " .. args)
+-- hypr-shell: keybind actions go through the running instance's GApplication
+local function shell(args)
+    return hl.dsp.exec_cmd("/home/USERNAME/.local/bin/hypr-shell " .. args)
 end
+-- volume / brightness: wpctl and brightnessctl (5% steps);
+-- hypr-shell's OSD reacts to the resulting PipeWire / backlight changes
+local volume_up   = hl.dsp.exec_cmd("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")
+local volume_down = hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-")
+local brightness_up   = hl.dsp.exec_cmd("brightnessctl -q s +5%")
+local brightness_down = hl.dsp.exec_cmd("brightnessctl -q s 5%-")
 
 -- -----------------------------------------------------
 -- Key bindings
@@ -25,7 +32,7 @@ hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("lutris"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(filemanager .. " --new-window"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(filemanager .. " admin://"))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(calculator))
-hl.bind(mainMod .. " + P", noctalia("wallpaper random"))
+hl.bind(mainMod .. " + P", shell("--wallpaper-next"))
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
 
 -- Windows
@@ -79,21 +86,21 @@ hl.bind(mainMod .. " + SHIFT + mouse_up",   hl.dsp.window.move({ workspace = "r+
 -- Actions
 -- -----------------------------------------------------
 
-hl.bind("ALT + space", noctalia("launcher toggle"))
-hl.bind(mainMod .. " + SUPER_L", noctalia("launcher toggle"))
-hl.bind(mainMod .. " + V", noctalia("launcher clipboard"))
-hl.bind(mainMod .. " + A", noctalia("controlCenter toggle"))
-hl.bind(mainMod .. " + X", noctalia("sessionMenu toggle"))
-hl.bind(mainMod .. " + L", noctalia("lockScreen lock"))
+hl.bind("ALT + space", shell("--launcher"))
+hl.bind(mainMod .. " + SUPER_L", shell("--launcher"))
+hl.bind(mainMod .. " + V", shell("--clipboard"))
+hl.bind(mainMod .. " + A", shell("--control-center"))
+hl.bind(mainMod .. " + X", shell("--session"))
+hl.bind(mainMod .. " + L", shell("--lock"))
 
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("virsh --connect qemu:///system start win; virt-viewer --connect qemu:///system win"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("hyprctl reload"))
-hl.bind(mainMod .. " + SHIFT + W", noctalia("wallpaper toggle"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("env HS_SETTINGS_PAGE=wallpaper_page /home/USERNAME/.local/bin/hypr-shell-settings"))
 
-hl.bind("switch:Lid Switch", noctalia("sessionMenu lockAndSuspend"), { locked = true })
+hl.bind("switch:Lid Switch", shell("--lock-and-suspend"), { locked = true })
 
-hl.bind(mainMod .. " + I", noctalia("brightness decrease"))
-hl.bind(mainMod .. " + O", noctalia("brightness increase"))
+hl.bind(mainMod .. " + I", brightness_down)
+hl.bind(mainMod .. " + O", brightness_up)
 
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd('grim && notify-send -u normal -a "Snipping Tool" "Screenshot Captured" "Screenshot saved to /home/Pictures folder."'))
@@ -102,11 +109,11 @@ hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd('grim && notify-send -u normal -a
 -- Fn / Media keys
 -- -----------------------------------------------------
 
-hl.bind("XF86MonBrightnessUp",   noctalia("brightness increase"))
-hl.bind("XF86MonBrightnessDown", noctalia("brightness decrease"))
-hl.bind("XF86AudioRaiseVolume",  noctalia("volume increase"))
-hl.bind("XF86AudioLowerVolume",  noctalia("volume decrease"))
-hl.bind("XF86AudioMute",         noctalia("volume muteOutput"))
-hl.bind("XF86AudioMicMute",      noctalia("volume muteInput"))
-hl.bind("XF86ScreenSaver",       noctalia("lockScreen lock"))
+hl.bind("XF86MonBrightnessUp",   brightness_up)
+hl.bind("XF86MonBrightnessDown", brightness_down)
+hl.bind("XF86AudioRaiseVolume",  volume_up)
+hl.bind("XF86AudioLowerVolume",  volume_down)
+hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
+hl.bind("XF86ScreenSaver",       shell("--lock"))
 hl.bind("Print",                 hl.dsp.exec_cmd("grim - | wl-copy"))

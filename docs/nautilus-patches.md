@@ -4,7 +4,7 @@ This file documents every local change carried on top of the vendored upstream
 snapshot at [applications/nautilus-fork/nautilus/](../applications/nautilus-fork/nautilus/),
 described **by behavior** rather than by diff, so the same customizations can be
 re-applied when bumping to a newer upstream release. Keep it updated when
-patching the fork (same convention as [noctalia-patches.md](noctalia-patches.md)).
+patching the fork.
 
 - **Baseline:** upstream Nautilus 50.2.2
   (gitlab.gnome.org/GNOME/nautilus tag `50.2.2`,
