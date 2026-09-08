@@ -25,7 +25,8 @@
 #      shell does) and selects it via a drop-in in /etc/sddm.conf.d/ (Arch
 #      ships no /etc/sddm.conf), together with the desktop's cursor
 #      (BreezeX-Light, 24 — breezex-cursor-theme from the AUR, installed via
-#      yay if missing)
+#      yay if missing; xorg-xsetroot so sddm can actually apply it to the X
+#      root window, and the same XCURSOR_* in GreeterEnvironment)
 #   3. installs assets/profile.png as the user's SDDM avatar in
 #      /usr/share/sddm/faces/ — the greeter runs as the sddm user and can't
 #      read ~/.face.icon inside a 0700 home
@@ -131,9 +132,12 @@ EOF
 do_install() {
     [[ -d "$THEME_SRC/$THEME" ]] || die "theme directory $THEME_SRC/$THEME not found"
 
-    msg "Installing sddm, qt6-5compat and the theme font"
-    # ttf-fira-sans: the theme renders in Fira Sans (the desktop's interface font).
-    sudo pacman -S --noconfirm --needed sddm ttf-fira-sans
+    msg "Installing sddm, qt6-5compat, xsetroot and the theme font"
+    # ttf-fira-sans: the theme renders in Fira Sans (the desktop's interface
+    # font). xorg-xsetroot: sddm applies CursorTheme to the X root window by
+    # running `xsetroot -cursor_name left_ptr`; without it the journal shows
+    # "Could not setup default cursor" and the greeter keeps X's stock cursor.
+    sudo pacman -S --noconfirm --needed sddm ttf-fira-sans xorg-xsetroot
     # As a dependency, so `uninstall` can drop it again once nothing needs it.
     sudo pacman -S --noconfirm --needed --asdeps qt6-5compat
 
@@ -172,7 +176,13 @@ do_install() {
 
     msg "Selecting $THEME and the $CURSOR_THEME cursor in $THEME_CONF"
     sudo mkdir -p "$CONF_DIR"
+    # CursorTheme/CursorSize cover the root window (xsetroot) and the greeter;
+    # GreeterEnvironment passes the same XCURSOR_* the desktop sets in
+    # environment.lua straight to the greeter process as well.
     sudo tee "$THEME_CONF" >/dev/null <<EOF
+[General]
+GreeterEnvironment=XCURSOR_THEME=$CURSOR_THEME,XCURSOR_SIZE=$CURSOR_SIZE
+
 [Theme]
 Current=$THEME
 CursorTheme=$CURSOR_THEME
