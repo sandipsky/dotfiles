@@ -2,23 +2,35 @@
   "bar": {
     "active_window": {
       "hide_mode": "visible",
-      "no_window_text": "desktop",
+      "no_window_text": "none",
       "show_icon": true,
       "title_mode": "appname"
     },
     "app_menu": {
       "columns": 6,
       "display": "icon_text",
-      "icon": "grid-dots"
+      "group_by_letter": false,
+      "icon": "apps",
+      "show_search": true,
+      "show_session_button": false,
+      "show_settings_button": false,
+      "tile_background": false,
+      "view": "grid"
     },
-    "background_opacity": 1.0,
+    "background_opacity": 0.9,
     "bluetooth": {
       "auto_connect": false
     },
+    "clock": {
+      "format_horizontal": "%I:%M %p %a, %b %d",
+      "format_vertical": "%I %M %p"
+    },
     "control_center": {
-      "show_audio": true,
-      "show_brightness": true,
-      "show_media": true,
+      "show_audio": false,
+      "show_brightness": false,
+      "show_media": false,
+      "show_session_button": false,
+      "show_settings_button": false,
       "show_sysmon": true
     },
     "height": 0,
@@ -28,34 +40,40 @@
         "app_menu",
         "launcher",
         "workspaces",
+        "taskbar",
         "active_window"
       ],
       "right": [
+        "clipboard",
         "bluetooth",
         "battery",
         "network",
         "volume",
-        "clock",
         "notifications",
-        "session"
+        "control_center",
+        "session",
+        "clock"
       ]
     },
     "modules": {
       "active_window": true,
       "battery": true,
       "clock": true,
+      "launcher": false,
       "network": true,
+      "taskbar": false,
       "volume": true
     },
     "position": "top",
     "show_on_workspace_switch": false,
     "show_when_workspace_empty": true,
     "taskbar": {
+      "apps": "pinned",
       "colorize_icons": false,
       "hide_mode": "hidden",
       "only_active_workspaces": true,
       "only_same_monitor": true,
-      "show_pinned_apps": true
+      "running_indicator": true
     },
     "visibility": "visible",
     "workspaces": {
@@ -68,6 +86,13 @@
     "enabled": true,
     "paste_on_click": true,
     "show_images": false
+  },
+  "greeter": {
+    "default_session": "hyprland"
+  },
+  "idle": {
+    "lock_timeout": 603,
+    "screen_off_timeout": 600
   },
   "launcher": {
     "enable_web_search": true,
@@ -94,13 +119,16 @@
     "mode": "dropdown"
   },
   "ui": {
-    "accent": "#3584e4",
+    "accent": "#ed5b00",
     "dark_mode": true,
     "font": "Fira Sans"
   },
   "wallpaper": {
     "current": "/home/USERNAME/Pictures/Wallpapers/0189.jpg",
     "directory": "~/Pictures/Wallpapers",
-    "slideshow": true
+    "slideshow": true,
+    "transitions": [
+      "disc"
+    ]
   }
 }
