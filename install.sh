@@ -12,6 +12,7 @@ fi
 
 # All interactive input happens here, before the long unattended run.
 read -rp "Install Plymouth boot splash? (y/n): " INSTALL_PLYMOUTH
+read -rp "Install SDDM login screen (Elegant theme) instead of direct login into Hyprland? (y/n): " INSTALL_SDDM
 
 # Ask for the sudo password once, up front, and keep the credential cache
 # fresh in the background — the pacman/yay/makepkg steps outlast sudo's
@@ -245,14 +246,6 @@ sudo fc-cache -f
 
 sudo -u "$USERNAME" cp -r config/* "/home/$USERNAME/.config/"
 
-sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
-sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf >/dev/null <<EOF
-[Service]
-ExecStart=
-ExecStart=-/usr/bin/agetty --autologin $USERNAME --skip-login --nonewline --noissue --noclear %I \$TERM
-Type=idle
-EOF
-
 # Plymouth boot splash (optional). arch.sh already boots quiet with early KMS
 # (i915 + nvidia in MODULES, systemd hook, systemd-boot entry), so this is
 # just the hook, the `splash` kernel arg and a theme: the default theme minus
@@ -263,19 +256,38 @@ if [[ "${INSTALL_PLYMOUTH,,}" == y* ]]; then
     ./scripts/plymouth.sh install
 fi
 
-LOGIN_SHELL=$(getent passwd "$USERNAME" | cut -d: -f7)
-if [[ "$(basename "$LOGIN_SHELL")" == "zsh" ]]; then
-    AUTOSTART_PROFILE="/home/$USERNAME/.zprofile"
+# Login path (optional SDDM). Default is direct login: tty1 autologin via an
+# agetty override, then the login profile execs Hyprland through uwsm. With
+# SDDM chosen, scripts/sddm.sh installs sddm + the Elegant
+# theme, enables sddm.service and skips/removes those two direct-login
+# pieces (it can also switch a running system either way later:
+# ./scripts/sddm.sh install|uninstall|status). Its `uninstall`
+# re-creates the override and profile block below — keep them in sync.
+if [[ "${INSTALL_SDDM,,}" == y* ]]; then
+    ./scripts/sddm.sh install
 else
-    AUTOSTART_PROFILE="/home/$USERNAME/.bash_profile"
-fi
-tee "$AUTOSTART_PROFILE" >/dev/null <<'EOF'
+    sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
+    sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf >/dev/null <<EOF
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin $USERNAME --skip-login --nonewline --noissue --noclear %I \$TERM
+Type=idle
+EOF
+
+    LOGIN_SHELL=$(getent passwd "$USERNAME" | cut -d: -f7)
+    if [[ "$(basename "$LOGIN_SHELL")" == "zsh" ]]; then
+        AUTOSTART_PROFILE="/home/$USERNAME/.zprofile"
+    else
+        AUTOSTART_PROFILE="/home/$USERNAME/.bash_profile"
+    fi
+    tee "$AUTOSTART_PROFILE" >/dev/null <<'EOF'
 if [[ -z "$WAYLAND_DISPLAY" && "$(tty)" == "/dev/tty1" ]]; then
     if uwsm check may-start; then
         exec uwsm start hyprland.desktop >/dev/null 2>&1
     fi
 fi
 EOF
+fi
 
 # the Hyprland Lua config and hypr-shell's config.json carry absolute paths
 for f in hypr/conf/keybinds.lua hypr/conf/autostart.lua hypr-shell/config.json; do
