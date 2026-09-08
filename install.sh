@@ -10,6 +10,9 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
+# All interactive input happens here, before the long unattended run.
+read -rp "Install Plymouth boot splash? (y/n): " INSTALL_PLYMOUTH
+
 # Ask for the sudo password once, up front, and keep the credential cache
 # fresh in the background — the pacman/yay/makepkg steps outlast sudo's
 # 15-minute timeout, and a mid-run re-prompt would stall the install.
@@ -249,6 +252,16 @@ ExecStart=
 ExecStart=-/usr/bin/agetty --autologin $USERNAME --skip-login --nonewline --noissue --noclear %I \$TERM
 Type=idle
 EOF
+
+# Plymouth boot splash (optional). arch.sh already boots quiet with early KMS
+# (i915 + nvidia in MODULES, systemd hook, systemd-boot entry), so this is
+# just the hook, the `splash` kernel arg and a theme: the default theme minus
+# the Arch logo under the spinner, boot-only (no shutdown splash). It all
+# lives in scripts/plymouth.sh, which can also add or remove it later on the
+# running system: ./scripts/plymouth.sh install|remove|status
+if [[ "${INSTALL_PLYMOUTH,,}" == y* ]]; then
+    ./scripts/plymouth.sh install
+fi
 
 LOGIN_SHELL=$(getent passwd "$USERNAME" | cut -d: -f7)
 if [[ "$(basename "$LOGIN_SHELL")" == "zsh" ]]; then
