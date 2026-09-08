@@ -20,7 +20,11 @@
 #      clone the default. Cloning instead of deleting the file from the
 #      package's own theme means a plymouth upgrade can't bring the logo back.
 #      bgrt has no images of its own (its ImageDir points at spinner), so the
-#      clone is built from whatever ImageDir the theme uses.
+#      clone is built from whatever ImageDir the theme uses. The clone also
+#      gets a bigger, lower spinner: the throbber-*.png frames are redrawn as
+#      vectors at SPINNER_SIZE px (the two-step plugin has no scale key of its
+#      own, and upscaling the 32 px originals looks blurry) and
+#      VerticalAlignment is set to SPINNER_VALIGN.
 #   5. rebuilds the initramfs (plymouth-set-default-theme -R)
 #   6. masks the poweroff/reboot/halt/kexec units so the splash shows at boot
 #      only — shutdown goes straight to the quiet, cursor-less console
@@ -39,6 +43,12 @@ ENTRIES=/boot/loader/entries
 THEMES=/usr/share/plymouth/themes
 UNITS=(plymouth-poweroff.service plymouth-reboot.service plymouth-halt.service plymouth-kexec.service)
 
+# Spinner tweaks applied to the -nologo clone. Upstream frames are 32 px and
+# sit at VerticalAlignment=.7 (0 = top edge, 1 = bottom edge of the screen).
+SPINNER_SIZE=48
+SPINNER_VALIGN=.76
+SPINNER_FRAMES=30   # same count as upstream, so the rotation speed is unchanged
+
 msg() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 die() { printf '\033[1;31merror:\033[0m %s\n' "$*" >&2; exit 1; }
 
@@ -51,9 +61,28 @@ base_theme() {
     echo "${theme:-spinner}"
 }
 
+# One frame of the GNOME/Adwaita spinner as SVG on stdout (frame 1..SPINNER_FRAMES).
+# Geometry is measured from the upstream 32 px throbber-*.png frames: a 4-unit
+# ring of radius 9.5 on a 32-unit canvas, the track in #7c7c7c at 24 %
+# opacity, and a white 96° arc with round caps that advances
+# 360/SPINNER_FRAMES degrees per frame (clockwise, starting near 3 o'clock).
+# Rendering the SVG at SPINNER_SIZE gives crisp edges at any size.
+spinner_frame_svg() {
+    awk -v n="$1" -v frames="$SPINNER_FRAMES" 'BEGIN {
+        pi = atan2(0, -1); r = 9.5; sweep = 96
+        start = -6 + (n - 1) * 360 / frames
+        a0 = start * pi / 180; a1 = (start + sweep) * pi / 180
+        printf "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\">\n"
+        printf "<circle cx=\"16\" cy=\"16\" r=\"%s\" fill=\"none\" stroke=\"#7c7c7c\" stroke-opacity=\"0.243\" stroke-width=\"4\"/>\n", r
+        printf "<path d=\"M %.4f %.4f A %s %s 0 0 1 %.4f %.4f\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n", \
+            16 + r * cos(a0), 16 + r * sin(a0), r, r, 16 + r * cos(a1), 16 + r * sin(a1)
+        printf "</svg>\n"
+    }'
+}
+
 do_install() {
-    msg "Installing plymouth"
-    sudo pacman -S --noconfirm --needed plymouth
+    msg "Installing plymouth (and librsvg, whose rsvg-convert renders the spinner frames)"
+    sudo pacman -S --noconfirm --needed plymouth librsvg
 
     msg "Adding the plymouth mkinitcpio hook"
     if grep -Eq '^HOOKS=.*\bplymouth\b' "$MKINITCPIO"; then
@@ -98,9 +127,32 @@ do_install() {
         -e 's/^(Name=.*)/\1 (no logo)/' \
         -e "s|^ImageDir=.*|ImageDir=$dst|" \
         -e "s|^ScriptFile=$src_dir/|ScriptFile=$dst/|" \
+        -e "s|^VerticalAlignment=.*|VerticalAlignment=$SPINNER_VALIGN|" \
         "$src_conf" | sudo tee "$dst/$theme-nologo.plymouth" >/dev/null
     if ! grep -q '^ImageDir=' "$dst/$theme-nologo.plymouth"; then
         sudo sed -i "/^\[two-step\]/a ImageDir=$dst" "$dst/$theme-nologo.plymouth"
+    fi
+    if ! grep -q '^VerticalAlignment=' "$dst/$theme-nologo.plymouth"; then
+        sudo sed -i "/^\[two-step\]/a VerticalAlignment=$SPINNER_VALIGN" "$dst/$theme-nologo.plymouth"
+    fi
+
+    # Bigger spinner: the two-step plugin draws the throbber-*.png frames at
+    # their pixel size, so replace the clone's copies with frames rendered
+    # from vector art at SPINNER_SIZE (the package's own frames stay untouched).
+    if compgen -G "$dst/throbber-*.png" >/dev/null; then
+        msg "Rendering $SPINNER_FRAMES spinner frames at ${SPINNER_SIZE}px, VerticalAlignment=$SPINNER_VALIGN"
+        local tmp i name
+        tmp=$(mktemp -d)
+        for ((i = 1; i <= SPINNER_FRAMES; i++)); do
+            name=$(printf 'throbber-%04d' "$i")
+            spinner_frame_svg "$i" > "$tmp/$name.svg"
+            rsvg-convert -w "$SPINNER_SIZE" -h "$SPINNER_SIZE" "$tmp/$name.svg" -o "$tmp/$name.png"
+        done
+        sudo rm -f "$dst"/throbber-*.png
+        sudo cp "$tmp"/throbber-*.png "$dst/"
+        rm -rf "$tmp"
+    else
+        echo "theme has no throbber-*.png frames — spinner size left as is"
     fi
 
     msg "Setting $theme-nologo as default and rebuilding the initramfs"

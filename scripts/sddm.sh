@@ -25,8 +25,14 @@
 #      shell does) and selects it via a drop-in in /etc/sddm.conf.d/ (Arch
 #      ships no /etc/sddm.conf), together with the desktop's cursor
 #      (BreezeX-Light, 24 — breezex-cursor-theme from the AUR, installed via
-#      yay if missing; xorg-xsetroot so sddm can actually apply it to the X
-#      root window, and the same XCURSOR_* in GreeterEnvironment)
+#      yay if missing). The cursor reaches the greeter through three paths:
+#      sddm's CursorTheme (applied to the X root window with xsetroot, hence
+#      xorg-xsetroot), the same XCURSOR_* in GreeterEnvironment, and — the one
+#      that actually matters for the greeter's own windows — an Xsetup
+#      (DisplayCommand) script that sets the Xcursor.theme/Xcursor.size X
+#      resources with xrdb (hence xorg-xrdb). Qt6's xcb backend loads cursors
+#      via libxcb-cursor, which ignores XCURSOR_THEME and reads only those
+#      resources; without them it falls back to the `default` theme (Adwaita).
 #   3. installs assets/profile.png as the user's SDDM avatar in
 #      /usr/share/sddm/faces/ — the greeter runs as the sddm user and can't
 #      read ~/.face.icon inside a 0700 home
@@ -59,6 +65,9 @@ FACES_DIR=/usr/share/sddm/faces
 CONF_DIR=/etc/sddm.conf.d
 THEME_CONF=$CONF_DIR/10-theme.conf
 STATE_FILE=/var/lib/sddm/state.conf
+# sddm runs this as root on the greeter's X display before the greeter starts
+# ([X11] DisplayCommand). Ours only sets the cursor X resources, see above.
+XSETUP=/usr/local/bin/sddm-xsetup
 UWSM_SESSION=/usr/share/wayland-sessions/hyprland-uwsm.desktop
 GETTY_DIR=/etc/systemd/system/getty@tty1.service.d
 GETTY_OVERRIDE=$GETTY_DIR/override.conf
@@ -132,12 +141,14 @@ EOF
 do_install() {
     [[ -d "$THEME_SRC/$THEME" ]] || die "theme directory $THEME_SRC/$THEME not found"
 
-    msg "Installing sddm, qt6-5compat, xsetroot and the theme font"
+    msg "Installing sddm, qt6-5compat, xsetroot, xrdb and the theme font"
     # ttf-fira-sans: the theme renders in Fira Sans (the desktop's interface
     # font). xorg-xsetroot: sddm applies CursorTheme to the X root window by
     # running `xsetroot -cursor_name left_ptr`; without it the journal shows
-    # "Could not setup default cursor" and the greeter keeps X's stock cursor.
-    sudo pacman -S --noconfirm --needed sddm ttf-fira-sans xorg-xsetroot
+    # "Could not setup default cursor" and the root window keeps X's stock
+    # cursor. xorg-xrdb: our Xsetup script sets the Xcursor.* X resources,
+    # the only cursor-theme source Qt6's xcb backend (libxcb-cursor) honours.
+    sudo pacman -S --noconfirm --needed sddm ttf-fira-sans xorg-xsetroot xorg-xrdb
     # As a dependency, so `uninstall` can drop it again once nothing needs it.
     sudo pacman -S --noconfirm --needed --asdeps qt6-5compat
 
@@ -196,11 +207,32 @@ do_install() {
         echo "yay not found — install breezex-cursor-theme (AUR) by hand, the greeter falls back to the default cursor until then" >&2
     fi
 
+    msg "Installing $XSETUP (cursor X resources for the greeter)"
+    # Qt6's xcb platform plugin loads cursors through libxcb-cursor, which
+    # does not read XCURSOR_THEME — it takes the theme from the Xcursor.theme
+    # X resource on the root window (and the size from Xcursor.size or
+    # XCURSOR_SIZE), falling back to /usr/share/icons/default (Adwaita) when
+    # unset. sddm runs DisplayCommand as root with DISPLAY/XAUTHORITY set,
+    # before the greeter starts, so that is where the resources get loaded.
+    # -nocpp: don't require a C preprocessor just to merge two lines.
+    sudo install -d "$(dirname "$XSETUP")"
+    sudo tee "$XSETUP" >/dev/null <<EOF
+#!/bin/sh
+# Written by dotfiles/scripts/sddm.sh — sddm's [X11] DisplayCommand.
+# Sets the cursor theme for the greeter: Qt6's xcb backend (libxcb-cursor)
+# ignores XCURSOR_THEME and only honours the Xcursor.theme/Xcursor.size
+# X resources, so load them before the greeter starts.
+printf 'Xcursor.theme: %s\nXcursor.size: %s\n' "$CURSOR_THEME" "$CURSOR_SIZE" | xrdb -nocpp -merge -
+EOF
+    sudo chmod 755 "$XSETUP"
+
     msg "Selecting $THEME and the $CURSOR_THEME cursor in $THEME_CONF"
     sudo mkdir -p "$CONF_DIR"
-    # CursorTheme/CursorSize cover the root window (xsetroot) and the greeter;
-    # GreeterEnvironment passes the same XCURSOR_* the desktop sets in
-    # environment.lua straight to the greeter process as well.
+    # CursorTheme/CursorSize cover the root window (xsetroot); GreeterEnvironment
+    # passes the same XCURSOR_* the desktop sets in environment.lua to the
+    # greeter process (libxcb-cursor uses XCURSOR_SIZE); DisplayCommand runs
+    # the Xsetup script above, which is what makes the greeter's own windows
+    # use the theme.
     sudo tee "$THEME_CONF" >/dev/null <<EOF
 [General]
 GreeterEnvironment=XCURSOR_THEME=$CURSOR_THEME,XCURSOR_SIZE=$CURSOR_SIZE
@@ -209,6 +241,9 @@ GreeterEnvironment=XCURSOR_THEME=$CURSOR_THEME,XCURSOR_SIZE=$CURSOR_SIZE
 Current=$THEME
 CursorTheme=$CURSOR_THEME
 CursorSize=$CURSOR_SIZE
+
+[X11]
+DisplayCommand=$XSETUP
 EOF
 
     msg "Installing the SDDM avatar for $USERNAME"
@@ -247,9 +282,9 @@ do_uninstall() {
     msg "Disabling sddm.service"
     sudo systemctl disable sddm.service 2>/dev/null || echo "not enabled"
 
-    msg "Removing the theme, its config drop-in, the avatar and SDDM's state"
+    msg "Removing the theme, its config drop-in, the Xsetup script, the avatar and SDDM's state"
     sudo rm -rf "$THEMES_DIR/$THEME"
-    sudo rm -f "$THEME_CONF" "$FACES_DIR/$USERNAME.face.icon" "$STATE_FILE"
+    sudo rm -f "$THEME_CONF" "$XSETUP" "$FACES_DIR/$USERNAME.face.icon" "$STATE_FILE"
     [[ -d "$CONF_DIR" ]] && sudo rmdir --ignore-fail-on-non-empty "$CONF_DIR"
 
     if pacman -Qq sddm >/dev/null 2>&1; then
@@ -281,9 +316,14 @@ do_status() {
         echo "theme:     $THEME absent"
     fi
     if [[ -f "$THEME_CONF" ]]; then
-        echo "config:    theme $(sed -nE 's/^Current=//p' "$THEME_CONF"), cursor $(sed -nE 's/^CursorTheme=//p' "$THEME_CONF") $(sed -nE 's/^CursorSize=//p' "$THEME_CONF") — $THEME_CONF"
+        echo "config:    theme $(sed -nE 's/^Current=//p' "$THEME_CONF"), cursor $(sed -nE 's/^CursorTheme=//p' "$THEME_CONF") $(sed -nE 's/^CursorSize=//p' "$THEME_CONF"), DisplayCommand $(sed -nE 's/^DisplayCommand=//p' "$THEME_CONF" | grep . || echo unset) — $THEME_CONF"
     else
         echo "config:    no $THEME_CONF"
+    fi
+    if [[ -x "$XSETUP" ]]; then
+        echo "xsetup:    $XSETUP — $(tail -n1 "$XSETUP")"
+    else
+        echo "xsetup:    none — the greeter falls back to the default (Adwaita) cursor"
     fi
     if [[ -f "$FACES_DIR/$USERNAME.face.icon" ]]; then
         echo "avatar:    $FACES_DIR/$USERNAME.face.icon"
