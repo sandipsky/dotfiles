@@ -7,6 +7,17 @@
 // that open lock-screen-style menus: sessions, users (when there are several)
 // and power. Colours are the tokens hypr-shell derives from ui.accent in dark
 // mode, so the greeter matches whatever accent the desktop uses.
+//
+// theme.conf keys (theme.conf.user overrides them; scripts/sddm.sh writes the
+// accent, hypr-shell-settings' "Login screen" page writes the rest):
+//   accent           #rrggbb   hypr-shell ui.accent
+//   background       #rrggbb   solid colour (default: GDM's #222226)
+//   backgroundMode   color|image
+//   backgroundImage  file (relative to the theme dir or absolute), image mode
+//   backgroundBlur   0–1, like lock_screen.blur (× 48 px), image mode only
+//   showSessionMenu  true|false — the session button bottom-right
+//   defaultSession   a /usr/share/{wayland-,x}sessions/*.desktop path that
+//                    is preselected instead of SDDM's remembered session
 import QtQuick 2.15
 import Qt5Compat.GraphicalEffects
 import SddmComponents 2.0
@@ -59,12 +70,45 @@ Rectangle {
     FontLoader { id: iconFont; source: "fonts/noctalia-tabler-icons.ttf" }
     TextConstants { id: textConstants }
 
+    // ---- background -------------------------------------------------------
+    // Solid colour (the Rectangle above) unless backgroundMode=image: then the
+    // image, the lock screen's blur (0–1 → 0–48 px) and its four-stop
+    // darkening gradient (.lock-gradient).
+    readonly property bool imageBackground: String(config.backgroundMode) === "image"
+                                            && String(config.backgroundImage || "") !== ""
+    readonly property real backgroundBlur: Math.min(1, Math.max(0, parseFloat(config.backgroundBlur) || 0))
+    Image {
+        id: wallpaper
+        anchors.fill: parent
+        visible: imageBackground
+        source: imageBackground ? config.backgroundImage : ""
+        fillMode: Image.PreserveAspectCrop
+        smooth: true
+    }
+    FastBlur {
+        anchors.fill: wallpaper
+        source: wallpaper
+        radius: Math.round(backgroundBlur * 48)
+        visible: imageBackground && wallpaper.status === Image.Ready && backgroundBlur > 0
+    }
+    Rectangle {
+        anchors.fill: parent
+        visible: imageBackground && wallpaper.status === Image.Ready
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0.4) }
+            GradientStop { position: 0.3; color: Qt.rgba(0, 0, 0, 0.2) }
+            GradientStop { position: 0.7; color: Qt.rgba(0, 0, 0, 0.25) }
+            GradientStop { position: 1.0; color: Qt.rgba(0, 0, 0, 0.5) }
+        }
+    }
+
     // ---- state ------------------------------------------------------------
     property string userName: userModel.lastUser
     property string displayName: userName
     property url avatarSource: ""
     property int sessionIndex: Math.max(0, sessionModel.lastIndex)
     property bool busy: false
+    readonly property bool showSessionMenu: String(config.showSessionMenu) !== "false"
 
     // Invisible copies of the two models so rows can be looked up by index.
     Item {
@@ -81,7 +125,10 @@ Rectangle {
         Repeater {
             id: sessions
             model: sessionModel
-            delegate: Item { property string label: name }
+            delegate: Item {
+                property string label: name
+                property string path: file
+            }
         }
     }
 
@@ -99,6 +146,11 @@ Rectangle {
         for (var i = 0; i < users.count; i++)
             if (users.itemAt(i).login === userModel.lastUser) idx = i
         selectUser(idx)
+        // A configured default session beats SDDM's remembered one.
+        var wanted = String(config.defaultSession || "")
+        if (wanted !== "")
+            for (var s = 0; s < sessions.count; s++)
+                if (sessions.itemAt(s).path === wanted) sessionIndex = s
     }
 
     function login() {
@@ -374,7 +426,7 @@ Rectangle {
         }
         IconButton {
             id: sessionButton
-            visible: sessions.count > 1
+            visible: sessions.count > 1 && showSessionMenu
             glyph: ""
             active: sessionMenu.open
             onClicked: toggleMenu(sessionMenu)

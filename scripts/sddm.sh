@@ -143,23 +143,45 @@ do_install() {
 
     msg "Installing the $THEME theme to $THEMES_DIR"
     sudo mkdir -p "$THEMES_DIR"
+    # Keep what hypr-shell-settings' "Login screen" page wrote into the theme
+    # dir (theme.conf.user and a copied background image) across the re-copy.
+    local keep f
+    keep=$(mktemp -d)
+    for f in "$THEMES_DIR/$THEME"/theme.conf.user "$THEMES_DIR/$THEME"/background.*; do
+        [[ -f "$f" ]] && sudo cp -p "$f" "$keep/"
+    done
     sudo rm -rf "$THEMES_DIR/$THEME"
     sudo cp -r "$THEME_SRC/$THEME" "$THEMES_DIR/"
+    for f in "$keep"/*; do
+        [[ -f "$f" ]] && sudo cp -p "$f" "$THEMES_DIR/$THEME/" && echo "kept $(basename "$f")"
+    done
+    sudo rm -rf "$keep"
     sudo chown -R root:root "$THEMES_DIR/$THEME"
     sudo chmod -R u=rwX,go=rX "$THEMES_DIR/$THEME"
 
     # The theme derives its colours from hypr-shell's accent (same maths as
     # the shell's palette.hpp), so the greeter matches the desktop. Take the
     # live value from the user's config, else the repo snapshot; theme.conf.user
-    # overrides theme.conf without touching the vendored file.
+    # overrides theme.conf without touching the vendored file. The same file
+    # holds the "Login screen" page's settings (background, session menu,
+    # default session) — only the accent key is touched here.
     msg "Matching hypr-shell's accent colour"
     accent=""
     for cfg in "/home/$USERNAME/.config/hypr-shell/config.json" "$REPO_DIR/config/hypr-shell/config.json"; do
         [[ -f "$cfg" ]] && command -v jq >/dev/null 2>&1 || continue
         accent=$(jq -r '.ui.accent // empty' "$cfg" 2>/dev/null) && [[ -n "$accent" ]] && break
     done
+    local user_conf="$THEMES_DIR/$THEME/theme.conf.user"
     if [[ "$accent" =~ ^#[0-9a-fA-F]{6}$ ]]; then
-        printf '[General]\naccent=%s\n' "$accent" | sudo tee "$THEMES_DIR/$THEME/theme.conf.user" >/dev/null
+        # Replace-or-append: the file also carries the Login screen page's
+        # settings (single [General] section), which must survive.
+        if [[ -f "$user_conf" ]] && grep -q '^accent=' "$user_conf"; then
+            sudo sed -i "s|^accent=.*|accent=$accent|" "$user_conf"
+        elif [[ -f "$user_conf" ]]; then
+            printf 'accent=%s\n' "$accent" | sudo tee -a "$user_conf" >/dev/null
+        else
+            printf '[General]\naccent=%s\n' "$accent" | sudo tee "$user_conf" >/dev/null
+        fi
         echo "accent $accent (from $cfg)"
     else
         echo "no ui.accent found (jq missing or no config.json) — the theme's default applies"
