@@ -299,6 +299,28 @@ sudo -u "$USERNAME" -H xdg-mime default org.gnome.TextEditor.desktop application
 
 sudo -u "$USERNAME" -H xdg-user-dirs-update
 
+# ~/Projects as an extra XDG user dir. xdg-user-dirs-update only creates the
+# standard eight, but keeps any local additions to user-dirs.dirs, so the
+# line survives its later runs.
+USER_DIRS="/home/$USERNAME/.config/user-dirs.dirs"
+if ! grep -q '^XDG_PROJECTS_DIR=' "$USER_DIRS" 2>/dev/null; then
+    echo 'XDG_PROJECTS_DIR="$HOME/Projects"' >> "$USER_DIRS"
+fi
+mkdir -p "/home/$USERNAME/Projects"
+
+# Sidebar shortcuts. Nautilus lists the user folders from the GTK bookmarks
+# file; on GNOME xdg-user-dirs-gtk-update seeds it at login, but its autostart
+# entry is OnlyShowIn=GNOME/XFCE/..., so under Hyprland the sidebar stays at
+# Home/Starred/Network/Trash unless we write the bookmarks ourselves.
+# Append-if-missing, so bookmarks added later in Nautilus are kept.
+BOOKMARKS="/home/$USERNAME/.config/gtk-3.0/bookmarks"
+mkdir -p "$(dirname "$BOOKMARKS")"
+touch "$BOOKMARKS"
+for dir in Documents Downloads Music Pictures Videos Projects; do
+    mkdir -p "/home/$USERNAME/$dir"
+    grep -qxF "file:///home/$USERNAME/$dir" "$BOOKMARKS" || echo "file:///home/$USERNAME/$dir" >> "$BOOKMARKS"
+done
+
 sudo -u "$USERNAME" -H bash -c "cd '$PWD/applications/music' && echo Y | ./install.sh"
 
 sudo -u "$USERNAME" rm -f /home/$USERNAME/.gnupg/public-keys.d/pubring.db.lock
