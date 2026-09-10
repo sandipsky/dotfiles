@@ -86,7 +86,6 @@ sudo pacman -S --noconfirm --needed \
     obs-studio \
     qbittorrent \
     ffmpeg \
-    libreoffice-fresh \
     ntfsprogs \
     xdg-user-dirs
 
@@ -155,28 +154,10 @@ for file in "${files[@]}"; do
     fi
 done
 
-# LibreOffice: only Writer, Calc and Impress stay visible in the launcher.
-# These .desktop files can't use the plain append above — they end with a
-# [Desktop Action] section (so an appended key lands in the wrong section),
-# and startcenter/math ship an explicit NoDisplay=false that overrides any
-# earlier NoDisplay=true (GKeyFile takes the last occurrence of a key).
-# NoDisplay=true must therefore be the last key of [Desktop Entry], i.e.
-# inserted right before the Actions= line.
-for src in /usr/share/applications/libreoffice-*.desktop; do
-    [[ -f "$src" ]] || continue
-    name=$(basename "$src")
-    case "$name" in
-        libreoffice-writer.desktop|libreoffice-calc.desktop|libreoffice-impress.desktop)
-            continue ;;
-    esac
-    dest="$APPS_DIR/$name"
-    cp "$src" "$dest"
-    if grep -q '^Actions=' "$dest"; then
-        sed -i '/^Actions=/i NoDisplay=true' "$dest"
-    else
-        echo 'NoDisplay=true' >> "$dest"
-    fi
-done
+# LibreOffice: scripts/office.sh installs libreoffice-fresh and hides
+# everything but Writer, Calc and Impress from the launcher (same script
+# install.sh uses; ./scripts/office.sh remove undoes it later).
+"$REPO_DIR"/scripts/office.sh install
 
 sudo cp "$REPO_DIR"/assets/icons/* /usr/share/icons/hicolor/scalable/apps/
 

@@ -13,6 +13,7 @@ fi
 # All interactive input happens here, before the long unattended run.
 read -rp "Install Plymouth boot splash? (y/n): " INSTALL_PLYMOUTH
 read -rp "Install SDDM login screen (Elegant theme) instead of direct login into Hyprland? (y/n): " INSTALL_SDDM
+read -rp "Install LibreOffice (Writer, Calc, Impress)? (y/n): " INSTALL_OFFICE
 
 # Ask for the sudo password once, up front, and keep the credential cache
 # fresh in the background — the pacman/yay/makepkg steps outlast sudo's
@@ -65,7 +66,6 @@ sudo pacman -S --noconfirm --needed \
     slurp \
     gnome-calculator \
     evince \
-    libreoffice-fresh \
     loupe \
     file-roller \
     gnome-text-editor \
@@ -200,27 +200,14 @@ for file in "${files[@]}"; do
     fi
 done
 
-# LibreOffice: only Writer, Calc and Impress stay visible in the launcher.
-# These .desktop files can't use the plain append above — they end with a
-# [Desktop Action] section (so an appended key lands in the wrong section),
-# and startcenter/math ship an explicit NoDisplay=false that overrides any
-# earlier NoDisplay=true (GKeyFile takes the last occurrence of a key).
-# NoDisplay=true must therefore be the last key of [Desktop Entry], i.e.
-# inserted right before the Actions= line.
-for src in /usr/share/applications/libreoffice-*.desktop; do
-    name=$(basename "$src")
-    case "$name" in
-        libreoffice-writer.desktop|libreoffice-calc.desktop|libreoffice-impress.desktop)
-            continue ;;
-    esac
-    dest="$APPS_DIR/$name"
-    sudo -u "$USERNAME" cp "$src" "$dest"
-    if grep -q '^Actions=' "$dest"; then
-        sudo -u "$USERNAME" sed -i '/^Actions=/i NoDisplay=true' "$dest"
-    else
-        sudo -u "$USERNAME" bash -c "echo 'NoDisplay=true' >> '$dest'"
-    fi
-done
+# LibreOffice (optional). scripts/office.sh installs libreoffice-fresh and
+# hides everything but Writer, Calc and Impress from the launcher (NoDisplay
+# overrides in ~/.local/share/applications — see the script for why they
+# can't use the plain append above). It can also add or remove the suite
+# later on the running system: ./scripts/office.sh install|remove|status
+if [[ "${INSTALL_OFFICE,,}" == y* ]]; then
+    ./scripts/office.sh install
+fi
 
 # OBS Studio and qBittorrent (Qt apps) render too small — launch them at
 # 125% scaling via local .desktop overrides.
