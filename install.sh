@@ -316,6 +316,11 @@ sudo -u "$USERNAME" -H xdg-mime default org.gnome.Loupe.desktop image/webp
 sudo -u "$USERNAME" -H xdg-mime default org.gnome.TextEditor.desktop text/plain
 sudo -u "$USERNAME" -H xdg-mime default org.gnome.TextEditor.desktop application/x-shellscript
 
+# PDFs always open in Evince, whether or not LibreOffice was installed above
+# (LibreOffice Draw registers itself for application/pdf and would otherwise
+# grab the association).
+sudo -u "$USERNAME" -H xdg-mime default org.gnome.Evince.desktop application/pdf
+
 sudo -u "$USERNAME" -H xdg-user-dirs-update
 
 # ~/Projects as an extra XDG user dir. xdg-user-dirs-update only creates the
