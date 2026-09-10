@@ -6,6 +6,8 @@
 #   ./scripts/secrets.sh encrypt   scripts/github.sh -> scripts/github.sh.enc
 #   ./scripts/secrets.sh check     verify the password decrypts github.sh.enc
 #   ./scripts/secrets.sh decrypt   print the decrypted script to stdout
+#   ./scripts/secrets.sh restore   scripts/github.sh.enc -> scripts/github.sh
+#                                  (refuses to overwrite an existing plaintext)
 #   ./scripts/secrets.sh run       decrypt and run it (clones into ~/Projects)
 #
 # The password is read from the SECRET_PASSWORD environment variable when set
@@ -42,17 +44,29 @@ case "${1:-}" in
         ;;
     check)
         [[ -f "$ENC" ]] || { echo "$ENC not found." >&2; exit 1; }
-        decrypt > /dev/null
+        decrypt > /dev/null || { echo "Wrong password or corrupt ${ENC#$ROOT/}." >&2; exit 1; }
+        echo "OK: password decrypts ${ENC#$ROOT/}"
         ;;
     decrypt)
-        decrypt
+        decrypt || { echo "Wrong password or corrupt ${ENC#$ROOT/}." >&2; exit 1; }
+        ;;
+    restore)
+        [[ -f "$ENC" ]] || { echo "$ENC not found." >&2; exit 1; }
+        if [[ -e "$PLAIN" ]]; then
+            echo "${PLAIN#$ROOT/} already exists — remove it first (or run 'encrypt' if it has newer edits)." >&2
+            exit 1
+        fi
+        script=$(decrypt) || { echo "Wrong password or corrupt ${ENC#$ROOT/}." >&2; exit 1; }
+        (umask 077; printf '%s\n' "$script" > "$PLAIN")
+        chmod 700 "$PLAIN"
+        echo "Wrote ${PLAIN#$ROOT/}"
         ;;
     run)
         script=$(decrypt) || { echo "Wrong password or corrupt ${ENC#$ROOT/}." >&2; exit 1; }
         bash -c "$script"
         ;;
     *)
-        echo "Usage: $0 encrypt|check|decrypt|run" >&2
+        echo "Usage: $0 encrypt|check|decrypt|restore|run" >&2
         exit 1
         ;;
 esac
