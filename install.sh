@@ -14,6 +14,7 @@ fi
 read -rp "Install Plymouth boot splash? (y/n): " INSTALL_PLYMOUTH
 read -rp "Install SDDM login screen (Elegant theme) instead of direct login into Hyprland? (y/n): " INSTALL_SDDM
 read -rp "Install LibreOffice (Writer, Calc, Impress)? (y/n): " INSTALL_OFFICE
+read -rp "Install VirtualBox (VM host, with the guest-additions ISO)? (y/n): " INSTALL_VIRTUALBOX
 read -rp "Clone your GitHub projects into ~/Projects? (needs the secrets password) (y/n): " CLONE_PROJECTS
 
 # The clone script carries a GitHub token, so the repo only holds it encrypted
@@ -229,6 +230,15 @@ done
 # later on the running system: ./scripts/office.sh install|remove|status
 if [[ "${INSTALL_OFFICE,,}" == y* ]]; then
     ./scripts/office.sh install
+fi
+
+# VirtualBox (optional). scripts/virtualbox.sh installs virtualbox, the dkms
+# host modules (Arch no longer ships prebuilt ones) with the headers for every
+# installed kernel, and the guest-additions ISO, then adds the user to
+# vboxusers for USB passthrough. It can also add or remove it later on the
+# running system: ./scripts/virtualbox.sh install|remove|status
+if [[ "${INSTALL_VIRTUALBOX,,}" == y* ]]; then
+    ./scripts/virtualbox.sh install
 fi
 
 # OBS Studio and qBittorrent (Qt apps) render too small — launch them at
