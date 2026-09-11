@@ -74,6 +74,7 @@ sudo pacman -S --noconfirm --needed \
     polkit-gnome \
     blueman \
     jq \
+    git \
     alacritty \
     xdg-user-dirs-gtk \
     obs-studio \
@@ -100,16 +101,18 @@ yay -S --noconfirm --needed \
 sudo -u "$USERNAME" -H bash -c "curl -fsSL https://claude.ai/install.sh | bash"
 
 # hypr-shell — the GTK4 bar/shell (bar, launcher, control center, notifications,
-# lock/idle, night light, wallpaper, OSDs). Built from the vendored source
-# tarball in applications/hypr-shell/ (a `git archive` of the hypr-shell repo,
-# refreshed by running ./package.sh in that repo and copying
-# dist/hypr-shell.tar.gz here) instead of cloning it: the install reproduces offline and can't be affected
-# by the repo moving. Its own install.sh installs the pacman build deps it is
-# missing (gtkmm-4.0, gtk4-layer-shell, libadwaita, ...) and builds into
-# ~/.local (binaries, icon fonts, desktop entry); autostart.lua and the
-# keybinds call /home/$USERNAME/.local/bin/hypr-shell by absolute path.
+# lock/idle, night light, wallpaper, OSDs). Cloned fresh from its GitHub repo
+# (public, so no token) into a temp dir and built from there — the repo moves
+# too fast to keep a vendored snapshot in sync, so this step needs network
+# (it just ran pacman/yay, so that's already a given). Its own install.sh
+# installs the pacman build deps it is missing (gtkmm-4.0, gtk4-layer-shell,
+# libadwaita, ...) and builds into ~/.local (binaries, icon fonts, desktop
+# entry); autostart.lua and the keybinds call /home/$USERNAME/.local/bin/hypr-shell
+# by absolute path. The throwaway clone is removed afterwards; the dev checkout
+# at ~/Projects/hypr-shell comes from the project-clone step at the end.
+HYPR_SHELL_REPO=https://github.com/sandipsky/hypr-shell
 BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
-sudo -u "$USERNAME" tar -xzf applications/hypr-shell/hypr-shell.tar.gz -C "$BUILD_DIR"
+sudo -u "$USERNAME" git clone --depth 1 "$HYPR_SHELL_REPO" "$BUILD_DIR/hypr-shell"
 (cd "$BUILD_DIR/hypr-shell" && sudo -u "$USERNAME" -H ./install.sh)
 rm -rf "$BUILD_DIR"
 
