@@ -54,6 +54,11 @@ hl.config({
     binds = {
         allow_workspace_cycles = true,
     },
+
+    ecosystem = {
+        no_update_news = true, -- never show the "Hyprland updated to X" popup
+        no_donation_nag = true,
+    },
 })
 
 hl.gesture({ fingers = 3, direction = "up",         action = "fullscreen" })
