@@ -23,3 +23,10 @@ hl.env("WLR_DRM_NO_ATOMIC", "1")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "0")
+-- Without a platform theme Qt falls back to its generic Unix theme: "Sans
+-- Serif" 9pt via fontconfig (Noto Sans here), ignoring the GTK font. The gtk3
+-- plugin ships with qt6-base and makes Qt apps (OBS, qBittorrent, VirtualBox)
+-- read gtk-font-name from gtk-3.0/settings.ini — Fira Sans 12 — plus the GTK
+-- dark-mode preference, icon theme and file dialogs. Applies to apps launched
+-- from this session; a reload only affects apps started afterwards.
+hl.env("QT_QPA_PLATFORMTHEME", "gtk3")

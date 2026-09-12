@@ -22,12 +22,18 @@
 #      a VM (takes effect at the next login; install.sh reboots anyway)
 #   3. loads the modules now, best-effort — the package's modules-load.d file
 #      loads them at every boot, and a fresh install reboots right after this
+#   4. writes a virtualbox.desktop override into ~/.local/share/applications
+#      that launches VirtualBox with QT_SCALE_FACTOR=1.25 — the same 125%
+#      treatment install.sh gives OBS and qBittorrent, since Qt apps render
+#      too small under Hyprland (every Exec= line gets the prefix, so the
+#      "Open VM Manager" action is covered too). The override is tagged with a
+#      marker comment so `remove` only ever deletes a file this script wrote.
 #
 # `remove` refuses while a VM is running, unloads the modules, removes the
-# packages (and the AUR extension pack if it was added by hand), and drops the
-# vboxusers membership. It deliberately keeps dkms and the kernel headers
-# (nvidia-open-dkms needs them) and never touches the user's VMs
-# (~/VirtualBox VMs) or settings (~/.config/VirtualBox).
+# packages (and the AUR extension pack if it was added by hand), drops the
+# vboxusers membership and deletes the .desktop override. It deliberately
+# keeps dkms and the kernel headers (nvidia-open-dkms needs them) and never
+# touches the user's VMs (~/VirtualBox VMs) or settings (~/.config/VirtualBox).
 #
 # Every step is idempotent — re-running either mode is harmless.
 
@@ -37,6 +43,10 @@ USERNAME=$(logname)
 PACKAGES=(virtualbox virtualbox-host-dkms virtualbox-guest-iso)
 MODULES=(vboxnetadp vboxnetflt vboxdrv)   # unload order; vboxdrv last (the others depend on it)
 GROUP=vboxusers
+APPS_DIR="/home/$USERNAME/.local/share/applications"
+DESKTOP=virtualbox.desktop
+SCALE=1.25
+MARKER='# scaled by dotfiles/scripts/virtualbox.sh'
 
 msg() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 die() { printf '\033[1;31merror:\033[0m %s\n' "$*" >&2; exit 1; }
@@ -95,6 +105,21 @@ do_install() {
         echo "could not load them for the running kernel — they load at the next boot"
     fi
 
+    msg "Launching VirtualBox at ${SCALE}x scaling ($APPS_DIR/$DESKTOP)"
+    if [[ -f "/usr/share/applications/$DESKTOP" ]]; then
+        mkdir -p "$APPS_DIR"
+        # Rewritten on every install so a new upstream entry (changed Exec,
+        # new actions) is picked up rather than pinned to an old copy.
+        {
+            echo "$MARKER"
+            sed "s|^Exec=|Exec=env QT_SCALE_FACTOR=$SCALE |" "/usr/share/applications/$DESKTOP"
+        } > "$APPS_DIR/$DESKTOP"
+        command -v update-desktop-database >/dev/null && update-desktop-database "$APPS_DIR" 2>/dev/null || true
+        echo "written"
+    else
+        echo "no /usr/share/applications/$DESKTOP — skipped" >&2
+    fi
+
     msg "Done — launch VirtualBox from the app menu"
 }
 
@@ -129,6 +154,17 @@ do_remove() {
         sudo pacman -Rns --noconfirm "${installed[@]}"
     else
         echo "VirtualBox is not installed"
+    fi
+
+    msg "Removing the scaling override"
+    if [[ -f "$APPS_DIR/$DESKTOP" ]] && grep -qxF "$MARKER" "$APPS_DIR/$DESKTOP"; then
+        rm -f "$APPS_DIR/$DESKTOP"
+        command -v update-desktop-database >/dev/null && update-desktop-database "$APPS_DIR" 2>/dev/null || true
+        echo "deleted"
+    elif [[ -f "$APPS_DIR/$DESKTOP" ]]; then
+        echo "$APPS_DIR/$DESKTOP was not written by this script — left alone"
+    else
+        echo "none"
     fi
 
     msg "Done — VMs in ~/VirtualBox VMs and ~/.config/VirtualBox were left alone"
@@ -172,6 +208,13 @@ do_status() {
         echo "group:    $USERNAME is in $GROUP"
     else
         echo "group:    $USERNAME is not in $GROUP"
+    fi
+    if [[ -f "$APPS_DIR/$DESKTOP" ]] && grep -qxF "$MARKER" "$APPS_DIR/$DESKTOP"; then
+        echo "scaling:  $DESKTOP override at ${SCALE}x (QT_SCALE_FACTOR)"
+    elif [[ -f "$APPS_DIR/$DESKTOP" ]]; then
+        echo "scaling:  $APPS_DIR/$DESKTOP exists but was not written by this script"
+    else
+        echo "scaling:  no override — VirtualBox launches at 1x"
     fi
 }
 
