@@ -193,20 +193,12 @@ files=(
     java-java25-openjdk.desktop
     jconsole-java25-openjdk.desktop
     jshell-java25-openjdk.desktop
-    assistant.desktop
-    designer.desktop
-    linguist.desktop
-    qdbusviewer.desktop
     xgpsspeed.desktop
     xgps.desktop
     vim.desktop
     org.freedesktop.IBus.Setup.desktop
     org.gnome.FileRoller.desktop
     remote-viewer.desktop
-    assistant.desktop
-    qdbusviewer.desktop
-    linguist.desktop
-    designer.desktop
     uuctl.desktop
 )
 
@@ -223,6 +215,33 @@ for file in "${files[@]}"; do
     fi
 done
 
+# The Qt developer tools shipped by qt6-tools (Qt Assistant, Qt Widgets
+# Designer, Qt Linguist, Qt D-Bus Viewer) are hidden unconditionally — the
+# override is written even when the package isn't installed yet. qt6-tools is
+# not in the pacman list above; it arrives as a dependency of virtualbox
+# (scripts/virtualbox.sh, which runs after this loop) or of whatever Qt app
+# gets installed later, and the loop above only copies files that already
+# exist. So: copy the system entry when present, otherwise write a stub with
+# the same Exec — GLib ignores an entry whose binary is missing, and the
+# moment qt6-tools appears the stub takes over the id and hides it.
+# virtualbox.sh's hide_qt_tools does the same thing (keep the two in sync).
+for file in assistant.desktop designer.desktop linguist.desktop qdbusviewer.desktop; do
+    src="/usr/share/applications/$file"
+    dest="$APPS_DIR/$file"
+    if [[ -f "$src" ]]; then
+        sudo -u "$USERNAME" cp "$src" "$dest"
+    else
+        sudo -u "$USERNAME" tee "$dest" >/dev/null <<EOT
+[Desktop Entry]
+Type=Application
+Name=Qt ${file%.desktop}
+Exec=${file%.desktop}6
+Categories=Qt;Development;
+EOT
+    fi
+    sudo -u "$USERNAME" bash -c "printf '# hidden by dotfiles/install.sh\nNoDisplay=true\n' >> '$dest'"
+done
+
 # LibreOffice (optional). scripts/office.sh installs libreoffice-fresh and
 # hides everything but Writer, Calc and Impress from the launcher (NoDisplay
 # overrides in ~/.local/share/applications — see the script for why they
@@ -235,7 +254,9 @@ fi
 # VirtualBox (optional). scripts/virtualbox.sh installs virtualbox, the dkms
 # host modules (Arch no longer ships prebuilt ones) with the headers for every
 # installed kernel, and the guest-additions ISO, then adds the user to
-# vboxusers for USB passthrough. It can also add or remove it later on the
+# vboxusers for USB passthrough. (Its qt6-tools dependency ships launcher
+# entries for the Qt developer tools; those are already hidden above, whether
+# or not VirtualBox is chosen.) It can also add or remove it later on the
 # running system:
 # ./scripts/virtualbox.sh install|remove|status
 if [[ "${INSTALL_VIRTUALBOX,,}" == y* ]]; then

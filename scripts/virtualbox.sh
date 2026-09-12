@@ -22,12 +22,22 @@
 #      a VM (takes effect at the next login; install.sh reboots anyway)
 #   3. loads the modules now, best-effort — the package's modules-load.d file
 #      loads them at every boot, and a fresh install reboots right after this
+#   4. hides the Qt developer tools that come along for the ride: virtualbox
+#      depends on qt6-tools, which ships launcher entries for Qt Assistant,
+#      Qt Widgets Designer, Qt Linguist and Qt D-Bus Viewer. They get
+#      NoDisplay=true overrides in ~/.local/share/applications (copies of the
+#      system files plus the key, each tagged with a marker comment). install.sh
+#      writes the same overrides unconditionally — as stubs when qt6-tools
+#      isn't installed yet — so on a fresh install this step only refreshes
+#      them; it matters when VirtualBox is added later on a running system.
 #
 # `remove` refuses while a VM is running, unloads the modules, removes the
 # packages (and the AUR extension pack if it was added by hand), and drops the
 # vboxusers membership. It deliberately keeps dkms and the kernel headers
-# (nvidia-open-dkms needs them) and never touches the user's VMs
-# (~/VirtualBox VMs) or settings (~/.config/VirtualBox).
+# (nvidia-open-dkms needs them), never touches the user's VMs
+# (~/VirtualBox VMs) or settings (~/.config/VirtualBox), and leaves the
+# Qt-tools overrides in place — those tools are hidden on this desktop no
+# matter what pulls qt6-tools in, not only because of VirtualBox.
 #
 # Every step is idempotent — re-running either mode is harmless.
 
@@ -37,9 +47,69 @@ USERNAME=$(logname)
 PACKAGES=(virtualbox virtualbox-host-dkms virtualbox-guest-iso)
 MODULES=(vboxnetadp vboxnetflt vboxdrv)   # unload order; vboxdrv last (the others depend on it)
 GROUP=vboxusers
+# Launcher entries shipped by qt6-tools (a virtualbox dependency) that have no
+# place in the app menu — hidden with NoDisplay=true overrides, same as
+# install.sh does unconditionally (keep the two in sync).
+QT_TOOLS_PKG=qt6-tools
+QT_TOOLS_ENTRIES=(assistant.desktop designer.desktop linguist.desktop qdbusviewer.desktop)
+SYSTEM_APPS=/usr/share/applications
+APPS_DIR="$HOME/.local/share/applications"
+# Written into every override so the scripts never touch a .desktop the user
+# created themselves; install.sh tags its copies "dotfiles/install.sh".
+MARKER='# hidden by dotfiles/scripts/virtualbox.sh'
+MARKER_PREFIX='# hidden by dotfiles/'
 
 msg() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 die() { printf '\033[1;31merror:\033[0m %s\n' "$*" >&2; exit 1; }
+
+[[ $EUID -eq 0 ]] && die "run this as your normal user, not with sudo — the launcher overrides go into your home"
+
+# An override in $APPS_DIR written by install.sh or this script: carries a
+# dotfiles marker, or (older install.sh runs, which wrote no marker) differs
+# from the system file only by NoDisplay=true. Anything else is the user's.
+is_ours() {
+    local f=$1 sys="$SYSTEM_APPS/$(basename "$1")"
+    grep -qF "$MARKER_PREFIX" "$f" && return 0
+    [[ -f "$sys" ]] || return 1
+    diff -q <(grep -vxF 'NoDisplay=true' "$f") "$sys" >/dev/null
+}
+
+# Copy of the system entry plus NoDisplay=true — or, when qt6-tools isn't
+# installed, a stub with the same Exec: GLib ignores an entry whose binary is
+# missing, and once the package lands the stub takes over the id and hides it.
+hide_qt_tools() {
+    mkdir -p "$APPS_DIR"
+    local name src dest
+    for name in "${QT_TOOLS_ENTRIES[@]}"; do
+        src="$SYSTEM_APPS/$name"
+        dest="$APPS_DIR/$name"
+        if [[ -f "$dest" ]] && ! is_ours "$dest"; then
+            echo "kept:    $name (override not written by dotfiles)"
+            continue
+        fi
+        if [[ -f "$src" ]]; then
+            cp "$src" "$dest"
+            echo "hidden:  $name"
+        else
+            cat > "$dest" <<EOF
+[Desktop Entry]
+Type=Application
+Name=Qt ${name%.desktop}
+Exec=${name%.desktop}6
+Categories=Qt;Development;
+EOF
+            echo "hidden:  $name (stub — $QT_TOOLS_PKG not installed)"
+        fi
+        # Same shape as office.sh: the key must land in [Desktop Entry], so
+        # insert it before Actions= when the file has one, else append.
+        if grep -q '^Actions=' "$dest"; then
+            sed -i -e "/^Actions=/i $MARKER" -e '/^Actions=/i NoDisplay=true' "$dest"
+        else
+            printf '%s\nNoDisplay=true\n' "$MARKER" >> "$dest"
+        fi
+    done
+    command -v update-desktop-database >/dev/null && update-desktop-database "$APPS_DIR" 2>/dev/null || true
+}
 
 # pkgbase of every installed kernel (linux, linux-lts, linux-zen, ...) — read
 # from the module trees so custom kernels are covered too, filtered against
@@ -94,6 +164,9 @@ do_install() {
     else
         echo "could not load them for the running kernel — they load at the next boot"
     fi
+
+    msg "Hiding the Qt developer tools that $QT_TOOLS_PKG adds to the launcher"
+    hide_qt_tools
 
     msg "Done — launch VirtualBox from the app menu"
 }
@@ -173,6 +246,17 @@ do_status() {
     else
         echo "group:    $USERNAME is not in $GROUP"
     fi
+    local name dest
+    for name in "${QT_TOOLS_ENTRIES[@]}"; do
+        dest="$APPS_DIR/$name"
+        if [[ -f "$dest" ]] && is_ours "$dest"; then
+            echo "hidden:   $name"
+        elif [[ -f "$SYSTEM_APPS/$name" ]]; then
+            echo "shown:    $name — no dotfiles override in $APPS_DIR"
+        else
+            echo "unhidden: $name — no override, $QT_TOOLS_PKG not installed (run install.sh, or this script's install, to seed it)"
+        fi
+    done
 }
 
 case "${1:-}" in
