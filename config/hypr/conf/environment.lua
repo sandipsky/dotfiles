@@ -23,10 +23,10 @@ hl.env("WLR_DRM_NO_ATOMIC", "1")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "0")
--- Without a platform theme Qt falls back to its generic Unix theme: "Sans
--- Serif" 9pt via fontconfig (Noto Sans here), ignoring the GTK font. The gtk3
--- plugin ships with qt6-base and makes Qt apps (OBS, qBittorrent, VirtualBox)
--- read gtk-font-name from gtk-3.0/settings.ini — Fira Sans 12 — plus the GTK
--- dark-mode preference, icon theme and file dialogs. Applies to apps launched
--- from this session; a reload only affects apps started afterwards.
-hl.env("QT_QPA_PLATFORMTHEME", "gtk3")
+-- Deliberately no QT_QPA_PLATFORMTHEME: Qt's built-in fallback asks fontconfig
+-- for "Sans Serif" 9pt, and fontconfig/fonts.conf maps sans-serif to Fira Sans,
+-- so Qt apps get the desktop font at Qt's native 9pt. The gtk3 theme would
+-- import the GTK font instead — Fira Sans 12 — which on top of the 1.25
+-- QT_SCALE_FACTOR .desktop overrides (OBS, qBittorrent, VirtualBox) made those
+-- apps far too big. It would also be ignored by VirtualBox, which forces the
+-- xdgdesktopportal theme at startup.

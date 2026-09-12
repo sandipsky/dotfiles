@@ -28,6 +28,9 @@
 #      too small under Hyprland (every Exec= line gets the prefix, so the
 #      "Open VM Manager" action is covered too). The override is tagged with a
 #      marker comment so `remove` only ever deletes a file this script wrote.
+#      The font (Fira Sans at Qt's 9pt) comes from config/fontconfig/fonts.conf
+#      mapping sans-serif to Fira Sans — not from a Qt platform theme, which
+#      VirtualBox ignores anyway (it forces xdgdesktopportal at startup).
 #
 # `remove` refuses while a VM is running, unloads the modules, removes the
 # packages (and the AUR extension pack if it was added by hand), drops the
@@ -156,7 +159,7 @@ do_remove() {
         echo "VirtualBox is not installed"
     fi
 
-    msg "Removing the scaling override"
+    msg "Removing the .desktop override"
     if [[ -f "$APPS_DIR/$DESKTOP" ]] && grep -qxF "$MARKER" "$APPS_DIR/$DESKTOP"; then
         rm -f "$APPS_DIR/$DESKTOP"
         command -v update-desktop-database >/dev/null && update-desktop-database "$APPS_DIR" 2>/dev/null || true
@@ -210,11 +213,11 @@ do_status() {
         echo "group:    $USERNAME is not in $GROUP"
     fi
     if [[ -f "$APPS_DIR/$DESKTOP" ]] && grep -qxF "$MARKER" "$APPS_DIR/$DESKTOP"; then
-        echo "scaling:  $DESKTOP override at ${SCALE}x (QT_SCALE_FACTOR)"
+        echo "override: $DESKTOP at ${SCALE}x (QT_SCALE_FACTOR)"
     elif [[ -f "$APPS_DIR/$DESKTOP" ]]; then
-        echo "scaling:  $APPS_DIR/$DESKTOP exists but was not written by this script"
+        echo "override: $APPS_DIR/$DESKTOP exists but was not written by this script"
     else
-        echo "scaling:  no override — VirtualBox launches at 1x"
+        echo "override: none — VirtualBox launches at 1x"
     fi
 }
 

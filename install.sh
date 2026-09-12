@@ -245,7 +245,9 @@ fi
 
 # OBS Studio and qBittorrent (Qt apps) render too small — launch them at
 # 125% scaling via local .desktop overrides. (VirtualBox gets the same
-# treatment from scripts/virtualbox.sh when it is installed.)
+# treatment from scripts/virtualbox.sh when it is installed.) Their font is
+# Fira Sans at Qt's native 9pt via config/fontconfig/fonts.conf, deliberately
+# not a Qt platform theme — see config/hypr/conf/environment.lua.
 for file in com.obsproject.Studio.desktop org.qbittorrent.qBittorrent.desktop; do
     src="/usr/share/applications/$file"
     dest="$APPS_DIR/$file"
