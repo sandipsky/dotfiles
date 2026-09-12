@@ -30,8 +30,18 @@
 #      writes the same overrides unconditionally — as stubs when qt6-tools
 #      isn't installed yet — so on a fresh install this step only refreshes
 #      them; it matters when VirtualBox is added later on a running system.
+#   5. installs the Hyprland snippet assets/hypr/virtualbox.lua as
+#      ~/.config/hypr/conf/virtualbox.lua: Super+Shift+Return starts the
+#      "Windows 10" VM (VBoxManage startvm) and a window rule opens that VM's
+#      window maximized on Hyprland's side only (fullscreen_state "1 0" — the
+#      Super+F state, bar still visible; VirtualBox is never told, so it stays
+#      out of its own exclusive fullscreen mode). hyprland.lua requires the file
+#      with pcall, so it is simply inactive while absent; a running Hyprland is
+#      reloaded so the bind works right away. The VM itself is not part of the
+#      dotfiles — copy "~/VirtualBox VMs/Windows 10" back from the backup
+#      drive and add it in the Manager (Machine > Add).
 #
-# `remove` refuses while a VM is running, unloads the modules, removes the
+# `remove` refuses while a VM is running, deletes the Hyprland snippet, unloads the modules, removes the
 # packages (and the AUR extension pack if it was added by hand), and drops the
 # vboxusers membership. It deliberately keeps dkms and the kernel headers
 # (nvidia-open-dkms needs them), never touches the user's VMs
@@ -54,6 +64,10 @@ QT_TOOLS_PKG=qt6-tools
 QT_TOOLS_ENTRIES=(assistant.desktop designer.desktop linguist.desktop qdbusviewer.desktop)
 SYSTEM_APPS=/usr/share/applications
 APPS_DIR="$HOME/.local/share/applications"
+# Hyprland keybind + window rule for the Windows VM (step 5 above). The repo
+# copy is the source of truth; hyprland.lua pcall-requires conf/virtualbox.
+HYPR_SNIPPET_SRC="$(cd "$(dirname "$0")/.." && pwd)/assets/hypr/virtualbox.lua"
+HYPR_SNIPPET="$HOME/.config/hypr/conf/virtualbox.lua"
 # Written into every override so the scripts never touch a .desktop the user
 # created themselves; install.sh tags its copies "dotfiles/install.sh".
 MARKER='# hidden by dotfiles/scripts/virtualbox.sh'
@@ -109,6 +123,37 @@ EOF
         fi
     done
     command -v update-desktop-database >/dev/null && update-desktop-database "$APPS_DIR" 2>/dev/null || true
+}
+
+# Hyprland picks up Lua changes to files it already loaded on save, but a
+# conf/ file that appears or disappears only registers on a reload — so do one
+# when a session is running (no-op from a tty or under another desktop).
+hypr_reload() {
+    if [[ -n ${HYPRLAND_INSTANCE_SIGNATURE:-} ]] && command -v hyprctl >/dev/null; then
+        hyprctl reload >/dev/null 2>&1 && echo "Hyprland reloaded" || echo "could not reload Hyprland — Super+Shift+N does it" >&2
+    fi
+}
+
+install_hypr_snippet() {
+    [[ -f "$HYPR_SNIPPET_SRC" ]] || die "missing $HYPR_SNIPPET_SRC — run from a dotfiles checkout"
+    mkdir -p "$(dirname "$HYPR_SNIPPET")"
+    if [[ -f "$HYPR_SNIPPET" ]] && cmp -s "$HYPR_SNIPPET_SRC" "$HYPR_SNIPPET"; then
+        echo "already installed: $HYPR_SNIPPET"
+        return
+    fi
+    cp "$HYPR_SNIPPET_SRC" "$HYPR_SNIPPET"
+    echo "installed: $HYPR_SNIPPET"
+    hypr_reload
+}
+
+remove_hypr_snippet() {
+    if [[ -f "$HYPR_SNIPPET" ]]; then
+        rm "$HYPR_SNIPPET"
+        echo "removed: $HYPR_SNIPPET"
+        hypr_reload
+    else
+        echo "not installed"
+    fi
 }
 
 # pkgbase of every installed kernel (linux, linux-lts, linux-zen, ...) — read
@@ -168,13 +213,19 @@ do_install() {
     msg "Hiding the Qt developer tools that $QT_TOOLS_PKG adds to the launcher"
     hide_qt_tools
 
-    msg "Done — launch VirtualBox from the app menu"
+    msg "Installing the Hyprland keybind (Super+Shift+Return starts the Windows VM, maximized)"
+    install_hypr_snippet
+
+    msg "Done — launch VirtualBox from the app menu; the VM comes from the backup drive (~/VirtualBox VMs, then Machine > Add)"
 }
 
 do_remove() {
     if pgrep -x VirtualBoxVM >/dev/null || pgrep -x VBoxHeadless >/dev/null; then
         die "a VM is running — shut it down first"
     fi
+
+    msg "Removing the Hyprland keybind"
+    remove_hypr_snippet
 
     msg "Unloading the kernel modules"
     local m
@@ -245,6 +296,15 @@ do_status() {
         echo "group:    $USERNAME is in $GROUP"
     else
         echo "group:    $USERNAME is not in $GROUP"
+    fi
+    if [[ -f "$HYPR_SNIPPET" ]]; then
+        if cmp -s "$HYPR_SNIPPET_SRC" "$HYPR_SNIPPET"; then
+            echo "keybind:  $HYPR_SNIPPET installed (Super+Shift+Return)"
+        else
+            echo "keybind:  $HYPR_SNIPPET installed but differs from the repo copy — re-run install to refresh"
+        fi
+    else
+        echo "keybind:  not installed (no $HYPR_SNIPPET)"
     fi
     local name dest
     for name in "${QT_TOOLS_ENTRIES[@]}"; do

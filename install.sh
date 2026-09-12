@@ -254,10 +254,14 @@ fi
 # VirtualBox (optional). scripts/virtualbox.sh installs virtualbox, the dkms
 # host modules (Arch no longer ships prebuilt ones) with the headers for every
 # installed kernel, and the guest-additions ISO, then adds the user to
-# vboxusers for USB passthrough. (Its qt6-tools dependency ships launcher
-# entries for the Qt developer tools; those are already hidden above, whether
-# or not VirtualBox is chosen.) It can also add or remove it later on the
-# running system:
+# vboxusers for USB passthrough, and drops assets/hypr/virtualbox.lua into
+# ~/.config/hypr/conf/ — Super+Shift+Return starts the "Windows 10" VM and a
+# window rule opens it maximized, bar visible (Hyprland-side only). hyprland.lua requires
+# that file with pcall, so nothing else changes when VirtualBox is skipped;
+# the config copy below overlays the rest of hypr/ around it. (Its qt6-tools
+# dependency ships launcher entries for the Qt developer tools; those are
+# already hidden above, whether or not VirtualBox is chosen.) It can also add
+# or remove it later on the running system:
 # ./scripts/virtualbox.sh install|remove|status
 if [[ "${INSTALL_VIRTUALBOX,,}" == y* ]]; then
     ./scripts/virtualbox.sh install

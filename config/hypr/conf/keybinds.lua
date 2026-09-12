@@ -93,7 +93,8 @@ hl.bind(mainMod .. " + A", shell("--control-center"))
 hl.bind(mainMod .. " + X", shell("--session"))
 hl.bind(mainMod .. " + L", shell("--lock"))
 
-hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("virsh --connect qemu:///system start win; virt-viewer --connect qemu:///system win"))
+-- Super+Shift+Return (start the Windows VM) lives in conf/virtualbox.lua,
+-- present only while scripts/virtualbox.sh has VirtualBox installed.
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("hyprctl reload"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("env HS_SETTINGS_PAGE=wallpaper_page /home/USERNAME/.local/bin/hypr-shell-settings"))
 

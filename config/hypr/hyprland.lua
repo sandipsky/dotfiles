@@ -13,6 +13,11 @@ require("conf/keybinds")
 require("conf/layout")
 require("conf/windowrules")
 
+-- Optional pieces that a scripts/*.sh helper drops into conf/ while what they
+-- drive is installed (virtualbox.sh `install` copies assets/hypr/virtualbox.lua
+-- in, `remove` deletes it) — pcall so a missing file is not a config error.
+pcall(require, "conf/virtualbox")
+
 -- -----------------------------------------------------
 -- Monitor
 -- -----------------------------------------------------
