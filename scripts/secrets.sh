@@ -11,7 +11,8 @@
 #   ./scripts/secrets.sh run       decrypt and run it (clones into ~/Projects)
 #
 # The password is read from the SECRET_PASSWORD environment variable when set
-# (that's how install.sh passes it), otherwise openssl prompts on the terminal.
+# (for unattended use), otherwise openssl prompts on the terminal. install.sh
+# no longer calls this — `run` is a manual step after a fresh install.
 # AES-256-CBC with a salted PBKDF2 key (600k iterations) — the .enc file is
 # public, so the passphrase is the only thing protecting the token.
 set -euo pipefail

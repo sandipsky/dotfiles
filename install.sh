@@ -15,25 +15,6 @@ read -rp "Install Plymouth boot splash? (y/n): " INSTALL_PLYMOUTH
 read -rp "Install SDDM login screen (Elegant theme) instead of direct login into Hyprland? (y/n): " INSTALL_SDDM
 read -rp "Install LibreOffice (Writer, Calc, Impress)? (y/n): " INSTALL_OFFICE
 read -rp "Install VirtualBox (VM host, with the guest-additions ISO)? (y/n): " INSTALL_VIRTUALBOX
-read -rp "Clone your GitHub projects into ~/Projects? (needs the secrets password) (y/n): " CLONE_PROJECTS
-
-# The clone script carries a GitHub token, so the repo only holds it encrypted
-# (scripts/github.sh.enc, see scripts/secrets.sh). Take the password now and
-# verify it, so a typo can't surface as a failure an hour into the run.
-SECRET_PASSWORD=
-if [[ "${CLONE_PROJECTS,,}" == y* ]]; then
-    for _ in 1 2 3; do
-        read -rsp "Secrets password (empty to skip cloning): " SECRET_PASSWORD; echo
-        [[ -z "$SECRET_PASSWORD" ]] && break
-        SECRET_PASSWORD="$SECRET_PASSWORD" ./scripts/secrets.sh check && break
-        echo "Wrong password." >&2
-        SECRET_PASSWORD=
-    done
-    if [[ -z "$SECRET_PASSWORD" ]]; then
-        echo "Skipping the project clones." >&2
-        CLONE_PROJECTS=n
-    fi
-fi
 
 # Ask for the sudo password once, up front, and keep the credential cache
 # fresh in the background — the pacman/yay/makepkg steps outlast sudo's
@@ -110,7 +91,8 @@ sudo -u "$USERNAME" -H bash -c "curl -fsSL https://claude.ai/install.sh | bash"
 # libadwaita, ...) and builds into ~/.local (binaries, icon fonts, desktop
 # entry); autostart.lua and the keybinds call /home/$USERNAME/.local/bin/hypr-shell
 # by absolute path. The throwaway clone is removed afterwards; the dev checkout
-# at ~/Projects/hypr-shell comes from the project-clone step at the end.
+# at ~/Projects/hypr-shell is cloned by hand later (./scripts/secrets.sh run
+# does every project at once — deliberately not part of this script).
 HYPR_SHELL_REPO=https://github.com/sandipsky/hypr-shell
 BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
 sudo -u "$USERNAME" git clone --depth 1 "$HYPR_SHELL_REPO" "$BUILD_DIR/hypr-shell"
@@ -378,13 +360,6 @@ for dir in Documents Downloads Music Pictures Videos Projects; do
     mkdir -p "/home/$USERNAME/$dir"
     grep -qxF "file:///home/$USERNAME/$dir" "$BOOKMARKS" || echo "file:///home/$USERNAME/$dir" >> "$BOOKMARKS"
 done
-
-# Decrypts scripts/github.sh.enc with the password taken up front and runs it
-# — it clones the GitHub repos into ~/Projects, skipping existing checkouts.
-if [[ "${CLONE_PROJECTS,,}" == y* ]]; then
-    SECRET_PASSWORD="$SECRET_PASSWORD" ./scripts/secrets.sh run \
-        || echo "Some project clones failed — re-run ./scripts/secrets.sh run later." >&2
-fi
 
 sudo -u "$USERNAME" -H bash -c "cd '$PWD/applications/music' && echo Y | ./install.sh"
 
