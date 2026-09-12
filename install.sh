@@ -264,7 +264,9 @@ if [[ "${INSTALL_VIRTUALBOX,,}" == y* ]]; then
 fi
 
 # Qt apps (OBS, qBittorrent, VirtualBox, VLC) are scaled to 125% globally via
-# QT_SCALE_FACTOR in config/hypr/conf/environment.lua and get Fira Sans via
+# QT_SCALE_FACTOR in config/uwsm/env (uwsm exports it into the systemd user
+# environment, so it reaches apps however they are launched — Hyprland's own
+# `env` only covers its direct children) and get Fira Sans via
 # config/fontconfig/conf.d/50-hypr-shell-sans-serif.conf — no per-app .desktop overrides.
 
 sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/

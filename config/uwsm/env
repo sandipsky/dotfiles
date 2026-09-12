@@ -1,0 +1,34 @@
+# Session environment for the uwsm-managed Hyprland session.
+#
+# uwsm sources this file (POSIX sh) before it starts Hyprland and exports
+# every variable set here into the systemd user manager and the D-Bus
+# activation environment. That is what makes these reach *every* app:
+# Hyprland's own `env` (hl.env in config/hypr/conf/environment.lua) only
+# applies to processes Hyprland forks directly, so anything launched through
+# systemd (`uwsm app`, transient scopes), D-Bus activation, xdg-desktop-portal
+# or a restarted hypr-shell never saw them. Compositor-only variables stay in
+# environment.lua; app-facing ones belong here.
+
+# Cursor (Hyprland reads these for its own cursor too; it inherits this env)
+export XCURSOR_THEME=BreezeX-Light
+export XCURSOR_SIZE=24
+
+# Toolkits on Wayland
+export MOZ_ENABLE_WAYLAND=1
+export CLUTTER_BACKEND=wayland
+export SDL_VIDEODRIVER=wayland
+
+# Qt apps (OBS, qBittorrent, VirtualBox, VLC, ...)
+export QT_QPA_PLATFORM="wayland;xcb"
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+# Qt apps render too small at 1x, so scale them all — one global factor
+# instead of per-app .desktop overrides. Text is Qt's 9pt fallback × 1.25
+# ≈ 11pt, close to the GTK 12pt.
+export QT_SCALE_FACTOR=1.25
+# Deliberately no QT_QPA_PLATFORMTHEME: Qt's built-in fallback asks fontconfig
+# for "Sans Serif" 9pt, and fontconfig/conf.d/50-hypr-shell-sans-serif.conf
+# maps sans-serif to Fira Sans, so Qt apps get the desktop font at Qt's native
+# 9pt. The gtk3 theme would import the GTK font instead — Fira Sans 12 — which
+# on top of the 1.25 QT_SCALE_FACTOR above made Qt apps far too big. It would
+# also be ignored by VirtualBox, which forces the xdgdesktopportal theme.
