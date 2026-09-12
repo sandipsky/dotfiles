@@ -235,27 +235,16 @@ fi
 # VirtualBox (optional). scripts/virtualbox.sh installs virtualbox, the dkms
 # host modules (Arch no longer ships prebuilt ones) with the headers for every
 # installed kernel, and the guest-additions ISO, then adds the user to
-# vboxusers for USB passthrough and writes a virtualbox.desktop override
-# launching it at 125% (QT_SCALE_FACTOR, same as the OBS/qBittorrent loop
-# below). It can also add or remove it later on the running system:
+# vboxusers for USB passthrough. It can also add or remove it later on the
+# running system:
 # ./scripts/virtualbox.sh install|remove|status
 if [[ "${INSTALL_VIRTUALBOX,,}" == y* ]]; then
     ./scripts/virtualbox.sh install
 fi
 
-# OBS Studio and qBittorrent (Qt apps) render too small — launch them at
-# 125% scaling via local .desktop overrides. (VirtualBox gets the same
-# treatment from scripts/virtualbox.sh when it is installed.) Their font is
-# Fira Sans at Qt's native 9pt via config/fontconfig/fonts.conf, deliberately
-# not a Qt platform theme — see config/hypr/conf/environment.lua.
-for file in com.obsproject.Studio.desktop org.qbittorrent.qBittorrent.desktop; do
-    src="/usr/share/applications/$file"
-    dest="$APPS_DIR/$file"
-    if [[ -f "$src" ]]; then
-        sudo -u "$USERNAME" cp "$src" "$dest"
-        sudo -u "$USERNAME" sed -i 's|^Exec=|Exec=env QT_SCALE_FACTOR=1.25 |' "$dest"
-    fi
-done
+# Qt apps (OBS, qBittorrent, VirtualBox, VLC) are scaled to 125% globally via
+# QT_SCALE_FACTOR in config/hypr/conf/environment.lua and get Fira Sans via
+# config/fontconfig/fonts.conf — no per-app .desktop overrides.
 
 sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/
 

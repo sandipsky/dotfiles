@@ -23,10 +23,13 @@ hl.env("WLR_DRM_NO_ATOMIC", "1")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "0")
+-- Qt apps render too small at 1x, so scale them all (OBS, qBittorrent,
+-- VirtualBox, VLC, ...) — one global factor instead of per-app .desktop
+-- overrides. Text is Qt's 9pt fallback × 1.25 ≈ 11pt, close to the GTK 12pt.
+hl.env("QT_SCALE_FACTOR", "1.25")
 -- Deliberately no QT_QPA_PLATFORMTHEME: Qt's built-in fallback asks fontconfig
 -- for "Sans Serif" 9pt, and fontconfig/fonts.conf maps sans-serif to Fira Sans,
 -- so Qt apps get the desktop font at Qt's native 9pt. The gtk3 theme would
 -- import the GTK font instead — Fira Sans 12 — which on top of the 1.25
--- QT_SCALE_FACTOR .desktop overrides (OBS, qBittorrent, VirtualBox) made those
--- apps far too big. It would also be ignored by VirtualBox, which forces the
--- xdgdesktopportal theme at startup.
+-- QT_SCALE_FACTOR above made Qt apps far too big. It would also be ignored by
+-- VirtualBox, which forces the xdgdesktopportal theme at startup.
