@@ -91,8 +91,8 @@ sudo -u "$USERNAME" -H bash -c "curl -fsSL https://claude.ai/install.sh | bash"
 # libadwaita, ...) and builds into ~/.local (binaries, icon fonts, desktop
 # entry); autostart.lua and the keybinds call /home/$USERNAME/.local/bin/hypr-shell
 # by absolute path. The throwaway clone is removed afterwards; the dev checkout
-# at ~/Projects/hypr-shell is cloned by hand later (./scripts/secrets.sh run
-# does every project at once — deliberately not part of this script).
+# at ~/Projects/hypr-shell is cloned by hand later — deliberately not part of
+# this script.
 HYPR_SHELL_REPO=https://github.com/sandipsky/hypr-shell
 BUILD_DIR=$(sudo -u "$USERNAME" mktemp -d)
 sudo -u "$USERNAME" git clone --depth 1 "$HYPR_SHELL_REPO" "$BUILD_DIR/hypr-shell"
