@@ -28,7 +28,7 @@ hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "0")
 -- overrides. Text is Qt's 9pt fallback × 1.25 ≈ 11pt, close to the GTK 12pt.
 hl.env("QT_SCALE_FACTOR", "1.25")
 -- Deliberately no QT_QPA_PLATFORMTHEME: Qt's built-in fallback asks fontconfig
--- for "Sans Serif" 9pt, and fontconfig/fonts.conf maps sans-serif to Fira Sans,
+-- for "Sans Serif" 9pt, and fontconfig/conf.d/50-hypr-shell-sans-serif.conf maps sans-serif to Fira Sans,
 -- so Qt apps get the desktop font at Qt's native 9pt. The gtk3 theme would
 -- import the GTK font instead — Fira Sans 12 — which on top of the 1.25
 -- QT_SCALE_FACTOR above made Qt apps far too big. It would also be ignored by

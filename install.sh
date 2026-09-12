@@ -244,7 +244,7 @@ fi
 
 # Qt apps (OBS, qBittorrent, VirtualBox, VLC) are scaled to 125% globally via
 # QT_SCALE_FACTOR in config/hypr/conf/environment.lua and get Fira Sans via
-# config/fontconfig/fonts.conf — no per-app .desktop overrides.
+# config/fontconfig/conf.d/50-hypr-shell-sans-serif.conf — no per-app .desktop overrides.
 
 sudo cp assets/icons/* /usr/share/icons/hicolor/scalable/apps/
 
