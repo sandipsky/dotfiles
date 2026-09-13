@@ -275,8 +275,8 @@ ZSHRC="/home/$USERNAME/.zshrc"
 if ! grep -q 'fastfetch' "$ZSHRC" 2>/dev/null; then
     sudo -u "$USERNAME" tee -a "$ZSHRC" >/dev/null <<'EOF'
 
-# system summary on every new interactive terminal (skipped when output is not a tty)
-[[ -t 1 ]] && command -v fastfetch >/dev/null && fastfetch
+# system summary on every new interactive terminal (skipped when output is not a tty or inside the VS Code terminal)
+[[ -t 1 && "$TERM_PROGRAM" != vscode ]] && command -v fastfetch >/dev/null && fastfetch
 EOF
 fi
 

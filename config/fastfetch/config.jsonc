@@ -10,7 +10,7 @@
 
   "logo": {
     "type": "file",
-    "source": "/home/sandip/.config/fastfetch/arch.txt",
+    "source": "/home/USERNAME/.config/fastfetch/arch.txt",
     "color": { "1": "white" },
     "padding": { "top": 1, "left": 2, "right": 5 }
   },
