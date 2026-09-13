@@ -1,6 +1,6 @@
 // ~/.config/fastfetch/config.jsonc
 // Minimal layout: a dotted Arch logo on the left, `user@host` plus a short
-// icon-keyed info list on the right, and the terminal's colour palette at
+// icon-keyed info list on the right (no now-playing line — removed on request), and the terminal's colour palette at
 // the bottom. Icons are plain Unicode covered by DejaVu Sans Mono (the
 // alacritty font) — no Nerd Font required. Each icon takes a different
 // terminal colour (31–36) so they match the palette row at the bottom. fastfetch only resolves absolute
@@ -33,7 +33,6 @@
     { "type": "terminal", "key": "{#36}▦{#}  ", "format": "{pretty-name} {version}" },
     { "type": "wm",       "key": "{#31}⊞{#}  ", "format": "{pretty-name} ({protocol-name})" },
     { "type": "uptime",   "key": "{#33}◷{#}  " },
-    { "type": "media",    "key": "{#35}♫{#}  ", "format": "{artist} - {title}" },
     "break",
     {
       "type": "colors",

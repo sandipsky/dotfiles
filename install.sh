@@ -269,6 +269,17 @@ sudo fc-cache -f
 
 sudo -u "$USERNAME" cp -r config/* "/home/$USERNAME/.config/"
 
+# fastfetch on every new interactive terminal. ~/.zshrc itself is owned by
+# arch.sh (separate repo), so only append the block if it isn't there yet.
+ZSHRC="/home/$USERNAME/.zshrc"
+if ! grep -q 'fastfetch' "$ZSHRC" 2>/dev/null; then
+    sudo -u "$USERNAME" tee -a "$ZSHRC" >/dev/null <<'EOF'
+
+# system summary on every new interactive terminal (skipped when output is not a tty)
+[[ -t 1 ]] && command -v fastfetch >/dev/null && fastfetch
+EOF
+fi
+
 # Plymouth boot splash (optional). arch.sh already boots quiet with early KMS
 # (i915 + nvidia in MODULES, systemd hook, systemd-boot entry), so this is
 # just the hook, the `splash` kernel arg and a theme: the default theme minus
