@@ -1,0 +1,45 @@
+// ~/.config/fastfetch/config.jsonc
+// Minimal layout: a dotted Arch logo on the left, `user@host` plus a short
+// icon-keyed info list on the right, and the terminal's colour palette at
+// the bottom. Icons are plain Unicode covered by DejaVu Sans Mono (the
+// alacritty font) — no Nerd Font required. Each icon takes a different
+// terminal colour (31–36) so they match the palette row at the bottom. fastfetch only resolves absolute
+// logo paths, so the sandip token below is substituted by install.sh.
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "type": "file",
+    "source": "/home/sandip/.config/fastfetch/arch.txt",
+    "color": { "1": "white" },
+    "padding": { "top": 1, "left": 2, "right": 5 }
+  },
+
+  "display": {
+    "separator": "",
+    "size": { "ndigits": 1 }
+  },
+
+  "modules": [
+    {
+      "type": "title",
+      "format": "{#1;32}{user-name}@{host-name}{#}"
+    },
+    "break",
+    { "type": "os",       "key": "{#32}⚙{#}  ", "format": "{name} {arch}" },
+    { "type": "kernel",   "key": "{#33}▣{#}  ", "format": "{release}" },
+    { "type": "packages", "key": "{#34}▤{#}  " },
+    { "type": "shell",    "key": "{#35}❯{#}  ", "format": "{pretty-name} {version}" },
+    { "type": "terminal", "key": "{#36}▦{#}  ", "format": "{pretty-name} {version}" },
+    { "type": "wm",       "key": "{#31}⊞{#}  ", "format": "{pretty-name} ({protocol-name})" },
+    { "type": "uptime",   "key": "{#33}◷{#}  " },
+    { "type": "media",    "key": "{#35}♫{#}  ", "format": "{artist} - {title}" },
+    "break",
+    {
+      "type": "colors",
+      "symbol": "block",
+      "paddingLeft": 0,
+      "block": { "width": 4, "range": [1, 6] }
+    }
+  ]
+}

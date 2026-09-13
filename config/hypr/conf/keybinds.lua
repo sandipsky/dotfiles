@@ -87,7 +87,6 @@ hl.bind(mainMod .. " + SHIFT + mouse_up",   hl.dsp.window.move({ workspace = "r+
 -- -----------------------------------------------------
 
 hl.bind("ALT + space", shell("--launcher"))
-hl.bind(mainMod .. " + SUPER_L", shell("--launcher"))
 hl.bind(mainMod .. " + V", shell("--clipboard"))
 hl.bind(mainMod .. " + A", shell("--control-center"))
 hl.bind(mainMod .. " + X", shell("--session"))

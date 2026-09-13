@@ -75,6 +75,7 @@ sudo pacman -S --noconfirm --needed \
     ntfsprogs \
     gnome-themes-extra \
     adwaita-icon-theme \
+    fastfetch \
     uwsm
 
 yay -S --noconfirm --needed \
@@ -311,8 +312,8 @@ fi
 EOF
 fi
 
-# the Hyprland Lua config and hypr-shell's config.json carry absolute paths
-for f in hypr/conf/keybinds.lua hypr/conf/autostart.lua hypr-shell/config.json; do
+# the Hyprland Lua config, hypr-shell's config.json and fastfetch's logo path carry absolute paths
+for f in hypr/conf/keybinds.lua hypr/conf/autostart.lua hypr-shell/config.json fastfetch/config.jsonc; do
     sudo -u "$USERNAME" sed -i "s|USERNAME|$USERNAME|g" "/home/$USERNAME/.config/$f"
 done
 sudo -u "$USERNAME" cp assets/profile.png "/home/$USERNAME/.face"
