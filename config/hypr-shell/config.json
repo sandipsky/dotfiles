@@ -10,7 +10,8 @@
       "columns": 6,
       "display": "icon_text",
       "group_by_letter": false,
-      "icon": "apps",
+      "icon": "custom",
+      "right_click_session": false,
       "show_search": true,
       "show_session_button": false,
       "show_settings_button": false,
@@ -33,9 +34,12 @@
       "show_settings_button": false,
       "show_sysmon": true
     },
+    "density": "compact",
     "height": 0,
     "layout": {
-      "center": [],
+      "center": [
+        "clock"
+      ],
       "left": [
         "app_menu",
         "launcher",
@@ -45,22 +49,29 @@
       ],
       "right": [
         "clipboard",
-        "bluetooth",
-        "battery",
-        "network",
-        "volume",
         "notifications",
+        "bluetooth",
+        "network",
+        "battery",
+        "volume",
         "control_center",
         "session",
-        "clock"
+        "cpu",
+        "memory",
+        "disk"
       ]
     },
     "modules": {
       "active_window": true,
       "battery": true,
       "clock": true,
+      "control_center": false,
+      "cpu": false,
+      "disk": false,
       "launcher": false,
+      "memory": false,
       "network": true,
+      "session": true,
       "taskbar": false,
       "volume": true
     },
@@ -77,6 +88,7 @@
     },
     "visibility": "visible",
     "workspaces": {
+      "accent_active": false,
       "fixed_count": 6,
       "mode": "fixed",
       "scroll_wrap": false
@@ -112,19 +124,23 @@
   },
   "notifications": {
     "do_not_disturb": false,
-    "enabled": true
+    "enabled": true,
+    "location": "top_right"
+  },
+  "osd": {
+    "location": "bottom"
   },
   "session": {
     "fullscreen_layout": "single_row",
     "mode": "dropdown"
   },
   "ui": {
-    "accent": "#ed5b00",
+    "accent": "#3584e4",
     "dark_mode": true,
     "font": "Fira Sans"
   },
   "wallpaper": {
-    "current": "/home/USERNAME/Pictures/Wallpapers/0189.jpg",
+    "current": "/home/USERNAME/Pictures/Wallpapers/0016.jpg",
     "directory": "~/Pictures/Wallpapers",
     "slideshow": true,
     "transitions": [

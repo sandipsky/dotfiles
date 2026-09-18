@@ -327,6 +327,9 @@ fi
 for f in hypr/conf/keybinds.lua hypr/conf/autostart.lua hypr-shell/config.json fastfetch/config.jsonc; do
     sudo -u "$USERNAME" sed -i "s|USERNAME|$USERNAME|g" "/home/$USERNAME/.config/$f"
 done
+# hypr-shell's bar presets carry the same absolute paths (any *.json the snapshot ships)
+sudo -u "$USERNAME" find "/home/$USERNAME/.config/hypr-shell/presets" -name '*.json' \
+    -exec sed -i "s|USERNAME|$USERNAME|g" {} +
 sudo -u "$USERNAME" cp assets/profile.png "/home/$USERNAME/.face"
 
 sudo -u "$USERNAME" -H dbus-run-session -- bash <<'EOF'

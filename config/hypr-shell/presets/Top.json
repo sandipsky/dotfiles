@@ -1,0 +1,154 @@
+{
+  "config": {
+    "bar": {
+      "active_window": {
+        "hide_mode": "visible",
+        "no_window_text": "none",
+        "show_icon": true,
+        "title_mode": "appname"
+      },
+      "app_menu": {
+        "columns": 6,
+        "display": "icon_text",
+        "group_by_letter": false,
+        "icon": "custom",
+        "right_click_session": false,
+        "show_search": true,
+        "show_session_button": false,
+        "show_settings_button": false,
+        "tile_background": false,
+        "view": "grid"
+      },
+      "background_opacity": 0.9,
+      "bluetooth": {
+        "auto_connect": false
+      },
+      "clock": {
+        "format_horizontal": "%I:%M %p %a, %b %d",
+        "format_vertical": "%I %M %p"
+      },
+      "control_center": {
+        "show_audio": false,
+        "show_brightness": false,
+        "show_media": false,
+        "show_session_button": false,
+        "show_settings_button": false,
+        "show_sysmon": true
+      },
+      "density": "compact",
+      "height": 0,
+      "layout": {
+        "center": [
+          "clock"
+        ],
+        "left": [
+          "app_menu",
+          "launcher",
+          "workspaces",
+          "taskbar",
+          "active_window"
+        ],
+        "right": [
+          "clipboard",
+          "notifications",
+          "bluetooth",
+          "network",
+          "battery",
+          "volume",
+          "control_center",
+          "session",
+          "cpu",
+          "memory",
+          "disk"
+        ]
+      },
+      "modules": {
+        "active_window": true,
+        "battery": true,
+        "clock": true,
+        "control_center": false,
+        "cpu": false,
+        "disk": false,
+        "launcher": false,
+        "memory": false,
+        "network": true,
+        "session": true,
+        "taskbar": false,
+        "volume": true
+      },
+      "position": "top",
+      "show_on_workspace_switch": false,
+      "show_when_workspace_empty": true,
+      "taskbar": {
+        "apps": "pinned",
+        "colorize_icons": false,
+        "hide_mode": "hidden",
+        "only_active_workspaces": true,
+        "only_same_monitor": true,
+        "running_indicator": true
+      },
+      "visibility": "visible",
+      "workspaces": {
+        "accent_active": false,
+        "fixed_count": 6,
+        "mode": "fixed",
+        "scroll_wrap": false
+      }
+    },
+    "clipboard": {
+      "enabled": true,
+      "paste_on_click": true,
+      "show_images": false
+    },
+    "greeter": {
+      "default_session": "hyprland"
+    },
+    "idle": {
+      "lock_timeout": 603,
+      "screen_off_timeout": 600
+    },
+    "launcher": {
+      "enable_web_search": true,
+      "show_all_apps": false,
+      "show_result_count": true
+    },
+    "lock_screen": {
+      "background": "/home/USERNAME/Pictures/Wallpapers/lockscreen/0018.jpg",
+      "blur": 0.35
+    },
+    "night_light": {
+      "enabled": true,
+      "forced": true,
+      "manual_sunrise": "06:30",
+      "manual_sunset": "18:30",
+      "night_temp": 4785
+    },
+    "notifications": {
+      "do_not_disturb": false,
+      "enabled": true,
+      "location": "top_right"
+    },
+    "osd": {
+      "location": "bottom"
+    },
+    "session": {
+      "fullscreen_layout": "single_row",
+      "mode": "dropdown"
+    },
+    "ui": {
+      "accent": "#3584e4",
+      "dark_mode": true,
+      "font": "Fira Sans"
+    },
+    "wallpaper": {
+      "current": "/home/USERNAME/Pictures/Wallpapers/0016.jpg",
+      "directory": "~/Pictures/Wallpapers",
+      "slideshow": true,
+      "transitions": [
+        "disc"
+      ]
+    }
+  },
+  "name": "Top",
+  "saved": "2026-09-18T19:22:12"
+}
