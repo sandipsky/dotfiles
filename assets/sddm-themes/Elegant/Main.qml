@@ -59,6 +59,8 @@ Rectangle {
     readonly property color mSurfaceVariant: hsl(accentHue + 18, 0.06, 0.13)
     readonly property color mOnSurfaceVariant: hsl(accentHue + 14, 0.10, 0.79)
     readonly property color mOutline: hsl(accentHue + 3, 0.06, 0.29)
+    readonly property color mHover: hsl(accentHue + 3, 0.06, 0.24)
+    readonly property color mOnHover: mOnSurface
     readonly property color mError: "#ffb4ab"
     readonly property color mOnError: "#690005"
 
@@ -310,15 +312,16 @@ Rectangle {
                 font.family: pill.revealed ? fontFamily : iconFamily
                 font.pointSize: pill.revealed ? 11 : 13
                 font.letterSpacing: pill.revealed ? 0 : 1
-                color: mPrimary
-                selectionColor: mPrimary
-                selectedTextColor: mOnPrimary
+                // Neutral, like hypr-shell's lock screen: no accent in the field.
+                color: mOnSurface
+                selectionColor: mOnSurface
+                selectedTextColor: mSurface
                 verticalAlignment: TextInput.AlignVCenter
-                // 2×20 accent caret fading in and out every 530 ms (.lock-caret).
+                // 2×20 caret fading in and out every 530 ms (.lock-caret).
                 cursorDelegate: Rectangle {
                     width: 2
                     height: 20
-                    color: mPrimary
+                    color: mOnSurface
                     SequentialAnimation on opacity {
                         loops: Animation.Infinite
                         running: password.activeFocus
@@ -343,14 +346,14 @@ Rectangle {
                 width: 26
                 height: 26
                 radius: 13
-                color: eyeHover.containsMouse ? mPrimary : "transparent"
+                color: eyeHover.containsMouse ? mHover : "transparent"
                 Behavior on color { ColorAnimation { duration: 150; easing.type: Easing.OutCubic } }
                 Text {
                     anchors.centerIn: parent
                     text: pill.revealed ? "" : ""
                     font.family: iconFamily
                     font.pointSize: 14
-                    color: eyeHover.containsMouse ? mOnPrimary : mOnSurfaceVariant
+                    color: eyeHover.containsMouse ? mOnHover : mOnSurfaceVariant
                 }
                 MouseArea {
                     id: eyeHover
